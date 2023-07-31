@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "424015912860",
+    "project_id": "emagz-39f3d",
+    "storage_bucket": "emagz-39f3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424015912860:android:c78ae0b9c295d1f3a73259",
+        "android_client_info": {
+          "package_name": "app.vendor.emagz_vendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424015912860-lnhf2inkmf9508crd703b6a80rkckn0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIknnJtWh32zEtk-IhiKaNkvMmZ5MTV6Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424015912860-lnhf2inkmf9508crd703b6a80rkckn0r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.vendor.emagzVendor"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

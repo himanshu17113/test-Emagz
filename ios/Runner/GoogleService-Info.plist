@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAfIlXfirK85OK7-ha4FWapEEaNjGWc6Mo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>424015912860</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.vendor.emagzVendor</string>
+	<key>PROJECT_ID</key>
+	<string>emagz-39f3d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>emagz-39f3d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:424015912860:ios:4406cc1889c6eb49a73259</string>
+</dict>
+</plist>
