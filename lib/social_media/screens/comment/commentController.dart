@@ -10,7 +10,19 @@ class CommentController extends GetxController{
   Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
 
   var jwtController = Get.put(JWTController());
+  @override
+  onInit() async {
+    await storedData();
 
+    super.onInit();
+  }
+
+  String? token;
+  String? userId;
+  Future<void> storedData() async {
+    token = await jwtController.getAuthToken();
+    userId = await jwtController.getUserId();
+  }
   RxBool isPosting = RxBool(false);
   TextEditingController controller = TextEditingController();
   Future<bool> postComment(String postId)async{
@@ -22,8 +34,8 @@ class CommentController extends GetxController{
     isPosting.value = true;
     try{
       Dio dio = Dio();
-      var token = await jwtController.getAuthToken();
-      var userId = await jwtController.getUserId();
+      // var token = await jwtController.getAuthToken();
+      // var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
       var data = {
         "userId": userId,
@@ -33,6 +45,7 @@ class CommentController extends GetxController{
       isPosting.value = false;
       controller.clear();
       instantComments.value.add(Comment(text: comment,userId: UserSchema(sId: userId) ,comments: [],sId: userId));
+      
       update();
       return false;
     }catch(e){

@@ -11,7 +11,7 @@ import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.d
 
 class StoryScreen extends StatefulWidget {
   late String userId;
-  late List<Story> stories;
+  late List<Stories> stories;
   StoryScreen({super.key,required this.stories,required this.userId});
 
   @override
@@ -42,7 +42,7 @@ class _StoryScreenState extends State<StoryScreen> {
            StoryItem.pageImage(
               key: Key(index.toString()),
               url:
-                  widget.stories[index].mediaUrl!,
+                  widget.stories[index].mediaUrl ?? "",
               controller: controller);
         });
     //   StoryItem.pageImage(

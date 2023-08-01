@@ -26,7 +26,7 @@ class _PostCommentTileState extends State<PostCommentTile> {
   }
 
   asyncInit() async {
-   var user = await storyController.jwtController.getUserDetail(widget.comment.userId!.sId!);
+    var user = await storyController.jwtController.getUserDetail(widget.comment.userId!.sId!);
     userName = user!.username!;
     profileUrl = user.sId;
     setState(() {});
@@ -75,7 +75,7 @@ class _PostCommentTileState extends State<PostCommentTile> {
                               : userName!,
                       fontSize: 10,
                     ),
-                    Container(
+                    SizedBox(
                       width: context.width / 1.7,
                       child: Text(
                         "${widget.comment.text}",
@@ -142,17 +142,19 @@ class _PostCommentTileState extends State<PostCommentTile> {
             ),
           ),
         ),
-        Column(
-          children: List.generate(widget.comment.comments!.length, (index) {
-            if (widget.comment.comments!.isNotEmpty) {
-              return CommentReplyTile(
-                comment: widget.comment.comments![index]!,
-              );
-            } else {
-              return SizedBox();
-            }
-          }),
-        )
+        if (widget.comment.comments != null) ...[
+          Column(
+            children: List.generate(widget.comment.comments!.length, (index) {
+              if (widget.comment.comments!.isNotEmpty) {
+                return CommentReplyTile(
+                  comment: widget.comment.comments![index],
+                );
+              } else {
+                return const SizedBox();
+              }
+            }),
+          )
+        ]
 
         // ListView.builder(
         //   shrinkWrap: true,

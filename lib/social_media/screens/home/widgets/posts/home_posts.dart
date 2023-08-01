@@ -41,7 +41,7 @@ class _HomePostsState extends State<HomePosts> {
             child: ListView.builder(
               shrinkWrap: true,
               controller: homePostController.scrollController,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return InkWell(
@@ -93,12 +93,12 @@ class _HomePostsState extends State<HomePosts> {
                       key: widget.key ?? Key("$index+@4+1999"),
                       onVisibilityChanged: (info) {
                         if (index - 9 >= homePostController.skip.value) {
-                          print(info.visibleFraction);
-                          setState(() {});
+                          // print(info.visibleFraction);
+                          // setState(() {});
                         }
                       },
                       child: snapshot.data?[index] == null
-                          ? Container()
+                          ? const SizedBox()
                           : PostCard(
                               isLiked: snapshot.data![index].likes!.contains(widget.myUserId),
                               myUserId: widget.myUserId,

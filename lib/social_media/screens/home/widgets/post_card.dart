@@ -41,7 +41,7 @@ class _PostCardState extends State<PostCard> {
   @override
   void initState() {
     super.initState();
-    print("post : ${widget.post}");
+    debugPrint("post : ${widget.post}");
   }
 
   @override
@@ -87,7 +87,7 @@ class _PostCardState extends State<PostCard> {
               if (widget.post!.mediaType == "image") {
                 return Container(
                   decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(widget.url), fit: BoxFit.cover),
+                    image: DecorationImage(image: CachedNetworkImageProvider(widget.url), fit: BoxFit.cover),
                   ),
                 );
               } else if (widget.post!.mediaType == "video") {
@@ -236,7 +236,7 @@ class _PostCardState extends State<PostCard> {
                   onTap: () {
                     Get.to(() => CommentViewScreen(
                           post: widget.post!,
-                          isLiked: widget.isLiked ?? false,
+                          isLiked: widget.isLiked ?? false, myUserId: widget.myUserId,
                         ));
                   },
                   child: Container(

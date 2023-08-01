@@ -15,7 +15,7 @@ class StoryView extends StatefulWidget {
 }
 
 class _StoryViewState extends State<StoryView> {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -30,14 +30,15 @@ class _StoryViewState extends State<StoryView> {
       margin: const EdgeInsets.only(top: 10),
       height: 85,
       decoration: BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
-      child: FutureBuilder<Map<String, Map<String, Story>>>(
+      child: FutureBuilder<List<Story?>?>(
         future: storyController.getStories(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: Text("Loading..."),
-            );
-          } else {
+          // if (!snapshot.hasData) {
+          //   return const Center(
+          //     child: Text("Loading..."),
+          //   );
+          // } else
+          if (snapshot.hasData) {
             return SizedBox(
               width: double.minPositive,
               child: ListView.builder(
@@ -45,7 +46,7 @@ class _StoryViewState extends State<StoryView> {
                   controller: _scrollController,
                   physics: const ScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: snapshot.data!.keys.length,
+                  itemCount: snapshot.data!.length,
                   itemBuilder: (ctx, index) {
                     if (index == 0) {
                       final String url = "https://picsum.photos/500/500?random=${index + 1}";
@@ -57,13 +58,12 @@ class _StoryViewState extends State<StoryView> {
                           const MyStory(),
                           InkWell(
                               onTap: () {
-                                Get.to(() => StoryScreen(
-                                    userId: snapshot.data!.keys.toList()[index],
-                                    stories: snapshot.data![snapshot.data!.keys.elementAt(index)]!.values.toList()));
+                                Get.to(() =>
+                                    StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
                               },
                               child: StoryViewCard(
                                 url: url,
-                                username: snapshot.data!.keys.elementAt(index),
+                                username: snapshot.data![index]!.userId!.username!,
                               ))
                         ],
                       );
@@ -71,16 +71,19 @@ class _StoryViewState extends State<StoryView> {
                       final String url = "https://picsum.photos/500/500?random=${index + 1}";
                       return InkWell(
                           onTap: () {
-                            Get.to(() => StoryScreen(
-                                userId: snapshot.data!.keys.toList()[index],
-                                stories: snapshot.data![snapshot.data!.keys.elementAt(index)]!.values.toList()));
+                            Get.to(
+                                () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
                           },
                           child: StoryViewCard(
                             url: url,
-                            username: snapshot.data!.keys.elementAt(index),
+                            username: snapshot.data![index]?.userId?.username ??  "",
                           ));
                     }
                   }),
+            );
+          } else {
+            return const Center(
+              child: Text("Loading..."),
             );
           }
         },

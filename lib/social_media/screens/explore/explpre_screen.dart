@@ -107,7 +107,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   final tile = pattern[index % pattern.length];
                   return InkWell(
                     onTap: () {
-                      Get.to(() => ExplorePostDetails());
+                      Get.to(() => const ExplorePostDetails());
                     },
                     child: ImageTile(
                       index: index,
@@ -146,8 +146,12 @@ class ImageTile extends StatelessWidget {
       width: 400,
       child: CachedNetworkImage(
         imageUrl: imageList[index],
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
+        placeholder: (context, url) => Container(
+          height: 400,
+          width: 400,
+          color: Colors.grey,
+        ),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
         width: width.toDouble(),
         height: height.toDouble(),
         fit: BoxFit.cover,

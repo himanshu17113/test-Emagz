@@ -101,174 +101,151 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   //                 ),
                   //               ),
                   //             )
-                  //           :
-                  //            InteractiveViewer(
-                  //                     minScale: 0.75,
-                  //                     maxScale: 2.0,
-                  //                     child: Container(
-                  //                       height: 250,
-                  //                       decoration: BoxDecoration(
-                  //                         image: DecorationImage(
-                  //                             colorFilter: index == -1
-                  //                                 ? null
-                  //                                 : ColorFilter.matrix(filters[index]),
-                  //                             image: MemoryImage(
-                  //                                 postController.imagePath!),
-                  //                             ),
-                  //                       ),
-                  //                     ),
-                  //                   );
-                  // }),
-                  // postController.imagePath == null
-                  //     ? SizedBox(
-                  //         height: 250,
-                  //         child: Center(
-                  //           child: FormHeadingText(
-                  //             headings: "No Image Selected",
-                  //             fontWeight: FontWeight.bold,
-                  //             color: Colors.black,
-                  //             fontSize: 14,
-                  //           ),
-                  //         ),
-                  //       )
-                  //     : Obx(() {
-                  //         return postController.isSettingImage.value
-                  //             ? Container()
-                  //             : Container(
+                  //           : InteractiveViewer(
+                  //               minScale: 0.75,
+                  //               maxScale: 2.0,
+                  //               child: Container(
                   //                 height: 250,
                   //                 decoration: BoxDecoration(
                   //                   image: DecorationImage(
-                  //                       colorFilter: index == -1
-                  //                           ? null
-                  //                           : ColorFilter.matrix(filters[index]),
-                  //                       image:
-                  //                           MemoryImage(postController.imagePath!),
-                  //                       fit: BoxFit.cover),
+                  //                     colorFilter: index == -1 ? null : ColorFilter.matrix(filters[index]),
+                  //                     image: MemoryImage(postController.imagePath!),
+                  //                   ),
                   //                 ),
-                  //               );
-                  //       }),
-                  // SizedBox.expand(),
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     FormHeadingText(
-                  //       headings: "Landscape",
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.black,
-                  //       fontSize: 12,
-                  //     ),
-                  //     FormHeadingText(
-                  //       headings: "Portrait",
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.black,
-                  //       fontSize: 12,
-                  //     ),
-                  //     FormHeadingText(
-                  //       headings: "Scale",
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.black,
-                  //       fontSize: 12,
-                  //     ),
-                  //     FormHeadingText(
-                  //       headings: "Rotate",
-                  //       fontWeight: FontWeight.bold,
-                  //       color: Colors.black,
-                  //       fontSize: 12,
-                  //     ),
-                  //   ],
-                  // ),
+                  //               ),
+                  //             );
+                  // }),
 
-                  // const SizedBox(
-                  //   height: 10,
-                  // ),
-
-                  // postController.imagePath == null
-                  //     ? Container()
-                  //     : Container(
-                  //         color: const Color(0xffDFECFF),
-                  //         child: SingleChildScrollView(
-                  //           scrollDirection: Axis.horizontal,
-                  //           child: Obx(() {
-                  //             return postController.isSettingImage.value
-                  //                 ? Container()
-                  //                 : postController.imagePath == null
-                  //                     ? Container()
-                  //                     : Row(
-                  //                         children: [
-                  //                           InkWell(
-                  //                             onTap: () {
-                  //                               setState(() {
-                  //                                 index = -1;
-                  //                               });
-                  //                             },
-                  //                             child: Container(
-                  //                               margin: const EdgeInsets.only(
-                  //                                   right: 10),
-                  //                               height: 50,
-                  //                               width: 70,
-                  //                               key: _imageKey,
-                  //                               decoration: BoxDecoration(
-                  //                                 image: DecorationImage(
-                  //                                     // colorFilter: index == -1
-                  //                                     //     ? null
-                  //                                     //     : ColorFilter.matrix(filters[index]),
-                  //                                     image: MemoryImage(
-                  //                                         postController
-                  //                                             .imagePath!),
-                  //                                     fit: BoxFit.cover),
-                  //                               ),
-                  //                             ),
-                  //                           ),
-                  //                           postController.isSettingImage.value
-                  //                               ? Container()
-                  //                               : postController.imagePath ==
-                  //                                       null
-                  //                                   ? Container()
-                  //                                   : Row(
-                  //                                       children: List.generate(
-                  //                                         filters.length,
-                  //                                         (index) => InkWell(
-                  //                                           onTap: () async {
-                  //                                             setState(() {
-                  //                                               this.index =
-                  //                                                   index;
-                  //                                             });
-                  //                                           },
-                  //                                           child: Container(
-                  //                                             margin:
-                  //                                                 const EdgeInsets
-                  //                                                         .only(
-                  //                                                     right:
-                  //                                                         10),
-                  //                                             height: 50,
-                  //                                             width: 70,
-                  //                                             decoration:
-                  //                                                 BoxDecoration(
-                  //                                               image: DecorationImage(
-                  //                                                   colorFilter:
-                  //                                                       ColorFilter.matrix(filters[
-                  //                                                           index]),
-                  //                                                   image: MemoryImage(
-                  //                                                       postController
-                  //                                                           .imagePath!),
-                  //                                                   fit: BoxFit
-                  //                                                       .cover),
-                  //                                             ),
-                  //                                           ),
-                  //                                         ),
-                  //                                       ),
-                  //                                     ),
-                  //                         ],
-                  //                       );
-                  //           }),
-                  //         ),
-                  //       ),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
+                  postController.imagePath == null
+                      ? SizedBox(
+                          height: 250,
+                          child: Center(
+                            child: FormHeadingText(
+                              headings: "No Image Selected",
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 14,
+                            ),
+                          ),
+                        )
+                      : Obx(() {
+                          return postController.isSettingImage.value
+                              ? Container()
+                              : Container(
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        colorFilter: index == -1 ? null : ColorFilter.matrix(filters[index]),
+                                        image: MemoryImage(postController.imagePath!),
+                                        fit: BoxFit.cover),
+                                  ),
+                                );
+                        }),
+                  //   SizedBox.expand(),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FormHeadingText(
+                        headings: "Landscape",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                      FormHeadingText(
+                        headings: "Portrait",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                      FormHeadingText(
+                        headings: "Scale",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                      FormHeadingText(
+                        headings: "Rotate",
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 12,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  postController.imagePath == null
+                      ? Container()
+                      : Container(
+                          color: const Color(0xffDFECFF),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Obx(() {
+                              return postController.isSettingImage.value
+                                  ? Container()
+                                  : postController.imagePath == null
+                                      ? Container()
+                                      : Row(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  index = -1;
+                                                });
+                                              },
+                                              child: Container(
+                                                margin: const EdgeInsets.only(right: 10),
+                                                height: 50,
+                                                width: 70,
+                                                key: _imageKey,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      // colorFilter: index == -1
+                                                      //     ? null
+                                                      //     : ColorFilter.matrix(filters[index]),
+                                                      image: MemoryImage(postController.imagePath!),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                              ),
+                                            ),
+                                            postController.isSettingImage.value
+                                                ? Container()
+                                                : postController.imagePath == null
+                                                    ? Container()
+                                                    : Row(
+                                                        children: List.generate(
+                                                          filters.length,
+                                                          (index) => InkWell(
+                                                            onTap: () async {
+                                                              setState(() {
+                                                                this.index = index;
+                                                              });
+                                                            },
+                                                            child: Container(
+                                                              margin: const EdgeInsets.only(right: 10),
+                                                              height: 50,
+                                                              width: 70,
+                                                              decoration: BoxDecoration(
+                                                                image: DecorationImage(
+                                                                    colorFilter: ColorFilter.matrix(filters[index]),
+                                                                    image: MemoryImage(postController.imagePath!),
+                                                                    fit: BoxFit.cover),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                          ],
+                                        );
+                            }),
+                          ),
+                        ),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -363,11 +340,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               color: const Color(0xffDFECFF),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: FormHeadingText(
-                              headings: "v-Magz",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
+                            child: InkWell(
+                              onTap: () => setState(() => postController.currentType?.value = PostType.gallery),
+                              child: FormHeadingText(
+                                headings: "v-Magz",
+                                fontWeight: FontWeight.bold,
+                                color: const Color(0xff054BFF),
+                                fontSize: 14,
+                              ),
                             ),
                           ),
                         ),
@@ -395,7 +375,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       ],
                     ),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),

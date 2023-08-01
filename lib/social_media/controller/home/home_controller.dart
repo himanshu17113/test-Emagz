@@ -10,19 +10,34 @@ class HomePostsController extends GetxController{
   ScrollController scrollController = ScrollController();
 
   var jwtController = Get.put(JWTController());
+ // String? userId;
+  
+  @override
+  onInit() async {
+    await storedData();
+
+    super.onInit();
+  }
+
+  String? token;
   String? userId;
+  Future<void> storedData() async {
+    
+    token = await jwtController.getAuthToken();
+    userId = await jwtController.getUserId();
+  }
   RxList<Post>? posts;
   RxInt skip =RxInt(-10);
 
   Future<List<Post>> getPost() async{
       skip.value += 10;
-      print(skip.value);
+     // print(skip.value);
       try{
         Dio dio = Dio();
-        var token = await jwtController.getAuthToken();
-        userId = await jwtController.getUserId();
+        // var token = await jwtController.getAuthToken();
+        // userId = await jwtController.getUserId();
         dio.options.headers["Authorization"] = token;
-        print(ApiEndpoint.posts(skip.value));
+      //  print(ApiEndpoint.posts(skip.value));
         var endPoint = ApiEndpoint.posts(skip.value);
         var resposne = await dio.get(endPoint);
         resposne.data["AllPost"].forEach((e) {
@@ -40,7 +55,7 @@ class HomePostsController extends GetxController{
 
         return posts!.reversed.toList();
     }catch(e){
-        print(e);
+     //   print(e);
         return [];
       }
   }
@@ -48,13 +63,13 @@ class HomePostsController extends GetxController{
   Future<List<Post>> refreshResent() async{
       skip.value =  -10;
       posts!.value = [];
-      print(skip.value);
+    //  print(skip.value);
       try{
         Dio dio = Dio();
-        var token = await jwtController.getAuthToken();
-        userId = await jwtController.getUserId();
+        // var token = await jwtController.getAuthToken();
+        // userId = await jwtController.getUserId();
         dio.options.headers["Authorization"] = token;
-        print(ApiEndpoint.posts(skip.value));
+    //    print(ApiEndpoint.posts(skip.value));
         var endPoint = ApiEndpoint.posts(0);
         var resposne = await dio.get(endPoint);
         resposne.data["posts"].forEach((e) {
@@ -77,26 +92,26 @@ class HomePostsController extends GetxController{
   Future<bool> likePost(String postId) async{
     try{
       Dio dio = Dio();
-      print(ApiEndpoint.likePost(postId));
-      var token = await JWTController().getAuthToken();
-      var userId = await JWTController().getUserId();
+      // print(ApiEndpoint.likePost(postId));
+      // var token = await JWTController().getAuthToken();
+      // var userId = await JWTController().getUserId();
       dio.options.headers["authorization"] = token;
       var data = {
         "userId": userId,
       };
       var response = await dio.post(ApiEndpoint.likePost(postId), data: data);
-      print(response.data);
+    //  print(response.data);
       return true;
     }catch(e) {
-      print(e);
+    //  print(e);
       return false;
     }
   }
 
   Future postPoll(String postId,String vote) async{
     try{
-      var userId = await JWTController().getUserId();
-      var token = await JWTController().getAuthToken();
+      // var userId = await JWTController().getUserId();
+      // var token = await JWTController().getAuthToken();
       Dio dio = Dio();
       print(ApiEndpoint.doPoll(postId));
       var data = {"vote": vote,"userId":userId};

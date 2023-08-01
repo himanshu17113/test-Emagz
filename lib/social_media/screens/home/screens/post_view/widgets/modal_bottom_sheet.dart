@@ -7,8 +7,8 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class PostCommentsModalBottomSheet extends StatefulWidget {
   final String postId;
-  final List<Comment?> comments;
-  const PostCommentsModalBottomSheet({super.key, required this.comments, required this.postId});
+  List<Comment?> comments;
+ PostCommentsModalBottomSheet({super.key, required this.comments, required this.postId});
 
   @override
   State<PostCommentsModalBottomSheet> createState() => _PostCommentsModalBottomSheetState();
@@ -21,30 +21,30 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
   @override
   Widget build(BuildContext context) {
     bool _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-    print(MediaQuery.of(context).viewInsets.bottom);
-    print(MediaQuery.of(context).size.height);
+    // print(MediaQuery.of(context).viewInsets.bottom);
+    // print(MediaQuery.of(context).size.height);
 
-    return Container(
+    return SizedBox(
       height: _keyboardVisible ? MediaQuery.of(context).size.height : 450,
       child: Column(
         children: [
-          Container(
-              height: 50,
-              child: Center(
-                child: Text("Comments"),
-              )),
+          const Text(
+            "Comments",
+            textAlign: TextAlign.center,
+            style: TextStyle(height: 2, fontSize: 18, color: Colors.black),
+          ),
           Container(width: double.maxFinite, height: 0.5, color: Colors.black),
-          Container(
+          SizedBox(
             height: _keyboardVisible ? (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom - 120) : 320,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView(
-                physics: ScrollPhysics(),
+                physics: const ScrollPhysics(),
                 children: [
                   if (widget.comments.isNotEmpty) ...[
                     ListView.builder(
                       shrinkWrap: true,
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       itemCount: widget.comments.length,
                       itemBuilder: (context, index) {
                         return PostCommentTile(
@@ -56,10 +56,10 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   Obx(
                     () => ListView.builder(
                       shrinkWrap: true,
-                      physics: ScrollPhysics(),
+                      physics: const ScrollPhysics(),
                       itemCount: commentsController.instantComments.value.length,
                       itemBuilder: (context, index) {
-                        print(commentsController.instantComments.value[index]);
+                        //  print(commentsController.instantComments.value[index]);
                         return PostCommentTile(
                           comment: commentsController.instantComments.value[index],
                         );
@@ -70,7 +70,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
               ),
             ),
           ),
-          Container(
+          SizedBox(
             height: 55,
             width: MediaQuery.of(context).size.width - 20,
             child: TextField(
@@ -83,15 +83,19 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   child: Obx(
                     () => IconButton(
                         onPressed: () {
-                          commentsController.isPosting.value ? print("sending comment") : commentsController.postComment(widget.postId);
-                          setState(() {});
+                          commentsController.isPosting.value
+                              ? debugPrint("sending comment")
+                              : commentsController.postComment(widget.postId);
+                          setState(() {
+widget.comments.add( Comment(text: commentsController.controller.text,userId: UserSchema(sId:  commentsController.userId) ,comments: [],sId:  commentsController.userId));
+                          });
                         },
                         icon: commentsController.isPosting.value
-                            ? Icon(
+                            ? const Icon(
                                 Icons.more_horiz,
                                 color: Colors.blue,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.send,
                                 color: Colors.blue,
                               )),

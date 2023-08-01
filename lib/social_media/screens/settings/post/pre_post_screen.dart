@@ -392,7 +392,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                           topRight: Radius.circular(20)
                                           )),
                                           context: context, builder: (context) {
-                                          return FollowingList();
+                                          return const FollowingList();
                                         },);
                                       },
                                       child: Text(
@@ -558,7 +558,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       CircularProgressIndicator(value: postController.uploadPercentage.value,color: Colors.white),
                       Text(
 
-                        "${(postController.uploadPercentage.value*100).toInt().toString()}%",style: TextStyle(
+                        "${(postController.uploadPercentage.value*100).toInt().toString()}%",style: const TextStyle(
                         color: Colors.white,
                         fontSize: 10
                       ),)
