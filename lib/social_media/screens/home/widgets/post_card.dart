@@ -60,7 +60,8 @@ class _PostCardState extends State<PostCard> {
     }
     return GestureDetector(
       onTap: () {
-        Get.to(PostView(
+        Get.to(
+          () => PostView(
           post: widget.post!,
           isLiked: widget.isLiked!,
           myId: widget.myUserId!,

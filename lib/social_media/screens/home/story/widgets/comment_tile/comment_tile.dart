@@ -3,35 +3,34 @@ import 'package:get/get.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
+
 class StoryCommentTile extends StatefulWidget {
   final String text;
   final String userId;
-  const StoryCommentTile({super.key,required this.text,required this.userId});
+  const StoryCommentTile({super.key, required this.text, required this.userId});
 
   @override
   State<StoryCommentTile> createState() => _StoryCommentTileState();
 }
 
 class _StoryCommentTileState extends State<StoryCommentTile> {
-  
   var storyController = Get.put(GetXStoryController());
   String? userName;
   String? profileUrl;
-  
-  
+
   @override
   void initState() {
     super.initState();
     asyncInit();
   }
-  
-  asyncInit()async{
+
+  asyncInit() async {
     var user = await storyController.jwtController.getUserDetail(widget.userId);
     userName = user!.username!;
     profileUrl = user.sId;
     setState(() {});
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,28 +48,32 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
             const SizedBox(
               width: 10,
             ),
-        (profileUrl == null) ?CircleAvatar(
-              radius: 24,
-              backgroundImage:
-               NetworkImage(templateFiveImage[0]) ,
-            ): CircleAvatar(
-          radius: 24,
-          backgroundImage: NetworkImage(templateFiveImage[0]),
-        ),
+            (profileUrl == null)
+                ? CircleAvatar(
+                    radius: 24,
+                    backgroundImage: NetworkImage(templateFiveImage[0]),
+                  )
+                : CircleAvatar(
+                    radius: 24,
+                    backgroundImage: NetworkImage(templateFiveImage[0]),
+                  ),
             const SizedBox(
               width: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment:
-              MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FormHeadingText(
-                  headings: (userName == null ) ? "loading ": (userName!.length > 20 )? "${userName!.substring(17)}...": userName!,
+                  headings: (userName == null)
+                      ? "loading "
+                      : (userName!.length > 20)
+                          ? "${userName!.substring(17)}..."
+                          : userName!,
                   fontSize: 10,
                 ),
                 FormHeadingText(
-                  headings: "${widget.text}",
+                  headings: widget.text,
                   fontSize: 14,
                 ),
                 Row(
@@ -84,7 +87,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                       width: 10,
                     ),
                     FormHeadingText(
-                      headings: "Reply",
+                      headings: "Reply..",
                       fontSize: 8,
                       color: const Color(0xff323232),
                     ),
@@ -119,8 +122,8 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                   BoxShadow(color: toggleInactive),
                 ],
               ),
-              child: Image.asset("assets/png/liked_icon.png",
-                  color: purpleColor),
+              child:
+                  Image.asset("assets/png/liked_icon.png", color: purpleColor),
             ),
             const SizedBox(
               width: 20,

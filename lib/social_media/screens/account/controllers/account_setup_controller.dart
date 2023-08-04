@@ -93,7 +93,8 @@ class SetupAccount extends GetxController {
       isUserRegiserting.value = false;
       //lead to main page
 
-      Get.to(BottomNavBar(),
+      Get.to(
+        () => BottomNavBar(),
           transition: Transition.rightToLeftWithFade);
       return true;
     } else if (response.statusCode == 401) {

@@ -100,7 +100,8 @@ class _HomePostsState extends State<HomePosts> {
                       child: snapshot.data?[index] == null
                           ? const SizedBox()
                           : PostCard(
-                              isLiked: snapshot.data![index].likes!.contains(widget.myUserId),
+                              isLiked: snapshot.data![index].likes!
+                                  .contains(widget.myUserId),
                               myUserId: widget.myUserId,
                               post: snapshot.data![index],
                               url: snapshot.data![index].mediaUrl ?? "",

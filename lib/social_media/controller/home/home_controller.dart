@@ -59,7 +59,7 @@ class HomePostsController extends GetxController{
         return [];
       }
   }
-
+ 
   Future<List<Post>> refreshResent() async{
       skip.value =  -10;
       posts!.value = [];

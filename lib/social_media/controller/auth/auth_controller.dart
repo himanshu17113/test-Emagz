@@ -109,7 +109,8 @@ class AuthController extends GetxController {
         var userId = data["userId"];
         print("TOKEN : $token userId : $userId");
         jwtController.setAuthToken(token, userId);
-        Get.to(const ChooseIntrestScreen(),
+        Get.to(
+          () => const ChooseIntrestScreen(),
             transition: Transition.rightToLeftWithFade);
         return true;
       } else if (response.statusCode == 401) {
@@ -148,7 +149,8 @@ class AuthController extends GetxController {
       var data = jsonDecode(response.body);
       print(data["data"]["_id"]);
       if (response.statusCode == 200) {
-        Get.to(BottomNavBar());
+        Get.to(
+          () => BottomNavBar());
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
         jwtController.setAuthToken(data["token"], data["data"]["_id"]);

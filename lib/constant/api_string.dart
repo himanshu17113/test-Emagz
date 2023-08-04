@@ -10,7 +10,7 @@ class ApiEndpoint {
   //     "http://ec2-15-206-157-157.ap-south-1.compute.amazonaws.com:3000/api";
 
   // static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
-     static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
+  static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
   static String socketUrl = "http://$ip:8900";
 
   static String userInfo(String userId) => "$baseUrl/auth/get-user-details/$userId";
@@ -43,6 +43,8 @@ class ApiEndpoint {
 
   static String likePost(String postId) => "$baseUrl/post/$postId/likeANDunlike";
   static String commentPost(String postId) => "$baseUrl/post/$postId/comment";
+  static String replyPost(String postId, String commentId, String userId) =>
+      "$baseUrl/post/comment-on-comment?postId=$postId&commentId=$commentId&userId=$userId";
   static String doPoll(String postId) => "$baseUrl/post/$postId/Poll";
   static String makePost = "$baseUrl/post";
 

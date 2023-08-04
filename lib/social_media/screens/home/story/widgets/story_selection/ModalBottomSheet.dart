@@ -110,7 +110,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
 
           Expanded(child: GridGallery(onPostTapped: (imageData,assetEntity) {
             print("image Data : ${assetEntity.mimeType!.split("/")[1]}");
-            Get.to(
+            Get.to(() => 
                 EditorScreen(
                   onSubmit: (editedImage) async{
                     await storyController.postStory(assetEntity.mimeType!.split("/")[0], editedImage.path);

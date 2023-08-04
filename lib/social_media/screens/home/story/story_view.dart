@@ -63,7 +63,7 @@ class _StoryViewState extends State<StoryView> {
                               },
                               child: StoryViewCard(
                                 url: url,
-                                username: snapshot.data![index]!.userId!.username!,
+                                username: snapshot.data![index]!.userId!.sId!,
                               ))
                         ],
                       );
@@ -76,7 +76,7 @@ class _StoryViewState extends State<StoryView> {
                           },
                           child: StoryViewCard(
                             url: url,
-                            username: snapshot.data![index]?.userId?.username ??  "",
+                            username: snapshot.data![index]?.userId?.sId ??  "",
                           ));
                     }
                   }),

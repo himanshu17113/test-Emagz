@@ -8,11 +8,16 @@ class PostView extends StatefulWidget {
   final Post post;
   final String myId;
   bool isLiked;
-  PostView({super.key, required this.post, required this.isLiked, required this.myId});
+  PostView(
+      {super.key,
+      required this.post,
+      required this.isLiked,
+      required this.myId});
 
   @override
   State<PostView> createState() => _PostViewState();
 }
+
 
 class _PostViewState extends State<PostView> {
   @override
@@ -28,7 +33,8 @@ class _PostViewState extends State<PostView> {
             height: MediaQuery.of(context).size.height,
             child: CachedNetworkImage(
               imageUrl: widget.post.mediaUrl!,
-              progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
+              progressIndicatorBuilder: (context, url, downloadProgress) =>
+                  CircularProgressIndicator(value: downloadProgress.progress),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
@@ -40,7 +46,8 @@ class _PostViewState extends State<PostView> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(color: Colors.white, Icons.arrow_back_rounded))),
+                icon:
+                    const Icon(color: Colors.white, Icons.arrow_back_rounded))),
         Positioned(
           bottom: 30,
           child: Material(
@@ -76,7 +83,10 @@ class _PostViewState extends State<PostView> {
                 ),
                 Text(
                   "${widget.post.likes?.length.toString()}",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: whiteColor),
                 ),
                 const SizedBox(
                   width: 30,
@@ -85,11 +95,14 @@ class _PostViewState extends State<PostView> {
                   onTap: () {
                     if (widget.post.comments != null) {
                       showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
                         // enableDrag: true,
                         enableDrag: true,
                         isScrollControlled: true,
                         shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20))),
                         context: context,
                         builder: (context) {
                           return Wrap(children: [
@@ -112,7 +125,10 @@ class _PostViewState extends State<PostView> {
                 ),
                 Text(
                   "${widget.post.comments?.length.toString()}",
-                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                  style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: whiteColor),
                 ),
                 const SizedBox(
                   width: 30,
