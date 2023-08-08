@@ -115,7 +115,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                             Text(
                               overflow: TextOverflow.ellipsis,
                               user != null ? user!.accountType == "professional" ? user!.businessName! :
-                              user!.displayName!  :
+                              user?.displayName?? 'loding..'  :
                               "laoding...",
                               style: TextStyle(
                                   color: blackButtonColor,

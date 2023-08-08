@@ -1,6 +1,7 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
+import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -129,7 +130,9 @@ class PersonalProfileSetup extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        accountSetUpController.setUpPersonalAccount();
+
+                        Get.to(()=>ChooseTemplate());
+                        //accountSetUpController.setUpPersonalAccount();
                         // Get.to(() => BusinessProfileSetupScreen());
                       },
                       child: Container(
