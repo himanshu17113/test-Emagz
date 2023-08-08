@@ -95,13 +95,13 @@ class _StoryScreenState extends State<StoryScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${snapshot.data!.username ?? "loading..."}",
+                            snapshot.data!.username ?? "loading...",
                             style: TextStyle(
                                 fontSize: 10,
                                 fontWeight: FontWeight.w600,
                                 color: whiteColor),
                           ),
-                          Text("${snapshot.data!.username?? "loading..."}",
+                          Text(snapshot.data!.username?? "loading...",
                               style: TextStyle(
                                   fontSize: 8,
                                   fontWeight: FontWeight.w600,
@@ -146,7 +146,7 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       Obx(
                         () =>  Text(
-                          "${widget.stories[storyController.currentStoryIndex.value].likes!.length.toString()}",
+                          widget.stories[storyController.currentStoryIndex.value].likes!.length.toString(),
                           style: TextStyle(
                               fontSize: 11,
                               fontWeight: FontWeight.w600,
@@ -175,7 +175,7 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       Obx(
                         () => Text(
-                              "${widget.stories[storyController.currentStoryIndex.value].comments!.length.toString()}",
+                              widget.stories[storyController.currentStoryIndex.value].comments!.length.toString(),
                               style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600,
@@ -340,7 +340,7 @@ class _StoryScreenState extends State<StoryScreen> {
                         ),
                         // Same Boc
 
-                        Container(height: 230,
+                        SizedBox(height: 230,
                           width: MediaQuery.of(context).size.width,
                           child: ListView.builder(
                             itemCount: comments.length,
@@ -353,7 +353,7 @@ class _StoryScreenState extends State<StoryScreen> {
 
                         // CommentReplyTile(),
                         // StoryCommentTile(),
-                        Container(
+                        SizedBox(
                           height: 55,
                           child: TextField(
                             controller: textEditingController,

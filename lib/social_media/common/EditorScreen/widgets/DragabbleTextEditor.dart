@@ -61,7 +61,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: ColorPicker(pickerColor: Colors.black, onColorChanged: (value) {
                                     textColor = value;
-                                    print(value);
+                                    //print(value);
                                   },),
                                 ),
                                 ElevatedButton(onPressed: () {
@@ -154,19 +154,19 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                       fontSize = fontSize!+1;
                       setState(() {});
                   },
-                  child: Text("+",style: TextStyle(color: Colors.white,fontSize: 21)),),
+                  child: const Text("+",style: TextStyle(color: Colors.white,fontSize: 21)),),
                 const SizedBox(width: 10,),
-                Text("$fontSize",style: TextStyle(color: Colors.white,fontSize: 21),),
+                Text("$fontSize",style: const TextStyle(color: Colors.white,fontSize: 21),),
                 const SizedBox(width: 10,),
-                Container(child: Padding(
+                Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: TextButton(
                       onPressed: () {
                         fontSize = fontSize!-1;
                         setState(() {});
                       },
-                      child:Text("-",style: TextStyle(color: Colors.white,fontSize: 21),)),
-                )),
+                      child:const Text("-",style: TextStyle(color: Colors.white,fontSize: 21),)),
+                ),
               ],
             ),
           ),
@@ -183,7 +183,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
               maxLength: 1000,
               controller: inputController,
               onChanged: (value) {
-                if(value.length > 0){
+                if(value.isNotEmpty){
                   isTextWritten = true;
                   setState(() {
                   });

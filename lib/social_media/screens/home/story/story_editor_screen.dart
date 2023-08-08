@@ -12,7 +12,6 @@ class StoryEditorScreen extends StatefulWidget {
 }
 
 class _StoryEditorScreenState extends State<StoryEditorScreen> {
-
   var storyController = Get.put(GetXStoryController());
 
   @override
@@ -41,34 +40,37 @@ class _StoryEditorScreenState extends State<StoryEditorScreen> {
           showDialog(
             useSafeArea: true,
             barrierDismissible: false,
-            context: context, builder: (context) {
-            return Center(child:
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => LinearProgressIndicator(
-                        value: storyController.storyUploadPercentage.value,
-                        ),),
-              Obx(
-                      () => Material(
-                        color: Colors.transparent,
-                        child: Text(
-                          "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
-                          style: TextStyle(color: Colors.white),
-                          ),
+            context: context,
+            builder: (context) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Obx(
+                        () => LinearProgressIndicator(
+                          value: storyController.storyUploadPercentage.value,
+                        ),
                       ),
-                    ),
-                  ],
+                      Obx(
+                        () => Material(
+                          color: Colors.transparent,
+                          child: Text(
+                            "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-            ),);
-          },);
+              );
+            },
+          );
         },
       ),
     );
   }
 }
-

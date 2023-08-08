@@ -10,6 +10,7 @@ import 'package:path_provider/path_provider.dart';
 
 import 'social_media/controller/bottom_nav_controller.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDir = await getApplicationDocumentsDirectory();

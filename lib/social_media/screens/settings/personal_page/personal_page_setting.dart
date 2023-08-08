@@ -416,7 +416,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               InkWell(
                 onTap: () async {
                   await jwtController.setAuthToken(null, null);
-                  Get.off(CommonAuthScreen());
+                  Get.off(()=>CommonAuthScreen());
                 },
                 child: Container(
                   alignment: Alignment.center,
