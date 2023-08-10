@@ -28,7 +28,12 @@ class MyCustomTextfiled extends StatelessWidget {
       height: maxLines == 1 ? 44 : null,
       child: TextFormField(
         onTap: () {
-          onTap!();
+          if (onTap==Null)
+          {
+
+          }
+          else
+          onTap;
         },
         controller: controller,
         maxLines: maxLines,

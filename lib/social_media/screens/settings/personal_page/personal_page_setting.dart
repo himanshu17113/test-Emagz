@@ -10,6 +10,7 @@ import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_policy_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_setting_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/security_screen.dart';
+import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -167,19 +168,24 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               fontSize: 10,
                               fontWeight: FontWeight.w600),
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 12),
-                          decoration: BoxDecoration(
-                            // borderRadius: BorderRadius.circular(10),
-                            color: chipColor,
-                          ),
-                          child: Text(
-                            "Change Theme",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400),
+                        GestureDetector(
+                          onTap:(){
+                            Get.to(()=> ChooseTemplate());
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                            decoration: BoxDecoration(
+                              // borderRadius: BorderRadius.circular(10),
+                              color: chipColor,
+                            ),
+                            child: Text(
+                              "Change Theme",
+                              style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         )
                       ],
@@ -269,6 +275,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   title: "Security",
                 ),
               ),
+
               Container(
                 height: 64,
                 margin: EdgeInsets.only(top: 10),

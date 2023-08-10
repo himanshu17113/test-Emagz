@@ -7,13 +7,16 @@ class FormHeadingText extends StatelessWidget {
   final double fontSize;
   Color? color;
   final TextAlign textAlign;
+  FontStyle? isItalic;
   FormHeadingText(
       {Key? key,
       required this.headings,
       this.fontWeight,
       this.color,
       this.textAlign = TextAlign.start,
-      this.fontSize = 15})
+      this.fontSize = 15,
+        this.isItalic,
+      })
       : super(key: key);
 
   @override
@@ -26,9 +29,12 @@ class FormHeadingText extends StatelessWidget {
         style: TextStyle(
 
             // height: .25,
+          fontStyle: isItalic ?? FontStyle.normal,
             fontSize: fontSize,
             fontWeight: fontWeight ?? FontWeight.w400,
-            color: color ?? blackButtonColor),
+            color: color ?? blackButtonColor
+
+        ),
       ),
     );
   }

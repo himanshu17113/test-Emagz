@@ -15,6 +15,64 @@ class ChooseTemplate extends StatefulWidget {
 class _ChooseTemplateState extends State<ChooseTemplate> {
   int value=1;
   var accountSetUpController = Get.put(SetupAccount());
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          elevation: 3,
+
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+          backgroundColor: Colors.white,
+          title:  FormHeadingText(
+
+
+
+            textAlign: TextAlign.center,
+            headings: 'Do You want to Use this Persona?',
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            isItalic: FontStyle.italic,
+          ),
+          content:  SingleChildScrollView(
+            child:  Container(
+                child: Column(
+                  children: [
+                    Text(
+                      "You can always change your persona Later",
+                      style: TextStyle(
+                          color: accountGray,
+                          fontSize: 9,
+                          fontWeight: FontWeight.w200),
+                    ),
+                    SizedBox(height: 30,),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 200,
+                            child: customYesNoButton("Yes", 1)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: 200,
+                            child: customYesNoButton("No", 2)),
+                      ],
+                    ),
+
+
+                  ],
+                ),
+            )
+          ),
+
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,23 +207,29 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         Positioned(
           left: 300,
             top: 20,
-            child: Container(
-              height: 45,
-              width: 45,
-              decoration: BoxDecoration(
-                color: const Color(0xff1B47C1),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child:
-                Transform.rotate(
-                    angle: 135 * math.pi / 180,
-                    child: Icon(
-                      Icons.arrow_back_sharp,
-                      color: Colors.white,
-                      size: 17,
-                    )
+            child: GestureDetector(
+              onTap: ()
+              {
+                _showMyDialog();
+              },
+              child: Container(
+                height: 45,
+                width: 45,
+                decoration: BoxDecoration(
+                  color: const Color(0xff1B47C1),
+                  borderRadius: BorderRadius.circular(15),
                 ),
+                child:
+                  Transform.rotate(
+                      angle: 135 * math.pi / 180,
+                      child: Icon(
+                        Icons.arrow_back_sharp,
+                        color: Colors.white,
+                        size: 17,
+                      )
+                  ),
 
+              ),
             )
         )
 
@@ -201,6 +265,34 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       ),
     );
   }
+  Widget customYesNoButton(String text, int index) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+      },
+      child: Container(
+        // padding: const EdgeInsets.symmetric(horizontal: 10),
+        alignment: Alignment.center,
+        height: 45,
+        decoration: BoxDecoration(
+            color: (value == index) ? Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
+            // border: Border.all(
+            //   color: (value == index) ? chipColor : Colors.black,
+            // ),
+            borderRadius: BorderRadius.circular(10)),
+        child: Text(
+          text,
+          style: TextStyle(
+              color: (value == index)
+                  ? whiteColor
+                  : blackButtonColor.withOpacity(.5),
+              fontSize: 12,
+              fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
+
 }
 // ElevatedButton(
 // onPressed: ()

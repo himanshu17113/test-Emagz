@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
       //home: DefaultBusinesstempScreen(),
       // home: PersonalProfileInsightScreen(),
       //  home: SupportScreen(),
-     // home: ChooseTemplate(),
+      //home: ChooseTemplate(),
     // home: const BottomNavBar(),
       home: Obx(() =>  authController.isAuthorised.value ? const BottomNavBar() : const CommonAuthScreen()),
       // home: ChatScreen(),
