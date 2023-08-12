@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      // home: PTemplateTwoScreen(),
+       //home: PTemplateTwoScreen(),
       // home: TemplateFiveScreen(),
       //home: DefaultBusinesstempScreen(),
       // home: PersonalProfileInsightScreen(),

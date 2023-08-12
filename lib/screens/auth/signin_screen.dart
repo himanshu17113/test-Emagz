@@ -22,7 +22,7 @@ class _SignInScreenState extends State<SignInScreen> with SingleTickerProviderSt
 
   @override
   void initState() {
-    authController.tabController = TabController(length: 2, vsync: this);
+   // authController.tabController = TabController(length: 2, vsync: this);
     // TODO: implement initState
     super.initState();
   }
