@@ -1,47 +1,53 @@
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/models/user_model.dart';
+import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/MessagesView/messages_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import '../notification/notification_screen.dart';
 import 'chat_list_screen.dart';
 
 class ChatScreen extends StatefulWidget {
-  late String conversationId;
-  late User user;
-  ChatScreen({Key? key, required this.user, required this.conversationId}) : super(key: key);
+  final String conversationId;
+  final UserSchema? user;
+  final List<Message>? messages;
+  const ChatScreen({Key? key, required this.user, required this.conversationId, this.messages}) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  var chatController = Get.put(ConversationController());
-  var jwtController = Get.put(JWTController());
-  var socketController = Get.put(SocketController());
+  final chatController = Get.find<ConversationController>();
+  final jwtController = Get.find<JWTController>();
+  final socketController = Get.find<SocketController>();
   String? userId;
 
-  List<Message>? messages;
+//  List<Message>? messages = [];
   @override
   void initState() {
     initAsync();
+    socketController.connectToServer(widget.conversationId);
     super.initState();
   }
 
   TextEditingController inputTextController = TextEditingController();
 
   void initAsync() async {
-    userId = await jwtController.getUserId();
-    messages = await chatController.getMessages(widget.conversationId);
-    // print(messages);
-    setState(() {});
+    userId = jwtController.userId?.value;
+    if (userId == null) {
+      userId = chatController.userId;
+      if (userId == null) {
+        var hiveBox = Hive.box("secretes");
+        userId = await hiveBox.get("userId");
+      }
+    }
   }
 
   @override
@@ -77,22 +83,23 @@ class _ChatScreenState extends State<ChatScreen> {
                         color: blackButtonColor,
                       ),
                     ),
-                    const SizedBox(
-                      width: 25,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          // Get.to(() => const PersonalPageSetting());
-                        },
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(5)),
-                        )),
-                    const SizedBox(
-                      width: 5,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 25, bottom: 5),
+                      child: InkWell(
+                        onTap: () {},
+                        child: CachedNetworkImage(
+                          imageUrl: url,
+                          placeholder: (context, url) => const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                        ),
+                        //  Container(
+                        //     height: 30,
+                        //     width: 30,
+                        //     decoration: BoxDecoration(
+                        //         image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
+                        //         borderRadius: BorderRadius.circular(5)),
+                        //   )
+                      ),
                     ),
                   ],
                 ),
@@ -111,7 +118,6 @@ class _ChatScreenState extends State<ChatScreen> {
               padding: const EdgeInsets.symmetric(vertical: 3),
               height: 68,
               decoration: BoxDecoration(
-                // color: whiteColor,
                 border: Border.all(
                   color: const Color(0xffAFB6FD),
                 ),
@@ -123,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     width: 10,
                   ),
                   CircleAvatar(
-                    backgroundImage: NetworkImage(url),
+                    backgroundImage: CachedNetworkImageProvider(url),
                     maxRadius: 20,
                   ),
                   const SizedBox(
@@ -134,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "${widget.user.username}",
+                        "${widget.user?.username}",
                         style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
                       ),
                       Text(
@@ -145,14 +151,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   const Spacer(),
                   PopupMenuButton(
-                    // offset: Offset(60, 0),
                     padding: EdgeInsets.zero,
                     elevation: 0.0,
                     color: Colors.transparent,
                     position: PopupMenuPosition.under,
-                    onSelected: (value) {
-                      // your logic
-                    },
+                    onSelected: (value) {},
                     child: const Icon(Icons.more_vert),
                     itemBuilder: (BuildContext bc) {
                       return [
@@ -160,7 +163,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           child: null,
                         ),
                         PopupMenuItem(
-                          // padding: EdgeInsets.only(left: 50),
                           value: '/hello',
                           child: ClipRRect(
                             child: BackdropFilter(
@@ -175,11 +177,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
-                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff323232))))),
+                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
                           ),
                         ),
                         PopupMenuItem(
-                          // padding: EdgeInsets.only(left: 50),
                           value: '/hello',
                           child: ClipRRect(
                             child: BackdropFilter(
@@ -194,7 +195,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
-                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Color(0xff323232))))),
+                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
                           ),
                         ),
                       ];
@@ -209,28 +210,15 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                // decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(20), color: whiteColor),
                 child: Column(
                   children: [
-                    Expanded(
-                        child: (messages == null)
-                            ? Center(
-                                child: CircularProgressIndicator(),
-                              )
-                            : MessageView(messages: [], senderId: userId!)),
+                    Expanded(child: MessageView(room: widget.conversationId, messages: widget.messages!, senderId: userId!)),
                     Container(
-                      margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       height: 48,
                       decoration: BoxDecoration(
-                        color: Color(0xffE8E7E7),
+                        color: const Color(0xffE8E7E7),
                         borderRadius: BorderRadius.circular(10),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //       color: Colors.black.withOpacity(.1),
-                        //       blurRadius: 3,
-                        //       spreadRadius: 2)
-                        // ],
                       ),
                       child: Row(
                         children: [
@@ -265,7 +253,6 @@ class _ChatScreenState extends State<ChatScreen> {
                               controller: inputTextController,
                               decoration: const InputDecoration(
                                   isDense: true,
-                                  // filled: true,
                                   hintText: "Type something ",
                                   hintStyle: TextStyle(
                                     fontSize: 12,
@@ -278,33 +265,19 @@ class _ChatScreenState extends State<ChatScreen> {
                                   border: InputBorder.none),
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.all(5.0),
-                          //   child: CircleAvatar(
-                          //     radius: 15,
-                          //     backgroundColor: chipColor,
-                          //     child: Transform.rotate(
-                          //       angle: -45,
-                          //       child: Icon(
-                          //         Icons.send,
-                          //         size: 10,
-                          //         color: whiteColor,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // )
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: InkWell(
                               onTap: () {
-                                var receiverId = widget.user.sId;
-                                socketController.sendMessage(receiverId!, inputTextController.text);
-                                chatController.postChat(inputTextController.text, widget.conversationId);
-                                inputTextController.clear();
+                                if (inputTextController.text.isNotEmpty) {
+                                  final receiverId = widget.user?.sId;
+                                  socketController.sendMessage(inputTextController.text, widget.conversationId, receiverId!);
+                                  chatController.postChat(inputTextController.text, widget.conversationId);
+                                  inputTextController.clear();
+                                }
                               },
                               child: CircleAvatar(
                                   radius: 16,
-                                  // backgroundColor: chipColor,
                                   backgroundImage: const AssetImage(
                                     "assets/png/send_msg_bg.png",
                                   ),
@@ -327,15 +300,3 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 }
-
-class ChatMessage {
-  String messageContent;
-  String messageType;
-  ChatMessage({required this.messageContent, required this.messageType});
-}
-
-List<ChatMessage> messages = [
-  ChatMessage(messageContent: "Hey, How are you making the post", messageType: "sender"),
-  ChatMessage(messageContent: "Hey, Yea by giving the issue", messageType: "receiver"),
-  ChatMessage(messageContent: "Oh Great, Thanks For Teaching", messageType: "sender"),
-];

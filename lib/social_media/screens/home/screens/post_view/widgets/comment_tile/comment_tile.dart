@@ -33,7 +33,7 @@ class _PostCommentTileState extends State<PostCommentTile> {
   asyncInit() async {
     var user = await storyController.jwtController.getUserDetail(widget.comment.userId!.sId!);
     userName = user!.username!;
-    profileUrl = user.businessLogo;
+    // profileUrl = user.businessLogo;
     setState(() {});
   }
 

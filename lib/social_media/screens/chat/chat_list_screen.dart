@@ -109,7 +109,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.to(() => ChatSettingScreen());
+                        Get.to(() => const ChatSettingScreen());
                       },
                       child: Container(
                           padding: const EdgeInsets.all(12),
@@ -179,7 +179,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 ),
               ),
               (userId == null)
-                  ? CircularProgressIndicator()
+                  ? const CircularProgressIndicator()
                   : UserChats(
                       userId: userId!,
                     )

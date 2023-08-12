@@ -1,28 +1,37 @@
+// To parse this JSON data, do
+//
+//     final conversation = conversationFromMap(jsonString);
+
+import 'dart:convert';
+
 class Conversation {
-  String? sId;
   List<String>? members;
-  String? createdAt;
-  String? updatedAt;
-  int? iV;
+  String? id;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-  Conversation(
-      {this.sId, this.members, this.createdAt, this.updatedAt, this.iV});
+  Conversation({
+    this.members,
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-  Conversation.fromJson(Map<String, dynamic> json) {
-    sId = json['_id'];
-    members = json['members'].cast<String>();
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    iV = json['__v'];
-  }
+  factory Conversation.fromJson(String str) => Conversation.fromMap(json.decode(str));
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['members'] = this.members;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    return data;
-  }
+  String toJson() => json.encode(toMap());
+
+  factory Conversation.fromMap(Map<String, dynamic> json) => Conversation(
+        members: json["members"] == null ? [] : List<String>.from(json["members"]!.map((x) => x)),
+        id: json["_id"],
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "members": members == null ? [] : List<dynamic>.from(members!.map((x) => x)),
+        "_id": id,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
+      };
 }

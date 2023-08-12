@@ -132,22 +132,22 @@ class _CommentReplyTileState extends State<CommentReplyTile> {
                         const Spacer(),
                         GestureDetector(
                           onTap: () {
-                            //   setState(() {
-                            if (max == 10) {
-                              max = 1;
-                            } else {
-                              max = 10;
-                            }
-                            //   });
+                            setState(() {
+                              if (max == 10) {
+                                max = 1;
+                              } else {
+                                max = 10;
+                              }
+                            });
                           },
-                          child: const Icon(
-                            Icons.keyboard_arrow_down,
-                            size: 15,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: const Icon(
+                              Icons.keyboard_arrow_down,
+                              size: 20,
+                            ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        )
                       ],
                     ),
                   ),

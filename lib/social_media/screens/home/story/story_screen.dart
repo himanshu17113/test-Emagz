@@ -1,4 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/models/user_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
@@ -12,7 +13,7 @@ import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.d
 class StoryScreen extends StatefulWidget {
   late String userId;
   late List<Stories> stories;
-  StoryScreen({super.key,required this.stories,required this.userId});
+  StoryScreen({super.key, required this.stories, required this.userId});
 
   @override
   State<StoryScreen> createState() => _StoryScreenState();
@@ -23,28 +24,18 @@ class _StoryScreenState extends State<StoryScreen> {
   void initState() {
     super.initState();
   }
+
   StoryController controller = StoryController();
 
   var storyController = Get.put(GetXStoryController());
 
   @override
   Widget build(BuildContext context) {
-    List<StoryItem> storyItems = List.generate(
-        widget.stories.length, (index) {
-          return
-      widget.stories[index].mediaType == "video" ?
-           StoryItem.pageVideo(
-              widget.stories[index].mediaUrl!,
-              key: Key(index.toString()),
-
-              controller: controller)
-      :
-           StoryItem.pageImage(
-              key: Key(index.toString()),
-              url:
-                  widget.stories[index].mediaUrl ?? "",
-              controller: controller);
-        });
+    List<StoryItem> storyItems = List.generate(widget.stories.length, (index) {
+      return widget.stories[index].mediaType == "video"
+          ? StoryItem.pageVideo(widget.stories[index].mediaUrl!, key: Key(index.toString()), controller: controller)
+          : StoryItem.pageImage(key: Key(index.toString()), url: widget.stories[index].mediaUrl ?? "", controller: controller);
+    });
     //   StoryItem.pageImage(
     //       url: foodImage[0], controller: controller, imageFit: BoxFit.cover),
     return Scaffold(
@@ -58,7 +49,7 @@ class _StoryScreenState extends State<StoryScreen> {
                   controller: controller,
                   repeat: false,
                   onStoryShow: (s) {
-                    storyController.currentStoryIndex.value = int.parse(s.view.key.toString().substring(3,s.view.key.toString().length-3));
+                    storyController.currentStoryIndex.value = int.parse(s.view.key.toString().substring(3, s.view.key.toString().length - 3));
                   },
                   onComplete: () {
                     Navigator.pop(context);
@@ -85,29 +76,22 @@ class _StoryScreenState extends State<StoryScreen> {
                     const SizedBox(
                       width: 5,
                     ),
-                    FutureBuilder<User?>(
+                    FutureBuilder<UserSchema?>(
                       future: storyController.jwtController.getUserDetail(widget.userId),
                       builder: (context, snapshot) {
-                        if(!snapshot.hasData){
+                        if (!snapshot.hasData) {
                           return Container();
                         }
                         return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            snapshot.data!.username ?? "loading...",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor),
-                          ),
-                          Text(snapshot.data!.username?? "loading...",
-                              style: TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w600,
-                                  color: whiteColor)),
-                        ],
-                      );
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              snapshot.data!.username ?? "loading...",
+                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
+                            ),
+                            Text(snapshot.data!.username ?? "loading...", style: TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
+                          ],
+                        );
                       },
                     )
                   ],
@@ -127,30 +111,27 @@ class _StoryScreenState extends State<StoryScreen> {
                       GestureDetector(
                         onTap: () {
                           storyController.likeStory(widget.stories[storyController.currentStoryIndex.value].sId.toString());
-                          if(widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)){
+                          if (widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)) {
                             widget.stories[storyController.currentStoryIndex.value].likes!.add(storyController.myId.value);
                           }
                         },
-                        child:
-                            Obx(() =>
-                                widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value) ? Image.asset(
-                          "assets/png/liked_icon.png",
-                          width: 22,
-                        ) :Image.asset(
-                                  "assets/png/unlike_icon.png",
-                                  width: 22,
-                                ) ),
+                        child: Obx(() => widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)
+                            ? Image.asset(
+                                "assets/png/liked_icon.png",
+                                width: 22,
+                              )
+                            : Image.asset(
+                                "assets/png/unlike_icon.png",
+                                width: 22,
+                              )),
                       ),
                       const SizedBox(
                         width: 5,
                       ),
                       Obx(
-                        () =>  Text(
+                        () => Text(
                           widget.stories[storyController.currentStoryIndex.value].likes!.length.toString(),
-                          style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: whiteColor),
+                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
                       ),
                       const SizedBox(
@@ -158,12 +139,8 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          updateName(
-                              context,
-                              widget.stories[storyController.currentStoryIndex.value].comments!,
-                              widget.stories[storyController.currentStoryIndex.value].sId!,
-                            storyController.myId.value
-                          );
+                          updateName(context, widget.stories[storyController.currentStoryIndex.value].comments!,
+                              widget.stories[storyController.currentStoryIndex.value].sId!, storyController.myId.value);
                         },
                         child: Image.asset(
                           "assets/png/comment_icon.png",
@@ -175,12 +152,9 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       Obx(
                         () => Text(
-                              widget.stories[storyController.currentStoryIndex.value].comments!.length.toString(),
-                              style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w600,
-                                  color: whiteColor),
-                            ),
+                          widget.stories[storyController.currentStoryIndex.value].comments!.length.toString(),
+                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                        ),
                       ),
                       const SizedBox(
                         width: 30,
@@ -191,8 +165,6 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                     ],
                   ),
-             
-             
                 ),
               ),
             ),
@@ -200,7 +172,7 @@ class _StoryScreenState extends State<StoryScreen> {
         ));
   }
 
-  updateName(BuildContext context,List<Comments> comments,String storyId,String myId) {
+  updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
     TextEditingController textEditingController = TextEditingController();
     return showDialog(
       barrierColor: const Color(0xff252525).withOpacity(.4),
@@ -232,21 +204,11 @@ class _StoryScreenState extends State<StoryScreen> {
                   // width: double.infinity,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.white.withOpacity(.5),
-                          blurRadius: 20,
-                          spreadRadius: 2,
-                          offset: const Offset(0, -10))
-                    ],
+                    boxShadow: [BoxShadow(color: Colors.white.withOpacity(.5), blurRadius: 20, spreadRadius: 2, offset: const Offset(0, -10))],
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [
-                        const Color(0xffE7E9FE).withOpacity(.01),
-                        const Color(0xffE7E9FE).withOpacity(.02),
-                        const Color(0xffE7E9FE)
-                      ],
+                      colors: [const Color(0xffE7E9FE).withOpacity(.01), const Color(0xffE7E9FE).withOpacity(.02), const Color(0xffE7E9FE)],
                     ),
                     color: Colors.white.withOpacity(.2),
                   ),
@@ -266,10 +228,7 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       Text(
                         "0",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: whiteColor),
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: whiteColor),
                       ),
                       const SizedBox(
                         width: 10,
@@ -288,10 +247,7 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       Text(
                         "${comments.length}",
-                        style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: whiteColor),
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: whiteColor),
                       ),
                       const SizedBox(
                         width: 10,
@@ -340,15 +296,19 @@ class _StoryScreenState extends State<StoryScreen> {
                         ),
                         // Same Boc
 
-                        SizedBox(height: 230,
+                        SizedBox(
+                          height: 230,
                           width: MediaQuery.of(context).size.width,
                           child: ListView.builder(
                             itemCount: comments.length,
                             shrinkWrap: true,
-
                             itemBuilder: (context, index) {
-                              return StoryCommentTile(text: comments[index].text!,userId: comments[index].userId!,);
-                            },),
+                              return StoryCommentTile(
+                                text: comments[index].text!,
+                                userId: comments[index].userId!,
+                              );
+                            },
+                          ),
                         ),
 
                         // CommentReplyTile(),
@@ -361,18 +321,22 @@ class _StoryScreenState extends State<StoryScreen> {
                               hintText: "write comment",
                               suffixIcon: Padding(
                                 padding: const EdgeInsets.all(2.0),
-                                child: IconButton(onPressed: () {
-                                  storyController.commentStory(textEditingController.text, storyId);
-                                  comments.add(Comments(text: textEditingController.text,userId: myId,));
-                                  textEditingController.clear();
-                                  Get.back();
-                                },icon: Icon(Icons.send,color: Colors.blue,)),
+                                child: IconButton(
+                                    onPressed: () {
+                                      storyController.commentStory(textEditingController.text, storyId);
+                                      comments.add(Comments(
+                                        text: textEditingController.text,
+                                        userId: myId,
+                                      ));
+                                      textEditingController.clear();
+                                      Get.back();
+                                    },
+                                    icon: Icon(
+                                      Icons.send,
+                                      color: Colors.blue,
+                                    )),
                               ),
-                              border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(8)
-                                  )
-                              ),
+                              border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
                             ),
                           ),
                         )

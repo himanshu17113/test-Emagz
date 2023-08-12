@@ -1,15 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
-import 'package:emagz_vendor/social_media/common/appbar/common_app_bar.dart';
-import 'package:emagz_vendor/social_media/common/searchbar/search_bar.dart';
+ 
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
-import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
-import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
-import 'package:emagz_vendor/social_media/screens/explore/explpre_screen.dart';
+ 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+ 
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
@@ -100,7 +96,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(() => MessageRequestScreen());
+                    Get.to(() => const MessageRequestScreen());
                   },
                   child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),

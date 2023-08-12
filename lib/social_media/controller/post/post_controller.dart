@@ -107,7 +107,7 @@ class PostController extends GetxController {
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
       bottomNavController.pageUpdate(0);
-      Get.offAll(const BottomNavBar());
+      Get.offAll(() => const BottomNavBar());
     } catch (e) {
       uploadPercentage.value = 0.0;
       isPosting.value = false;

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/models/user_model.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -7,7 +8,7 @@ import 'package:hive/hive.dart';
 class JWTController extends GetxController {
   RxString? token;
   RxString? userId;
-  Rx<User>? currentUser;
+  Rx<UserSchema>? currentUser;
   RxBool isAuthorised = false.obs;
   var hiveBox = Hive.box("secretes");
 
@@ -25,7 +26,7 @@ class JWTController extends GetxController {
     return userDetails;
   }
 
-  Future<User?> getUserDetail(String id) async {
+  Future<UserSchema?> getUserDetail(String id) async {
     try {
       Dio dio = Dio();
       var userToken = await getAuthToken();
@@ -35,7 +36,7 @@ class JWTController extends GetxController {
       print(ApiEndpoint.userInfo(id!));
       var response = await dio.get(ApiEndpoint.userInfo(id));
       print(response.data);
-      var userDetails = User.fromJson(response.data);
+      var userDetails = UserSchema.fromJson(response.data);
       currentUser ??= userDetails.obs;
       return userDetails;
     } catch (e) {

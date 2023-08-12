@@ -11,7 +11,7 @@ class ApiEndpoint {
 
   // static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
   static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
-  static String socketUrl = "http://$ip:8900";
+  static String socketUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/socket_connection";
 
   static String userInfo(String userId) => "$baseUrl/auth/get-user-details/$userId";
 
@@ -27,9 +27,6 @@ class ApiEndpoint {
 
   static String chooseIntrest = "$baseUrl/auth/addInterest/";
   static String uniqueName(String userId) => "$baseUrl/auth/profile/get-unique-name/$userId";
-
-  static String requestList = "$baseUrl/chat_setting/requests";
-  static String blockUser = "$baseUrl/chat_setting/block";
 
   static String story = "$baseUrl/story/stories";
   static String likeStroy(String storyId) => "$baseUrl/story/$storyId/like";
@@ -52,5 +49,12 @@ class ApiEndpoint {
 
   static String getConversation(String userId) => "$baseUrl/conversations/$userId";
   static String getMessages(String conversationId) => "$baseUrl/messages/$conversationId";
+
+  static String blockUser = "$baseUrl/chat_setting/block";
+  static String requestList = "$baseUrl/chat_setting/requests";
+  static String acceptRequest(String userId) => "$baseUrl/chat_setting/requests/$userId/accept";
+  static String strikeFirstCon = "$baseUrl/conversations/";
+  static String getConID(String userId, String secUserId) => "$baseUrl/conversations/find/$userId/$secUserId";
+
   static String postMessage = "$baseUrl/messages";
 }
