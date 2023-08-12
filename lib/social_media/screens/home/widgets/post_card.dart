@@ -62,12 +62,11 @@ class _PostCardState extends State<PostCard> {
     }
     return GestureDetector(
       onTap: () {
-        Get.to(
-          () => PostView(
-          post: widget.post!,
-          isLiked: widget.isLiked!,
-          myId: widget.myUserId!,
-        ));
+        Get.to(() => PostView(
+              post: widget.post!,
+              isLiked: widget.isLiked!,
+              myId: widget.myUserId!,
+            ));
       },
       child: Container(
         height: Get.size.height / 1.6,
@@ -87,7 +86,7 @@ class _PostCardState extends State<PostCard> {
           borderRadius: BorderRadius.circular(20),
           child: Stack(fit: StackFit.expand, children: [
             Builder(builder: (context) {
-              if (widget.post!.mediaType == "image") {
+              if (widget.post!.mediaType == "image" || widget.post!.mediaType == "text") {
                 return Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(image: CachedNetworkImageProvider(widget.url), fit: BoxFit.cover),
@@ -285,8 +284,7 @@ class _PostCardState extends State<PostCard> {
                       Container(
                         margin: const EdgeInsets.only(left: 10),
                         width: Get.size.width / 2.5,
-                        child:
-                            Text("${widget.post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                        child: Text("${widget.post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
                       ),
                       const Expanded(child: SizedBox()),
                       GestureDetector(
@@ -338,8 +336,7 @@ class _PostCardState extends State<PostCard> {
                       InkWell(
                         onTap: () {
                           showModalBottomSheet(
-                            shape: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                            shape: const OutlineInputBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
                             isScrollControlled: true,
                             context: context,
                             builder: (context) {

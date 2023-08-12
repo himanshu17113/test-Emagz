@@ -1,6 +1,7 @@
 import 'dart:ui' as UI;
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart';
+import 'package:emagz_vendor/social_media/screens/post/text-post.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,6 +13,7 @@ import 'package:screenshot/screenshot.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
 import '../../controller/post/post_controller.dart';
 import '../../utils/photo_filter.dart';
+import '../home/story/story_editor_screen.dart';
 import '../home/widgets/home_screen_appbar.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -246,7 +248,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       "Post",
@@ -259,6 +261,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     child: Row(
                       children: [
                         InkWell(
+                          onTap: () {
+                            Get.to(() => const TextPostScreen());
+                          },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -272,18 +277,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: FormHeadingText(
-                              headings: "Text",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
+                            child: const Text(
+                              "Text",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff054BFF),
+                                fontSize: 14,
+                              ),
                             ),
                           ),
-                          onTap: () {
-                            setState(() {
-                              postController.currentType?.value = PostType.text;
-                            });
-                          },
+                          // onTap: () {
+                          //   setState(() {
+                          //     postController.currentType?.value = PostType.text;
+                          //   });
+                          // },
                         ),
                         const SizedBox(
                           width: 10,
@@ -415,8 +422,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                               UI.Image realImage = await ScreenshotController.widgetToUiImage(index == -1
                                   ? Image.memory(postController.imagePath!)
-                                  : ColorFiltered(
-                                      colorFilter: ColorFilter.matrix(filters[index]), child: Image.memory(postController.imagePath!)));
+                                  : ColorFiltered(colorFilter: ColorFilter.matrix(filters[index]), child: Image.memory(postController.imagePath!)));
                               var buffer = await realImage.toByteData(format: UI.ImageByteFormat.png);
                               var imageData = await buffer!.buffer.asUint8List();
                               // var image = await screenshotController.capture();
@@ -424,14 +430,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               postController.setPost(imageData, postController.assetType!);
                               isLoading = false;
                               Get.off(
-                                EditorScreen(
+                                () => EditorScreen(
                                     imageHeight: realImage.height,
                                     imageWidth: realImage.width,
                                     fileExtension: fileExtension,
                                     image: postController.imagePath,
                                     onSubmit: (editedImage) {
                                       postController.setPost(editedImage.readAsBytesSync(), postController.assetType!);
-                                      Get.off(PrePostScreen(postType: PostType.gallery, image: postController.imagePath));
+                                      Get.off(() => PrePostScreen(postType: PostType.gallery, image: postController.imagePath));
                                     }),
                               );
                             },

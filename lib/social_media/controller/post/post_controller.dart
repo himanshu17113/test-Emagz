@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart'  ;
+import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
@@ -14,16 +14,16 @@ import 'package:get/get.dart' hide MultipartFile, FormData;
 
 import 'package:path_provider/path_provider.dart';
 
-enum PostAssetType{image,video,text}
+enum PostAssetType { image, video, text }
 
 class PostController extends GetxController {
-
   TextEditingController captionController = TextEditingController();
   RxDouble uploadPercentage = RxDouble(0);
   RxString privacyLikesAndViews = RxString("hideFromEveryone");
   RxString privacyLikesAndViewsUI = RxString("Everyone");
   PostAssetType? assetType;
   Uint8List? imagePath;
+  String? textPost;
   Rx<PostType>? currentType;
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
@@ -36,20 +36,23 @@ class PostController extends GetxController {
   var jwtController = Get.put(JWTController());
   var bottomNavController = Get.put(NavController());
 
-  Future setPost(image,PostAssetType assetType) async {
+  Future setPost(image, PostAssetType assetType) async {
     isSettingImage.value = true;
-    imagePath = image;
+    if (assetType == PostAssetType.text) {
+      textPost = image;
+    } else {
+      imagePath = image;
+    }
     this.assetType = assetType;
     isSettingImage.value = false;
-    update();
+    //update();
   }
 
-
   Future makePost(
-      bool enablePoll,
-      String tagPrivacy,
-      String setTimer,
-      ) async {
+    bool enablePoll,
+    String tagPrivacy,
+    String ?setTimer,
+  ) async {
     isPosting.value = true;
 
     try {
@@ -70,45 +73,48 @@ class PostController extends GetxController {
       var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
       //todo : Remove The New File Making Process With Filtered File
-      Uint8List imageInUnit8List = imagePath!;
       final tempDir = await getTemporaryDirectory();
       File file = await File('${tempDir.path}/image.png').create();
-      file.writeAsBytesSync(imageInUnit8List);
+      if (assetType != PostAssetType.text) {
+        Uint8List imageInUnit8List = imagePath!;
+
+        file.writeAsBytesSync(imageInUnit8List);
+      }
+
       FormData reqData = FormData.fromMap({
         "userId": userId,
         "mediaType": assetType.toString().split(".")[1].substring(0),
         "mediaUrl": MultipartFile.fromFileSync(
-          file.path.toString(),
+          assetType == PostAssetType.text ? textPost! : file.path.toString(),
         ),
         "Enabledpoll": enablePoll ? "yes" : "no",
         "ShowPollResults": "yes",
-        "setTimer": setTimer,
+        "setTimer": enablePoll ? setTimer:"",
         "caption": captionController.text,
-        "privacy": {
-          "likesAndViews": privacyLikesAndViews.value,
-          "hideLikeAndViewsControl": "0"
-        },
+        "privacy": {"likesAndViews": privacyLikesAndViews.value, "hideLikeAndViewsControl": "0"},
         "tagPrivacy": tagPrivacy,
         "pollDuration": "0",
       });
-      await dio.post(ApiEndpoint.makePost,
-          data: reqData, onSendProgress: (count, total) {
-            uploadPercentage.value =  (count/total);
-          },);
+      await dio.post(
+        ApiEndpoint.makePost,
+        data: reqData,
+        onSendProgress: (count, total) {
+          uploadPercentage.value = (count / total);
+        },
+      );
       uploadPercentage.value = 0.0;
 
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
       bottomNavController.pageUpdate(0);
       Get.offAll(const BottomNavBar());
-    }catch(e) {
+    } catch (e) {
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");
       print("posting video error $e");
     }
   }
-
 
   // createPost() async {
   //   try {

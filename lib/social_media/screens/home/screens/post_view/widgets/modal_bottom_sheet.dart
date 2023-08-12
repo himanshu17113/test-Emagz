@@ -124,7 +124,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
               // controller: textEditingController,
               decoration: InputDecoration(
                 hintText: "write comment",
-                hintStyle: TextStyle(color: Colors.white54),
+                hintStyle: const TextStyle(color: Colors.white54),
                 suffixIcon: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child:

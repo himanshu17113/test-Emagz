@@ -13,10 +13,8 @@ class StorySelectionBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     var storyController = Get.put(GetXStoryController());
     return Container(
-      padding:
-      const EdgeInsets.symmetric(horizontal: 15),
-      margin:
-      const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       height: 500,
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -27,22 +25,19 @@ class StorySelectionBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const SizedBox(
-            height: 15,
-          ),
-          FormHeadingText(
-            headings: "Update eMagz",
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-          const SizedBox(
-            height: 15,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: FormHeadingText(
+              headings: "Update eMagz",
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Row(
             children: [
               Expanded(
                 child: InkWell(
-                  onTap:(){
+                  onTap: () {
                     Get.to(() => const StoryEditorScreen());
                   },
                   child: Container(
@@ -50,8 +45,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
                     height: 42,
                     decoration: BoxDecoration(
                       color: const Color(0xffDFECFF),
-                      borderRadius:
-                      BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: FormHeadingText(
                       headings: "Text",
@@ -71,8 +65,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
                   height: 42,
                   decoration: BoxDecoration(
                     color: const Color(0xffDFECFF),
-                    borderRadius:
-                    BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: FormHeadingText(
                     headings: "Gallery",
@@ -91,8 +84,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
                   height: 42,
                   decoration: BoxDecoration(
                     color: const Color(0xffDFECFF),
-                    borderRadius:
-                    BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: FormHeadingText(
                     headings: "Camera",
@@ -107,19 +99,18 @@ class StorySelectionBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-
-          Expanded(child: GridGallery(onPostTapped: (imageData,assetEntity) {
-            print("image Data : ${assetEntity.mimeType!.split("/")[1]}");
-            Get.to(() => 
-                EditorScreen(
-                  onSubmit: (editedImage) async{
-                    await storyController.postStory(assetEntity.mimeType!.split("/")[0], editedImage.path);
-                  },
-              image: imageData,
-              fileType:assetEntity.mimeType!.split("/")[0] ,
-              fileExtension: assetEntity.mimeType!.split("/")[1],)
-            );
-          },
+          Expanded(child: GridGallery(
+            onPostTapped: (imageData, assetEntity) {
+              print("image Data : ${assetEntity.mimeType!.split("/")[1]}");
+              Get.to(() => EditorScreen(
+                    onSubmit: (editedImage) async {
+                      await storyController.postStory(assetEntity.mimeType!.split("/")[0], editedImage.path);
+                    },
+                    image: imageData,
+                    fileType: assetEntity.mimeType!.split("/")[0],
+                    fileExtension: assetEntity.mimeType!.split("/")[1],
+                  ));
+            },
           ))
         ],
       ),
