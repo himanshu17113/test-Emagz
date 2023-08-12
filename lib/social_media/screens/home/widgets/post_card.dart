@@ -11,6 +11,8 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/videoPlayer/Custo
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../screens/post_view/widgets/modal_bottom_sheet.dart';
+
 class PostCard extends StatefulWidget {
   Post? post;
   bool isBorder;
@@ -234,11 +236,31 @@ class _PostCardState extends State<PostCard> {
                     : Container(),
                 InkWell(
                   onTap: () {
-                    Get.to(() => CommentViewScreen(
-                          post: widget.post!,
-                          isLiked: widget.isLiked ?? false,
-                          myUserId: widget.myUserId,
-                        ));
+                    // Get.to(() => CommentViewScreen(
+                    //       post: widget.post!,
+                    //       isLiked: widget.isLiked ?? false, myUserId: widget.myUserId,
+                    //     ));
+                    if (widget.post!.comments != null) {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        // enableDrag: true,
+                        enableDrag: true,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20))),
+                        context: context,
+                        builder: (context) {
+                          return Wrap(children: [
+                            PostCommentsModalBottomSheet(
+                              comments: widget.post!.comments!,
+                              postId: widget.post!.sId!,
+                            )
+                          ]);
+                        },
+                      );
+                    }
                   },
                   child: Container(
                     height: 40,
