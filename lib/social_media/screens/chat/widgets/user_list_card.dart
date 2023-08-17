@@ -55,12 +55,12 @@ class _UserChatState extends State<UserChat> {
             "Please wait",
           );
         } else {
-          List<Message>? messages = [];
-          messages = await chatController.getMessages(widget.conversationId);
+       //   List<Message>? messages = [];
+        //  messages = await chatController.getMessages(widget.conversationId);
           Get.to(() => ChatScreen(
                 user: sender,
                 conversationId: widget.conversationId,
-                messages: messages,
+              //  messages: messages,
               ));
         }
       },

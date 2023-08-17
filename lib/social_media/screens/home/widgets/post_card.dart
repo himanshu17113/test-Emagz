@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../chat/chat_screen.dart';
+import '../../chat/models/message_model.dart';
 
 class PostCard extends StatefulWidget {
   Post? post;
@@ -41,7 +42,7 @@ class _PostCardState extends State<PostCard> {
   int selectedOption = -1;
   var homePostController = Get.put(HomePostsController());
   // var jwtController = Get.put(JWTController());
-  ConversationController chatController = Get.put(ConversationController());
+final  ConversationController chatController = Get.put(ConversationController());
   @override
   void initState() {
     super.initState();
@@ -128,10 +129,15 @@ class _PostCardState extends State<PostCard> {
                       onTap: () async {
                         final conversationalId = await chatController.conversationId(widget.post!.user!.sId!);
                         debugPrint("🧣🧣$conversationalId🧣🧣🧣");
-                        Get.off(() => ChatScreen(
-                              user: widget.post!.user!,
-                              conversationId: conversationalId,
-                            ));
+                        if (widget.post!.user != null) {
+                 //         List<Message>? messages = [];
+                   //       messages = await chatController.getMessages(conversationalId);
+                          Get.off(() => ChatScreen(
+                                user: widget.post!.user!,
+                                conversationId: conversationalId,
+                              //  messages: messages ?? [],
+                              ));
+                        }
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -329,7 +335,8 @@ class _PostCardState extends State<PostCard> {
                     InkWell(
                       onTap: () {
                         showModalBottomSheet(
-                          shape: const OutlineInputBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                          shape:
+                              const OutlineInputBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
                           isScrollControlled: true,
                           context: context,
                           builder: (context) {

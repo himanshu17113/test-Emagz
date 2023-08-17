@@ -13,12 +13,17 @@ class SocketController extends GetxController {
   String? userId;
 
   Rx<Message> liveMessage = Message().obs;
-
+  RxList<Message> liveMessages = <Message>[].obs;
   RxString? conversationId;
 
   void connectToServer(String room) {
     socket.onConnect((_) {
       socket.emit("joinRoom", room);
+    });
+    socket.on("chatHistory", (payload) {
+      for (var payloadx in payload) {
+        liveMessages.add(Message.fromJson(payloadx));
+      }
     });
 
     socket.onDisconnect((_) => debugPrint('disconnect'));
@@ -31,6 +36,13 @@ class SocketController extends GetxController {
         text: message['text'],
         createdAt: message['createdAt'],
       );
+      liveMessages.add(Message(
+        sId: message['_id'],
+        conversationId: message['conversationId'],
+        sender: message['sender'],
+        text: message['text'],
+        createdAt: message['createdAt'],
+      ));
     });
   }
 
@@ -45,6 +57,11 @@ class SocketController extends GetxController {
       print(data);
 
       socket.emit('chatMessage', data);
+      liveMessages.add(Message(
+        conversationId: room,
+        sender: id,
+        text: message,
+      ));
       liveMessage.value = Message(
         conversationId: room,
         sender: id,

@@ -20,7 +20,8 @@ class UserChats extends StatelessWidget {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          debugPrint("😡😡😡😡😡😡😡😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️🫥🫥🫥 ${snapshot.data?.length} ");
+          debugPrint(
+              "😡😡😡😡😡😡😡😶‍🌫️😶‍🌫️😶‍🌫️😶‍🌫️🫥🫥🫥 ${snapshot.data?.length} ");
           return ListView.builder(
             shrinkWrap: true,
             itemCount: snapshot.data?.length ?? 0,
@@ -28,10 +29,12 @@ class UserChats extends StatelessWidget {
             controller: scrollController,
             itemBuilder: (context, index) {
               print("USER Id : $userId");
-              print("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
+              //   print("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
               return UserChat(
-                conversationId: snapshot.data![index].id!,
-                senderId: snapshot.data![index].members!.singleWhere((element) => element != userId),
+                conversationId: snapshot.data![index].data!.id!,
+                senderId: snapshot.data![index].data!.members
+                        ?.singleWhere((element) => element != userId) ??
+                    "",
               );
             },
           );

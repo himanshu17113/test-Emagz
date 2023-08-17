@@ -8,7 +8,7 @@ import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart
 import 'package:get/get.dart';
 
 class ConversationController extends GetxController {
-  Rx<Map<String, Conversation>>? conversations;
+  //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
 
   var jwtController = Get.put(JWTController());
@@ -60,14 +60,14 @@ class ConversationController extends GetxController {
         print("🧣🧣🧣🧣🧣 x");
         // print(jsonEncode(e));
         //   conversations ??= Rx<Map<String, Conversation>>({});
-        final conversation = Conversation.fromMap(e);
-        print("🧣🧣🧣🧣🧣m ${conversation.members}");
+        final conversation = Conversation.fromJson(e);
+        print("🧣🧣🧣🧣🧣m ${conversation.data?.members}");
         conversationsx.add(conversation);
-        conversations?.value.addAll({conversation.id!: conversation});
-        print("🧣🧣🧣🧣🧣v  ${conversations?.value.toString()}");
+   //     conversations?.value.addAll({conversation.data!.id!: conversation});
+   //     print("🧣🧣🧣🧣🧣v  ${conversations?.value.toString()}");
       });
 
-      print("🧣🧣🧣🧣🧣jkkkkkkkk  ${conversations?.value.values.toString()}");
+    //  print("🧣🧣🧣🧣🧣jkkkkkkkk  ${conversations?.value.values.toString()}");
       return conversationsx;
       //  return conversations!.value.values.toList().reversed.toList();
     } catch (e) {

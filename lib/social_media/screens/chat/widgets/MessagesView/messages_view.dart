@@ -9,11 +9,14 @@ import 'package:hive/hive.dart';
 import '../../../../../constant/api_string.dart';
 
 class MessageView extends StatefulWidget {
-  final List<Message> messages;
+  // final List<Message> messages;
   final String? senderId;
   final String? room;
   const MessageView(
-      {super.key, required this.messages, this.senderId, this.room});
+      {super.key,
+      // required this.messages,
+      this.senderId,
+      this.room});
 
   @override
   State<MessageView> createState() => _MessageViewState();
@@ -24,15 +27,15 @@ class _MessageViewState extends State<MessageView> {
 
   bool isReciver(String messageUserId) => !(messageUserId == widget.senderId);
 
-  var socketController = Get.put(SocketController());
+  final socketController = Get.put(SocketController());
   List<Message> liveMessages = [];
   @override
   initState() {
-    liveMessages = widget.messages;
+    //  liveMessages = widget.messages;
     print(
         "----------------------------------------------------------------------------------------------------------------------------------------------------");
 
-    print(widget.messages);
+    //  print(widget.messages);
     super.initState();
   }
 
@@ -104,11 +107,12 @@ class _MessageViewState extends State<MessageView> {
         //   builder: (context, snapshot) =>
 
         Obx(() {
-      liveMessages.addIf(socketController.liveMessage.value.sender != null,
-          socketController.liveMessage.value);
+      // liveMessages.addIf(socketController.liveMessage.value.sender != null,
+      //     socketController.liveMessage.value);
       return ListView.builder(
         // controller: socketController.scrollController,
-        itemCount: (liveMessages.length ?? -1),
+        itemCount: socketController.liveMessages.length,
+        // (liveMessages.length ?? -1),
         // widget.messages.length
         //     +
 
@@ -118,7 +122,7 @@ class _MessageViewState extends State<MessageView> {
         itemBuilder: (context, index) {
           //print(snapshot.data![0].sender!);
           // print(snapshot.data![index % 2].sender!);
-          final Message data = liveMessages[index];
+          final Message data = socketController.liveMessages[index];
           return Container(
             padding:
                 const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),

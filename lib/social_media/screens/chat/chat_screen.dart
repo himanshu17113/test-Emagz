@@ -16,8 +16,13 @@ import 'chat_list_screen.dart';
 class ChatScreen extends StatefulWidget {
   final String conversationId;
   final UserSchema? user;
-  final List<Message>? messages;
-  const ChatScreen({Key? key, required this.user, required this.conversationId, this.messages}) : super(key: key);
+  //final List<Message>? messages;
+  const ChatScreen({
+    Key? key,
+    required this.user,
+    required this.conversationId,
+    //  this.messages
+  }) : super(key: key);
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -26,7 +31,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final chatController = Get.find<ConversationController>();
   final jwtController = Get.find<JWTController>();
-  final socketController = Get.find<SocketController>();
+  final socketController = Get.put(SocketController());
   String? userId;
 
 //  List<Message>? messages = [];
@@ -66,7 +71,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: const [
                       Text(
                         "Chat",
-                        style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 21, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -89,8 +95,10 @@ class _ChatScreenState extends State<ChatScreen> {
                         onTap: () {},
                         child: CachedNetworkImage(
                           imageUrl: url,
-                          placeholder: (context, url) => const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => const Icon(Icons.error),
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
                         //  Container(
                         //     height: 30,
@@ -141,11 +149,17 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       Text(
                         "${widget.user?.username}",
-                        style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w400),
                       ),
                       Text(
                         "Online",
-                        style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: chatOnlineDot,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -166,36 +180,50 @@ class _ChatScreenState extends State<ChatScreen> {
                           value: '/hello',
                           child: ClipRRect(
                             child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                filter: ImageFilter.blur(
+                                    sigmaX: 10.0, sigmaY: 10.0),
                                 child: Container(
                                     padding: const EdgeInsets.only(left: 15),
                                     alignment: Alignment.centerLeft,
                                     width: 120.0,
                                     height: 42.0,
-                                    decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200
+                                            .withOpacity(0.5)),
                                     child: Text('Report User',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
-                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
+                                            .copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color:
+                                                    const Color(0xff323232))))),
                           ),
                         ),
                         PopupMenuItem(
                           value: '/hello',
                           child: ClipRRect(
                             child: BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                                filter: ImageFilter.blur(
+                                    sigmaX: 10.0, sigmaY: 10.0),
                                 child: Container(
                                     padding: const EdgeInsets.only(left: 15),
                                     alignment: Alignment.centerLeft,
                                     width: 120.0,
                                     height: 42.0,
-                                    decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200
+                                            .withOpacity(0.5)),
                                     child: Text('Block User',
                                         style: Theme.of(context)
                                             .textTheme
                                             .bodyMedium!
-                                            .copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
+                                            .copyWith(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color:
+                                                    const Color(0xff323232))))),
                           ),
                         ),
                       ];
@@ -209,12 +237,18 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Expanded(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Column(
                   children: [
-                    Expanded(child: MessageView(room: widget.conversationId, messages: widget.messages!, senderId: userId!)),
+                    Expanded(
+                        child: MessageView(
+                            room: widget.conversationId,
+                            // messages: widget.messages ?? [],
+                            senderId: userId!)),
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       height: 48,
                       decoration: BoxDecoration(
                         color: const Color(0xffE8E7E7),
@@ -271,8 +305,11 @@ class _ChatScreenState extends State<ChatScreen> {
                               onTap: () {
                                 if (inputTextController.text.isNotEmpty) {
                                   final receiverId = widget.user?.sId;
-                                  socketController.sendMessage(inputTextController.text, widget.conversationId, receiverId!);
-                                  chatController.postChat(inputTextController.text, widget.conversationId);
+                                  socketController.sendMessage(
+                                      inputTextController.text,
+                                      widget.conversationId,
+                                      receiverId!);
+                                  //    chatController.postChat(inputTextController.text, widget.conversationId);
                                   inputTextController.clear();
                                 }
                               },
