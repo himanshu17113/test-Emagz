@@ -26,7 +26,8 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 3,
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(4.0))),
           backgroundColor: Colors.white,
           title: FormHeadingText(
             textAlign: TextAlign.center,
@@ -39,7 +40,10 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             children: [
               Text(
                 "You can always change your persona Later",
-                style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
+                style: TextStyle(
+                    color: accountGray,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w200),
               ),
               const SizedBox(
                 height: 30,
@@ -66,7 +70,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            width: double.infinity,
+            // width: double.infinity,
             // decoration: const BoxDecoration(
             //   gradient: LinearGradient(
             //     begin: Alignment.bottomLeft,
@@ -77,7 +81,8 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             //     ],
             //   ),
             // ),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(
                 height: 50,
               ),
@@ -99,7 +104,10 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               ),
               Text(
                 "Please Choose Your Persona",
-                style: TextStyle(color: accountGray, fontSize: 14, fontWeight: FontWeight.w200),
+                style: TextStyle(
+                    color: accountGray,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w200),
               ),
               const SizedBox(
                 height: 28,
@@ -119,15 +127,28 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               ),
               Expanded(
                 child: ListView(children: [
-                  Persona("assets/png/cameronWilliamson.png", "assets/png/cameronMobile.png", const Color.fromRGBO(255, 199, 1, 1.0)),
+                  GestureDetector(
+                      onTap: () {
+                        _launchUrl();
+                      },
+                      child: Persona(
+                          "assets/png/cameronWilliamson.png",
+                          "assets/png/cameronMobile.png",
+                          const Color.fromRGBO(255, 199, 1, 1.0))),
                   const SizedBox(
                     height: 20,
                   ),
-                  Persona("assets/png/jamesWills.png", "assets/png/jamesMobile.png", const Color.fromRGBO(202, 42, 243, 1.0)),
+                  Persona(
+                      "assets/png/jamesWills.png",
+                      "assets/png/jamesMobile.png",
+                      const Color.fromRGBO(202, 42, 243, 1.0)),
                   const SizedBox(
                     height: 20,
                   ),
-                  Persona("assets/png/cameronWilliamson.png", "assets/png/cameronMobile.png", const Color.fromRGBO(255, 199, 1, 1.0)),
+                  Persona(
+                      "assets/png/cameronWilliamson.png",
+                      "assets/png/cameronMobile.png",
+                      const Color.fromRGBO(255, 199, 1, 1.0)),
                   const SizedBox(
                     height: 20,
                   ),
@@ -140,14 +161,12 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     return GestureDetector(
       onTap: () => _launchUrl,
       child: Stack(children: [
-        GestureDetector(
-          child: Container(
-            height: 220,
-            width: 450,
-            decoration: BoxDecoration(
-              color: BackGround,
-              borderRadius: BorderRadius.circular(10),
-            ),
+        Container(
+          height: 220,
+          width: 450,
+          decoration: BoxDecoration(
+            color: BackGround,
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         Positioned(
@@ -157,7 +176,8 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             width: 250.0,
             height: 160.0,
             decoration: BoxDecoration(
-              image: DecorationImage(fit: BoxFit.cover, image: AssetImage(ImgPath)),
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage(ImgPath)),
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
               color: Colors.redAccent,
             ),
@@ -217,14 +237,21 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
+            color: (value == index)
+                ? const Color.fromRGBO(1, 26, 251, 1.0)
+                : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 18, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: (value == index)
+                  ? whiteColor
+                  : blackButtonColor.withOpacity(.5),
+              fontSize: 18,
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -242,29 +269,39 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
+            color: (value == index)
+                ? const Color.fromRGBO(1, 26, 251, 1.0)
+                : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 12, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: (value == index)
+                  ? whiteColor
+                  : blackButtonColor.withOpacity(.5),
+              fontSize: 12,
+              fontWeight: FontWeight.w600),
         ),
       ),
     );
   }
 
   Future<void> _launchUrl() async {
-    final Uri url = Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/Template8');
-    print("iiiiiiiiiiiiiii");
+    final Uri url = Uri.parse(
+        'http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/Template8');
     if (await canLaunchUrl(url)) {
       await launchUrl(
         url, mode: LaunchMode.inAppWebView,
-        webViewConfiguration: const WebViewConfiguration(enableJavaScript: true, enableDomStorage: true,
-       headers: <String, String>{'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZjUxZjkzZGExZjNjNTIxM2Q1MDkiLCJpYXQiOjE2OTE2NDk0NTN9.-3p_gugs-9SnBoaprWnEMkGM9NhsEnZQPpq8dKSPyeQ'}),
-        
-     
+        webViewConfiguration: const WebViewConfiguration(
+            enableJavaScript: true,
+            enableDomStorage: true,
+            headers: <String, String>{
+              'Authorization':
+                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZjUxZjkzZGExZjNjNTIxM2Q1MDkiLCJpYXQiOjE2OTE2NDk0NTN9.-3p_gugs-9SnBoaprWnEMkGM9NhsEnZQPpq8dKSPyeQ'
+            }),
 
         // forceWebView = true,
         // enableJavaScript = false

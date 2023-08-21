@@ -20,7 +20,14 @@ class EditorScreen extends StatefulWidget {
   final Uint8List? image;
   final int? imageHeight;
   final int? imageWidth;
-  const EditorScreen({super.key, required this.onSubmit, required this.image, this.fileType, this.imageHeight, this.imageWidth, required this.fileExtension});
+  const EditorScreen(
+      {super.key,
+      required this.onSubmit,
+      required this.image,
+      this.fileType,
+      this.imageHeight,
+      this.imageWidth,
+      required this.fileExtension});
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();
@@ -29,7 +36,7 @@ class EditorScreen extends StatefulWidget {
 class _EditorScreenState extends State<EditorScreen> {
   var storyController = Get.put(GetXStoryController());
   ScreenshotController screenshotController = ScreenshotController();
-
+  bool visibilty = true;
   List<Widget> editableItems = [];
 
   @override
@@ -46,7 +53,10 @@ class _EditorScreenState extends State<EditorScreen> {
             maxScale: 4,
             child: Stack(
               fit: StackFit.expand,
-              children: [Image.memory(widget.image!, fit: BoxFit.contain), ...editableItems],
+              children: [
+                Image.memory(widget.image!, fit: BoxFit.contain),
+                ...editableItems
+              ],
             ),
           ),
         ),
@@ -57,40 +67,46 @@ class _EditorScreenState extends State<EditorScreen> {
           child: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
-            title: Row(
-              children: [
-                IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
-                IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return DraggableTextEditor(
-                            text: "",
-                            style: const TextStyle(),
-                            onSubmit: (text, style) {
-                              Navigator.pop(context);
+            title: visibilty
+                ? Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {}, icon: const Icon(Icons.more_vert)),
+                      IconButton(
+                          onPressed: () {
+                            visibilty = false;
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return DraggableTextEditor(
+                                  text: "",
+                                  style: const TextStyle(),
+                                  onSubmit: (text, style) {
+                                    Navigator.pop(context);
 
-                              editableItems.add(DraggableText(
-                                text: text,
-                                style: style,
-                                position: const Offset(200, 200),
-                              ));
-                              setState(() {});
-                            },
-                          );
-                        },
-                      );
-                    },
-                    icon: const Icon(Icons.text_fields)),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.music_note,
-                      // color: Colors.amber,
-                    ))
-              ],
-            ),
+                                    editableItems.add(DraggableText(
+                                      text: text,
+                                      style: style,
+                                      position: const Offset(200, 200),
+                                    ));
+                                    setState(() {
+                                      visibilty = true;
+                                    });
+                                  },
+                                );
+                              },
+                            );
+                          },
+                          icon: const Icon(Icons.text_fields)),
+                      IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.music_note,
+                            // color: Colors.amber,
+                          ))
+                    ],
+                  )
+                : null,
             actions: [
               IconButton(
                   onPressed: () async {
@@ -143,10 +159,14 @@ class _EditorScreenState extends State<EditorScreen> {
                     //     pixelRatio: widget.imageWidth != null ? widget.imageWidth! / widget.imageHeight! : null);
                     // var buffer = await realImage.toByteData(format: ui.ImageByteFormat.png);
 
-                    screenshotController.capture(delay: const Duration(milliseconds: 10)).then((capturedImage) async {
+                    screenshotController
+                        .capture(delay: const Duration(milliseconds: 10))
+                        .then((capturedImage) async {
                       var editedImage = capturedImage;
                       final tempDir = await getTemporaryDirectory();
-                      File file = await File("${tempDir.path}/story.${widget.fileExtension}").create();
+                      File file = await File(
+                              "${tempDir.path}/story.${widget.fileExtension}")
+                          .create();
                       await file.writeAsBytes(editedImage!);
                       widget.onSubmit(file);
                     }).catchError((onError) {
@@ -194,6 +214,8 @@ class _DraggableTextState extends State<DraggableText> {
     position = widget.position;
     super.initState();
   }
+
+  Offset startPosition = Offset(10, 10);
   // const Offset(100, 100);
 
   //print(position)
@@ -213,11 +235,11 @@ class _DraggableTextState extends State<DraggableText> {
       duration: const Duration(milliseconds: 100),
       child: GestureDetector(
         onPanStart: (details) {
-          //   startPosition = details.globalPosition - position;
+          startPosition = details.globalPosition - position;
         },
         onPanUpdate: (details) {
           setState(() {
-            position = details.globalPosition;
+            position = details.globalPosition - startPosition;
 
             // -startPosition;
           });
@@ -253,7 +275,7 @@ class _DraggableTextState extends State<DraggableText> {
           //           child: Text(widget.text,style: widget.style,))),
           //   child: Text(widget.text,style: widget.style,),
           // ),
-          child: Text("${widget.text}", style: widget.style),
+          child: Text(widget.text, style: widget.style),
         ),
       ),
     );

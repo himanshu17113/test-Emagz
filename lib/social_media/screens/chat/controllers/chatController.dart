@@ -56,12 +56,11 @@ class ConversationController extends GetxController {
       print("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
       response.data.forEach((e) {
-        print(e);
-        print("🧣🧣🧣🧣🧣 x");
+       
         // print(jsonEncode(e));
         //   conversations ??= Rx<Map<String, Conversation>>({});
         final conversation = Conversation.fromJson(e);
-        print("🧣🧣🧣🧣🧣m ${conversation.data?.members}");
+        //print("🧣🧣🧣🧣🧣m ${conversation.data?.members}");
         conversationsx.add(conversation);
    //     conversations?.value.addAll({conversation.data!.id!: conversation});
    //     print("🧣🧣🧣🧣🧣v  ${conversations?.value.toString()}");

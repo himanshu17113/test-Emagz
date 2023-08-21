@@ -28,9 +28,11 @@ class UserChats extends StatelessWidget {
             physics: const ScrollPhysics(),
             controller: scrollController,
             itemBuilder: (context, index) {
-              print("USER Id : $userId");
+         //     print("USER Id : $userId");
               //   print("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
               return UserChat(
+                userData: snapshot.data![index].userData,
+                resentMessage: snapshot.data![index].resentMessage,
                 conversationId: snapshot.data![index].data!.id!,
                 senderId: snapshot.data![index].data!.members
                         ?.singleWhere((element) => element != userId) ??

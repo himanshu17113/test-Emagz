@@ -15,7 +15,7 @@ import 'chat_list_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   final String conversationId;
-  final UserSchema? user;
+  final user;
   //final List<Message>? messages;
   const ChatScreen({
     Key? key,

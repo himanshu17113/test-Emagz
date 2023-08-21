@@ -8,17 +8,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/chatController.dart';
+import '../models/chat_model.dart';
 import '../models/message_model.dart';
 
 class UserChat extends StatefulWidget {
-  bool? isMessage;
-  late String senderId;
-  late String conversationId;
+ final bool? isMessage;
+  final UserData? userData;
+  final String senderId;
+  final String conversationId;
+ final ResentMessage? resentMessage;
   UserChat({
     Key? key,
     required this.senderId,
     required this.conversationId,
+         this.userData,
     this.isMessage = false,
+     this.resentMessage,
+
   }) : super(key: key);
 
   @override
@@ -28,7 +34,7 @@ class UserChat extends StatefulWidget {
 class _UserChatState extends State<UserChat> {
   final jwtController = Get.find<JWTController>();
   final chatController = Get.find<ConversationController>();
-  UserSchema? sender;
+//  UserSchema? sender;
 
   @override
   void initState() {
@@ -39,7 +45,7 @@ class _UserChatState extends State<UserChat> {
   Future getInitUser() async {
     print("id in list item : ${widget.senderId}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      sender = await jwtController.getUserDetail(widget.senderId);
+   //   sender = await jwtController.getUserDetail(widget.senderId);
       setState(() {});
     });
     //setState(() {});
@@ -49,18 +55,19 @@ class _UserChatState extends State<UserChat> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (sender == null) {
+       // if (sender == null) {
+           if (widget.userData == null) {
           Get.snackbar(
             "Loading",
             "Please wait",
           );
         } else {
-       //   List<Message>? messages = [];
-        //  messages = await chatController.getMessages(widget.conversationId);
+          //   List<Message>? messages = [];
+          //  messages = await chatController.getMessages(widget.conversationId);
           Get.to(() => ChatScreen(
-                user: sender,
+                user: widget.userData,
                 conversationId: widget.conversationId,
-              //  messages: messages,
+                //  messages: messages,
               ));
         }
       },
@@ -88,7 +95,7 @@ class _UserChatState extends State<UserChat> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                sender == null
+                widget.userData == null
                     ? Text(
                         "loading",
                         style: TextStyle(
@@ -97,7 +104,7 @@ class _UserChatState extends State<UserChat> {
                             fontWeight: FontWeight.w400),
                       )
                     : Text(
-                        "${sender?.username}",
+                        "${widget.userData?.username}",
                         style: TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
@@ -106,7 +113,7 @@ class _UserChatState extends State<UserChat> {
                 const SizedBox(
                   height: 3,
                 ),
-                sender == null
+                widget.resentMessage == null
                     ? Text(
                         "loading",
                         style: TextStyle(
@@ -115,7 +122,7 @@ class _UserChatState extends State<UserChat> {
                             fontWeight: FontWeight.w600),
                       )
                     : Text(
-                        "last text",
+                        widget.resentMessage?.text??  "last text",
                         style: TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
