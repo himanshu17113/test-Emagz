@@ -22,14 +22,17 @@ class GetXStoryController extends GetxController {
     try {
       print(ApiEndpoint.story);
       var token = await jwtController.getAuthToken();
+      print(token);
       myId.value = (await jwtController.getUserId())!;
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
 
       http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
-
+      print(body);
       body.forEach((e) {
+        print('story');
         // stories ??= Map();
+        print(e);
         var story = Story.fromJson(e);
         stories?.add(story);
         // if (stories![story.userId!] == null) {
@@ -39,6 +42,7 @@ class GetXStoryController extends GetxController {
       });
       return stories!;
     } catch (e) {
+      print('stoey');
       print(e);
       return null;
     }

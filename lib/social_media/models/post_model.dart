@@ -1,5 +1,5 @@
 class Post {
-  Privacy? privacy;
+  //Privacy? privacy;
   PollResults? pollResults;
   int? likeCount;
   String? sId;
@@ -10,7 +10,7 @@ class Post {
   bool? showPollResults;
   int? setTimer;
   String? caption;
-  String? tagPrivacy;
+  //String? tagPrivacy;
   List<String?>? reacted;
   List<String?>? likes;
   List<String?>? shares;
@@ -23,7 +23,7 @@ class Post {
   bool? isLike;
 
   Post(
-      {this.privacy,
+      {//this.privacy,
       this.pollResults,
       this.sId,
       this.likeCount,
@@ -34,7 +34,7 @@ class Post {
       this.showPollResults,
       this.setTimer,
       this.caption,
-      this.tagPrivacy,
+     // this.tagPrivacy,
       this.reacted,
       this.likes,
       this.shares,
@@ -47,7 +47,7 @@ class Post {
       });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-        privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
+        //privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
         pollResults: json["PollResults"] == null ? null : PollResults.fromJson(json["PollResults"]),
         likeCount: json["LikeCount"],
         sId: json["_id"],
@@ -58,7 +58,7 @@ class Post {
         showPollResults: json["ShowPollResults"],
         setTimer: json["setTimer"],
         caption: json["caption"],
-        tagPrivacy: json["tagPrivacy"],
+       // tagPrivacy: json["tagPrivacy"],
         reacted: json["Reacted"] == null ? [] : List<String?>.from(json["Reacted"].map((x) => x)),
         likes: json["Likes"] == null ? [] : List<String?>.from(json["Likes"].map((x) => x)),
         shares: json["shares"] == null ? [] : List<String?>.from(json["shares"].map((x) => x)),

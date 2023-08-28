@@ -1,4 +1,6 @@
 
+
+
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
@@ -31,7 +33,7 @@ class HomePostsController extends GetxController{
 
   Future<List<Post>> getPost() async{
       skip.value += 10;
-     // print(skip.value);
+
       try{
         Dio dio = Dio();
         // var token = await jwtController.getAuthToken();
@@ -40,29 +42,39 @@ class HomePostsController extends GetxController{
       //  print(ApiEndpoint.posts(skip.value));
         var endPoint = ApiEndpoint.posts(skip.value);
         var resposne = await dio.get(endPoint);
-        resposne.data["AllPost"].forEach((e) {
-          posts ??= RxList();
-          // rating is at 159 post
-          var post = Post.fromJson(e);
-          print(post.mediaUrl!);
+        if(resposne.data['AllPost']!=null){
+          resposne.data["AllPost"].forEach((e) {
+            posts ??= RxList();
+            // rating is at 159 post
+            var post = Post.fromJson(e);
+            //print(post.mediaUrl!);
 
-          if (post != null) {
-            if(post.user != null){
-              posts!.insert(0,post);
+            if (post != null) {
+              if(post.user != null){
+                posts!.insert(0,post);
+              }
             }
-          }
-        });
+          });
 
-        return posts!.reversed.toList();
+          return posts!.reversed.toList();
+        }
+        return [];
     }catch(e){
-     //   print(e);
+        print('hey');
+       print(e);
         return [];
       }
   }
  
   Future<List<Post>> refreshResent() async{
-      skip.value =  -10;
-      posts!.value = [];
+      skip.value = -10;
+      if(posts==null){
+
+      }
+      else
+        {
+          posts!.value=[];
+        }
     //  print(skip.value);
       try{
         Dio dio = Dio();
@@ -72,18 +84,32 @@ class HomePostsController extends GetxController{
     //    print(ApiEndpoint.posts(skip.value));
         var endPoint = ApiEndpoint.posts(0);
         var resposne = await dio.get(endPoint);
-        resposne.data["posts"].forEach((e) {
+
+        resposne.data["AllPost"].forEach((e) {
+
           posts ??= RxList();
           // rating is at 159 post
-          var post = Post.fromJson(e);
-          // print(post.mediaUrl);
-          if (post != null) {
-            posts!.add(post);
+          try {
+            print(e);
+            var post = Post.fromJson(e);
+              if (post != null) {
+                posts!.add(post);
+              }
+
           }
+          catch(ee)
+          {
+            print('eor');
+            print(ee);
+          }
+          // print(post.mediaUrl);
+
         });
+
 
         return posts!.reversed.toList();
     }catch(e){
+        print('eroror');
         print(e);
         return [];
       }

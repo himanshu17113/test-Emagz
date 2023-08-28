@@ -3,6 +3,7 @@ import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class SocketController extends GetxController {
@@ -14,7 +15,10 @@ class SocketController extends GetxController {
 
   Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
+  RxList<String> timeStamps= <String>[].obs;
   RxString? conversationId;
+  RxBool isDate= false.obs;
+  RxString toPut=''.obs;
 
   void connectToServer(String room) {
     socket.onConnect((_) {
@@ -55,17 +59,20 @@ class SocketController extends GetxController {
       };
       print("9999999999999999999");
       print(data);
-
-      socket.emit('chatMessage', data);
+      print(isDate);
+      DateTime curr=DateTime.now();
+      String formattedTime = DateFormat.jm().format(curr);//05:00Pm
       liveMessages.add(Message(
         conversationId: room,
         sender: id,
         text: message,
+        createdAt: curr.toString()//formattedTime
       ));
       liveMessage.value = Message(
         conversationId: room,
         sender: id,
         text: message,
+        createdAt: curr.toString()//formattedtime
       );
     }
   }

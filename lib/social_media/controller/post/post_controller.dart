@@ -87,14 +87,19 @@ class PostController extends GetxController {
         "mediaUrl": MultipartFile.fromFileSync(
           assetType == PostAssetType.text ? textPost! : file.path.toString(),
         ),
-        "Enabledpoll": enablePoll ? "yes" : "no",
-        "ShowPollResults": "yes",
+        "Enabledpoll": enablePoll ? true : false,
+        "ShowPollResults": true,
         "setTimer": enablePoll ? setTimer:"",
         "caption": captionController.text,
-        "privacy": {"likesAndViews": privacyLikesAndViews.value, "hideLikeAndViewsControl": "0"},
-        "tagPrivacy": tagPrivacy,
+        "privacy": {"everyone":false,"followers":true,"no_one":false},
+        "post_hide":[],
+        "tag_privacy": {"everyone":false,"followers":true,"no_one":false},
         "pollDuration": "0",
+        "tags":[],
+        "tagPeople":[]
       });
+      FormData req= reqData;
+      print(req.fields.toString());
       await dio.post(
         ApiEndpoint.makePost,
         data: reqData,
@@ -102,6 +107,7 @@ class PostController extends GetxController {
           uploadPercentage.value = (count / total);
         },
       );
+      //print(reqData.toString());
       uploadPercentage.value = 0.0;
 
       CustomSnackbar.showSucess("Post  successful");
@@ -109,6 +115,7 @@ class PostController extends GetxController {
       bottomNavController.pageUpdate(0);
       Get.offAll(() => const BottomNavBar());
     } catch (e) {
+      //print(reqData.toString());
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");

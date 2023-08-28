@@ -50,7 +50,7 @@ class _SocialMediaHomePageState extends State<SocialMediaHomePage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const StoryView(),
+                  StoryView(),
                   const SizedBox(
                     height: 10,
                   ),

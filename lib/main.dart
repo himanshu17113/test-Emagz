@@ -2,6 +2,7 @@ import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
+import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
       //home: DefaultBusinesstempScreen(),
       // home: PersonalProfileInsightScreen(),
       //  home: SupportScreen(),
+      //home: ChooseTemplate()
       // home: const BottomNavBar(),
       home: Obx(() => authController.isAuthorised.value ? const BottomNavBar() : const CommonAuthScreen()),
       // home: ChatScreen(),

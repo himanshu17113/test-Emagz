@@ -38,48 +38,56 @@ class _StoryViewState extends State<StoryView> {
           //     child: Text("Loading..."),
           //   );
           // } else
+
           if (snapshot.hasData) {
-            return SizedBox(
-              width: double.minPositive,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  controller: _scrollController,
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (ctx, index) {
-                    if (index == 0) {
-                      final String url = "https://picsum.photos/500/500?random=${index + 1}";
-                      return Row(
-                        children: [
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          const MyStory(),
-                          // InkWell(
-                          //     onTap: () {
-                          //       Get.to(() =>
-                          //           StoryScreen(userId: snapshot.data?[index]?.userId?.sId??'Loding..', stories: snapshot.data![index]!.stories!));
-                          //     },
-                          //     child: StoryViewCard(
-                          //       url: url,
-                          //       username: snapshot.data?[index]?.userId?.sId??"64a28b0d31a31c338a18f5f3",
-                          //     ))
-                        ],
-                      );
-                    } else {
-                      final String url = "https://picsum.photos/500/500?random=${index + 1}";
-                      return InkWell(
-                          onTap: () {
-                            Get.to(
-                                () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
-                          },
-                          child: StoryViewCard(
-                            url: url,
-                            username: snapshot.data![index]?.userId?.sId ??  "",
-                          ));
-                    }
-                  }),
+            return Row(
+              children: [
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    const MyStory(),
+
+                    // InkWell(
+                    //     onTap: () {
+                    //       Get.to(() =>
+                    //           StoryScreen(userId: snapshot.data?[index]?.userId?.sId??'Loding..', stories: snapshot.data![index]!.stories!));
+                    //     },
+                    //     child: StoryViewCard(
+                    //       url: url,
+                    //       username: snapshot.data?[index]?.userId?.sId??"64a28b0d31a31c338a18f5f3",
+                    //     ))
+                  ],
+                ),
+
+                SizedBox(
+                  width: double.minPositive,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      controller: _scrollController,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (ctx, index) {
+                        if (index == 0) {
+                          final String url = "https://picsum.photos/500/500?random=${index + 1}";
+
+                        } else {
+                          final String url = "https://picsum.photos/500/500?random=${index + 1}";
+                          return InkWell(
+                              onTap: () {
+                                Get.to(
+                                    () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
+                              },
+                              child: StoryViewCard(
+                                url: url,
+                                username: snapshot.data![index]?.userId?.sId ??  "",
+                              ));
+                        }
+                      }),
+                ),
+              ],
             );
           } else {
             return const Center(
