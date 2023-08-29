@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -51,7 +52,90 @@ class PostController extends GetxController {
   Future makePost(
     bool enablePoll,
     String tagPrivacy,
-    String ?setTimer,
+    String? setTimer,
+  ) async {
+    isPosting.value = true;
+
+    try {
+      // if(setTimer == "-1"){
+      //   CustomSnackbar.show("please setTimer");
+      //   isPosting.value = false;
+      //   return;
+      // }
+      // if(captionController.text == ""){
+      //   CustomSnackbar.show("please fill captions");
+      //   isPosting.value = false;
+      //   return;
+      // }
+
+      Dio dio = Dio();
+      print(privacyLikesAndViews.value);
+      var token = await jwtController.getAuthToken();
+      var userId = await jwtController.getUserId();
+      dio.options.headers["Authorization"] = token;
+      //todo : Remove The New File Making Process With Filtered File
+      final tempDir = await getTemporaryDirectory();
+      File file = await File('${tempDir.path}/image.png').create();
+      if (assetType != PostAssetType.text) {
+        Uint8List imageInUnit8List = imagePath!;
+
+        file.writeAsBytesSync(imageInUnit8List);
+      }
+      print(
+        file.path.toString(),
+      );
+
+      FormData reqData = FormData.fromMap({
+        "userId": "649169812de33ff6e4fb7f00",
+        "mediaType": "image",
+        // assetType.toString().split(".")[1].substring(0),
+        "mediaUrl": MultipartFile.fromFileSync(
+          assetType == PostAssetType.text ? textPost! : file.path.toString(),
+        ),
+
+        "Enabledpoll": enablePoll ? true : false,
+
+        //  "setTimer": enablePoll ? setTimer:"",
+        "caption": captionController.text,
+
+        "ShowPollResults": true,
+
+        "privacy": '{"everyone": false, "followers": true, "no_one": false}',
+        "post_hide": "[]",
+        "tag_privacy":
+            '{"everyone": false, "followers": true, "no_one": false}',
+        "pollDuration": 2,
+        "tags": "[]",
+        "tagPeople": "[]"
+      });
+ 
+      await dio.post(
+        ApiEndpoint.makePost,
+        data: reqData,
+        onSendProgress: (count, total) {
+          uploadPercentage.value = (count / total);
+        },
+      );
+      //print(reqData.toString());
+      uploadPercentage.value = 0.0;
+
+      CustomSnackbar.showSucess("Post  successful");
+      isPosting.value = false;
+      bottomNavController.pageUpdate(0);
+      Get.offAll(() => const BottomNavBar());
+    } catch (e) {
+      //print(reqData.toString());
+      uploadPercentage.value = 0.0;
+      isPosting.value = false;
+      Get.snackbar("Cant Post", "Some Internal Error");
+      print("posting video error $e");
+    }
+  }
+
+  Future makelPost(
+    bool enablePoll,
+    String tagPrivacy,
+    String? setTimer,
   ) async {
     isPosting.value = true;
 
@@ -87,19 +171,17 @@ class PostController extends GetxController {
         "mediaUrl": MultipartFile.fromFileSync(
           assetType == PostAssetType.text ? textPost! : file.path.toString(),
         ),
-        "Enabledpoll": enablePoll ? true : false,
-        "ShowPollResults": true,
-        "setTimer": enablePoll ? setTimer:"",
+        "Enabledpoll": enablePoll ? "yes" : "no",
+        "ShowPollResults": "yes",
+        //    "setTimer": enablePoll ? setTimer : "",
         "caption": captionController.text,
-        "privacy": {"everyone":false,"followers":true,"no_one":false},
-        "post_hide":[],
-        "tag_privacy": {"everyone":false,"followers":true,"no_one":false},
+        "privacy": {
+          "likesAndViews": privacyLikesAndViews.value,
+          "hideLikeAndViewsControl": "0"
+        },
+        "tagPrivacy": tagPrivacy,
         "pollDuration": "0",
-        "tags":[],
-        "tagPeople":[]
       });
-      FormData req= reqData;
-      print(req.fields.toString());
       await dio.post(
         ApiEndpoint.makePost,
         data: reqData,
@@ -107,7 +189,6 @@ class PostController extends GetxController {
           uploadPercentage.value = (count / total);
         },
       );
-      //print(reqData.toString());
       uploadPercentage.value = 0.0;
 
       CustomSnackbar.showSucess("Post  successful");
@@ -115,7 +196,6 @@ class PostController extends GetxController {
       bottomNavController.pageUpdate(0);
       Get.offAll(() => const BottomNavBar());
     } catch (e) {
-      //print(reqData.toString());
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");
