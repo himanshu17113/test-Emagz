@@ -11,6 +11,8 @@ import "package:emagz_vendor/constant/api_string.dart";
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../templates/choose_template/template_model.dart';
+
 class SetupAccount extends GetxController {
 
   var jwtController = Get.put(JWTController());
@@ -21,7 +23,7 @@ class SetupAccount extends GetxController {
   final TextEditingController businessTypeController = TextEditingController();
 
   RxBool isUserRegiserting = RxBool(false);
-
+  List<Template>? templates=[];
 
   // setBusinessLogo
 
@@ -110,5 +112,28 @@ class SetupAccount extends GetxController {
       isUserRegiserting.value = false;
       return false;
     }
+  }
+
+  Future<List<Template?>?> getAllTempltes() async {
+    templates=[];
+    try{
+      var token = await jwtController.getAuthToken();
+      print(token);
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
+      var body = jsonDecode(response.body);
+      print(body);
+      body.forEach((e) {
+        var temp = Template.fromJson(e);
+        templates?.add(temp);
+      });
+      return templates;
+    }
+    catch(e)
+    {
+      print(e);
+    }
+
   }
 }

@@ -72,13 +72,21 @@ class _StoryViewState extends State<StoryView> {
                       itemBuilder: (ctx, index) {
                         if (index == 0) {
                           final String url = "https://picsum.photos/500/500?random=${index + 1}";
-
+                          return Row(
+                            children: [
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              const MyStory(),
+                            ],
+                          );
                         } else {
+                          print('heheee');
                           final String url = "https://picsum.photos/500/500?random=${index + 1}";
                           return InkWell(
                               onTap: () {
                                 Get.to(
-                                    () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
+                                        () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
                               },
                               child: StoryViewCard(
                                 url: url,

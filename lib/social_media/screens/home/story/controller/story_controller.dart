@@ -34,6 +34,7 @@ class GetXStoryController extends GetxController {
         // stories ??= Map();
         print(e);
         var story = Story.fromJson(e);
+        print(story);
         stories?.add(story);
         // if (stories![story.userId!] == null) {
         //   stories![story.userId] = {};

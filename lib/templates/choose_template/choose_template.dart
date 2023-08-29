@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/templates/choose_template/template_model.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +23,7 @@ class ChooseTemplate extends StatefulWidget {
 class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
+  final ScrollController _scrollController = ScrollController();
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
@@ -84,147 +87,211 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             //   ),
             // ),
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                SingleChildScrollView(
+                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               const SizedBox(
-                height: 50,
+                  height: 50,
               ),
               Image.asset(
-                "assets/png/new_logo.png",
-                width: 50,
-                color: const Color(0xff1B47C1),
+                  "assets/png/new_logo.png",
+                  width: 50,
+                  color: const Color(0xff1B47C1),
               ),
               const SizedBox(
-                height: 30,
+                  height: 30,
               ),
               FormHeadingText(
-                headings: 'Choose Your Persona',
-                fontSize: 27,
-                fontWeight: FontWeight.bold,
+                  headings: 'Choose Your Persona',
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
               ),
               const SizedBox(
-                height: 7,
+                  height: 7,
               ),
               Text(
-                "Please Choose Your Persona",
-                style: TextStyle(
-                    color: accountGray,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w200),
+                  "Please Choose Your Persona",
+                  style: TextStyle(
+                      color: accountGray,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w200),
               ),
               const SizedBox(
-                height: 28,
+                  height: 28,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(child: customRadioButton("Personal", 1)),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Expanded(child: customRadioButton("Business", 2)),
-                ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(child: customRadioButton("Personal", 1)),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(child: customRadioButton("Business", 2)),
+                  ],
               ),
               const SizedBox(
-                height: 28,
+                  height: 28,
               ),
-              Expanded(
-                child: ListView(children: [
-                  GestureDetector(
-                      onTap: () {
-                        Get.to(()=>WebViewPersona());
-                      },
-                      child: Persona(
-                          "assets/png/cameronWilliamson.png",
-                          "assets/png/cameronMobile.png",
-                          const Color.fromRGBO(255, 199, 1, 1.0))),
-                  const SizedBox(
-                    height: 20,
+              Container(
+                  child: FutureBuilder<List<Template?>?>(
+                    future: accountSetUpController.getAllTempltes(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator(); // Show a loading indicator
+                      }
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+
+                            scrollDirection: Axis.vertical,
+                            controller: _scrollController,
+                            physics: const ScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (ctx, index) {
+                                String url=snapshot.data![index]!.thumbnail.toString();
+                                if(url=='null')
+                                  {
+
+                                  }
+                                else {
+                                  return  Persona(
+                                      snapshot.data![index]!.introImage,
+                                      snapshot.data![index]!.thumbnail,
+                                      const Color.fromRGBO(255, 199, 1, 1.0),
+                                      index+1);
+                                }
+
+
+
+
+                            });
+                      } else {
+                        return const Center(
+                          child: Text("Loading..."),
+                        );
+                      }
+                    },
                   ),
-                  Persona(
-                      "assets/png/jamesWills.png",
-                      "assets/png/jamesMobile.png",
-                      const Color.fromRGBO(202, 42, 243, 1.0)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Persona(
-                      "assets/png/cameronWilliamson.png",
-                      "assets/png/cameronMobile.png",
-                      const Color.fromRGBO(255, 199, 1, 1.0)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ]),
               )
-            ])));
+              // Expanded(
+              //   child: ListView(children: [
+              //     Persona("assets/template IMG/Group 613.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),1),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/iPhone 13 Pro Max - 6.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),2),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/iPhone 14 Pro Max - 1.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),3),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/Persona -- 2.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),4),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/iPhone 14 Pro Max - 8.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),5),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/iPhone 13 Pro Max - 13.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),6),
+              //     SizedBox(height: 20,),
+              //     Persona("assets/template IMG/Frame 71.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),7),
+              //     SizedBox(height: 20,),
+              //     Persona(
+              //         "assets/png/cameronWilliamson.png",
+              //         "assets/png/cameronMobile.png",
+              //         const Color.fromRGBO(255, 199, 1, 1.0),8),
+              //     const SizedBox(
+              //       height: 20,
+              //     ),
+              //     Persona(
+              //         "assets/template IMG/Frame 72.png",
+              //         " ",
+              //         const Color.fromRGBO(202, 42, 243, 1.0),9),
+              //     const SizedBox(
+              //       height: 20,
+              //     ),
+              //     Persona(
+              //         "assets/template IMG/MacBook Pro 16_ - 11.png",
+              //         " ",
+              //         const Color.fromRGBO(255, 199, 1, 1.0),10),
+              //     const SizedBox(
+              //       height: 20,
+              //     ),
+              //   ]),
+              // )
+            ]),
+                )));
   }
 
-  Widget Persona(String ImgPath, String MobileImgPath, Color BackGround) {
-    return GestureDetector(
-      onTap: () => Get.to(()=>WebViewPersona()),//_launchUrl
+  Widget Persona(String? ImgPath, String? MobileImgPath, Color BackGround,int ind) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0,left: 1,right: 1,top: 1),
+      child: GestureDetector(
+        onTap: () => Get.to(()=>WebViewPersona(index:ind.toString())),//_launchUrl
 
-      child: Stack(children: [
-        Container(
-          height: 220,
-          width: 450,
-          decoration: BoxDecoration(
-            color: BackGround,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Positioned(
-          top: 60,
-          left: 50,
-          child: Container(
-            width: 250.0,
-            height: 160.0,
+        child: Stack(children: [
+          Container(
+            height: 220,
+            width: 450,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage(ImgPath)),
-              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-              color: Colors.redAccent,
+              color: BackGround,
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-        ),
-        Positioned(
-          top: 80,
-          left: 245,
-          child: SizedBox(
-            height: 140,
-            child: AspectRatio(
-              aspectRatio: 0.5,
-              child: Image.asset(
-                MobileImgPath,
-                fit: BoxFit.cover,
-                //height: 100,
+          ImgPath==null?Container(
+            child: Text('Loading...'),
+          ):
+          Positioned(
+            top: 60,
+            left: 50,
+            child: Container(
+              width: 250.0,
+              height: 160.0,
+              decoration: BoxDecoration(
+
+                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                color: Colors.redAccent,
+              ),
+              child: CachedNetworkImage(imageUrl: ImgPath,
+              fit: BoxFit.cover,
               ),
             ),
           ),
-        ),
-        Positioned(
-            left: 300,
-            top: 20,
-            child: GestureDetector(
-              onTap: () {
-                _showMyDialog();
-              },
-              child: Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                  color: const Color(0xff1B47C1),
-                  borderRadius: BorderRadius.circular(15),
+          MobileImgPath==null?Container():
+          Positioned(
+            top: 80,
+            left: 245,
+            child: SizedBox(
+              height: 140,
+              child: AspectRatio(
+                aspectRatio: 0.5,
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover, imageUrl: MobileImgPath,
+                  //height: 100,
                 ),
-                child: Transform.rotate(
-                    angle: 135 * math.pi / 180,
-                    child: const Icon(
-                      Icons.arrow_back_sharp,
-                      color: Colors.white,
-                      size: 17,
-                    )),
               ),
-            ))
-      ]),
+            ),
+          ),
+          Positioned(
+              left: 300,
+              top: 20,
+              child: GestureDetector(
+                onTap: () {
+                  _showMyDialog();
+                },
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    color: const Color(0xff1B47C1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Transform.rotate(
+                      angle: 135 * math.pi / 180,
+                      child: const Icon(
+                        Icons.arrow_back_sharp,
+                        color: Colors.white,
+                        size: 17,
+                      )),
+                ),
+              ))
+        ]),
+      ),
     );
   }
 
@@ -265,7 +332,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     return InkWell(
       onTap: () {
         //_launchUrl();
-        Get.to(()=>WebViewPersona());
+        Get.to(()=>WebViewPersona(index:index.toString()));
         //Navigator.pop(context);
       },
       child: Container(

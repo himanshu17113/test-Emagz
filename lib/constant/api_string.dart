@@ -34,6 +34,7 @@ class ApiEndpoint {
       "$baseUrl/auth/profile/get-unique-name/$userId";
 
   static String story = "$baseUrl/story/stories";
+  static String template="$baseUrl/persona/template";
   static String likeStroy(String storyId) => "$baseUrl/story/$storyId/like";
   static String commentStroy(String storyId) =>
       "$baseUrl/story/comment/${storyId}";
