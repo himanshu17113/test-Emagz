@@ -22,23 +22,29 @@ class MyStory extends StatelessWidget {
       child: Container(
         height: 55,
         width: 55,
+        alignment: Alignment.centerRight,
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage("assets/png/story_border.png"),
+              fit: BoxFit.contain),
         ),
         child: RotationTransition(
           turns: const AlwaysStoppedAnimation(-48 / 360),
           child: Stack(
             children: [
               Positioned(
-                top: 10.5,
+                top: 24,
                 left: 7.3,
                 child: Container(
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
+                    //   border: Border.all( color: ),
                     image: const DecorationImage(
-                        image: CachedNetworkImageProvider("https://picsum.photos/500/500?random=0"), fit: BoxFit.cover),
+                        image: CachedNetworkImageProvider(
+                            "https://picsum.photos/500/500?random=0"),
+                        fit: BoxFit.cover),
                   ),
                   // child: Image.network(
                   //   url,
@@ -47,7 +53,7 @@ class MyStory extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 40,
+                top: 55,
                 left: 15,
                 child: CircleAvatar(
                   backgroundColor: whiteColor,

@@ -86,7 +86,7 @@ class PostController extends GetxController {
       );
 
       FormData reqData = FormData.fromMap({
-        "userId": "649169812de33ff6e4fb7f00",
+        "userId": userId,
         "mediaType": "image",
         // assetType.toString().split(".")[1].substring(0),
         "mediaUrl": MultipartFile.fromFileSync(
@@ -108,7 +108,7 @@ class PostController extends GetxController {
         "tags": "[]",
         "tagPeople": "[]"
       });
- 
+
       await dio.post(
         ApiEndpoint.makePost,
         data: reqData,
