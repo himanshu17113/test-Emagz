@@ -13,7 +13,7 @@ class NavController extends GetxController {
   bool isEdit = false;
 
   List<Widget> screen = [
-    const SocialMediaHomePage(),
+       SocialMediaHomePage(),
     const ExploreScreen(),
     // SearchScreen(),
 
