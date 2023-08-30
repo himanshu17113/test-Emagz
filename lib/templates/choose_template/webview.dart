@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class WebViewPersona extends StatefulWidget {
-  const WebViewPersona({Key? key}) : super(key: key);
+  String E_Persona;
+  String E_Token;
+  String E_CurrId;
+  final index;
+  WebViewPersona({Key? key, this.index,required this.E_CurrId,required this.E_Persona,required this.E_Token}) : super(key: key);
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -10,6 +14,7 @@ class WebViewPersona extends StatefulWidget {
 class _WebViewPersonaState extends State<WebViewPersona> {
   late final WebViewController controller;
   var loadingPercentage = 0;
+
   final cookieManager = WebViewCookieManager();
   Future<void> _onAddCookie(WebViewController controller) async {
     await controller.runJavaScript('''var date = new Date();
@@ -24,15 +29,34 @@ class _WebViewPersonaState extends State<WebViewPersona> {
   }
   Future<void> _onSetCookie(WebViewController controller) async {
     print("here");
+    try {
+      await cookieManager.setCookie(
+        WebViewCookie(name: 'E_persona_userId',
+            value: widget.E_Persona,
+            domain: 'persona.emagz.live'),
+      );
+    }
+    catch(e)
+    {
+      print('error setting cookie');
+      print(e);
+    }
     await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_persona_userId', value: 'bar', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+    WebViewCookie(name: 'E_current_userId', value: widget.E_CurrId, domain: 'persona.emagz.live'),
     );
-    await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_current_userId', value: 'bar', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
-    );
-    await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_token', value: 'token', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
-    );
+    // try {
+    //   await cookieManager.setCookie(
+    //
+    //     WebViewCookie(name: 'E_token',
+    //         value: widget.E_Token,
+    //         domain: '.emagz.live'),
+    //   );
+    // }
+    // catch(re)
+    // {
+    //   print('errotin token');
+    //   print(re);
+    // }
     if (!mounted) {
       print('cookis');
       return;
@@ -71,17 +95,30 @@ class _WebViewPersonaState extends State<WebViewPersona> {
               loadingPercentage = progress;
             });
           },
-          onPageFinished: (url) {
+          onPageFinished: (url) async{
+            await _onSetCookie(controller);
+           // await _onListCookies(controller);
             setState(() {
               loadingPercentage = 100;
             });
+
           },
+        onWebResourceError: (we){
+            print('hrr');
+            print(we);
+        },
+        onUrlChange: (url)async{
+            //await _onSetCookie(controller);
+            print('hr');
+            print(url.url);
+            //await _onSetCookie(controller);
+      }
       ))
       ..loadRequest(
-        Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/'),
+        Uri.parse('http://persona.emagz.live/${widget.index.toString()}'),
       );
 
-    _onAddCookie(controller);
+    //_onSetCookie(controller);
     super.initState();
   }
   @override
@@ -94,17 +131,17 @@ class _WebViewPersonaState extends State<WebViewPersona> {
               controller: controller
           ),
         ),
-      if(loadingPercentage < 100)
-          LinearProgressIndicator(
-             value: loadingPercentage / 100.0,
-       ),
-        ElevatedButton(
-            onPressed:() async
-        {
-         await _onSetCookie(controller);
-          await _onListCookies(controller);
-          },
-            child:Text('Get cookies'))
+      // if(loadingPercentage < 100)
+      //     LinearProgressIndicator(
+      //        value: loadingPercentage / 100.0,
+      //  ),
+      //   ElevatedButton(
+      //       onPressed:() async
+      //   {
+      //    await _onSetCookie(controller);
+      //     await _onListCookies(controller);
+      //     },
+      //       child:Text('Get cookies'))
       ],
     );
   }

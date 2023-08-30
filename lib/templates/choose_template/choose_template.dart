@@ -10,6 +10,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:get/get_core/src/get_main.dart';
 import 'dart:math' as math;
 import '../../constant/colors.dart';
+import '../../social_media/controller/auth/jwtcontroller.dart';
 import '../../social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,10 +25,10 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
   final ScrollController _scrollController = ScrollController();
-  Future<void> _showMyDialog() async {
+  Future<void> _showMyDialog(int indexx) async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      //barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 3,
@@ -56,11 +57,11 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 200, child: customYesNoButton("Yes", 1)),
+                  SizedBox(width: 200, child: customYesNoButton("Yes", 1,indexx)),
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(width: 200, child: customYesNoButton("No", 2)),
+                  SizedBox(width: 200, child: customYesNoButton("No", 2,indexx)),
                 ],
               ),
             ],
@@ -151,12 +152,14 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                             itemCount: snapshot.data!.length,
                             itemBuilder: (ctx, index) {
                                 String url=snapshot.data![index]!.thumbnail.toString();
-                                if(url=='null')
+                                String url2=snapshot.data![index]!.id.toString();
+                                if(url=='null' || url2=='null')
                                   {
 
                                   }
                                 else {
                                   return  Persona(
+                                      snapshot.data![index]!.id,
                                       snapshot.data![index]!.introImage,
                                       snapshot.data![index]!.thumbnail,
                                       const Color.fromRGBO(255, 199, 1, 1.0),
@@ -218,11 +221,16 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 )));
   }
 
-  Widget Persona(String? ImgPath, String? MobileImgPath, Color BackGround,int ind) {
+  Widget Persona(String? id,String? ImgPath, String? MobileImgPath, Color BackGround,int ind) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0,left: 1,right: 1,top: 1),
       child: GestureDetector(
-        onTap: () => Get.to(()=>WebViewPersona(index:ind.toString())),//_launchUrl
+
+        onTap: () {
+          _showMyDialog(ind);
+          print(id);
+
+        },//_launchUrl
 
         child: Stack(children: [
           Container(
@@ -271,8 +279,12 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               left: 300,
               top: 20,
               child: GestureDetector(
-                onTap: () {
-                  _showMyDialog();
+                onTap: () async{
+                  var jwtController = Get.put(JWTController());
+                  var token = await jwtController.getAuthToken();
+                  var userId= await jwtController.getUserId();
+
+                  Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
                 },
                 child: Container(
                   height: 45,
@@ -327,13 +339,18 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     );
   }
 
-  Widget customYesNoButton(String text, int index) {
+  Widget customYesNoButton(String text, int index,int tmpInd) {
 
     return InkWell(
       onTap: () {
         //_launchUrl();
-        Get.to(()=>WebViewPersona(index:index.toString()));
-        //Navigator.pop(context);
+        if(index==1) {
+          accountSetUpController.userTemplate(accountSetUpController.templates![tmpInd].id!);
+          //Get.to(() => WebViewPersona(index: tmpInd.toString()));
+
+        }
+        else
+        Navigator.pop(context);
       },
       child: Container(
         // padding: const EdgeInsets.symmetric(horizontal: 10),

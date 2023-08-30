@@ -33,7 +33,7 @@ class Template{
     this.updatedAt
 });
   Template.fromJson(Map<String, dynamic> json) {
-    id = json['_id'] != null ? (json['Rating_count']) : null;
+    id = json['_id'] != null ? (json['_id']) : null;
     name = json['name'] != null ? (json['name']) : null;
     description = json['description'] != null ? json['description']: null;
     type = json['type'] != null ? (json['type']) : null;

@@ -35,6 +35,8 @@ class ApiEndpoint {
 
   static String story = "$baseUrl/story/stories";
   static String template="$baseUrl/persona/template";
+  static String uploadProfilePic="$baseUrl/auth/upload-profile-picture";
+  static String userTemplate="$baseUrl/persona/user-template";
   static String likeStroy(String storyId) => "$baseUrl/story/$storyId/like";
   static String commentStroy(String storyId) =>
       "$baseUrl/story/comment/$storyId";

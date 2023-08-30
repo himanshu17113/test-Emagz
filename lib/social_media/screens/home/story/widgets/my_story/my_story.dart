@@ -2,10 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/story_selection/ModalBottomSheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
-class MyStory extends StatelessWidget {
+import '../../../../../controller/auth/jwtcontroller.dart';
+
+class MyStory extends StatefulWidget {
   const MyStory({super.key});
 
+  @override
+  State<MyStory> createState() => _MyStoryState();
+}
+
+class _MyStoryState extends State<MyStory> {
+  var jwtController = Get.put(JWTController());
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -41,9 +51,8 @@ class MyStory extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     //   border: Border.all( color: ),
-                    image: const DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            "https://picsum.photos/500/500?random=0"),
+                    image: DecorationImage(
+                        image: NetworkImage(jwtController.profilePic.toString()),
                         fit: BoxFit.cover),
                   ),
                   // child: Image.network(

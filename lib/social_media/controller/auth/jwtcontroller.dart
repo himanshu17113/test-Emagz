@@ -7,6 +7,7 @@ import 'package:hive/hive.dart';
 
 class JWTController extends GetxController {
   RxString? token;
+  RxString? profilePic='https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg'.obs;
   RxString? userId;
   Rx<UserSchema>? currentUser;
   RxBool isAuthorised = false.obs;
@@ -78,6 +79,17 @@ class JWTController extends GetxController {
   Future<String?> getUserId() async {
     var userId = await hiveBox.get("userId");
     return userId;
+  }
+
+  Future setProfileImage(String imageUrl) async
+  {
+    await hiveBox.put('ProfilePic',imageUrl);
+    this.profilePic= RxString(imageUrl!);
+  }
+  Future<String> getProfileImage() async{
+    var imageUrl= await hiveBox.get('ProfilePic');
+
+    return imageUrl;
   }
 
   @override

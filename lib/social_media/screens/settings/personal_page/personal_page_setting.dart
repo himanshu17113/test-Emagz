@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/user_model.dart';
+import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets/setting_common_tile.dart';
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_setting_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/security_screen.dart';
@@ -10,6 +12,7 @@ import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../profile_insight/profile_insight_screen.dart';
 
@@ -22,7 +25,12 @@ class PersonalPageSetting extends StatefulWidget {
 
 class _PersonalPageSettingState extends State<PersonalPageSetting> {
   var jwtController = Get.put(JWTController());
+  var accountSetupController= Get.put(SetupAccount());
+
+  final ImagePicker picker = ImagePicker();
+  XFile? image;
   User? user;
+
   @override
   void initState() {
     super.initState();
@@ -30,7 +38,9 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
   }
 
   asyncInit()async{
+
     user = await jwtController.getCurrentUserDetail();
+
     setState(() {
     });
   }
@@ -81,9 +91,9 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       children: [
                         Stack(
                           children: [
-                            const CircleAvatar(
+                             CircleAvatar(
                               backgroundImage: NetworkImage(
-                                'https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661?b=1&k=20&m=1307615661&s=170667a&w=0&h=Zp9_27RVS_UdlIm2k8sa8PuutX9K3HTs8xdK0UfKmYk=',
+                                 jwtController.profilePic.toString(),
                               ),
                               maxRadius: 45,
                             ),
@@ -93,10 +103,22 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                 child: CircleAvatar(
                                   radius: 10,
                                   backgroundColor: whiteColor,
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    color: blackButtonColor,
-                                    size: 10,
+                                  child: IconButton(
+                                    onPressed: () async
+                                    {
+
+                                      image = await picker.pickImage(source: ImageSource.gallery);
+                                      await accountSetupController.uploadProfilePic(image);
+
+                                      setState(() {
+
+                                      });
+                                    },
+                                   icon: Icon(
+                                      Icons.camera_alt,
+                                      color: blackButtonColor,
+                                      size: 10,
+                                    ),
                                   ),
                                 ))
                           ],
