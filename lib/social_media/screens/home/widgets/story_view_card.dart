@@ -58,7 +58,7 @@ class _StoryViewCardState extends State<StoryViewCard> {
                 height: 54,
                 width: 54,
                 decoration: BoxDecoration(
-                    color: Colors.deepOrangeAccent,
+                    color: Colors.grey,
                     border: Border.all(color: whiteColor, width: 1),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(

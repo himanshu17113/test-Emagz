@@ -254,7 +254,7 @@ class ApprovalFormScreen extends StatelessWidget {
                           ),
                           ApprovalTextField(
                             sufixIcon: Container(
-                                padding: EdgeInsets.symmetric(vertical: 6),
+                                padding: const EdgeInsets.symmetric(vertical: 6),
                                 child: SvgPicture.asset(
                                   "assets/svg/Frame.svg",
                                 )),
@@ -296,7 +296,7 @@ class ApprovalFormScreen extends StatelessWidget {
                           isRequired: false,
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           height: 100,
                           width: 100,
                           decoration: BoxDecoration(
@@ -307,7 +307,7 @@ class ApprovalFormScreen extends StatelessWidget {
                             ),
                           ),
                           child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 35),
+                              padding: const EdgeInsets.symmetric(vertical: 35),
                               child: SvgPicture.asset(
                                 "assets/svg/Frame.svg",
                               )),
@@ -321,7 +321,7 @@ class ApprovalFormScreen extends StatelessWidget {
                           isRequired: false,
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           height: 100,
                           width: 100,
                           decoration: BoxDecoration(
@@ -332,7 +332,7 @@ class ApprovalFormScreen extends StatelessWidget {
                             ),
                           ),
                           child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 35),
+                              padding: const EdgeInsets.symmetric(vertical: 35),
                               child: SvgPicture.asset(
                                 "assets/svg/Frame.svg",
                               )),
@@ -346,7 +346,7 @@ class ApprovalFormScreen extends StatelessWidget {
                           isRequired: false,
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 15),
+                          margin: const EdgeInsets.only(top: 15),
                           height: 100,
                           width: 100,
                           decoration: BoxDecoration(
@@ -357,7 +357,7 @@ class ApprovalFormScreen extends StatelessWidget {
                             ),
                           ),
                           child: Container(
-                              padding: EdgeInsets.symmetric(vertical: 35),
+                              padding: const EdgeInsets.symmetric(vertical: 35),
                               child: SvgPicture.asset(
                                 "assets/svg/Frame.svg",
                               )),

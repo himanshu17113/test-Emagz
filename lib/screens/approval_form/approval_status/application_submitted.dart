@@ -2,8 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/approval_form/approval_status/application_verified.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-
+ 
 class ApplicationSubmittedScreen extends StatelessWidget {
   const ApplicationSubmittedScreen({Key? key}) : super(key: key);
 
