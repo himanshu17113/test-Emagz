@@ -114,9 +114,9 @@ class Privacy {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['likesAndViews'] = this.likesAndViews;
-    data['hideLikeAndViewsControl'] = this.hideLikeAndViewsControl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['likesAndViews'] = likesAndViews;
+    data['hideLikeAndViewsControl'] = hideLikeAndViewsControl;
     return data;
   }
 }
@@ -133,9 +133,9 @@ class PollResults {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['yes'] = this.yes;
-    data['no'] = this.no;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['yes'] = yes;
+    data['no'] = no;
     return data;
   }
 }
@@ -217,30 +217,30 @@ class UserSchema {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['mobile_number'] = this.mobileNumber;
-    data['login_otp'] = this.loginOtp;
-    data['personalTemplate'] = this.personalTemplate;
-    data['_id'] = this.sId;
-    data['username'] = this.username;
-    data['email'] = this.email;
-    data['dob'] = this.dob;
-    data['accountType'] = this.accountType;
-    data['interestName'] = this.interestName;
-    data['Followers'] = this.followers;
-    data['Followings'] = this.followings;
-    data['Hirable'] = this.hirable;
-    data['Rating'] = this.rating;
-    data['Reviews'] = this.reviews;
-    data['Poll'] = this.poll;
-    data['Jobcreated'] = this.jobcreated;
-    data['AccountStatus'] = this.accountStatus;
-    data['search'] = this.search;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    data['GetstatedName'] = this.getstatedName;
-    data['displayName'] = this.displayName;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['mobile_number'] = mobileNumber;
+    data['login_otp'] = loginOtp;
+    data['personalTemplate'] = personalTemplate;
+    data['_id'] = sId;
+    data['username'] = username;
+    data['email'] = email;
+    data['dob'] = dob;
+    data['accountType'] = accountType;
+    data['interestName'] = interestName;
+    data['Followers'] = followers;
+    data['Followings'] = followings;
+    data['Hirable'] = hirable;
+    data['Rating'] = rating;
+    data['Reviews'] = reviews;
+    data['Poll'] = poll;
+    data['Jobcreated'] = jobcreated;
+    data['AccountStatus'] = accountStatus;
+    data['search'] = search;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
+    data['GetstatedName'] = getstatedName;
+    data['displayName'] = displayName;
     return data;
   }
 }

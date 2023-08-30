@@ -1,7 +1,5 @@
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../constant/colors.dart';
 

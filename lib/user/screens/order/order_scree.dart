@@ -1,8 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/profile/profile_screen.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
-import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:emagz_vendor/user/screens/order/empty_order_screen.dart';
 import 'package:emagz_vendor/user/screens/order/order_details.dart';
 import 'package:emagz_vendor/user/screens/order/widgets/order_list_card.dart';
 import 'package:emagz_vendor/user/screens/profile/profile_screen.dart';
@@ -15,7 +12,7 @@ class OrderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: UserTopBar(title: "Order"),
+      appBar: const UserTopBar(title: "Order"),
       body: Column(
         children: [
           ListView.builder(
@@ -25,7 +22,7 @@ class OrderScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
-                      Get.to(() => OrderDetailsScreen());
+                      Get.to(() => const OrderDetailsScreen());
                     },
                     child: const OrderListCard());
               }),
@@ -34,7 +31,7 @@ class OrderScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => ProfileScreenUser());
+              Get.to(() => const ProfileScreenUser());
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 50),

@@ -1,7 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
-import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:emagz_vendor/user/screens/bag/empty_bag.dart';
 import 'package:emagz_vendor/user/screens/bag/widget/bag_item_card.dart';
 import 'package:emagz_vendor/user/screens/order/order_scree.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +20,12 @@ class BagScreen extends StatelessWidget {
           const SizedBox(height: 15),
           ListView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               itemCount: 2,
               itemBuilder: (context, index) {
-                return BagItemcard();
+                return const BagItemcard();
               }),
-          Expanded(child: SizedBox()),
+          const Expanded(child: SizedBox()),
           Column(
             children: [
               Padding(
@@ -53,17 +51,17 @@ class BagScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 color: blackButtonColor,
                 height: .58,
               ),
               Container(
                 height: 130,
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Color(0xffF2F2F2)),
+                    color: const Color(0xffF2F2F2)),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,7 +94,7 @@ class BagScreen extends StatelessWidget {
                               Text(
                                 "Free        ",
                                 style: style.copyWith(
-                                  color: Color(0xff598D4B),
+                                  color: const Color(0xff598D4B),
                                 ),
                               ),
                             ],
@@ -175,7 +173,7 @@ class BagScreen extends StatelessWidget {
               size: 20,
             ),
             Text("Continue Shoping",
-                style: style.copyWith(color: Color(0xff535353))),
+                style: style.copyWith(color: const Color(0xff535353))),
           ],
         ),
       ),

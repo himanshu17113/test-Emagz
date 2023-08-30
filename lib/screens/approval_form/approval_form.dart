@@ -380,7 +380,7 @@ class ApprovalFormScreen extends StatelessWidget {
                         Get.to(() => const ApplicationSubmittedScreen());
                       },
                       style:
-                          ElevatedButton.styleFrom(primary: blackButtonColor),
+                          ElevatedButton.styleFrom(backgroundColor: blackButtonColor),
                       child: const Text("Apply"),
                     ),
                   ),

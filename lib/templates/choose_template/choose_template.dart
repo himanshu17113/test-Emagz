@@ -1,10 +1,8 @@
-import 'dart:io';
 
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:get/get_core/src/get_main.dart';
 import 'dart:math' as math;
 import '../../constant/colors.dart';
@@ -131,7 +129,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 child: ListView(children: [
                   GestureDetector(
                       onTap: () {
-                        Get.to(()=>WebViewPersona());
+                        Get.to(()=>const WebViewPersona());
                       },
                       child: Persona(
                           "assets/png/cameronWilliamson.png",
@@ -161,7 +159,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
 
   Widget Persona(String ImgPath, String MobileImgPath, Color BackGround) {
     return GestureDetector(
-      onTap: () => Get.to(()=>WebViewPersona()),//_launchUrl
+      onTap: () => Get.to(()=>const WebViewPersona()),//_launchUrl
 
       child: Stack(children: [
         Container(
@@ -265,7 +263,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     return InkWell(
       onTap: () {
         //_launchUrl();
-        Get.to(()=>WebViewPersona());
+        Get.to(()=>const WebViewPersona());
         //Navigator.pop(context);
       },
       child: Container(

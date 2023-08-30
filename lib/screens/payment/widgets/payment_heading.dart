@@ -12,7 +12,7 @@ class PaymentHeading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: EdgeInsets.only(left: 10),
+            margin: const EdgeInsets.only(left: 10),
             child: Text(
               "Trans. ID",
               style: TextStyle(

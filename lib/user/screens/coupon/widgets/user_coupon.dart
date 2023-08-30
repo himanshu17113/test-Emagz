@@ -19,7 +19,7 @@ class UserCouponWidget extends StatelessWidget {
         height: 130,
         width: 300,
         decoration: BoxDecoration(
-            color: Color(0xff2C199E),
+            color: const Color(0xff2C199E),
             borderRadius: BorderRadius.circular(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,7 +67,7 @@ class UserCouponWidget extends StatelessWidget {
                       height: 21,
                       width: 120,
                       decoration: BoxDecoration(
-                          color: Color(0xff3C83E6),
+                          color: const Color(0xff3C83E6),
                           borderRadius: BorderRadius.circular(6)),
                       child: Text(
                         "Apply Code",

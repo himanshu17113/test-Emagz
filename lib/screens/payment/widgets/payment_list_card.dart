@@ -1,6 +1,4 @@
-import 'dart:ui';
 
-import 'package:emagz_vendor/model/order_list_model.dart';
 import 'package:emagz_vendor/model/payment_list_model.dart';
 import 'package:flutter/material.dart';
 

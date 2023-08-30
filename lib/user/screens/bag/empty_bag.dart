@@ -1,12 +1,8 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/orders/order_list_screen.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
-import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:emagz_vendor/user/screens/bag/widget/empty_bag_gridview.dart';
 import 'package:emagz_vendor/user/screens/order/order_scree.dart';
-import 'package:emagz_vendor/user/screens/order/widgets/order_list_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class EmptyBagScreen extends StatelessWidget {
@@ -24,7 +20,7 @@ class EmptyBagScreen extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Get.to(() => OrderScreen());
+              Get.to(() => const OrderScreen());
             },
             child: Image.asset(
               "assets/png/Cart.png",

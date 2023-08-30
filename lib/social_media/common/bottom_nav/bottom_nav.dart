@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';

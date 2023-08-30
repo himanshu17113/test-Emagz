@@ -76,7 +76,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                         fontWeight: FontWeight.w600),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 5),
+                    margin: const EdgeInsets.symmetric(vertical: 5),
                     height: 35,
                     child: TextFormField(
                       // controller: controller,
@@ -91,7 +91,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                             ),
                             fontWeight: FontWeight.bold,
                             fontSize: 9),
-                        fillColor: Color(0xffF1F1F1),
+                        fillColor: const Color(0xffF1F1F1),
                         hintText: "Nakul_kumar8",
                         filled: true,
                         contentPadding: const EdgeInsets.only(left: 10),

@@ -1,9 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/coupon/coupon_screen.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
 import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:emagz_vendor/user/screens/address/add_address.dart';
 import 'package:emagz_vendor/user/screens/address/my_save_address.dart';
 import 'package:emagz_vendor/user/screens/order/empty_order_screen.dart';
 import 'package:emagz_vendor/user/screens/profile/widgets/profile_menu_card.dart';
@@ -16,7 +13,7 @@ import 'package:get/get.dart';
 import '../coupon/coupon_screen.dart';
 
 class ProfileScreenUser extends StatefulWidget {
-  ProfileScreenUser({Key? key}) : super(key: key);
+  const ProfileScreenUser({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreenUser> createState() => _ProfileScreenUserState();
@@ -86,7 +83,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -201,7 +198,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => EmptyOrderScreen());
+                        Get.to(() => const EmptyOrderScreen());
                       },
                       child: ProfileMenuCard(
                         backGroundImage: "assets/png/order_back.png",
@@ -220,7 +217,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => CouponScreen());
+                        Get.to(() => const CouponScreen());
                       },
                       child: ProfileMenuCard(
                         backGroundImage: "assets/png/coupon_back.png",
@@ -245,7 +242,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => WishListScreen());
+                        Get.to(() => const WishListScreen());
                       },
                       child: ProfileMenuCard(
                         backGroundImage: "assets/png/wishlist_back.png",
@@ -261,7 +258,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
@@ -287,7 +284,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => MySaveAddressScreen());
+                        Get.to(() => const MySaveAddressScreen());
                       },
                       child: ProfileMenuCard(
                         backGroundImage: "assets/png/address_back.png",
@@ -310,7 +307,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        Get.to(() => RatingScreen());
+                        Get.to(() => const RatingScreen());
                       },
                       child: ProfileMenuCard(
                         backGroundImage: "assets/png/review_back.png",

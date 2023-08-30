@@ -2,7 +2,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/signup_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'signin_screen.dart';
@@ -102,7 +101,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                             controller: authController.tabController,
                             children: [
                               SignUpScreen(),
-                              SignInScreen(),
+                              const SignInScreen(),
                             ],
                           ),
                         ),

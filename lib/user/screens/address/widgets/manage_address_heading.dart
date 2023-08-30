@@ -11,7 +11,7 @@ class ManageAddressHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 1),
+      margin: const EdgeInsets.symmetric(vertical: 1),
       child: Text(
         title,
         style: TextStyle(

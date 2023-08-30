@@ -54,8 +54,8 @@ class ProductGridView extends StatelessWidget {
                 height: 30,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment(-0.5, .7),
-                      end: Alignment(0.5, -5.5),
+                      begin: const Alignment(-0.5, .7),
+                      end: const Alignment(0.5, -5.5),
                       colors: [
                         darkBlue,
                         darkBlueAcent,

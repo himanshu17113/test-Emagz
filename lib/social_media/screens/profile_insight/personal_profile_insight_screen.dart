@@ -2,7 +2,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../model/chart_model.dart';
 import '../../common/common_appbar.dart';
 
 class PersonalProfileInsightScreen extends StatefulWidget {
@@ -141,7 +140,7 @@ class _PersonalProfileInsightScreenState
                     SizedBox(
                       height: 190,
                       child: SfCartesianChart(
-                        margin: EdgeInsets.only(right: 20, left: 10),
+                        margin: const EdgeInsets.only(right: 20, left: 10),
                         // enableSideBySideSeriesPlacement: false,
                         borderWidth: 0,
                         plotAreaBorderWidth: 0,

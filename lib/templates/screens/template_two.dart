@@ -398,7 +398,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum augue amet, mi tellus proin ornare quam fermentum neque. Risus amet, commodo eget viverra ornare magna. Non dictumst purus felis ridiculus mi scelerisque mauris nisl, dui.",
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                    color: Color(0xff424242),
+                    color: const Color(0xff424242),
                     fontSize: 14,
                     // height: 1.8,
                     letterSpacing: .2,

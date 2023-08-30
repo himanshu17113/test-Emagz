@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constant/colors.dart';
 
 class ProductDiscHeading extends StatelessWidget {
   const ProductDiscHeading({Key? key}) : super(key: key);
@@ -20,21 +19,21 @@ class ProductDiscHeading extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.only(right: 35),
+                margin: const EdgeInsets.only(right: 35),
                 child: const Text(
                   "Stock",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(right: 15),
+                margin: const EdgeInsets.only(right: 15),
                 child: const Text(
                   "GST",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(right: 12),
+                margin: const EdgeInsets.only(right: 12),
                 child: const Text(
                   "GST Type",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),

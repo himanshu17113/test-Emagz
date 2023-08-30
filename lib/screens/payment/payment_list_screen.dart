@@ -1,19 +1,12 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/model/payment_list_model.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
-import 'package:emagz_vendor/screens/orders/widgets/order_list_card.dart';
-import 'package:emagz_vendor/screens/orders/widgets/order_list_heading.dart';
 import 'package:emagz_vendor/screens/payment/widgets/payment_heading.dart';
 import 'package:emagz_vendor/screens/payment/widgets/payment_list_card.dart';
-import 'package:emagz_vendor/screens/product/view_product.dart';
-import 'package:emagz_vendor/screens/product/widgets/product_desc_headings.dart';
-import 'package:emagz_vendor/screens/product/widgets/product_list_card.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-import '../../model/order_list_model.dart';
 
 class PaymentListScreen extends StatefulWidget {
   const PaymentListScreen({Key? key}) : super(key: key);

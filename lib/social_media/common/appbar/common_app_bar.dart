@@ -1,17 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/profile/profile_screen.dart';
-import 'package:emagz_vendor/social_media/screens/account/personal_account.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/personal_page_setting.dart';
-import 'package:emagz_vendor/user/screens/notifiction_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../screens/notification/notification_screen.dart';
 
 class SocialMediaAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
+  @override
   final Size preferredSize;
   const SocialMediaAppBar({
     required this.title,
@@ -23,7 +19,7 @@ class SocialMediaAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 40, right: 10, left: 10),
+      margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
       child: Row(
         children: [
           Expanded(

@@ -38,7 +38,7 @@ class HomeScren extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Container(
+            SizedBox(
               // margin: EdgeInsets.symmetric(horizontal: 10),
               height: 80,
               child: ListView.builder(
@@ -48,7 +48,7 @@ class HomeScren extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Container(
                       margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +75,7 @@ class HomeScren extends StatelessWidget {
               height: 15,
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 12),
+              margin: const EdgeInsets.symmetric(horizontal: 12),
               height: 72,
               child: Row(
                 children: [

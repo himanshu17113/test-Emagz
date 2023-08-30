@@ -23,7 +23,7 @@ class ProductListTile extends StatelessWidget {
                 fontSize: 8, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           Container(
-            margin: EdgeInsets.only(right: 5),
+            margin: const EdgeInsets.only(right: 5),
             child: const Text(
               "LKSNDOAAL62",
               style: TextStyle(
@@ -33,7 +33,7 @@ class ProductListTile extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(right: 15),
+            margin: const EdgeInsets.only(right: 15),
             child: const Text(
               "₹ 1499.00",
               style: TextStyle(
@@ -43,7 +43,7 @@ class ProductListTile extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 17, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 5),
             decoration: BoxDecoration(
               color: blueColor,
               borderRadius: BorderRadius.circular(20),

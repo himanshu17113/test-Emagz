@@ -102,13 +102,13 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      homePostController.likePost(widget.post!.sId!);
+                                      homePostController.likePost(widget.post.sId!);
                                       setState(() {
                                         if (widget.isLiked == true) {
-                                          widget.post!.likes!.removeLast();
+                                          widget.post.likes!.removeLast();
                                           widget.isLiked = false;
                                         } else {
-                                          widget.post!.likes!.add(widget.myUserId!);
+                                          widget.post.likes!.add(widget.myUserId!);
                                           widget.isLiked = true;
                                         }
                                       });

@@ -131,7 +131,7 @@ class PersonalProfileSetup extends StatelessWidget {
                     InkWell(
                       onTap: () {
 
-                        Get.to(()=>ChooseTemplate());
+                        Get.to(()=>const ChooseTemplate());
                         //accountSetUpController.setUpPersonalAccount();
                         // Get.to(() => BusinessProfileSetupScreen());
                       },
@@ -145,7 +145,7 @@ class PersonalProfileSetup extends StatelessWidget {
                             // ),
                             borderRadius: BorderRadius.circular(5)),
                         child: Obx(
-                          () => (accountSetUpController.isUserRegiserting.value) ? CircularProgressIndicator(
+                          () => (accountSetUpController.isUserRegiserting.value) ? const CircularProgressIndicator(
                             color: Colors.white,
                           ): Text(
                             "Choose Template",
@@ -162,8 +162,8 @@ class PersonalProfileSetup extends StatelessWidget {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () => Get.to(() => BottomNavBar()),
-                        child: Text(
+                        onTap: () => Get.to(() => const BottomNavBar()),
+                        child: const Text(
                           "Skip For Now",
                           style: TextStyle(
                               color: Color(0xff7C7C7C),

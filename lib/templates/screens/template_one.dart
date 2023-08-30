@@ -1,16 +1,14 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/templates/widgets/fav_and_locate_widget.dart';
 import 'package:emagz_vendor/templates/widgets/temp_one_sliderCard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../common/appbar/common_appbar.dart';
 import '../widgets/common_slider.dart';
 
 class TemplateOne extends StatefulWidget {
-  TemplateOne({Key? key}) : super(key: key);
+  const TemplateOne({Key? key}) : super(key: key);
 
   @override
   State<TemplateOne> createState() => _TemplateOneState();
@@ -96,7 +94,7 @@ class _TemplateOneState extends State<TemplateOne> {
                     "Store Name",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                        color: Color(0xff262626),
+                        color: const Color(0xff262626),
                         fontSize: 35,
                         fontWeight: FontWeight.w700),
                     // style: TextStyle(
@@ -115,7 +113,7 @@ class _TemplateOneState extends State<TemplateOne> {
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Scelerisque curabitur et lorem gravida pretium mi. Nisi, orci, egestas nulla\n sapien at cras. Diam.",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.inter(
-                        color: Color(0xff454545),
+                        color: const Color(0xff454545),
                         fontSize: 15,
                         height: 1.4,
                         fontWeight: FontWeight.w400),
@@ -128,7 +126,7 @@ class _TemplateOneState extends State<TemplateOne> {
                     children: [
                       Container(
                         height: 130,
-                        margin: EdgeInsets.only(right: 10),
+                        margin: const EdgeInsets.only(right: 10),
                         width: MediaQuery.of(context).size.width / 1.5,
                         child: Image.network(
                           "https://images.unsplash.com/photo-1549449390-012d06a7d7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNvdXJjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -137,7 +135,7 @@ class _TemplateOneState extends State<TemplateOne> {
                       ),
                       Container(
                         height: 130,
-                        margin: EdgeInsets.only(right: 10),
+                        margin: const EdgeInsets.only(right: 10),
                         width: MediaQuery.of(context).size.width / 1.5,
                         child: Image.network(
                           "https://images.unsplash.com/photo-1549449390-012d06a7d7c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNvdXJjZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
@@ -153,12 +151,12 @@ class _TemplateOneState extends State<TemplateOne> {
                 Container(
                   height: 300,
                   alignment: Alignment.center,
-                  color: Color(0xff1B4F30),
+                  color: const Color(0xff1B4F30),
                   child: Text(
                     "Lorem ipsum dolor sit amet, \nconsectetur adipiscing elit. \nIpsum augue amet,",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.seaweedScript(
-                        color: Color(0xffFFFFFF),
+                        color: const Color(0xffFFFFFF),
                         fontSize: 22,
                         height: 1.8,
                         fontWeight: FontWeight.w400),
@@ -177,7 +175,7 @@ class _TemplateOneState extends State<TemplateOne> {
                         "Welcome",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.seaweedScript(
-                            color: Color(0xffE9B95D),
+                            color: const Color(0xffE9B95D),
                             fontSize: 50,
                             // height: 1.8,
                             fontWeight: FontWeight.w400),
@@ -221,7 +219,7 @@ class _TemplateOneState extends State<TemplateOne> {
                 const SizedBox(
                   height: 15,
                 ),
-                Container(
+                SizedBox(
                   // margin: const EdgeInsets.only(right: 20),
                   height: 350,
                   child: PageView.builder(

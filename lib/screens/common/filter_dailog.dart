@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../product/widgets/add_product_textfield.dart';
 
 class FilterDailog extends StatefulWidget {
   const FilterDailog({Key? key}) : super(key: key);
@@ -113,8 +112,8 @@ filterDalilog(BuildContext context) {
                     height: 50,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          end: Alignment(-0.6, .6),
-                          begin: Alignment(0.5, -5.5),
+                          end: const Alignment(-0.6, .6),
+                          begin: const Alignment(0.5, -5.5),
                           colors: [
                             darkBlueAcent,
                             darkBlue,

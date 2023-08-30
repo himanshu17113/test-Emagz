@@ -30,17 +30,17 @@ class MyGradientButton extends StatelessWidget {
               end: Alignment.topRight,
               colors:
               isEnabled ?? true? [
-              Color(0xFF020AFF),
-                Color(0xFF23A3FF),
-                Color(0xFF23A3FF),
+              const Color(0xFF020AFF),
+                const Color(0xFF23A3FF),
+                const Color(0xFF23A3FF),
                 // Color(0xFF2489D2),
-                Color(0xFF23A3FF),
+                const Color(0xFF23A3FF),
 
-                Color(0xFF020EFF)
+                const Color(0xFF020EFF)
                 ]: [Colors.grey,Colors.grey],
 
               // stops: [-0.082, 0.4, 0.6848, 0.9257],
-              transform: GradientRotation(
+              transform: const GradientRotation(
                 7843 * (math.pi / 10000),
               ),
             ),

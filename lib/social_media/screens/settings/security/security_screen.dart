@@ -180,7 +180,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() => TwoStepVerificationScreen());
+                          Get.to(() => const TwoStepVerificationScreen());
                         },
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -367,7 +367,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                          offset: Offset(0, 4.07),
+                          offset: const Offset(0, 4.07),
                           blurRadius: 20,
                           color: const Color(0xff00000040).withOpacity(.25))
                     ],
@@ -594,7 +594,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
-                              offset: Offset(0, 4.07),
+                              offset: const Offset(0, 4.07),
                               blurRadius: 20,
                               color: const Color(0xff00000040).withOpacity(.25))
                         ],
@@ -708,7 +708,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
-                              offset: Offset(0, 4.07),
+                              offset: const Offset(0, 4.07),
                               blurRadius: 20,
                               color: const Color(0xff00000040).withOpacity(.25))
                         ],
@@ -827,7 +827,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                          offset: Offset(0, 4.07),
+                          offset: const Offset(0, 4.07),
                           blurRadius: 20,
                           color: const Color(0xff00000040).withOpacity(.25))
                     ],
@@ -935,7 +935,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                          offset: Offset(0, 4.07),
+                          offset: const Offset(0, 4.07),
                           blurRadius: 20,
                           color: const Color(0xff00000040).withOpacity(.25))
                     ],
@@ -1043,7 +1043,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                            offset: Offset(0, 4.07),
+                            offset: const Offset(0, 4.07),
                             blurRadius: 20,
                             color: const Color(0xff00000040).withOpacity(.25))
                       ],

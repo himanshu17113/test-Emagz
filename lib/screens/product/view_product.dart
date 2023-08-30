@@ -3,18 +3,10 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/product/add_product_screen.dart';
 import 'package:emagz_vendor/screens/product/widgets/add_product_textfield.dart';
 import 'package:emagz_vendor/screens/product/widgets/product_details_card.dart';
-import 'package:emagz_vendor/screens/product/widgets/product_heading_text.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
-import 'package:emagz_vendor/screens/product/widgets/view_product_heading.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import '../common/common_top_bar.dart';
-import 'widgets/product_desc_headings.dart';
-import 'widgets/product_list_card.dart';
 
 class ViewProductScreen extends StatefulWidget {
   const ViewProductScreen({Key? key}) : super(key: key);
@@ -60,27 +52,27 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                       "Product",
                       style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1.65,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(right: 12),
+                            margin: const EdgeInsets.only(right: 12),
                             child: const Text(
                               "Stock",
                               style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(right: 20),
+                            margin: const EdgeInsets.only(right: 20),
                             child: const Text(
                               "Color",
                               style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 10),
+                            margin: const EdgeInsets.only(left: 10),
                             child: const Text(
                               "Total",
                               style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
@@ -338,7 +330,7 @@ showAlertDailog(BuildContext context) {
           InkWell(
             onTap: () {
               Get.back();
-              Get.to(() => AddProductScreen());
+              Get.to(() => const AddProductScreen());
             },
             child: ModelTile(modelTextbody: modelTextbody, title: "Edit Product", icons: Icons.edit_outlined),
           ),
@@ -353,7 +345,7 @@ showAlertDailog(BuildContext context) {
               Get.back();
             },
             child: Container(
-              margin: EdgeInsets.only(top: 10),
+              margin: const EdgeInsets.only(top: 10),
               width: MediaQuery.of(context).size.width / 1.5,
               alignment: Alignment.center,
               height: 45,
@@ -531,8 +523,8 @@ QuickEditDailog(BuildContext context) {
                     height: 50,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          end: Alignment(-0.6, .6),
-                          begin: Alignment(0.5, -5.5),
+                          end: const Alignment(-0.6, .6),
+                          begin: const Alignment(0.5, -5.5),
                           colors: [
                             darkBlueAcent,
                             darkBlue,

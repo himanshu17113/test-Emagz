@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BusinessProfileSetupScreen extends StatefulWidget {
-  BusinessProfileSetupScreen({Key? key}) : super(key: key);
+  const BusinessProfileSetupScreen({Key? key}) : super(key: key);
 
   @override
   State<BusinessProfileSetupScreen> createState() => _BusinessProfileSetupScreenState();
@@ -125,7 +125,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                       height: 5,
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
+                      margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 35,
                       child: TextFormField(
                         controller: accountSetupController.businessNameController,
@@ -140,7 +140,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                               ),
                               fontWeight: FontWeight.bold,
                               fontSize: 9),
-                          fillColor: Color(0xffF1F1F1),
+                          fillColor: const Color(0xffF1F1F1),
                           hintText: "UXM",
                           filled: true,
                           contentPadding: const EdgeInsets.only(left: 10),
@@ -175,7 +175,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                       height: 5,
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
+                      margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 35,
                       child: TextFormField(
                         controller: accountSetupController.businessTypeController,
@@ -190,7 +190,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                               ),
                               fontWeight: FontWeight.bold,
                               fontSize: 9),
-                          fillColor: Color(0xffF1F1F1),
+                          fillColor: const Color(0xffF1F1F1),
                           hintText: "UXM",
                           filled: true,
                           contentPadding: const EdgeInsets.only(left: 10),
@@ -215,7 +215,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                       onTap: () {
                         if(image == null){
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Please Select logo image")));
+                              const SnackBar(content: Text("Please Select logo image")));
                           // Get.("Error", "");
                         }else {
                           accountSetupController
@@ -232,7 +232,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                             color: chipColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: (accountSetupController.isUserRegiserting.value) ?
-                          CircularProgressIndicator(color: Colors.white,):Text(
+                          const CircularProgressIndicator(color: Colors.white,):Text(
                           "Choose Template ",
                           style: TextStyle(
                               color: whiteColor,

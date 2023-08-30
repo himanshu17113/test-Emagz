@@ -1,7 +1,5 @@
-import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 class ShareBottomSheet extends StatefulWidget {
   final Post post;
@@ -17,7 +15,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 350,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -25,7 +23,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: Container(
+            child: SizedBox(
               height: 30,
               child: Center(child: Text("Share",style: TextStyle(
                   color: Colors.black.withOpacity(0.60),
@@ -38,7 +36,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
             padding: const EdgeInsets.all(8.0),
             child: Container(color: Colors.grey,height: 2,width: MediaQuery.of(context).size.width/2,),
           ),
-          Container(
+          SizedBox(
             height: 250,
             width: MediaQuery.of(context).size.width/1.1,
             child:PageView.builder(
@@ -50,7 +48,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
               itemCount: 2,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, pageIndex) {
-              return GridView.builder(itemCount: 6,gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              return GridView.builder(itemCount: 6,gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
                 itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -67,7 +65,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
+              SizedBox(
                 height: 10,
                 width: 150,
                 child: Center(
@@ -92,6 +90,6 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
           )
         ],
       ),
-    );;
+    );
   }
 }

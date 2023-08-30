@@ -140,7 +140,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                     },
                     child: Column(
                       children: [
-                        IgnorePointer(child: UserChat(
+                        const IgnorePointer(child: UserChat(
                           conversationId: "Error message _ request Screen 150",
                           senderId: "Error message _ request Screen 150",)),
                         selectedIndex == index

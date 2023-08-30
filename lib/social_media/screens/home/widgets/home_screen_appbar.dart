@@ -12,6 +12,7 @@ import '../temp_attech_screen.dart';
 
 class SocialHomeScreenAppBar extends StatefulWidget with PreferredSizeWidget {
   final String title;
+  @override
   final Size preferredSize;
   final bool isColor;
   const SocialHomeScreenAppBar({
@@ -99,7 +100,7 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
                   key: cardKey,
                   front: InkWell(
                       onTap: () {
-                        Get.to(() => TempAttachScreen());
+                        Get.to(() => const TempAttachScreen());
                       },
                       child: Container(
                         margin: const EdgeInsets.only(right: 10),

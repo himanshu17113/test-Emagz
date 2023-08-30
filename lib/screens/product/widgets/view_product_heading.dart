@@ -16,7 +16,7 @@ class ViewProductHeading extends StatelessWidget {
             "Product",
             style: TextStyle(fontSize: 14,color: blackButtonColor, fontWeight: FontWeight.w500),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Text(

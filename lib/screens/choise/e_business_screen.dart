@@ -1,15 +1,11 @@
-import 'dart:ui';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/choise/e_business_user.dart';
 import 'package:emagz_vendor/screens/choise/e_magz_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 import 'package:page_transition/page_transition.dart';
-import 'dart:math' as math;
 
 class EbusinessScreen extends StatelessWidget {
   const EbusinessScreen({Key? key}) : super(key: key);
@@ -83,7 +79,7 @@ class EbusinessScreen extends StatelessWidget {
                           context,
                           PageTransition(
                               type: PageTransitionType.bottomToTopPop,
-                              child: EbussinessUser(),
+                              child: const EbussinessUser(),
                               childCurrent: this));
                     },
                     child: SizedBox(
@@ -209,8 +205,8 @@ class EbusinessScreen extends StatelessWidget {
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.topToBottom,
-                                      duration: Duration(milliseconds: 500),
-                                      child: EmagzScreen(),
+                                      duration: const Duration(milliseconds: 500),
+                                      child: const EmagzScreen(),
                                       childCurrent: this));
                             },
                             child: SvgPicture.asset(

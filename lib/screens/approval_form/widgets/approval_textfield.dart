@@ -32,7 +32,7 @@ class ApprovalTextField extends StatelessWidget {
         keyboardType: inputType,
         // autofocus: true,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(left: 5),
+          contentPadding: const EdgeInsets.only(left: 5),
           suffixIcon: sufixIcon,
           hintText: hint,
           // filled: true,

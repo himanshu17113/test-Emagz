@@ -1,18 +1,11 @@
-import 'dart:ui';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/choise/e_business_screen.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
-import 'package:emagz_vendor/social_media/common/common_appbar.dart';
-import 'package:emagz_vendor/social_media/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 import 'package:page_transition/page_transition.dart';
 
-import 'e_business_user.dart';
 
 class EmagzScreen extends StatelessWidget {
   const EmagzScreen({Key? key}) : super(key: key);
@@ -132,7 +125,7 @@ class EmagzScreen extends StatelessWidget {
                               width: size.width / 2,
                               height: 40,
                               decoration: BoxDecoration(
-                                  color: Color(0xffEE688A),
+                                  color: const Color(0xffEE688A),
                                   // gradient: LinearGradient(
                                   //     begin: Alignment.centerLeft,
                                   //     end: Alignment.centerRight,
@@ -171,8 +164,8 @@ class EmagzScreen extends StatelessWidget {
                             context,
                             PageTransition(
                                 type: PageTransitionType.bottomToTopPop,
-                                duration: Duration(milliseconds: 500),
-                                child: EbusinessScreen(),
+                                duration: const Duration(milliseconds: 500),
+                                child: const EbusinessScreen(),
                                 childCurrent: this));
                       },
                       child: Container(

@@ -140,9 +140,9 @@ class _CommentReplyTileState extends State<CommentReplyTile> {
                               }
                             });
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: const Icon(
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(
                               Icons.keyboard_arrow_down,
                               size: 20,
                             ),

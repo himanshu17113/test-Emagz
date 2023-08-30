@@ -104,7 +104,7 @@ class _WebViewPersonaState extends State<WebViewPersona> {
          await _onSetCookie(controller);
           await _onListCookies(controller);
           },
-            child:Text('Get cookies'))
+            child:const Text('Get cookies'))
       ],
     );
   }

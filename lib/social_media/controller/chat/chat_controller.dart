@@ -99,7 +99,7 @@ class ChatController extends GetxController {
       isUnBlockingUser.value = true;
       // Map body = {"blockerId": userId};
       http.Response response = await http.get(
-        Uri.parse("${ApiEndpoint.blockUser}"),
+        Uri.parse(ApiEndpoint.blockUser),
         // body: jsonEncode(body),
       );
       // Map res = jsonDecode(response.body);

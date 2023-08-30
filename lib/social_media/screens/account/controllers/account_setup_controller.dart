@@ -36,7 +36,7 @@ class SetupAccount extends GetxController {
     var id = await jwtController.getUserId();
     Dio dio = Dio();
     dio.options.headers["Authorization"] = token!;
-    var headers = {'Content-Type': 'application/json',"":token!};
+    var headers = {'Content-Type': 'application/json',"":token};
     FormData body = FormData.fromMap({
       "_id": id,
       //todo implement multipart file upload when backend is ready
@@ -53,7 +53,7 @@ class SetupAccount extends GetxController {
     if (response.statusCode == 200) {
 
       isUserRegiserting.value = false;
-      Get.to(() => BusinessAccountConfirmationScreen());
+      Get.to(() => const BusinessAccountConfirmationScreen());
       return true;
     } else if (response.statusCode == 401) {
       CustomSnackbar.show(data['error']);
@@ -94,7 +94,7 @@ class SetupAccount extends GetxController {
       //lead to main page
 
       Get.to(
-        () => BottomNavBar(),
+        () => const BottomNavBar(),
           transition: Transition.rightToLeftWithFade);
       return true;
     } else if (response.statusCode == 401) {

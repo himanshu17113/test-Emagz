@@ -5,7 +5,6 @@ import 'package:emagz_vendor/screens/product/widgets/add_product_textfield.dart'
 import 'package:emagz_vendor/screens/product/widgets/product_heading_text.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class AddProductScreen extends StatefulWidget {

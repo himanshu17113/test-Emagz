@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:emagz_vendor/user/screens/bag/bag_screen.dart';
 import 'package:emagz_vendor/user/screens/bag/widget/bag_drop_down.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +69,7 @@ class BagItemcard extends StatelessWidget {
                     width: 50,
                     // height: 50,
                     child: BagDropDown(
-                      listData: ["01", "02", "03"],
+                      listData: const ["01", "02", "03"],
                       value: quanity,
                     ),
                   )

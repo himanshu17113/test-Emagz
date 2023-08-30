@@ -2,9 +2,7 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_textField.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/my_coupon.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
-import 'package:emagz_vendor/user/screens/coupon/widgets/user_coupon.dart';
 import 'package:emagz_vendor/user/screens/coupon/widgets/user_coupon_clippath.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -112,7 +110,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                     height: 15,
                                     width: 85,
                                     decoration: BoxDecoration(
-                                        color: Color(0xff3C83E6),
+                                        color: const Color(0xff3C83E6),
                                         borderRadius: BorderRadius.circular(2)),
                                     child: Text(
                                       "Apply Code",
@@ -279,7 +277,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                         _colorPallete(),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Column(
@@ -289,12 +287,12 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           headings: "Status",
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 10),
+                          margin: const EdgeInsets.only(top: 10),
                           width: 150,
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(
-                              color: Color(0xff4BB642),
+                              color: const Color(0xff4BB642),
                               borderRadius: BorderRadius.circular(50)),
                           child: Text(
                             "Ongoing",
@@ -330,7 +328,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       InkWell(
@@ -353,7 +351,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 InkWell(

@@ -7,7 +7,6 @@ import 'package:emagz_vendor/social_media/screens/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
@@ -59,7 +58,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               const Expanded(child: SizedBox()),
               InkWell(
                 onTap: () {
-                  Get.to(() => SearchScreen());
+                  Get.to(() => const SearchScreen());
                 },
                 child: SvgPicture.asset(
                   "assets/svg/MagnifyingGlass.svg",

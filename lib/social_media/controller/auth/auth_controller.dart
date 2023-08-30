@@ -150,7 +150,7 @@ class AuthController extends GetxController {
       print(data["data"]["_id"]);
       if (response.statusCode == 200) {
         Get.to(
-          () => BottomNavBar());
+          () => const BottomNavBar());
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
         jwtController.setAuthToken(data["token"], data["data"]["_id"]);
@@ -218,7 +218,7 @@ class AuthController extends GetxController {
           );
       if(response.statusCode == 200){
         (value == 1 )?
-        Get.to(() => PersonalProfileSetup()) : Get.to(()=> BusinessProfileSetupScreen());
+        Get.to(() => PersonalProfileSetup()) : Get.to(()=> const BusinessProfileSetupScreen());
       }
       isUserlogging.value = false;
     }catch(e){
@@ -250,7 +250,7 @@ class AuthController extends GetxController {
       isUserRegiserting.value = false;
       Otp.value = responseData["otp"].toString();
       Get.snackbar(
-        "One Time Password","${Otp.value}",
+        "One Time Password",Otp.value,
         backgroundColor: Colors.white24,
         duration: const Duration(seconds: 40),
         colorText: Colors.white,
@@ -312,7 +312,7 @@ class AuthController extends GetxController {
     if(response.statusCode == 200){
       isUserRegiserting.value = false;
       CustomSnackbar.show("password reset Successful");
-      Get.to(() => SignInScreen());
+      Get.to(() => const SignInScreen());
       isUserRegiserting.value = false;
     }else{
       isUserRegiserting.value = false;
@@ -336,7 +336,7 @@ class AuthController extends GetxController {
           Uri.parse(ApiEndpoint.chooseIntrest),
           body: jsonEncode(body),
           headers: headers);
-      debugPrint("${response.body}");
+      debugPrint(response.body);
       if (response.statusCode == 200) {
 
         http.Response uniqueNameResponse = await http.get(

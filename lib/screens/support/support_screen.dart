@@ -1,14 +1,8 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/model/order_list_model.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_textField.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/coupon_haeding.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/coupon_list_card.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/my_coupon.dart';
-import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SupportScreen extends StatefulWidget {
@@ -105,7 +99,7 @@ class _SupportScreenState extends State<SupportScreen> {
                         alignment: Alignment.center,
                         height: 120,
                         decoration: BoxDecoration(color: lightgrayColor),
-                        child: AddCouponHeadingText(headings: "Upload Image"),
+                        child: const AddCouponHeadingText(headings: "Upload Image"),
                       ),
                     ),
                     const SizedBox(
@@ -116,7 +110,7 @@ class _SupportScreenState extends State<SupportScreen> {
                         alignment: Alignment.center,
                         height: 120,
                         decoration: BoxDecoration(color: lightgrayColor),
-                        child: AddCouponHeadingText(headings: "Upload Image"),
+                        child: const AddCouponHeadingText(headings: "Upload Image"),
                       ),
                     ),
                   ],

@@ -1,19 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/cs/crousel_slider.dart';
 import 'package:emagz_vendor/templates/widgets/common_slider.dart';
-import 'package:emagz_vendor/templates/widgets/fav_and_locate_widget.dart';
-import 'package:emagz_vendor/templates/widgets/temp_two_big_slider.dart';
 import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../common/appbar/common_appbar.dart';
-import '../widgets/temp_one_sliderCard.dart';
 
 class TemplateTenScreen extends StatefulWidget {
   const TemplateTenScreen({Key? key}) : super(key: key);
@@ -70,7 +64,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
           const SizedBox(
             height: 30,
           ),
-          Container(
+          SizedBox(
             // alignment: Alignment.center,
             height: 250,
             width: double.infinity,

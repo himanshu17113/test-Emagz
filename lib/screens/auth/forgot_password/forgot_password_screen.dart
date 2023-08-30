@@ -106,8 +106,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         ),
                         Center(
                           child: Obx(
-                            ()=>(authController.isUserRegiserting.value) ? CircularProgressIndicator():  MyGradientButton(
-                              isEnabled: authController.forgotPasswordEmailController.value.text.length > 0,
+                            ()=>(authController.isUserRegiserting.value) ? const CircularProgressIndicator():  MyGradientButton(
+                              isEnabled: authController.forgotPasswordEmailController.value.text.isNotEmpty,
                               onTap: () async{
                                 await authController.sendForgotPasswordRequest();
                               },

@@ -11,7 +11,7 @@ class MyAddressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
       child: Column(
         children: [
           Row(

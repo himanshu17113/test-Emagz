@@ -1,13 +1,9 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/model/order_list_model.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
-import 'package:emagz_vendor/screens/orders/widgets/order_list_card.dart';
-import 'package:emagz_vendor/screens/orders/widgets/order_list_heading.dart';
 import 'package:emagz_vendor/screens/product/widgets/add_product_dropdown.dart';
 import 'package:emagz_vendor/screens/product/widgets/add_product_textfield.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ViewOrderScreen extends StatefulWidget {
   const ViewOrderScreen({Key? key}) : super(key: key);
@@ -36,11 +32,11 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                   title: 'Order',
                 ),
                 const SearchContainer(),
-                Text(
+                const Text(
                   "View Order",
                   style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -272,9 +268,9 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 ),
                 Container(
                     width: 150,
-                    margin: EdgeInsets.only(top: 5),
+                    margin: const EdgeInsets.only(top: 5),
                     child: AddProductDropDown(
-                      listData: ['pending', "completed"],
+                      listData: const ['pending', "completed"],
                       // value: orderStatus,
                     ))
               ],

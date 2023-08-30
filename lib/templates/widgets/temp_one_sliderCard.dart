@@ -14,7 +14,7 @@ class SliderCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           // padding: EdgeInsets.only(right: 10),
           width: MediaQuery.of(context).size.width / 2,
           height: 340,
@@ -29,7 +29,7 @@ class SliderCard extends StatelessWidget {
           child: Container(
             height: 150,
             width: 190,
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               color: tempOneSliderback,
               border: Border.all(width: 5, color: whiteColor),
@@ -40,7 +40,7 @@ class SliderCard extends StatelessWidget {
                 Text(
                   "Product 01",
                   style: GoogleFonts.inter(
-                      color: Color(0xff424242),
+                      color: const Color(0xff424242),
                       fontSize: 15,
                       // height: 1.8,
                       fontWeight: FontWeight.w600),
@@ -51,7 +51,7 @@ class SliderCard extends StatelessWidget {
                 Text(
                   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum augue amet, mi tellus proin ornare quam fermentum neque. Risus amet, commodo eget viverra ornare magna. Non dictumst purus felis ridiculus mi scelerisque mauris nisl, dui.",
                   style: GoogleFonts.inter(
-                      color: Color(0xff424242),
+                      color: const Color(0xff424242),
                       fontSize: 6,
                       height: 1.5,
                       fontWeight: FontWeight.w400),

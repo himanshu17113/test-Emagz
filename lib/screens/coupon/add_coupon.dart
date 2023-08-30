@@ -1,11 +1,8 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/screens/auth/widgets/my_custom_textfiled.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
 import 'package:emagz_vendor/screens/coupon/manage_coupon.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_textField.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/coupon_haeding.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

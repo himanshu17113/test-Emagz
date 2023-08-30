@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';

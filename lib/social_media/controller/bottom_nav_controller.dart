@@ -18,12 +18,12 @@ class NavController extends GetxController {
     // SearchScreen(),
 
     // const Text("data"),
-    CreatePostScreen(),
+    const CreatePostScreen(),
     // PrePostScreen(),
     // LiveFullScreenLandScapeMode(),
     // LiveScreen(),
     const ChatListScreen(),
-    PersonalPageSetting(),
+    const PersonalPageSetting(),
 
     // Material(
     //   child: PopupMenuButton<int>(

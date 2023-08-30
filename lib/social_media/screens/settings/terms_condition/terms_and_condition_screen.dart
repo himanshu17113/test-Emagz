@@ -1,18 +1,8 @@
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/social_media/screens/settings/security/widget/other_security_tile.dart';
-import 'package:emagz_vendor/social_media/screens/settings/security/widget/personal_information_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../constant/colors.dart';
-import '../../../../screens/auth/widgets/my_custom_textfiled.dart';
-import '../../../../screens/auth/widgets/my_gradient_button.dart';
 
 class TermsAndConditionScreen extends StatefulWidget {
   const TermsAndConditionScreen({super.key});

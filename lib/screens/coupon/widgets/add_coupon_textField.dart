@@ -18,7 +18,7 @@ class AddCouponTextfiled extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       height: maxLines == 1 ? 40 : null,
       child: TextFormField(
         controller: controller,
