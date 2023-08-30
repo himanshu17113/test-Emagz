@@ -15,28 +15,29 @@ class GetXStoryController extends GetxController {
   RxString myId = RxString("");
   RxDouble storyUploadPercentage = RxDouble(0);
   RxBool isUploading = RxBool(false);
-
-  var jwtController = Get.put(JWTController());
+  String? token;
+  final JWTController jwtController = Get.put(JWTController());
 
   Future<List<Story?>?> getStories() async {
     try {
+      stories?.clear();
+      
+      debugPrint(
+          "🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 mmmmmmmm");
       debugPrint(ApiEndpoint.story);
-      var token = await jwtController.getAuthToken();
+      token = await jwtController.getAuthToken();
+      await getmyStories();
       debugPrint(token);
       myId.value = (await jwtController.getUserId())!;
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      final headers = {'Content-Type': 'application/json', "Authorization": token!};
 
-      http.Response response =
-          await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
-      debugPrint(body);
+      debugPrint(body.toString());
       body.forEach((e) {
         debugPrint('story');
         // stories ??= Map();
-        debugPrint(e);
+        debugPrint(e.toString());
         var story = Story.fromJson(e);
         stories?.add(story);
         // if (stories![story.userId!] == null) {
@@ -53,19 +54,47 @@ class GetXStoryController extends GetxController {
     }
   }
 
+  Future<List<Story?>?> getmyStories() async {
+    try {
+      debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
+     // if (myId.value == "" || token == null) {
+        debugPrint(ApiEndpoint.story);
+        final token = await jwtController.getAuthToken();
+        debugPrint(token);
+        myId.value = (await jwtController.getUserId())!;
+    //  }
+      final headers = {'Content-Type': 'application/json', "Authorization": token!};
+
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
+      var body = jsonDecode(response.body);
+      debugPrint(body.toString());
+     
+        debugPrint('story');
+        // stories ??= Map();
+      
+        var story = Story.fromJson(body["data"]);
+        stories?.add(story);
+        // if (stories![story.userId!] == null) {
+        //   stories![story.userId] = {};
+        // }
+        // stories![story.userId!]![story.sId!] = story;
+     
+      debugPrint(stories.toString());
+      return stories!;
+    } catch (e) {
+      debugPrint('stoey');
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+
   likeStory(String storyId) async {
     try {
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
       Map body = {"userId": userId};
-      http.Response response = await http.post(
-          Uri.parse(ApiEndpoint.likeStroy(storyId)),
-          headers: headers,
-          body: jsonEncode(body));
+      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -81,10 +110,7 @@ class GetXStoryController extends GetxController {
     debugPrint("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.commentStroy(storyId)),
-        headers: headers,
-        body: jsonEncode(body));
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
   }
 

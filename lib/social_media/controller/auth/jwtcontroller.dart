@@ -66,7 +66,7 @@ class JWTController extends GetxController {
       return token!.value;
     }
     //  debugPrint("DONE SLOWLY");
-    var lastToken = await hiveBox.get("token");
+    final lastToken = await hiveBox.get("token");
     if (lastToken != null) {
       isAuthorised.value = true;
     } else {
