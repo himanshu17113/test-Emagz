@@ -28,8 +28,8 @@ class UserChats extends StatelessWidget {
             physics: const ScrollPhysics(),
             controller: scrollController,
             itemBuilder: (context, index) {
-         //     print("USER Id : $userId");
-              //   print("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
+              //     debugPrint("USER Id : $userId");
+              //   debugPrint("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
               return UserChat(
                 userData: snapshot.data![index].userData,
                 resentMessage: snapshot.data![index].resentMessage,
@@ -45,10 +45,12 @@ class UserChats extends StatelessWidget {
     );
   }
 }
+
 class UserChatsWithSearch extends StatelessWidget {
   final String userId;
   final String senderName;
-  UserChatsWithSearch({super.key, required this.userId, required this.senderName});
+  UserChatsWithSearch(
+      {super.key, required this.userId, required this.senderName});
 
   ScrollController scrollController = ScrollController();
 
@@ -70,31 +72,25 @@ class UserChatsWithSearch extends StatelessWidget {
             physics: const ScrollPhysics(),
             controller: scrollController,
             itemBuilder: (context, index) {
-              if(
-
-              (snapshot.data![index].userData!.username!)== senderName)
-                {
-                  return UserChat(
-                    userData: snapshot.data![index].userData,
-                    resentMessage: snapshot.data![index].resentMessage,
-                    conversationId: snapshot.data![index].data!.id!,
-                    senderId: snapshot.data![index].data!.members
+              if ((snapshot.data![index].userData!.username!) == senderName) {
+                return UserChat(
+                  userData: snapshot.data![index].userData,
+                  resentMessage: snapshot.data![index].resentMessage,
+                  conversationId: snapshot.data![index].data!.id!,
+                  senderId: snapshot.data![index].data!.members
+                          ?.singleWhere((element) => element != userId) ??
+                      "",
+                );
+              } else {
+                debugPrint(senderName);
+                debugPrint(snapshot.data![index].data!.members
                         ?.singleWhere((element) => element != userId) ??
-                        "",
-                  );
-                }
-              else
-                {
-                  print(senderName);
-                  print(snapshot.data![index].data!.members
-                      ?.singleWhere((element) => element != userId) ??
-                      "");
-                  print(snapshot.data![index].userData!.username);
-                }
+                    "");
+                debugPrint(snapshot.data![index].userData!.username);
+              }
               return null;
-              //     print("USER Id : $userId");
-              //   print("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
-
+              //     debugPrint("USER Id : $userId");
+              //   debugPrint("SENDER ID AFTER : ${snapshot.data![index].members?.singleWhere((element) => element != userId)}");
             },
           );
         }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 class WebViewPersona extends StatefulWidget {
   const WebViewPersona({Key? key}) : super(key: key);
 
@@ -22,19 +23,29 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ),
     );
   }
+
   Future<void> _onSetCookie(WebViewController controller) async {
-    print("here");
+    debugPrint("here");
     await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_persona_userId', value: 'bar', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+      const WebViewCookie(
+          name: 'E_persona_userId',
+          value: 'bar',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
     );
     await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_current_userId', value: 'bar', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+      const WebViewCookie(
+          name: 'E_current_userId',
+          value: 'bar',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
     );
     await cookieManager.setCookie(
-      const WebViewCookie(name: 'E_token', value: 'token', domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+      const WebViewCookie(
+          name: 'E_token',
+          value: 'token',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
     );
     if (!mounted) {
-      print('cookis');
+      debugPrint('cookis');
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
@@ -43,10 +54,11 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ),
     );
   }
+
   Future<void> _onListCookies(WebViewController controller) async {
     final String cookies = await controller
         .runJavaScriptReturningResult('document.cookie') as String;
-    print(cookies);
+    debugPrint(cookies);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -57,25 +69,24 @@ class _WebViewPersonaState extends State<WebViewPersona> {
 
   @override
   void initState() {
-
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
-          onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
-          },
-          onPageFinished: (url) {
-            setState(() {
-              loadingPercentage = 100;
-            });
-          },
+        onPageStarted: (url) {
+          setState(() {
+            loadingPercentage = 0;
+          });
+        },
+        onProgress: (progress) {
+          setState(() {
+            loadingPercentage = progress;
+          });
+        },
+        onPageFinished: (url) {
+          setState(() {
+            loadingPercentage = 100;
+          });
+        },
       ))
       ..loadRequest(
         Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/'),
@@ -84,27 +95,25 @@ class _WebViewPersonaState extends State<WebViewPersona> {
     _onAddCookie(controller);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          flex:1,
-          child: WebViewWidget(
-              controller: controller
-          ),
+          flex: 1,
+          child: WebViewWidget(controller: controller),
         ),
-      if(loadingPercentage < 100)
+        if (loadingPercentage < 100)
           LinearProgressIndicator(
-             value: loadingPercentage / 100.0,
-       ),
+            value: loadingPercentage / 100.0,
+          ),
         ElevatedButton(
-            onPressed:() async
-        {
-         await _onSetCookie(controller);
-          await _onListCookies(controller);
-          },
-            child:const Text('Get cookies'))
+            onPressed: () async {
+              await _onSetCookie(controller);
+              await _onListCookies(controller);
+            },
+            child: const Text('Get cookies'))
       ],
     );
   }

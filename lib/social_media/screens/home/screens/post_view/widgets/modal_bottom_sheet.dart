@@ -9,13 +9,16 @@ import 'glass.dart';
 class PostCommentsModalBottomSheet extends StatefulWidget {
   final String postId;
   List<Comment?> comments;
-  PostCommentsModalBottomSheet({super.key, required this.comments, required this.postId});
+  PostCommentsModalBottomSheet(
+      {super.key, required this.comments, required this.postId});
 
   @override
-  State<PostCommentsModalBottomSheet> createState() => _PostCommentsModalBottomSheetState();
+  State<PostCommentsModalBottomSheet> createState() =>
+      _PostCommentsModalBottomSheetState();
 }
 
-class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSheet> {
+class _PostCommentsModalBottomSheetState
+    extends State<PostCommentsModalBottomSheet> {
   var commentsController = Get.put(CommentController());
   double mainHeight = 450;
 
@@ -29,8 +32,8 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
   @override
   Widget build(BuildContext context) {
     bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-    // print(MediaQuery.of(context).viewInsets.bottom);
-    // print(MediaQuery.of(context).size.height);
+    // debugPrint(MediaQuery.of(context).viewInsets.bottom);
+    // debugPrint(MediaQuery.of(context).size.height);
 
     return GlassmorphicContainer(
       borderRadius: 33,
@@ -47,7 +50,11 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
 
           ///  Container(width: double.maxFinite, height: 0.5, color: Colors.black),
           SizedBox(
-              height: keyboardVisible ? (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom - 120) : 320,
+              height: keyboardVisible
+                  ? (MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).viewInsets.bottom -
+                      120)
+                  : 320,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 // child: ListView(
@@ -74,7 +81,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
           //     itemCount:
           //         commentsController.instantComments.value.length,
           //     itemBuilder: (context, index) {
-          //       //  print(commentsController.instantComments.value[index]);
+          //       //  debugPrint(commentsController.instantComments.value[index]);
           //       return PostCommentTile(
           //         comment:
           //             commentsController.instantComments.value[index],
@@ -102,7 +109,8 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                       ),
                       IconButton(
                           onPressed: () => setState(() {
-                                commentsController.isCommentingOnPost.value = true;
+                                commentsController.isCommentingOnPost.value =
+                                    true;
                                 commentsController.focusNode.unfocus();
                               }),
                           icon: const Icon(
@@ -133,25 +141,36 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                             commentsController.isCommentingOnPost.value
                                 ? commentsController.isPosting.value
                                     ? debugPrint("sending comment")
-                                    : commentsController.postComment(widget.postId)
+                                    : commentsController
+                                        .postComment(widget.postId)
                                 : commentsController.isPosting.value
                                     ? debugPrint("sending comment")
                                     : commentsController.postReply(
-                                        widget.postId, commentsController.commentId.value, commentsController.controller.text);
+                                        widget.postId,
+                                        commentsController.commentId.value,
+                                        commentsController.controller.text);
                             commentsController.isCommentingOnPost.value
                                 ? setState(() {
                                     widget.comments.add(Comment(
-                                        text: commentsController.controller.text,
-                                        userId: UserSchema(sId: commentsController.userId),
+                                        text:
+                                            commentsController.controller.text,
+                                        userId: UserSchema(
+                                            sId: commentsController.userId),
                                         // comments: [],
                                         sId: commentsController.userId));
                                   })
                                 : setState(() {
-                                    widget.comments[commentsController.commentindex.value]?.comments?.add(Comment(
-                                        text: commentsController.controller.text,
-                                        userId: UserSchema(sId: commentsController.userId),
-                                        comments: [],
-                                        sId: commentsController.userId));
+                                    widget
+                                        .comments[commentsController
+                                            .commentindex.value]
+                                        ?.comments
+                                        ?.add(Comment(
+                                            text: commentsController
+                                                .controller.text,
+                                            userId: UserSchema(
+                                                sId: commentsController.userId),
+                                            comments: [],
+                                            sId: commentsController.userId));
                                   });
                           },
                           icon: commentsController.isPosting.value

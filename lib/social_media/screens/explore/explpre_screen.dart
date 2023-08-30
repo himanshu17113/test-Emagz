@@ -53,7 +53,10 @@ class _ExploreScreenState extends State<ExploreScreen> {
               ),
               Text(
                 "Explore your \nWorld",
-                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
               ),
               const Expanded(child: SizedBox()),
               InkWell(
@@ -81,7 +84,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
               onSelectionChanged: (selectedList) {
                 setState(() {
                   selectedReportList = selectedList;
-                  print(selectedList.toList());
+                  debugPrint(selectedList.toList().toString());
                 });
               },
               maxSelection: 2,

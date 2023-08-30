@@ -40,7 +40,7 @@ class _EditorScreenState extends State<EditorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //   print(editableItems[0]);
+    //   debugPrint(editableItems[0]);
     return Scaffold(
       backgroundColor: Colors.black,
       // appBar: ,
@@ -109,9 +109,7 @@ class _EditorScreenState extends State<EditorScreen> {
             actions: [
               IconButton(
                   onPressed: () async {
-                    if (kDebugMode) {
-                      print(editableItems);
-                    }
+                  
                     // showDialog(
                     //   useSafeArea: true,
                     //   barrierDismissible: false,
@@ -169,7 +167,7 @@ class _EditorScreenState extends State<EditorScreen> {
                       await file.writeAsBytes(editedImage!);
                       widget.onSubmit(file);
                     }).catchError((onError) {
-                      print(onError);
+                      debugPrint(onError);
                     });
                   },
                   // var editedImage = await buffer!.buffer.asUint8List();
@@ -217,7 +215,7 @@ class _DraggableTextState extends State<DraggableText> {
   Offset startPosition = const Offset(10, 10);
   // const Offset(100, 100);
 
-  //print(position)
+  //debugPrint(position)
 
   ///  Offset startPosition = const Offset(10, 10);
   // double _scale = 1.0;
@@ -227,7 +225,7 @@ class _DraggableTextState extends State<DraggableText> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(position.toString());
+     debugPrint(position.toString());
     return AnimatedPositioned(
       top: position.dy,
       left: position.dx,

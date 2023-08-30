@@ -29,8 +29,8 @@ class _HomePostsState extends State<HomePosts> {
           return const Center(child: CircularProgressIndicator());
         }
         // if(!snapshot.hasError){
-        //   print(snapshot.data![0]);
-        //   print(snapshot.error);
+        //   debugPrint(snapshot.data![0]);
+        //   debugPrint(snapshot.error);
         //   return const Center(child: Text("Facing technical error while loading ... "));
         // }
 
@@ -93,7 +93,7 @@ class _HomePostsState extends State<HomePosts> {
                       key: widget.key ?? Key("$index+@4+1999"),
                       onVisibilityChanged: (info) {
                         if (index - 9 >= homePostController.skip.value) {
-                          // print(info.visibleFraction);
+                          // debugPrint(info.visibleFraction);
                           // setState(() {});
                         }
                       },

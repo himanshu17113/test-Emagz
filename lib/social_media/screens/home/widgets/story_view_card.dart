@@ -30,7 +30,7 @@ class _StoryViewCardState extends State<StoryViewCard> {
   }
 
   getInitUser() async {
-    // print(widget.username);
+    // debugPrint(widget.username);
     user = await jwtController.getUserDetail(widget.username);
     //setState(() {});
   }

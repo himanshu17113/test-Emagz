@@ -23,9 +23,9 @@ class ChatListScreen extends StatefulWidget {
 
 class _ChatListScreenState extends State<ChatListScreen> {
   String? userId;
-  bool isSearch=false;
-  String searchQuery='XXXXXXX';
-  TextEditingController QueryControl= TextEditingController();
+  bool isSearch = false;
+  String searchQuery = 'XXXXXXX';
+  TextEditingController QueryControl = TextEditingController();
   @override
   void initState() {
     asyncInit();
@@ -34,7 +34,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
 
   asyncInit() async {
     userId = await Get.put(JWTController()).getUserId();
-    print(userId);
+    debugPrint(userId);
     setState(() {});
   }
 
@@ -54,7 +54,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       children: const [
                         Text(
                           "Chat",
-                          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 21, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -76,14 +77,16 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       ),
                       InkWell(
                           onTap: () {
-                            print("Profile ICon");
+                            debugPrint("Profile ICon");
                             // Get.to(() => const PersonalPageSetting());
                           },
                           child: Container(
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(url),
+                                    fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(5)),
                           )),
                       const SizedBox(
@@ -105,8 +108,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 18),
                 child: Row(
                   children: [
-                     Expanded(
-                        child:Container(
+                    Expanded(
+                        child: Container(
                       // margin: EdgeInsets.symmetric(),
                       height: 42,
                       decoration: BoxDecoration(
@@ -114,24 +117,21 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           borderRadius: BorderRadius.circular(10)),
                       child: TextField(
                         controller: QueryControl,
-                        onSubmitted: (value)
-                        {
-                          print('uefibdjv');
-
+                        onSubmitted: (value) {
+                          debugPrint('uefibdjv');
 
                           setState(() {
-                            isSearch=!isSearch;
-                            searchQuery=QueryControl.text;
+                            isSearch = !isSearch;
+                            searchQuery = QueryControl.text;
                           });
-
-
                         },
-
                         showCursor: false,
                         decoration: InputDecoration(
                             hintText: "Search",
-                            hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
-                            contentPadding: const EdgeInsets.only(left: 10, top: 5),
+                            hintStyle: TextStyle(
+                                fontSize: 13, color: blackButtonColor),
+                            contentPadding:
+                                const EdgeInsets.only(left: 10, top: 5),
                             prefixIcon: const Icon(
                               Icons.search,
                               color: Colors.black,
@@ -171,7 +171,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 18),
                 child: Text(
                   "Online",
-                  style: TextStyle(color: blackButtonColor, fontSize: 15.5, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      color: blackButtonColor,
+                      fontSize: 15.5,
+                      fontWeight: FontWeight.w600),
                 ),
               ),
               const SizedBox(
@@ -216,15 +219,14 @@ class _ChatListScreenState extends State<ChatListScreen> {
               ),
               (userId == null)
                   ? const CircularProgressIndicator()
-                  : (isSearch)?
-              UserChatsWithSearch(
-
-                userId: userId!, senderName: searchQuery,
-
-              ):
-              UserChats(
-                      userId: userId!,
-                    )
+                  : (isSearch)
+                      ? UserChatsWithSearch(
+                          userId: userId!,
+                          senderName: searchQuery,
+                        )
+                      : UserChats(
+                          userId: userId!,
+                        )
             ],
           ),
         ),

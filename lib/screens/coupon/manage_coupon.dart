@@ -404,7 +404,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
             onTap: () {
               setState(() {
                 _selectedColor = index;
-                //print(_selectedColor);
+                //debugPrint(_selectedColor);
               });
             },
             child: Padding(

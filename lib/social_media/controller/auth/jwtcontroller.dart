@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/models/user_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -14,14 +15,14 @@ class JWTController extends GetxController {
 
   Future<User> getCurrentUserDetail() async {
     Dio dio = Dio();
-  //  var userToken = await getAuthToken();
+    //  var userToken = await getAuthToken();
     var id = await getUserId();
     dio.options.headers["Authorization"] =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
     var response = await dio.get(ApiEndpoint.userInfo(id!));
-    // print(ApiEndpoint.userInfo(id!));
-    // print(response.data);
+    // debugdebugPrint(ApiEndpoint.userInfo(id!));
+    // debugPrint(response.data);
     var userDetails = User.fromJson(response.data);
     return userDetails;
   }
@@ -30,18 +31,18 @@ class JWTController extends GetxController {
     try {
       Dio dio = Dio();
       var userToken = await getAuthToken();
-      dio.options.headers["Authorization"] =userToken??
+      dio.options.headers["Authorization"] = userToken ??
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
       //userToken;
-     // print(ApiEndpoint.userInfo(id!));
+      // debugPrint(ApiEndpoint.userInfo(id!));
       var response = await dio.get(ApiEndpoint.userInfo(id));
-    //  print(response.data);
+      //  debugPrint(response.data);
       var userDetails = UserSchema.fromJson(response.data);
       currentUser ??= userDetails.obs;
       return userDetails;
     } catch (e) {
-      print("get Id Error HImanshu");
-      // print(e);
+      debugPrint("get Id Error HImanshu");
+      // debugPrint(e);
       return null;
     }
   }
@@ -61,10 +62,10 @@ class JWTController extends GetxController {
 
   Future<String?> getAuthToken() async {
     if (token != null) {
-    //  print("done fastly");
+      //  debugPrint("done fastly");
       return token!.value;
     }
-  //  print("DONE SLOWLY");
+    //  debugPrint("DONE SLOWLY");
     var lastToken = await hiveBox.get("token");
     if (lastToken != null) {
       isAuthorised.value = true;
@@ -85,12 +86,12 @@ class JWTController extends GetxController {
     super.onInit();
     String? lastAuthToken = await getAuthToken();
     String? userId = await getUserId();
-    print(lastAuthToken);
-    print(userId);
+    debugPrint(lastAuthToken);
+    debugPrint(userId);
     if (lastAuthToken == null) {
-      print("NO AUTH");
+      debugPrint("NO AUTH");
     } else {
-      print("AUTH");
+      debugPrint("AUTH");
       isAuthorised.value = true;
     }
   }

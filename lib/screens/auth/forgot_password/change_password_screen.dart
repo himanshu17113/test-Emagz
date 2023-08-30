@@ -103,7 +103,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                 ),
                 onChanged: (v) {
-                  debugPrint(v);
+                    debugPrint(v);
                   // authController.passwordText.value = v;
                   // setState(() {});
                   setState(() {});
@@ -256,7 +256,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                 ),
                 onChanged: (v) {
-                  debugPrint(v);
+                    debugPrint(v);
                   setState(() {});
                   // authController.passwordText.value = v;
                   // setState(() {});

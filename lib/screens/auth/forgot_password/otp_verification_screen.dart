@@ -16,16 +16,14 @@ class OtpVerificationScreen extends StatefulWidget {
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
-
   bool isEnabled = false;
   var authController = Get.put(AuthController());
   TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
-    debugPrint(size.width.toString());
+     debugPrint(size.width.toString());
 
     return SafeArea(
         child: Scaffold(
@@ -117,31 +115,33 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           ),
                           length: 4,
                           onChanged: (v) {
-                            if(v.length == 4){
+                            if (v.length == 4) {
                               isEnabled = true;
-                              setState(() {
-                              });
-                            }else{
+                              setState(() {});
+                            } else {
                               isEnabled = false;
-                              setState(() {
-                              });
+                              setState(() {});
                             }
                           },
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                         Center(
-                           child: Obx(
-                             () => (authController.isUserRegiserting.value) ? const CircularProgressIndicator() : MyGradientButton(
-                               isEnabled: isEnabled,
-                              onTap: () {
-                                 isEnabled ?
-                                authController.verifyOtp(controller.text) : null;
-                              },
+                        Center(
+                          child: Obx(
+                            () => (authController.isUserRegiserting.value)
+                                ? const CircularProgressIndicator()
+                                : MyGradientButton(
+                                    isEnabled: isEnabled,
+                                    onTap: () {
+                                      isEnabled
+                                          ? authController
+                                              .verifyOtp(controller.text)
+                                          : null;
+                                    },
+                                  ),
+                          ),
                         ),
-                           ),
-                         ),
                         const SizedBox(
                           height: 30,
                         ),

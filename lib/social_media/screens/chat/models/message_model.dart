@@ -9,15 +9,15 @@ class Message {
 
   Message(
       {this.sId,
-        this.conversationId,
-        this.sender,
-        this.text,
-        this.createdAt,
-        this.updatedAt,
-        this.iV});
+      this.conversationId,
+      this.sender,
+      this.text,
+      this.createdAt,
+      this.updatedAt,
+      this.iV});
 
   Message.fromJson(Map<String, dynamic> json) {
-    print("json");
+ 
     sId = json['_id'];
     conversationId = json['conversationId'];
     sender = json['sender'];

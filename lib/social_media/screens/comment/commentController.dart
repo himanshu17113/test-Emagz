@@ -61,7 +61,8 @@ class CommentController extends GetxController {
       // var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
       var data = {"userId": userId, "text": comment};
-      var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      var resposne =
+          await dio.post(ApiEndpoint.commentPost(postId), data: data);
 
       isPosting.value = false;
       controller.clear();
@@ -80,7 +81,8 @@ class CommentController extends GetxController {
     }
   }
 
-  Future<bool> postReply(String postId, String commentID, String? comment) async {
+  Future<bool> postReply(
+      String postId, String commentID, String? comment) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
@@ -94,11 +96,12 @@ class CommentController extends GetxController {
       Dio dio = Dio();
       // var token = await jwtController.getAuthToken();
       // var userId = await jwtController.getUserId();
-      print(token);
+      debugPrint(token);
       dio.options.headers["Authorization"] = token;
       var data = {"text": comment ?? controller.text};
-      var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
-      print(resposne);
+      var resposne = await dio
+          .post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
+      debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
       //    instantComments.value.add(Comment(text: comment, userId: UserSchema(sId: userId), comments: [], sId: userId));
