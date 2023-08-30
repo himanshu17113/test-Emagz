@@ -61,7 +61,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   //     image: postController.imagePath!,
   //     imageEditorOption: option,
   //   );
-  //   print(option.toString());
+  //   debugPrint(option.toString());
 
   //   if (result == null) {
   //     return;
@@ -451,8 +451,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                               postController.imagePath!)));
                               var buffer = await realImage.toByteData(
                                   format: UI.ImageByteFormat.png);
-                              var imageData =
-                                  buffer!.buffer.asUint8List();
+                              var imageData = buffer!.buffer.asUint8List();
                               // var image = await screenshotController.capture();
                               // realImage.();
                               postController.setPost(

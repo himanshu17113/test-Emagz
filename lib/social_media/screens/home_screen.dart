@@ -8,31 +8,20 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SocialMediaHomePage extends StatefulWidget {
-  const SocialMediaHomePage({Key? key}) : super(key: key);
+class SocialMediaHomePage extends StatelessWidget {
+  SocialMediaHomePage({Key? key}) : super(key: key);
 
-  @override
-  State<SocialMediaHomePage> createState() => _SocialMediaHomePageState();
-}
+  final jwtController = Get.put(JWTController());
 
-class _SocialMediaHomePageState extends State<SocialMediaHomePage> {
-  String? myUserId;
-  var jwtController = Get.put(JWTController());
-  var homePostController = Get.put(HomePostsController());
+  final homePostController = Get.put(HomePostsController());
 
-  @override
-  void initState() {
-    super.initState();
-    asyncInit();
-  }
-
-  asyncInit() async {
-    myUserId = await jwtController.getUserId();
-    setState(() {});
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
+    String? myUserId = jwtController.userId?.value ?? homePostController.userId;
+    // if (myUserId == null)async {
+    //   myUserId = await jwtController.getUserId();
+    // }
     return SafeArea(
       child: Scaffold(
         backgroundColor: socialBack,
@@ -44,7 +33,7 @@ class _SocialMediaHomePageState extends State<SocialMediaHomePage> {
           },
           body: RefreshIndicator(
             onRefresh: () {
-              setState(() {});
+              //   setState(() {});
               return homePostController.refreshResent();
             },
             child: SingleChildScrollView(
@@ -54,7 +43,7 @@ class _SocialMediaHomePageState extends State<SocialMediaHomePage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  HomePosts(myUserId: myUserId ?? ""),
+                  HomePosts(myUserId: jwtController.userId?.value ?? myUserId),
                 ],
               ),
             ),

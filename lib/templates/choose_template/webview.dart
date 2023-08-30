@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
 class WebViewPersona extends StatefulWidget {
-  String E_Persona;
-  String E_Token;
-  String E_CurrId;
-  final index;
-  WebViewPersona({Key? key, this.index,required this.E_CurrId,required this.E_Persona,required this.E_Token}) : super(key: key);
+  const WebViewPersona({Key? key}) : super(key: key);
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -14,7 +11,6 @@ class WebViewPersona extends StatefulWidget {
 class _WebViewPersonaState extends State<WebViewPersona> {
   late final WebViewController controller;
   var loadingPercentage = 0;
-
   final cookieManager = WebViewCookieManager();
   Future<void> _onAddCookie(WebViewController controller) async {
     await controller.runJavaScript('''var date = new Date();
@@ -27,38 +23,29 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ),
     );
   }
+
   Future<void> _onSetCookie(WebViewController controller) async {
-    print("here");
-    try {
-      await cookieManager.setCookie(
-        WebViewCookie(name: 'E_persona_userId',
-            value: widget.E_Persona,
-            domain: 'persona.emagz.live'),
-      );
-    }
-    catch(e)
-    {
-      print('error setting cookie');
-      print(e);
-    }
+    debugPrint("here");
     await cookieManager.setCookie(
-    WebViewCookie(name: 'E_current_userId', value: widget.E_CurrId, domain: 'persona.emagz.live'),
+      const WebViewCookie(
+          name: 'E_persona_userId',
+          value: 'bar',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
     );
-    // try {
-    //   await cookieManager.setCookie(
-    //
-    //     WebViewCookie(name: 'E_token',
-    //         value: widget.E_Token,
-    //         domain: '.emagz.live'),
-    //   );
-    // }
-    // catch(re)
-    // {
-    //   print('errotin token');
-    //   print(re);
-    // }
+    await cookieManager.setCookie(
+      const WebViewCookie(
+          name: 'E_current_userId',
+          value: 'bar',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+    );
+    await cookieManager.setCookie(
+      const WebViewCookie(
+          name: 'E_token',
+          value: 'token',
+          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
+    );
     if (!mounted) {
-      print('cookis');
+      debugPrint('cookis');
       return;
     }
     ScaffoldMessenger.of(context).showSnackBar(
@@ -67,10 +54,11 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ),
     );
   }
+
   Future<void> _onListCookies(WebViewController controller) async {
     final String cookies = await controller
         .runJavaScriptReturningResult('document.cookie') as String;
-    print(cookies);
+    debugPrint(cookies);
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -81,67 +69,51 @@ class _WebViewPersonaState extends State<WebViewPersona> {
 
   @override
   void initState() {
-
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
-          onPageStarted: (url) {
-            setState(() {
-              loadingPercentage = 0;
-            });
-          },
-          onProgress: (progress) {
-            setState(() {
-              loadingPercentage = progress;
-            });
-          },
-          onPageFinished: (url) async{
-            await _onSetCookie(controller);
-           // await _onListCookies(controller);
-            setState(() {
-              loadingPercentage = 100;
-            });
-
-          },
-        onWebResourceError: (we){
-            print('hrr');
-            print(we);
+        onPageStarted: (url) {
+          setState(() {
+            loadingPercentage = 0;
+          });
         },
-        onUrlChange: (url)async{
-            //await _onSetCookie(controller);
-            print('hr');
-            print(url.url);
-            //await _onSetCookie(controller);
-      }
+        onProgress: (progress) {
+          setState(() {
+            loadingPercentage = progress;
+          });
+        },
+        onPageFinished: (url) {
+          setState(() {
+            loadingPercentage = 100;
+          });
+        },
       ))
       ..loadRequest(
-        Uri.parse('http://persona.emagz.live/${widget.index.toString()}'),
+        Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/'),
       );
 
-    //_onSetCookie(controller);
+    _onAddCookie(controller);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          flex:1,
-          child: WebViewWidget(
-              controller: controller
-          ),
+          flex: 1,
+          child: WebViewWidget(controller: controller),
         ),
-      // if(loadingPercentage < 100)
-      //     LinearProgressIndicator(
-      //        value: loadingPercentage / 100.0,
-      //  ),
-      //   ElevatedButton(
-      //       onPressed:() async
-      //   {
-      //    await _onSetCookie(controller);
-      //     await _onListCookies(controller);
-      //     },
-      //       child:Text('Get cookies'))
+        if (loadingPercentage < 100)
+          LinearProgressIndicator(
+            value: loadingPercentage / 100.0,
+          ),
+        ElevatedButton(
+            onPressed: () async {
+              await _onSetCookie(controller);
+              await _onListCookies(controller);
+            },
+            child: const Text('Get cookies'))
       ],
     );
   }

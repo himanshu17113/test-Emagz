@@ -1,40 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+ import 'package:flutter/material.dart';
 
-class StoryViewCard extends StatefulWidget {
+import '../story/model/story_model.dart';
+ 
+
+class StoryViewCard extends StatelessWidget {
   const StoryViewCard({
     Key? key,
-    required this.username,
+      this.username,
     required this.url,
   }) : super(key: key);
-  final String username;
+  final UserId? username;
   final String url;
 
-  @override
-  State<StoryViewCard> createState() => _StoryViewCardState();
-}
-
-class _StoryViewCardState extends State<StoryViewCard> {
-  UserSchema? user;
-
-  var jwtController = Get.put(JWTController());
-
-  @override
-  void initState() {
-    getInitUser();
-    super.initState();
-  }
-
-  getInitUser() async {
-    // print(widget.username);
-    user = await jwtController.getUserDetail(widget.username);
-    //setState(() {});
-  }
-
+  // UserSchema? user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -61,7 +41,7 @@ class _StoryViewCardState extends State<StoryViewCard> {
                     border: Border.all(color: whiteColor, width: 1),
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
-                        image: CachedNetworkImageProvider(widget.url),
+                        image: CachedNetworkImageProvider(url),
                         fit: BoxFit.cover)),
               ),
             ),
@@ -69,7 +49,7 @@ class _StoryViewCardState extends State<StoryViewCard> {
               top: 66,
               left: 20,
               child: Text(
-                user == null ? "loading.." : user!.username!,
+                username == null ? "loading.." : username!.username!,
                 style: TextStyle(
                     fontSize: 6,
                     fontWeight: FontWeight.bold,

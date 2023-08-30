@@ -52,7 +52,7 @@ class BagDropDown extends StatelessWidget {
           value: value,
           onChanged: (val) {
             value = val.toString();
-            print(value);
+            debugPrint(value);
           },
           validator: (value) {
             if (value == null) {

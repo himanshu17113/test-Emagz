@@ -6,16 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-class HomePosts extends StatefulWidget {
+class HomePosts extends StatelessWidget {
   String? myUserId;
   HomePosts({Key? key, this.myUserId}) : super(key: key);
 
-  @override
-  State<HomePosts> createState() => _HomePostsState();
-}
-
-class _HomePostsState extends State<HomePosts> {
-  var homePostController = Get.put(HomePostsController());
+  var homePostController = Get.find<HomePostsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +24,8 @@ class _HomePostsState extends State<HomePosts> {
           return const Center(child: CircularProgressIndicator());
         }
         // if(!snapshot.hasError){
-        //   print(snapshot.data![0]);
-        //   print(snapshot.error);
+        //   debugPrint(snapshot.data![0]);
+        //   debugPrint(snapshot.error);
         //   return const Center(child: Text("Facing technical error while loading ... "));
         // }
 
@@ -90,19 +85,18 @@ class _HomePostsState extends State<HomePosts> {
                           });
                     },
                     child: VisibilityDetector(
-                      key: widget.key ?? Key("$index+@4+1999"),
+                      key: Key("$index+@4+1999"),
                       onVisibilityChanged: (info) {
                         if (index - 9 >= homePostController.skip.value) {
-                          // print(info.visibleFraction);
+                          // debugPrint(info.visibleFraction);
                           // setState(() {});
                         }
                       },
                       child: snapshot.data?[index] == null
                           ? const SizedBox()
                           : PostCard(
-                              isLiked: snapshot.data![index].likes!
-                                  .contains(widget.myUserId),
-                              myUserId: widget.myUserId,
+                              isLiked: snapshot.data![index].likes!.contains(myUserId),
+                              myUserId: myUserId,
                               post: snapshot.data![index],
                               url: snapshot.data![index].mediaUrl ?? "",
                             ),

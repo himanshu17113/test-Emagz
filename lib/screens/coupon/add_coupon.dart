@@ -211,7 +211,7 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
             onTap: () {
               setState(() {
                 _selectedColor = index;
-                //print(_selectedColor);
+                //debugPrint(_selectedColor);
               });
             },
             child: Padding(

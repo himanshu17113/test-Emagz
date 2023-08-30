@@ -7,39 +7,20 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/story_view_card.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StoryView extends StatefulWidget {
+class StoryView extends StatelessWidget {
   const StoryView({super.key});
 
   @override
-  State<StoryView> createState() => _StoryViewState();
-}
-
-class _StoryViewState extends State<StoryView> {
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    var storyController = Get.put(GetXStoryController());
+    final GetXStoryController storyController = Get.put(GetXStoryController());
     return Container(
       width: Get.size.width,
       margin: const EdgeInsets.only(top: 10),
       height: 85,
-      decoration:
-          BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
+      decoration: BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
       child: FutureBuilder<List<Story?>?>(
         future: storyController.getStories(),
         builder: (context, snapshot) {
-          // if (!snapshot.hasData) {
-          //   return const Center(
-          //     child: Text("Loading..."),
-          //   );
-          // } else
-
           if (snapshot.hasData) {
             return ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -57,21 +38,12 @@ class _StoryViewState extends State<StoryView> {
                   } else {
                     return InkWell(
                         onTap: () {
-                          Get.to(() => StoryScreen(
-                              userId: snapshot.data![index - 1]!.userId!.sId!,
-                              stories: snapshot.data![index - 1]!.stories!));
+                          Get.to(() => StoryScreen(userId: snapshot.data![index - 1]!.userId!.sId!, stories: snapshot.data![index - 1]!.stories!));
                         },
-                        child:
-                            //  Image.network(
-                            //     snapshot.data![index]!.stories![0].mediaUrl ??
-                            //         "")
-
-                            StoryViewCard(
-                          url: snapshot
-                                  .data![index - 1]!.stories![0].mediaUrl ??
+                        child: StoryViewCard(
+                          url: snapshot.data![index - 1]!.stories?[0].mediaUrl ??
                               "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg",
-                          username:
-                              snapshot.data![index - 1]?.userId?.sId ?? "",
+                          username: snapshot.data![index - 1]?.userId,
                         ));
                   }
                 });

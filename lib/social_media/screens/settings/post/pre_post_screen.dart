@@ -224,7 +224,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               hours: pickedTime!.hour,
                               minutes: pickedTime.minute));
                           var timeDifference = time.difference(DateTime.now());
-                          print(timeDifference.inDays.toString());
+                          debugPrint(timeDifference.inDays.toString());
                           timerOptionList.add("${timeDifference.inDays}D");
                           selectedTimer = timerOptionList.length - 1;
                           setState(() {});

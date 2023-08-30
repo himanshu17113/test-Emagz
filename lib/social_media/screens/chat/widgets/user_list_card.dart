@@ -9,19 +9,18 @@ import '../controllers/chatController.dart';
 import '../models/chat_model.dart';
 
 class UserChat extends StatefulWidget {
- final bool? isMessage;
+  final bool? isMessage;
   final UserData? userData;
   final String senderId;
   final String conversationId;
- final ResentMessage? resentMessage;
+  final ResentMessage? resentMessage;
   const UserChat({
     Key? key,
     required this.senderId,
     required this.conversationId,
-         this.userData,
+    this.userData,
     this.isMessage = false,
-     this.resentMessage,
-
+    this.resentMessage,
   }) : super(key: key);
 
   @override
@@ -40,9 +39,9 @@ class _UserChatState extends State<UserChat> {
   }
 
   Future getInitUser() async {
-    print("id in list item : ${widget.senderId}");
+    debugPrint("id in list item : ${widget.senderId}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-   //   sender = await jwtController.getUserDetail(widget.senderId);
+      //   sender = await jwtController.getUserDetail(widget.senderId);
       setState(() {});
     });
     //setState(() {});
@@ -52,8 +51,8 @@ class _UserChatState extends State<UserChat> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-       // if (sender == null) {
-           if (widget.userData == null) {
+        // if (sender == null) {
+        if (widget.userData == null) {
           Get.snackbar(
             "Loading",
             "Please wait",
@@ -119,7 +118,7 @@ class _UserChatState extends State<UserChat> {
                             fontWeight: FontWeight.w600),
                       )
                     : Text(
-                        widget.resentMessage?.text??  "last text",
+                        widget.resentMessage?.text ?? "last text",
                         style: TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,

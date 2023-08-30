@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 onSelectionChanged: (selectedList) {
                   setState(() {
                     selectedReportList = selectedList;
-                    print(selectedList.toList());
+                  //  debugPrint(selectedList.toList().toString());
                   });
                 },
                 maxSelection: 2,

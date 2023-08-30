@@ -68,7 +68,7 @@ class PostController extends GetxController {
       // }
 
       Dio dio = Dio();
-      print(privacyLikesAndViews.value);
+      debugPrint(privacyLikesAndViews.value);
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
@@ -80,7 +80,7 @@ class PostController extends GetxController {
 
         file.writeAsBytesSync(imageInUnit8List);
       }
-      print(
+      debugPrint(
         file.path.toString(),
       );
 
@@ -115,7 +115,7 @@ class PostController extends GetxController {
           uploadPercentage.value = (count / total);
         },
       );
-      //print(reqData.toString());
+      //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;
 
       CustomSnackbar.showSucess("Post  successful");
@@ -123,11 +123,11 @@ class PostController extends GetxController {
       bottomNavController.pageUpdate(0);
       Get.offAll(() => const BottomNavBar());
     } catch (e) {
-      //print(reqData.toString());
+      //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");
-      print("posting video error $e");
+      debugPrint("posting video error $e");
     }
   }
 
@@ -151,7 +151,7 @@ class PostController extends GetxController {
       // }
 
       Dio dio = Dio();
-      print(privacyLikesAndViews.value);
+      debugPrint(privacyLikesAndViews.value);
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
@@ -198,7 +198,7 @@ class PostController extends GetxController {
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");
-      print("posting video error $e");
+      debugPrint("posting video error $e");
     }
   }
 
@@ -227,9 +227,9 @@ class PostController extends GetxController {
   //     http.StreamedResponse response = await request.send();
   //
   //     if (response.statusCode == 200) {
-  //       print(await response.stream.bytesToString());
+  //       debugPrint(await response.stream.bytesToString());
   //     } else {
-  //       print(response.reasonPhrase);
+  //       debugPrint(response.reasonPhrase);
   //     }
   //   } catch (e) {}
   // }
