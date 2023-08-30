@@ -1,21 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/cs/crousel_slider.dart';
 import 'package:emagz_vendor/templates/widgets/fav_and_locate_widget.dart';
-import 'package:emagz_vendor/templates/widgets/temp_one_sliderCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../social_media/screens/explore/explpre_screen.dart';
 import '../../user/models/product_model.dart';
 import '../common/appbar/common_appbar.dart';
 import '../widgets/common_slider.dart';
-import '../widgets/temp_two_big_slider.dart';
 
 class TemplateThree extends StatefulWidget {
   const TemplateThree({Key? key}) : super(key: key);

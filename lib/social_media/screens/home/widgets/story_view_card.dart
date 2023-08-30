@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -43,7 +42,9 @@ class _StoryViewCardState extends State<StoryViewCard> {
       height: 68,
       width: 72,
       decoration: const BoxDecoration(
-        image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.cover),
+        image: DecorationImage(
+            image: AssetImage("assets/png/story_border.png"),
+            fit: BoxFit.cover),
       ),
       child: RotationTransition(
         turns: const AlwaysStoppedAnimation(-48.5 / 360),
@@ -56,9 +57,12 @@ class _StoryViewCardState extends State<StoryViewCard> {
                 height: 54,
                 width: 54,
                 decoration: BoxDecoration(
+                    color: Colors.grey,
                     border: Border.all(color: whiteColor, width: 1),
                     borderRadius: BorderRadius.circular(10),
-                    image: DecorationImage(image: CachedNetworkImageProvider(widget.url), fit: BoxFit.cover)),
+                    image: DecorationImage(
+                        image: CachedNetworkImageProvider(widget.url),
+                        fit: BoxFit.cover)),
               ),
             ),
             Positioned(
@@ -66,7 +70,10 @@ class _StoryViewCardState extends State<StoryViewCard> {
               left: 20,
               child: Text(
                 user == null ? "loading.." : user!.username!,
-                style: TextStyle(fontSize: 6, fontWeight: FontWeight.bold, color: blackButtonColor),
+                style: TextStyle(
+                    fontSize: 6,
+                    fontWeight: FontWeight.bold,
+                    color: blackButtonColor),
               ),
             ),
           ],

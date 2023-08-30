@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/profile/profile_screen.dart';
 import 'package:emagz_vendor/user/screens/notifiction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +6,7 @@ import 'package:get/get.dart';
 
 class UserTopBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
+  @override
   final Size preferredSize;
   const UserTopBar({
     required this.title,
@@ -17,7 +17,7 @@ class UserTopBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 25, right: 10, left: 10),
+      margin: const EdgeInsets.only(top: 25, right: 10, left: 10),
       child: Row(
         children: [
           Expanded(
@@ -39,7 +39,7 @@ class UserTopBar extends StatelessWidget with PreferredSizeWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                 ),
               ],
             ),
@@ -58,7 +58,7 @@ class UserTopBar extends StatelessWidget with PreferredSizeWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => NotificationScreenUser());
+                  Get.to(() => const NotificationScreenUser());
                 },
                 child: SvgPicture.asset(
                   "assets/svg/Notify.svg",

@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/approval_form/approval_form.dart';
 import 'package:emagz_vendor/user/common/bottom_nav.dart';
-import 'package:emagz_vendor/user/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -114,7 +113,7 @@ class EbussinessUser extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Get.offAll(() => UserBottomNavBar());
+                        Get.offAll(() => const UserBottomNavBar());
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -152,8 +151,8 @@ class EbussinessUser extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              begin: Alignment(-0.4, .6),
-                              end: Alignment(0.5, -5.5),
+                              begin: const Alignment(-0.4, .6),
+                              end: const Alignment(0.5, -5.5),
                               colors: [
                                 darkBlue,
                                 darkBlueAcent,

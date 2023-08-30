@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/screens/explore/explpre_screen.dart';
 import 'package:emagz_vendor/user/screens/order/widgets/details_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,7 @@ class OrderDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+   // Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

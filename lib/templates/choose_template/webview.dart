@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 class WebViewPersona extends StatefulWidget {
-  final String index;
-  const WebViewPersona({Key? key, required this.index}) : super(key: key);
+  const WebViewPersona({Key? key}) : super(key: key);
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -79,7 +78,7 @@ class _WebViewPersonaState extends State<WebViewPersona> {
           },
       ))
       ..loadRequest(
-        Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/Template${widget.index}'),
+        Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/'),
       );
 
     _onAddCookie(controller);
@@ -95,17 +94,17 @@ class _WebViewPersonaState extends State<WebViewPersona> {
               controller: controller
           ),
         ),
-      // if(loadingPercentage < 100)
-      //     LinearProgressIndicator(
-      //        value: loadingPercentage / 100.0,
-      //  ),
-        // ElevatedButton(
-        //     onPressed:() async
-        // {
-        //  await _onSetCookie(controller);
-        //   await _onListCookies(controller);
-        //   },
-        //     child:Text('Get cookies'))
+      if(loadingPercentage < 100)
+          LinearProgressIndicator(
+             value: loadingPercentage / 100.0,
+       ),
+        ElevatedButton(
+            onPressed:() async
+        {
+         await _onSetCookie(controller);
+          await _onListCookies(controller);
+          },
+            child:Text('Get cookies'))
       ],
     );
   }

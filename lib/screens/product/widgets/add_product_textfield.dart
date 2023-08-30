@@ -17,7 +17,7 @@ class AddProductTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: maxLines == 1 ? 40 : null,
       child: TextFormField(
         controller: controller,

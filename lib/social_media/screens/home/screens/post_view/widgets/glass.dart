@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class GlassmorphicFlexContainer extends StatelessWidget {
+  @override
   final Key? key;
 
   final AlignmentGeometry? alignment;
@@ -75,7 +76,7 @@ class GlassmorphicFlexContainer extends StatelessWidget {
         key: key,
         alignment: alignment,
         padding: padding,
-        constraints: BoxConstraints.tightForFinite(),
+        constraints: const BoxConstraints.tightForFinite(),
         transform: transform,
         child: Stack(
           children: [
@@ -113,6 +114,7 @@ class GlassmorphicFlexContainer extends StatelessWidget {
 }
 
 class GlassmorphicContainer extends StatelessWidget {
+  @override
   final Key? key;
 
   final AlignmentGeometry? alignment;
@@ -226,8 +228,8 @@ final Color? colour;
                 topRight: Radius.circular(borderRadius)),
             //   borderRadius: BorderRadius.circular(borderRadius),
             child: Container(
-              child: child,
               alignment: alignment,
+              child: child,
             ),
           ),
         ],
@@ -248,9 +250,9 @@ class GlassmorphicBorder extends StatelessWidget {
     required Gradient gradient,
     this.height,
     this.width,
-  })  : this._painter = _GradientPainter(
+  })  : _painter = _GradientPainter(
             strokeWidth: strokeWidth, radius: radius, gradient: gradient),
-        this._radius = radius;
+        _radius = radius;
 
   @override
   Widget build(BuildContext context) {
@@ -277,9 +279,9 @@ class _GradientPainter extends CustomPainter {
       {required double strokeWidth,
       required double radius,
       required Gradient gradient})
-      : this.strokeWidth = strokeWidth,
-        this.radius = radius,
-        this.gradient = gradient;
+      : strokeWidth = strokeWidth,
+        radius = radius,
+        gradient = gradient;
   final Paint paintObject = Paint();
 
   @override

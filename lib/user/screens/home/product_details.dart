@@ -5,7 +5,6 @@ import 'package:emagz_vendor/user/screens/bag/bag_screen.dart';
 import 'package:emagz_vendor/user/screens/home/widgets/rating_widets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   const ProductDetailsScreen({Key? key}) : super(key: key);
@@ -15,7 +14,7 @@ class ProductDetailsScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: UserTopBar(title: "Fashion"),
+      appBar: const UserTopBar(title: "Fashion"),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -43,7 +42,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
@@ -54,7 +53,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             const RatingWidget(),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
@@ -75,7 +74,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   color: blackButtonColor,
                   fontWeight: FontWeight.w500),
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Row(
@@ -179,7 +178,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Column(
@@ -204,7 +203,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 )
               ],

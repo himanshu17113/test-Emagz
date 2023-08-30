@@ -3,7 +3,6 @@ import 'package:emagz_vendor/social_media/screens/comment/commentController.dart
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'glass.dart';
 
@@ -29,7 +28,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
 
   @override
   Widget build(BuildContext context) {
-    bool _keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
+    bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
     // print(MediaQuery.of(context).viewInsets.bottom);
     // print(MediaQuery.of(context).size.height);
 
@@ -37,7 +36,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
       borderRadius: 33,
       blur: 5,
       //  width: MediaQuery.of(context).size.width,
-      height: _keyboardVisible ? MediaQuery.of(context).size.height : 450,
+      height: keyboardVisible ? MediaQuery.of(context).size.height : 450,
       child: Column(
         children: [
           const Text(
@@ -48,7 +47,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
 
           ///  Container(width: double.maxFinite, height: 0.5, color: Colors.black),
           SizedBox(
-              height: _keyboardVisible ? (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom - 120) : 320,
+              height: keyboardVisible ? (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom - 120) : 320,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 // child: ListView(

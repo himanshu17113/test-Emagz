@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/appbar/common_app_bar.dart';
 import 'package:emagz_vendor/social_media/common/searchbar/search_bar.dart';
-import 'package:emagz_vendor/social_media/screens/explore/explpre_screen.dart';
 import 'package:emagz_vendor/social_media/screens/explore/widgets/multi_choise_chip.dart';
 import 'package:emagz_vendor/social_media/screens/search/widget/search_result_card.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../../user/models/product_model.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({Key? key}) : super(key: key);
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -40,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              SearchWidget(),
+              const SearchWidget(),
               const SizedBox(
                 height: 15,
               ),
@@ -264,10 +263,10 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ],
               ),
-              SearchResultCard(),
-              SearchResultCard(),
-              SearchResultCard(),
-              SearchResultCard(),
+              const SearchResultCard(),
+              const SearchResultCard(),
+              const SearchResultCard(),
+              const SearchResultCard(),
             ],
           ),
         ),

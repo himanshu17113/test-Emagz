@@ -50,7 +50,7 @@ class PersonalInformationTile extends StatelessWidget {
             child: FormHeadingText(
               headings: "Update",
               fontSize: 10,
-              color: Color(0xff1B47C1),
+              color: const Color(0xff1B47C1),
             ),
           ),
         ],

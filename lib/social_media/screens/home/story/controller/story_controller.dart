@@ -5,7 +5,6 @@ import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 
@@ -17,16 +16,20 @@ class GetXStoryController extends GetxController {
   RxBool isUploading = RxBool(false);
 
   var jwtController = Get.put(JWTController());
- 
+
   Future<List<Story?>?> getStories() async {
     try {
       print(ApiEndpoint.story);
       var token = await jwtController.getAuthToken();
       print(token);
       myId.value = (await jwtController.getUserId())!;
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
 
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+      http.Response response =
+          await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
       print(body);
       body.forEach((e) {
@@ -41,6 +44,7 @@ class GetXStoryController extends GetxController {
         // }
         // stories![story.userId!]![story.sId!] = story;
       });
+      print(stories);
       return stories!;
     } catch (e) {
       print('stoey');
@@ -53,9 +57,15 @@ class GetXStoryController extends GetxController {
     try {
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
       Map body = {"userId": userId};
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
+      http.Response response = await http.post(
+          Uri.parse(ApiEndpoint.likeStroy(storyId)),
+          headers: headers,
+          body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -71,7 +81,10 @@ class GetXStoryController extends GetxController {
     print("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.commentStroy(storyId)),
+        headers: headers,
+        body: jsonEncode(body));
     print(response.body);
   }
 

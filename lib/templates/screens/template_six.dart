@@ -236,7 +236,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       height: 220,
                       width: Get.size.width / 1.8,
                       decoration: BoxDecoration(

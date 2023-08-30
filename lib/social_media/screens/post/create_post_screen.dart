@@ -4,17 +4,13 @@ import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart'
 import 'package:emagz_vendor/social_media/screens/post/text-post.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:screenshot/screenshot.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
 import '../../controller/post/post_controller.dart';
 import '../../utils/photo_filter.dart';
-import '../home/story/story_editor_screen.dart';
-import '../home/widgets/home_screen_appbar.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -74,7 +70,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   //   setState(() {});
   // }
 
-  GlobalKey _imageKey = GlobalKey();
+  final GlobalKey _imageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -456,7 +452,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               var buffer = await realImage.toByteData(
                                   format: UI.ImageByteFormat.png);
                               var imageData =
-                                  await buffer!.buffer.asUint8List();
+                                  buffer!.buffer.asUint8List();
                               // var image = await screenshotController.capture();
                               // realImage.();
                               postController.setPost(
@@ -533,8 +529,8 @@ class _GridGalleryState extends State<GridGallery> {
 
   _fetchNewMedia() async {
     lastPage = currentPage;
-    final PermissionState _ps = await PhotoManager.requestPermissionExtend();
-    if (_ps.isAuth) {
+    final PermissionState ps = await PhotoManager.requestPermissionExtend();
+    if (ps.isAuth) {
       List<AssetPathEntity> albums =
           await PhotoManager.getAssetPathList(onlyAll: true);
       List<AssetEntity> media = await albums[0]

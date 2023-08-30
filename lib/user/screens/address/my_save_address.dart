@@ -1,10 +1,7 @@
-import 'dart:math';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
 import 'package:emagz_vendor/user/screens/address/add_address.dart';
-import 'package:emagz_vendor/user/screens/address/widgets/manage_address_heading.dart';
-import 'package:emagz_vendor/user/screens/address/widgets/manage_address_textfield.dart';
 import 'package:emagz_vendor/user/screens/address/widgets/save_address_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -62,7 +59,7 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
             ),
             InkWell(
               onTap: () {
-                Get.to(() => ManageAddressScreen());
+                Get.to(() => const ManageAddressScreen());
               },
               child: Container(
                 width: size.width / 2.15,

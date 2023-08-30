@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
@@ -85,7 +84,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                       children: [
                         InkWell(
                           onLongPress: () {
-                            Get.to(() => BottomNavBar());
+                            Get.to(() => const BottomNavBar());
                           },
                           onTap: () {
                             setState(() {
@@ -168,7 +167,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: (authController.selectedChoices.length > 0)
+      floatingActionButton: (authController.selectedChoices.isNotEmpty)
           ? GestureDetector(
               // todo : Re Implement it when backend is ready
               onTap: () {

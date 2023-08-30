@@ -133,7 +133,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ),
                          Center(
                            child: Obx(
-                             () => (authController.isUserRegiserting.value) ? CircularProgressIndicator() : MyGradientButton(
+                             () => (authController.isUserRegiserting.value) ? const CircularProgressIndicator() : MyGradientButton(
                                isEnabled: isEnabled,
                               onTap: () {
                                  isEnabled ?

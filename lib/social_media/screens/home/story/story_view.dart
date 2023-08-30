@@ -29,7 +29,8 @@ class _StoryViewState extends State<StoryView> {
       width: Get.size.width,
       margin: const EdgeInsets.only(top: 10),
       height: 85,
-      decoration: BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
+      decoration:
+          BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
       child: FutureBuilder<List<Story?>?>(
         future: storyController.getStories(),
         builder: (context, snapshot) {
@@ -40,63 +41,40 @@ class _StoryViewState extends State<StoryView> {
           // } else
 
           if (snapshot.hasData) {
-            return Row(
-              children: [
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    const MyStory(),
+            return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                //  controller: _scrollController,
+                physics: const ScrollPhysics(),
+//shrinkWrap: true,
+                itemCount: snapshot.data!.length + 1,
+                itemBuilder: (ctx, index) {
+                  if (index == 0) {
+                    return const SizedBox(
+                        child: Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: MyStory(),
+                    ));
+                  } else {
+                    return InkWell(
+                        onTap: () {
+                          Get.to(() => StoryScreen(
+                              userId: snapshot.data![index - 1]!.userId!.sId!,
+                              stories: snapshot.data![index - 1]!.stories!));
+                        },
+                        child:
+                            //  Image.network(
+                            //     snapshot.data![index]!.stories![0].mediaUrl ??
+                            //         "")
 
-                    // InkWell(
-                    //     onTap: () {
-                    //       Get.to(() =>
-                    //           StoryScreen(userId: snapshot.data?[index]?.userId?.sId??'Loding..', stories: snapshot.data![index]!.stories!));
-                    //     },
-                    //     child: StoryViewCard(
-                    //       url: url,
-                    //       username: snapshot.data?[index]?.userId?.sId??"64a28b0d31a31c338a18f5f3",
-                    //     ))
-                  ],
-                ),
-
-                SizedBox(
-                  width: double.minPositive,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      controller: _scrollController,
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (ctx, index) {
-                        if (index == 0) {
-                          final String url = "https://picsum.photos/500/500?random=${index + 1}";
-                          return Row(
-                            children: [
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              const MyStory(),
-                            ],
-                          );
-                        } else {
-                          print('heheee');
-                          final String url = "https://picsum.photos/500/500?random=${index + 1}";
-                          return InkWell(
-                              onTap: () {
-                                Get.to(
-                                        () => StoryScreen(userId: snapshot.data![index]!.userId!.sId!, stories: snapshot.data![index]!.stories!));
-                              },
-                              child: StoryViewCard(
-                                url: url,
-                                username: snapshot.data![index]?.userId?.sId ??  "",
-                              ));
-                        }
-                      }),
-                ),
-              ],
-            );
+                            StoryViewCard(
+                          url: snapshot
+                                  .data![index - 1]!.stories![0].mediaUrl ??
+                              "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg",
+                          username:
+                              snapshot.data![index - 1]?.userId?.sId ?? "",
+                        ));
+                  }
+                });
           } else {
             return const Center(
               child: Text("Loading..."),

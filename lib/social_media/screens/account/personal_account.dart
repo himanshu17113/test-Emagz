@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
@@ -99,7 +98,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     //       hint: "Nakul_kumar8",
                     //     )),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 5),
+                      margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 35,
                       child: TextFormField(
                         // controller: controller,
@@ -115,9 +114,9 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                               ),
                               fontWeight: FontWeight.bold,
                               fontSize: 9),
-                          fillColor: Color(0xffF1F1F1),
+                          fillColor: const Color(0xffF1F1F1),
                           counterText: "",
-                          hintText: widget.suggestedName == null ? "new user-name" : widget.suggestedName,
+                          hintText: widget.suggestedName ?? "new user-name",
                           filled: true,
                           contentPadding: const EdgeInsets.only(left: 10),
                           border: OutlineInputBorder(
@@ -177,7 +176,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                             // ),
                             borderRadius: BorderRadius.circular(5)),
                         child: Obx(
-                          () => (authController.isUserlogging.value) ? CircularProgressIndicator(color: Colors.white,) :Text(
+                          () => (authController.isUserlogging.value) ? const CircularProgressIndicator(color: Colors.white,) :Text(
                             "Continue",
                             style: TextStyle(
                                 color: whiteColor,

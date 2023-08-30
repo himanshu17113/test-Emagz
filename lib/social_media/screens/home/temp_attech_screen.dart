@@ -7,7 +7,6 @@ import 'package:emagz_vendor/templates/screens/template_two.dart';
 import 'package:emagz_vendor/templates/screens/templete_three.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 import '../../../templates/screens/template_eight.dart';
 import '../../../templates/screens/template_four.dart';
@@ -26,61 +25,61 @@ class TempAttachScreen extends StatelessWidget {
           CustomButton(
             title: "Temp 1 ",
             function: () {
-              Get.to(() => TemplateOne());
+              Get.to(() => const TemplateOne());
             },
           ),
           CustomButton(
             title: "Temp 2 ",
             function: () {
-              Get.to(() => TemplateTwoScreen());
+              Get.to(() => const TemplateTwoScreen());
             },
           ),
           CustomButton(
             title: "Temp 3 ",
             function: () {
-              Get.to(() => TemplateThree());
+              Get.to(() => const TemplateThree());
             },
           ),
           CustomButton(
             title: "Temp 4 ",
             function: () {
-              Get.to(() => TemplateFourScreen());
+              Get.to(() => const TemplateFourScreen());
             },
           ),
           CustomButton(
             title: "Temp 5 ",
             function: () {
-              Get.to(() => TemplateFiveScreen());
+              Get.to(() => const TemplateFiveScreen());
             },
           ),
           CustomButton(
             title: "Temp 5 ",
             function: () {
-              Get.to(() => TemplateSixScreen());
+              Get.to(() => const TemplateSixScreen());
             },
           ),
           CustomButton(
             title: "Temp 7 ",
             function: () {
-              Get.to(() => TemplateSevenScreen());
+              Get.to(() => const TemplateSevenScreen());
             },
           ),
           CustomButton(
             title: "Temp 8 ",
             function: () {
-              Get.to(() => TemplateEightScreen());
+              Get.to(() => const TemplateEightScreen());
             },
           ),
           CustomButton(
             title: "Temp 9 ",
             function: () {
-              Get.to(() => TemplateNineScreen());
+              Get.to(() => const TemplateNineScreen());
             },
           ),
           CustomButton(
             title: "Temp 10 ",
             function: () {
-              Get.to(() => TemplateTenScreen());
+              Get.to(() => const TemplateTenScreen());
             },
           ),
         ],

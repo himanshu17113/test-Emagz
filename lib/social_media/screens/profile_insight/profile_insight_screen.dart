@@ -3,7 +3,6 @@ import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../model/chart_model.dart';
 import '../../common/common_appbar.dart';
 
 class ProfileInsightScreen extends StatefulWidget {
@@ -74,7 +73,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                 height: 25,
               ),
               Container(
-                padding: EdgeInsets.only(right: 5),
+                padding: const EdgeInsets.only(right: 5),
                 color: const Color(0xffDDE0FF),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 15),

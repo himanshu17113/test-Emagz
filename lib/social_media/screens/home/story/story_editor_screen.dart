@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:vs_story_designer/vs_story_designer.dart';
 

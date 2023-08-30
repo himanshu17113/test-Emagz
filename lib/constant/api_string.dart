@@ -37,7 +37,7 @@ class ApiEndpoint {
   static String template="$baseUrl/persona/template";
   static String likeStroy(String storyId) => "$baseUrl/story/$storyId/like";
   static String commentStroy(String storyId) =>
-      "$baseUrl/story/comment/${storyId}";
+      "$baseUrl/story/comment/$storyId";
   static String addStory = "$baseUrl/story/";
 
   static String posts(int skip) {

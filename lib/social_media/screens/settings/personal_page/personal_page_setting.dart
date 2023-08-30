@@ -3,19 +3,13 @@ import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/user_model.dart';
-import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
-import 'package:emagz_vendor/social_media/screens/home/widgets/home_screen_appbar.dart';
-import 'package:emagz_vendor/social_media/screens/profile_insight/personal_profile_insight_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets/setting_common_tile.dart';
-import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_policy_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_setting_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/security_screen.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 import '../../profile_insight/profile_insight_screen.dart';
 
@@ -170,7 +164,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         ),
                         GestureDetector(
                           onTap:(){
-                            Get.to(()=> ChooseTemplate());
+                            Get.to(()=> const ChooseTemplate());
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(
@@ -259,7 +253,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => PrivacyScreen());
+                  Get.to(() => const PrivacyScreen());
                 },
                 child: PreferenceTile(
                   isBlue: false,
@@ -268,7 +262,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => SecurityScreen());
+                  Get.to(() => const SecurityScreen());
                 },
                 child: PreferenceTile(
                   isBlue: false,
@@ -278,7 +272,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
               Container(
                 height: 64,
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                     color: whiteColor, borderRadius: BorderRadius.circular(15)),
                 child: Row(
@@ -423,7 +417,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               InkWell(
                 onTap: () async {
                   await jwtController.setAuthToken(null, null);
-                  Get.off(()=>CommonAuthScreen());
+                  Get.off(()=>const CommonAuthScreen());
                 },
                 child: Container(
                   alignment: Alignment.center,
@@ -445,7 +439,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 height: 10,
               ),
               Container(
-                margin: EdgeInsets.symmetric(vertical: 20),
+                margin: const EdgeInsets.symmetric(vertical: 20),
                 alignment: Alignment.center,
                 child: Text(
                   "Add another account",

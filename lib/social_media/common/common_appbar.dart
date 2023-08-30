@@ -1,13 +1,11 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/profile/profile_screen.dart';
-import 'package:emagz_vendor/user/screens/notifiction_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SocialMediaSettingAppBar extends StatelessWidget
     with PreferredSizeWidget {
   final String title;
+  @override
   final Size preferredSize;
   const SocialMediaSettingAppBar({
     required this.title,

@@ -206,7 +206,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                          offset: Offset(0, 4.07),
+                          offset: const Offset(0, 4.07),
                           blurRadius: 20,
                           color: const Color(0xff00000040).withOpacity(.25))
                     ],

@@ -1,11 +1,9 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 class AddPostScren extends StatelessWidget {
-  AddPostScren({Key? key}) : super(key: key);
+  const AddPostScren({Key? key}) : super(key: key);
   // final navController = Get.put(NavController());
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,6 @@ import 'package:emagz_vendor/social_media/screens/settings/comments/comment_sett
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 import '../live/live_setting.dart';
 import '../mention/mention_setting_screen.dart';
@@ -184,7 +183,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => MentionSettingScreen());
+                  Get.to(() => const MentionSettingScreen());
                 },
                 child: PreferenceTile(
                   title: 'Mentions',

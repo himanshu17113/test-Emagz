@@ -71,7 +71,7 @@ class ProductBigSlider extends StatelessWidget {
                   Text(
                     "Product 01",
                     style: GoogleFonts.inter(
-                        color: Color(0xff424242),
+                        color: const Color(0xff424242),
                         fontSize: 15,
                         // height: 1.8,
                         fontWeight: FontWeight.w600),
@@ -82,7 +82,7 @@ class ProductBigSlider extends StatelessWidget {
                   Text(
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum augue amet, mi tellus proin ornare quam fermentum neque. Risus amet, commodo eget viverra ornare magna. Non dictumst purus felis ridiculus mi scelerisque mauris nisl, dui.",
                     style: GoogleFonts.inter(
-                        color: Color(0xff424242),
+                        color: const Color(0xff424242),
                         fontSize: 6,
                         height: 1.5,
                         fontWeight: FontWeight.w400),

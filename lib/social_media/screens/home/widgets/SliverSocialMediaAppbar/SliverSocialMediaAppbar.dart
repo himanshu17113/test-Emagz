@@ -72,7 +72,7 @@ class _SliverSocialMediaAppBarState extends State<SliverSocialMediaAppBar> {
               key: cardKey,
               front: InkWell(
                   onTap: () {
-                    Get.to(() => TempAttachScreen());
+                    Get.to(() => const TempAttachScreen());
                   },
                   child: Container(
                     margin: const EdgeInsets.only(right: 10),

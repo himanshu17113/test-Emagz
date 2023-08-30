@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileMenuCard extends StatelessWidget {
   final String backGroundImage;

@@ -87,34 +87,34 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['personalTemplate'] = this.personalTemplate;
-    data['_id'] = this.sId;
-    data['username'] = this.username;
-    data['email'] = this.email;
-    data['dob'] = this.dob;
-    data['password'] = this.password;
-    data['mobile_number'] = this.mobileNumber;
-    data['login_otp'] = this.loginOtp;
-    data['accountType'] = this.accountType;
-    data['interestName'] = this.interestName;
-    data['displayName'] = this.displayName;
-    data['Followers'] = this.followers;
-    data['Followings'] = this.followings;
-    data['Hirable'] = this.hirable;
-    data['Rating'] = this.rating;
-    data['Reviews'] = this.reviews;
-    data['Poll'] = this.poll;
-    data['Jobcreated'] = this.jobcreated;
-    data['AccountStatus'] = this.accountStatus;
-    data['search'] = this.search;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    data['GetstatedName'] = this.getstatedName;
-    data['businessName'] = this.businessName;
-    data['businessType'] = this.businessType;
-    data['businessLogo'] = this.businessLogo;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['personalTemplate'] = personalTemplate;
+    data['_id'] = sId;
+    data['username'] = username;
+    data['email'] = email;
+    data['dob'] = dob;
+    data['password'] = password;
+    data['mobile_number'] = mobileNumber;
+    data['login_otp'] = loginOtp;
+    data['accountType'] = accountType;
+    data['interestName'] = interestName;
+    data['displayName'] = displayName;
+    data['Followers'] = followers;
+    data['Followings'] = followings;
+    data['Hirable'] = hirable;
+    data['Rating'] = rating;
+    data['Reviews'] = reviews;
+    data['Poll'] = poll;
+    data['Jobcreated'] = jobcreated;
+    data['AccountStatus'] = accountStatus;
+    data['search'] = search;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
+    data['GetstatedName'] = getstatedName;
+    data['businessName'] = businessName;
+    data['businessType'] = businessType;
+    data['businessLogo'] = businessLogo;
     return data;
   }
 }

@@ -34,7 +34,7 @@ class commonTopBar extends StatelessWidget {
               ),
               Text(
                 title,
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
               ),
             ],
           ),
@@ -52,7 +52,7 @@ class commonTopBar extends StatelessWidget {
             // ),
             InkWell(
               onTap: () {
-                Get.to(() => ProfileScreen());
+                Get.to(() => const ProfileScreen());
               },
               child: SvgPicture.asset(
                 "assets/svg/Account.svg",

@@ -1,6 +1,3 @@
-import 'package:emagz_vendor/social_media/screens/chat/chat_list_screen.dart';
-import 'package:emagz_vendor/social_media/screens/home_screen.dart';
-import 'package:emagz_vendor/social_media/screens/search/search_screen.dart';
 import 'package:emagz_vendor/user/screens/bag/bag_screen.dart';
 import 'package:emagz_vendor/user/screens/home/home_screen.dart';
 import 'package:emagz_vendor/user/screens/profile/profile_screen.dart';
@@ -16,7 +13,7 @@ class UserNavController extends GetxController {
    BagScreen(),
 
     // const Text("data"),
-   ProfileScreenUser()
+   const ProfileScreenUser()
   ];
   int page = 0;
 

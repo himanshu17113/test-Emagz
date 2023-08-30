@@ -19,7 +19,7 @@ class ManageAddressTextfiled extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xffF5F5F5), borderRadius: BorderRadius.circular(8)),
+          color: const Color(0xffF5F5F5), borderRadius: BorderRadius.circular(8)),
       height: maxLines == 1 ? 30 : null,
       child: TextFormField(
         controller: controller,

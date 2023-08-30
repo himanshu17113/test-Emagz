@@ -239,12 +239,12 @@ class RatingCount {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['Rating_1'] = this.rating1;
-    data['Rating_2'] = this.rating2;
-    data['Rating_3'] = this.rating3;
-    data['Rating_4'] = this.rating4;
-    data['Rating_5'] = this.rating5;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['Rating_1'] = rating1;
+    data['Rating_2'] = rating2;
+    data['Rating_3'] = rating3;
+    data['Rating_4'] = rating4;
+    data['Rating_5'] = rating5;
     return data;
   }
 }
@@ -265,11 +265,11 @@ class CommentPrivacy {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['everyone'] = this.everyone;
-    data['followers'] = this.followers;
-    data['follow'] = this.follow;
-    data['follow_and_followers'] = this.followAndFollowers;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['everyone'] = everyone;
+    data['followers'] = followers;
+    data['follow'] = follow;
+    data['follow_and_followers'] = followAndFollowers;
     return data;
   }
 }
@@ -288,10 +288,10 @@ class PostPrivacy {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['everyone'] = this.everyone;
-    data['followers'] = this.followers;
-    data['no_one'] = this.noOne;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['everyone'] = everyone;
+    data['followers'] = followers;
+    data['no_one'] = noOne;
     return data;
   }
 }
@@ -310,10 +310,10 @@ class StoryPrivacy {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['everyone'] = this.everyone;
-    data['close_friend'] = this.closeFriend;
-    data['specific'] = this.specific;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['everyone'] = everyone;
+    data['close_friend'] = closeFriend;
+    data['specific'] = specific;
     return data;
   }
 }

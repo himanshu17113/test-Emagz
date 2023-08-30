@@ -1,7 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/models/user_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +7,6 @@ import 'package:get/get.dart';
 
 import '../controllers/chatController.dart';
 import '../models/chat_model.dart';
-import '../models/message_model.dart';
 
 class UserChat extends StatefulWidget {
  final bool? isMessage;
@@ -17,7 +14,7 @@ class UserChat extends StatefulWidget {
   final String senderId;
   final String conversationId;
  final ResentMessage? resentMessage;
-  UserChat({
+  const UserChat({
     Key? key,
     required this.senderId,
     required this.conversationId,

@@ -4,13 +4,13 @@ class FollowingList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 300,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: 50,
             child: Center(child: Text("Hide like & views Controll",style: TextStyle(
                 color: Colors.black.withOpacity(0.60),
@@ -22,7 +22,7 @@ class FollowingList extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(color: Colors.grey,height: 2,width: MediaQuery.of(context).size.width/2,),
           ),
-          Center(child: Text("List of People"),)
+          const Center(child: Text("List of People"),)
         ],
       ),
     );

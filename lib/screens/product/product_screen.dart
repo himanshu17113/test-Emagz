@@ -6,7 +6,6 @@ import 'package:emagz_vendor/screens/product/view_product.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 
 import 'widgets/product_desc_headings.dart';

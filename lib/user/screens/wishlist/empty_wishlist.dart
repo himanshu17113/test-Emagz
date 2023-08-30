@@ -1,9 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
-import 'package:emagz_vendor/user/models/product_model.dart';
-import 'package:emagz_vendor/user/screens/order/widgets/order_list_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class EmptyWishListScreen extends StatelessWidget {
   const EmptyWishListScreen({Key? key}) : super(key: key);
@@ -59,7 +56,7 @@ class EmptyWishListScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
         ],

@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/auth/signin_screen.dart';
-import 'package:emagz_vendor/screens/auth/signup_screen.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
 import 'package:emagz_vendor/screens/profile/peronal_profile.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();

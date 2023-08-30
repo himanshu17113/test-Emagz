@@ -92,7 +92,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(
-                            color: Color(0xffFCFCFC),
+                            color: const Color(0xffFCFCFC),
                             borderRadius: BorderRadius.circular(5)),
                         child: Text(
                           "Analysis your post",
@@ -131,7 +131,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(
-                              color: Color(0xffFCFCFC),
+                              color: const Color(0xffFCFCFC),
                               borderRadius: BorderRadius.circular(5)),
                           child: Text(
                             "Redirect to store",
@@ -183,7 +183,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(
-                              color: Color(0xffFCFCFC),
+                              color: const Color(0xffFCFCFC),
                               borderRadius: BorderRadius.circular(5)),
                           child: Text(
                             "Upload product images",
@@ -201,7 +201,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => BottomNavBar());
+                      Get.to(() => const BottomNavBar());
                     },
                     child: Container(
                       alignment: Alignment.center,

@@ -13,13 +13,13 @@ class LikesAndViewsOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-      Container(
+      SizedBox(
       height: 300,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
+          SizedBox(
             height: 50,
             child: Center(child: Text("Likes and Views",style: TextStyle(
               color: Colors.black.withOpacity(0.60),
@@ -31,11 +31,11 @@ class LikesAndViewsOptions extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(color: Colors.grey,height: 2,width: MediaQuery.of(context).size.width/2,),
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             child: ListView.builder(
               shrinkWrap: true,
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               itemCount: visibilityOptions.length,
               itemBuilder: (context, index) => ListTile(
                 leading: visibilityOptions[index].icon,

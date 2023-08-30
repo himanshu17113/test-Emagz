@@ -1,7 +1,5 @@
-import 'dart:ui';
 
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/user/controller/bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -8,8 +8,8 @@ class MultiSelectChip extends StatefulWidget {
   final Function(List<String>)? onMaxSelected;
   final int? maxSelection;
 
-  MultiSelectChip(this.reportList,
-      {this.onSelectionChanged, this.onMaxSelected, this.maxSelection});
+  const MultiSelectChip(this.reportList,
+      {super.key, this.onSelectionChanged, this.onMaxSelected, this.maxSelection});
 
   @override
   _MultiSelectChipState createState() => _MultiSelectChipState();
@@ -21,9 +21,9 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
   _buildChoiceList() {
     List<Widget> choices = [];
 
-    widget.reportList.forEach((item) {
+    for (var item in widget.reportList) {
       choices.add(Container(
-        margin: EdgeInsets.symmetric(vertical: 4),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         // alignment: Alignment.center,
         height: 30,
         // width: 106,
@@ -39,18 +39,18 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           side: BorderSide(
             width: .5,
             color:
-                selectedChoices.contains(item) ? chipColor : Color(0xff686868),
+                selectedChoices.contains(item) ? chipColor : const Color(0xff686868),
           ),
-          labelPadding: EdgeInsets.symmetric(horizontal: 10),
+          labelPadding: const EdgeInsets.symmetric(horizontal: 10),
           label: Container(
-            margin: EdgeInsets.symmetric(horizontal: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5),
             child: Text(
               item,
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: selectedChoices.contains(item)
                       ? whiteColor
-                      : Color(0xff686868),
+                      : const Color(0xff686868),
                   fontSize: 12),
             ),
           ),
@@ -70,7 +70,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           },
         ),
       ));
-    });
+    }
 
     return choices;
   }

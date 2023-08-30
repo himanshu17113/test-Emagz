@@ -49,10 +49,8 @@ class HomePostsController extends GetxController{
             var post = Post.fromJson(e);
             //print(post.mediaUrl!);
 
-            if (post != null) {
-              if(post.user != null){
-                posts!.insert(0,post);
-              }
+            if(post.user != null){
+              posts!.insert(0,post);
             }
           });
 
@@ -92,9 +90,7 @@ class HomePostsController extends GetxController{
           try {
             print(e);
             var post = Post.fromJson(e);
-              if (post != null) {
-                posts!.add(post);
-              }
+              posts!.add(post);
 
           }
           catch(ee)

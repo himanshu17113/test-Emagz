@@ -3,14 +3,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/strings.dart' as text;
 import 'package:emagz_vendor/templates/common/appbar/common_appbar.dart';
-import 'package:emagz_vendor/templates/widgets/common_slider.dart';
 import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/fav_and_locate_widget.dart';
-import '../widgets/temp_four_product_card.dart';
 
 class TemplateFiveScreen extends StatefulWidget {
   const TemplateFiveScreen({Key? key}) : super(key: key);

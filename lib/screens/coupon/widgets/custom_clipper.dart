@@ -14,7 +14,7 @@ class DolDurmaClipper extends CustomClipper<Path> {
       ..arcToPoint(
         Offset(0, size.height - bottom),
         clockwise: true,
-        radius: Radius.circular(1),
+        radius: const Radius.circular(1),
       )
       ..lineTo(0.0, size.height)
       ..lineTo(size.width, size.height)
@@ -22,7 +22,7 @@ class DolDurmaClipper extends CustomClipper<Path> {
       ..arcToPoint(
         Offset(size.width, size.height - bottom - holeRadius),
         clockwise: true,
-        radius: Radius.circular(1),
+        radius: const Radius.circular(1),
       );
 
     path.lineTo(size.width, 0.0);

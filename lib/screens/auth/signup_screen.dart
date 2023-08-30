@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/screens/choise/e_business_screen.dart';
+ 
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../common/common_snackbar.dart';
-import '../choise/e_business_screen.dart';
+ 
 import 'widgets/my_custom_textfiled.dart';
 
 class SignUpScreen extends StatelessWidget {

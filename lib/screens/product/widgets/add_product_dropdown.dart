@@ -37,7 +37,7 @@ class AddProductDropDown extends StatelessWidget {
           ),
           focusColor: Colors.white,
           // dropdownColor: AppColor.red,
-          hint: Text("Select status"),
+          hint: const Text("Select status"),
           isExpanded: true,
           icon: const Align(
               alignment: Alignment.centerRight,

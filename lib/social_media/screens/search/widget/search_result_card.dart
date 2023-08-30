@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/screens/explore/explpre_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../user/models/product_model.dart';
@@ -12,7 +11,7 @@ class SearchResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 8),
+      margin: const EdgeInsets.only(top: 8),
       height: 55,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

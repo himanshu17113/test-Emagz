@@ -27,7 +27,7 @@ class _CommonSliderState extends State<CommonSlider> {
         height: 3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
-          color: currentIndex == index ? Colors.white : Color(0xffA0A0A0),
+          color: currentIndex == index ? Colors.white : const Color(0xffA0A0A0),
         ),
       );
     });

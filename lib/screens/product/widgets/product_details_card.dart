@@ -57,7 +57,7 @@ class ProductDetailsCard extends StatelessWidget {
                 radius: 8,
                 backgroundColor: blackButtonColor,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(

@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/user/common/user_top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +17,7 @@ class _NotificationScreenUserState extends State<NotificationScreenUser> {
       appBar: const UserNotificationTopBar(title: "Notification"),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Expanded(
@@ -47,9 +46,9 @@ class _NotificationScreenUserState extends State<NotificationScreenUser> {
                         ),
                         child: Container(
                           height: 65,
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           alignment: Alignment.center,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             // border: Border(
                             //     top: BorderSide(
                             //       color: grayColor,
@@ -85,6 +84,7 @@ class _NotificationScreenUserState extends State<NotificationScreenUser> {
 
 class UserNotificationTopBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
+  @override
   final Size preferredSize;
   const UserNotificationTopBar({
     required this.title,
@@ -95,7 +95,7 @@ class UserNotificationTopBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 25, right: 10, left: 10),
+      margin: const EdgeInsets.only(top: 25, right: 10, left: 10),
       child: Row(
         children: [
           Expanded(
@@ -117,7 +117,7 @@ class UserNotificationTopBar extends StatelessWidget with PreferredSizeWidget {
                 ),
                 Text(
                   title,
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
                 ),
               ],
             ),

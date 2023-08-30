@@ -4,7 +4,6 @@ import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 
 class SocialNotificationScreen extends StatelessWidget {
   const SocialNotificationScreen({Key? key}) : super(key: key);

@@ -1,11 +1,9 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/model/payment_list_model.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
 import 'package:emagz_vendor/screens/coupon/add_coupon.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/coupon_haeding.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/coupon_list_card.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/my_coupon.dart';
-import 'package:emagz_vendor/screens/payment/widgets/payment_list_card.dart';
 import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -58,15 +56,15 @@ class _CouponListScreenState extends State<CouponListScreen> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
+              SizedBox(
                 height: 60,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       return Container(
-                          margin: EdgeInsets.only(right: 10),
-                          child: MyCustomCuppon());
+                          margin: const EdgeInsets.only(right: 10),
+                          child: const MyCustomCuppon());
                     }),
               ),
               const SizedBox(
@@ -128,7 +126,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        margin: EdgeInsets.only(bottom: 10, right: 20),
+        margin: const EdgeInsets.only(bottom: 10, right: 20),
         child: Row(
           children: [
             const Expanded(

@@ -6,7 +6,7 @@ import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
 
 class MentionSettingScreen extends StatefulWidget {
-  MentionSettingScreen({Key? key}) : super(key: key);
+  const MentionSettingScreen({Key? key}) : super(key: key);
 
   @override
   State<MentionSettingScreen> createState() => _MentionSettingScreenState();

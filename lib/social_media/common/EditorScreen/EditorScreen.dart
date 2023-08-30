@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -215,7 +214,7 @@ class _DraggableTextState extends State<DraggableText> {
     super.initState();
   }
 
-  Offset startPosition = Offset(10, 10);
+  Offset startPosition = const Offset(10, 10);
   // const Offset(100, 100);
 
   //print(position)

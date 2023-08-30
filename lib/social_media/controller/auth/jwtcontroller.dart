@@ -14,14 +14,14 @@ class JWTController extends GetxController {
 
   Future<User> getCurrentUserDetail() async {
     Dio dio = Dio();
-    var userToken = await getAuthToken();
+  //  var userToken = await getAuthToken();
     var id = await getUserId();
     dio.options.headers["Authorization"] =
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
     var response = await dio.get(ApiEndpoint.userInfo(id!));
-    print(ApiEndpoint.userInfo(id!));
-    print(response.data);
+    // print(ApiEndpoint.userInfo(id!));
+    // print(response.data);
     var userDetails = User.fromJson(response.data);
     return userDetails;
   }
@@ -33,15 +33,15 @@ class JWTController extends GetxController {
       dio.options.headers["Authorization"] =userToken??
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
       //userToken;
-      print(ApiEndpoint.userInfo(id!));
+     // print(ApiEndpoint.userInfo(id!));
       var response = await dio.get(ApiEndpoint.userInfo(id));
-      print(response.data);
+    //  print(response.data);
       var userDetails = UserSchema.fromJson(response.data);
       currentUser ??= userDetails.obs;
       return userDetails;
     } catch (e) {
       print("get Id Error HImanshu");
-      print(e);
+      // print(e);
       return null;
     }
   }
@@ -53,7 +53,7 @@ class JWTController extends GetxController {
     if (lastToken != null) {
       isAuthorised.value = true;
       this.token = RxString(token!);
-      this.userId = RxString(id!);
+      userId = RxString(id!);
     } else {
       isAuthorised.value = false;
     }
@@ -61,10 +61,10 @@ class JWTController extends GetxController {
 
   Future<String?> getAuthToken() async {
     if (token != null) {
-      print("done fastly");
+    //  print("done fastly");
       return token!.value;
     }
-    print("DONE SLOWLY");
+  //  print("DONE SLOWLY");
     var lastToken = await hiveBox.get("token");
     if (lastToken != null) {
       isAuthorised.value = true;

@@ -3,10 +3,8 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/socketControl
 import 'package:flutter/material.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 // import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-import '../../../../../constant/api_string.dart';
 import 'package:intl/intl.dart';
 class MessageView extends StatefulWidget {
   // final List<Message> messages;
@@ -162,7 +160,7 @@ class _MessageViewState extends State<MessageView> {
                       ),
                     ),
                   ):
-                     SizedBox.shrink(),
+                     const SizedBox.shrink(),
 
 
                   Container(

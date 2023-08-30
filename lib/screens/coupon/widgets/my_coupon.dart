@@ -18,7 +18,7 @@ class MyCustomCuppon extends StatelessWidget {
         height: 60,
         width: 130,
         decoration: BoxDecoration(
-            color: Color(0xff2C199E), borderRadius: BorderRadius.circular(10)),
+            color: const Color(0xff2C199E), borderRadius: BorderRadius.circular(10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +60,7 @@ class MyCustomCuppon extends StatelessWidget {
                       alignment: Alignment.center,
                       height: 10,
                       decoration: BoxDecoration(
-                          color: Color(0xff3C83E6),
+                          color: const Color(0xff3C83E6),
                           borderRadius: BorderRadius.circular(2)),
                       child: Text(
                         "Apply Code",

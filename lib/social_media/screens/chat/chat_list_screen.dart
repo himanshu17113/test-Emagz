@@ -1,19 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/social_media/common/searchbar/search_bar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_setting_screen.dart';
-import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/UserChats/user_chats.dart';
-import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../notification/notification_screen.dart';
-import 'controllers/chatController.dart';
 
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
@@ -29,7 +25,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
   String? userId;
   bool isSearch=false;
   String searchQuery='XXXXXXX';
-  TextEditingController QueryControl= new TextEditingController();
+  TextEditingController QueryControl= TextEditingController();
   @override
   void initState() {
     asyncInit();
