@@ -39,7 +39,7 @@ class Post {
       this.likes,
       this.shares,
       this.pollDuration,
-      this.comments,
+     this.comments,
       this.isLike
       // this.createdAt,
       // this.updatedAt,
@@ -48,7 +48,7 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         //privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
-        pollResults: json["PollResults"] == null ? null : PollResults.fromJson(json["PollResults"]),
+        pollResults: json["PollResults"] == [] ? null : PollResults.fromJson(json["PollResults"]),
         likeCount: json["LikeCount"],
         sId: json["_id"],
         user: json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
@@ -59,11 +59,11 @@ class Post {
         setTimer: json["setTimer"],
         caption: json["caption"],
        // tagPrivacy: json["tagPrivacy"],
-        reacted: json["Reacted"] == null ? [] : List<String?>.from(json["Reacted"].map((x) => x)),
-        likes: json["Likes"] == null ? [] : List<String?>.from(json["Likes"].map((x) => x)),
-        shares: json["shares"] == null ? [] : List<String?>.from(json["shares"].map((x) => x)),
+        reacted: json["Reacted"] == [] ? [] : List<String?>.from(json["Reacted"].map((x) => x)),
+        likes: json["Likes"] == [] ? [] : List<String?>.from(json["Likes"].map((x) => x)),
+        shares: json["shares"] == [] ? [] : List<String?>.from(json["shares"].map((x) => x)),
         pollDuration: json["pollDuration"],
-        comments: json["Comments"] == null ? [] : List<Comment?>.from(json["Comments"].map((x) => Comment.fromJson(x))),
+        comments: json["Comments"] == [] ? [] : List<Comment?>.from(json["Comments"].map((x) => Comment.fromJson(x))),
         // createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         // updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         // v: json["__v"],

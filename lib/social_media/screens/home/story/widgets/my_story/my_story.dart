@@ -1,14 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/view_my_story.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/story_selection/ModalBottomSheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../controller/auth/jwtcontroller.dart';
+import '../../controller/story_controller.dart';
+import '../../model/story_model.dart';
+import '../../story_screen.dart';
 
 class MyStory extends StatefulWidget {
-  const MyStory({super.key});
+  String userID;
+  List<Stories>stories;
+   MyStory({super.key, required this.userID, required this.stories});
 
   @override
   State<MyStory> createState() => _MyStoryState();
@@ -20,14 +26,11 @@ class _MyStoryState extends State<MyStory> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        showModalBottomSheet(
-            elevation: 0.0,
-            backgroundColor: Colors.transparent,
-            barrierColor: Colors.transparent,
-            context: context,
-            builder: (context) {
-              return const StorySelectionBottomSheet();
-            });
+        if(widget.stories==[])
+          {
+            return;
+          }
+        Get.to(() => StoryScreen(userId: widget.userID, stories: widget.stories));
       },
       child: Container(
         height: 55,
@@ -67,12 +70,25 @@ class _MyStoryState extends State<MyStory> {
                 child: CircleAvatar(
                   backgroundColor: whiteColor,
                   radius: 8,
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundColor: Color(0xff3B12AA),
                     radius: 6,
-                    child: Icon(
-                      Icons.add,
-                      size: 9,
+                    child: IconButton(
+                      onPressed: ()
+                      {
+                        showModalBottomSheet(
+                            elevation: 0.0,
+                            backgroundColor: Colors.transparent,
+                            barrierColor: Colors.transparent,
+                            context: context,
+                            builder: (context) {
+                              return const StorySelectionBottomSheet();
+                            });
+                      },
+                      icon: Icon(
+                        Icons.add,
+                        size: 9,
+                      ),
                     ),
                   ),
                 ),
