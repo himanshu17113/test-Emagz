@@ -57,11 +57,13 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(width: 200, child: customYesNoButton("Yes", 1,indexx)),
+                  SizedBox(
+                      width: 200, child: customYesNoButton("Yes", 1, indexx)),
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(width: 200, child: customYesNoButton("No", 2,indexx)),
+                  SizedBox(
+                      width: 200, child: customYesNoButton("No", 2, indexx)),
                 ],
               ),
             ],
@@ -87,150 +89,145 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             //     ],
             //   ),
             // ),
-            child:
-                SingleChildScrollView(
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const SizedBox(
-                  height: 50,
-              ),
-              Image.asset(
-                  "assets/png/new_logo.png",
-                  width: 50,
-                  color: const Color(0xff1B47C1),
-              ),
-              const SizedBox(
-                  height: 30,
-              ),
-              FormHeadingText(
-                  headings: 'Choose Your Persona',
-                  fontSize: 27,
-                  fontWeight: FontWeight.bold,
-              ),
-              const SizedBox(
-                  height: 7,
-              ),
-              Text(
-                  "Please Choose Your Persona",
-                  style: TextStyle(
-                      color: accountGray,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w200),
-              ),
-              const SizedBox(
-                  height: 28,
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: SingleChildScrollView(
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: customRadioButton("Personal", 1)),
                     const SizedBox(
-                      width: 5,
+                      height: 50,
                     ),
-                    Expanded(child: customRadioButton("Business", 2)),
-                  ],
-              ),
-              const SizedBox(
-                  height: 28,
-              ),
-              Container(
-                  child: FutureBuilder<List<Template?>?>(
-                    future: accountSetUpController.getAllTempltes(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator(); // Show a loading indicator
-                      }
-                      if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      }
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-
-                            scrollDirection: Axis.vertical,
-                            controller: _scrollController,
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (ctx, index) {
-                                String url=snapshot.data![index]!.thumbnail.toString();
-                                String url2=snapshot.data![index]!.id.toString();
-                                if(url=='null' || url2=='null')
-                                  {
-
+                    Image.asset(
+                      "assets/png/new_logo.png",
+                      width: 50,
+                      color: const Color(0xff1B47C1),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    FormHeadingText(
+                      headings: 'Choose Your Persona',
+                      fontSize: 27,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Text(
+                      "Please Choose Your Persona",
+                      style: TextStyle(
+                          color: accountGray,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w200),
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(child: customRadioButton("Personal", 1)),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Expanded(child: customRadioButton("Business", 2)),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 28,
+                    ),
+                    Container(
+                      child: FutureBuilder<List<Template?>?>(
+                        future: accountSetUpController.getAllTempltes(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator(); // Show a loading indicator
+                          }
+                          if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          }
+                          if (snapshot.hasData) {
+                            return ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                controller: _scrollController,
+                                physics: const ScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (ctx, index) {
+                                  String url = snapshot.data![index]!.thumbnail
+                                      .toString();
+                                  String url2 =
+                                      snapshot.data![index]!.id.toString();
+                                  if (url == 'null' || url2 == 'null') {
+                                  } else {
+                                    return Persona(
+                                        snapshot.data![index]!.id,
+                                        snapshot.data![index]!.introImage,
+                                        snapshot.data![index]!.thumbnail,
+                                        const Color.fromRGBO(255, 199, 1, 1.0),
+                                        index + 1);
                                   }
-                                else {
-                                  return  Persona(
-                                      snapshot.data![index]!.id,
-                                      snapshot.data![index]!.introImage,
-                                      snapshot.data![index]!.thumbnail,
-                                      const Color.fromRGBO(255, 199, 1, 1.0),
-                                      index+1);
-                                }
-
-
-
-
-                            });
-                      } else {
-                        return const Center(
-                          child: Text("Loading..."),
-                        );
-                      }
-                    },
-                  ),
-              )
-              // Expanded(
-              //   child: ListView(children: [
-              //     Persona("assets/template IMG/Group 613.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),1),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/iPhone 13 Pro Max - 6.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),2),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/iPhone 14 Pro Max - 1.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),3),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/Persona -- 2.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),4),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/iPhone 14 Pro Max - 8.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),5),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/iPhone 13 Pro Max - 13.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),6),
-              //     SizedBox(height: 20,),
-              //     Persona("assets/template IMG/Frame 71.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),7),
-              //     SizedBox(height: 20,),
-              //     Persona(
-              //         "assets/png/cameronWilliamson.png",
-              //         "assets/png/cameronMobile.png",
-              //         const Color.fromRGBO(255, 199, 1, 1.0),8),
-              //     const SizedBox(
-              //       height: 20,
-              //     ),
-              //     Persona(
-              //         "assets/template IMG/Frame 72.png",
-              //         " ",
-              //         const Color.fromRGBO(202, 42, 243, 1.0),9),
-              //     const SizedBox(
-              //       height: 20,
-              //     ),
-              //     Persona(
-              //         "assets/template IMG/MacBook Pro 16_ - 11.png",
-              //         " ",
-              //         const Color.fromRGBO(255, 199, 1, 1.0),10),
-              //     const SizedBox(
-              //       height: 20,
-              //     ),
-              //   ]),
-              // )
-            ]),
-                )));
+                                });
+                          } else {
+                            return const Center(
+                              child: Text("Loading..."),
+                            );
+                          }
+                        },
+                      ),
+                    )
+                    // Expanded(
+                    //   child: ListView(children: [
+                    //     Persona("assets/template IMG/Group 613.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),1),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/iPhone 13 Pro Max - 6.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),2),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/iPhone 14 Pro Max - 1.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),3),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/Persona -- 2.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),4),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/iPhone 14 Pro Max - 8.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),5),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/iPhone 13 Pro Max - 13.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),6),
+                    //     SizedBox(height: 20,),
+                    //     Persona("assets/template IMG/Frame 71.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),7),
+                    //     SizedBox(height: 20,),
+                    //     Persona(
+                    //         "assets/png/cameronWilliamson.png",
+                    //         "assets/png/cameronMobile.png",
+                    //         const Color.fromRGBO(255, 199, 1, 1.0),8),
+                    //     const SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //     Persona(
+                    //         "assets/template IMG/Frame 72.png",
+                    //         " ",
+                    //         const Color.fromRGBO(202, 42, 243, 1.0),9),
+                    //     const SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //     Persona(
+                    //         "assets/template IMG/MacBook Pro 16_ - 11.png",
+                    //         " ",
+                    //         const Color.fromRGBO(255, 199, 1, 1.0),10),
+                    //     const SizedBox(
+                    //       height: 20,
+                    //     ),
+                    //   ]),
+                    // )
+                  ]),
+            )));
   }
 
-  Widget Persona(String? id,String? ImgPath, String? MobileImgPath, Color BackGround,int ind) {
+  Widget Persona(String? id, String? ImgPath, String? MobileImgPath,
+      Color BackGround, int ind) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20.0,left: 1,right: 1,top: 1),
+      padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
-
         onTap: () {
           _showMyDialog(ind);
           print(id);
-
-        },//_launchUrl
+        }, //_launchUrl
 
         child: Stack(children: [
           Container(
@@ -241,50 +238,53 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          ImgPath==null?Container(
-            child: Text('Loading...'),
-          ):
-          Positioned(
-            top: 60,
-            left: 50,
-            child: Container(
-              width: 250.0,
-              height: 160.0,
-              decoration: BoxDecoration(
-
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                color: Colors.redAccent,
-              ),
-              child: CachedNetworkImage(imageUrl: ImgPath,
-              fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          MobileImgPath==null?Container():
-          Positioned(
-            top: 80,
-            left: 245,
-            child: SizedBox(
-              height: 140,
-              child: AspectRatio(
-                aspectRatio: 0.5,
-                child: CachedNetworkImage(
-                  fit: BoxFit.cover, imageUrl: MobileImgPath,
-                  //height: 100,
+          ImgPath == null
+              ? Container(
+                  child: Text('Loading...'),
+                )
+              : Positioned(
+                  top: 60,
+                  left: 50,
+                  child: Container(
+                    width: 250.0,
+                    height: 160.0,
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(8.0)),
+                      color: Colors.redAccent,
+                    ),
+                    child: CachedNetworkImage(
+                      imageUrl: ImgPath,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
+          MobileImgPath == null
+              ? Container()
+              : Positioned(
+                  top: 80,
+                  left: 245,
+                  child: SizedBox(
+                    height: 140,
+                    child: AspectRatio(
+                      aspectRatio: 0.5,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover, imageUrl: MobileImgPath,
+                        //height: 100,
+                      ),
+                    ),
+                  ),
+                ),
           Positioned(
               left: 300,
               top: 20,
               child: GestureDetector(
-                onTap: () async{
+                onTap: () async {
                   var jwtController = Get.put(JWTController());
                   var token = await jwtController.getAuthToken();
-                  var userId= await jwtController.getUserId();
+                  var userId = await jwtController.getUserId();
 
-                  Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
+                  //     Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
                 },
                 child: Container(
                   height: 45,
@@ -339,18 +339,16 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     );
   }
 
-  Widget customYesNoButton(String text, int index,int tmpInd) {
-
+  Widget customYesNoButton(String text, int index, int tmpInd) {
     return InkWell(
       onTap: () {
         //_launchUrl();
-        if(index==1) {
-          accountSetUpController.userTemplate(accountSetUpController.templates![tmpInd].id!);
+        if (index == 1) {
+          accountSetUpController
+              .userTemplate(accountSetUpController.templates![tmpInd].id!);
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
-
-        }
-        else
-        Navigator.pop(context);
+        } else
+          Navigator.pop(context);
       },
       child: Container(
         // padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -398,7 +396,4 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       throw Exception('Could not launch $url');
     }
   }
-
-
-
 }

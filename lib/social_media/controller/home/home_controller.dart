@@ -35,9 +35,13 @@ class HomePostsController extends GetxController {
       Dio dio = Dio();
       // var token = await jwtController.getAuthToken();
       // userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token;
+      dio.options.headers["Authorization"] =
+          token ?? await jwtController.getAuthToken();
+      debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
       //  debugPrint(ApiEndpoint.posts(skip.value));
-      var endPoint = ApiEndpoint.posts(skip.value);
+      final String endPoint = ApiEndpoint.posts(skip.value);
+      debugPrint("pppppppppppppppp🧣🧣🧣🧣🧣🧣🧣🧣🧣pppppppp");
+      print(endPoint);
       var resposne = await dio.get(endPoint);
       if (resposne.data['AllPost'] != null) {
         resposne.data["AllPost"].forEach((e) {
@@ -55,7 +59,7 @@ class HomePostsController extends GetxController {
       }
       return [];
     } catch (e) {
-      debugPrint('hey');
+      debugPrint('GET post error');
       debugPrint(e.toString());
       return [];
     }
