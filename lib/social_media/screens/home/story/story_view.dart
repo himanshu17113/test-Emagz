@@ -7,9 +7,35 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/story_view_card.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StoryView extends StatelessWidget {
+import '../../../controller/auth/jwtcontroller.dart';
+
+class StoryView extends StatefulWidget {
   const StoryView({super.key});
 
+  @override
+  State<StoryView> createState() => _StoryViewState();
+}
+
+class _StoryViewState extends State<StoryView> {
+  var jwtController = Get.put(JWTController());
+  var storyController = Get.put(GetXStoryController());
+  String? userId;
+  List<Story?>?storie;
+  List<Stories>st=[];
+
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
+
+  asyncInit()async{
+    await jwtController.getProfileImage();
+    await jwtController.getUserId();
+    storie= await storyController.getmyStories();
+    setState(() {
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final GetXStoryController storyController = Get.put(GetXStoryController());
@@ -31,10 +57,10 @@ class StoryView extends StatelessWidget {
                 itemCount: snapshot.data!.length + 1,
                 itemBuilder: (ctx, index) {
                   if (index == 0) {
-                    return const SizedBox(
+                    return  SizedBox(
                         child: Padding(
                       padding: EdgeInsets.only(left: 20),
-                      child: MyStory(),
+                      child: MyStory(userID:userId.toString(),stories:(storie!=null)? storie!.last!.stories!:st),
                     ));
                   } else {
                     return InkWell(

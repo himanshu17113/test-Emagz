@@ -47,10 +47,10 @@ class HomePostsController extends GetxController {
       debugPrint("pppppppppppppppp🧣🧣🧣🧣🧣🧣🧣🧣🧣pppppppp");
       print(endPoint);
       var resposne = await dio.get(endPoint);
-   //   logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null &&
-          resposne.data["AllPost"] is List) {
+      logger.d(resposne.data);
+      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
+
           posts ??= RxList();
           // rating is at 159 post
           var post;
