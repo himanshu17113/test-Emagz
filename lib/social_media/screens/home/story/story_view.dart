@@ -20,8 +20,8 @@ class _StoryViewState extends State<StoryView> {
   var jwtController = Get.put(JWTController());
   var storyController = Get.put(GetXStoryController());
   String? userId;
-  List<Story?>?storie;
-  List<Stories>st=[];
+  List<Story?>? storie;
+  List<Stories> st = [];
 
   @override
   void initState() {
@@ -29,13 +29,13 @@ class _StoryViewState extends State<StoryView> {
     asyncInit();
   }
 
-  asyncInit()async{
+  asyncInit() async {
     await jwtController.getProfileImage();
     await jwtController.getUserId();
-    storie= await storyController.getmyStories();
-    setState(() {
-    });
+    storie = await storyController.getmyStories();
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     final GetXStoryController storyController = Get.put(GetXStoryController());
@@ -57,10 +57,10 @@ class _StoryViewState extends State<StoryView> {
                 itemCount: snapshot.data!.length + 1,
                 itemBuilder: (ctx, index) {
                   if (index == 0) {
-                    return  SizedBox(
+                    return const SizedBox(
                         child: Padding(
                       padding: EdgeInsets.only(left: 20),
-                      child: MyStory(userID:userId.toString(),stories:(storie!=null)? storie!.last!.stories!:st),
+                      child: MyStory(),
                     ));
                   } else {
                     return InkWell(
