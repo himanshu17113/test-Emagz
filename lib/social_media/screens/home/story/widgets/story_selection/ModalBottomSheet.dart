@@ -104,9 +104,12 @@ class StorySelectionBottomSheet extends StatelessWidget {
               debugPrint("image Data : ${assetEntity.mimeType!.split("/")[1]}");
               Get.to(() => EditorScreen(
                     onSubmit: (editedImage) async {
-                      await storyController.postStory(
+                      final bool x = await storyController.postStory(
                           assetEntity.mimeType!.split("/")[0],
                           editedImage.path);
+                      if (x) {
+                        Get.close(2);
+                      }
                     },
                     image: imageData,
                     fileType: assetEntity.mimeType!.split("/")[0],

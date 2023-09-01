@@ -1,6 +1,6 @@
 class Post {
   //Privacy? privacy;
-  PollResults? pollResults;
+  List<PollResults?>? pollResults;
   int? likeCount;
   String? sId;
   UserSchema? user;
@@ -23,7 +23,7 @@ class Post {
   bool? isLike;
 
   Post(
-      {//this.privacy,
+      { //this.privacy,
       this.pollResults,
       this.sId,
       this.likeCount,
@@ -34,12 +34,12 @@ class Post {
       this.showPollResults,
       this.setTimer,
       this.caption,
-     // this.tagPrivacy,
+      // this.tagPrivacy,
       this.reacted,
       this.likes,
       this.shares,
       this.pollDuration,
-      this.comments,
+     this.comments,
       this.isLike
       // this.createdAt,
       // this.updatedAt,
@@ -48,22 +48,35 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         //privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
-        pollResults: json["PollResults"] == null ? null : PollResults.fromJson(json["PollResults"]),
+        pollResults: json["PollResults"] == null
+            ? []
+            : List<PollResults>.from(
+                json["PollResults"]!.map((x) => PollResults.fromJson(x))),
         likeCount: json["LikeCount"],
         sId: json["_id"],
-        user: json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
+        user:
+            json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
         mediaType: json["mediaType"],
         mediaUrl: json["mediaUrl"],
         enabledpoll: json["Enabledpoll"],
         showPollResults: json["ShowPollResults"],
         setTimer: json["setTimer"],
         caption: json["caption"],
-       // tagPrivacy: json["tagPrivacy"],
-        reacted: json["Reacted"] == null ? [] : List<String?>.from(json["Reacted"].map((x) => x)),
-        likes: json["Likes"] == null ? [] : List<String?>.from(json["Likes"].map((x) => x)),
-        shares: json["shares"] == null ? [] : List<String?>.from(json["shares"].map((x) => x)),
+        // tagPrivacy: json["tagPrivacy"],
+        reacted: json["Reacted"] == null
+            ? []
+            : List<String?>.from(json["Reacted"].map((x) => x)),
+        likes: json["Likes"] == null
+            ? []
+            : List<String?>.from(json["Likes"].map((x) => x)),
+        shares: json["shares"] == null
+            ? []
+            : List<String?>.from(json["shares"].map((x) => x)),
         pollDuration: json["pollDuration"],
-        comments: json["Comments"] == null ? [] : List<Comment?>.from(json["Comments"].map((x) => Comment.fromJson(x))),
+        comments: json["Comments"] == null
+            ? []
+            : List<Comment?>.from(
+                json["Comments"].map((x) => Comment.fromJson(x))),
         // createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         // updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         // v: json["__v"],
@@ -296,18 +309,26 @@ class Comment {
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) => Comment(
-        userId: json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
+        userId:
+            json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
         text: json["text"],
         sId: json["_id"],
-        comments: json["Comments"] == null ? [] : List<Comment>.from(json["Comments"]!.map((x) => Comment.fromJson(x))),
-        timestamp: json["timestamp"] == null ? null : DateTime.parse(json["timestamp"]),
+        comments: json["Comments"] == null
+            ? []
+            : List<Comment>.from(
+                json["Comments"]!.map((x) => Comment.fromJson(x))),
+        timestamp: json["timestamp"] == null
+            ? null
+            : DateTime.parse(json["timestamp"]),
       );
 
   Map<String, dynamic> toJson() => {
         "userId": userId?.toJson(),
         "text": text,
         "_id": sId,
-        "Comments": comments == null ? [] : List<dynamic>.from(comments!.map((x) => x.toJson())),
+        "Comments": comments == null
+            ? []
+            : List<dynamic>.from(comments!.map((x) => x.toJson())),
         "timestamp": timestamp?.toIso8601String(),
       };
 }

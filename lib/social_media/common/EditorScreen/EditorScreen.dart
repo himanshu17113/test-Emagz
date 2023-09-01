@@ -109,39 +109,38 @@ class _EditorScreenState extends State<EditorScreen> {
             actions: [
               IconButton(
                   onPressed: () async {
-                  
-                    // showDialog(
-                    //   useSafeArea: true,
-                    //   barrierDismissible: false,
-                    //   context: context,
-                    //   builder: (context) {
-                    //     return Center(
-                    //       child: Padding(
-                    //         padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                    //         child: Column(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           crossAxisAlignment: CrossAxisAlignment.center,
-                    //           children: [
-                    //             Obx(
-                    //               () => LinearProgressIndicator(
-                    //                 value: storyController.storyUploadPercentage.value,
-                    //               ),
-                    //             ),
-                    //             Obx(
-                    //               () => Material(
-                    //                 color: Colors.transparent,
-                    //                 child: Text(
-                    //                   "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
-                    //                   style: const TextStyle(color: Colors.white),
-                    //                 ),
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     );
-                    //   },
-                    // );
+                    
+                    showDialog(
+                      useSafeArea: true,
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return Center(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 50.0),
+                            child: Obx(() => Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    LinearProgressIndicator(
+                                      value: storyController
+                                          .storyUploadPercentage.value,
+                                    ),
+                                    Material(
+                                      color: Colors.transparent,
+                                      child: Text(
+                                        "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                          ),
+                        );
+                      },
+                    );
                     //   setState(() {});
                     // var realImage = await ScreenshotController.widgetToUiImage(
                     //     InteractiveViewer(
@@ -225,7 +224,7 @@ class _DraggableTextState extends State<DraggableText> {
 
   @override
   Widget build(BuildContext context) {
-     debugPrint(position.toString());
+    debugPrint(position.toString());
     return AnimatedPositioned(
       top: position.dy,
       left: position.dx,

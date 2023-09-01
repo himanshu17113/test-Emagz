@@ -39,13 +39,16 @@ class _PostCardState extends State<PostCard> {
   int selectedOption = -1;
   var homePostController = Get.put(HomePostsController());
   // var jwtController = Get.put(JWTController());
-  final ConversationController chatController = Get.put(ConversationController());
+  final ConversationController chatController =
+      Get.put(ConversationController());
 
   @override
   Widget build(BuildContext context) {
     //todo change logic
-    var yesCount = widget.post!.pollResults!.yes ?? 0;
-    var noCount = widget.post!.pollResults!.no ?? 0;
+    var yesCount = 0;
+    var noCount = 0;
+    // var yesCount = widget.post?.pollResults?[0]?.yes ?? 0;
+    // var noCount = widget.post?.pollResults?[0]?.no ?? 0;
     late double yesPercentage;
     late double noPercentage;
     if (yesCount + noCount != 0) {
@@ -68,12 +71,18 @@ class _PostCardState extends State<PostCard> {
           //     fit: BoxFit.cover
           // ),
           borderRadius: BorderRadius.circular(20),
-          border: widget.isBorder == true ? Border.all(color: const Color(0xff46F2DB), width: 1.5, style: BorderStyle.solid) : null),
+          border: widget.isBorder == true
+              ? Border.all(
+                  color: const Color(0xff46F2DB),
+                  width: 1.5,
+                  style: BorderStyle.solid)
+              : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Stack(fit: StackFit.loose, children: [
           Builder(builder: (context) {
-            if (widget.post!.mediaType == "image" || widget.post!.mediaType == "text") {
+            if (widget.post!.mediaType == "image" ||
+                widget.post!.mediaType == "text") {
               return GestureDetector(
                 onTap: () {
                   Get.to(() => PostView(
@@ -86,7 +95,8 @@ class _PostCardState extends State<PostCard> {
                   //    fit: BoxFit.cover,
                   // height: 55,
                   imageUrl: widget.url,
-                  placeholder: (context, url) => const CircularProgressIndicator(),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               );
@@ -96,7 +106,8 @@ class _PostCardState extends State<PostCard> {
                 post: widget.post!,
                 // videoUrl: videoUrl,
                 videoUrl: widget.post!.mediaUrl!,
-                aspectRatio: (Get.size.height / 2.62) / (MediaQuery.of(context).size.width - 10),
+                aspectRatio: (Get.size.height / 2.62) /
+                    (MediaQuery.of(context).size.width - 10),
               );
             } else {
               return Text("unknown type : ${widget.post!.mediaType}");
@@ -115,7 +126,8 @@ class _PostCardState extends State<PostCard> {
                   CircleAvatar(
                     radius: 16,
                     backgroundImage: widget.post!.mediaType == "video"
-                        ? const CachedNetworkImageProvider("https://picsum.photos/500/500?random=851")
+                        ? const CachedNetworkImageProvider(
+                            "https://picsum.photos/500/500?random=851")
                         : CachedNetworkImageProvider(widget.url),
                   ),
                   const SizedBox(
@@ -123,7 +135,8 @@ class _PostCardState extends State<PostCard> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      final conversationalId = await chatController.conversationId(widget.post!.user!.sId!);
+                      final conversationalId = await chatController
+                          .conversationId(widget.post!.user!.sId!);
                       debugPrint("🧣🧣$conversationalId🧣🧣🧣");
                       if (widget.post!.user != null) {
                         //         List<Message>? messages = [];
@@ -141,10 +154,16 @@ class _PostCardState extends State<PostCard> {
                         Text(
                           "${widget.post?.user!.username.toString()}",
                           // "${widget.post!.userId}",
-                          style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
+                          style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              color: whiteColor),
                         ),
                         Text("@${widget.post?.user!.getstatedName.toString()}",
-                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
+                            style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor)),
                       ],
                     ),
                   )
@@ -188,48 +207,75 @@ class _PostCardState extends State<PostCard> {
                                     }
                                     setState(() {
                                       selectedOption = index;
-                                      homePostController.postPoll(widget.post!.sId!, (index == 0 ? "yes" : "no"));
+                                      homePostController.postPoll(
+                                          widget.post!.sId!,
+                                          (index == 0 ? "yes" : "no"));
                                     });
                                   },
-                                  child: Stack(alignment: Alignment.centerLeft, children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      height: 52,
-                                      width: 100,
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        color: selectedOption == index ? whiteColor : null,
-                                        border: Border.all(color: whiteColor),
-                                      ),
-                                      child: FormHeadingText(
-                                        headings: chooseOption[index],
-                                        color: selectedOption != index ? whiteColor : Colors.black,
-                                      ),
-                                    ),
-                                    (selectedOption != -1)
-                                        ? ((index == 0)
-                                            ? Container(
-                                                alignment: Alignment.bottomCenter,
-                                                child: Container(
-                                                  alignment: Alignment.bottomCenter,
-                                                  height: 52,
-                                                  width: yesPercentage,
-                                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
-                                                  child: Text("$yesCount", style: const TextStyle(color: Colors.white)),
-                                                ),
-                                              )
-                                            : Container(
-                                                alignment: Alignment.bottomCenter,
-                                                child: Container(
-                                                  alignment: Alignment.bottomCenter,
-                                                  height: 52,
-                                                  width: noPercentage,
-                                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
-                                                  child: Text("$noCount", style: const TextStyle(color: Colors.white)),
-                                                ),
-                                              ))
-                                        : Container()
-                                  ]),
+                                  child: Stack(
+                                      alignment: Alignment.centerLeft,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          height: 52,
+                                          width: 100,
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: selectedOption == index
+                                                ? whiteColor
+                                                : null,
+                                            border:
+                                                Border.all(color: whiteColor),
+                                          ),
+                                          child: FormHeadingText(
+                                            headings: chooseOption[index],
+                                            color: selectedOption != index
+                                                ? whiteColor
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        (selectedOption != -1)
+                                            ? ((index == 0)
+                                                ? Container(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: Container(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      height: 52,
+                                                      width: yesPercentage,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(
+                                                                  0.5)),
+                                                      child: Text("$yesCount",
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white)),
+                                                    ),
+                                                  )
+                                                : Container(
+                                                    alignment:
+                                                        Alignment.bottomCenter,
+                                                    child: Container(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      height: 52,
+                                                      width: noPercentage,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.black
+                                                              .withOpacity(
+                                                                  0.5)),
+                                                      child: Text("$noCount",
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .white)),
+                                                    ),
+                                                  ))
+                                            : Container()
+                                      ]),
                                 ),
                               ),
                             ),
@@ -247,7 +293,8 @@ class _PostCardState extends State<PostCard> {
                             });
                           },
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 15, bottom: 15),
+                            padding:
+                                const EdgeInsets.only(right: 15, bottom: 15),
                             child: Image.asset(
                               "assets/png/poll_icon.png",
                               width: 25,
@@ -270,13 +317,17 @@ class _PostCardState extends State<PostCard> {
                       border: Border.all(
                         color: const Color(0xFFffffff).withOpacity(.15),
                       ),
-                      gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                        const Color(0xFFffffff).withOpacity(0.20),
-                        const Color(0xFFFFFFFF).withOpacity(0.25),
-                      ], stops: const [
-                        2,
-                        0.1,
-                      ]),
+                      gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            const Color(0xFFffffff).withOpacity(0.20),
+                            const Color(0xFFFFFFFF).withOpacity(0.25),
+                          ],
+                          stops: const [
+                            2,
+                            0.1,
+                          ]),
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
@@ -286,7 +337,11 @@ class _PostCardState extends State<PostCard> {
                       Container(
                         margin: const EdgeInsets.only(left: 10),
                         width: Get.size.width / 2.5,
-                        child: Text("${widget.post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                        child: Text("${widget.post!.caption}",
+                            style: TextStyle(
+                                fontSize: 7,
+                                fontWeight: FontWeight.w400,
+                                color: whiteColor)),
                       ),
                       //    const Expanded(child: SizedBox()),
                       GestureDetector(
@@ -316,7 +371,10 @@ class _PostCardState extends State<PostCard> {
                       ),
                       Text(
                         "${widget.post!.likes!.length}",
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: whiteColor),
                       ),
                       const SizedBox(
                         width: 8,
@@ -330,7 +388,10 @@ class _PostCardState extends State<PostCard> {
                       ),
                       Text(
                         "${widget.post!.comments?.length}",
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                        style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            color: whiteColor),
                       ),
                       const SizedBox(
                         width: 5,
@@ -339,7 +400,9 @@ class _PostCardState extends State<PostCard> {
                         onTap: () {
                           showModalBottomSheet(
                             shape: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                borderRadius: BorderRadius.only(
+                                    topRight: Radius.circular(20),
+                                    topLeft: Radius.circular(20))),
                             isScrollControlled: true,
                             context: context,
                             builder: (context) {

@@ -11,6 +11,8 @@ import "package:emagz_vendor/constant/api_string.dart";
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../templates/choose_template/template_model.dart';
+
 class SetupAccount extends GetxController {
 
   var jwtController = Get.put(JWTController());
@@ -21,7 +23,7 @@ class SetupAccount extends GetxController {
   final TextEditingController businessTypeController = TextEditingController();
 
   RxBool isUserRegiserting = RxBool(false);
-
+  List<Template>? templates=[];
 
   // setBusinessLogo
 
@@ -110,5 +112,89 @@ class SetupAccount extends GetxController {
       isUserRegiserting.value = false;
       return false;
     }
+  }
+
+  Future<String> uploadProfilePic(XFile? image) async{
+    var token = await jwtController.getAuthToken();
+    var id= await jwtController.getUserId();
+    Map<String, String> header = {'Content-type': 'multipart/form-data'};
+    Map<String,String> header2={"Authorization":token!};
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=${id}'));
+    request.headers.addAll(header);
+    request.headers.addAll(header2);
+    if (image?.path != null) {
+      request.files.add(await http.MultipartFile.fromPath(
+        'ProfilePic',
+        image!.path,
+        filename: image!.name,
+      ));
+    };
+    var response = await request.send();
+    debugPrint("code${response.statusCode}");
+    debugPrint("stream${response.stream}");
+    final res = await http.Response.fromStream(response);
+    var data = jsonDecode(res.body);
+    if(response.statusCode==200)
+      {
+        print(data.toString());
+        print(data['data']['ProfilePic']);
+        await jwtController.setProfileImage(data['data']['ProfilePic']);
+        return data['data']['ProfilePic'];
+      }
+    else
+      {
+        print('error');
+        return 'https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661?b=1&k=20&m=1307615661&s=170667a&w=0&h=Zp9_27RVS_UdlIm2k8sa8PuutX9K3HTs8xdK0UfKmYk=';
+      }
+  }
+
+  Future<List<Template?>?> getAllTempltes() async {
+    templates=[];
+    try{
+      var token = await jwtController.getAuthToken();
+      print(token);
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
+      var body = jsonDecode(response.body);
+      print(body);
+      body.forEach((e) {
+        var temp = Template.fromJson(e);
+        templates?.add(temp);
+      });
+      return templates;
+    }
+    catch(e)
+    {
+      print(e);
+    }
+
+  }
+
+  userTemplate(String? templateId) async
+  {
+    print('hehrehere');
+    print(templateId.toString());
+    var userId= await jwtController.getUserId();
+    var token = await jwtController.getAuthToken();
+    Map body = {
+      "userId": userId,
+      "templateId": templateId,
+      "finalTemplateData": {}
+    };
+    var headers = {'Content-Type': 'application/json', "Authorization": token!};
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.userTemplate), headers: headers,body: jsonEncode(body),);
+    Map data= jsonDecode(response.body);
+    if(response.statusCode==200)
+      {
+        print('succes');
+        print(data);
+
+        Get.back();
+      }
+    else{
+      print('expected error');
+    }
+
   }
 }
