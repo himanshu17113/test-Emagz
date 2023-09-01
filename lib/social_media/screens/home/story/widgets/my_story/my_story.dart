@@ -11,11 +11,11 @@ class MyStory extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if(widget.stories==[])
-          {
-            return;
-          }
-        Get.to(() => StoryScreen(userId: widget.userID, stories: widget.stories));
+        // if(widget.stories==[])
+        //   {
+        //     return;
+        //   }
+        // Get.to(() => StoryScreen(userId: widget.userID, stories: widget.stories));
       },
       child: Container(
         height: 55,

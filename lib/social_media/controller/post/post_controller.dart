@@ -131,77 +131,7 @@ class PostController extends GetxController {
     }
   }
 
-  Future makelPost(
-    bool enablePoll,
-    String tagPrivacy,
-    String? setTimer,
-  ) async {
-    isPosting.value = true;
-
-    try {
-      // if(setTimer == "-1"){
-      //   CustomSnackbar.show("please setTimer");
-      //   isPosting.value = false;
-      //   return;
-      // }
-      // if(captionController.text == ""){
-      //   CustomSnackbar.show("please fill captions");
-      //   isPosting.value = false;
-      //   return;
-      // }
-
-      Dio dio = Dio();
-      debugPrint(privacyLikesAndViews.value);
-      var token = await jwtController.getAuthToken();
-      var userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token;
-      //todo : Remove The New File Making Process With Filtered File
-      final tempDir = await getTemporaryDirectory();
-      File file = await File('${tempDir.path}/image.png').create();
-      if (assetType != PostAssetType.text) {
-        Uint8List imageInUnit8List = imagePath!;
-
-        file.writeAsBytesSync(imageInUnit8List);
-      }
-
-      FormData reqData = FormData.fromMap({
-        "userId": userId,
-        "mediaType": assetType.toString().split(".")[1].substring(0),
-        "mediaUrl": MultipartFile.fromFileSync(
-          assetType == PostAssetType.text ? textPost! : file.path.toString(),
-        ),
-        "Enabledpoll": enablePoll ? "yes" : "no",
-        "ShowPollResults": "yes",
-        //    "setTimer": enablePoll ? setTimer : "",
-        "caption": captionController.text,
-        "privacy": {
-          "likesAndViews": privacyLikesAndViews.value,
-          "hideLikeAndViewsControl": "0"
-        },
-        "tagPrivacy": tagPrivacy,
-        "pollDuration": "0",
-      });
-      await dio.post(
-        ApiEndpoint.makePost,
-        data: reqData,
-        onSendProgress: (count, total) {
-          uploadPercentage.value = (count / total);
-        },
-      );
-      uploadPercentage.value = 0.0;
-
-      CustomSnackbar.showSucess("Post  successful");
-      isPosting.value = false;
-      bottomNavController.pageUpdate(0);
-      Get.offAll(() => const BottomNavBar());
-    } catch (e) {
-      uploadPercentage.value = 0.0;
-      isPosting.value = false;
-      Get.snackbar("Cant Post", "Some Internal Error");
-      debugPrint("posting video error $e");
-    }
-  }
-
+ 
   // createPost() async {
   //   try {
   //     var headers = {'Content-Type': 'application/json'};

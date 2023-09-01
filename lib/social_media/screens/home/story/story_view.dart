@@ -7,35 +7,9 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/story_view_card.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/auth/jwtcontroller.dart';
-
-class StoryView extends StatefulWidget {
+class StoryView extends StatelessWidget {
   const StoryView({super.key});
 
-  @override
-  State<StoryView> createState() => _StoryViewState();
-}
-
-class _StoryViewState extends State<StoryView> {
-  var jwtController = Get.put(JWTController());
-  var storyController = Get.put(GetXStoryController());
-  String? userId;
-  List<Story?>?storie;
-  List<Stories>st=[];
-
-  @override
-  void initState() {
-    super.initState();
-    asyncInit();
-  }
-
-  asyncInit()async{
-    await jwtController.getProfileImage();
-    await jwtController.getUserId();
-    storie= await storyController.getmyStories();
-    setState(() {
-    });
-  }
   @override
   Widget build(BuildContext context) {
     final GetXStoryController storyController = Get.put(GetXStoryController());
@@ -43,7 +17,8 @@ class _StoryViewState extends State<StoryView> {
       width: Get.size.width,
       margin: const EdgeInsets.only(top: 10),
       height: 85,
-      decoration: BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
+      decoration:
+          BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
       child: FutureBuilder<List<Story?>?>(
         future: storyController.getStories(),
         builder: (context, snapshot) {
@@ -56,22 +31,22 @@ class _StoryViewState extends State<StoryView> {
                 itemCount: snapshot.data!.length + 1,
                 itemBuilder: (ctx, index) {
                   if (index == 0) {
-                    return  SizedBox(
+                    return const SizedBox(
                         child: Padding(
                       padding: EdgeInsets.only(left: 20),
-                      child: MyStory(userID:userId.toString(),stories:(storie!=null)? storie!.last!.stories!:st),
+                      child: MyStory(),
                     ));
                   } else {
                     return InkWell(
                         onTap: () {
-                          Get.to(() => StoryScreen(userId: snapshot.data![index -1]!.userId!.sId!, stories: snapshot.data![index -1]!.stories!));
+                          Get.to(() => StoryScreen(
+                              userId: snapshot.data![index - 1]!.userId!.sId!,
+                              stories: snapshot.data![index - 1]!.stories!));
                         },
                         child: StoryViewCard(
-
-                          url: snapshot.data![index-1]!.stories!.isNotEmpty?
-                          (snapshot.data![index - 1]!.stories?[0].mediaUrl ??
-                              "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg"):
-                          'https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg',
+                          url: snapshot
+                                  .data![index - 1]!.stories?[0].mediaUrl ??
+                              "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg",
                           username: snapshot.data![index - 1]?.userId,
                         ));
                   }
