@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 class GetXStoryController extends GetxController {
   RxInt currentStoryIndex = RxInt(0);
   List<Story>? stories = [];
+  List<Stories> mystory=[];
   RxString myId = RxString("");
   RxDouble storyUploadPercentage = RxDouble(0);
   RxBool isUploading = RxBool(false);
@@ -61,6 +62,7 @@ class GetXStoryController extends GetxController {
 
   Future<List<Story?>?> getmyStories() async {
     try {
+      //stories?.clear();
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
       // if (myId.value == "" || token == null) {
       debugPrint(ApiEndpoint.story);
@@ -94,6 +96,39 @@ class GetXStoryController extends GetxController {
       debugPrint('stoey erreoe');
       debugPrint(e.toString());
       return null;
+    }
+  }
+  Future<List<Stories>> getmymyStories() async {
+    try {
+      debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
+      // if (myId.value == "" || token == null) {
+      debugPrint(ApiEndpoint.story);
+      final token = await jwtController.getAuthToken();
+      debugPrint(token);
+      myId.value = (await jwtController.getUserId())!;
+      //  }
+      final headers = {'Content-Type': 'application/json', "Authorization": token!};
+
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
+      var body = jsonDecode(response.body);
+      debugPrint(body.toString());
+
+      debugPrint('story');
+      // stories ??= Map();
+
+      var story = Stories.fromJson(body["data"]["stories"]);
+      mystory.add(story);
+      // if (stories![story.userId!] == null) {
+      //   stories![story.userId] = {};
+      // }
+      // stories![story.userId!]![story.sId!] = story;
+
+      debugPrint(stories.toString());
+      return mystory!;
+    } catch (e) {
+      debugPrint('stoey');
+      debugPrint(e.toString());
+      return mystory;
     }
   }
 

@@ -37,7 +37,7 @@ class _StoryScreenState extends State<StoryScreen> {
     });
     //   StoryItem.pageImage(
     //       url: foodImage[0], controller: controller, imageFit: BoxFit.cover),
-    return Scaffold(
+    return widget.stories.isNotEmpty?Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
@@ -114,7 +114,12 @@ class _StoryScreenState extends State<StoryScreen> {
                             widget.stories[storyController.currentStoryIndex.value].likes!.add(storyController.myId.value);
                           }
                         },
-                        child: Obx(() => widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)
+                        child: widget.stories.length==0?(Container(
+                          child: Image.asset(
+                            "assets/png/unlike_icon.png",
+                            width: 22,
+                          ),
+                        )): Obx(() =>(widget.stories![storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value))
                             ? Image.asset(
                                 "assets/png/liked_icon.png",
                                 width: 22,
@@ -127,8 +132,10 @@ class _StoryScreenState extends State<StoryScreen> {
                       const SizedBox(
                         width: 5,
                       ),
-                      Obx(
-                        () => Text(
+
+                          widget.stories.length==0?Text('Valid'):
+                          Obx(
+                                () => Text(
                           widget.stories[storyController.currentStoryIndex.value].likes!.length.toString(),
                           style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
@@ -149,12 +156,14 @@ class _StoryScreenState extends State<StoryScreen> {
                       const SizedBox(
                         width: 5,
                       ),
-                      Obx(
-                        () => Text(
-                          widget.stories[storyController.currentStoryIndex.value].comments!.length.toString(),
+
+                          widget.stories.isNotEmpty?Obx(
+                                () => Text(
+                          widget.stories[storyController.currentStoryIndex.value].comments!.length.toString())):
+                          Text('VAlid',
                           style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
-                      ),
+
                       const SizedBox(
                         width: 30,
                       ),
@@ -168,7 +177,12 @@ class _StoryScreenState extends State<StoryScreen> {
               ),
             ),
           ],
-        ));
+        )):
+    Container(
+      child: Text('No Story'),
+
+    )
+    ;
   }
 
   updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {

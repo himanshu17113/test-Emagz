@@ -284,7 +284,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                   var token = await jwtController.getAuthToken();
                   var userId = await jwtController.getUserId();
 
-                  //     Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
+                  //     //Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
                 },
                 child: Container(
                   height: 45,

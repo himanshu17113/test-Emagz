@@ -39,7 +39,7 @@ class Post {
       this.likes,
       this.shares,
       this.pollDuration,
-      this.comments,
+     this.comments,
       this.isLike
       // this.createdAt,
       // this.updatedAt,

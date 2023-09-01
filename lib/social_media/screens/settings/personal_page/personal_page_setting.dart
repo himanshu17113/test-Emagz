@@ -38,6 +38,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
   }
 
   asyncInit()async{
+    await jwtController.getProfileImage();
 
     user = await jwtController.getCurrentUserDetail();
 
