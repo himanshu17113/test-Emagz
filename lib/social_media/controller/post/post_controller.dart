@@ -14,6 +14,8 @@ import 'package:get/get.dart' hide MultipartFile, FormData;
 
 import 'package:path_provider/path_provider.dart';
 
+import '../home/home_controller.dart';
+
 enum PostAssetType { image, video, text }
 
 class PostController extends GetxController {
@@ -32,10 +34,9 @@ class PostController extends GetxController {
   RxString imagePathUpload = "".obs;
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-
+  HomePostsController homePostsController = Get.put(HomePostsController());
   var jwtController = Get.put(JWTController());
   var bottomNavController = Get.put(NavController());
-
   Future setPost(image, PostAssetType assetType) async {
     isSettingImage.value = true;
     if (assetType == PostAssetType.text) {
@@ -120,7 +121,11 @@ class PostController extends GetxController {
 
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
+
+      homePostsController.skip.value = -10;
+
       bottomNavController.pageUpdate(0);
+      homePostsController.posts?.clear();
       Get.offAll(() => const BottomNavBar());
     } catch (e) {
       //debugPrint(reqData.toString());
@@ -131,7 +136,6 @@ class PostController extends GetxController {
     }
   }
 
- 
   // createPost() async {
   //   try {
   //     var headers = {'Content-Type': 'application/json'};

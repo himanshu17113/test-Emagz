@@ -4,7 +4,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 
 import '../story/model/story_model.dart';
  
-
 class StoryViewCard extends StatelessWidget {
   const StoryViewCard({
     Key? key,

@@ -1,60 +1,36 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/story_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/my_story.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/story_view_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/auth/jwtcontroller.dart';
-
-class StoryView extends StatefulWidget {
-  const StoryView({super.key});
-
-  @override
-  State<StoryView> createState() => _StoryViewState();
-}
-
-class _StoryViewState extends State<StoryView> {
-  var jwtController = Get.put(JWTController());
-  var storyController = Get.put(GetXStoryController());
-  String? userId;
-  List<Story?>? storie;
-  List<Stories> st = [];
-
-  @override
-  void initState() {
-    super.initState();
-    asyncInit();
-  }
-
-  asyncInit() async {
-    await jwtController.getProfileImage();
-    await jwtController.getUserId();
-    storie = await storyController.getmyStories();
-    setState(() {});
-  }
+class StoryView extends StatelessWidget {
+  StoryView({super.key});
+  final GetXStoryController storyController = Get.put(GetXStoryController());
 
   @override
   Widget build(BuildContext context) {
-    final GetXStoryController storyController = Get.put(GetXStoryController());
+    //  storyController.getStories();
     return Container(
-      width: Get.size.width,
-      margin: const EdgeInsets.only(top: 10),
-      height: 85,
-      decoration:
-          BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
-      child: FutureBuilder<List<Story?>?>(
-        future: storyController.getStories(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
+        width: Get.size.width,
+        margin: const EdgeInsets.only(top: 10),
+        height: 85,
+        decoration:
+            BoxDecoration(border: Border.all(color: whiteColor, width: 1)),
+        child:
+            //  FutureBuilder<List<Story?>?>(
+            //   future: storyController.getStories(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       return
+            ListView.builder(
                 scrollDirection: Axis.horizontal,
                 //  controller: _scrollController,
                 physics: const ScrollPhysics(),
 //shrinkWrap: true,
-                itemCount: snapshot.data!.length + 1,
+                itemCount: storyController.stories!.length + 1,
                 itemBuilder: (ctx, index) {
                   if (index == 0) {
                     return const SizedBox(
@@ -62,28 +38,26 @@ class _StoryViewState extends State<StoryView> {
                       padding: EdgeInsets.only(left: 20),
                       child: MyStory(),
                     ));
-                  } else {
+                  } else if (storyController.stories?[index - 1].stories !=
+                          null &&
+                      storyController.stories![index - 1].stories!.isNotEmpty) {
                     return InkWell(
                         onTap: () {
                           Get.to(() => StoryScreen(
-                              userId: snapshot.data![index - 1]!.userId!.sId!,
-                              stories: snapshot.data![index - 1]!.stories!));
+                              userId: storyController
+                                  .stories![index - 1].userId!.sId!,
+                              stories: storyController
+                                  .stories![index - 1].stories!));
                         },
                         child: StoryViewCard(
-                          url: snapshot
-                                  .data![index - 1]!.stories?[0].mediaUrl ??
+                          url: storyController
+                                  .stories?[index - 1].stories?[0].mediaUrl ??
                               "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg",
-                          username: snapshot.data![index - 1]?.userId,
+                          username: storyController.stories![index - 1].userId,
                         ));
+                  } else {
+                    return const SizedBox();
                   }
-                });
-          } else {
-            return const Center(
-              child: Text("Loading..."),
-            );
-          }
-        },
-      ),
-    );
+                }));
   }
 }

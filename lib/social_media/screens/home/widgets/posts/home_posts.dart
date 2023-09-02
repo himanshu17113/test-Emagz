@@ -2,12 +2,15 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/post_card.dart';
 import 'package:emagz_vendor/social_media/screens/home_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../story/story_view.dart';
+
 class HomePosts extends StatelessWidget {
-  String? myUserId;
+  final String? myUserId;
   HomePosts({Key? key, this.myUserId}) : super(key: key);
 
   final HomePostsController homePostController =
@@ -15,30 +18,20 @@ class HomePosts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Post>>(
-      future: homePostController.getPost(),
-      builder: (context, snapshot) {
-        // if(snapshot.hasError){
-        //   return Center(child: Text(snapshot.error.toString()));
-        // }
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        // if(!snapshot.hasError){
-        //   debugPrint(snapshot.data![0]);
-        //   debugPrint(snapshot.error);
-        //   return const Center(child: Text("Facing technical error while loading ... "));
-        // }
-
-        return Center(
-          // fit: FlexFit.loose,
-          child: ListView.builder(
-            padding: const EdgeInsets.only(bottom: 80.0),
-            shrinkWrap: true,
-            controller: homePostController.scrollController,
-            physics: const ScrollPhysics(),
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
+    return Obx(() =>
+     ListView.builder(
+          padding: const EdgeInsets.only(bottom: 80.0),
+          controller: homePostController.scrollController,
+          //   shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          itemCount: homePostController.posts!.length+1,
+          itemBuilder: (context, index) {
+            if (index == homePostController.posts!.length) {
+              return const CupertinoActivityIndicator();
+            }
+            if (index == 0) {
+              return StoryView();
+            } else {
               return InkWell(
                   onTap: () {
                     // Get.to(() => ExploreScreen());
@@ -92,20 +85,19 @@ class HomePosts extends StatelessWidget {
                         // setState(() {});
                       }
                     },
-                    child: snapshot.data?[index] == null
+                    child: homePostController.posts?[index] == null
                         ? const SizedBox()
                         : PostCard(
-                            isLiked:
-                                snapshot.data![index].likes!.contains(myUserId),
+                            isLiked: homePostController.posts?[index].likes!
+                                .contains(myUserId),
                             myUserId: myUserId,
-                            post: snapshot.data![index],
-                            url: snapshot.data![index].mediaUrl ?? "",
+                            post: homePostController.posts?[index],
+                            url:
+                                homePostController.posts?[index].mediaUrl ?? "",
                           ),
                   ));
-            },
-          ),
-        );
-      },
-    );
+            }
+          },
+        ));
   }
 }

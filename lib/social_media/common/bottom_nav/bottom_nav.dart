@@ -1,4 +1,3 @@
-
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +96,9 @@ class BottomNavBar extends StatelessWidget {
 //   }
 // }
   Widget build(BuildContext context) {
-    return GetBuilder<NavController> (
+    return GetBuilder<NavController>(
+    //  dispose: (state) => ,
+      autoRemove: false,
       init: NavController(),
       builder: (value) {
         return Stack(

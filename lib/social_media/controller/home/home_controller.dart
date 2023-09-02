@@ -13,12 +13,23 @@ class HomePostsController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   var jwtController = Get.put(JWTController());
+
   // String? userId;
 
   @override
   onInit() async {
     await storedData();
-
+  await  getPost();
+    if (posts!.length < 2) {
+      //  postController.audiovideopostList.clear();
+    //  print("gggggggggggvvvvvvvvvvvvvv");
+      getPost();
+      //  setState(() {});
+    }
+    scrollController.addListener(() {
+      loadMoreData();
+    });
+    //  getPost();
     super.onInit();
   }
 
@@ -29,11 +40,19 @@ class HomePostsController extends GetxController {
     userId = await jwtController.getUserId();
   }
 
-  RxList<Post>? posts;
+  loadMoreData() async {
+    if (scrollController.position.pixels >=
+        scrollController.position.maxScrollExtent) {
+      await getPost();
+    } else if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent - 50) {}
+  }
+
+  RxList<Post>? posts = <Post>[].obs;
   RxInt skip = RxInt(-10);
 
-  Future<List<Post>> getPost() async {
-    skip.value += 10;
+  getPost() async {
+    skip.value = skip.value + 10;
 
     try {
       Dio dio = Dio();
@@ -47,12 +66,10 @@ class HomePostsController extends GetxController {
       debugPrint("pppppppppppppppp🧣🧣🧣🧣🧣🧣🧣🧣🧣pppppppp");
       print(endPoint);
       var resposne = await dio.get(endPoint);
-      logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
+      // logger.d(resposne.data);
+      if (resposne.data['AllPost'] != null &&
+          resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
-
-          posts ??= RxList();
-          // rating is at 159 post
           var post;
           try {
             post = Post.fromJson(e);
@@ -63,17 +80,17 @@ class HomePostsController extends GetxController {
           //debugPrint(post.mediaUrl!);
 
           if (post.user != null) {
-            posts!.insert(0, post);
+            posts!.add(post);
           }
         });
 
-        return posts!.reversed.toList();
+        //   return posts!.reversed.toList();
       }
-      return [];
+      //   return [];
     } catch (e) {
       debugPrint('hey get post not working');
-      debugPrint(e.toString());
-      return [];
+      //    debugPrint(e.toString());
+      //   return [];
     }
   }
 
