@@ -1,22 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/view_my_story.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/view_my_story.dart';
+import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
+
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/story_selection/ModalBottomSheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../story_screen.dart';
 
 class MyStory extends StatelessWidget {
-  const MyStory({super.key});
+  final String? userID;
+  final List<Stories>? stories;
+  const MyStory({super.key, this.stories, this.userID});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // if(widget.stories==[])
-        //   {
-        //     return;
-        //   }
-        // Get.to(() => StoryScreen(userId: widget.userID, stories: widget.stories));
+        if (stories == [] || userID == null) {
+          return;
+        }
+        Get.to(() => StoryScreen(userId: userID!, stories: stories!));
       },
       child: Container(
         height: 55,
@@ -40,9 +44,10 @@ class MyStory extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     //   border: Border.all( color: ),
-                    image: const DecorationImage(
+                    image: DecorationImage(
                         image: CachedNetworkImageProvider(
-                            "https://picsum.photos/500/500?random=0"),
+                            stories?[0].mediaUrl ??
+                                "https://picsum.photos/500/500?random=0"),
                         fit: BoxFit.cover),
                   ),
                   // child: Image.network(
@@ -52,30 +57,31 @@ class MyStory extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 55,
-                left: 15,
-                child: CircleAvatar(
-                  backgroundColor: whiteColor,
-                  radius: 8,
-                  child: CircleAvatar(
-                    backgroundColor: Color(0xff3B12AA),
-                    radius: 6,
-                    child: IconButton(
-                      onPressed: ()
-                      {
-                        showModalBottomSheet(
-                            elevation: 0.0,
-                            backgroundColor: Colors.transparent,
-                            barrierColor: Colors.transparent,
-                            context: context,
-                            builder: (context) {
-                              return const StorySelectionBottomSheet();
-                            });
-                      },
-                      icon: Icon(
-                        Icons.add,
-                        size: 9,
-                      ),
+                top: 45,
+                left: 10,
+                child: IconButton(
+                  alignment: Alignment.centerLeft,
+                  iconSize: 10,
+                  onPressed: () {
+                    showModalBottomSheet(
+                        elevation: 0.0,
+                        backgroundColor: Colors.transparent,
+                        barrierColor: Colors.transparent,
+                        context: context,
+                        builder: (context) {
+                          return const StorySelectionBottomSheet();
+                        });
+                  },
+                  icon: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(33),
+                      border: Border.all(color: Colors.white, width: 2),
+                      color: const Color(0xff3B12AA),
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 15,
                     ),
                   ),
                 ),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
+import '../../story/controller/story_controller.dart';
 import '../../story/story_view.dart';
 
 class HomePosts extends StatelessWidget {
@@ -15,22 +16,27 @@ class HomePosts extends StatelessWidget {
 
   final HomePostsController homePostController =
       Get.find<HomePostsController>();
-
+  final GetXStoryController storyController = Get.put(GetXStoryController());
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>
-     ListView.builder(
+    return Obx(() => ListView.builder(
+          cacheExtent: 5000,
           padding: const EdgeInsets.only(bottom: 80.0),
           controller: homePostController.scrollController,
           //   shrinkWrap: true,
           physics: const ScrollPhysics(),
-          itemCount: homePostController.posts!.length+1,
+          itemCount: homePostController.posts!.length + 2,
           itemBuilder: (context, index) {
-            if (index == homePostController.posts!.length) {
+            if (index == homePostController.posts!.length + 1) {
               return const CupertinoActivityIndicator();
             }
             if (index == 0) {
-              return StoryView();
+              if (storyController.stories!.isNotEmpty) {
+                return StoryView(
+                    sid: myUserId ?? homePostController.userId ?? "");
+              } else {
+                Text("loading");
+              }
             } else {
               return InkWell(
                   onTap: () {
@@ -85,15 +91,16 @@ class HomePosts extends StatelessWidget {
                         // setState(() {});
                       }
                     },
-                    child: homePostController.posts?[index] == null
+                    child: homePostController.posts?[index - 1] == null
                         ? const SizedBox()
                         : PostCard(
-                            isLiked: homePostController.posts?[index].likes!
+                            isLiked: homePostController.posts?[index - 1].likes!
                                 .contains(myUserId),
                             myUserId: myUserId,
-                            post: homePostController.posts?[index],
+                            post: homePostController.posts?[index - 1],
                             url:
-                                homePostController.posts?[index].mediaUrl ?? "",
+                                homePostController.posts?[index - 1].mediaUrl ??
+                                    "",
                           ),
                   ));
             }
