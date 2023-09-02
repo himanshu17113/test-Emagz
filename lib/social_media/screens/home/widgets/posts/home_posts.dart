@@ -95,6 +95,7 @@ class HomePosts extends StatelessWidget {
                     child: snapshot.data?[index] == null
                         ? const SizedBox()
                         : PostCard(
+
                             isLiked:
                                 snapshot.data![index].likes!.contains(myUserId),
                             myUserId: myUserId,
