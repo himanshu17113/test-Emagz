@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPersona extends StatefulWidget {
-  const WebViewPersona({Key? key}) : super(key: key);
+  String token;
+  String userId;
+  String personaUserId;
+  String templateId;
+  WebViewPersona({Key? key, required this.token, required this.userId, required this.personaUserId,required this.templateId}) : super(key: key);
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -10,62 +14,6 @@ class WebViewPersona extends StatefulWidget {
 
 class _WebViewPersonaState extends State<WebViewPersona> {
   late final WebViewController controller;
-  var loadingPercentage = 0;
-  final cookieManager = WebViewCookieManager();
-  Future<void> _onAddCookie(WebViewController controller) async {
-    await controller.runJavaScript('''var date = new Date();
-  date.setTime(date.getTime()+(30*24*60*60*1000));
-  document.cookie = "FirstName=John; expires=" + date.toGMTString();''');
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Custom cookie added.'),
-      ),
-    );
-  }
-
-  Future<void> _onSetCookie(WebViewController controller) async {
-    debugPrint("here");
-    await cookieManager.setCookie(
-      const WebViewCookie(
-          name: 'E_persona_userId',
-          value: 'bar',
-          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
-    );
-    await cookieManager.setCookie(
-      const WebViewCookie(
-          name: 'E_current_userId',
-          value: 'bar',
-          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
-    );
-    await cookieManager.setCookie(
-      const WebViewCookie(
-          name: 'E_token',
-          value: 'token',
-          domain: 'ec2-15-207-150-14.ap-south-1.compute.amazonaws.com'),
-    );
-    if (!mounted) {
-      debugPrint('cookis');
-      return;
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Custom cookie is set.'),
-      ),
-    );
-  }
-
-  Future<void> _onListCookies(WebViewController controller) async {
-    final String cookies = await controller
-        .runJavaScriptReturningResult('document.cookie') as String;
-    debugPrint(cookies);
-    if (!mounted) return;
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(cookies.isNotEmpty ? cookies : 'There are no cookies.'),
-      ),
-    );
-  }
 
   @override
   void initState() {
@@ -73,26 +21,21 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(NavigationDelegate(
         onPageStarted: (url) {
-          setState(() {
-            loadingPercentage = 0;
-          });
+
         },
         onProgress: (progress) {
-          setState(() {
-            loadingPercentage = progress;
-          });
+
         },
         onPageFinished: (url) {
-          setState(() {
-            loadingPercentage = 100;
-          });
+          print('http://persona.emagz.live/${widget.templateId}/${widget.personaUserId}/${widget.userId}/${widget.token}');
         },
       ))
       ..loadRequest(
-        Uri.parse('http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/'),
+        //Uri.parse('http://persona.emagz.live/64e8f2c3b9b30c1ed4b28bb6/64d33c54b6a7b2fb0be633dc/64d33c54b6a7b2fb0be633dc/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzM2M1NGI2YTdiMmZiMGJlNjMzZGMiLCJpYXQiOjE2OTM0MDA2NTB9.PgFHtbYq9V9gT3mvmSQ6S61tG-BYAEDfHtt5LLODBOY'),
+        Uri.parse('http://persona.emagz.live/${widget.templateId}/${widget.personaUserId}/${widget.userId}/${widget.token}'),
       );
 
-    _onAddCookie(controller);
+
     super.initState();
   }
 
@@ -104,16 +47,7 @@ class _WebViewPersonaState extends State<WebViewPersona> {
           flex: 1,
           child: WebViewWidget(controller: controller),
         ),
-        if (loadingPercentage < 100)
-          LinearProgressIndicator(
-            value: loadingPercentage / 100.0,
-          ),
-        ElevatedButton(
-            onPressed: () async {
-              await _onSetCookie(controller);
-              await _onListCookies(controller);
-            },
-            child: const Text('Get cookies'))
+
       ],
     );
   }
