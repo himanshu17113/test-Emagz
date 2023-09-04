@@ -151,7 +151,7 @@ class _MessageViewState extends State<MessageView> {
                 Container(
                   padding: const EdgeInsets.only(
                       left: 14, right: 14, top: 10, bottom: 10),
-                  child: isReciver(data.sender!)
+                  child: socketController.isUserSender!.value
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -163,7 +163,7 @@ class _MessageViewState extends State<MessageView> {
                                   bottomRight: Radius.circular(10),
                                   topLeft: Radius.circular(10),
                                 ),
-                                color: (isReciver(data.sender!)
+                                color: (socketController.isUserSender!.value
                                     ? const Color(0xffAFB6FD).withOpacity(.5)
                                     : chipColor),
                               ),
@@ -177,7 +177,7 @@ class _MessageViewState extends State<MessageView> {
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w700,
-                                      color: (isReciver(data.sender!)
+                                      color: (socketController.isUserSender!.value
                                           ? blackButtonColor
                                           : chipColor),
                                     ),
@@ -209,7 +209,7 @@ class _MessageViewState extends State<MessageView> {
                                   bottomLeft: Radius.circular(10),
                                   topLeft: Radius.circular(10),
                                 ),
-                                color: (isReciver(data.sender!)
+                                color: (socketController.isUserSender!.value
                                     ? chatContainer
                                     : chipColor),
                               ),
@@ -223,7 +223,7 @@ class _MessageViewState extends State<MessageView> {
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w700,
-                                      color: (isReciver(data.sender!)
+                                      color: (socketController.isUserSender!.value
                                           ? blackButtonColor
                                           : whiteColor),
                                     ),

@@ -1,4 +1,5 @@
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,8 @@ class SocketController extends GetxController {
   });
 
   String? userId;
+  RxBool? isUserSender=false.obs;
+  var chatController= Get.put(ConversationController());
 
   Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
@@ -50,14 +53,11 @@ class SocketController extends GetxController {
     });
   }
 
-  void sendMessage(String message, String room, String id) {
+  void sendMessage(String message, String room, String id) async{
     if (message.isNotEmpty) {
-      Map<String, dynamic> data = {
-        "room": room,
-        "sender": id,
-        "message": message,
-      };
- 
+
+      await chatController.postChat(message, room);
+      isUserSender=(userId==id).obs;
       DateTime curr = DateTime.now();
       String formattedTime = DateFormat.jm().format(curr); //05:00Pm
       liveMessages.add(Message(

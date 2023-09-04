@@ -82,7 +82,6 @@ class ConversationController extends GetxController {
         "text": text
       };
       var response = await dio.post(ApiEndpoint.postMessage, data: body);
-      debugPrint(response.data);
     } catch (e) {
       debugPrint(e.toString());
     }
