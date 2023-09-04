@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/story_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/my_story.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/story_view_card.dart';
@@ -23,7 +22,7 @@ class StoryView extends StatelessWidget {
         child: Obx(() => ListView.builder(
             scrollDirection: Axis.horizontal,
             physics: const ScrollPhysics(),
-            itemCount: storyController.stories!.length,
+            itemCount: storyController.stories!.length + 1,
             itemBuilder: (ctx, index) {
               if (index == 0) {
                 if (storyController.stories?[index].userId?.sId == sid) {
@@ -45,19 +44,21 @@ class StoryView extends StatelessWidget {
                     ),
                   ));
                 }
-              } else if (storyController.stories?[index].stories != null &&
-                  storyController.stories![index].stories!.isNotEmpty) {
+              } else if (storyController.stories?[index - 1].stories != null &&
+                  storyController.stories![index - 1].stories!.isNotEmpty) {
                 return InkWell(
                     onTap: () {
                       Get.to(() => StoryScreen(
-                          userId: storyController.stories![index].userId!.sId!,
-                          stories: storyController.stories![index].stories!));
+                          userId:
+                              storyController.stories![index - 1].userId!.sId!,
+                          stories:
+                              storyController.stories![index - 1].stories!));
                     },
                     child: StoryViewCard(
                       url: storyController
-                              .stories?[index].stories?[0].mediaUrl ??
+                              .stories?[index - 1].stories?[0].mediaUrl ??
                           "https://res.cloudinary.com/dzarrma99/image/upload/v1693305203/cbyzdleae3zilg5yf7r5.jpg",
-                      username: storyController.stories![index].userId,
+                      username: storyController.stories![index - 1].userId,
                     ));
               } else {
                 return const SizedBox();

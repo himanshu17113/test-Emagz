@@ -20,7 +20,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
   @override
   void initState() {
     authController.tabController = TabController(length: 2, vsync: this);
-    // TODO: implement initState
+
     super.initState();
   }
 
@@ -101,7 +101,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                             controller: authController.tabController,
                             children: [
                               SignUpScreen(),
-                              const SignInScreen(),
+                              SignInScreen(),
                             ],
                           ),
                         ),

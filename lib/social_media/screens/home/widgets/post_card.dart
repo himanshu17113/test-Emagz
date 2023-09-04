@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/auth/jwtcontroller.dart';
-import '../../chat/chat_screen.dart';
 
 class PostCard extends StatefulWidget {
   Post? post;
@@ -40,7 +39,7 @@ class _PostCardState extends State<PostCard> {
   List chooseOption = ["A. Yes", "B. No"];
   int selectedOption = -1;
   var homePostController = Get.put(HomePostsController());
-   var jwtController = Get.put(JWTController());
+  var jwtController = Get.put(JWTController());
   final ConversationController chatController =
       Get.put(ConversationController());
 
@@ -97,8 +96,16 @@ class _PostCardState extends State<PostCard> {
                   //    fit: BoxFit.cover,
                   // height: 55,
                   imageUrl: widget.url,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
+                  placeholder: (context, url) => const Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(150.0),
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.amberAccent,
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               );
@@ -149,26 +156,26 @@ class _PostCardState extends State<PostCard> {
                       //         //  messages: messages ?? [],
                       //       ));
                       // }
-                      var tok= await jwtController.getAuthToken();
+                      var tok = await jwtController.getAuthToken();
                       //var userIdd= await jwtController.getUserId();
                       print(tok);
 
                       print(widget.post!.sId!);
-                      String temp=widget.post!.user!.personalTemplate!;
-                      if(temp==null)
-                        {
-                          Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
-                        }
-                      else {
+                      String temp = widget.post!.user!.personalTemplate!;
+                      if (temp == null) {
+                        Get.snackbar('No persona Choosen by this user',
+                            'Hi No persona here');
+                      } else {
                         if (temp[0] == 'T') {
-                          Get.snackbar('This is a Old account ', 'Persona wont work properly');
+                          Get.snackbar('This is a Old account ',
+                              'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
-                        Get.to(() =>
-                            WebViewPersona(token: tok!,
-                              userId: widget.myUserId!,
-                              personaUserId: widget.post!.user!.sId!,
-                              templateId: temp));
+                        Get.to(() => WebViewPersona(
+                            token: tok!,
+                            userId: widget.myUserId!,
+                            personaUserId: widget.post!.user!.sId!,
+                            templateId: temp));
                       }
                     },
                     child: Column(

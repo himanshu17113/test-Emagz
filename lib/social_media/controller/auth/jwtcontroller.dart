@@ -85,15 +85,12 @@ class JWTController extends GetxController {
   Future setProfileImage(String imageUrl) async
   {
     await hiveBox.put('ProfilePic',imageUrl);
-    this.profilePic= RxString(imageUrl!);
+    profilePic= RxString(imageUrl);
   }
   Future<String> getProfileImage() async{
     var imageUrl= await hiveBox.get('ProfilePic');
-    if(imageUrl==null)
-      {
-        imageUrl='https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
-      }
-    this.profilePic= RxString(imageUrl!);
+    imageUrl ??= 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
+    profilePic= RxString(imageUrl!);
     return imageUrl;
   }
 

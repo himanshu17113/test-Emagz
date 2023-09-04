@@ -114,12 +114,12 @@ class _StoryScreenState extends State<StoryScreen> {
                             widget.stories[storyController.currentStoryIndex.value].likes!.add(storyController.myId.value);
                           }
                         },
-                        child: widget.stories.length==0?(Container(
+                        child: widget.stories.isEmpty?(Container(
                           child: Image.asset(
                             "assets/png/unlike_icon.png",
                             width: 22,
                           ),
-                        )): Obx(() =>(widget.stories![storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value))
+                        )): Obx(() =>(widget.stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value))
                             ? Image.asset(
                                 "assets/png/liked_icon.png",
                                 width: 22,
@@ -133,7 +133,7 @@ class _StoryScreenState extends State<StoryScreen> {
                         width: 5,
                       ),
 
-                          widget.stories.length==0?Text('Valid'):
+                          widget.stories.isEmpty?const Text('Valid'):
                           Obx(
                                 () => Text(
                           widget.stories[storyController.currentStoryIndex.value].likes!.length.toString(),
@@ -179,7 +179,7 @@ class _StoryScreenState extends State<StoryScreen> {
           ],
         )):
     Container(
-      child: Text('No Story'),
+      child: const Text('No Story'),
 
     )
     ;

@@ -35,7 +35,7 @@ class Template{
   Template.fromJson(Map<String, dynamic> json) {
     id = json['_id'] != null ? (json['_id']) : null;
     name = json['name'] != null ? (json['name']) : null;
-    description = json['description'] != null ? json['description']: null;
+    description = json['description'];
     type = json['type'] != null ? (json['type']) : null;
    personName = json['details']['name'] != null ? (json['details']['name']) : ' ';
     coverImage = json['details']['coverImage'] != null ? (json['details']['coverImage']) : ' ';

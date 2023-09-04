@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/story_selection/ModalBottomSheet.dart';
@@ -45,9 +44,10 @@ class MyStory extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     //   border: Border.all( color: ),
                     image: DecorationImage(
-                        image: CachedNetworkImageProvider(
-                            stories?[0].mediaUrl ??
-                                "https://picsum.photos/500/500?random=0"),
+                        image: CachedNetworkImageProvider(stories!.isNotEmpty
+                            ? stories![0].mediaUrl ??
+                                "https://picsum.photos/500/500?random=0"
+                            : "https://picsum.photos/500/500?random=0"),
                         fit: BoxFit.cover),
                   ),
                   // child: Image.network(

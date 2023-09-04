@@ -3,13 +3,9 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/story_view.dart';
-import 'package:emagz_vendor/social_media/screens/home/widgets/SliverSocialMediaAppbar/SliverSocialMediaAppbar.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 

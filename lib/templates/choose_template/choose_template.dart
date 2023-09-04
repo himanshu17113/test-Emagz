@@ -1,12 +1,9 @@
-import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/templates/choose_template/template_model.dart';
-import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:get/get_core/src/get_main.dart';
 import 'dart:math' as math;
 import '../../constant/colors.dart';
@@ -141,7 +138,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return CircularProgressIndicator(); // Show a loading indicator
+                            return const CircularProgressIndicator(); // Show a loading indicator
                           }
                           if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
@@ -167,6 +164,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                                         const Color.fromRGBO(255, 199, 1, 1.0),
                                         index + 1);
                                   }
+                                  return null;
                                 });
                           } else {
                             return const Center(
@@ -240,7 +238,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
           ),
           ImgPath == null
               ? Container(
-                  child: Text('Loading...'),
+                  child: const Text('Loading...'),
                 )
               : Positioned(
                   top: 60,
@@ -248,9 +246,9 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                   child: Container(
                     width: 250.0,
                     height: 160.0,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius:
-                          const BorderRadius.all(Radius.circular(8.0)),
+                          BorderRadius.all(Radius.circular(8.0)),
                       color: Colors.redAccent,
                     ),
                     child: CachedNetworkImage(
@@ -347,8 +345,9 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
           accountSetUpController
               .userTemplate(accountSetUpController.templates![tmpInd].id!);
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
-        } else
+        } else {
           Navigator.pop(context);
+        }
       },
       child: Container(
         // padding: const EdgeInsets.symmetric(horizontal: 10),

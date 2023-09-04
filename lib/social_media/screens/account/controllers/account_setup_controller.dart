@@ -119,16 +119,16 @@ class SetupAccount extends GetxController {
     var id= await jwtController.getUserId();
     Map<String, String> header = {'Content-type': 'multipart/form-data'};
     Map<String,String> header2={"Authorization":token!};
-    var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=${id}'));
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$id'));
     request.headers.addAll(header);
     request.headers.addAll(header2);
     if (image?.path != null) {
       request.files.add(await http.MultipartFile.fromPath(
         'ProfilePic',
         image!.path,
-        filename: image!.name,
+        filename: image.name,
       ));
-    };
+    }
     var response = await request.send();
     debugPrint("code${response.statusCode}");
     debugPrint("stream${response.stream}");
@@ -168,6 +168,7 @@ class SetupAccount extends GetxController {
     {
       print(e);
     }
+    return null;
 
   }
 

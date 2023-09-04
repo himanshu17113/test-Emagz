@@ -146,7 +146,7 @@ class AuthController extends GetxController {
       var data = jsonDecode(response.body);
       debugPrint(data["data"]["_id"]);
       if (response.statusCode == 200) {
-        Get.to(() => const BottomNavBar());
+      
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
         jwtController.setAuthToken(data["token"], data["data"]["_id"]);
@@ -292,11 +292,11 @@ class AuthController extends GetxController {
         Uri.parse(ApiEndpoint.changePassword),
         body: jsonEncode(body),
         headers: headers);
-    var responseBody = jsonDecode(response.body);
+  //  var responseBody = jsonDecode(response.body);
     if (response.statusCode == 200) {
       isUserRegiserting.value = false;
       CustomSnackbar.show("password reset Successful");
-      Get.to(() => const SignInScreen());
+      Get.to(() =>   SignInScreen());
       isUserRegiserting.value = false;
     } else {
       isUserRegiserting.value = false;

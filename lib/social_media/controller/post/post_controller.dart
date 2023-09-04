@@ -126,6 +126,7 @@ class PostController extends GetxController {
 
       bottomNavController.pageUpdate(0);
       homePostsController.posts?.clear();
+      homePostsController.getPost();
       Get.offAll(() => const BottomNavBar());
     } catch (e) {
       //debugPrint(reqData.toString());

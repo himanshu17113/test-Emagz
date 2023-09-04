@@ -70,7 +70,7 @@ class HomePostsController extends GetxController {
       if (resposne.data['AllPost'] != null &&
           resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
-          var post;
+          Post? post;
           try {
             post = Post.fromJson(e);
           } catch (err) {
@@ -79,8 +79,8 @@ class HomePostsController extends GetxController {
           }
           //debugPrint(post.mediaUrl!);
 
-          if (post.user != null) {
-            posts!.add(post);
+          if (post?.user != null) {
+            posts!.add(post!);
           }
         });
 
