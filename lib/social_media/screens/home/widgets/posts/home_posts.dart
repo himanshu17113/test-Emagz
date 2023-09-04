@@ -19,11 +19,11 @@ class HomePosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() => ListView.builder(
-          cacheExtent: 5000,
+          cacheExtent: 2000,
           padding: const EdgeInsets.only(bottom: 80.0),
           controller: homePostController.scrollController,
           //   shrinkWrap: true,
-          physics: const ScrollPhysics(),
+          physics: const BouncingScrollPhysics (),
           itemCount: homePostController.posts!.length + 2,
           itemBuilder: (context, index) {
             if (index == homePostController.posts!.length + 1) {

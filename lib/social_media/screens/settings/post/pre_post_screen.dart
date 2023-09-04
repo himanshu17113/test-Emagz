@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
@@ -17,7 +18,7 @@ enum PostType { text, poll, gallery, camera }
 
 class PrePostScreen extends StatefulWidget {
   final PostType postType;
-  Uint8List? image;
+  dynamic? image;
   PrePostScreen({super.key, this.image, required this.postType});
 
   @override
@@ -40,7 +41,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
   bool noOne = false;
   bool followAndFollower = false;
 
-  var postController = Get.put(PostController());
+  final postController = Get.put(PostController());
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +83,12 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                 const BoxDecoration(color: Colors.black),
                             child: (widget.postType == PostType.gallery)
                                 ? Image.memory(widget.image!)
-                                : const SizedBox(
-                                    child: Text("EDITABLE TEXT"),
-                                  )),
+                                : Image.file(File(widget.image!))
+
+                            // const SizedBox(
+                            //     child: Text("EDITABLE TEXT"),
+                            //   )
+                            ),
                       ],
                       GestureDetector(
                         onTap: () => Get.close(1),
