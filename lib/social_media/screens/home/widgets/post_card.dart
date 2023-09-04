@@ -25,7 +25,7 @@ class PostCard extends StatefulWidget {
     this.isLiked,
     this.myUserId,
     required this.url,
-    this.isBorder = false,
+    this.isBorder = true,
   }) : super(key: key);
 
   final String url;
@@ -75,7 +75,7 @@ class _PostCardState extends State<PostCard> {
           border: widget.isBorder == true
               ? Border.all(
                   color: const Color(0xff46F2DB),
-                  width: 1.5,
+                  width: 2.2,
                   style: BorderStyle.solid)
               : null),
       child: ClipRRect(

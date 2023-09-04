@@ -72,7 +72,7 @@ class UserChatsWithSearch extends StatelessWidget {
             physics: const ScrollPhysics(),
             controller: scrollController,
             itemBuilder: (context, index) {
-              if ((snapshot.data![index].userData!.username!) == senderName) {
+              if ((snapshot.data![index].userData!.username!).startsWith(senderName)) {
                 return UserChat(
                   userData: snapshot.data![index].userData,
                   resentMessage: snapshot.data![index].resentMessage,

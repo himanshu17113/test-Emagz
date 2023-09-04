@@ -121,8 +121,14 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           debugPrint('uefibdjv');
 
                           setState(() {
-                            isSearch = !isSearch;
+                            isSearch = true;
                             searchQuery = QueryControl.text;
+                          });
+                        },
+                        onTapOutside: (p)
+                        {
+                          setState(() {
+                            isSearch=false;
                           });
                         },
                         showCursor: false,

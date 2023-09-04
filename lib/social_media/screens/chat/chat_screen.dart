@@ -302,7 +302,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             child: InkWell(
                               onTap: () {
                                 if (inputTextController.text.isNotEmpty) {
-                                  final receiverId = widget.user!.sId;
+                                  final receiverId = widget.user!.id;
                                   socketController.sendMessage(
                                       inputTextController.text,
                                       widget.conversationId,
