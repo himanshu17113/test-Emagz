@@ -1,3 +1,5 @@
+ 
+
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
@@ -86,6 +88,7 @@ class _TextPostScreenState extends State<TextPostScreen> {
           // );
           Get.off(() => PrePostScreen(
                 postType: PostType.text,
+                image:  v,
               ));
         },
       ),

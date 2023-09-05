@@ -1,11 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/FollowingList.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/LikesAndViewsOptions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +16,7 @@ enum PostType { text, poll, gallery, camera }
 
 class PrePostScreen extends StatefulWidget {
   final PostType postType;
-  dynamic? image;
+  dynamic image;
   PrePostScreen({super.key, this.image, required this.postType});
 
   @override
@@ -83,7 +81,12 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                 const BoxDecoration(color: Colors.black),
                             child: (widget.postType == PostType.gallery)
                                 ? Image.memory(widget.image!)
-                                : Image.file(File(widget.image!))
+                                : Image.file(
+                                    File(widget.image ??
+                                        postController.textPost!),
+                                    width: 200, // Adjust the width as needed
+                                    height: 400,
+                                  )
 
                             // const SizedBox(
                             //     child: Text("EDITABLE TEXT"),
