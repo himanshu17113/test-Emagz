@@ -37,7 +37,7 @@ class _PostCommentsModalBottomSheetState
 
     return GlassmorphicContainer(
       borderRadius: 33,
-      blur: 5,
+      blur: 6,
       //  width: MediaQuery.of(context).size.width,
       height: keyboardVisible ? MediaQuery.of(context).size.height : 450,
       child: Column(

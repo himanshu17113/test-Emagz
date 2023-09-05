@@ -1,5 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
+import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
@@ -273,87 +274,117 @@ class _StoryScreenState extends State<StoryScreen> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    color: const Color(0xffE7E9FE),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: [
-                            const Icon(Icons.arrow_back_sharp),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            FormHeadingText(
-                              headings: "Comments",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            const Spacer(),
-                            FormHeadingText(
-                              headings: "Latest",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Icon(Icons.keyboard_arrow_down),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // Same Boc
+                  child: GlassmorphicContainer(
+                    blur: 2,
+                    borderRadius: 2,
+                    height: 200,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
 
-                        SizedBox(
-                          height: 230,
-                          width: MediaQuery.of(context).size.width,
-                          child: ListView.builder(
-                            itemCount: comments.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return StoryCommentTile(
-                                text: comments[index].text!,
-                                userId: comments[index].userId!,
-                              );
-                            },
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
                           ),
-                        ),
-
-                        // CommentReplyTile(),
-                        // StoryCommentTile(),
-                        SizedBox(
-                          height: 55,
-                          child: TextField(
-                            controller: textEditingController,
-                            decoration: InputDecoration(
-                              hintText: "write comment",
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.all(2.0),
-                                child: IconButton(
-                                    onPressed: () {
-                                      storyController.commentStory(textEditingController.text, storyId);
-                                      comments.add(Comments(
-                                        text: textEditingController.text,
-                                        userId: myId,
-                                      ));
-                                      textEditingController.clear();
-                                      Get.back();
-                                    },
-                                    icon: const Icon(
-                                      Icons.send,
-                                      color: Colors.blue,
-                                    )),
+                          Row(
+                            children: [
+                              const Icon(Icons.arrow_back_sharp,
+                                color: Colors.white,
                               ),
-                              border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              FormHeadingText(
+                                color: Colors.white,
+                                headings: "Comments",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              const Spacer(),
+                              FormHeadingText(
+                                color: Colors.white,
+                                headings: "Latest",
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              const Icon(Icons.keyboard_arrow_down,
+                              color: Colors.white,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          // Same Boc
+
+                          SizedBox(
+                            height: 230,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                              itemCount: comments.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return StoryCommentTile(
+                                  text: comments[index].text!,
+                                  userId: comments[index].userId!,
+                                );
+                              },
                             ),
                           ),
-                        )
-                      ],
+
+                          // CommentReplyTile(),
+                          // StoryCommentTile(),
+                          SizedBox(
+                            height: 55,
+                            child: TextField(
+                              controller: textEditingController,
+                              decoration: InputDecoration(
+                                suffixIcon: Padding(
+                                  padding: const EdgeInsets.all(2.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+
+                                        child: Container(
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.rectangle,
+
+                                          ),
+                                            child:
+                                            FormHeadingText(headings: 'Type Your Comment',
+                                              color: Colors.white,)
+                                        ),
+                                      ),
+
+
+                                      IconButton(
+                                          onPressed: () {
+                                            storyController.commentStory(textEditingController.text, storyId);
+                                            comments.add(Comments(
+                                              text: textEditingController.text,
+                                              userId: myId,
+                                            ));
+                                            textEditingController.clear();
+                                            Get.back();
+                                          },
+                                          icon: const Icon(
+                                            Icons.send,
+                                            color: Colors.blue,
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                                border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
