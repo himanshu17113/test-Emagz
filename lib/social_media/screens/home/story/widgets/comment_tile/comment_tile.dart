@@ -40,7 +40,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
         // margin: const EdgeInsets.symmetric(horizontal: 20),
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: const Color(0xffDDE0FF),
+          color: Colors.grey[600],
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -65,6 +65,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 FormHeadingText(
+                  color: Colors.white,
                   headings: (userName == null)
                       ? "loading "
                       : (userName!.length > 20)
@@ -73,23 +74,26 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                   fontSize: 10,
                 ),
                 FormHeadingText(
+                  color: Colors.white,
                   headings: widget.text,
                   fontSize: 14,
                 ),
                 Row(
                   children: [
                     FormHeadingText(
+
                       headings: "4+ Loves",
                       fontSize: 8,
-                      color: const Color(0xff323232),
+                      color: Colors.white,
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     FormHeadingText(
+
                       headings: "Reply..",
                       fontSize: 8,
-                      color: const Color(0xff323232),
+                      color: Colors.white,
                     ),
                     const SizedBox(
                       width: 10,
@@ -97,7 +101,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                     FormHeadingText(
                       headings: "Love Back",
                       fontSize: 8,
-                      color: const Color(0xff323232),
+                      color: Colors.white,
                     ),
                   ],
                 )
@@ -105,6 +109,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
             ),
             const Spacer(),
             FormHeadingText(
+              color: Colors.white,
               headings: "3+",
               fontSize: 12,
             ),
