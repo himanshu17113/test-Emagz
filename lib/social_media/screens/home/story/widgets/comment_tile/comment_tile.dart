@@ -40,7 +40,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
         // margin: const EdgeInsets.symmetric(horizontal: 20),
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.grey[600],
+          color: Color.fromRGBO(160, 160, 160, 0.6),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(

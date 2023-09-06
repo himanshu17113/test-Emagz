@@ -18,7 +18,7 @@ class FloatingCommentInput extends StatelessWidget {
       height: 40,
       decoration: BoxDecoration(
         gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-          const Color(0xFFffffff).withOpacity(0.30),
+          const Color(0xFFffffff).withOpacity(0.70),
           const Color(0xFFFFFFFF).withOpacity(0.25),
         ], stops: const [
           2,
@@ -37,7 +37,7 @@ class FloatingCommentInput extends StatelessWidget {
         scrollPadding: EdgeInsets.zero,
         decoration: InputDecoration(
             alignLabelWithHint: true,
-            hintText: "Add Your Comment",
+            hintText: "Type Your Comment",
             hintStyle: TextStyle(color: whiteColor, fontSize: 12),
             isDense: false,
 
@@ -59,7 +59,7 @@ class FloatingCommentInput extends StatelessWidget {
                       )
                     : const Icon(
                         Icons.send,
-                        color: Colors.white,
+                        color: Colors.blue,
                         size: 24,
                       )),
               ),

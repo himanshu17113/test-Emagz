@@ -192,177 +192,219 @@ class _StoryScreenState extends State<StoryScreen> {
       barrierColor: const Color(0xff252525).withOpacity(.4),
       context: context,
       builder: (ctx) {
-        return AlertDialog(
-          alignment: Alignment.bottomCenter,
-          contentPadding: EdgeInsets.zero,
-          iconPadding: EdgeInsets.zero,
-          insetPadding: EdgeInsets.zero,
-          titlePadding: EdgeInsets.zero,
-          buttonPadding: EdgeInsets.zero,
-          actionsPadding: EdgeInsets.zero,
-          elevation: 0.0,
-          backgroundColor: Colors.transparent,
+        return 
+           AlertDialog(
+            alignment: Alignment.bottomCenter,
+            contentPadding: EdgeInsets.zero,
+            iconPadding: EdgeInsets.zero,
+            insetPadding: EdgeInsets.zero,
+            titlePadding: EdgeInsets.zero,
+            buttonPadding: EdgeInsets.zero,
+            actionsPadding: EdgeInsets.zero,
+            elevation: 0.0,
+            backgroundColor: Colors.transparent,
 
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.circular(20),
-          // ),
-          content: SizedBox(
-            height: 400,
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  // width: double.infinity,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    boxShadow: [BoxShadow(color: Colors.white.withOpacity(.5), blurRadius: 20, spreadRadius: 2, offset: const Offset(0, -10))],
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [const Color(0xffE7E9FE).withOpacity(.01), const Color(0xffE7E9FE).withOpacity(.02), const Color(0xffE7E9FE)],
-                    ),
-                    color: Colors.white.withOpacity(.2),
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Image.asset(
-                        "assets/png/unlike_icon.png",
-                        width: 25,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "0",
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          // updateName(context,);
-                        },
-                        child: Image.asset(
-                          "assets/png/comment_icon.png",
-                          width: 25,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${comments.length}",
-                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Image.asset(
-                        "assets/png/share_icon.png",
-                        width: 30,
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: GlassmorphicContainer(
-                    blur: 2,
-                    borderRadius: 2,
-                    height: 200,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
+            // shape: const RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.only(
+            //     topLeft: Radius.circular(50.0),
+            //     topRight: Radius.circular(50.0)
+            //
+            //   ),
+            // ),
+            content: SingleChildScrollView(
+              child: SizedBox(
+                height: 400,
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: GlassmorphicContainer(
+                        blur: 6,
+                        borderRadius: 2,
+                        height: 200,
+                        child: Container(
 
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 10,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(0, 0, 0, 0.2),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20.0),
+                              topLeft: Radius.circular(20.0)
+
+                            )
                           ),
-                          Row(
+                          padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+
+                          child: Column(
+
                             children: [
-                              const Icon(Icons.arrow_back_sharp,
-                                color: Colors.white,
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Image.asset(
+                                    "assets/png/unlike_icon.png",
+                                    width: 40,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "0",
+                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      // updateName(context,);
+                                    },
+                                    child: Image.asset(
+                                      "assets/png/comment_icon.png",
+                                      width: 40,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "${comments.length}",
+                                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Image.asset(
+                                    "assets/png/share_icon.png",
+                                    width: 40,
+                                  ),
+                                ],
                               ),
                               const SizedBox(
-                                width: 15,
+                                height: 10,
                               ),
-                              FormHeadingText(
-                                color: Colors.white,
-                                headings: "Comments",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              const Spacer(),
-                              FormHeadingText(
-                                color: Colors.white,
-                                headings: "Latest",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                              Row(
+                                children: [
+                                  const Icon(Icons.arrow_back_sharp,
+                                    color: Colors.white,
+                                  ),
+                                  const SizedBox(
+                                    width: 15,
+                                  ),
+                                  FormHeadingText(
+                                    color: Colors.white,
+                                    headings: "Comments",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  const Spacer(),
+                                  FormHeadingText(
+                                    color: Colors.white,
+                                    headings: "Latest",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Icon(Icons.keyboard_arrow_down,
+                                  color: Colors.white,
+                                  ),
+                                ],
                               ),
                               const SizedBox(
-                                width: 5,
+                                height: 20,
                               ),
-                              const Icon(Icons.keyboard_arrow_down,
-                              color: Colors.white,
+                              // Same Boc
+
+                              SizedBox(
+                                height: 230,
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView.builder(
+                                  itemCount: comments.length,
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    return StoryCommentTile(
+                                      text: comments[index].text!,
+                                      userId: comments[index].userId!,
+                                    );
+                                  },
+                                ),
                               ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          // Same Boc
 
-                          SizedBox(
-                            height: 230,
-                            width: MediaQuery.of(context).size.width,
-                            child: ListView.builder(
-                              itemCount: comments.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return StoryCommentTile(
-                                  text: comments[index].text!,
-                                  userId: comments[index].userId!,
-                                );
-                              },
-                            ),
-                          ),
+                              // CommentReplyTile(),
+                              // StoryCommentTile(),
+                              SizedBox(
+                                height: 55,
+                                child: Row(
+                                  children: [
 
-                          // CommentReplyTile(),
-                          // StoryCommentTile(),
-                          SizedBox(
-                            height: 55,
-                            child: TextField(
-                              controller: textEditingController,
-                              decoration: InputDecoration(
-                                suffixIcon: Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-
-                                        child: Container(
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.rectangle,
-
-                                          ),
-                                            child:
-                                            FormHeadingText(headings: 'Type Your Comment',
-                                              color: Colors.white,)
-                                        ),
+                                    Expanded(
+                                      child: TextField(
+                                        cursorColor: grayColor,
+                                        controller: textEditingController,
+                                        decoration: const InputDecoration(
+                                            isDense: true,
+                                            hintText: "Type Your Comment ",
+                                            hintStyle: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(
+                                                0xff909090,
+                                              ),
+                                            ),
+                                            contentPadding: EdgeInsets.only(left: 2),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(Radius.circular(1))
+                                            )),
                                       ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.only(left: 5),
+                                      alignment: Alignment.center,
+                                      width: 55,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: const [
+                                          Icon(
+                                            Icons.emoji_emotions_outlined,
+                                            color: Color(
+                                              0xff909090,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Icon(
+                                            Icons.attach_file,
+                                            color: Color(
+                                              0xff909090,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      decoration:  const BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                                        gradient: LinearGradient(
+                                          end: Alignment.bottomRight,
+                                          begin: Alignment.topLeft,
+                                          colors: [
+                                            Color.fromRGBO(27, 71, 193, 1),
+                                            Color.fromRGBO(49, 219, 199, 1)
 
 
-                                      IconButton(
+                                          ]
+                                        )
+
+                                      ),
+                                      child: IconButton(
                                           onPressed: () {
                                             storyController.commentStory(textEditingController.text, storyId);
                                             comments.add(Comments(
@@ -374,24 +416,23 @@ class _StoryScreenState extends State<StoryScreen> {
                                           },
                                           icon: const Icon(
                                             Icons.send,
-                                            color: Colors.blue,
+                                         color: Colors.white,
+                                            size: 24,
                                           )),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                                border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(8))),
-                              ),
-                            ),
-                          )
-                        ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        );
+          );
       },
     );
   }
