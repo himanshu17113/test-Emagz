@@ -23,7 +23,7 @@ class HomePosts extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 80.0),
           controller: homePostController.scrollController,
           //   shrinkWrap: true,
-          physics: const BouncingScrollPhysics (),
+          physics: const BouncingScrollPhysics(),
           itemCount: homePostController.posts!.length + 2,
           itemBuilder: (context, index) {
             if (index == homePostController.posts!.length + 1) {
@@ -103,6 +103,9 @@ class HomePosts extends StatelessWidget {
                               post: homePostController.posts?[index - 1],
                               url: homePostController
                                       .posts?[index - 1].mediaUrl ??
+                                  "",
+                              userImg: homePostController
+                                      .posts?[index - 1].user?.ProfilePic ??
                                   "",
                             ),
                     ));

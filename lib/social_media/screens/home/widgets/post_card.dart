@@ -19,11 +19,13 @@ class PostCard extends StatefulWidget {
   bool isBorder;
   bool? isLiked;
   String? myUserId;
+  String? userImg;
   PostCard({
     Key? key,
     this.post,
     this.isLiked,
     this.myUserId,
+    this.userImg,
     required this.url,
     this.isBorder = true,
   }) : super(key: key);
@@ -38,8 +40,8 @@ class _PostCardState extends State<PostCard> {
   bool isShowPoll = false;
   List chooseOption = ["A. Yes", "B. No"];
   int selectedOption = -1;
-  var homePostController = Get.put(HomePostsController());
-  var jwtController = Get.put(JWTController());
+  final homePostController = Get.put(HomePostsController());
+  final jwtController = Get.put(JWTController());
   final ConversationController chatController =
       Get.put(ConversationController());
 
@@ -137,7 +139,7 @@ class _PostCardState extends State<PostCard> {
                     backgroundImage: widget.post!.mediaType == "video"
                         ? const CachedNetworkImageProvider(
                             "https://picsum.photos/500/500?random=851")
-                        : CachedNetworkImageProvider(widget.url),
+                        : CachedNetworkImageProvider(widget.userImg!),
                   ),
                   const SizedBox(
                     width: 5,
@@ -304,7 +306,7 @@ class _PostCardState extends State<PostCard> {
                                                                       .white)),
                                                     ),
                                                   ))
-                                            : Container()
+                                            : const SizedBox()
                                       ]),
                                 ),
                               ),
@@ -363,92 +365,94 @@ class _PostCardState extends State<PostCard> {
                         bottomRight: Radius.circular(20),
                       ),
                     ),
-                    child: Row(children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        width: Get.size.width / 2.5,
-                        child: Text("${widget.post!.caption}",
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            width: Get.size.width / 2.5,
+                            child: Text("${widget.post!.caption}",
+                                style: TextStyle(
+                                    fontSize: 7,
+                                    fontWeight: FontWeight.w400,
+                                    color: whiteColor)),
+                          ),
+                          //    const Expanded(child: SizedBox()),
+                          GestureDetector(
+                              onTap: () {
+                                homePostController.likePost(widget.post!.sId!);
+                                setState(() {
+                                  if (widget.isLiked == true) {
+                                    widget.post!.likes!.removeLast();
+                                    widget.isLiked = false;
+                                  } else {
+                                    widget.post!.likes!.add(widget.myUserId!);
+                                    widget.isLiked = true;
+                                  }
+                                });
+                              },
+                              child: (widget.isLiked ?? false)
+                                  ? Image.asset(
+                                      "assets/png/liked_icon.png",
+                                      width: 26,
+                                    )
+                                  : Image.asset(
+                                      "assets/png/unlike_icon.png",
+                                      width: 22,
+                                    )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "${widget.post!.likes!.length}",
                             style: TextStyle(
-                                fontSize: 7,
-                                fontWeight: FontWeight.w400,
-                                color: whiteColor)),
-                      ),
-                      //    const Expanded(child: SizedBox()),
-                      GestureDetector(
-                          onTap: () {
-                            homePostController.likePost(widget.post!.sId!);
-                            setState(() {
-                              if (widget.isLiked == true) {
-                                widget.post!.likes!.removeLast();
-                                widget.isLiked = false;
-                              } else {
-                                widget.post!.likes!.add(widget.myUserId!);
-                                widget.isLiked = true;
-                              }
-                            });
-                          },
-                          child: (widget.isLiked ?? false)
-                              ? Image.asset(
-                                  "assets/png/liked_icon.png",
-                                  width: 26,
-                                )
-                              : Image.asset(
-                                  "assets/png/unlike_icon.png",
-                                  width: 22,
-                                )),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${widget.post!.likes!.length}",
-                        style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Image.asset(
-                        "assets/png/comment_icon.png",
-                        width: 22,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "${widget.post!.comments?.length}",
-                        style: TextStyle(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                            shape: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    topLeft: Radius.circular(20))),
-                            isScrollControlled: true,
-                            context: context,
-                            builder: (context) {
-                              return ShareBottomSheet(post: widget.post!);
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Image.asset(
+                            "assets/png/comment_icon.png",
+                            width: 22,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "${widget.post!.comments?.length}",
+                            style: TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                shape: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        topLeft: Radius.circular(20))),
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return ShareBottomSheet(post: widget.post!);
+                                },
+                              );
                             },
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/png/share_icon.png",
-                          width: 26,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      )
-                    ]),
+                            child: Image.asset(
+                              "assets/png/share_icon.png",
+                              width: 26,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          )
+                        ]),
                   ),
                 ),
               ],

@@ -16,7 +16,12 @@ class CommentViewScreen extends StatefulWidget {
   bool isLiked;
 
   String? myUserId;
-  CommentViewScreen({Key? key, required this.isLiked, required this.post, required this.myUserId}) : super(key: key);
+  CommentViewScreen(
+      {Key? key,
+      required this.isLiked,
+      required this.post,
+      required this.myUserId})
+      : super(key: key);
 
   @override
   State<CommentViewScreen> createState() => _CommentViewScreenState();
@@ -24,7 +29,7 @@ class CommentViewScreen extends StatefulWidget {
 
 class _CommentViewScreenState extends State<CommentViewScreen> {
   var jwtController = Get.put(JWTController());
-  String? myUserId;
+  // String? myUserId;
   double opacityLevel = 1.0;
 
   void _changeOpacity() {
@@ -34,14 +39,14 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
   var homePostController = Get.put(HomePostsController());
   var commentsController = Get.put(CommentController());
 
-  @override
-  void initState() {
-    super.initState();
-    asyncInit();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   asyncInit();
+  // }
 
   asyncInit() async {
-    myUserId = await jwtController.getUserId();
+    //myUserId = await jwtController.getUserId();
   }
 
   @override
@@ -59,7 +64,9 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                 height: Get.size.height,
                 // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
                 decoration: BoxDecoration(
-                  image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(url),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
@@ -84,106 +91,131 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                         height: Get.size.height / 2,
                         width: Get.width,
                         child: SingleChildScrollView(
-                          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                              // width: Get.size.width / 2.5,
-                              child: Text(widget.post.caption ?? "",
-                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: whiteColor)),
-                            ),
-                            // const Expanded(child: SizedBox()),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 15,
-                              ),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      homePostController.likePost(widget.post.sId!);
-                                      setState(() {
-                                        if (widget.isLiked == true) {
-                                          widget.post.likes!.removeLast();
-                                          widget.isLiked = false;
-                                        } else {
-                                          widget.post.likes!.add(widget.myUserId!);
-                                          widget.isLiked = true;
-                                        }
-                                      });
-                                    },
-                                    child: (widget.isLiked)
-                                        ? Padding(
-                                            padding: const EdgeInsets.all(12),
-                                            child: Image.asset(
-                                              "assets/png/liked_icon.png",
-                                              width: 32,
-                                            ),
-                                          )
-                                        : Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Image.asset(
-                                              "assets/png/unlike_icon.png",
-                                              width: 26,
-                                            ),
-                                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  // width: Get.size.width / 2.5,
+                                  child: Text(widget.post.caption ?? "",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: whiteColor)),
+                                ),
+                                // const Expanded(child: SizedBox()),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                    horizontal: 15,
                                   ),
-                                  Text(
-                                    "${widget.post.likes!.length}",
-                                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          homePostController
+                                              .likePost(widget.post.sId!);
+                                          setState(() {
+                                            if (widget.isLiked == true) {
+                                              widget.post.likes!.removeLast();
+                                              widget.isLiked = false;
+                                            } else {
+                                              widget.post.likes!
+                                                  .add(widget.myUserId!);
+                                              widget.isLiked = true;
+                                            }
+                                          });
+                                        },
+                                        child: (widget.isLiked)
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(12),
+                                                child: Image.asset(
+                                                  "assets/png/liked_icon.png",
+                                                  width: 32,
+                                                ),
+                                              )
+                                            : Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Image.asset(
+                                                  "assets/png/unlike_icon.png",
+                                                  width: 26,
+                                                ),
+                                              ),
+                                      ),
+                                      Text(
+                                        "${widget.post.likes!.length}",
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: whiteColor),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          // updateName(context);
+                                        },
+                                        child: Image.asset(
+                                          "assets/png/comment_icon.png",
+                                          width: 22,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "${(widget.post.comments!.length + commentsController.instantComments.value.length)}",
+                                        style: TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: whiteColor),
+                                      ),
+                                      const SizedBox(
+                                        width: 20,
+                                      ),
+                                      Image.asset(
+                                        "assets/png/share_icon.png",
+                                        width: 26,
+                                      ),
+                                    ],
                                   ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      // updateName(context);
-                                    },
-                                    child: Image.asset(
-                                      "assets/png/comment_icon.png",
-                                      width: 22,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(
-                                    "${(widget.post.comments!.length + commentsController.instantComments.value.length)}",
-                                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                                  ),
-                                  const SizedBox(
-                                    width: 20,
-                                  ),
-                                  Image.asset(
-                                    "assets/png/share_icon.png",
-                                    width: 26,
-                                  ),
-                                ],
-                              ),
-                            ),
+                                ),
 
-                            const Text(
-                              "    COMMENT",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white, height: 3),
-                            ),
-                            if (widget.post.comments != null) ...[
-                              ListView.builder(
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.only(bottom: 100),
-                                itemCount: widget.post.comments?.length ?? 0,
-                                physics: const ScrollPhysics(),
-                                itemBuilder: (context, index) => CommentCard(comment: widget.post.comments![index]!),
-                              ),
-                            ]
-                            // Obx(() => ListView.builder(
-                            //   shrinkWrap: true,
-                            //   itemCount: commentsController.instantComments.value.length,
-                            //   physics: ScrollPhysics(),
-                            //   itemBuilder: (context, index) => CommentCard(comment: commentsController.instantComments.value[index]),)
-                            // )
-                          ]),
+                                const Text(
+                                  "    COMMENT",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      height: 3),
+                                ),
+                                if (widget.post.comments != null) ...[
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    padding: const EdgeInsets.only(bottom: 100),
+                                    itemCount:
+                                        widget.post.comments?.length ?? 0,
+                                    physics: const ScrollPhysics(),
+                                    itemBuilder: (context, index) =>
+                                        CommentCard(
+                                            comment:
+                                                widget.post.comments![index]!),
+                                  ),
+                                ]
+                                // Obx(() => ListView.builder(
+                                //   shrinkWrap: true,
+                                //   itemCount: commentsController.instantComments.value.length,
+                                //   physics: ScrollPhysics(),
+                                //   itemBuilder: (context, index) => CommentCard(comment: commentsController.instantComments.value[index]),)
+                                // )
+                              ]),
                         ),
                       ),
                     ),
@@ -207,7 +239,8 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
         floatingActionButton: FloatingCommentInput(
             postId: widget.post.sId ?? "",
             onTapExtra: (String text) {
-              widget.post.comments!.add(Comment(userId: UserSchema(sId: myUserId), text: text));
+              widget.post.comments!.add(Comment(
+                  userId: UserSchema(sId: widget.myUserId), text: text));
             }));
   }
 }
@@ -227,12 +260,18 @@ class CommentCard extends StatelessWidget {
             width: 228,
             child: Text(
               comment.text ?? "",
-              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xffD2D2D2)),
+              style: const TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xffD2D2D2)),
             ),
           ),
           Text(
             comment.timestamp?.toString() ?? "5:30 PM",
-            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Color(0xffD2D2D2)),
+            style: const TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w600,
+                color: Color(0xffD2D2D2)),
           ),
         ],
       ),

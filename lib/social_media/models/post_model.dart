@@ -39,8 +39,9 @@ class Post {
       this.likes,
       this.shares,
       this.pollDuration,
-     this.comments,
-      this.isLike
+      this.comments,
+      this.isLike,
+      
       // this.createdAt,
       // this.updatedAt,
       //  this.iV
@@ -154,6 +155,7 @@ class PollResults {
 }
 
 class UserSchema {
+  String? ProfilePic;
   String? mobileNumber;
   String? loginOtp;
   String? personalTemplate;
@@ -201,9 +203,11 @@ class UserSchema {
       this.updatedAt,
       this.iV,
       this.getstatedName,
+      this.ProfilePic,
       this.displayName});
 
   UserSchema.fromJson(Map<String, dynamic> json) {
+    ProfilePic = json["ProfilePic"];
     mobileNumber = json['mobile_number'];
     loginOtp = json['login_otp'];
     personalTemplate = json['personalTemplate'];

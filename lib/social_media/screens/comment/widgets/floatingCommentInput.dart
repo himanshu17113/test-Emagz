@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 class FloatingCommentInput extends StatelessWidget {
   final String postId;
   final Function(String text) onTapExtra;
-  const FloatingCommentInput({Key? key, required this.postId, required this.onTapExtra}) : super(key: key);
+  const FloatingCommentInput(
+      {Key? key, required this.postId, required this.onTapExtra})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +19,17 @@ class FloatingCommentInput extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
       height: 40,
       decoration: BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-          const Color(0xFFffffff).withOpacity(0.30),
-          const Color(0xFFFFFFFF).withOpacity(0.25),
-        ], stops: const [
-          2,
-          0.1,
-        ]),
+        gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [
+              const Color(0xFFffffff).withOpacity(0.30),
+              const Color(0xFFFFFFFF).withOpacity(0.25),
+            ],
+            stops: const [
+              2,
+              0.1,
+            ]),
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
@@ -49,20 +55,23 @@ class FloatingCommentInput extends StatelessWidget {
                 commentController.postComment(postId);
                 onTapExtra(commentController.controller.text);
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Obx(() => commentController.isPosting.value
-                    ? const Icon(
-                        Icons.more_horiz,
-                        color: Colors.white,
-                        size: 24,
-                      )
-                    : const Icon(
-                        Icons.send,
-                        color: Colors.white,
-                        size: 24,
-                      )),
-              ),
+              child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child:
+                      //  Obx(() => commentController.isPosting.value
+                      //     ?
+                      Icon(
+                    Icons.send,
+                    color: Colors.white,
+                    size: 24,
+                  )
+                  // : const Icon(
+                  //     Icons.send,
+                  //     color: Colors.white,
+                  //     size: 24,
+                  //   )
+                  // ),
+                  ),
             )),
       ),
     );
