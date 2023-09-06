@@ -43,7 +43,7 @@ class FloatingCommentInput extends StatelessWidget {
         scrollPadding: EdgeInsets.zero,
         decoration: InputDecoration(
             alignLabelWithHint: true,
-            hintText: "Add Your Comment",
+            hintText: "Type Your Comment",
             hintStyle: TextStyle(color: whiteColor, fontSize: 12),
             isDense: false,
 
