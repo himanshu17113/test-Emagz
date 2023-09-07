@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../story_screen.dart';
 
 class MyStory extends StatelessWidget {
-  final String? userID;
+  final UserId? userID;
   final List<Stories>? stories;
   const MyStory({super.key, this.stories, this.userID});
 

@@ -36,79 +36,84 @@ class HomePosts extends StatelessWidget {
                 const Text("loading");
               }
             } else {
-              if (homePostController.posts![index - 1].mediaUrl!
-                  .endsWith(".svg")) {
-                return const SizedBox();
-              } else {
-                return InkWell(
-                    onTap: () {
-                      // Get.to(() => ExploreScreen());
-                    },
-                    onLongPress: () {
-                      showDialog(
-                          barrierColor: Colors.black.withOpacity(.5),
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              insetPadding: EdgeInsets.zero,
-                              iconPadding: EdgeInsets.zero,
-                              titlePadding: EdgeInsets.zero,
-                              buttonPadding: EdgeInsets.zero,
-                              actionsPadding: EdgeInsets.zero,
-                              contentPadding: EdgeInsets.zero,
-                              elevation: 0.0,
-                              actionsAlignment: MainAxisAlignment.center,
-                              alignment: Alignment.center,
-                              backgroundColor: Colors.transparent,
-                              content: SizedBox(
-                                height: 250,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: const [
-                                    HomePagePopupWidget(
-                                      isBorder: false,
-                                      title: "View Post",
-                                    ),
-                                    HomePagePopupWidget(
-                                      title: "View Stats",
-                                    ),
-                                    HomePagePopupWidget(
-                                      title: "Download",
-                                    ),
-                                    HomePagePopupWidget(
-                                      title: "Share",
-                                    )
-                                  ],
-                                ),
-                              ),
-                            );
-                          });
-                    },
-                    child: VisibilityDetector(
-                      key: Key("$index+@4+1999"),
-                      onVisibilityChanged: (info) {
-                        if (index - 9 >= homePostController.skip.value) {
-                          // debugPrint(info.visibleFraction);
-                          // setState(() {});
-                        }
+              if (homePostController.posts!.isNotEmpty) {
+                if (homePostController.posts![index - 1].mediaUrl!
+                    .endsWith(".svg")) {
+                  return const SizedBox();
+                } else {
+                  return InkWell(
+                      onTap: () {
+                        // Get.to(() => ExploreScreen());
                       },
-                      child: homePostController.posts?[index - 1] == null
-                          ? const SizedBox()
-                          : PostCard(
-                              isLiked: homePostController
-                                  .posts?[index - 1].likes!
-                                  .contains(myUserId),
-                              myUserId: myUserId,
-                              post: homePostController.posts?[index - 1],
-                              url: homePostController
-                                      .posts?[index - 1].mediaUrl ??
-                                  "",
-                              userImg: homePostController
-                                      .posts?[index - 1].user?.ProfilePic ??
-                                  "",
-                            ),
-                    ));
+                      onLongPress: () {
+                        showDialog(
+                            barrierColor: Colors.black.withOpacity(.5),
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                insetPadding: EdgeInsets.zero,
+                                iconPadding: EdgeInsets.zero,
+                                titlePadding: EdgeInsets.zero,
+                                buttonPadding: EdgeInsets.zero,
+                                actionsPadding: EdgeInsets.zero,
+                                contentPadding: EdgeInsets.zero,
+                                elevation: 0.0,
+                                actionsAlignment: MainAxisAlignment.center,
+                                alignment: Alignment.center,
+                                backgroundColor: Colors.transparent,
+                                content: SizedBox(
+                                  height: 250,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: const [
+                                      HomePagePopupWidget(
+                                        isBorder: false,
+                                        title: "View Post",
+                                      ),
+                                      HomePagePopupWidget(
+                                        title: "View Stats",
+                                      ),
+                                      HomePagePopupWidget(
+                                        title: "Download",
+                                      ),
+                                      HomePagePopupWidget(
+                                        title: "Share",
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                      child: VisibilityDetector(
+                        key: Key("$index+@4+1999"),
+                        onVisibilityChanged: (info) {
+                          if (index - 9 >= homePostController.skip.value) {
+                            // debugPrint(info.visibleFraction);
+                            // setState(() {});
+                          }
+                        },
+                        child: homePostController.posts?[index - 1] == null
+                            ? const SizedBox()
+                            : PostCard(
+                                isLiked: homePostController
+                                    .posts?[index - 1].likes!
+                                    .contains(myUserId),
+                                myUserId: myUserId,
+                                post: homePostController.posts?[index - 1],
+                                url: homePostController
+                                        .posts?[index - 1].mediaUrl ??
+                                    "",
+                                userImg: homePostController
+                                        .posts?[index - 1].user?.ProfilePic ??
+                                    "",
+                              ),
+                      ));
+                }
+              } else {
+                return const CupertinoActivityIndicator();
               }
             }
           },

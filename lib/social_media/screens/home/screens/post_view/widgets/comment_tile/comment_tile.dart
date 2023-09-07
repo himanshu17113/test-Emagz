@@ -8,40 +8,22 @@ import 'package:flutter/material.dart';
 import '../../../../../comment/commentController.dart';
 import '../glass.dart';
 
-class PostCommentTile extends StatefulWidget {
+class PostCommentTile extends StatelessWidget {
   final Comment comment;
   final int index;
-  const PostCommentTile({super.key, required this.comment, required this.index});
+  PostCommentTile({super.key, required this.comment, required this.index});
 
-  @override
-  State<PostCommentTile> createState() => _PostCommentTileState();
-}
+  //var storyController = Get.put(GetXStoryController());
+  final storyController = Get.put(CommentController());
 
-class _PostCommentTileState extends State<PostCommentTile> {
-  // var storyController = Get.put(GetXStoryController());
-  var storyController = Get.put(CommentController());
-  String? userName;
-  String? profileUrl;
-
-  @override
-  void initState() {
-    super.initState();
-    asyncInit();
-  }
-
-  asyncInit() async {
-    var user = await storyController.jwtController.getUserDetail(widget.comment.userId!.sId!);
-    userName = user!.username!;
-    // profileUrl = user.businessLogo;
-    setState(() {});
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
           child: GlassmorphicContainer(
             colour: Colors.white30,
             // const Color(0xffDDE0FF),
@@ -57,7 +39,7 @@ class _PostCommentTileState extends State<PostCommentTile> {
             // ),
             child: Row(
               children: [
-                (profileUrl == null)
+                (comment.userId?.ProfilePic == null)
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
@@ -77,15 +59,15 @@ class _PostCommentTileState extends State<PostCommentTile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FormHeadingText(
-                      headings: (userName == null)
+                      headings: (comment.userId?.displayName == null)
                           ? "loading "
-                          : (userName!.length > 20)
-                              ? "${userName!.substring(17)}..."
-                              : userName!,
+                          : (comment.userId!.displayName!.length > 20)
+                              ? "${comment.userId?.displayName?.substring(17)}..."
+                              : comment.userId!.displayName!,
                       fontSize: 10,
                     ),
                     Text(
-                      "${widget.comment.text}",
+                      "${comment.text}",
                       style: const TextStyle(fontSize: 14),
                     ),
                     // FormHeadingText(
@@ -104,7 +86,8 @@ class _PostCommentTileState extends State<PostCommentTile> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                              storyController.setCommentId(widget.comment.sId!, userName ?? widget.comment.userId?.username ?? "jjk", widget.index);
+                              storyController.setCommentId(comment.sId!,
+                                  comment.userId?.username ?? "jjk", index);
                             },
                             child: FormHeadingText(
                               headings: "Reply",
@@ -141,7 +124,8 @@ class _PostCommentTileState extends State<PostCommentTile> {
                       BoxShadow(color: toggleInactive),
                     ],
                   ),
-                  child: Image.asset("assets/png/liked_icon.png", color: purpleColor),
+                  child: Image.asset("assets/png/liked_icon.png",
+                      color: purpleColor),
                 ),
                 const SizedBox(
                   width: 20,
@@ -150,13 +134,13 @@ class _PostCommentTileState extends State<PostCommentTile> {
             ),
           ),
         ),
-        if (widget.comment.comments != null) ...[
+        if (comment.comments != null) ...[
           Column(
-            children: List.generate(widget.comment.comments!.length, (index) {
-              if (widget.comment.comments!.isNotEmpty) {
+            children: List.generate(comment.comments!.length, (index) {
+              if (comment.comments!.isNotEmpty) {
                 return CommentReplyTile(
-                  last: widget.comment.comments!.length == index + 1,
-                  comment: widget.comment.comments![index],
+                  last: comment.comments!.length == index + 1,
+                  comment: comment.comments![index],
                 );
               } else {
                 return const SizedBox();

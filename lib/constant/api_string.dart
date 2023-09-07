@@ -46,6 +46,8 @@ class ApiEndpoint {
 
   static String likePost(String postId) => "$baseUrl/post/$postId/likeANDunlike";
   static String commentPost(String postId) => "$baseUrl/post/$postId/comment";
+    static String getcomment(String postId) => "$baseUrl/post/$postId/getcomments";
+  
   static String replyPost(String postId, String commentId, String userId) =>
       "$baseUrl/post/comment-on-comment?postId=$postId&commentId=$commentId&userId=$userId";
   static String doPoll(String postId) => "$baseUrl/post/$postId/Poll";

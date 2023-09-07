@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 class CommentController extends GetxController {
   Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
 
-  var jwtController = Get.put(JWTController());
+  final jwtController = Get.put(JWTController());
   @override
   onInit() async {
     await storedData();
@@ -48,11 +48,11 @@ class CommentController extends GetxController {
     focusNode.unfocus();
   }
 
-  Future<bool> postComment(String postId) async {
+  Future<String> postComment(String postId) async {
     var comment = controller.text;
     if (comment == "") {
       Get.snackbar("Invalid Comment", "Cant post Empty Comment");
-      return false;
+      return "";
     }
     isPosting.value = true;
     try {
@@ -63,9 +63,16 @@ class CommentController extends GetxController {
       var data = {"userId": userId, "text": comment};
       var resposne =
           await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      debugPrint(ApiEndpoint.commentPost(postId));
+      debugPrint(data.toString());
+      print(resposne);
+      List<dynamic> list = resposne.data["post"]["Comments"];
+      // String s = list.last["_id"];
+      // String s = list.last["text"];
 
+      //   print("grrgf ${list.last["_id"]}");
       isPosting.value = false;
-      controller.clear();
+      //  controller.clear();
       // instantComments.value.add(Comment(
       //     text: comment,
       //     userId: UserSchema(sId: userId),
@@ -73,11 +80,44 @@ class CommentController extends GetxController {
       //     sId: userId));
 
       //   update();
-      return false;
+      return list.last["_id"];
     } catch (e) {
       isPosting.value = false;
       //   update();
-      return false;
+      return "";
+    }
+  }
+
+  Future<List<Comment?>> getComment(String postId) async {
+    var comment = controller.text;
+    if (comment == "") {
+      Get.snackbar("Invalid Comment", "Cant post Empty Comment");
+      return [];
+    }
+    isPosting.value = true;
+    try {
+      Dio dio = Dio();
+      // var token = await jwtController.getAuthToken();
+      // var userId = await jwtController.getUserId();
+      dio.options.headers["Authorization"] = token;
+
+      final resposne = await dio.get(
+        ApiEndpoint.getcomment(postId),
+      );
+
+      isPosting.value = false;
+      controller.clear();
+      if (resposne.statusCode == 200) {
+        List<Comment?> x =
+            List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
+        return x;
+      }
+
+      return [];
+    } catch (e) {
+      isPosting.value = false;
+      //   update();
+      return [];
     }
   }
 

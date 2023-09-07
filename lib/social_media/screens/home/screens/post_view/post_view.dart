@@ -4,7 +4,7 @@ import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
-class PostView extends StatefulWidget {
+class PostView extends StatelessWidget {
   final Post post;
   final String myId;
   bool isLiked;
@@ -14,12 +14,6 @@ class PostView extends StatefulWidget {
       required this.isLiked,
       required this.myId});
 
-  @override
-  State<PostView> createState() => _PostViewState();
-}
-
-
-class _PostViewState extends State<PostView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +26,7 @@ class _PostViewState extends State<PostView> {
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: CachedNetworkImage(
-              imageUrl: widget.post.mediaUrl!,
+              imageUrl: post.mediaUrl!,
               progressIndicatorBuilder: (context, url, downloadProgress) =>
                   CircularProgressIndicator(value: downloadProgress.progress),
               errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -56,33 +50,35 @@ class _PostViewState extends State<PostView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                InkWell(
-                  onTap: () {
-                    if (widget.isLiked) {
-                      widget.isLiked = !widget.isLiked;
-                      widget.post.likes!.remove(widget.myId);
-                      setState(() {});
-                    } else {
-                      widget.isLiked = !widget.isLiked;
-                      widget.post.likes!.add(widget.myId);
-                      setState(() {});
-                    }
-                  },
-                  child: widget.isLiked
-                      ? Image.asset(
-                          "assets/png/liked_icon.png",
-                          width: 22,
-                        )
-                      : Image.asset(
-                          "assets/png/unlike_icon.png",
-                          width: 22,
-                        ),
+                StatefulBuilder(
+                  builder: (context, setInnerState) => InkWell(
+                    onTap: () {
+                      if (isLiked) {
+                        isLiked = !isLiked;
+                        post.likes!.remove(myId);
+                        setInnerState(() {});
+                      } else {
+                        isLiked = !isLiked;
+                        post.likes!.add(myId);
+                        setInnerState(() {});
+                      }
+                    },
+                    child: isLiked
+                        ? Image.asset(
+                            "assets/png/liked_icon.png",
+                            width: 22,
+                          )
+                        : Image.asset(
+                            "assets/png/unlike_icon.png",
+                            width: 22,
+                          ),
+                  ),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(
-                  "${widget.post.likes?.length.toString()}",
+                  "${post.likes?.length.toString()}",
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
@@ -93,7 +89,7 @@ class _PostViewState extends State<PostView> {
                 ),
                 InkWell(
                   onTap: () {
-                    if (widget.post.comments != null) {
+                    if (post.comments != null) {
                       showModalBottomSheet(
                         backgroundColor: Colors.transparent,
                         // enableDrag: true,
@@ -107,8 +103,8 @@ class _PostViewState extends State<PostView> {
                         builder: (context) {
                           return Wrap(children: [
                             PostCommentsModalBottomSheet(
-                              comments: widget.post.comments!,
-                              postId: widget.post.sId!,
+                              comments: post.comments!,
+                              postId: post.sId!,
                             )
                           ]);
                         },
@@ -124,7 +120,7 @@ class _PostViewState extends State<PostView> {
                   width: 5,
                 ),
                 Text(
-                  "${widget.post.comments?.length.toString()}",
+                  "${post.comments?.length.toString()}",
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,

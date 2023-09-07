@@ -31,7 +31,7 @@ class StoryView extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 20),
                     child: MyStory(
                       stories: storyController.stories?[index].stories,
-                      userID: sid,
+                      userID: storyController.stories?[index].userId,
                     ),
                   ));
                 } else {
@@ -50,7 +50,7 @@ class StoryView extends StatelessWidget {
                     onTap: () {
                       Get.to(() => StoryScreen(
                           userId:
-                              storyController.stories![index - 1].userId!.sId!,
+                              storyController.stories![index - 1].userId! ,
                           stories:
                               storyController.stories![index - 1].stories!));
                     },

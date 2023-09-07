@@ -123,7 +123,7 @@ class GlassmorphicContainer extends StatelessWidget {
 
   //final double width;
   final double height;
-final Color? colour;
+  final Color? colour;
   final EdgeInsetsGeometry? margin;
 
   final Matrix4? transform;
@@ -147,19 +147,19 @@ final Color? colour;
     BoxConstraints? constraints,
     this.margin,
     this.transform,
-  //  required this.width,
+    //  required this.width,
     required this.height,
     required this.borderRadius,
     // required this.linearGradient,
     //  required this.border,
     required this.blur,
-      this.colour,
+    this.colour,
     //   required this.borderGradient,
   })  : assert(margin == null || margin.isNonNegative),
         assert(padding == null || padding.isNonNegative),
         assert(constraints == null || constraints.debugAssertIsValid()),
-        constraints = constraints?.tighten( height: height) ??
-            BoxConstraints.tightFor( height: height),
+        constraints = constraints?.tighten(height: height) ??
+            BoxConstraints.tightFor(height: height),
         super(key: key);
 
   @override
@@ -182,7 +182,7 @@ final Color? colour;
   Widget build(BuildContext context) {
     return Container(
       key: key,
-     // width: width,
+      // width: width,
       margin: margin,
       alignment: alignment,
       constraints: constraints,
@@ -191,29 +191,32 @@ final Color? colour;
       child: Stack(
         alignment: alignment ?? Alignment.topLeft,
         children: [
-          ClipRRect(
-            clipBehavior: Clip.hardEdge,
-            borderRadius:
-            //  BorderRadius.only(
-            //     topLeft: Radius.circular(borderRadius),
-            //     topRight: Radius.circular(borderRadius)),
-           BorderRadius.circular(borderRadius),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
-              child: Container(
-                alignment: alignment ?? Alignment.topLeft,
-                decoration: BoxDecoration(
-                   color: colour,
-                  borderRadius: 
-                  // BorderRadius.only(
+          if (blur != 0 && borderRadius != 0) ...[
+            ClipRRect(
+              clipBehavior: Clip.hardEdge,
+              borderRadius:
+                  //  BorderRadius.only(
                   //     topLeft: Radius.circular(borderRadius),
                   //     topRight: Radius.circular(borderRadius)),
-              BorderRadius.circular(borderRadius),
-                  // gradient: linearGradient,
+                  BorderRadius.circular(borderRadius),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: blur, sigmaY: blur * 2),
+                child: Container(
+                  alignment: alignment ?? Alignment.topLeft,
+                  decoration: BoxDecoration(
+                    color: 
+                    colour,
+                    borderRadius:
+                        // BorderRadius.only(
+                        //     topLeft: Radius.circular(borderRadius),
+                        //     topRight: Radius.circular(borderRadius)),
+                        BorderRadius.circular(borderRadius),
+                    // gradient: linearGradient,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],
           // GlassmorphicBorder(
           //   strokeWidth: border,
           //   radius: borderRadius,
