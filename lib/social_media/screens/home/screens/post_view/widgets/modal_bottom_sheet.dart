@@ -4,6 +4,8 @@ import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../constant/colors.dart';
+import '../../../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'glass.dart';
 
 class PostCommentsModalBottomSheet extends StatefulWidget {
@@ -50,88 +52,180 @@ class _PostCommentsModalBottomSheetState
       blur: widget.isblurNeeded ? 6 : 0,
       //  width: MediaQuery.of(context).size.width,
       height: keyboardVisible ? MediaQuery.of(context).size.height : 450,
-      child: Column(
-        children: [
-          const Text(
-            "Comments",
-            textAlign: TextAlign.center,
-            style: TextStyle(height: 2, fontSize: 18, color: Colors.black),
-          ),
-
-          ///  Container(width: double.maxFinite, height: 0.5, color: Colors.black),
-          SizedBox(
-              height: keyboardVisible
-                  ? (MediaQuery.of(context).size.height -
-                      MediaQuery.of(context).viewInsets.bottom -
-                      120)
-                  : 320,
-              //MediaQuery.of(context).size.height * .7,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                // child: ListView(
-                //   physics: const ScrollPhysics(),
-                //   children: [
-                child: widget.comments.isNotEmpty
-                    ? ListView.builder(
-                        //   shrinkWrap: true,
-                        physics: const ScrollPhysics(),
-                        itemCount: widget.comments.length,
-                        itemBuilder: (context, index) {
-                          return PostCommentTile(
-                            comment: widget.comments[index]!,
-                            index: index,
-                          );
-                        },
-                      )
-                    : const SizedBox(),
-              )),
-          // Obx(
-          //   () => ListView.builder(
-          //     shrinkWrap: true,
-          //     physics: const ScrollPhysics(),
-          //     itemCount:
-          //         commentsController.instantComments.value.length,
-          //     itemBuilder: (context, index) {
-          //       //  debugPrint(commentsController.instantComments.value[index]);
-          //       return PostCommentTile(
-          //         comment:
-          //             commentsController.instantComments.value[index],
-          //       );
-          //     },
-          //   ),
-          // ),
-
-          //   ],
-          // ),
-          Obx(() => commentsController.isCommentingOnPost.value
-              ? const SizedBox()
-              : Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: 30,
-                  //   width: context.width,
-                  alignment: Alignment.center,
-                  color: Colors.white60,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        "replying to ${commentsController.commentOwner.value}",
-                        style: const TextStyle(color: Colors.brown),
-                      ),
-                      IconButton(
-                          onPressed: () => setState(() {
-                                commentsController.isCommentingOnPost.value =
-                                    true;
-                                commentsController.focusNode.unfocus();
-                              }),
-                          icon: const Icon(
-                            Icons.close,
-                            color: Colors.white,
-                            size: 15,
-                          ))
-                    ],
+      child: Container(
+        decoration: const BoxDecoration(
+            color: Color.fromRGBO(0, 0, 0, 0.2),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(20.0),
+                topLeft: Radius.circular(20.0))),
+        padding: const EdgeInsets.symmetric(
+            horizontal: 20, vertical: 10),
+        child: Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  width: 10,
+                ),
+                Image.asset(
+                  "assets/png/unlike_icon.png",
+                  width: 40,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "0",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: whiteColor),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                InkWell(
+                  onTap: () {
+                    // updateName(context,);
+                  },
+                  child: Image.asset(
+                    "assets/png/comment_icon.png",
+                    width: 40,
                   ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "${widget.comments.length}",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: whiteColor),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                Image.asset(
+                  "assets/png/share_icon.png",
+                  width: 40,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                const Icon(
+                  Icons.arrow_back_sharp,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                FormHeadingText(
+                  color: Colors.white,
+                  headings: "Comments",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+                const Spacer(),
+                FormHeadingText(
+                  color: Colors.white,
+                  headings: "Latest",
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                const Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.white,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+
+            ///  Container(width: double.maxFinite, height: 0.5, color: Colors.black),
+            SizedBox(
+                height: keyboardVisible
+                    ? (MediaQuery.of(context).size.height -
+                        MediaQuery.of(context).viewInsets.bottom -
+                        140)
+                    : 270,
+                //MediaQuery.of(context).size.height * .7,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  // child: ListView(
+                  //   physics: const ScrollPhysics(),
+                  //   children: [
+                  child: widget.comments.isNotEmpty
+                      ? ListView.builder(
+                          //   shrinkWrap: true,
+                          physics: const ScrollPhysics(),
+                          itemCount: widget.comments.length,
+                          itemBuilder: (context, index) {
+                            return PostCommentTile(
+                              comment: widget.comments[index]!,
+                              index: index,
+                            );
+                          },
+                        )
+                      : const SizedBox(),
                 )),
+            // Obx(
+            //   () => ListView.builder(
+            //     shrinkWrap: true,
+            //     physics: const ScrollPhysics(),
+            //     itemCount:
+            //         commentsController.instantComments.value.length,
+            //     itemBuilder: (context, index) {
+            //       //  debugPrint(commentsController.instantComments.value[index]);
+            //       return PostCommentTile(
+            //         comment:
+            //             commentsController.instantComments.value[index],
+            //       );
+            //     },
+            //   ),
+            // ),
+
+            //   ],
+            // ),
+            Obx(() => commentsController.isCommentingOnPost.value
+                ? const SizedBox()
+                : Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    height: 30,
+                    //   width: context.width,
+                    alignment: Alignment.center,
+                    color: Colors.white60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          "replying to ${commentsController.commentOwner.value}",
+                          style: const TextStyle(color: Colors.brown),
+                        ),
+                        IconButton(
+                            onPressed: () => setState(() {
+                                  commentsController.isCommentingOnPost.value =
+                                      true;
+                                  commentsController.focusNode.unfocus();
+                                }),
+                            icon: const Icon(
+                              Icons.close,
+                              color: Colors.white,
+                              size: 15,
+                            ))
+                      ],
+                    ),
+                  )),
 
           SizedBox(
             height: 55,

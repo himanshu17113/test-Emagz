@@ -23,7 +23,7 @@ class PostCommentTile extends StatelessWidget {
       children: [
         Padding(
           padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
+              const EdgeInsets.only(left: 5, right: 5, top: 15, bottom: 5),
           child: GlassmorphicContainer(
             colour: Colors.white30,
             // const Color(0xffDDE0FF),
@@ -32,7 +32,7 @@ class PostCommentTile extends StatelessWidget {
             //     width: MediaQuery.of(context).size.width,
             borderRadius: 20,
             // margin: const EdgeInsets.symmetric(horizontal: 20),
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 4),
             // decoration: BoxDecoration(
 
             //   borderRadius: BorderRadius.circular(10),
