@@ -15,7 +15,7 @@ class CommentReplyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 40.0),
+      padding: const EdgeInsets.only(left: 20.0),
       child: StatefulBuilder(
         builder: (BuildContext context, setState) => IntrinsicHeight(
           child: Row(
@@ -31,7 +31,7 @@ class CommentReplyTile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          flex: 20,
+                          flex: 10,
                           child: Container(
                             width: 2,
                             color: Colors.white30,
@@ -43,7 +43,7 @@ class CommentReplyTile extends StatelessWidget {
                         ),
                         (!last)
                             ? Expanded(
-                                flex: 20,
+                                flex: 10,
                                 child: Container(
                                   margin: const EdgeInsets.only(top: 10),
                                   width: 2,
@@ -51,7 +51,7 @@ class CommentReplyTile extends StatelessWidget {
                                 ),
                               )
                             : const Spacer(
-                                flex: 20,
+                                flex: 10,
                               )
                       ],
                     ),
@@ -112,7 +112,7 @@ class CommentReplyTile extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(right: 40),
                                 child: SizedBox(
-                                  width: 200,
+                                  width: 150,
                                   child: Text(
                                     comment.text ?? "",
                                     maxLines: max,

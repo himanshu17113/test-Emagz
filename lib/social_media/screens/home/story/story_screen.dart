@@ -10,6 +10,9 @@ import "package:story_view/story_view.dart";
 import '../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 
+import '../screens/post_view/widgets/modal_bottom_sheet.dart';
+import '../widgets/bottomSheet/share_bottom_sheet.dart';
+
 class StoryScreen extends StatelessWidget {
   late UserId userId;
   late List<Stories> stories;
@@ -191,41 +194,41 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 InkWell(
                                   onTap: () {
-                                    showModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      // enableDrag: true,
-                                      enableDrag: true,
-                                      isScrollControlled: true,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20),
-                                              topRight: Radius.circular(20))),
-                                      context: context,
-                                      builder: (context) {
-                                        return Wrap(children: [
-                                          //     PostCommentsModalBottomSheet(
-                                          //       comments:
-                                          //         stories[storyController
-                                          //               .currentStoryIndex.value]
-                                          //           .comments!,
-                                          // postId:        stories[storyController
-                                          //               .currentStoryIndex.value]
-                                          //           .sId!,
+                                    // showModalBottomSheet(
+                                    //   backgroundColor: Colors.transparent,
+                                    //   // enableDrag: true,
+                                    //   enableDrag: true,
+                                    //   isScrollControlled: true,
+                                    //   shape: const RoundedRectangleBorder(
+                                    //       borderRadius: BorderRadius.only(
+                                    //           topLeft: Radius.circular(20),
+                                    //           topRight: Radius.circular(20))),
+                                    //   context: context,
+                                    //   builder: (context) {
+                                    //     return Wrap(children: [
+                                    //           PostCommentsModalBottomSheet(
+                                    //             comments:
+                                    //               stories[storyController
+                                    //                     .currentStoryIndex.value]
+                                    //                 .comments,
+                                    //       postId:        stories[storyController
+                                    //                     .currentStoryIndex.value]
+                                    //                 .sId!,
+                                    //
+                                    //           )
+                                    //     ]);
+                                    //   },
+                                    // );
 
-                                          //     )
-                                        ]);
-                                      },
-                                    );
-
-                                    // updateName(
-                                    //     context,
-                                    //     stories[storyController
-                                    //             .currentStoryIndex.value]
-                                    //         .comments!,
-                                    //     stories[storyController
-                                    //             .currentStoryIndex.value]
-                                    //         .sId!,
-                                    //     storyController.myId.value);
+                                    updateName(
+                                        context,
+                                        stories[storyController
+                                                .currentStoryIndex.value]
+                                            .comments!,
+                                        stories[storyController
+                                                .currentStoryIndex.value]
+                                            .sId!,
+                                        storyController.myId.value);
                                   },
                                   child: Image.asset(
                                     "assets/png/comment_icon.png",
@@ -240,7 +243,11 @@ class StoryScreen extends StatelessWidget {
                                             .currentStoryIndex.value]
                                         .comments!
                                         .length
-                                        .toString())
+                                        .toString(),
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: whiteColor),)
                                     : Text(
                                         'VAlid',
                                         style: TextStyle(
@@ -251,9 +258,24 @@ class StoryScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 30,
                                 ),
-                                Image.asset(
-                                  "assets/png/share_icon.png",
-                                  width: 26,
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      shape: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(20),
+                                              topLeft: Radius.circular(20))),
+                                      isScrollControlled: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return ShareStory();
+                                      },
+                                    );
+                                  },
+                                  child: Image.asset(
+                                    "assets/png/share_icon.png",
+                                    width: 26,
+                                  ),
                                 ),
                               ],
                             );
@@ -268,6 +290,7 @@ class StoryScreen extends StatelessWidget {
 
   updateName(BuildContext context, List<Comments> comments, String storyId,
       String myId) {
+    print('ndn');
     TextEditingController textEditingController = TextEditingController();
     return showDialog(
       barrierColor: const Color(0xff252525).withOpacity(.4),
@@ -421,15 +444,21 @@ class StoryScreen extends StatelessWidget {
 
                             // CommentReplyTile(),
                             // StoryCommentTile(),
-                            SizedBox(
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(160, 160, 160, 0.5),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               height: 55,
                               child: Row(
                                 children: [
                                   Expanded(
                                     child: TextField(
+                                      textAlign: TextAlign.left,
                                       cursorColor: grayColor,
                                       controller: textEditingController,
                                       decoration: const InputDecoration(
+                                        border: InputBorder.none,
                                           isDense: true,
                                           hintText: "Type Your Comment ",
                                           hintStyle: TextStyle(
@@ -440,10 +469,9 @@ class StoryScreen extends StatelessWidget {
                                             ),
                                           ),
                                           contentPadding:
-                                              EdgeInsets.only(left: 2),
-                                          border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(1)))),
+                                              EdgeInsets.only(left: 20),
+
+                                      ),
                                     ),
                                   ),
                                   Container(

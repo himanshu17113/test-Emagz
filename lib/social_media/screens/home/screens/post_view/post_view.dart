@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
+import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../screens/auth/widgets/form_haeding_text.dart';
+import '../../story/widgets/comment_tile/comment_tile.dart';
 
 class PostView extends StatelessWidget {
   final Post post;
@@ -16,6 +20,7 @@ class PostView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.black,
       // backgroundColor: socialBack,
@@ -109,6 +114,8 @@ class PostView extends StatelessWidget {
                           ]);
                         },
                       );
+
+
                     }
                   },
                   child: Image.asset(
@@ -140,4 +147,5 @@ class PostView extends StatelessWidget {
       ]),
     );
   }
+
 }

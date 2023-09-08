@@ -27,14 +27,14 @@ class _WebViewPersonaState extends State<WebViewPersona> {
 
         },
         onPageFinished: (url) {
-          print('http://persona.emagz.live/${widget.templateId}/${widget.personaUserId}/${widget.userId}/${widget.token}');
+          print('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}');
           print(widget.personaUserId);
         },
       ))
       ..loadRequest(
         //Uri.parse('http://persona.emagz.live/64e8f2c3b9b30c1ed4b28bb6/64d33c54b6a7b2fb0be633dc/64d33c54b6a7b2fb0be633dc/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzM2M1NGI2YTdiMmZiMGJlNjMzZGMiLCJpYXQiOjE2OTM0MDA2NTB9.PgFHtbYq9V9gT3mvmSQ6S61tG-BYAEDfHtt5LLODBOY'),
 
-        Uri.parse('http://persona.emagz.live/${widget.templateId}/${widget.personaUserId}/${widget.userId}/${widget.token}'),
+        Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'),
       );
 
 
