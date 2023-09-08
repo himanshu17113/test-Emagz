@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
- import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
+import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import "package:story_view/story_view.dart";
- 
+
 import '../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
+
+import '../screens/post_view/widgets/modal_bottom_sheet.dart';
 
 class StoryScreen extends StatelessWidget {
   late UserId userId;
@@ -50,7 +52,7 @@ class StoryScreen extends StatelessWidget {
                             .substring(3, s.view.key.toString().length - 3));
                       },
                       onComplete: () {
-                        Navigator.pop(context);
+                        //  Navigator.pop(context);
                       },
                       onVerticalSwipeComplete: (direction) {
                         if (direction == Direction.down) {
@@ -186,36 +188,34 @@ class StoryScreen extends StatelessWidget {
                                             fontWeight: FontWeight.w600,
                                             color: whiteColor),
                                       ),
-                                const SizedBox(
-                                  width: 30,
-                                ),
                                 InkWell(
-                                  onTap: () {
+                                  onTap: () async {
+                                    controller.pause();
                                     showModalBottomSheet(
-                                      backgroundColor: Colors.transparent,
-                                      // enableDrag: true,
-                                      enableDrag: true,
-                                      isScrollControlled: true,
-                                      shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(20),
-                                              topRight: Radius.circular(20))),
-                                      context: context,
-                                      builder: (context) {
-                                        return Wrap(children: [
-                                          //     PostCommentsModalBottomSheet(
-                                          //       comments:
-                                          //         stories[storyController
-                                          //               .currentStoryIndex.value]
-                                          //           .comments!,
-                                          // postId:        stories[storyController
-                                          //               .currentStoryIndex.value]
-                                          //           .sId!,
-
-                                          //     )
-                                        ]);
-                                      },
-                                    );
+                                        backgroundColor: Colors.transparent,
+                                        // enableDrag: true,
+                                        enableDrag: true,
+                                        isScrollControlled: true,
+                                        shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                                topLeft: Radius.circular(20),
+                                                topRight: Radius.circular(20))),
+                                        context: context,
+                                        builder: (context) {
+                                          return Wrap(children: [
+                                            PostCommentsModalBottomSheet(
+                                              comments: stories[storyController
+                                                      .currentStoryIndex.value]
+                                                  .comments!,
+                                              postId: stories[storyController
+                                                      .currentStoryIndex.value]
+                                                  .sId!,
+                                              isStory: true,
+                                            )
+                                          ]);
+                                        }).whenComplete(() {
+                                      controller.play();
+                                    });
 
                                     // updateName(
                                     //     context,
@@ -227,13 +227,14 @@ class StoryScreen extends StatelessWidget {
                                     //         .sId!,
                                     //     storyController.myId.value);
                                   },
-                                  child: Image.asset(
-                                    "assets/png/comment_icon.png",
-                                    width: 22,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(30, 8, 5, 8),
+                                    child: Image.asset(
+                                      "assets/png/comment_icon.png",
+                                      width: 22,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
                                 ),
                                 stories.isNotEmpty
                                     ? Text(stories[storyController

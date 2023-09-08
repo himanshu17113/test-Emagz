@@ -18,8 +18,9 @@ class MyStory extends StatelessWidget {
       onTap: () {
         if (stories == [] || userID == null) {
           return;
+        } else {
+          Get.to(() => StoryScreen(userId: userID!, stories: stories!));
         }
-        Get.to(() => StoryScreen(userId: userID!, stories: stories!));
       },
       child: Container(
         height: 55,

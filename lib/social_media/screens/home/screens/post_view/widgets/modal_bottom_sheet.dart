@@ -10,11 +10,13 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
   final String postId;
   List<Comment?> comments;
   final bool isblurNeeded;
+  final bool? isStory;
   PostCommentsModalBottomSheet(
       {super.key,
       required this.comments,
       required this.postId,
-      this.isblurNeeded = true});
+      this.isblurNeeded = true,
+      this.isStory = false});
 
   @override
   State<PostCommentsModalBottomSheet> createState() =>
@@ -24,6 +26,8 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
 class _PostCommentsModalBottomSheetState
     extends State<PostCommentsModalBottomSheet> {
   final commentsController = Get.put(CommentController());
+  //final getXStoryController = Get.find<GetXStoryController>();
+
   double mainHeight = 450;
 
   @override
@@ -145,44 +149,86 @@ class _PostCommentsModalBottomSheetState
                       //    Obx( () =>
                       IconButton(
                           onPressed: () async {
-                            if (commentsController.isCommentingOnPost.value) {
-                              //  commentsController.isPosting.value
-                              //     ? debugPrint("sending comment")
-                              //     :
-                              String x = await commentsController
-                                  .postComment(widget.postId);
-                              setState(() {
-                                widget.comments.add(Comment(
-                                    text: commentsController.controller.text,
-                                    userId: UserSchema(
-                                        sId: commentsController.userId),
-                                    comments: [],
-                                    sId: x));
-                                commentsController.controller.clear();
-                              });
-                            } else {
-                              commentsController.isPosting.value
-                                  ? debugPrint("sending comment")
-                                  : commentsController.postReply(
-                                      widget.postId,
-                                      commentsController.commentId.value,
-                                      commentsController.controller.text);
+                            if (!widget.isStory!) {
+                              if (commentsController.isCommentingOnPost.value) {
+                                //  commentsController.isPosting.value
+                                //     ? debugPrint("sending comment")
+                                //     :
+                                String x = await commentsController
+                                    .postComment(widget.postId);
+                                setState(() {
+                                  widget.comments.add(Comment(
+                                      text: commentsController.controller.text,
+                                      userId: UserSchema(
+                                          sId: commentsController.userId),
+                                      comments: [],
+                                      sId: x));
+                                  commentsController.controller.clear();
+                                });
+                              } else {
+                                commentsController.isPosting.value
+                                    ? debugPrint("sending comment")
+                                    : commentsController.postReply(
+                                        widget.postId,
+                                        commentsController.commentId.value,
+                                        commentsController.controller.text);
 
-                              setState(() {
-                                widget
-                                    .comments[
-                                        commentsController.commentindex.value]
-                                    ?.comments
-                                    ?.add(Comment(
-                                        text:
-                                            commentsController.controller.text,
-                                        userId: UserSchema(
-                                            //       username: ,
-                                            sId: commentsController.userId),
-                                        comments: [],
-                                        sId: commentsController.userId));
-                                commentsController.controller.clear();
-                              });
+                                setState(() {
+                                  widget
+                                      .comments[
+                                          commentsController.commentindex.value]
+                                      ?.comments
+                                      ?.add(Comment(
+                                          text: commentsController
+                                              .controller.text,
+                                          userId: UserSchema(
+                                              //       username: ,
+                                              sId: commentsController.userId),
+                                          comments: [],
+                                          sId: commentsController.userId));
+                                  commentsController.controller.clear();
+                                });
+                              }
+                            } else {
+                              if (commentsController.isCommentingOnPost.value) {
+                                //  commentsController.isPosting.value
+                                //     ? debugPrint("sending comment")
+                                //     :
+                                String x = await commentsController
+                                    .commentStory(widget.postId);
+                                setState(() {
+                                  widget.comments.add(Comment(
+                                      text: commentsController.controller.text,
+                                      userId: UserSchema(
+                                          sId: commentsController.userId),
+                                      comments: [],
+                                      sId: x));
+                                  commentsController.controller.clear();
+                                });
+                              } else {
+                                commentsController.isPosting.value
+                                    ? debugPrint("sending comment")
+                                    : commentsController.replyStory(
+                                        widget.postId,
+                                        commentsController.commentId.value,
+                                        commentsController.controller.text);
+
+                                setState(() {
+                                  widget
+                                      .comments[
+                                          commentsController.commentindex.value]
+                                      ?.comments
+                                      ?.add(Comment(
+                                          text: commentsController
+                                              .controller.text,
+                                          userId: UserSchema(
+                                              //       username: ,
+                                              sId: commentsController.userId),
+                                          comments: [],
+                                          sId: commentsController.userId));
+                                  commentsController.controller.clear();
+                                });
+                              }
                             }
                           },
                           icon: commentsController.isPosting.value

@@ -50,6 +50,8 @@ class ApiEndpoint {
   
   static String replyPost(String postId, String commentId, String userId) =>
       "$baseUrl/post/comment-on-comment?postId=$postId&commentId=$commentId&userId=$userId";
+        static String replyStory(String postId, String commentId, String userId) =>
+      "$baseUrl/story/comment?storyId=$postId&commentId=$commentId&userId=$userId";
   static String doPoll(String postId) => "$baseUrl/post/$postId/Poll";
   static String makePost = "$baseUrl/post/";
 

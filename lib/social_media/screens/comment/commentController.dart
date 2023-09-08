@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class CommentController extends GetxController {
   Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
@@ -65,7 +68,7 @@ class CommentController extends GetxController {
           await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
-      print(resposne);
+      // print(resposne);
       List<dynamic> list = resposne.data["post"]["Comments"];
       // String s = list.last["_id"];
       // String s = list.last["text"];
@@ -118,6 +121,66 @@ class CommentController extends GetxController {
       isPosting.value = false;
       //   update();
       return [];
+    }
+  }
+
+  commentStory(String storyId) async {
+    var comment = controller.text;
+    if (token == null) {
+      token = await jwtController.getAuthToken();
+      userId = await jwtController.getUserId();
+    }
+
+    debugPrint("story : $storyId");
+    final headers = {
+      'Content-Type': 'application/json',
+      "Authorization": token!
+    };
+    debugPrint(ApiEndpoint.commentPost(storyId));
+    Map body = {"userId": userId, "text": comment};
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.commentStroy(storyId)),
+        headers: headers,
+        body: jsonEncode(body));
+    debugPrint(response.body);
+    List<dynamic> list = jsonDecode(response.body)["stories"]["Comments"];
+    // String s = list.last["_id"];
+    // String s = list.last["text"];
+
+    print("grrgf ${list.last["_id"]}");
+    isPosting.value = false;
+    //  controller.clear();
+
+    return list.last["_id"];
+  }
+
+  replyStory(String postId, String commentID, String? comment) async {
+    debugPrint("👾👾👾👾👾👾👾👾");
+
+    debugPrint(ApiEndpoint.replyStory(postId, commentID, userId!));
+    //  // var comment = controller.text;
+    //   if (comment == "") {
+    //     Get.snackbar("Invalid Comment", "Cant post Empty Comment");
+    //     return false;
+    //   }
+    isPosting.value = true;
+    try {
+      Dio dio = Dio();
+
+      debugPrint(token);
+      dio.options.headers["Authorization"] = token;
+      var data = {"text": comment ?? controller.text};
+      var resposne = await dio
+          .post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
+      debugPrint(resposne.toString());
+      isPosting.value = false;
+      controller.clear();
+
+      return false;
+    } catch (e) {
+      isPosting.value = false;
+
+      return false;
     }
   }
 

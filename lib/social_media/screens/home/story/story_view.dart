@@ -25,7 +25,8 @@ class StoryView extends StatelessWidget {
             itemCount: storyController.stories!.length + 1,
             itemBuilder: (ctx, index) {
               if (index == 0) {
-                if (storyController.stories?[index].userId?.sId == sid) {
+                if (storyController.stories!.isNotEmpty &&
+                    storyController.stories?[index].userId?.sId == sid) {
                   return SizedBox(
                       child: Padding(
                     padding: const EdgeInsets.only(left: 20),
@@ -49,8 +50,7 @@ class StoryView extends StatelessWidget {
                 return InkWell(
                     onTap: () {
                       Get.to(() => StoryScreen(
-                          userId:
-                              storyController.stories![index - 1].userId! ,
+                          userId: storyController.stories![index - 1].userId!,
                           stories:
                               storyController.stories![index - 1].stories!));
                     },

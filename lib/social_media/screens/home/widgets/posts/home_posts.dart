@@ -8,6 +8,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../story/controller/story_controller.dart';
 import '../../story/story_view.dart';
+import '../../story/widgets/my_story/my_story.dart';
 
 class HomePosts extends StatelessWidget {
   final String? myUserId;
@@ -33,7 +34,17 @@ class HomePosts extends StatelessWidget {
                 return StoryView(
                     sid: myUserId ?? homePostController.userId ?? "");
               } else {
-                const Text("loading");
+                return 
+                // const Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: MyStory(
+                //     stories: [],
+                //     userID: null,
+                //   ),
+                // );
+                 StoryView(sid: myUserId ?? homePostController.userId ?? "");
+                // const SizedBox();
+                // const Text("loading");
               }
             } else {
               if (homePostController.posts!.isNotEmpty) {

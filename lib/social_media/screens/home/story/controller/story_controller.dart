@@ -28,11 +28,10 @@ class GetXStoryController extends GetxController {
     try {
       stories?.clear();
 
-      debugPrint(
-          "🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 mmmmmmmm");
+      debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
       debugPrint(ApiEndpoint.story);
       token = await jwtController.getAuthToken();
-      await getmyStories();
+      //  await getmyStories();
       //   debugPrint(token);
       myId.value = (await jwtController.getUserId())!;
       final headers = {
@@ -79,7 +78,7 @@ class GetXStoryController extends GetxController {
         'Content-Type': 'application/json',
         "Authorization": token!
       };
-
+      debugPrint(ApiEndpoint.Storybyid(myId.value));
       http.Response response = await http
           .get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
       var body = jsonDecode(response.body);
