@@ -11,6 +11,7 @@ import '../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 
 import '../screens/post_view/widgets/modal_bottom_sheet.dart';
+import '../widgets/bottomSheet/share_bottom_sheet.dart';
 
 class StoryScreen extends StatelessWidget {
   late UserId userId;
@@ -266,7 +267,7 @@ class StoryScreen extends StatelessWidget {
                                       isScrollControlled: true,
                                       context: context,
                                       builder: (context) {
-                                        return ShareStory();
+                                        return const ShareStory();
                                       },
                                     );
                                   },
@@ -444,7 +445,7 @@ class StoryScreen extends StatelessWidget {
                             // StoryCommentTile(),
                             Container(
                               decoration: BoxDecoration(
-                                color: Color.fromRGBO(160, 160, 160, 0.5),
+                                color: const Color.fromRGBO(160, 160, 160, 0.5),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               height: 55,

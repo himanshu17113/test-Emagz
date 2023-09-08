@@ -227,7 +227,11 @@ class _PostCommentsModalBottomSheetState
                     ),
                   )),
 
-          SizedBox(
+          Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(160, 160, 160, 0.5),
+                  borderRadius: BorderRadius.circular(10),
+                ),
             height: 55,
             width: MediaQuery.of(context).size.width - 20,
             child: TextField(
@@ -235,117 +239,131 @@ class _PostCommentsModalBottomSheetState
               controller: commentsController.controller,
               // controller: textEditingController,
               decoration: InputDecoration(
-                hintText: "write comment",
+                hintText: "Type your Comment",
                 hintStyle: const TextStyle(color: Colors.white54),
+                  border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        borderSide: BorderSide(color: Colors.white, width: 2)),
                 suffixIcon: Padding(
                   padding: const EdgeInsets.all(2.0),
+                  
                   child:
                       //    Obx( () =>
-                      IconButton(
-                          onPressed: () async {
-                            if (!widget.isStory!) {
-                              if (commentsController.isCommentingOnPost.value) {
-                                //  commentsController.isPosting.value
-                                //     ? debugPrint("sending comment")
-                                //     :
-                                String x = await commentsController
-                                    .postComment(widget.postId);
-                                setState(() {
-                                  widget.comments.add(Comment(
-                                      text: commentsController.controller.text,
-                                      userId: UserSchema(
-                                          sId: commentsController.userId),
-                                      comments: [],
-                                      sId: x));
-                                  commentsController.controller.clear();
-                                });
+                      Container(
+                         decoration: const BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            gradient: LinearGradient(
+                                end: Alignment.bottomRight,
+                                begin: Alignment.topLeft,
+                                colors: [
+                                  Color.fromRGBO(27, 71, 193, 1),
+                                  Color.fromRGBO(49, 219, 199, 1)
+                                ])),
+                        child: IconButton(
+                            onPressed: () async {
+                              if (!widget.isStory!) {
+                                if (commentsController.isCommentingOnPost.value) {
+                                  //  commentsController.isPosting.value
+                                  //     ? debugPrint("sending comment")
+                                  //     :
+                                  String x = await commentsController
+                                      .postComment(widget.postId);
+                                  setState(() {
+                                    widget.comments.add(Comment(
+                                        text: commentsController.controller.text,
+                                        userId: UserSchema(
+                                            sId: commentsController.userId),
+                                        comments: [],
+                                        sId: x));
+                                    commentsController.controller.clear();
+                                  });
+                                } else {
+                                  commentsController.isPosting.value
+                                      ? debugPrint("sending comment")
+                                      : commentsController.postReply(
+                                          widget.postId,
+                                          commentsController.commentId.value,
+                                          commentsController.controller.text);
+                      
+                                  setState(() {
+                                    widget
+                                        .comments[
+                                            commentsController.commentindex.value]
+                                        ?.comments
+                                        ?.add(Comment(
+                                            text: commentsController
+                                                .controller.text,
+                                            userId: UserSchema(
+                                                //       username: ,
+                                                sId: commentsController.userId),
+                                            comments: [],
+                                            sId: commentsController.userId));
+                                    commentsController.controller.clear();
+                                  });
+                                }
                               } else {
-                                commentsController.isPosting.value
-                                    ? debugPrint("sending comment")
-                                    : commentsController.postReply(
-                                        widget.postId,
-                                        commentsController.commentId.value,
-                                        commentsController.controller.text);
-
-                                setState(() {
-                                  widget
-                                      .comments[
-                                          commentsController.commentindex.value]
-                                      ?.comments
-                                      ?.add(Comment(
-                                          text: commentsController
-                                              .controller.text,
-                                          userId: UserSchema(
-                                              //       username: ,
-                                              sId: commentsController.userId),
-                                          comments: [],
-                                          sId: commentsController.userId));
-                                  commentsController.controller.clear();
-                                });
+                                if (commentsController.isCommentingOnPost.value) {
+                                  //  commentsController.isPosting.value
+                                  //     ? debugPrint("sending comment")
+                                  //     :
+                                  String x = await commentsController
+                                      .commentStory(widget.postId);
+                                  setState(() {
+                                    widget.comments.add(Comment(
+                                        text: commentsController.controller.text,
+                                        userId: UserSchema(
+                                            sId: commentsController.userId),
+                                        comments: [],
+                                        sId: x));
+                                    commentsController.controller.clear();
+                                  });
+                                } else {
+                                  commentsController.isPosting.value
+                                      ? debugPrint("sending comment")
+                                      : commentsController.replyStory(
+                                          widget.postId,
+                                          commentsController.commentId.value,
+                                          commentsController.controller.text);
+                      
+                                  setState(() {
+                                    widget
+                                        .comments[
+                                            commentsController.commentindex.value]
+                                        ?.comments
+                                        ?.add(Comment(
+                                            text: commentsController
+                                                .controller.text,
+                                            userId: UserSchema(
+                                                //       username: ,
+                                                sId: commentsController.userId),
+                                            comments: [],
+                                            sId: commentsController.userId));
+                                    commentsController.controller.clear();
+                                  });
+                                }
                               }
-                            } else {
-                              if (commentsController.isCommentingOnPost.value) {
-                                //  commentsController.isPosting.value
-                                //     ? debugPrint("sending comment")
-                                //     :
-                                String x = await commentsController
-                                    .commentStory(widget.postId);
-                                setState(() {
-                                  widget.comments.add(Comment(
-                                      text: commentsController.controller.text,
-                                      userId: UserSchema(
-                                          sId: commentsController.userId),
-                                      comments: [],
-                                      sId: x));
-                                  commentsController.controller.clear();
-                                });
-                              } else {
-                                commentsController.isPosting.value
-                                    ? debugPrint("sending comment")
-                                    : commentsController.replyStory(
-                                        widget.postId,
-                                        commentsController.commentId.value,
-                                        commentsController.controller.text);
-
-                                setState(() {
-                                  widget
-                                      .comments[
-                                          commentsController.commentindex.value]
-                                      ?.comments
-                                      ?.add(Comment(
-                                          text: commentsController
-                                              .controller.text,
-                                          userId: UserSchema(
-                                              //       username: ,
-                                              sId: commentsController.userId),
-                                          comments: [],
-                                          sId: commentsController.userId));
-                                  commentsController.controller.clear();
-                                });
-                              }
-                            }
-                          },
-                          icon: commentsController.isPosting.value
-                              ? const Icon(
-                                  Icons.more_horiz,
-                                  color: Colors.blue,
-                                )
-                              : const Icon(
-                                  Icons.send,
-                                  color: Colors.blue,
-                                )),
+                            },
+                            icon: commentsController.isPosting.value
+                                ? const Icon(
+                                    Icons.more_horiz,
+                                    color: Colors.blue,
+                                  )
+                                : const Icon(
+                                    Icons.send,
+                                    color: Colors.blue,
+                                  )),
+                      ),
                   //   ),
                 ),
-                border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
-                    ),
-                    borderSide: BorderSide(color: Colors.white, width: 2)),
+              
               ),
             ),
           )
         ],
       ),
-    );
+     ) );
   }
 }
