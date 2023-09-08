@@ -7,10 +7,10 @@ class CouponScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const UserTopBar(title: "Coupon"),
+    return const Scaffold(
+      appBar: UserTopBar(title: "Coupon"),
       body: SingleChildScrollView(
-        child: Column(children: const [
+        child: Column(children: [
           SizedBox(
             height: 20,
           ),

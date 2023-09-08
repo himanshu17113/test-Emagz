@@ -58,11 +58,11 @@ class CustomVideoPlayer extends StatelessWidget {
               },
               child: Container(
                 color: Colors.black.withOpacity(0.50),
-                child: Center(
+                child: const Center(
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.play_arrow,
                       size: 60,

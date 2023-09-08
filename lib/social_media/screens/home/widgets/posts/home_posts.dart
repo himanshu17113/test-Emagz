@@ -8,7 +8,6 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../story/controller/story_controller.dart';
 import '../../story/story_view.dart';
-import '../../story/widgets/my_story/my_story.dart';
 
 class HomePosts extends StatelessWidget {
   final String? myUserId;
@@ -61,7 +60,7 @@ class HomePosts extends StatelessWidget {
                             barrierColor: Colors.black.withOpacity(.5),
                             context: context,
                             builder: (context) {
-                              return AlertDialog(
+                              return const AlertDialog(
                                 insetPadding: EdgeInsets.zero,
                                 iconPadding: EdgeInsets.zero,
                                 titlePadding: EdgeInsets.zero,
@@ -78,7 +77,7 @@ class HomePosts extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    children: const [
+                                    children: [
                                       HomePagePopupWidget(
                                         isBorder: false,
                                         title: "View Post",

@@ -398,9 +398,9 @@ class StoryScreen extends StatelessWidget {
                                     margin: const EdgeInsets.only(left: 5),
                                     alignment: Alignment.center,
                                     width: 55,
-                                    child: Row(
+                                    child: const Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
-                                      children: const [
+                                      children: [
                                         Icon(
                                           Icons.emoji_emotions_outlined,
                                           color: Color(

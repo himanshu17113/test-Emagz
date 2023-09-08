@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/screens/auth/forgot_password/change_password_screen.dart';
 import 'package:emagz_vendor/screens/auth/forgot_password/otp_verification_screen.dart';
 import 'package:emagz_vendor/screens/auth/signin_screen.dart';
-import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/account/business_profile_setup.dart';
 import 'package:emagz_vendor/social_media/screens/account/personal_account.dart';

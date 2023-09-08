@@ -311,10 +311,10 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                           ),
                                         ],
                                       ),
-                                      Row(
+                                      const Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: const [
+                                        children: [
                                           SizedBox(
                                             width: 2,
                                           ),

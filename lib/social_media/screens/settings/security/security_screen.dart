@@ -3,17 +3,12 @@ import 'package:emagz_vendor/social_media/screens/settings/security/two_step_ver
 import 'package:emagz_vendor/social_media/screens/settings/security/widget/other_security_tile.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/widget/personal_information_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../../screens/auth/widgets/my_custom_textfiled.dart';
-import '../../../../screens/auth/widgets/my_gradient_button.dart';
 import '../../account/deactivate_account_screen.dart';
 import '../privacy/privacy_policy_screen.dart';
 import '../terms_condition/terms_and_condition_screen.dart';

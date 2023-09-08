@@ -157,8 +157,8 @@ class AddPostScren extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    children: const [
+                  const Column(
+                    children: [
                       SizedBox(
                         height: 35,
                       ),

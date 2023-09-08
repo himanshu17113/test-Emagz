@@ -45,10 +45,10 @@ class EbusinessScreen extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       SizedBox(
                         height: 8,
                       ),

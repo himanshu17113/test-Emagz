@@ -41,9 +41,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
               margin: const EdgeInsets.only(top: 10, right: 30, left: 30),
               child: Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: Row(
-                      children: const [
+                      children: [
                         Text(
                           "Chat Setting",
                           style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_reply_tile.dart';
 import 'package:get/get.dart';
@@ -22,8 +23,7 @@ class PostCommentTile extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding:
-              const EdgeInsets.only(left: 5, right: 5, top: 15, bottom: 5),
+          padding: const EdgeInsets.only(left: 5, right: 5, top: 15, bottom: 5),
           child: GlassmorphicContainer(
             colour: Colors.white30,
             // const Color(0xffDDE0FF),
@@ -44,14 +44,14 @@ class PostCommentTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundImage: NetworkImage(templateFiveImage[0]),
+                          backgroundImage: CachedNetworkImageProvider(templateFiveImage[0]),
                         ),
                       )
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundImage: NetworkImage(templateFiveImage[0]),
+                          backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic!),
                         ),
                       ),
                 Column(
@@ -59,11 +59,11 @@ class PostCommentTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FormHeadingText(
-                      headings: (comment.userId?.displayName == null)
+                      headings: (comment.userId?.username == null)
                           ? "loading "
-                          : (comment.userId!.displayName!.length > 20)
-                              ? "${comment.userId?.displayName?.substring(17)}..."
-                              : comment.userId!.displayName!,
+                          : (comment.userId!.username!.length > 20)
+                              ? "${comment.userId?.username?.substring(17)}..."
+                              : comment.userId!.username!,
                       fontSize: 10,
                     ),
                     Text(
@@ -86,8 +86,7 @@ class PostCommentTile extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                              storyController.setCommentId(comment.sId!,
-                                  comment.userId?.username ?? "jjk", index);
+                              storyController.setCommentId(comment.sId!, comment.userId?.username ?? "jjk", index);
                             },
                             child: FormHeadingText(
                               headings: "Reply",
@@ -124,8 +123,7 @@ class PostCommentTile extends StatelessWidget {
                       BoxShadow(color: toggleInactive),
                     ],
                   ),
-                  child: Image.asset("assets/png/liked_icon.png",
-                      color: purpleColor),
+                  child: Image.asset("assets/png/liked_icon.png", color: purpleColor),
                 ),
                 const SizedBox(
                   width: 20,

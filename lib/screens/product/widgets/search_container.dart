@@ -13,8 +13,8 @@ class SearchContainer extends StatelessWidget {
       height: 38,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10), color: lightgrayColor),
-      child: Row(
-        children: const [
+      child: const Row(
+        children: [
           SizedBox(
             width: 20,
           ),

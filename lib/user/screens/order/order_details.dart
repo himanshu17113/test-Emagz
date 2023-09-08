@@ -52,12 +52,12 @@ class OrderDetailsScreen extends StatelessWidget {
                   border: Border.all(width: 1, color: orderDetailBorder),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Order Date",
                         ),
@@ -68,7 +68,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Order ID",
                         ),
@@ -79,7 +79,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Order Total",
                         ),
@@ -322,15 +322,15 @@ class OrderDetailsScreen extends StatelessWidget {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 15),
-                child: Column(
+                child: const Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Items:",
                         ),
@@ -339,12 +339,12 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Total before tax",
                         ),
@@ -353,12 +353,12 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Tax",
                         ),
@@ -367,12 +367,12 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         DetailsText(
                           title: "Discount",
                         ),
@@ -381,7 +381,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                   ],

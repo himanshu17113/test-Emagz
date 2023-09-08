@@ -339,10 +339,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                                           ),
                                         ],
                                       ),
-                                      Row(
+                                      const Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: const [
+                                        children: [
                                           SizedBox(
                                             width: 2,
                                           ),

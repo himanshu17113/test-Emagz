@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 
 import 'package:emagz_vendor/social_media/models/post_model.dart';
@@ -92,12 +93,10 @@ class CommentReplyTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                             child: CircleAvatar(
                               radius: 20,
-                              backgroundImage:
-                                  NetworkImage(templateFiveImage[2]),
+                              backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic ?? templateFiveImage[2]),
                             ),
                           ),
                           Column(
@@ -106,8 +105,7 @@ class CommentReplyTile extends StatelessWidget {
                             children: [
                               Text(
                                 "${comment.userId?.username}",
-                                style: const TextStyle(
-                                    color: Colors.white54, fontSize: 9),
+                                style: const TextStyle(color: Colors.white54, fontSize: 9),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(right: 40),
@@ -118,15 +116,13 @@ class CommentReplyTile extends StatelessWidget {
                                     maxLines: max,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                        color: Colors.white54, fontSize: 14),
+                                    style: const TextStyle(color: Colors.white54, fontSize: 14),
                                   ),
                                 ),
                               ),
                               Text(
                                 "${comment.timestamp}",
-                                style: const TextStyle(
-                                    color: Colors.white54, fontSize: 9),
+                                style: const TextStyle(color: Colors.white54, fontSize: 9),
                               ),
                             ],
                           ),

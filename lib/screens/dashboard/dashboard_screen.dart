@@ -73,10 +73,10 @@ class _DashBordScreenState extends State<DashBordScreen> {
                         const SizedBox(
                           width: 12,
                         ),
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Text(
                               "Hey, User",
                               style: TextStyle(
@@ -122,8 +122,8 @@ class _DashBordScreenState extends State<DashBordScreen> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white),
-                child: Row(
-                  children: const [
+                child: const Row(
+                  children: [
                     SizedBox(
                       width: 20,
                     ),

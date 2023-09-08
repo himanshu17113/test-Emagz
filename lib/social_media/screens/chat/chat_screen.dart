@@ -64,9 +64,9 @@ class _ChatScreenState extends State<ChatScreen> {
             margin: const EdgeInsets.only(top: 10, right: 30, left: 30),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: Row(
-                    children: const [
+                    children: [
                       Text(
                         "Chat",
                         style: TextStyle(
@@ -258,9 +258,9 @@ class _ChatScreenState extends State<ChatScreen> {
                             margin: const EdgeInsets.only(left: 5),
                             alignment: Alignment.center,
                             width: 55,
-                            child: Row(
+                            child: const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.emoji_emotions_outlined,
                                   color: Color(

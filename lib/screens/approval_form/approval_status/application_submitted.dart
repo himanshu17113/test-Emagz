@@ -58,9 +58,9 @@ class ApplicationSubmittedScreen extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: size.height / 12),
                   alignment: Alignment.center,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Back to Dashboard",
                         textAlign: TextAlign.center,

@@ -378,10 +378,10 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                                     ),
                                   ],
                                 ),
-                                Row(
+                                const Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: const [
+                                  children: [
                                     SizedBox(
                                       width: 2,
                                     ),

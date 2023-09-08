@@ -1,17 +1,13 @@
-import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
-import 'package:emagz_vendor/social_media/screens/comment/widgets/floatingCommentInput.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
-import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../screens/auth/widgets/form_haeding_text.dart';
 import '../../controller/home/home_controller.dart';
 
 class CommentViewScreen extends StatefulWidget {

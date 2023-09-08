@@ -40,7 +40,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
         // margin: const EdgeInsets.symmetric(horizontal: 20),
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: Color.fromRGBO(160, 160, 160, 0.6),
+          color: const Color.fromRGBO(160, 160, 160, 0.6),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
@@ -81,7 +81,6 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                 Row(
                   children: [
                     FormHeadingText(
-
                       headings: "4+ Loves",
                       fontSize: 8,
                       color: Colors.white,
