@@ -26,12 +26,8 @@ class StoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<StoryItem> storyItems = List.generate(stories.length, (index) {
       return stories[index].mediaType == "video"
-          ? StoryItem.pageVideo(stories[index].mediaUrl!,
-              key: Key(index.toString()), controller: controller)
-          : StoryItem.pageImage(
-              key: Key(index.toString()),
-              url: stories[index].mediaUrl ?? "",
-              controller: controller);
+          ? StoryItem.pageVideo(stories[index].mediaUrl!, key: Key(index.toString()), controller: controller)
+          : StoryItem.pageImage(key: Key(index.toString()), url: stories[index].mediaUrl ?? "", controller: controller);
     });
     //   StoryItem.pageImage(
     //       url: foodImage[0], controller: controller, imageFit: BoxFit.cover),
@@ -47,10 +43,7 @@ class StoryScreen extends StatelessWidget {
                       controller: controller,
                       repeat: false,
                       onStoryShow: (s) {
-                        storyController.currentStoryIndex.value = int.parse(s
-                            .view.key
-                            .toString()
-                            .substring(3, s.view.key.toString().length - 3));
+                        storyController.currentStoryIndex.value = int.parse(s.view.key.toString().substring(3, s.view.key.toString().length - 3));
                       },
                       onComplete: () {
                         //  Navigator.pop(context);
@@ -70,8 +63,7 @@ class StoryScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 16,
-                        backgroundImage:
-                            CachedNetworkImageProvider(userId.profilePic ?? ""),
+                        backgroundImage: CachedNetworkImageProvider(userId.profilePic ?? ""),
                       ),
                       const SizedBox(
                         width: 5,
@@ -81,16 +73,9 @@ class StoryScreen extends StatelessWidget {
                         children: [
                           Text(
                             userId.username ?? "loading...",
-                            style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor),
+                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
                           ),
-                          Text(userId.sId ?? "loading...",
-                              style: TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w600,
-                                  color: whiteColor)),
+                          Text(userId.sId ?? "loading...", style: TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
                         ],
                       )
                     ],
@@ -110,37 +95,20 @@ class StoryScreen extends StatelessWidget {
                               children: [
                                 GestureDetector(
                                     onTap: () {
-                                      // storyController.likeStory(stories[
-                                      //         storyController
-                                      //             .currentStoryIndex.value]
-                                      //     .sId
-                                      //     .toString());
+                                      storyController.likeStory(stories[
+                                              storyController
+                                                  .currentStoryIndex.value]
+                                          .sId
+                                          .toString());
 
                                       setState(() {
-                                        if (stories[storyController
-                                                    .currentStoryIndex.value]
-                                                .isLike ??
-                                            stories[storyController
-                                                    .currentStoryIndex.value]
-                                                .likes!
-                                                .contains(storyController
-                                                    .myId.value)) {
-                                          stories[storyController
-                                                  .currentStoryIndex.value]
-                                              .isLike = false;
-                                          stories[storyController
-                                                  .currentStoryIndex.value]
-                                              .likes!
-                                              .remove(
-                                                  storyController.myId.value);
+                                        if (stories[storyController.currentStoryIndex.value].isLike ??
+                                            stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)) {
+                                          stories[storyController.currentStoryIndex.value].isLike = false;
+                                          stories[storyController.currentStoryIndex.value].likes!.remove(storyController.myId.value);
                                         } else {
-                                          stories[storyController
-                                                  .currentStoryIndex.value]
-                                              .isLike = true;
-                                          stories[storyController
-                                                  .currentStoryIndex.value]
-                                              .likes!
-                                              .add(storyController.myId.value);
+                                          stories[storyController.currentStoryIndex.value].isLike = true;
+                                          stories[storyController.currentStoryIndex.value].likes!.add(storyController.myId.value);
                                         }
                                       });
                                     },
@@ -149,29 +117,18 @@ class StoryScreen extends StatelessWidget {
                                             "assets/png/unlike_icon.png",
                                             width: 22,
                                           ))
-                                        : (stories[storyController
-                                                        .currentStoryIndex
-                                                        .value]
-                                                    .isLike ??
-                                                stories[storyController
-                                                        .currentStoryIndex
-                                                        .value]
-                                                    .likes!
-                                                    .contains(storyController
-                                                        .myId.value))
+                                        : (stories[storyController.currentStoryIndex.value].isLike ??
+                                                stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value))
                                             ? Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Image.asset(
                                                   "assets/png/liked_icon.png",
                                                   width: 22,
                                                 ),
                                               )
                                             : Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
+                                                padding: const EdgeInsets.all(8.0),
                                                 child: Image.asset(
-                                                  // "assets/png/liked_icon.png",
                                                   "assets/png/unlike_icon.png",
                                                   width: 22,
                                                 ),
@@ -179,15 +136,8 @@ class StoryScreen extends StatelessWidget {
                                 stories.isEmpty
                                     ? const Text('Valid')
                                     : Text(
-                                        stories[storyController
-                                                .currentStoryIndex.value]
-                                            .likes!
-                                            .length
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w600,
-                                            color: whiteColor),
+                                        stories[storyController.currentStoryIndex.value].likes!.length.toString(),
+                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                       ),
                                 InkWell(
                                   onTap: () async {
@@ -198,19 +148,13 @@ class StoryScreen extends StatelessWidget {
                                         enableDrag: true,
                                         isScrollControlled: true,
                                         shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(20),
-                                                topRight: Radius.circular(20))),
+                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                                         context: context,
                                         builder: (context) {
                                           return Wrap(children: [
                                             PostCommentsModalBottomSheet(
-                                              comments: stories[storyController
-                                                      .currentStoryIndex.value]
-                                                  .comments!,
-                                              postId: stories[storyController
-                                                      .currentStoryIndex.value]
-                                                  .sId!,
+                                              comments: stories[storyController.currentStoryIndex.value].comments!,
+                                              postId: stories[storyController.currentStoryIndex.value].sId!,
                                               isStory: true,
                                             )
                                           ]);
@@ -229,8 +173,7 @@ class StoryScreen extends StatelessWidget {
                                     //     storyController.myId.value);
                                   },
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(30, 8, 5, 8),
+                                    padding: const EdgeInsets.fromLTRB(30, 8, 5, 8),
                                     child: Image.asset(
                                       "assets/png/comment_icon.png",
                                       width: 22,
@@ -238,21 +181,13 @@ class StoryScreen extends StatelessWidget {
                                   ),
                                 ),
                                 stories.isNotEmpty
-                                    ? Text(stories[storyController
-                                            .currentStoryIndex.value]
-                                        .comments!
-                                        .length
-                                        .toString(),
-                                style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600,
-                                    color: whiteColor),)
+                                    ? Text(
+                                        stories[storyController.currentStoryIndex.value].comments!.length.toString(),
+                                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+                                      )
                                     : Text(
                                         'VAlid',
-                                        style: TextStyle(
-                                            fontSize: 11,
-                                            fontWeight: FontWeight.w600,
-                                            color: whiteColor),
+                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                       ),
                                 const SizedBox(
                                   width: 30,
@@ -261,9 +196,7 @@ class StoryScreen extends StatelessWidget {
                                   onTap: () {
                                     showModalBottomSheet(
                                       shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(20),
-                                              topLeft: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
                                       isScrollControlled: true,
                                       context: context,
                                       builder: (context) {
@@ -287,8 +220,7 @@ class StoryScreen extends StatelessWidget {
         : const Text('No Story');
   }
 
-  updateName(BuildContext context, List<Comments> comments, String storyId,
-      String myId) {
+  updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
     print('ndn');
     TextEditingController textEditingController = TextEditingController();
     return showDialog(
@@ -328,11 +260,8 @@ class StoryScreen extends StatelessWidget {
                       child: Container(
                         decoration: const BoxDecoration(
                             color: Color.fromRGBO(0, 0, 0, 0.2),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0))),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Column(
                           children: [
                             Row(
@@ -351,10 +280,7 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "0",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: whiteColor),
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -373,10 +299,7 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "${comments.length}",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: whiteColor),
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -458,18 +381,16 @@ class StoryScreen extends StatelessWidget {
                                       controller: textEditingController,
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
-                                          isDense: true,
-                                          hintText: "Type Your Comment ",
-                                          hintStyle: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: Color(
-                                              0xff909090,
-                                            ),
+                                        isDense: true,
+                                        hintText: "Type Your Comment ",
+                                        hintStyle: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: Color(
+                                            0xff909090,
                                           ),
-                                          contentPadding:
-                                              EdgeInsets.only(left: 20),
-
+                                        ),
+                                        contentPadding: EdgeInsets.only(left: 20),
                                       ),
                                     ),
                                   ),
@@ -478,8 +399,7 @@ class StoryScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     width: 55,
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: const [
                                         Icon(
                                           Icons.emoji_emotions_outlined,
@@ -502,20 +422,14 @@ class StoryScreen extends StatelessWidget {
                                   Container(
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
                                         gradient: LinearGradient(
                                             end: Alignment.bottomRight,
                                             begin: Alignment.topLeft,
-                                            colors: [
-                                              Color.fromRGBO(27, 71, 193, 1),
-                                              Color.fromRGBO(49, 219, 199, 1)
-                                            ])),
+                                            colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
                                     child: IconButton(
                                         onPressed: () {
-                                          storyController.commentStory(
-                                              textEditingController.text,
-                                              storyId);
+                                          storyController.commentStory(textEditingController.text, storyId);
                                           comments.add(Comments(
                                             text: textEditingController.text,
                                             userId: myId,

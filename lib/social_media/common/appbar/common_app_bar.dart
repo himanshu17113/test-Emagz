@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../screens/notification/notification_screen.dart';
 
-class SocialMediaAppBar extends StatelessWidget with PreferredSizeWidget {
+class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;
@@ -72,8 +72,7 @@ class SocialMediaAppBar extends StatelessWidget with PreferredSizeWidget {
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
-                        image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
-                        borderRadius: BorderRadius.circular(5)),
+                        image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover), borderRadius: BorderRadius.circular(5)),
                   )),
               const SizedBox(
                 width: 5,

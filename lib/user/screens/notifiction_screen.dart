@@ -82,7 +82,7 @@ class _NotificationScreenUserState extends State<NotificationScreenUser> {
   }
 }
 
-class UserNotificationTopBar extends StatelessWidget with PreferredSizeWidget {
+class UserNotificationTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;

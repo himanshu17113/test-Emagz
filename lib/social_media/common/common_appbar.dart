@@ -2,8 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SocialMediaSettingAppBar extends StatelessWidget
-    with PreferredSizeWidget {
+class SocialMediaSettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;
@@ -24,8 +23,7 @@ class SocialMediaSettingAppBar extends StatelessWidget
       centerTitle: false,
       title: Text(
         title,
-        style: TextStyle(
-            color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
+        style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
       ),
       actions: [
         Row(
@@ -45,8 +43,7 @@ class SocialMediaSettingAppBar extends StatelessWidget
                     color: chipColor,
                   ),
                   child: const Padding(
-                    padding: EdgeInsets.only(
-                        left: 20, right: 15, top: 10, bottom: 10),
+                    padding: EdgeInsets.only(left: 20, right: 15, top: 10, bottom: 10),
                     child: Icon(
                       Icons.arrow_back_ios,
                       size: 25,

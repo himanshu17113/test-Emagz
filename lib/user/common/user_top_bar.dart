@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class UserTopBar extends StatelessWidget with PreferredSizeWidget {
+class UserTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;

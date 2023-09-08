@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../../notification/notification_screen.dart';
 import '../temp_attech_screen.dart';
 
-class SocialHomeScreenAppBar extends StatefulWidget with PreferredSizeWidget {
+class SocialHomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;
