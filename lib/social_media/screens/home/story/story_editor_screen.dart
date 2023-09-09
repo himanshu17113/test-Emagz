@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vs_story_designer/vs_story_designer.dart';
 
-class StoryEditorScreen extends StatefulWidget {
-  const StoryEditorScreen({super.key});
+class StoryEditorScreen extends StatelessWidget {
+  StoryEditorScreen({super.key});
 
-  @override
-  State<StoryEditorScreen> createState() => _StoryEditorScreenState();
-}
-
-class _StoryEditorScreenState extends State<StoryEditorScreen> {
   var storyController = Get.put(GetXStoryController());
 
   @override
@@ -33,43 +28,51 @@ class _StoryEditorScreenState extends State<StoryEditorScreen> {
           ),
         ),
         centerText: "",
-        onDone: (v) {
+        onDone: (v) async {
           debugPrint("Story address : $v");
-          storyController.postStory("image", v);
-          showDialog(
-            useSafeArea: true,
-            barrierDismissible: false,
-            context: context,
-            builder: (context) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Obx(
-                        () => LinearProgressIndicator(
-                          value: storyController.storyUploadPercentage.value,
-                        ),
-                      ),
-                      Obx(
-                        () => Material(
-                          color: Colors.transparent,
-                          child: Text(
-                            "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+
+          dialog(context);
+          final bool x = await storyController.postStory("image", v);
+          if (x) {
+            Get.close(2);
+          }
         },
       ),
+    );
+  }
+
+  Future dialog(BuildContext context) {
+    return showDialog(
+      useSafeArea: true,
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 50.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Obx(
+                  () => LinearProgressIndicator(
+                    value: storyController.storyUploadPercentage.value,
+                  ),
+                ),
+                Obx(
+                  () => Material(
+                    color: Colors.transparent,
+                    child: Text(
+                      "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

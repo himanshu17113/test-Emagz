@@ -23,13 +23,13 @@ class PostCommentTile extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 5, right: 5, top: 15, bottom: 5),
+          padding: const EdgeInsets.only(left: 0, right: 5, top: 15, bottom: 5),
           child: GlassmorphicContainer(
             colour: Colors.white30,
             // const Color(0xffDDE0FF),
-            height: 75,
+            height: 65,
             blur: 2,
-            //     width: MediaQuery.of(context).size.width,
+            //  width: MediaQuery.of(context).size.width,
             borderRadius: 20,
             // margin: const EdgeInsets.symmetric(horizontal: 20),
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -41,7 +41,7 @@ class PostCommentTile extends StatelessWidget {
               children: [
                 (comment.userId?.ProfilePic == null)
                     ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CircleAvatar(
                           radius: 24,
                           backgroundImage: CachedNetworkImageProvider(templateFiveImage[0]),
@@ -50,7 +50,7 @@ class PostCommentTile extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
-                          radius: 24,
+                          radius: 20,
                           backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic!),
                         ),
                       ),
@@ -59,16 +59,16 @@ class PostCommentTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FormHeadingText(
-                      headings: (comment.userId?.username == null)
-                          ? "loading "
-                          : (comment.userId!.username!.length > 20)
-                              ? "${comment.userId?.username?.substring(17)}..."
-                              : comment.userId!.username!,
-                      fontSize: 10,
-                    ),
+                        headings: (comment.userId?.username == null)
+                            ? "loading "
+                            : (comment.userId!.username!.length > 20)
+                                ? "${comment.userId?.username?.substring(17)}..."
+                                : comment.userId!.username!,
+                        fontSize: 10,
+                        color: Colors.white70),
                     Text(
                       "${comment.text}",
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 14, color: Colors.white70),
                     ),
                     // FormHeadingText(
                     //   headings: ,
@@ -80,7 +80,7 @@ class PostCommentTile extends StatelessWidget {
                         FormHeadingText(
                           headings: "4+ Loves",
                           fontSize: 8,
-                          color: const Color(0xff323232),
+                          color: Colors.white70,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -88,18 +88,10 @@ class PostCommentTile extends StatelessWidget {
                             onTap: () {
                               storyController.setCommentId(comment.sId!, comment.userId?.username ?? "jjk", index);
                             },
-                            child: FormHeadingText(
-                              headings: "Reply",
-                              fontSize: 10,
-                              color: const Color(0xff323232),
-                            ),
+                            child: FormHeadingText(headings: "Reply", fontSize: 10, color: Colors.white70),
                           ),
                         ),
-                        FormHeadingText(
-                          headings: "Love Back",
-                          fontSize: 8,
-                          color: const Color(0xff323232),
-                        ),
+                        FormHeadingText(headings: "Love Back", fontSize: 8, color: Colors.white70),
                       ],
                     )
                   ],

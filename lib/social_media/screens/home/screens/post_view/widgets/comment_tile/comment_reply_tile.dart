@@ -16,7 +16,7 @@ class CommentReplyTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0),
+      padding: const EdgeInsets.only(left: 25),
       child: StatefulBuilder(
         builder: (BuildContext context, setState) => IntrinsicHeight(
           child: Row(
@@ -83,19 +83,19 @@ class CommentReplyTile extends StatelessWidget {
                     ),
                     Container(
                       alignment: Alignment.bottomCenter,
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
                         color: Colors.white12,
-                        borderRadius: BorderRadius.circular(22),
+                        borderRadius: BorderRadius.circular(18),
                       ),
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
                             child: CircleAvatar(
-                              radius: 20,
+                              radius: 18,
                               backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic ?? templateFiveImage[2]),
                             ),
                           ),

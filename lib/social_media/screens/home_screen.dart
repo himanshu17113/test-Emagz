@@ -2,21 +2,20 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
+import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
-final jwtController = Get.put(JWTController());
+  final jwtController = Get.put(JWTController());
 
   final bool _showAppbar = true;
- 
 
   final homePostController = Get.put(HomePostsController());
-
+  final GetXStoryController storyController = Get.put(GetXStoryController());
   // final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -95,8 +94,11 @@ final jwtController = Get.put(JWTController());
         // },
         body: RefreshIndicator(
           onRefresh: () {
-            //   setState(() {});
-            return homePostController.refreshResent();
+            homePostController.skip.value = -10;
+            homePostController.posts?.clear();
+            storyController.stories?.clear();
+            storyController.getStories();
+            return homePostController.getPost();
           },
           child: HomePosts(myUserId: jwtController.userId?.value ?? myUserId),
         ),

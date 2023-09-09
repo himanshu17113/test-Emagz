@@ -108,6 +108,8 @@ class HomePosts extends StatelessWidget {
                         child: homePostController.posts?[index - 1] == null
                             ? const SizedBox()
                             : PostCard(
+                              index: index,
+
                                 isLiked: homePostController
                                     .posts?[index - 1].likes!
                                     .contains(myUserId),

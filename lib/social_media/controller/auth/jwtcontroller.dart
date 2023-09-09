@@ -8,13 +8,14 @@ import 'package:hive/hive.dart';
 
 class JWTController extends GetxController {
   RxString? token;
-  RxString? profilePic='https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg'.obs;
+  RxString? profilePic = 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg'.obs;
   RxString? userId;
   Rx<UserSchema>? currentUser;
+  Rx<UserSchema>? user = UserSchema().obs;
   RxBool isAuthorised = false.obs;
   var hiveBox = Hive.box("secretes");
 
-  Future<User> getCurrentUserDetail() async {
+  Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
     //  var userToken = await getAuthToken();
     var id = await getUserId();
@@ -22,9 +23,10 @@ class JWTController extends GetxController {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
     var response = await dio.get(ApiEndpoint.userInfo(id!));
-    // debugdebugPrint(ApiEndpoint.userInfo(id!));
+    debugPrint(ApiEndpoint.userInfo(id));
     // debugPrint(response.data);
-    var userDetails = User.fromJson(response.data);
+    var userDetails = UserSchema.fromJson(response.data);
+      user?.value = userDetails;
     return userDetails;
   }
 
@@ -82,15 +84,15 @@ class JWTController extends GetxController {
     return userId;
   }
 
-  Future setProfileImage(String imageUrl) async
-  {
-    await hiveBox.put('ProfilePic',imageUrl);
-    profilePic= RxString(imageUrl);
+  Future setProfileImage(String imageUrl) async {
+    await hiveBox.put('ProfilePic', imageUrl);
+    profilePic = RxString(imageUrl);
   }
-  Future<String> getProfileImage() async{
-    var imageUrl= await hiveBox.get('ProfilePic');
+
+  Future<String> getProfileImage() async {
+    var imageUrl = await hiveBox.get('ProfilePic');
     imageUrl ??= 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
-    profilePic= RxString(imageUrl!);
+    profilePic = RxString(imageUrl!);
     return imageUrl;
   }
 
@@ -99,6 +101,7 @@ class JWTController extends GetxController {
     super.onInit();
     String? lastAuthToken = await getAuthToken();
     String? userId = await getUserId();
+    getCurrentUserDetail();
     debugPrint(lastAuthToken);
     debugPrint(userId);
     if (lastAuthToken == null) {

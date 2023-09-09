@@ -11,7 +11,6 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/videoPlayer/Custo
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../controller/auth/jwtcontroller.dart';
 
 class PostCard extends StatefulWidget {
@@ -20,12 +19,14 @@ class PostCard extends StatefulWidget {
   bool? isLiked;
   String? myUserId;
   String? userImg;
+  final int? index;
   PostCard({
     Key? key,
     this.post,
     this.isLiked,
     this.myUserId,
     this.userImg,
+    this.index,
     required this.url,
     this.isBorder = true,
   }) : super(key: key);
@@ -42,8 +43,13 @@ class _PostCardState extends State<PostCard> {
   int selectedOption = -1;
   final homePostController = Get.put(HomePostsController());
   final jwtController = Get.put(JWTController());
-  final ConversationController chatController =
-      Get.put(ConversationController());
+  final ConversationController chatController = Get.put(ConversationController());
+  Post? post ;
+  @override
+  void initState() {
+    super.initState();
+      post = homePostController.posts?[widget.index!];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +80,12 @@ class _PostCardState extends State<PostCard> {
           //     fit: BoxFit.cover
           // ),
           borderRadius: BorderRadius.circular(20),
-          border: widget.isBorder == true
-              ? Border.all(
-                  color: const Color(0xff46F2DB),
-                  width: 2.2,
-                  style: BorderStyle.solid)
-              : null),
+          border: widget.isBorder == true ? Border.all(color: const Color(0xff46F2DB), width: 2.2, style: BorderStyle.solid) : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Stack(fit: StackFit.loose, children: [
           Builder(builder: (context) {
-            if (widget.post!.mediaType == "image" ||
-                widget.post!.mediaType == "text") {
+            if (widget.post!.mediaType == "image" || widget.post!.mediaType == "text") {
               return GestureDetector(
                 onTap: () {
                   Get.to(() => PostView(
@@ -95,7 +95,9 @@ class _PostCardState extends State<PostCard> {
                       ));
                 },
                 child: CachedNetworkImage(
-                  //    fit: BoxFit.cover,
+                  width: Get.size.width,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.center,
                   // height: 55,
                   imageUrl: widget.url,
                   placeholder: (context, url) => const Center(
@@ -117,8 +119,7 @@ class _PostCardState extends State<PostCard> {
                 post: widget.post!,
                 // videoUrl: videoUrl,
                 videoUrl: widget.post!.mediaUrl!,
-                aspectRatio: (Get.size.height / 2.62) /
-                    (MediaQuery.of(context).size.width - 10),
+                aspectRatio: (Get.size.height / 2.62) / (MediaQuery.of(context).size.width - 10),
               );
             } else {
               return Text("unknown type : ${widget.post!.mediaType}");
@@ -137,8 +138,7 @@ class _PostCardState extends State<PostCard> {
                   CircleAvatar(
                     radius: 16,
                     backgroundImage: widget.post!.mediaType == "video"
-                        ? const CachedNetworkImageProvider(
-                            "https://picsum.photos/500/500?random=851")
+                        ? const CachedNetworkImageProvider("https://picsum.photos/500/500?random=851")
                         : CachedNetworkImageProvider(widget.userImg!),
                   ),
                   const SizedBox(
@@ -165,19 +165,13 @@ class _PostCardState extends State<PostCard> {
                       print(widget.post!.sId!);
                       String temp = widget.post!.user!.personalTemplate!;
                       if (temp == null) {
-                        Get.snackbar('No persona Choosen by this user',
-                            'Hi No persona here');
+                        Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
                       } else {
                         if (temp[0] == 'T') {
-                          Get.snackbar('This is a Old account ',
-                              'Persona wont work properly');
+                          Get.snackbar('This is a Old account ', 'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
-                        Get.to(() => WebViewPersona(
-                            token: tok!,
-                            userId: widget.myUserId!,
-                            personaUserId: widget.post!.user!.sId!,
-                            templateId: temp));
+                        Get.to(() => WebViewPersona(token: tok!, userId: widget.myUserId!, personaUserId: widget.post!.user!.sId!, templateId: temp));
                       }
                     },
                     child: Column(
@@ -186,16 +180,10 @@ class _PostCardState extends State<PostCard> {
                         Text(
                           "${widget.post?.user!.username.toString()}",
                           // "${widget.post!.userId}",
-                          style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.w600,
-                              color: whiteColor),
+                          style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
                         Text("@${widget.post?.user!.getstatedName.toString()}",
-                            style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor)),
+                            style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
                       ],
                     ),
                   )
@@ -239,75 +227,48 @@ class _PostCardState extends State<PostCard> {
                                     }
                                     setState(() {
                                       selectedOption = index;
-                                      homePostController.postPoll(
-                                          widget.post!.sId!,
-                                          (index == 0 ? "yes" : "no"));
+                                      homePostController.postPoll(widget.post!.sId!, (index == 0 ? "yes" : "no"));
                                     });
                                   },
-                                  child: Stack(
-                                      alignment: Alignment.centerLeft,
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          height: 52,
-                                          width: 100,
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color: selectedOption == index
-                                                ? whiteColor
-                                                : null,
-                                            border:
-                                                Border.all(color: whiteColor),
-                                          ),
-                                          child: FormHeadingText(
-                                            headings: chooseOption[index],
-                                            color: selectedOption != index
-                                                ? whiteColor
-                                                : Colors.black,
-                                          ),
-                                        ),
-                                        (selectedOption != -1)
-                                            ? ((index == 0)
-                                                ? Container(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Container(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      height: 52,
-                                                      width: yesPercentage,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.black
-                                                              .withOpacity(
-                                                                  0.5)),
-                                                      child: Text("$yesCount",
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
-                                                    ),
-                                                  )
-                                                : Container(
-                                                    alignment:
-                                                        Alignment.bottomCenter,
-                                                    child: Container(
-                                                      alignment: Alignment
-                                                          .bottomCenter,
-                                                      height: 52,
-                                                      width: noPercentage,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.black
-                                                              .withOpacity(
-                                                                  0.5)),
-                                                      child: Text("$noCount",
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
-                                                    ),
-                                                  ))
-                                            : const SizedBox()
-                                      ]),
+                                  child: Stack(alignment: Alignment.centerLeft, children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 52,
+                                      width: 100,
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: selectedOption == index ? whiteColor : null,
+                                        border: Border.all(color: whiteColor),
+                                      ),
+                                      child: FormHeadingText(
+                                        headings: chooseOption[index],
+                                        color: selectedOption != index ? whiteColor : Colors.black,
+                                      ),
+                                    ),
+                                    (selectedOption != -1)
+                                        ? ((index == 0)
+                                            ? Container(
+                                                alignment: Alignment.bottomCenter,
+                                                child: Container(
+                                                  alignment: Alignment.bottomCenter,
+                                                  height: 52,
+                                                  width: yesPercentage,
+                                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+                                                  child: Text("$yesCount", style: const TextStyle(color: Colors.white)),
+                                                ),
+                                              )
+                                            : Container(
+                                                alignment: Alignment.bottomCenter,
+                                                child: Container(
+                                                  alignment: Alignment.bottomCenter,
+                                                  height: 52,
+                                                  width: noPercentage,
+                                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+                                                  child: Text("$noCount", style: const TextStyle(color: Colors.white)),
+                                                ),
+                                              ))
+                                        : const SizedBox()
+                                  ]),
                                 ),
                               ),
                             ),
@@ -325,8 +286,7 @@ class _PostCardState extends State<PostCard> {
                             });
                           },
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 15, bottom: 15),
+                            padding: const EdgeInsets.only(right: 15, bottom: 15),
                             child: Image.asset(
                               "assets/png/poll_icon.png",
                               width: 25,
@@ -349,110 +309,94 @@ class _PostCardState extends State<PostCard> {
                       border: Border.all(
                         color: const Color(0xFFffffff).withOpacity(.15),
                       ),
-                      gradient: LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            const Color(0xFFffffff).withOpacity(0.20),
-                            const Color(0xFFFFFFFF).withOpacity(0.25),
-                          ],
-                          stops: const [
-                            2,
-                            0.1,
-                          ]),
+                      gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
+                        const Color(0xFFffffff).withOpacity(0.20),
+                        const Color(0xFFFFFFFF).withOpacity(0.25),
+                      ], stops: const [
+                        2,
+                        0.1,
+                      ]),
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
                     ),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            width: Get.size.width / 2.5,
-                            child: Text("${widget.post!.caption}",
-                                style: TextStyle(
-                                    fontSize: 7,
-                                    fontWeight: FontWeight.w400,
-                                    color: whiteColor)),
-                          ),
-                          //    const Expanded(child: SizedBox()),
-                          GestureDetector(
-                              onTap: () {
-                                homePostController.likePost(widget.post!.sId!);
-                                setState(() {
-                                  if (widget.isLiked == true) {
-                                    widget.post!.likes!.removeLast();
-                                    widget.isLiked = false;
-                                  } else {
-                                    widget.post!.likes!.add(widget.myUserId!);
-                                    widget.isLiked = true;
-                                  }
-                                });
-                              },
-                              child: (widget.isLiked ?? false)
-                                  ? Image.asset(
-                                      "assets/png/liked_icon.png",
-                                      width: 26,
-                                    )
-                                  : Image.asset(
-                                      "assets/png/unlike_icon.png",
-                                      width: 22,
-                                    )),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "${widget.post!.likes!.length}",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            "assets/png/comment_icon.png",
-                            width: 22,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "${widget.post!.comments?.length}",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
-                            onTap: () {
-                              showModalBottomSheet(
-                                shape: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(20),
-                                        topLeft: Radius.circular(20))),
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) {
-                                  return ShareBottomSheet(post: widget.post!);
-                                },
-                              );
+                    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                      Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        width: Get.size.width / 2.5,
+                        child: Text("${widget.post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                      ),
+                      //    const Expanded(child: SizedBox()),
+                      GestureDetector(
+                          onTap: () {
+                            homePostController.likePost(widget.post!.sId!);
+                            setState(() {
+                              if (widget.isLiked == true) {
+                                widget.post!.likeCount = widget.post!.likeCount! - 1;
+                                //      widget.post!.likes!.removeLast();
+                                widget.isLiked = false;
+                              } else {
+                                widget.post!.likeCount = widget.post!.likeCount! + 1;
+                                //  widget.post!.likes!.add(widget.myUserId!);
+                                widget.isLiked = true;
+                              }
+                            });
+                          },
+                          child: (widget.isLiked ?? false)
+                              ? Image.asset(
+                                  "assets/png/liked_icon.png",
+                                  width: 26,
+                                )
+                              : Image.asset(
+                                  "assets/png/unlike_icon.png",
+                                  width: 22,
+                                )),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "${widget.post!.likeCount}",
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Image.asset(
+                        "assets/png/comment_icon.png",
+                        width: 22,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "${widget.post!.comments?.length}",
+                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            shape: const OutlineInputBorder(
+                                borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) {
+                              return ShareBottomSheet(post: widget.post!);
                             },
-                            child: Image.asset(
-                              "assets/png/share_icon.png",
-                              width: 26,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          )
-                        ]),
+                          );
+                        },
+                        child: Image.asset(
+                          "assets/png/share_icon.png",
+                          width: 26,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      )
+                    ]),
                   ),
                 ),
               ],

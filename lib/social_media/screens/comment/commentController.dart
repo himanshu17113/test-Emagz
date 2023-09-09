@@ -51,7 +51,7 @@ class CommentController extends GetxController {
     focusNode.unfocus();
   }
 
-  Future<String> postComment(String postId) async {
+  Future<dynamic> postComment(String postId) async {
     var comment = controller.text;
     if (comment == "") {
       Get.snackbar("Invalid Comment", "Cant post Empty Comment");
@@ -64,26 +64,15 @@ class CommentController extends GetxController {
       // var userId = await jwtController.getUserId();
       dio.options.headers["Authorization"] = token;
       var data = {"userId": userId, "text": comment};
-      var resposne =
-          await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
       // print(resposne);
       List<dynamic> list = resposne.data["post"]["Comments"];
-      // String s = list.last["_id"];
-      // String s = list.last["text"];
 
-      //   print("grrgf ${list.last["_id"]}");
       isPosting.value = false;
-      //  controller.clear();
-      // instantComments.value.add(Comment(
-      //     text: comment,
-      //     userId: UserSchema(sId: userId),
-      //     comments: [],
-      //     sId: userId));
-
-      //   update();
-      return list.last["_id"];
+      final Comment commentx = Comment.fromJson(list.last);
+      return commentx;
     } catch (e) {
       isPosting.value = false;
       //   update();
@@ -111,8 +100,7 @@ class CommentController extends GetxController {
       isPosting.value = false;
       controller.clear();
       if (resposne.statusCode == 200) {
-        List<Comment?> x =
-            List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
+        List<Comment?> x = List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
         return x;
       }
 
@@ -132,25 +120,22 @@ class CommentController extends GetxController {
     }
 
     debugPrint("story : $storyId");
-    final headers = {
-      'Content-Type': 'application/json',
-      "Authorization": token!
-    };
+    final headers = {'Content-Type': 'application/json', "Authorization": token!};
     debugPrint(ApiEndpoint.commentPost(storyId));
     Map body = {"userId": userId, "text": comment};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.commentStroy(storyId)),
-        headers: headers,
-        body: jsonEncode(body));
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
     List<dynamic> list = jsonDecode(response.body)["stories"]["Comments"];
     // String s = list.last["_id"];
     // String s = list.last["text"];
 
-    print("grrgf ${list.last["_id"]}");
+    print("grrgf ${list.last}");
     isPosting.value = false;
     //  controller.clear();
 
+    isPosting.value = false;
+    //final Comment commentx = Comment.fromJson(jsonDecode(list.last));
+    //  return commentx;
     return list.last["_id"];
   }
 
@@ -170,8 +155,7 @@ class CommentController extends GetxController {
       debugPrint(token);
       dio.options.headers["Authorization"] = token;
       var data = {"text": comment ?? controller.text};
-      var resposne = await dio
-          .post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
+      var resposne = await dio.post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
@@ -184,8 +168,7 @@ class CommentController extends GetxController {
     }
   }
 
-  Future<bool> postReply(
-      String postId, String commentID, String? comment) async {
+  Future<dynamic> postReply(String postId, String commentID, String? comment) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
@@ -202,15 +185,17 @@ class CommentController extends GetxController {
       debugPrint(token);
       dio.options.headers["Authorization"] = token;
       var data = {"text": comment ?? controller.text};
-      var resposne = await dio
-          .post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
+      var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
+
+      isPosting.value = false;
+      final Comment commentx = Comment.fromJson(resposne.data["comment"]);
       //    instantComments.value.add(Comment(text: comment, userId: UserSchema(sId: userId), comments: [], sId: userId));
 
       //  update();
-      return false;
+      return commentx;
     } catch (e) {
       isPosting.value = false;
       //   update();

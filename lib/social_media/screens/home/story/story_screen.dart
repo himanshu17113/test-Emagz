@@ -22,6 +22,8 @@ class StoryScreen extends StatelessWidget {
 
   final storyController = Get.put(GetXStoryController());
 
+  ValueNotifier<int> buttonClickedTimes = ValueNotifier(0);
+
   @override
   Widget build(BuildContext context) {
     List<StoryItem> storyItems = List.generate(stories.length, (index) {
@@ -43,9 +45,18 @@ class StoryScreen extends StatelessWidget {
                       controller: controller,
                       repeat: false,
                       onStoryShow: (s) {
-                        storyController.currentStoryIndex.value = int.parse(s.view.key.toString().substring(3, s.view.key.toString().length - 3));
+                        // if (mounted) {
+                        //   setState(() {
+                        //     print("setstate called");
+                        //   });
+                        // }
+                        //  buttonClickedTimes = s.view.
+                        // set();
+
+                        buttonClickedTimes.value = int.parse(s.view.key.toString().substring(3, s.view.key.toString().length - 3));
                       },
                       onComplete: () {
+                        //    setState(() {});
                         //  Navigator.pop(context);
                       },
                       onVerticalSwipeComplete: (direction) {
@@ -87,131 +98,143 @@ class StoryScreen extends StatelessWidget {
                     type: MaterialType.transparency,
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: StatefulBuilder(
-                          builder: (BuildContext context, setState) {
-                            return Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      storyController.likeStory(stories[
-                                              storyController
-                                                  .currentStoryIndex.value]
-                                          .sId
-                                          .toString());
+                        child: ValueListenableBuilder(
+                          valueListenable: buttonClickedTimes,
+                          builder: (BuildContext context, dynamic value, Widget? child) => StatefulBuilder(
+                            builder: (BuildContext context, setState) {
+                              storyController.currentStoryIndex.value = buttonClickedTimes.value;
+                              // buttonClickedTimes.addListener(
+                              //   () {
+                              //     storyController.currentStoryIndex.value = buttonClickedTimes.value;
+                              //   },
+                              // );
+                              // if()
+                              //  controller.playbackNotifier.done;
+                              //    storyController.currentStoryIndex.value.
+                              return Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        storyController.likeStory(stories[buttonClickedTimes.value].sId.toString());
 
-                                      setState(() {
-                                        if (stories[storyController.currentStoryIndex.value].isLike ??
-                                            stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value)) {
-                                          stories[storyController.currentStoryIndex.value].isLike = false;
-                                          stories[storyController.currentStoryIndex.value].likes!.remove(storyController.myId.value);
-                                        } else {
-                                          stories[storyController.currentStoryIndex.value].isLike = true;
-                                          stories[storyController.currentStoryIndex.value].likes!.add(storyController.myId.value);
-                                        }
+                                        setState(() {
+                                          if (stories[buttonClickedTimes.value].isLike ??
+                                              stories[buttonClickedTimes.value].likes!.contains(storyController.myId.value)) {
+                                            stories[buttonClickedTimes.value].isLike = false;
+                                            stories[buttonClickedTimes.value].likes!.remove(storyController.myId.value);
+                                          } else {
+                                            stories[buttonClickedTimes.value].isLike = true;
+                                            stories[buttonClickedTimes.value].likes!.add(storyController.myId.value);
+                                          }
+                                        });
+                                      },
+                                      child: stories.isEmpty
+                                          ? (Image.asset(
+                                              "assets/png/unlike_icon.png",
+                                              width: 22,
+                                            ))
+                                          : (stories[buttonClickedTimes.value].isLike ??
+                                                  stories[buttonClickedTimes.value].likes!.contains(storyController.myId.value))
+                                              ? Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Image.asset(
+                                                    "assets/png/liked_icon.png",
+                                                    width: 22,
+                                                  ),
+                                                )
+                                              : Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Image.asset(
+                                                    "assets/png/unlike_icon.png",
+                                                    width: 22,
+                                                  ),
+                                                )),
+                                  stories.isEmpty
+                                      ? const Text('Valid')
+                                      : Text(
+                                          stories[buttonClickedTimes.value].likes!.length.toString(),
+                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                        ),
+                                  InkWell(
+                                    onTap: () async {
+                                      controller.pause();
+                                      showModalBottomSheet(
+                                          backgroundColor: Colors.transparent,
+                                          // enableDrag: true,
+                                          enableDrag: true,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          context: context,
+                                          builder: (context) {
+                                            controller.pause();
+                                            return Padding(
+                                              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                              child: PostCommentsModalBottomSheet(
+                                                    islike: stories[buttonClickedTimes.value].isLike,
+                                                likelength: stories[buttonClickedTimes.value].likeCount,
+                                                comments: stories[buttonClickedTimes.value].comments!,
+                                                postId: stories[buttonClickedTimes.value].sId!,
+                                                isStory: true,
+                                              ),
+                                            );
+                                          }).then((value) => controller.pause()).whenComplete(() {
+                                        controller.play();
                                       });
-                                    },
-                                    child: stories.isEmpty
-                                        ? (Image.asset(
-                                            "assets/png/unlike_icon.png",
-                                            width: 22,
-                                          ))
-                                        : (stories[storyController.currentStoryIndex.value].isLike ??
-                                                stories[storyController.currentStoryIndex.value].likes!.contains(storyController.myId.value))
-                                            ? Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Image.asset(
-                                                  "assets/png/liked_icon.png",
-                                                  width: 22,
-                                                ),
-                                              )
-                                            : Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Image.asset(
-                                                  "assets/png/unlike_icon.png",
-                                                  width: 22,
-                                                ),
-                                              )),
-                                stories.isEmpty
-                                    ? const Text('Valid')
-                                    : Text(
-                                        stories[storyController.currentStoryIndex.value].likes!.length.toString(),
-                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                                      ),
-                                InkWell(
-                                  onTap: () async {
-                                    controller.pause();
-                                    showModalBottomSheet(
-                                        backgroundColor: Colors.transparent,
-                                        // enableDrag: true,
-                                        enableDrag: true,
-                                        isScrollControlled: true,
-                                        shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-                                        context: context,
-                                        builder: (context) {
-                                          return Wrap(children: [
-                                            PostCommentsModalBottomSheet(
-                                              comments: stories[storyController.currentStoryIndex.value].comments!,
-                                              postId: stories[storyController.currentStoryIndex.value].sId!,
-                                              isStory: true,
-                                            )
-                                          ]);
-                                        }).whenComplete(() {
-                                      controller.play();
-                                    });
 
-                                    // updateName(
-                                    //     context,
-                                    //     stories[storyController
-                                    //             .currentStoryIndex.value]
-                                    //         .comments!,
-                                    //     stories[storyController
-                                    //             .currentStoryIndex.value]
-                                    //         .sId!,
-                                    //     storyController.myId.value);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(30, 8, 5, 8),
-                                    child: Image.asset(
-                                      "assets/png/comment_icon.png",
-                                      width: 22,
+                                      // updateName(
+                                      //     context,
+                                      //     stories[storyController
+                                      //             .currentStoryIndex.value]
+                                      //         .comments!,
+                                      //     stories[storyController
+                                      //             .currentStoryIndex.value]
+                                      //         .sId!,
+                                      //     storyController.myId.value);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(30, 8, 5, 8),
+                                      child: Image.asset(
+                                        "assets/png/comment_icon.png",
+                                        width: 22,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                stories.isNotEmpty
-                                    ? Text(
-                                        stories[storyController.currentStoryIndex.value].comments!.length.toString(),
-                                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
-                                      )
-                                    : Text(
-                                        'VAlid',
-                                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                                      ),
-                                const SizedBox(
-                                  width: 30,
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    showModalBottomSheet(
-                                      shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-                                      isScrollControlled: true,
-                                      context: context,
-                                      builder: (context) {
-                                        return const ShareStory();
-                                      },
-                                    );
-                                  },
-                                  child: Image.asset(
-                                    "assets/png/share_icon.png",
-                                    width: 26,
+                                  stories.isNotEmpty
+                                      ? Text(
+                                          stories[buttonClickedTimes.value].comments!.length.toString(),
+                                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
+                                        )
+                                      : Text(
+                                          'VAlid',
+                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                        ),
+                                  const SizedBox(
+                                    width: 30,
                                   ),
-                                ),
-                              ],
-                            );
-                          },
+                                  InkWell(
+                                    onTap: () {
+                                      showModalBottomSheet(
+                                        shape: const OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (context) {
+                                          return const ShareStory();
+                                        },
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      "assets/png/share_icon.png",
+                                      width: 26,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                         )),
                   ),
                 ),
