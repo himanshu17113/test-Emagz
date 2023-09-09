@@ -7,6 +7,7 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_tile.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../../../../../constant/colors.dart';
 import '../../../../../../screens/auth/widgets/form_haeding_text.dart';
@@ -16,17 +17,19 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
   final String postId;
   bool? islike;
   int? likelength;
+  final int? index;
   List<Comment?> comments;
   final bool isblurNeeded;
   final bool? isStory;
   PostCommentsModalBottomSheet({
     Key? key,
     required this.postId,
-    required this.islike,
+    this.islike,
     required this.likelength,
     required this.comments,
     this.isblurNeeded = false,
     this.isStory,
+    this.index,
   }) : super(key: key);
 
   @override
@@ -82,15 +85,19 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                           if (widget.islike == true) {
                             // widget.post!.likes!.removeLast();
                             widget.likelength = widget.likelength! - 1;
+                            homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
+                            homePostController.posts![widget.index!].isLike = false;
                             widget.islike = false;
                           } else {
                             widget.likelength = widget.likelength! + 1;
                             // widget.post!.likes!.add(widget.myUserId!);
+                            homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
+                            homePostController.posts![widget.index!].isLike = true;
                             widget.islike = true;
                           }
                         });
                       },
-                      child: (widget.islike ?? false)
+                      child: (widget.islike ?? true)
                           ? Image.asset(
                               "assets/png/liked_icon.png",
                               width: 26,

@@ -1,4 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
@@ -9,12 +13,12 @@ import 'package:emagz_vendor/social_media/screens/home/screens/post_view/post_vi
 import 'package:emagz_vendor/social_media/screens/home/widgets/bottomSheet/share_bottom_sheet.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/videoPlayer/CustomVideoPlayer.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import '../../../controller/auth/jwtcontroller.dart';
 
 class PostCard extends StatefulWidget {
-  Post? post;
+  // Post? post;
+
   bool isBorder;
   bool? isLiked;
   String? myUserId;
@@ -22,13 +26,14 @@ class PostCard extends StatefulWidget {
   final int? index;
   PostCard({
     Key? key,
-    this.post,
+    // this.post,
+
+    this.isBorder = true,
     this.isLiked,
     this.myUserId,
     this.userImg,
     this.index,
     required this.url,
-    this.isBorder = true,
   }) : super(key: key);
 
   final String url;
@@ -44,11 +49,15 @@ class _PostCardState extends State<PostCard> {
   final homePostController = Get.put(HomePostsController());
   final jwtController = Get.put(JWTController());
   final ConversationController chatController = Get.put(ConversationController());
-  Post? post ;
+  Post? post;
   @override
   void initState() {
     super.initState();
-      post = homePostController.posts?[widget.index!];
+    post = homePostController.posts?[widget.index!];
+  }
+
+  _update() {
+    setState(() {});
   }
 
   @override
@@ -56,8 +65,8 @@ class _PostCardState extends State<PostCard> {
     //todo change logic
     var yesCount = 0;
     var noCount = 0;
-    // var yesCount = widget.post?.pollResults?[0]?.yes ?? 0;
-    // var noCount = widget.post?.pollResults?[0]?.no ?? 0;
+    // var yesCount = post?.pollResults?[0]?.yes ?? 0;
+    // var noCount = post?.pollResults?[0]?.no ?? 0;
     late double yesPercentage;
     late double noPercentage;
     if (yesCount + noCount != 0) {
@@ -85,11 +94,13 @@ class _PostCardState extends State<PostCard> {
         borderRadius: BorderRadius.circular(20),
         child: Stack(fit: StackFit.loose, children: [
           Builder(builder: (context) {
-            if (widget.post!.mediaType == "image" || widget.post!.mediaType == "text") {
+            if (post!.mediaType == "image" || post!.mediaType == "text") {
               return GestureDetector(
                 onTap: () {
                   Get.to(() => PostView(
-                        post: widget.post!,
+                        update: _update,
+                        index: widget.index!,
+                        // post: post!,
                         isLiked: widget.isLiked!,
                         myId: widget.myUserId!,
                       ));
@@ -102,7 +113,7 @@ class _PostCardState extends State<PostCard> {
                   imageUrl: widget.url,
                   placeholder: (context, url) => const Center(
                     child: Padding(
-                      padding: EdgeInsets.all(150.0),
+                      padding: EdgeInsets.symmetric(horizontal: 180.0, vertical: 250),
                       child: CircularProgressIndicator(
                         backgroundColor: Colors.amberAccent,
                         strokeWidth: 2,
@@ -113,16 +124,16 @@ class _PostCardState extends State<PostCard> {
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               );
-            } else if (widget.post!.mediaType == "video") {
+            } else if (post!.mediaType == "video") {
               // var videoUrl = "https://joy1.videvo.net/videvo_files/video/free/2019-09/large_watermarked/190828_07_MarinaBayatNightDrone_UHD_02_preview.mp4";
               return CustomVideoPlayer(
-                post: widget.post!,
+                post: post!,
                 // videoUrl: videoUrl,
-                videoUrl: widget.post!.mediaUrl!,
+                videoUrl: post!.mediaUrl!,
                 aspectRatio: (Get.size.height / 2.62) / (MediaQuery.of(context).size.width - 10),
               );
             } else {
-              return Text("unknown type : ${widget.post!.mediaType}");
+              return Text("unknown type : ${post!.mediaType}");
             }
           }),
 
@@ -137,7 +148,7 @@ class _PostCardState extends State<PostCard> {
                 children: [
                   CircleAvatar(
                     radius: 16,
-                    backgroundImage: widget.post!.mediaType == "video"
+                    backgroundImage: post!.mediaType == "video"
                         ? const CachedNetworkImageProvider("https://picsum.photos/500/500?random=851")
                         : CachedNetworkImageProvider(widget.userImg!),
                   ),
@@ -147,13 +158,13 @@ class _PostCardState extends State<PostCard> {
                   GestureDetector(
                     onTap: () async {
                       // final conversationalId = await chatController
-                      //     .conversationId(widget.post!.user!.sId!);
+                      //     .conversationId(post!.user!.sId!);
                       // debugPrint("🧣🧣$conversationalId🧣🧣🧣");
-                      // if (widget.post!.user != null) {
+                      // if (post!.user != null) {
                       //   //         List<Message>? messages = [];
                       //   //       messages = await chatController.getMessages(conversationalId);
                       //   Get.off(() => ChatScreen(
-                      //         user: widget.post!.user!,
+                      //         user: post!.user!,
                       //         conversationId: conversationalId,
                       //         //  messages: messages ?? [],
                       //       ));
@@ -162,8 +173,8 @@ class _PostCardState extends State<PostCard> {
                       //var userIdd= await jwtController.getUserId();
                       print(tok);
 
-                      print(widget.post!.sId!);
-                      String temp = widget.post!.user!.personalTemplate!;
+                      print(post!.sId!);
+                      String temp = post!.user!.personalTemplate!;
                       if (temp == null) {
                         Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
                       } else {
@@ -171,18 +182,18 @@ class _PostCardState extends State<PostCard> {
                           Get.snackbar('This is a Old account ', 'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
-                        Get.to(() => WebViewPersona(token: tok!, userId: widget.myUserId!, personaUserId: widget.post!.user!.sId!, templateId: temp));
+                        Get.to(() => WebViewPersona(token: tok!, userId: widget.myUserId!, personaUserId: post!.user!.sId!, templateId: temp));
                       }
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${widget.post?.user!.username.toString()}",
-                          // "${widget.post!.userId}",
+                          "${post?.user!.username.toString()}",
+                          // "${post!.userId}",
                           style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
-                        Text("@${widget.post?.user!.getstatedName.toString()}",
+                        Text("@${post?.user!.getstatedName.toString()}",
                             style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
                       ],
                     ),
@@ -227,7 +238,7 @@ class _PostCardState extends State<PostCard> {
                                     }
                                     setState(() {
                                       selectedOption = index;
-                                      homePostController.postPoll(widget.post!.sId!, (index == 0 ? "yes" : "no"));
+                                      homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
                                     });
                                   },
                                   child: Stack(alignment: Alignment.centerLeft, children: [
@@ -276,7 +287,7 @@ class _PostCardState extends State<PostCard> {
                         ],
                       )
                     : const SizedBox(),
-                (widget.post!.enabledpoll!)
+                (post!.enabledpoll!)
                     ? Align(
                         alignment: Alignment.bottomRight,
                         child: InkWell(
@@ -298,7 +309,7 @@ class _PostCardState extends State<PostCard> {
                 InkWell(
                   onTap: () {
                     Get.to(() => CommentViewScreen(
-                          post: widget.post!,
+                          post: post!,
                           isLiked: widget.isLiked ?? false,
                           myUserId: widget.myUserId,
                         ));
@@ -321,83 +332,83 @@ class _PostCardState extends State<PostCard> {
                         bottomRight: Radius.circular(20),
                       ),
                     ),
-                    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                      Container(
-                        margin: const EdgeInsets.only(left: 10),
-                        width: Get.size.width / 2.5,
-                        child: Text("${widget.post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
-                      ),
-                      //    const Expanded(child: SizedBox()),
-                      GestureDetector(
-                          onTap: () {
-                            homePostController.likePost(widget.post!.sId!);
-                            setState(() {
-                              if (widget.isLiked == true) {
-                                widget.post!.likeCount = widget.post!.likeCount! - 1;
-                                //      widget.post!.likes!.removeLast();
-                                widget.isLiked = false;
-                              } else {
-                                widget.post!.likeCount = widget.post!.likeCount! + 1;
-                                //  widget.post!.likes!.add(widget.myUserId!);
-                                widget.isLiked = true;
-                              }
-                            });
-                          },
-                          child: (widget.isLiked ?? false)
-                              ? Image.asset(
-                                  "assets/png/liked_icon.png",
-                                  width: 26,
-                                )
-                              : Image.asset(
-                                  "assets/png/unlike_icon.png",
-                                  width: 22,
-                                )),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        "${widget.post!.likeCount}",
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Image.asset(
-                        "assets/png/comment_icon.png",
-                        width: 22,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "${widget.post!.comments?.length}",
-                        style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          showModalBottomSheet(
-                            shape: const OutlineInputBorder(
-                                borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-                            isScrollControlled: true,
-                            context: context,
-                            builder: (context) {
-                              return ShareBottomSheet(post: widget.post!);
+                    child:  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            width: Get.size.width / 2.5,
+                            child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                          ),
+                          //    const Expanded(child: SizedBox()),
+                          GestureDetector(
+                              onTap: () {
+                                homePostController.likePost(post!.sId!);
+                                setState(() {
+                                  if (homePostController.posts![widget.index!].isLike!) {
+                                    homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!]!.likeCount! - 1;
+                                    //      post!.likes!.removeLast();
+                                    homePostController.posts![widget.index!]!.isLike = false;
+                                  } else {
+                                    homePostController.posts![widget.index!]!.likeCount = homePostController.posts![widget.index!]!.likeCount! + 1;
+                                    //  post!.likes!.add(widget.myUserId!);
+                                    homePostController.posts![widget.index!]!.isLike = true;
+                                  }
+                                });
+                              },
+                              child: (post!.isLike ?? false)
+                                  ? Image.asset(
+                                      "assets/png/liked_icon.png",
+                                      width: 26,
+                                    )
+                                  : Image.asset(
+                                      "assets/png/unlike_icon.png",
+                                      width: 22,
+                                    )),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "${homePostController.posts?[widget.index!].likeCount}",
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Image.asset(
+                            "assets/png/comment_icon.png",
+                            width: 22,
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            "${post!.comments?.length}",
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              showModalBottomSheet(
+                                shape: const OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return ShareBottomSheet(post: post!);
+                                },
+                              );
                             },
-                          );
-                        },
-                        child: Image.asset(
-                          "assets/png/share_icon.png",
-                          width: 26,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      )
-                    ]),
-                  ),
+                            child: Image.asset(
+                              "assets/png/share_icon.png",
+                              width: 26,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          )
+                        ])),
+                 
                 ),
               ],
             ),

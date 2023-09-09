@@ -13,11 +13,11 @@ class HomePosts extends StatelessWidget {
   final String? myUserId;
   HomePosts({Key? key, this.myUserId}) : super(key: key);
 
-  final HomePostsController homePostController =
-      Get.find<HomePostsController>();
+  final HomePostsController homePostController = Get.find<HomePostsController>();
   final GetXStoryController storyController = Get.put(GetXStoryController());
   @override
   Widget build(BuildContext context) {
+     
     return Obx(() => ListView.builder(
           cacheExtent: 2000,
           padding: const EdgeInsets.only(bottom: 80.0),
@@ -30,25 +30,23 @@ class HomePosts extends StatelessWidget {
               return const CupertinoActivityIndicator();
             } else if (index == 0) {
               if (storyController.stories!.isNotEmpty) {
-                return StoryView(
-                    sid: myUserId ?? homePostController.userId ?? "");
+                return StoryView(sid: myUserId ?? homePostController.userId ?? "");
               } else {
-                return 
-                // const Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: MyStory(
-                //     stories: [],
-                //     userID: null,
-                //   ),
-                // );
-                 StoryView(sid: myUserId ?? homePostController.userId ?? "");
+                return
+                    // const Align(
+                    //   alignment: Alignment.centerLeft,
+                    //   child: MyStory(
+                    //     stories: [],
+                    //     userID: null,
+                    //   ),
+                    // );
+                    StoryView(sid: myUserId ?? homePostController.userId ?? "");
                 // const SizedBox();
                 // const Text("loading");
               }
             } else {
               if (homePostController.posts!.isNotEmpty) {
-                if (homePostController.posts![index - 1].mediaUrl!
-                    .endsWith(".svg")) {
+                if (homePostController.posts![index - 1].mediaUrl!.endsWith(".svg")) {
                   return const SizedBox();
                 } else {
                   return InkWell(
@@ -75,8 +73,7 @@ class HomePosts extends StatelessWidget {
                                   height: 250,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       HomePagePopupWidget(
                                         isBorder: false,
@@ -108,19 +105,13 @@ class HomePosts extends StatelessWidget {
                         child: homePostController.posts?[index - 1] == null
                             ? const SizedBox()
                             : PostCard(
-                              index: index,
-
-                                isLiked: homePostController
-                                    .posts?[index - 1].likes!
-                                    .contains(myUserId),
+                            
+                                index: index - 1,
+                                isLiked: homePostController.posts?[index - 1].likes!.contains(myUserId),
                                 myUserId: myUserId,
-                                post: homePostController.posts?[index - 1],
-                                url: homePostController
-                                        .posts?[index - 1].mediaUrl ??
-                                    "",
-                                userImg: homePostController
-                                        .posts?[index - 1].user?.ProfilePic ??
-                                    "",
+                                //  post: homePostController.posts?[index - 1],
+                                url: homePostController.posts?[index - 1].mediaUrl ?? "",
+                                userImg: homePostController.posts?[index - 1].user?.ProfilePic ?? "",
                               ),
                       ));
                 }
@@ -132,3 +123,5 @@ class HomePosts extends StatelessWidget {
         ));
   }
 }
+
+

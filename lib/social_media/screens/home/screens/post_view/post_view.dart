@@ -1,17 +1,29 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PostView extends StatelessWidget {
-  final Post post;
+  VoidCallback update;
+  final int index;
   final String myId;
   bool isLiked;
-  PostView({super.key, required this.post, required this.isLiked, required this.myId});
+  PostView(
+      {super.key,
+      required this.update,
+      // required this.post,
+      required this.isLiked,
+      required this.myId,
+      required this.index});
+
+  final homePostController = Get.put(HomePostsController());
 
   @override
   Widget build(BuildContext context) {
+    final Post post = homePostController.posts![index];
     return Scaffold(
       backgroundColor: Colors.black,
       // backgroundColor: socialBack,
@@ -45,21 +57,22 @@ class PostView extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      if (isLiked) {
-                        isLiked = !isLiked;
-                        post.isLike = false;
-                        post.likeCount = post.likeCount! - 1;
+                      homePostController.likePost(post.sId!);
+                      if (post.isLike!) {
+                        homePostController.posts![index!].isLike = false;
+                        homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! - 1;
                         //    post.likes!.remove(myId);
                         setInnerState(() {});
                       } else {
-                        post.isLike = true;
-                        post.likeCount = post.likeCount! + 1;
-                        isLiked = !isLiked;
+                        homePostController.posts![index].isLike = true;
+                        homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! + 1;
+
                         //    post.likes!.add(myId);
                         setInnerState(() {});
                       }
+                      update();
                     },
-                    child: isLiked
+                    child: homePostController.posts![index].isLike!
                         ? Image.asset(
                             "assets/png/liked_icon.png",
                             width: 22,
@@ -94,6 +107,7 @@ class PostView extends StatelessWidget {
                             return Padding(
                               padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                               child: PostCommentsModalBottomSheet(
+                                index: index,
                                 islike: post.isLike,
                                 likelength: post.likeCount,
                                 comments: post.comments!,
