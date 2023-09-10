@@ -129,4 +129,33 @@ class PrivacyController extends GetxController{
       CustomSnackbar.show(data.toString());
     }
   }
+  privacyLiveControl(bool everyone,bool followers,bool noone) async
+  {
+    var token = await jwtController.getAuthToken();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+    Map bodymain={
+      "everyone": everyone,
+      "followers": followers,
+      "no_one": noone,
+    };
+    Map body = {"live_privacy": bodymain};
+    debugPrint(ApiEndpoint.livePrivacy);
+    debugPrint(body.toString());
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.livePrivacy),
+        body: jsonEncode(body), headers: headers);
+    Map data = jsonDecode(response.body);
+    debugPrint("code${response.statusCode.toString()}");
+
+    if(response.statusCode==200)
+    {
+      CustomSnackbar.showSucess("User Live Privacy Updated");
+    }
+    else{
+      print(data.toString());
+      CustomSnackbar.show(data.toString());
+    }
+  }
 }

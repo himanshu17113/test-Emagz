@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/privacy/privacy_controller.dart';
 
-class LiveSettingScreen extends StatelessWidget {
+class LiveSettingScreen extends StatefulWidget {
   LiveSettingScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LiveSettingScreen> createState() => _LiveSettingScreenState();
+}
+
+class _LiveSettingScreenState extends State<LiveSettingScreen> {
   bool youFollow = false;
+
   bool everyOne = true;
+
   bool yourFollower = false;
-  bool followAndFollower = false;
+
+  bool followAndFollowerNoone = false;
+  final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +48,7 @@ class LiveSettingScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(15),
-              height: 190,
+              height: 260,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: whiteColor,
@@ -85,7 +97,79 @@ class LiveSettingScreen extends StatelessWidget {
                           inactiveToggleColor: toggleInactive,
                           value: everyOne,
                           onToggle: (val) {
-                            everyOne = val;
+                            setState(() {
+                              everyOne=val;
+                            });
+                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
+
+                            // setState(() {
+                            //   everyOne = val;
+                            // });
+                          }),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Followers",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      FlutterSwitch(
+                          activeColor: whiteAcent,
+                          toggleColor: blueColor,
+                          padding: 1,
+                          height: 20,
+                          width: 50,
+                          inactiveColor: lightgrayColor,
+                          inactiveToggleColor: toggleInactive,
+                          value: yourFollower,
+                          onToggle: (val) {
+                            setState(() {
+                              yourFollower=val;
+                            });
+                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
+
+                            // setState(() {
+                            //   everyOne = val;
+                            // });
+                          }),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Noone",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      FlutterSwitch(
+                          activeColor: whiteAcent,
+                          toggleColor: blueColor,
+                          padding: 1,
+                          height: 20,
+                          width: 50,
+                          inactiveColor: lightgrayColor,
+                          inactiveToggleColor: toggleInactive,
+                          value: followAndFollowerNoone,
+                          onToggle: (val) {
+                            setState(() {
+                              followAndFollowerNoone=val;
+                            });
+                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
+
                             // setState(() {
                             //   everyOne = val;
                             // });
