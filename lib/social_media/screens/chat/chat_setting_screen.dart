@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
  
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
  
@@ -29,7 +30,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
   bool youFollow = false;
   bool everyOne = true;
   bool yourFollower = false;
-  bool followAndFollower = false;
+  bool followAndFollowerNoone = false;
+  final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -290,6 +292,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                                 setState(() {
                                   everyOne = val;
                                 });
+                                privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
+
                               }),
                         ],
                       ),
@@ -299,7 +303,14 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "People you follow",
                         subTitle: "53 People",
-                        isActive: youFollow,
+                        isActive: yourFollower,
+                        onToggle: (val){
+                          setState(() {
+                            yourFollower=val;
+                          });
+                          privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
+
+                        },
                       ),
                       const SizedBox(
                         height: 5,
@@ -307,7 +318,14 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "No one expect ",
                         subTitle: "550 people",
-                        isActive: yourFollower,
+                        isActive: followAndFollowerNoone,
+                        onToggle: (val){
+                          setState(() {
+                            followAndFollowerNoone=val;
+                          });
+                          privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
+
+                        },
                       ),
                     ],
                   ),

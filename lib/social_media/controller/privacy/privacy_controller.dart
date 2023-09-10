@@ -158,4 +158,34 @@ class PrivacyController extends GetxController{
       CustomSnackbar.show(data.toString());
     }
   }
+  privacyMessageControl(bool everyone,bool followers, bool no_one ) async
+  {
+    var token = await jwtController.getAuthToken();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+    Map bodymain={
+      "everyone": everyone,
+      "followers": followers,
+      "no_one": no_one,
+    };
+    Map body = {"message_privacy": bodymain};
+
+    debugPrint(body.toString());
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.messagePrivacy),
+        body: jsonEncode(body), headers: headers);
+    Map data = jsonDecode(response.body);
+    debugPrint("code${response.statusCode.toString()}");
+
+    if(response.statusCode==200)
+    {
+      CustomSnackbar.showSucess("User Message Privacy Updated");
+    }
+    else{
+      print(data.toString());
+      CustomSnackbar.show(data.toString());
+    }
+
+  }
 }
