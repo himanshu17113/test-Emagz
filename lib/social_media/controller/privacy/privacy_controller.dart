@@ -102,4 +102,31 @@ class PrivacyController extends GetxController{
     }
 
   }
+  privacyStoryControl(bool everyone,bool closeFriends) async
+  {
+    var token = await jwtController.getAuthToken();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+    Map bodymain={
+      "everyone": everyone,
+      "close_friend":closeFriends,
+
+    };
+    Map body = {"story_privacy": bodymain};
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.storyPrivacy),
+        body: jsonEncode(body), headers: headers);
+    Map data = jsonDecode(response.body);
+    debugPrint("code${response.statusCode.toString()}");
+    debugPrint(body.toString());
+    if(response.statusCode==200)
+    {
+      CustomSnackbar.showSucess("User Mention Privacy Updated");
+    }
+    else{
+      print(data.toString());
+      CustomSnackbar.show(data.toString());
+    }
+  }
 }

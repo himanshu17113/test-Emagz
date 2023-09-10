@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/privacy/privacy_controller.dart';
 
-class StorySettingScreen extends StatelessWidget {
+class StorySettingScreen extends StatefulWidget {
   StorySettingScreen({Key? key}) : super(key: key);
-  bool youFollow = false;
+
+  @override
+  State<StorySettingScreen> createState() => _StorySettingScreenState();
+}
+
+class _StorySettingScreenState extends State<StorySettingScreen> {
+  bool closeFriends = false;
+
   bool everyOne = true;
+
   bool yourFollower = false;
+
   bool followAndFollower = false;
+
+  final privacyController= Get.put(PrivacyController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,11 +99,12 @@ class StorySettingScreen extends StatelessWidget {
                           inactiveToggleColor: toggleInactive,
                           value: everyOne,
                           onToggle: (val) {
-                            everyOne = val;
-                            // setState(() {
-                            //   everyOne = val;
-                            // });
-                          }),
+                              setState(() {
+                                everyOne=val;
+                              });
+                              privacyController.privacyStoryControl(everyOne, closeFriends);
+                          }
+                          ),
                     ],
                   ),
                   const SizedBox(
@@ -98,7 +113,14 @@ class StorySettingScreen extends StatelessWidget {
                   TitleAndSwitchWidget(
                     title: "Close Friends",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: closeFriends,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        closeFriends=val;
+                      });
+                      privacyController.privacyStoryControl(everyOne, closeFriends);
+                    },
                   ),
                   const SizedBox(
                     height: 10,
