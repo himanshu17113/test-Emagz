@@ -3,8 +3,10 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/privacy/privacy_controller.dart';
 
 class PostSettingScreen extends StatefulWidget {
   const PostSettingScreen({Key? key}) : super(key: key);
@@ -16,8 +18,9 @@ class PostSettingScreen extends StatefulWidget {
 class _PostSettingScreenState extends State<PostSettingScreen> {
   bool youFollow = false;
   bool everyOne = true;
-  bool yourFollower = false;
+  bool yourFollowerNoOne = false;
   bool followAndFollower = false;
+  final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -214,6 +217,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                             setState(() {
                               everyOne = val;
                             });
+                            privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
                           }),
                     ],
                   ),
@@ -224,6 +228,13 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                     title: "People you follow",
                     subTitle: "53 People",
                     isActive: youFollow,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        youFollow = val;
+                      });
+                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -231,7 +242,14 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Expect Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollower,
+                    isActive: yourFollowerNoOne,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        yourFollowerNoOne = val;
+                      });
+                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
                   ),
                 ],
               ),
@@ -290,6 +308,8 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                             setState(() {
                               everyOne = val;
                             });
+
+                            privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
                           }),
                     ],
                   ),
@@ -300,6 +320,15 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                     title: "People you follow",
                     subTitle: "53 People",
                     isActive: youFollow,
+                    onToggle: (val){
+
+                      setState(() {
+                        youFollow = val;
+                      });
+
+                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
+
                   ),
                   const SizedBox(
                     height: 8,
@@ -307,7 +336,15 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Expect Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollower,
+                    isActive: yourFollowerNoOne,
+                    onToggle: (val){
+
+                      setState(() {
+                        yourFollowerNoOne = val;
+                      });
+
+                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
                   ),
                 ],
               ),

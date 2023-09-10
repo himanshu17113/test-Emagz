@@ -42,4 +42,34 @@ class PrivacyController extends GetxController{
     }
 
   }
+  privacyPostControl(bool everyone,bool followers, bool no_one ) async
+  {
+    var token = await jwtController.getAuthToken();
+    var headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token!
+    };
+    Map bodymain={
+      "everyone": everyone,
+      "followers": followers,
+      "no_one": no_one,
+    };
+    Map body = {"post_privacy": bodymain};
+    debugPrint(ApiEndpoint.postPrivacy);
+    debugPrint(body.toString());
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.postPrivacy),
+        body: jsonEncode(body), headers: headers);
+    Map data = jsonDecode(response.body);
+    debugPrint("code${response.statusCode.toString()}");
+
+    if(response.statusCode==200)
+    {
+      CustomSnackbar.showSucess("User Post Privacy Updated");
+    }
+    else{
+      print(data.toString());
+      CustomSnackbar.show(data.toString());
+    }
+
+  }
 }
