@@ -1,8 +1,11 @@
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
+import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../common/title_switch/title_and_switch_widget.dart';
 
@@ -18,6 +21,7 @@ class _CommentSettingState extends State<CommentSetting> {
   bool everyOne = true;
   bool yourFollower = false;
   bool followAndFollower = false;
+  final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -219,9 +223,11 @@ class _CommentSettingState extends State<CommentSetting> {
                           inactiveToggleColor: toggleInactive,
                           value: everyOne,
                           onToggle: (val) {
+
                             setState(() {
                               everyOne = val;
                             });
+                            privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
                           }),
                     ],
                   ),
@@ -232,6 +238,13 @@ class _CommentSettingState extends State<CommentSetting> {
                     title: "People you follow",
                     subTitle: "53 People",
                     isActive: youFollow,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        youFollow = val;
+                      });
+                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -240,6 +253,13 @@ class _CommentSettingState extends State<CommentSetting> {
                     title: "Your followers",
                     subTitle: "53 People",
                     isActive: yourFollower,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        yourFollower = val;
+                      });
+                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -248,6 +268,13 @@ class _CommentSettingState extends State<CommentSetting> {
                     title: "People you follow and your followers",
                     subTitle: "550 People",
                     isActive: followAndFollower,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                       followAndFollower = val;
+                      });
+                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                    },
                   )
                 ],
               ),

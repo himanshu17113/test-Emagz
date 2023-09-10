@@ -64,6 +64,8 @@ class _TitleAndSwitchWidgetState extends State<TitleAndSwitchWidget> {
                 setState(() {
                   widget.isActive = val;
                 });
+
+
               } : widget.onToggle!
               )
         ],
