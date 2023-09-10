@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:get/get.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/privacy/privacy_controller.dart';
 
 class MentionSettingScreen extends StatefulWidget {
   const MentionSettingScreen({Key? key}) : super(key: key);
@@ -17,9 +19,10 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
 
   bool everyOne = true;
 
-  bool yourFollower = false;
+  bool yourFollowerNoOne = false;
 
   bool followAndFollower = false;
+  final privacyController= Get.put(PrivacyController());
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +94,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                             setState(() {
                               everyOne = val;
                             });
+                            privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
                           }),
                     ],
                   ),
@@ -101,6 +105,14 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                     title: "People you follow",
                     subTitle: "53 People",
                     isActive: youFollow,
+                    onToggle: (val)
+                    {
+
+                      setState(() {
+                       youFollow= val;
+                      });
+                      privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
                   ),
                   const SizedBox(
                     height: 8,
@@ -108,7 +120,15 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Expect Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollower,
+                    isActive: yourFollowerNoOne,
+                    onToggle: (val)
+                    {
+
+                      setState(() {
+                        yourFollowerNoOne = val;
+                      });
+                      privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
+                    },
                   ),
                 ],
               ),

@@ -67,6 +67,8 @@ class ApiEndpoint {
   static String getConID(String userId, String secUserId) => "$baseUrl/conversations/find/$userId/$secUserId";
 
   static String postMessage = "$baseUrl/messages";
+  static String mentionPrivacy="$baseUrl/auth/change-mention-privacy";
+
   static String postPrivacy= "$baseUrl/auth/change-post-privacy";
   static String commentprivacy= "$baseUrl/auth/change-comment-privacy";
 }
