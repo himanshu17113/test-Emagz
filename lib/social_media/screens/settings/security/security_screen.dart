@@ -9,6 +9,9 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../../screens/auth/widgets/my_custom_textfiled.dart';
+import '../../../controller/auth/jwtcontroller.dart';
+import '../../../controller/security/security_controller.dart';
+import '../../../models/post_model.dart';
 import '../../account/deactivate_account_screen.dart';
 import '../privacy/privacy_policy_screen.dart';
 import '../terms_condition/terms_and_condition_screen.dart';
@@ -21,8 +24,23 @@ class SecurityScreen extends StatefulWidget {
 }
 
 class _SecurityScreenState extends State<SecurityScreen> {
+  var jwtController = Get.put(JWTController());
   bool isTwoWayVerification = false;
   bool isDeactivateAccount = false;
+  final securityController= Get.put(SecurityController());
+  UserSchema? user;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
+
+  asyncInit() async {
+
+    user = await jwtController.getCurrentUserDetail();
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,28 +135,28 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 ),
                 PersonalInformationTile(
                   heading: "Name",
-                  body: "Deepak",
+                  body: user!=null? user!.username!:"Deepak",
                   onTap: () {
                     updateName(context);
                   },
                 ),
                 PersonalInformationTile(
                   heading: "Date Of Birth",
-                  body: "21-May-1917",
+                  body: user!=null? user!.dob!:"10/10/2011",
                   onTap: () {
                     updateDob(context);
                   },
                 ),
                 PersonalInformationTile(
                   heading: "Email",
-                  body: "Jhonwick@gmail.com",
+                  body: user!=null? user!.email!:"Johnwick@gmail",
                   onTap: () {
                     updateEmail(context);
                   },
                 ),
                 PersonalInformationTile(
                   heading: "Mobile Number",
-                  body: "+91 009009090",
+                  body: user!=null? user!.mobileNumber!:"+91 009009090",
                   onTap: () {
                     updateMobileNo(context);
                   },
@@ -628,7 +646,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
         });
   }
 
-  updateName(BuildContext context) {
+  updateName(BuildContext context) async{
+    TextEditingController name= new TextEditingController();
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
         context: context,
@@ -691,28 +710,35 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                     MyCustomTextfiled(
                       hint: "Enter your new name",
+                      controller: name,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 51,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff3A0DBB),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: const Offset(0, 4.07),
-                              blurRadius: 20,
-                              color: const Color(0xff00000040).withOpacity(.25))
-                        ],
-                      ),
-                      child: FormHeadingText(
-                        headings: "Update",
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 14,
+                    GestureDetector(
+                      onTap: () async
+                      {
+                        securityController.updateName(name.text);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 51,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff3A0DBB),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(0, 4.07),
+                                blurRadius: 20,
+                                color: const Color(0xff00000040).withOpacity(.25))
+                          ],
+                        ),
+                        child: FormHeadingText(
+                          headings: "Update",
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -720,7 +746,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () {
+                        onTap: () async{
+
                           Navigator.pop(context);
                         },
                         child: FormHeadingText(

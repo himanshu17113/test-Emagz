@@ -74,5 +74,10 @@ class ApiEndpoint {
   static String mentionPrivacy="$baseUrl/auth/change-mention-privacy";
 
   static String postPrivacy= "$baseUrl/auth/change-post-privacy";
+
+
   static String commentprivacy= "$baseUrl/auth/change-comment-privacy";
+
+  static String updateUserDetails= "$baseUrl/auth/update-user-details";
+
 }

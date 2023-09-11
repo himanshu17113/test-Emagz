@@ -11,6 +11,7 @@ import '../auth/jwtcontroller.dart';
 class PrivacyController extends GetxController{
   var jwtController = Get.put(JWTController());
 
+
   privacyCommentControl(bool everyone,bool follower, bool follow,bool followFollowers ) async
   {
     var token = await jwtController.getAuthToken();
