@@ -2,13 +2,14 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-import '../../../model/poll_model.dart';
+//import '../../../model/poll_model.dart';
 
 class HomePostsController extends GetxController {
   var logger = Logger(
