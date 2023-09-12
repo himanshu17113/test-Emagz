@@ -135,21 +135,21 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 ),
                 PersonalInformationTile(
                   heading: "Name",
-                  body: user!=null? user!.username!:"Deepak",
+                  body: user!=null? user!.username!:"Loading...",
                   onTap: () {
                     updateName(context);
                   },
                 ),
                 PersonalInformationTile(
                   heading: "Date Of Birth",
-                  body: user!=null? user!.dob!:"10/10/2011",
+                  body: user!=null? user!.dob!:"Loading..",
                   onTap: () {
                     updateDob(context);
                   },
                 ),
                 PersonalInformationTile(
                   heading: "Email",
-                  body: user!=null? user!.email!:"Johnwick@gmail",
+                  body: user!=null? user!.email!:"Loading..",
                   onTap: () {
                     updateEmail(context);
                   },
