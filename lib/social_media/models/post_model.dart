@@ -1,6 +1,6 @@
 class Post {
   //Privacy? privacy;
-  List<PollResults?>? pollResults;
+   List<PollResults?>? pollResults;
   int? likeCount;
   String? sId;
   UserSchema? user;
@@ -14,7 +14,7 @@ class Post {
   List<String?>? reacted;
   List<String?>? likes;
   List<String?>? shares;
-  int? pollDuration;
+  dynamic pollDuration;
   List<Comment?>? comments;
 
 //   DateTime? createdAt;
@@ -24,7 +24,7 @@ class Post {
 
   Post(
       { //this.privacy,
-      this.pollResults,
+  //    this.pollResults,
       this.sId,
       this.likeCount,
       this.user,
@@ -49,10 +49,10 @@ class Post {
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         //privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
-        pollResults: json["PollResults"] == null
-            ? []
-            : List<PollResults>.from(
-                json["PollResults"]!.map((x) => PollResults.fromJson(x))),
+   //     pollResults: json["PollResults"] == null
+            // ? []
+            // : List<PollResults>.from(
+            //     json["PollResults"]!.map((x) => PollResults.fromJson(x))),
         likeCount: json["LikeCount"],
         sId: json["_id"],
         user:
@@ -61,7 +61,7 @@ class Post {
         mediaUrl: json["mediaUrl"],
         enabledpoll: json["Enabledpoll"],
         showPollResults: json["ShowPollResults"],
-        setTimer: json["setTimer"],
+   setTimer: json["setTimer"],
         caption: json["caption"],
         // tagPrivacy: json["tagPrivacy"],
         reacted: json["Reacted"] == null
@@ -136,8 +136,8 @@ class Privacy {
 }
 
 class PollResults {
-  int? yes;
-  int? no;
+  String? yes;
+  String? no;
 
   PollResults({this.yes, this.no});
 
@@ -176,7 +176,7 @@ class UserSchema {
   List<String?>? search;
   String? createdAt;
   String? updatedAt;
-  int? iV;
+ // int? iV;
   String? getstatedName;
   String? displayName;
 
@@ -201,7 +201,7 @@ class UserSchema {
       this.search,
       this.createdAt,
       this.updatedAt,
-      this.iV,
+    //  this.iV,
       this.getstatedName,
       this.ProfilePic,
       this.displayName});
@@ -228,7 +228,7 @@ class UserSchema {
     //  search = json['search'].cast<String>();
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    iV = json['__v'];
+  //  iV = json['__v'];
     getstatedName = json['GetstatedName'];
     displayName = json['displayName'];
   }
@@ -255,7 +255,7 @@ class UserSchema {
     data['search'] = search;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
-    data['__v'] = iV;
+   // data['__v'] = iV;
     data['GetstatedName'] = getstatedName;
     data['displayName'] = displayName;
     return data;
