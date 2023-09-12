@@ -17,16 +17,17 @@ class JWTController extends GetxController {
 
   Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
-    //  var userToken = await getAuthToken();
-    var id = await getUserId();
-    dio.options.headers["Authorization"] =
+    token?.value ??= (await getAuthToken())!;
+
+    userId?.value ??= (await getUserId())!;
+    dio.options.headers["Authorization"] = token?.value ??
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
-    var response = await dio.get(ApiEndpoint.userInfo(id!));
-    debugPrint(ApiEndpoint.userInfo(id));
+    var response = await dio.get(ApiEndpoint.userInfo(userId!.value));
+    debugPrint(ApiEndpoint.userInfo(userId!.value));
     // debugPrint(response.data);
     var userDetails = UserSchema.fromJson(response.data);
-      user?.value = userDetails;
+    user?.value = userDetails;
     return userDetails;
   }
 
@@ -50,38 +51,47 @@ class JWTController extends GetxController {
     }
   }
 
-  Future setAuthToken(String? token, String? id) async {
-    await hiveBox.put("token", token);
+  Future setAuthToken(String? tokenx, String? id) async {
+    await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
-    var lastToken = await hiveBox.get("token");
-    if (lastToken != null) {
+    // token = RxString(tokenx!);
+    // userId?.value = id!;
+    if (tokenx != null && id != null) {
       isAuthorised.value = true;
-      this.token = RxString(token!);
-      userId = RxString(id!);
+      token = RxString(tokenx);
+      userId = RxString(id);
     } else {
       isAuthorised.value = false;
     }
   }
 
   Future<String?> getAuthToken() async {
-    if (token != null) {
+    if (token?.value != null) {
       //  debugPrint("done fastly");
       return token!.value;
     }
     //  debugPrint("DONE SLOWLY");
-    final lastToken = await hiveBox.get("token");
-    if (lastToken != null) {
+    final t = await hiveBox.get("token");
+    token?.value = t;
+    if (token?.value != null) {
       isAuthorised.value = true;
     } else {
       isAuthorised.value = false;
       return null;
     }
-    return lastToken;
+    return token!.value;
   }
 
   Future<String?> getUserId() async {
-    var userId = await hiveBox.get("userId");
-    return userId;
+    if (userId?.value != null) {
+      //  debugPrint("done fastly");
+      return userId!.value;
+    }
+    //
+
+    final u = await hiveBox.get("userId");
+    userId?.value = u;
+    return userId?.value;
   }
 
   Future setProfileImage(String imageUrl) async {
@@ -99,12 +109,12 @@ class JWTController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    String? lastAuthToken = await getAuthToken();
-    String? userId = await getUserId();
+    token?.value = (await getAuthToken())!;
+    userId?.value = (await getUserId())!;
     getCurrentUserDetail();
-    debugPrint(lastAuthToken);
-    debugPrint(userId);
-    if (lastAuthToken == null) {
+    debugPrint(token?.value);
+    debugPrint(userId?.value);
+    if (token?.value == null) {
       debugPrint("NO AUTH");
     } else {
       debugPrint("AUTH");
