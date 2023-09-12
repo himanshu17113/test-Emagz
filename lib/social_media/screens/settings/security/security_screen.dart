@@ -314,6 +314,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateDob(BuildContext context) {
+    TextEditingController dob= new TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -368,28 +369,40 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 ),
                 MyCustomTextfiled(
                   hint: "12 - June - 1997",
+                  controller: dob,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  height: 51,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff3A0DBB),
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(0, 4.07),
-                          blurRadius: 20,
-                          color: const Color(0xff00000040).withOpacity(.25))
-                    ],
-                  ),
-                  child: FormHeadingText(
-                    headings: "Update",
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 14,
+                GestureDetector(
+                  onTap: ()async
+                  {
+                    await securityController.updateDOB(dob.text);
+                    setState(() {
+                      user!.dob=dob.text;
+                    });
+                    Navigator.pop(context);
+
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 51,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff3A0DBB),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 4.07),
+                            blurRadius: 20,
+                            color: const Color(0xff00000040).withOpacity(.25))
+                      ],
+                    ),
+                    child: FormHeadingText(
+                      headings: "Update",
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -418,6 +431,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateAddress(BuildContext context) {
+    TextEditingController address= new TextEditingController();
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
         context: context,
@@ -495,6 +509,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                     MyCustomTextfiled(
                       hint: "Address line 2",
+                      controller: address,
                     ),
                     const SizedBox(
                       height: 10,
@@ -599,24 +614,34 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      height: 51,
-                      decoration: BoxDecoration(
-                        color: const Color(0xff3A0DBB),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                              offset: const Offset(0, 4.07),
-                              blurRadius: 20,
-                              color: const Color(0xff00000040).withOpacity(.25))
-                        ],
-                      ),
-                      child: FormHeadingText(
-                        headings: "Update",
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                        fontSize: 14,
+                    GestureDetector(
+                      onTap: ()async
+                      {
+                        await securityController.updateAddress(address.text);
+                        setState(() {
+
+                        });
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 51,
+                        decoration: BoxDecoration(
+                          color: const Color(0xff3A0DBB),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(0, 4.07),
+                                blurRadius: 20,
+                                color: const Color(0xff00000040).withOpacity(.25))
+                          ],
+                        ),
+                        child: FormHeadingText(
+                          headings: "Update",
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                     const SizedBox(
@@ -648,6 +673,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
   updateName(BuildContext context) async{
     TextEditingController name= new TextEditingController();
+
+
+    TextEditingController MobileNumber= new TextEditingController();
+    TextEditingController address= new TextEditingController();
+
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
         context: context,
@@ -718,7 +748,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     GestureDetector(
                       onTap: () async
                       {
-                        securityController.updateName(name.text);
+                        await securityController.updateName(name.text);
+                        setState(() {
+                          user!.username=name.text;
+                        });
+                        Navigator.pop(context);
                       },
                       child: Container(
                         alignment: Alignment.center,
@@ -768,6 +802,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   otpVerificationModal(BuildContext context) {
+    TextEditingController email= new TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -841,24 +876,33 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  height: 51,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff3A0DBB),
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(0, 4.07),
-                          blurRadius: 20,
-                          color: const Color(0xff00000040).withOpacity(.25))
-                    ],
-                  ),
-                  child: FormHeadingText(
-                    headings: "Update",
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 14,
+                GestureDetector(
+                  onTap: ()async
+                  {
+                    await securityController.updateEmail(email.text);
+                    setState(() {
+                      user!.email=email.text;
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 51,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff3A0DBB),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 4.07),
+                            blurRadius: 20,
+                            color: const Color(0xff00000040).withOpacity(.25))
+                      ],
+                    ),
+                    child: FormHeadingText(
+                      headings: "Update",
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -891,6 +935,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateMobileNo(BuildContext context) {
+    TextEditingController mobile= new TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -945,28 +990,38 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 ),
                 MyCustomTextfiled(
                   hint: "+91 000 000 0000",
+                  controller: mobile,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  height: 51,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff3A0DBB),
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: const Offset(0, 4.07),
-                          blurRadius: 20,
-                          color: const Color(0xff00000040).withOpacity(.25))
-                    ],
-                  ),
-                  child: FormHeadingText(
-                    headings: "Update",
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 14,
+                GestureDetector(
+                  onTap: ()async{
+                    await securityController.updateMobile(mobile.text);
+                    setState(() {
+                      user!.mobileNumber=mobile.text;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 51,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff3A0DBB),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 4.07),
+                            blurRadius: 20,
+                            color: const Color(0xff00000040).withOpacity(.25))
+                      ],
+                    ),
+                    child: FormHeadingText(
+                      headings: "Update",
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -995,6 +1050,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateEmail(BuildContext context) {
+    TextEditingController email= new TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -1049,13 +1105,19 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 ),
                 MyCustomTextfiled(
                   hint: "Enter your email id",
+                  controller: email,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 InkWell(
                   onTap: () {
-                    otpVerificationModal(context);
+                    securityController.updateEmail(email.text);
+                    Navigator.pop(context);
+                    setState(() {
+                      user!.email=email.text;
+                    });
+                    //otpVerificationModal(context);
                   },
                   child: Container(
                     alignment: Alignment.center,
