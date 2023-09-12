@@ -19,7 +19,6 @@ class SocialMediaHomePage extends StatelessWidget {
   // final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    
     // if (myUserId == null)async {
     //   myUserId = await jwtController.getUserId();
     // }
@@ -100,7 +99,7 @@ class SocialMediaHomePage extends StatelessWidget {
             storyController.getStories();
             return homePostController.getPost();
           },
-          child: HomePosts(myUserId: jwtController.userId?.value ??  homePostController.userId),
+          child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
         ),
       ),
     );

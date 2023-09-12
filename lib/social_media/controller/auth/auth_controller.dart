@@ -147,8 +147,8 @@ class AuthController extends GetxController {
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
         await jwtController.setAuthToken(data["token"], data["data"]["_id"]);
-        jwtController.token?.value = data["token"].toString();
-        jwtController.userId?.value = data["data"]["_id"].toString();
+        jwtController.token = data["token"].toString();
+        jwtController.userId = data["data"]["_id"].toString();
         jwtController.isAuthorised.value = true;
 
         isUserlogging.value = false;

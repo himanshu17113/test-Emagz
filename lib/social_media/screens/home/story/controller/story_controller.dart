@@ -20,9 +20,8 @@ class GetXStoryController extends GetxController {
   final JWTController jwtController = Get.put(JWTController());
   @override
   void onInit() {
-    if (jwtController.token?.value != null ||   jwtController.userId != null) {
-  getStories();
-}
+    getStories();
+
     super.onInit();
   }
 
@@ -32,15 +31,15 @@ class GetXStoryController extends GetxController {
 
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
       debugPrint(ApiEndpoint.story);
-      if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+      if (jwtController.token == null || jwtController.token!.isEmpty || jwtController.userId == null) {
         token = await jwtController.getAuthToken();
         myId.value = (await jwtController.getUserId())!;
       }
-  
+
       await getmyStories();
       //   debugPrint(token);
-     
-      final headers = {'Content-Type': 'application/json', "Authorization":  jwtController.token?.value ?? token!};
+
+      final headers = {'Content-Type': 'application/json', "Authorization": jwtController.token ?? token!};
 
       http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
@@ -72,14 +71,14 @@ class GetXStoryController extends GetxController {
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
       // if (myId.value == "" || token == null) {
       debugPrint(ApiEndpoint.story);
-       if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+      if (jwtController.token == null || jwtController.token!.isEmpty || jwtController.userId == null) {
         token = await jwtController.getAuthToken();
         myId.value = (await jwtController.getUserId())!;
       }
       //  }
       final headers = {'Content-Type': 'application/json', "Authorization": token!};
       debugPrint(ApiEndpoint.Storybyid(myId.value));
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(   jwtController.userId?.value ?? myId.value)), headers: headers);
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(jwtController.userId ?? myId.value)), headers: headers);
       var body = jsonDecode(response.body);
       //  debugPrint(body.toString());
 

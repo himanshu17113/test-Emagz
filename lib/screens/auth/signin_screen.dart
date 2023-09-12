@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
- import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
+import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 
@@ -90,9 +90,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   } else {
                     bool res = await authController.signInuser();
                     if (res) {
-                      if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+                      if (jwtController.token == null || jwtController.token!.isEmpty || jwtController.userId == null) {
                         await jwtController.getAuthToken();
-                    await jwtController.getUserId();
+                        await jwtController.getUserId();
                       }
                       //  authController.tabController!.index = 1;
                       // Get.back();
@@ -107,7 +107,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       // await homePostController.getPost();
 
                       if (homePostController.posts!.isNotEmpty && storyController.stories!.isNotEmpty) {
-                    //    Get.appUpdate();
+                        //    Get.appUpdate();
                         Get.offAll(const BottomNavBar());
                       }
                     } else {}
