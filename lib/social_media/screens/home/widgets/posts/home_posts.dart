@@ -17,7 +17,7 @@ class HomePosts extends StatelessWidget {
   final GetXStoryController storyController = Get.put(GetXStoryController());
   @override
   Widget build(BuildContext context) {
-     
+  
     return Obx(() => ListView.builder(
           cacheExtent: 2000,
           padding: const EdgeInsets.only(bottom: 80.0),
@@ -28,10 +28,12 @@ class HomePosts extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index == homePostController.posts!.length + 1) {
               return const CupertinoActivityIndicator();
+
             } else if (index == 0) {
               if (storyController.stories!.isNotEmpty) {
                 return StoryView(sid: myUserId ?? homePostController.userId ?? "");
               } else {
+      
                 return
                     // const Align(
                     //   alignment: Alignment.centerLeft,

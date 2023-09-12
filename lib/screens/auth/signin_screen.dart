@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/main.dart';
-import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
+ import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
+import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -26,6 +26,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
   final authController = Get.put(AuthController());
 
+  var jwtController = Get.put(JWTController());
   final GetXStoryController storyController = Get.put(GetXStoryController());
 
   // @override
@@ -80,55 +81,57 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             Align(
               alignment: Alignment.center,
-              child: Obx(
-                () => InkWell(
-                  onTap: () async {
-                    if (authController.emailController.text.isEmpty || !authController.emailController.text.isEmail) {
-                      CustomSnackbar.show("Please enter correct email ");
-                    } else if (authController.passwordController.text.isEmpty) {
-                      CustomSnackbar.show("Please enter at least correct password!");
-                    } else {
-                      bool res = await authController.signInuser();
-                      if (res) {
-                        //  authController.tabController!.index = 1;
-                        // Get.back();
-                        homePostController.skip.value = -10;
-                        homePostController.posts?.clear();
-                        storyController.stories?.clear();
-                        storyController.getStories();
-                        homePostController.getPost();
-                        // await storyController.getStories();
-                        // //  Get.offAll(() => Obx(() {
-                        // homePostController.skip.value = -10;
-                        // await homePostController.getPost();
+              child: InkWell(
+                onTap: () async {
+                  if (authController.emailController.text.isEmpty || !authController.emailController.text.isEmail) {
+                    CustomSnackbar.show("Please enter correct email ");
+                  } else if (authController.passwordController.text.isEmpty) {
+                    CustomSnackbar.show("Please enter at least correct password!");
+                  } else {
+                    bool res = await authController.signInuser();
+                    if (res) {
+                      if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+                        await jwtController.getAuthToken();
+                    await jwtController.getUserId();
+                      }
+                      //  authController.tabController!.index = 1;
+                      // Get.back();
+                      homePostController.skip.value = -10;
+                      homePostController.posts?.clear();
+                      storyController.stories?.clear();
+                      storyController.getStories();
+                      homePostController.getPost();
+                      // await storyController.getStories();
+                      // //  Get.offAll(() => Obx(() {
+                      // homePostController.skip.value = -10;
+                      // await homePostController.getPost();
 
-                        if (homePostController.posts!.isNotEmpty && storyController.stories!.isNotEmpty) {
-                          return Get.offAll(const BottomNavBar());
-                          Get.appUpdate();
-                        }
-                      } else {}
-                    }
-                  },
-                  child: Obx(() {
-                    return Container(
-                      alignment: Alignment.center,
-                      height: 45,
-                      width: MediaQuery.of(context).size.width / 2,
-                      decoration: BoxDecoration(
-                        gradient: buttonGradient,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: authController.isUserlogging.value
-                          ? const CircularProgressIndicator(
-                              color: Colors.white,
-                            )
-                          : Text(
-                              "Sign In",
-                              style: TextStyle(color: whiteColor, fontSize: 15),
-                            ),
-                    );
-                  }),
-                ),
+                      if (homePostController.posts!.isNotEmpty && storyController.stories!.isNotEmpty) {
+                    //    Get.appUpdate();
+                        Get.offAll(const BottomNavBar());
+                      }
+                    } else {}
+                  }
+                },
+                child: Obx(() {
+                  return Container(
+                    alignment: Alignment.center,
+                    height: 45,
+                    width: MediaQuery.of(context).size.width / 2,
+                    decoration: BoxDecoration(
+                      gradient: buttonGradient,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: authController.isUserlogging.value
+                        ? const CircularProgressIndicator(
+                            color: Colors.white,
+                          )
+                        : Text(
+                            "Sign In",
+                            style: TextStyle(color: whiteColor, fontSize: 15),
+                          ),
+                  );
+                }),
               ),
             ),
             SizedBox(

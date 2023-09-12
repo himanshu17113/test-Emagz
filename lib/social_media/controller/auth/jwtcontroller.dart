@@ -26,7 +26,7 @@ class JWTController extends GetxController {
     debugPrint(ApiEndpoint.userInfo(id));
     // debugPrint(response.data);
     var userDetails = UserSchema.fromJson(response.data);
-      user?.value = userDetails;
+    user?.value = userDetails;
     return userDetails;
   }
 
@@ -50,38 +50,45 @@ class JWTController extends GetxController {
     }
   }
 
-  Future setAuthToken(String? token, String? id) async {
-    await hiveBox.put("token", token);
+  Future setAuthToken(String? tokenx, String? id) async {
+    await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
-    var lastToken = await hiveBox.get("token");
-    if (lastToken != null) {
+    // token = RxString(tokenx!);
+    // userId?.value = id!;
+    if (tokenx != null && id != null) {
       isAuthorised.value = true;
-      this.token = RxString(token!);
-      userId = RxString(id!);
+      token = RxString(tokenx);
+      userId = RxString(id);
     } else {
       isAuthorised.value = false;
     }
   }
 
   Future<String?> getAuthToken() async {
-    if (token != null) {
+    if (token?.value != null) {
       //  debugPrint("done fastly");
       return token!.value;
     }
     //  debugPrint("DONE SLOWLY");
-    final lastToken = await hiveBox.get("token");
-    if (lastToken != null) {
+    token?.value = await hiveBox.get("token");
+    if (token?.value != null) {
       isAuthorised.value = true;
     } else {
       isAuthorised.value = false;
       return null;
     }
-    return lastToken;
+    return token!.value;
   }
 
   Future<String?> getUserId() async {
-    var userId = await hiveBox.get("userId");
-    return userId;
+    if (userId?.value != null) {
+      //  debugPrint("done fastly");
+      return userId!.value;
+    }
+    //
+
+    userId?.value = await hiveBox.get("userId");
+    return userId?.value;
   }
 
   Future setProfileImage(String imageUrl) async {
@@ -99,12 +106,12 @@ class JWTController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    String? lastAuthToken = await getAuthToken();
-    String? userId = await getUserId();
+    token?.value = (await getAuthToken())!;
+    userId?.value = (await getUserId())!;
     getCurrentUserDetail();
-    debugPrint(lastAuthToken);
-    debugPrint(userId);
-    if (lastAuthToken == null) {
+    debugPrint(token?.value);
+    debugPrint(userId?.value);
+    if (token?.value == null) {
       debugPrint("NO AUTH");
     } else {
       debugPrint("AUTH");

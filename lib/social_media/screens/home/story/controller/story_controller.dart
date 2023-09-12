@@ -20,7 +20,9 @@ class GetXStoryController extends GetxController {
   final JWTController jwtController = Get.put(JWTController());
   @override
   void onInit() {
-    getStories();
+    if (jwtController.token?.value != null ||   jwtController.userId != null) {
+  getStories();
+}
     super.onInit();
   }
 
@@ -30,11 +32,15 @@ class GetXStoryController extends GetxController {
 
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
       debugPrint(ApiEndpoint.story);
-      token = await jwtController.getAuthToken();
+      if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+        token = await jwtController.getAuthToken();
+        myId.value = (await jwtController.getUserId())!;
+      }
+  
       await getmyStories();
       //   debugPrint(token);
-      myId.value = (await jwtController.getUserId())!;
-      final headers = {'Content-Type': 'application/json', "Authorization": token!};
+     
+      final headers = {'Content-Type': 'application/json', "Authorization":  jwtController.token?.value ?? token!};
 
       http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
@@ -54,7 +60,7 @@ class GetXStoryController extends GetxController {
       // debugPrint(stories.toString());
       //    return stories!;
     } catch (e) {
-      debugPrint('stoey');
+      debugPrint('stoey all post errror');
       debugPrint(e.toString());
       //return null;
     }
@@ -66,13 +72,14 @@ class GetXStoryController extends GetxController {
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
       // if (myId.value == "" || token == null) {
       debugPrint(ApiEndpoint.story);
-      final token = await jwtController.getAuthToken();
-      debugPrint(token);
-      myId.value = (await jwtController.getUserId())!;
+       if (jwtController.token?.value == null || jwtController.token!.value.isEmpty || jwtController.userId == null) {
+        token = await jwtController.getAuthToken();
+        myId.value = (await jwtController.getUserId())!;
+      }
       //  }
       final headers = {'Content-Type': 'application/json', "Authorization": token!};
       debugPrint(ApiEndpoint.Storybyid(myId.value));
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(   jwtController.userId?.value ?? myId.value)), headers: headers);
       var body = jsonDecode(response.body);
       //  debugPrint(body.toString());
 
