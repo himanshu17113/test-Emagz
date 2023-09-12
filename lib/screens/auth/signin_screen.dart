@@ -94,8 +94,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         await jwtController.getAuthToken();
                         await jwtController.getUserId();
                       }
-                      //  authController.tabController!.index = 1;
-                      // Get.back();
+                       
                       homePostController.skip.value = -10;
                       homePostController.posts?.clear();
                       storyController.stories?.clear();

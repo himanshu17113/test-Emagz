@@ -58,8 +58,10 @@ class JWTController extends GetxController {
     // userId = id!;
     if (tokenx != null && id != null) {
       isAuthorised.value = true;
-      token = tokenx;
-      userId =  id;
+      if (token == null || userId == null) {
+        token = tokenx;
+        userId = id;
+      }
     } else {
       isAuthorised.value = false;
     }
@@ -87,11 +89,12 @@ class JWTController extends GetxController {
       //  debugPrint("done fastly");
       return userId!;
     }
-    //
+    debugPrint(
+        "gettttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttting the user id    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
     final u = await hiveBox.get("userId");
     userId = u;
-    return userId;
+    return u;
   }
 
   Future setProfileImage(String imageUrl) async {
