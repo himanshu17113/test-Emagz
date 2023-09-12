@@ -31,16 +31,12 @@ class GetXStoryController extends GetxController {
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
       debugPrint(ApiEndpoint.story);
       token = await jwtController.getAuthToken();
-      //  await getmyStories();
+      await getmyStories();
       //   debugPrint(token);
       myId.value = (await jwtController.getUserId())!;
-      final headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      final headers = {'Content-Type': 'application/json', "Authorization": token!};
 
-      http.Response response =
-          await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
       // debugPrint(body.toString());
       body.forEach((e) {
@@ -74,13 +70,9 @@ class GetXStoryController extends GetxController {
       debugPrint(token);
       myId.value = (await jwtController.getUserId())!;
       //  }
-      final headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      final headers = {'Content-Type': 'application/json', "Authorization": token!};
       debugPrint(ApiEndpoint.Storybyid(myId.value));
-      http.Response response = await http
-          .get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(myId.value)), headers: headers);
       var body = jsonDecode(response.body);
       //  debugPrint(body.toString());
 
@@ -140,15 +132,9 @@ class GetXStoryController extends GetxController {
     try {
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
       Map body = {"userId": userId};
-      http.Response response = await http.post(
-          Uri.parse(ApiEndpoint.likeStroy(storyId)),
-          headers: headers,
-          body: jsonEncode(body));
+      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -164,10 +150,7 @@ class GetXStoryController extends GetxController {
     debugPrint("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.commentStroy(storyId)),
-        headers: headers,
-        body: jsonEncode(body));
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
   }
 

@@ -20,21 +20,15 @@ class EditorScreen extends StatefulWidget {
   final int? imageHeight;
   final int? imageWidth;
   const EditorScreen(
-      {super.key,
-      required this.onSubmit,
-      required this.image,
-      this.fileType,
-      this.imageHeight,
-      this.imageWidth,
-      required this.fileExtension});
+      {super.key, required this.onSubmit, required this.image, this.fileType, this.imageHeight, this.imageWidth, required this.fileExtension});
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();
 }
 
 class _EditorScreenState extends State<EditorScreen> {
-  var storyController = Get.put(GetXStoryController());
-  ScreenshotController screenshotController = ScreenshotController();
+  final storyController = Get.put(GetXStoryController());
+  final ScreenshotController screenshotController = ScreenshotController();
   bool visibilty = true;
   List<Widget> editableItems = [];
 
@@ -45,17 +39,17 @@ class _EditorScreenState extends State<EditorScreen> {
       backgroundColor: Colors.black,
       // appBar: ,
       body: Stack(children: [
-        Screenshot(
-          controller: screenshotController,
-          child: InteractiveViewer(
-            minScale: 1,
-            maxScale: 4,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.memory(widget.image!, fit: BoxFit.contain),
-                ...editableItems
-              ],
+        InteractiveViewer(
+          minScale: 1,
+          maxScale: 4,
+          child: Center(
+            child: Screenshot(
+              controller: screenshotController,
+              child: Stack(
+                //    alignment: Alignment.center,
+                // fit: StackFit.expand,
+                children: [Image.memory(widget.image!, fit: BoxFit.fitWidth), ...editableItems],
+              ),
             ),
           ),
         ),
@@ -69,8 +63,7 @@ class _EditorScreenState extends State<EditorScreen> {
             title: visibilty
                 ? Row(
                     children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.more_vert)),
+                      IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
                       IconButton(
                           onPressed: () {
                             visibilty = false;
@@ -109,7 +102,6 @@ class _EditorScreenState extends State<EditorScreen> {
             actions: [
               IconButton(
                   onPressed: () async {
-                    
                     showDialog(
                       useSafeArea: true,
                       barrierDismissible: false,
@@ -117,22 +109,19 @@ class _EditorScreenState extends State<EditorScreen> {
                       builder: (context) {
                         return Center(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 50.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 50.0),
                             child: Obx(() => Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     LinearProgressIndicator(
-                                      value: storyController
-                                          .storyUploadPercentage.value,
+                                      value: storyController.storyUploadPercentage.value,
                                     ),
                                     Material(
                                       color: Colors.transparent,
                                       child: Text(
                                         "${(storyController.storyUploadPercentage.value * 100).toInt()} %",
-                                        style: const TextStyle(
-                                            color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -155,29 +144,16 @@ class _EditorScreenState extends State<EditorScreen> {
                     //     pixelRatio: widget.imageWidth != null ? widget.imageWidth! / widget.imageHeight! : null);
                     // var buffer = await realImage.toByteData(format: ui.ImageByteFormat.png);
 
-                    screenshotController
-                        .capture(delay: const Duration(milliseconds: 10))
-                        .then((capturedImage) async {
-                      var editedImage = capturedImage;
+                    screenshotController.capture(delay: const Duration(milliseconds: 0)).then((capturedImage) async {
+                      Uint8List? editedImage = capturedImage;
                       final tempDir = await getTemporaryDirectory();
-                      File file = await File(
-                              "${tempDir.path}/story.${widget.fileExtension}")
-                          .create();
+                      File file = await File("${tempDir.path}.jpeg").create();
                       await file.writeAsBytes(editedImage!);
                       widget.onSubmit(file);
                     }).catchError((onError) {
                       debugPrint(onError);
                     });
                   },
-                  // var editedImage = await buffer!.buffer.asUint8List();
-
-                  // ///   paintImage(editedImage);
-                  // //   var editedImage = await screenshotController.capture();
-                  // final tempDir = await getTemporaryDirectory();
-                  // File file = await File("${tempDir.path}/story.${widget.fileExtension}").create();
-                  // await file.writeAsBytes(editedImage);
-                  // widget.onSubmit(file);
-                  // },
                   icon: const Icon(Icons.arrow_right_alt))
             ],
           ),

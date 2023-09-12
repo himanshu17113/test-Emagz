@@ -36,7 +36,7 @@ class ApiEndpoint {
 
   static String commentStroy(String storyId) => "$baseUrl/story/comment/$storyId";
   static String Storybyid(String storyId) => "$baseUrl/story/mystory/$storyId";
-
+ 
   static String addStory = "$baseUrl/story/";
 
   static String posts(int skip) {
@@ -53,6 +53,8 @@ class ApiEndpoint {
         static String replyStory(String postId, String commentId, String userId) =>
       "$baseUrl/story/comment?storyId=$postId&commentId=$commentId&userId=$userId";
   static String doPoll(String postId) => "$baseUrl/post/$postId/Poll";
+  static String pollResults(String postId) => "$baseUrl/post/$postId/PollResults";
+   
   static String makePost = "$baseUrl/post/";
 
   //chats

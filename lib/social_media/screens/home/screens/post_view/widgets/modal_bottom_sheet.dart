@@ -28,7 +28,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
     required this.likelength,
     required this.comments,
     this.isblurNeeded = false,
-    this.isStory,
+    this.isStory = false,
     this.index,
   }) : super(key: key);
 
@@ -80,22 +80,22 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   ),
                   GestureDetector(
                       onTap: () {
-                        homePostController.likePost(widget.postId);
-                        setState(() {
-                          if (widget.islike == true) {
-                            // widget.post!.likes!.removeLast();
-                            widget.likelength = widget.likelength! - 1;
-                            homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
-                            homePostController.posts![widget.index!].isLike = false;
-                            widget.islike = false;
-                          } else {
-                            widget.likelength = widget.likelength! + 1;
-                            // widget.post!.likes!.add(widget.myUserId!);
-                            homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
-                            homePostController.posts![widget.index!].isLike = true;
-                            widget.islike = true;
-                          }
-                        });
+                        // homePostController.likePost(widget.postId);
+                        // setState(() {
+                        //   if (widget.islike == true) {
+                        //     // widget.post!.likes!.removeLast();
+                        //     widget.likelength = widget.likelength! - 1;
+                        //     homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
+                        //     homePostController.posts![widget.index!].isLike = false;
+                        //     widget.islike = false;
+                        //   } else {
+                        //     widget.likelength = widget.likelength! + 1;
+                        //     // widget.post!.likes!.add(widget.myUserId!);
+                        //     homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
+                        //     homePostController.posts![widget.index!].isLike = true;
+                        //     widget.islike = true;
+                        //   }
+                        // });
                       },
                       child: (widget.islike ?? true)
                           ? Image.asset(

@@ -12,7 +12,7 @@ class SocialMediaHomePage extends StatelessWidget {
 
   final jwtController = Get.put(JWTController());
 
-  final bool _showAppbar = true;
+  //final bool _showAppbar = true;
 
   final homePostController = Get.put(HomePostsController());
   final GetXStoryController storyController = Get.put(GetXStoryController());

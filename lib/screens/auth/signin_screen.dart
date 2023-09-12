@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/main.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
+import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,10 +14,19 @@ import 'forgot_password/forgot_password_screen.dart';
 import 'widgets/form_haeding_text.dart';
 import 'widgets/my_custom_textfiled.dart';
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({Key? key}) : super(key: key);
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   final homePostController = Get.put(HomePostsController());
+
   final authController = Get.put(AuthController());
+
+  final GetXStoryController storyController = Get.put(GetXStoryController());
 
   // @override
   @override
@@ -69,49 +80,55 @@ class SignInScreen extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.center,
-              child: InkWell(
-                onTap: () async {
-                  if (authController.emailController.text.isEmpty ||
-                      !authController.emailController.text.isEmail) {
-                    CustomSnackbar.show("Please enter correct email ");
-                  } else if (authController.passwordController.text.isEmpty) {
-                    CustomSnackbar.show(
-                        "Please enter at least correct password!");
-                  } else {
-                    bool res = await authController.signInuser();
-                    if (res) {
-                      authController.tabController!.index = 1;
+              child: Obx(
+                () => InkWell(
+                  onTap: () async {
+                    if (authController.emailController.text.isEmpty || !authController.emailController.text.isEmail) {
+                      CustomSnackbar.show("Please enter correct email ");
+                    } else if (authController.passwordController.text.isEmpty) {
+                      CustomSnackbar.show("Please enter at least correct password!");
+                    } else {
+                      bool res = await authController.signInuser();
+                      if (res) {
+                        //  authController.tabController!.index = 1;
+                        // Get.back();
+                        homePostController.skip.value = -10;
+                        homePostController.posts?.clear();
+                        storyController.stories?.clear();
+                        storyController.getStories();
+                        homePostController.getPost();
+                        // await storyController.getStories();
+                        // //  Get.offAll(() => Obx(() {
+                        // homePostController.skip.value = -10;
+                        // await homePostController.getPost();
 
-                      Get.to(() => Obx(() {
-                            homePostController.getPost();
-                            if (homePostController.posts!.isNotEmpty) {
-                              return const BottomNavBar();
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          }));
-                    } else {}
-                  }
-                },
-                child: Obx(() {
-                  return Container(
-                    alignment: Alignment.center,
-                    height: 45,
-                    width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
-                      gradient: buttonGradient,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: authController.isUserlogging.value
-                        ? const CircularProgressIndicator(
-                            color: Colors.white,
-                          )
-                        : Text(
-                            "Sign In",
-                            style: TextStyle(color: whiteColor, fontSize: 15),
-                          ),
-                  );
-                }),
+                        if (homePostController.posts!.isNotEmpty && storyController.stories!.isNotEmpty) {
+                          return Get.offAll(const BottomNavBar());
+                          Get.appUpdate();
+                        }
+                      } else {}
+                    }
+                  },
+                  child: Obx(() {
+                    return Container(
+                      alignment: Alignment.center,
+                      height: 45,
+                      width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
+                        gradient: buttonGradient,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: authController.isUserlogging.value
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Sign In",
+                              style: TextStyle(color: whiteColor, fontSize: 15),
+                            ),
+                    );
+                  }),
+                ),
               ),
             ),
             SizedBox(
@@ -122,10 +139,7 @@ class SignInScreen extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 1),
               child: Text(
                 "Continue With",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500,
-                    color: blackButtonColor),
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: blackButtonColor),
               ),
             ),
             SizedBox(
@@ -140,8 +154,7 @@ class SignInScreen extends StatelessWidget {
                   CircleAvatar(
                     radius: 15,
                     backgroundColor: whiteColor,
-                    backgroundImage: const CachedNetworkImageProvider(
-                        "https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
+                    backgroundImage: const CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
                   ),
                   const SizedBox(
                     width: 40,

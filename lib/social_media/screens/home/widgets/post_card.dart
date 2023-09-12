@@ -170,10 +170,7 @@ class _PostCardState extends State<PostCard> {
                       //       ));
                       // }
                       var tok = await jwtController.getAuthToken();
-                      //var userIdd= await jwtController.getUserId();
-                      print(tok);
-
-                      print(post!.sId!);
+                 
                       String temp = post!.user!.personalTemplate!;
                       if (temp == null) {
                         Get.snackbar('No persona Choosen by this user', 'Hi No persona here');

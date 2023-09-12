@@ -32,8 +32,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   ];
   bool isLoading = false;
 
-  final postController = Get.put(PostController());
-  ScreenshotController screenshotController = ScreenshotController();
+final postController = Get.put(PostController());
+ // ScreenshotController screenshotController = ScreenshotController();
   Uint8List? imagePath;
   String? fileExtension;
 
@@ -128,17 +128,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         )
                       : Obx(() {
                           return postController.isSettingImage.value
-                              ? Container()
+                              ? const SizedBox()
                               : Container(
                                   height: 250,
                                   decoration: BoxDecoration(
                                     image: DecorationImage(
-                                        colorFilter: index == -1
-                                            ? null
-                                            : ColorFilter.matrix(
-                                                filters[index]),
-                                        image: MemoryImage(
-                                            postController.imagePath!),
+                                        colorFilter: index == -1 ? null : ColorFilter.matrix(filters[index]),
+                                        image: MemoryImage(postController.imagePath!),
                                         fit: BoxFit.cover),
                                   ),
                                 );
@@ -199,8 +195,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                                 });
                                               },
                                               child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    right: 10),
+                                                margin: const EdgeInsets.only(right: 10),
                                                 height: 50,
                                                 width: 70,
                                                 key: _imageKey,
@@ -209,47 +204,33 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                                       // colorFilter: index == -1
                                                       //     ? null
                                                       //     : ColorFilter.matrix(filters[index]),
-                                                      image: MemoryImage(
-                                                          postController
-                                                              .imagePath!),
+                                                      image: MemoryImage(postController.imagePath!),
                                                       fit: BoxFit.cover),
                                                 ),
                                               ),
                                             ),
                                             postController.isSettingImage.value
-                                                ? Container()
-                                                : postController.imagePath ==
-                                                        null
-                                                    ? Container()
+                                                ? const SizedBox()
+                                                : postController.imagePath == null
+                                                    ? const SizedBox()
                                                     : Row(
                                                         children: List.generate(
                                                           filters.length,
                                                           (index) => InkWell(
                                                             onTap: () async {
                                                               setState(() {
-                                                                this.index =
-                                                                    index;
+                                                                this.index = index;
                                                               });
                                                             },
                                                             child: Container(
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      right:
-                                                                          10),
+                                                              margin: const EdgeInsets.only(right: 10),
                                                               height: 50,
                                                               width: 70,
-                                                              decoration:
-                                                                  BoxDecoration(
+                                                              decoration: BoxDecoration(
                                                                 image: DecorationImage(
-                                                                    colorFilter:
-                                                                        ColorFilter.matrix(filters[
-                                                                            index]),
-                                                                    image: MemoryImage(
-                                                                        postController
-                                                                            .imagePath!),
-                                                                    fit: BoxFit
-                                                                        .cover),
+                                                                    colorFilter: ColorFilter.matrix(filters[index]),
+                                                                    image: MemoryImage(postController.imagePath!),
+                                                                    fit: BoxFit.cover),
                                                               ),
                                                             ),
                                                           ),
@@ -268,8 +249,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     child: Text(
                       "Post",
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                          height: 2, fontSize: 25, fontWeight: FontWeight.w600),
+                      style: TextStyle(height: 2, fontSize: 25, fontWeight: FontWeight.w600),
                     ),
                   ),
                   SingleChildScrollView(
@@ -312,8 +292,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.poll),
+                          onTap: () => setState(() => postController.currentType?.value = PostType.poll),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -334,8 +313,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.gallery),
+                          onTap: () => setState(() => postController.currentType?.value = PostType.gallery),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -356,8 +334,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.camera),
+                          onTap: () => setState(() => postController.currentType?.value = PostType.camera),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -367,8 +344,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: InkWell(
-                              onTap: () => setState(() => postController
-                                  .currentType?.value = PostType.gallery),
+                              onTap: () => setState(() => postController.currentType?.value = PostType.gallery),
                               child: FormHeadingText(
                                 headings: "v-Magz",
                                 fontWeight: FontWeight.bold,
@@ -382,8 +358,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.camera),
+                          onTap: () => setState(() => postController.currentType?.value = PostType.camera),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -441,21 +416,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 isLoading = true;
                               });
 
-                              UI.Image realImage = await ScreenshotController
-                                  .widgetToUiImage(index == -1
-                                      ? Image.memory(postController.imagePath!)
-                                      : ColorFiltered(
-                                          colorFilter: ColorFilter.matrix(
-                                              filters[index]),
-                                          child: Image.memory(
-                                              postController.imagePath!)));
-                              var buffer = await realImage.toByteData(
-                                  format: UI.ImageByteFormat.png);
+                              UI.Image realImage = await ScreenshotController.widgetToUiImage(index == -1
+                                  ? Image.memory(postController.imagePath!)
+                                  : ColorFiltered(colorFilter: ColorFilter.matrix(filters[index]), child: Image.memory(postController.imagePath!)));
+                              var buffer = await realImage.toByteData(format: UI.ImageByteFormat.png);
                               var imageData = buffer!.buffer.asUint8List();
                               // var image = await screenshotController.capture();
                               // realImage.();
-                              postController.setPost(
-                                  imageData, postController.assetType!);
+                              postController.setPost(imageData, postController.assetType!);
                               isLoading = false;
                               Navigator.push(
                                   context,
@@ -466,18 +434,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         fileExtension: fileExtension,
                                         image: postController.imagePath,
                                         onSubmit: (editedImage) {
-                                          postController.setPost(
-                                              editedImage.readAsBytesSync(),
-                                              postController.assetType!);
+                                          postController.setPost(editedImage.readAsBytesSync(), postController.assetType!);
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PrePostScreen(
-                                                        postType:
-                                                            PostType.gallery,
-                                                        image: postController
-                                                            .imagePath)),
+                                                builder: (context) => PrePostScreen(postType: PostType.gallery, image: postController.imagePath)),
                                           );
                                           //Get.off(() => PrePostScreen(postType: PostType.gallery, image: postController.imagePath));
                                         }),
@@ -495,8 +456,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 class GridGallery extends StatefulWidget {
   final ScrollController? scrollCtr;
-  final void Function(Uint8List? imageData, AssetEntity assetEntity)?
-      onPostTapped;
+  final void Function(Uint8List? imageData, AssetEntity assetEntity)? onPostTapped;
   const GridGallery({
     Key? key,
     this.onPostTapped,
@@ -530,10 +490,8 @@ class _GridGalleryState extends State<GridGallery> {
     lastPage = currentPage;
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
     if (ps.isAuth) {
-      List<AssetPathEntity> albums =
-          await PhotoManager.getAssetPathList(onlyAll: true);
-      List<AssetEntity> media = await albums[0]
-          .getAssetListPaged(size: 60, page: currentPage); //preloading files
+      List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(onlyAll: true);
+      List<AssetEntity> media = await albums[0].getAssetListPaged(size: 60, page: currentPage); //preloading files
       List<Widget> temp = [];
       for (var asset in media) {
         temp.add(
@@ -541,8 +499,7 @@ class _GridGalleryState extends State<GridGallery> {
             future: asset.thumbnailDataWithSize(
               const ThumbnailSize(720, 1080),
             ),
-            builder:
-                (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Stack(
                   children: <Widget>[
@@ -551,17 +508,13 @@ class _GridGalleryState extends State<GridGallery> {
                         onTap: widget.onPostTapped == null
                             ? () async {
                                 if (asset.type == AssetType.image) {
-                                  postController.setPost(
-                                      snapshot.data, PostAssetType.image);
+                                  postController.setPost(snapshot.data, PostAssetType.image);
                                 } else if (asset.type == AssetType.video) {
-                                  postController.setPost(
-                                      snapshot.data, PostAssetType.video);
+                                  postController.setPost(snapshot.data, PostAssetType.video);
                                 } else {
-                                  postController.setPost(
-                                      snapshot.data, PostAssetType.image);
+                                  postController.setPost(snapshot.data, PostAssetType.image);
                                 }
-                                postController.currentType?.value =
-                                    PostType.gallery;
+                                postController.currentType?.value = PostType.gallery;
                                 // File filr = File.fromRawPath(snapshot.data!);
                                 // debugPrint(postController.imagePath.toString());
 
@@ -639,8 +592,7 @@ class _GridGalleryState extends State<GridGallery> {
       child: GridView.builder(
           controller: widget.scrollCtr,
           itemCount: _mediaList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
           itemBuilder: (BuildContext context, int index) {
             return _mediaList[index];
           }),
