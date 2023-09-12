@@ -91,8 +91,8 @@ dev_dependencies:
 
 flutter_icons:
   android: "launcher_icon"
-  ios: true
-  remove_alpha_ios: true
+  ios: false
+  #remove_alpha_ios: true
   image_path: "assets/png/blue_logo_new.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
