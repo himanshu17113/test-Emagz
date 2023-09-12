@@ -141,7 +141,7 @@ class AuthController extends GetxController {
 
       var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
-      
+
       debugPrint(data["data"]["_id"]);
       if (response.statusCode == 200) {
         clearValue();
@@ -149,6 +149,7 @@ class AuthController extends GetxController {
         await jwtController.setAuthToken(data["token"], data["data"]["_id"]);
         jwtController.token?.value = data["token"].toString();
         jwtController.userId?.value = data["data"]["_id"].toString();
+        jwtController.isAuthorised.value = true;
 
         isUserlogging.value = false;
         return true;

@@ -17,13 +17,14 @@ class JWTController extends GetxController {
 
   Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
-    //  var userToken = await getAuthToken();
-    var id = await getUserId();
-    dio.options.headers["Authorization"] =
+    token?.value ??= (await getAuthToken())!;
+
+    userId?.value ??= (await getUserId())!;
+    dio.options.headers["Authorization"] = token?.value ??
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
-    var response = await dio.get(ApiEndpoint.userInfo(id!));
-    debugPrint(ApiEndpoint.userInfo(id));
+    var response = await dio.get(ApiEndpoint.userInfo(userId!.value));
+    debugPrint(ApiEndpoint.userInfo(userId!.value));
     // debugPrint(response.data);
     var userDetails = UserSchema.fromJson(response.data);
     user?.value = userDetails;
@@ -70,7 +71,8 @@ class JWTController extends GetxController {
       return token!.value;
     }
     //  debugPrint("DONE SLOWLY");
-    token?.value = await hiveBox.get("token");
+    final t = await hiveBox.get("token");
+    token?.value = t;
     if (token?.value != null) {
       isAuthorised.value = true;
     } else {
@@ -87,7 +89,8 @@ class JWTController extends GetxController {
     }
     //
 
-    userId?.value = await hiveBox.get("userId");
+    final u = await hiveBox.get("userId");
+    userId?.value = u;
     return userId?.value;
   }
 
