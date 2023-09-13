@@ -102,6 +102,39 @@ class SocketController extends GetxController {
     }
   }
 
+  void sendLikeNotification(String id, String name) {
+    Map<String, dynamic> data = {
+      "notification_from": userId!,
+      "notification_to": id,
+      "notification": {},
+      "title": "Like",
+      "message": "$name liked your post"
+    };
+    socket.emit("notification", data);
+  }
+   void sendShareNotification(String id, String name,bool ispost,String shareLink) {
+    Map<String, dynamic> data = {
+      "notification_from": userId!,
+      "notification_to": id,
+      "notification": {
+        "link": shareLink
+      },
+      "title": ispost ? "post Shared "   : "story Shared ",
+      "message":  ispost ? "$name Share a post with you" : "$name Shared a story with you",
+    };
+    socket.emit("notification", data);
+  }
+   void sendCommentNotification(String id, String name, bool ispost, String shareLink) {
+    Map<String, dynamic> data = {
+      "notification_from": userId!,
+      "notification_to": id,
+      "notification": {"link": shareLink},
+      "title": "Comment",
+      "message":  ispost ? "$name Commented on your post ": "$name Commented on your Story "  ,
+    };
+    socket.emit("notification", data);
+  }
+
   @override
   void onInit() {
     initSocket();

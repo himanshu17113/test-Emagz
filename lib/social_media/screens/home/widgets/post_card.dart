@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -49,6 +50,7 @@ class _PostCardState extends State<PostCard> {
   final homePostController = Get.put(HomePostsController());
   final jwtController = Get.put(JWTController());
   final ConversationController chatController = Get.put(ConversationController());
+  final socketController = Get.find<SocketController>();
   Post? post;
   @override
   void initState() {
@@ -267,13 +269,10 @@ class _PostCardState extends State<PostCard> {
                                               )
                                             : Container(
                                                 alignment: Alignment.bottomCenter,
-                                                child: Container(
-                                                  alignment: Alignment.bottomCenter,
-                                                  height: 52,
-                                                  width: noPercentage,
-                                                  decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
-                                                  child: Text("$noCount", style: const TextStyle(color: Colors.white)),
-                                                ),
+                                                height: 52,
+                                                width: noPercentage,
+                                                decoration: BoxDecoration(color: Colors.black.withOpacity(0.5)),
+                                                child: Text("$noCount", style: const TextStyle(color: Colors.white)),
                                               ))
                                         : const SizedBox()
                                   ]),
@@ -331,8 +330,7 @@ class _PostCardState extends State<PostCard> {
                         ),
                       ),
                       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 10),
+                        SizedBox(
                           width: Get.size.width / 2,
                           child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
                         ),
@@ -342,13 +340,14 @@ class _PostCardState extends State<PostCard> {
                               homePostController.likePost(post!.sId!);
                               setState(() {
                                 if (homePostController.posts![widget.index!].isLike!) {
-                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!]!.likeCount! - 1;
+                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
                                   //      post!.likes!.removeLast();
-                                  homePostController.posts![widget.index!]!.isLike = false;
+                                  homePostController.posts![widget.index!].isLike = false;
                                 } else {
-                                  homePostController.posts![widget.index!]!.likeCount = homePostController.posts![widget.index!]!.likeCount! + 1;
+                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
                                   //  post!.likes!.add(widget.myUserId!);
-                                  homePostController.posts![widget.index!]!.isLike = true;
+                                  homePostController.posts![widget.index!].isLike = true;
+                                  socketController.sendLikeNotification(post?.user?.sId ?? "", jwtController.user?.value.username ?? "");
                                 }
                               });
                             },
@@ -361,16 +360,14 @@ class _PostCardState extends State<PostCard> {
                                     "assets/png/unlike_icon.png",
                                     width: 22,
                                   )),
-                        const SizedBox(
-                          width: 5,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                          child: Text(
+                            "${homePostController.posts?[widget.index!].likeCount}",
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                          ),
                         ),
-                        Text(
-                          "${homePostController.posts?[widget.index!].likeCount}",
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
+
                         Image.asset(
                           "assets/png/comment_icon.png",
                           width: 22,

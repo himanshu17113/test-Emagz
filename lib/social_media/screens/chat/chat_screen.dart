@@ -30,6 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final chatController = Get.find<ConversationController>();
   final jwtController = Get.find<JWTController>();
   final socketController = Get.put(SocketController());
+  //  final socketController = Get.find<SocketController>();
   String? userId;
 
 //  List<Message>? messages = [];
