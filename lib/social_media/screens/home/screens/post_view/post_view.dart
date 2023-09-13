@@ -107,6 +107,7 @@ class PostView extends StatelessWidget {
                             return Padding(
                               padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                               child: PostCommentsModalBottomSheet(
+                                update: update,
                                 index: index,
                                 islike: post.isLike,
                                 likelength: post.likeCount,

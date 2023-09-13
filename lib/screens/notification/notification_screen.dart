@@ -1,78 +1,70 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/screens/chat/models/notification_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../social_media/screens/chat/controllers/socketController.dart';
 
 class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
-
+  NotificationScreen({Key? key}) : super(key: key);
+  final socketController = Get.find<SocketController>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(231, 231, 254, 1),
       appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: myGradient),
-        ),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(gradient: myGradient),
+        // ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 22,
+              color: Colors.black,
+            ),
+          ),
+        ],
+        leading: const SizedBox(),
         toolbarHeight: 70,
         centerTitle: false,
         backgroundColor: Colors.transparent,
         title: const Text(
           "Notification",
-          style: TextStyle(fontSize: 21),
+          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
         ),
         elevation: 0.0,
       ),
-      body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white),
-                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                          "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8aGVhZHBob25lfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-                        ),
-                      ),
-                      SizedBox(
-                        width: size.width / 3,
-                        child: const Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.black),
-                        ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: blueColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Text(
-                          "Payment",
-                          style: TextStyle(fontSize: 8, fontWeight: FontWeight.w500, color: Colors.white),
-                        ),
-                      ),
-                      const Text(
-                        "2 min",
-                        style: TextStyle(fontSize: 8, fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                    ],
+      body: Obx(() => ListView.builder(
+            itemCount: socketController.notifications.length,
+            itemBuilder: (context, index) {
+              final NotificationModel notificationModel = socketController.notifications[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 2),
+                child: ListTile(
+                  tileColor: Colors.white,
+                  leading: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(notificationModel.notificationFrom!.profilePic!),
+                    // child: CachedNetworkImage(
+                    //   imageUrl: notificationModel.notificationFrom!.profilePic!,
+                    //   placeholder: (context, url) => const CircularProgressIndicator(),
+                    //   errorWidget: (context, url, error) => const Icon(Icons.error),
+                    // ),
                   ),
+
+                  //const SizedBox(),
+                  title: Text(notificationModel.title ?? ""),
+                  subtitle: Text(notificationModel.message ?? ""),
                 ),
-                Divider(
-                  thickness: 1,
-                  color: grayColor,
-                )
-              ],
-            );
-          }),
+              );
+            },
+            //  separatorBuilder: (context, index) => const Divider(),
+          )),
     );
   }
 }

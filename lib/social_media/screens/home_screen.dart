@@ -1,11 +1,14 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'chat/controllers/socketController.dart';
 
 class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class SocialMediaHomePage extends StatelessWidget {
 
   final homePostController = Get.put(HomePostsController());
   final GetXStoryController storyController = Get.put(GetXStoryController());
+  final socketController = Get.put(SocketController());
   // final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -40,10 +44,13 @@ class SocialMediaHomePage extends StatelessWidget {
             ),
           ),
           actions: [
-            Image.asset(
-              "assets/png/notification_bell.png",
-              // height: 18,
-              width: 22,
+            GestureDetector(
+              onTap: () => Get.to(()=>NotificationScreen()),
+              child: Image.asset(
+                "assets/png/notification_bell.png",
+                // height: 18,
+                width: 22,
+              ),
             ),
             const SizedBox(
               width: 10,

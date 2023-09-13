@@ -98,7 +98,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() => const NotificationScreen());
+                          Get.to(() =>   NotificationScreen());
                         },
                         child: SvgPicture.asset(
                           "assets/svg/Notify.svg",
