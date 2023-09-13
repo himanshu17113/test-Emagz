@@ -12,8 +12,7 @@ class ApiEndpoint {
   // static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
   static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
   static String socketUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/socket_connection";
-
-  static String userInfo(String userId) => "$baseUrl/auth/get-user-details/$userId";
+   static String userInfo(String userId) => "$baseUrl/auth/get-user-details/$userId";
 
   static String register = "$baseUrl/auth/register";
   static String login = "$baseUrl/auth/login";

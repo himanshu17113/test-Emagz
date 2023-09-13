@@ -78,7 +78,7 @@ class _PostCardState extends State<PostCard> {
     }
     return Container(
       //    height: Get.size.height / 1.6,
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 12),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       decoration: BoxDecoration(
           color: Colors.black,
           // shape: BoxShape.circle,
@@ -170,7 +170,7 @@ class _PostCardState extends State<PostCard> {
                       //       ));
                       // }
                       var tok = await jwtController.getAuthToken();
-                 
+
                       String temp = post!.user!.personalTemplate!;
                       if (temp == null) {
                         Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
@@ -306,106 +306,106 @@ class _PostCardState extends State<PostCard> {
                 InkWell(
                   onTap: () {
                     Get.to(() => CommentViewScreen(
+                          update: _update,
                           post: post!,
                           isLiked: widget.isLiked ?? false,
                           myUserId: widget.myUserId,
                         ));
                   },
                   child: Container(
-                    height: 40,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color(0xFFffffff).withOpacity(.15),
+                      height: 40,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color(0xFFffffff).withOpacity(.15),
+                        ),
+                        gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
+                          const Color(0xFFffffff).withOpacity(0.20),
+                          const Color(0xFFFFFFFF).withOpacity(0.25),
+                        ], stops: const [
+                          2,
+                          0.1,
+                        ]),
+                        borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
                       ),
-                      gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                        const Color(0xFFffffff).withOpacity(0.20),
-                        const Color(0xFFFFFFFF).withOpacity(0.25),
-                      ], stops: const [
-                        2,
-                        0.1,
-                      ]),
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                    ),
-                    child:  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                          Container(
-                            margin: const EdgeInsets.only(left: 10),
-                            width: Get.size.width / 2.5,
-                            child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
-                          ),
-                          //    const Expanded(child: SizedBox()),
-                          GestureDetector(
-                              onTap: () {
-                                homePostController.likePost(post!.sId!);
-                                setState(() {
-                                  if (homePostController.posts![widget.index!].isLike!) {
-                                    homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!]!.likeCount! - 1;
-                                    //      post!.likes!.removeLast();
-                                    homePostController.posts![widget.index!]!.isLike = false;
-                                  } else {
-                                    homePostController.posts![widget.index!]!.likeCount = homePostController.posts![widget.index!]!.likeCount! + 1;
-                                    //  post!.likes!.add(widget.myUserId!);
-                                    homePostController.posts![widget.index!]!.isLike = true;
-                                  }
-                                });
-                              },
-                              child: (post!.isLike ?? false)
-                                  ? Image.asset(
-                                      "assets/png/liked_icon.png",
-                                      width: 26,
-                                    )
-                                  : Image.asset(
-                                      "assets/png/unlike_icon.png",
-                                      width: 22,
-                                    )),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "${homePostController.posts?[widget.index!].likeCount}",
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Image.asset(
-                            "assets/png/comment_icon.png",
-                            width: 22,
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            "${post!.comments?.length}",
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
+                      child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                        Container(
+                          margin: const EdgeInsets.only(left: 10),
+                          width: Get.size.width / 2,
+                          child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                        ),
+                        //    const Expanded(child: SizedBox()),
+                        GestureDetector(
                             onTap: () {
-                              showModalBottomSheet(
-                                shape: const OutlineInputBorder(
-                                    borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) {
-                                  return ShareBottomSheet(post: post!);
-                                },
-                              );
+                              homePostController.likePost(post!.sId!);
+                              setState(() {
+                                if (homePostController.posts![widget.index!].isLike!) {
+                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!]!.likeCount! - 1;
+                                  //      post!.likes!.removeLast();
+                                  homePostController.posts![widget.index!]!.isLike = false;
+                                } else {
+                                  homePostController.posts![widget.index!]!.likeCount = homePostController.posts![widget.index!]!.likeCount! + 1;
+                                  //  post!.likes!.add(widget.myUserId!);
+                                  homePostController.posts![widget.index!]!.isLike = true;
+                                }
+                              });
                             },
-                            child: Image.asset(
-                              "assets/png/share_icon.png",
-                              width: 26,
-                            ),
+                            child: (post!.isLike ?? false)
+                                ? Image.asset(
+                                    "assets/png/liked_icon.png",
+                                    width: 26,
+                                  )
+                                : Image.asset(
+                                    "assets/png/unlike_icon.png",
+                                    width: 22,
+                                  )),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "${homePostController.posts?[widget.index!].likeCount}",
+                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Image.asset(
+                          "assets/png/comment_icon.png",
+                          width: 22,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Text(
+                          "${post!.comments?.length}",
+                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            showModalBottomSheet(
+                              shape: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (context) {
+                                return ShareBottomSheet(post: post!);
+                              },
+                            );
+                          },
+                          child: Image.asset(
+                            "assets/png/share_icon.png",
+                            width: 26,
                           ),
-                          const SizedBox(
-                            width: 8,
-                          )
-                        ])),
-                 
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        )
+                      ])),
                 ),
               ],
             ),

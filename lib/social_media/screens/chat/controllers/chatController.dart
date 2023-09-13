@@ -10,17 +10,21 @@ class ConversationController extends GetxController {
   //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
 
-  var jwtController = Get.put(JWTController());
+  final jwtController = Get.find<JWTController>();
 
+  String? token;
+  String? userId;
   @override
   onInit() async {
-    await storedData();
+    token = jwtController.token;
+    userId = jwtController.userId;
+    if (token == null || userId == null) {
+      await storedData();
+    }
 
     super.onInit();
   }
 
-  String? token;
-  String? userId;
   Future<void> storedData() async {
     token = await jwtController.getAuthToken();
     userId = await jwtController.getUserId();
@@ -76,11 +80,7 @@ class ConversationController extends GetxController {
     try {
       Dio dio = Dio();
       dio.options.headers["Authorization"] = token;
-      var body = {
-        "conversationId": conversationId,
-        "sender": userId,
-        "text": text
-      };
+      var body = {"conversationId": conversationId, "sender": userId, "text": text};
       var response = await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
       debugPrint(e.toString());
@@ -126,11 +126,11 @@ class ConversationController extends GetxController {
       dio.options.headers["Authorization"] = token;
       var body = {"senderId": userId, "receiverId": receiverId};
       var response = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
-    //  debugPrint(response.data["_id"].toString());
+      //  debugPrint(response.data["_id"].toString());
       //   final conversation = Conversation.fromJson(response.data);
       return response.data["_id"];
     } catch (e) {
-    //  debugPrint(e.toString());
+      //  debugPrint(e.toString());
       return "";
     }
   }

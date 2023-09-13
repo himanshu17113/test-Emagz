@@ -1,19 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_tile.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../../../../../constant/colors.dart';
 import '../../../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'glass.dart';
 
 class PostCommentsModalBottomSheet extends StatefulWidget {
+  VoidCallback? update;
   final String postId;
   bool? islike;
   int? likelength;
@@ -23,13 +24,14 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
   final bool? isStory;
   PostCommentsModalBottomSheet({
     Key? key,
+    this.update,
     required this.postId,
     this.islike,
     required this.likelength,
+    this.index,
     required this.comments,
     this.isblurNeeded = false,
     this.isStory = false,
-    this.index,
   }) : super(key: key);
 
   @override
@@ -281,6 +283,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                 var x = await commentsController.postComment(widget.postId);
                                 setState(() {
                                   widget.comments.add(x);
+                                  widget.update!();
                                   commentsController.controller.clear();
                                 });
                               } else {

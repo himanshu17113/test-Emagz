@@ -376,7 +376,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               InkWell(
                 onTap: () async {
-                  Get.deleteAll(force: true);
+               //   Get.deleteAll(force: true);
                   await jwtController.setAuthToken(null, null);
                   Get.off(() => const CommonAuthScreen());
                 },

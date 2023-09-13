@@ -1,20 +1,28 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../controller/home/home_controller.dart';
 
 class CommentViewScreen extends StatefulWidget {
   Post post;
   bool isLiked;
-
+  VoidCallback update;
   String? myUserId;
-  CommentViewScreen({Key? key, required this.isLiked, required this.post, required this.myUserId}) : super(key: key);
+  CommentViewScreen({
+    Key? key,
+    required this.post,
+    required this.isLiked,
+    required this.update,
+    this.myUserId,
+  }) : super(key: key);
 
   @override
   State<CommentViewScreen> createState() => _CommentViewScreenState();
@@ -73,8 +81,9 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                       ),
                       if (widget.post.comments != null) ...[
                         PostCommentsModalBottomSheet(
-                          islike: widget.post.isLike ,
-                          likelength: widget.post.likeCount ,
+                          update: widget.update,
+                          islike: widget.post.isLike,
+                          likelength: widget.post.likeCount,
                           isblurNeeded: false,
                           comments: widget.post.comments!,
                           postId: widget.post.sId!,

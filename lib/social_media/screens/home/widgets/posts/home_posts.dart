@@ -53,7 +53,7 @@ class HomePosts extends StatelessWidget {
                 } else {
                   return InkWell(
                       onTap: () {
-                        // Get.to(() => ExploreScreen());
+                        
                       },
                       onLongPress: () {
                         showDialog(

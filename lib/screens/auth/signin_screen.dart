@@ -98,14 +98,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       homePostController.skip.value = -10;
                       homePostController.posts?.clear();
                       storyController.stories?.clear();
-                      storyController.getStories();
-                      homePostController.getPost();
+                     await storyController.getStories();
+                    await  homePostController.getPost();
                       // await storyController.getStories();
                       // //  Get.offAll(() => Obx(() {
                       // homePostController.skip.value = -10;
                       // await homePostController.getPost();
 
-                      if (homePostController.posts!.isNotEmpty && storyController.stories!.isNotEmpty) {
+                      if (homePostController.posts!.isNotEmpty  ) {
                         //    Get.appUpdate();
                         Get.offAll(const BottomNavBar());
                       }
