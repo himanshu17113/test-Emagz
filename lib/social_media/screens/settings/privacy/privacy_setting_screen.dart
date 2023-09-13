@@ -21,6 +21,12 @@ class PrivacyScreen extends StatefulWidget {
 
 class _PrivacyScreenState extends State<PrivacyScreen> {
   bool isActive = false;
+  bool cmnt=false;
+  bool mess=false;
+  bool stor=false;
+  bool ment=false;
+  bool postb=false;
+  bool live=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,50 +172,112 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               ),
               InkWell(
                 onTap: () {
+
+                  setState(() {
+                    cmnt=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      cmnt=false;
+                    });
+
+
+                  });
                   Get.to(() => const CommentSetting());
                 },
                 child: PreferenceTile(
-                  isBlue: true,
+                  isBlue: cmnt,
                   title: 'Comment',
                 ),
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    postb=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      postb=false;
+                    });
+                  });
                   Get.to(() => const PostSettingScreen());
                 },
                 child: PreferenceTile(
+                  isBlue:postb,
                   title: 'Posts',
                 ),
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    ment=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 2000), () {
+                    setState(() {
+                      ment=false;
+                    });
+                  });
                   Get.to(() => const MentionSettingScreen());
                 },
                 child: PreferenceTile(
+                  isBlue:ment,
                   title: 'Mentions',
                 ),
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    stor=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      stor=false;
+                    });
+
+
+                  });
                   Get.to(() => StorySettingScreen());
                 },
                 child: PreferenceTile(
+                  isBlue:stor,
                   title: 'Story',
                 ),
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    live=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      live=false;
+                    });
+
+
+                  });
                   Get.to(() => LiveSettingScreen());
                 },
                 child: PreferenceTile(
+                  isBlue:live,
                   title: 'Live',
                 ),
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    mess=true;
+                  });
+                  Future.delayed(const Duration(milliseconds: 200), () {
+                    setState(() {
+                      mess=false;
+                    });
+
+
+                  });
                   Get.to(() => const ChatSettingScreen());
                 },
                 child: PreferenceTile(
+                  isBlue:mess,
                   title: 'Messages',
                 ),
               ),

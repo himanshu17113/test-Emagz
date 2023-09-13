@@ -5,7 +5,7 @@ import '../../../../../constant/colors.dart';
 class PreferenceTile extends StatelessWidget {
   final String title;
   bool? isBlue;
-  PreferenceTile({Key? key, required this.title, this.isBlue=true})
+  PreferenceTile({Key? key, required this.title, this.isBlue=false})
       : super(key: key);
 
   @override
@@ -14,9 +14,14 @@ class PreferenceTile extends StatelessWidget {
       height: 64,
       margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
-          color: isBlue == true ? chipColor : whiteColor,
+         // color: isBlue == true ? chipColor : whiteColor,
           borderRadius: BorderRadius.circular(10)),
       child: ListTile(
+        selected: isBlue!,
+        selectedTileColor: chipColor,
+        hoverColor: chipColor,
+        focusColor: chipColor,
+        tileColor: whiteColor,
         contentPadding: const EdgeInsets.only(left: 25, right: 20),
         dense: true,
         title: Text(

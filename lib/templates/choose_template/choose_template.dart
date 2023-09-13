@@ -2,6 +2,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/templates/choose_template/template_model.dart';
+import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //import 'package:get/get_core/src/get_main.dart';
@@ -278,11 +279,11 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               top: 20,
               child: GestureDetector(
                 onTap: () async {
-                  // var jwtController = Get.put(JWTController());
-                  // var token = await jwtController.getAuthToken();
-                  // var userId = await jwtController.getUserId();
+                  var jwtController = Get.put(JWTController());
+                   var token = await jwtController.getAuthToken();
+                   var userId = await jwtController.getUserId();
 
-                  //     //Get.to(()=>WebViewPersona(index:id.toString(),E_CurrId:'64e8a052b9b30c1ed4b24353' ,E_Persona: '64eefa543ca3f268ef2f9aa9',E_Token:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4YTA1MmI5YjMwYzFlZDRiMjQzNTMiLCJpYXQiOjE2OTI5NjY5OTR9.yBqSMM4lBEP0W7Ikw8KJLwvFQ4ypoXM_n-t0AO1uol8',));
+                  Get.to(()=>WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId!, templateId: id.toString()));
                 },
                 child: Container(
                   height: 45,
