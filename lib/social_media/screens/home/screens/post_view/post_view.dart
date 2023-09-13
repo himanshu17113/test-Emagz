@@ -31,7 +31,7 @@ class PostView extends StatelessWidget {
         Center(
           child: CachedNetworkImage(
             width: MediaQuery.of(context).size.width,
-            fit: BoxFit.fill,
+            //  fit: BoxFit.fill,
             imageUrl: post.mediaUrl!,
             filterQuality: FilterQuality.high,
             progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),

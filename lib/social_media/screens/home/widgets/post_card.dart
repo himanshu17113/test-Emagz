@@ -333,7 +333,7 @@ class _PostCardState extends State<PostCard> {
                       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         Container(
                           margin: const EdgeInsets.only(left: 10),
-                          width: Get.size.width / 2.5,
+                          width: Get.size.width / 2,
                           child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
                         ),
                         //    const Expanded(child: SizedBox()),
