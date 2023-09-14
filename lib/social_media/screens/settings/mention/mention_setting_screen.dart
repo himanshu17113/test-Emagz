@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/auth/jwtcontroller.dart';
 import '../../../controller/privacy/privacy_controller.dart';
+import '../../../models/post_model.dart';
 
 class MentionSettingScreen extends StatefulWidget {
   const MentionSettingScreen({Key? key}) : super(key: key);
@@ -15,13 +17,28 @@ class MentionSettingScreen extends StatefulWidget {
 }
 
 class _MentionSettingScreenState extends State<MentionSettingScreen> {
-  bool youFollow = false;
 
-  bool everyOne = true;
+  var jwtController= Get.put(JWTController());
+  UserSchema? user;
+  bool? youFollow ;
+  bool? everyOne;
+  bool? noone;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
 
-  bool yourFollowerNoOne = false;
+  asyncInit() async {
 
-  bool followAndFollower = false;
+    user = await jwtController.getCurrentUserDetail();
+    youFollow= user!.ment_priv!.yourFollower;
+
+    everyOne= user!.ment_priv!.everyone;
+    noone=user!.ment_priv!.noOne;
+
+    setState(() {});
+  }
   final privacyController= Get.put(PrivacyController());
 
   @override
@@ -89,12 +106,12 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne,
+                          value: everyOne!,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
                             });
-                            privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
+                            privacyController.privacyMentionControl(everyOne!, youFollow!, noone!);
                           }),
                     ],
                   ),
@@ -104,15 +121,16 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: youFollow!,
                     onToggle: (val)
                     {
-
                       setState(() {
-                       youFollow= val;
+                        youFollow = val;
                       });
-                      privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyMentionControl(everyOne!, youFollow!, noone!);
+
                     },
+
                   ),
                   const SizedBox(
                     height: 8,
@@ -120,14 +138,14 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Expect Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollowerNoOne,
+                    isActive: noone!,
                     onToggle: (val)
                     {
-
                       setState(() {
-                        yourFollowerNoOne = val;
+                        noone = val;
                       });
-                      privacyController.privacyMentionControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyMentionControl(everyOne!, youFollow!, noone!);
+
                     },
                   ),
                 ],

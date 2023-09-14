@@ -11,6 +11,8 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 import '../../common/title_switch/title_and_switch_widget.dart';
+import '../../controller/auth/jwtcontroller.dart';
+import '../../models/post_model.dart';
 import '../notification/notification_screen.dart';
 
 String url =
@@ -27,10 +29,27 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
   String selectedValue = "Latest Request";
   int? selectedIndex;
 
-  bool youFollow = false;
-  bool everyOne = true;
-  bool yourFollower = false;
-  bool followAndFollowerNoone = false;
+  var jwtController= Get.put(JWTController());
+  UserSchema? user;
+  bool? youFollow ;
+  bool? everyOne;
+  bool? noone;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
+
+  asyncInit() async {
+
+    user = await jwtController.getCurrentUserDetail();
+    youFollow= user!.mess_priv!.yourFollower;
+
+    everyOne= user!.mess_priv!.everyone;
+    noone=user!.mess_priv!.noOne;
+
+    setState(() {});
+  }
   final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
@@ -252,11 +271,13 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   height: 20,
                 ),
                 Container(
-                  padding: const EdgeInsets.all(18),
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.all(15),
+                  // height: 175,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: chatContainer,
-                    borderRadius: BorderRadius.circular(10),
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,8 +286,11 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                         height: 10,
                       ),
                       Text(
-                        "Allow Message request from",
-                        style: TextStyle(color: toggleInactive, fontSize: 10, fontWeight: FontWeight.w400),
+                        "Allow Message Request from",
+                        style: TextStyle(
+                            color: toggleInactive,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 10,
@@ -276,24 +300,25 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                         children: [
                           Text(
                             "Everyone",
-                            style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                color: blackButtonColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
                           ),
                           FlutterSwitch(
                               activeColor: whiteAcent,
                               toggleColor: blueColor,
-                              padding: 1,
-                              height: 18,
-                              width: 45,
+                              padding: 0,
+                              height: 15,
+                              width: 40,
                               inactiveColor: lightgrayColor,
                               inactiveToggleColor: toggleInactive,
-                              value: everyOne,
+                              value: everyOne!,
                               onToggle: (val) {
-                                // everyOne = val;
                                 setState(() {
                                   everyOne = val;
                                 });
-                                privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
-
+                                privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
                               }),
                         ],
                       ),
@@ -303,27 +328,30 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "People you follow",
                         subTitle: "53 People",
-                        isActive: yourFollower,
-                        onToggle: (val){
+                        isActive: youFollow!,
+                        onToggle: (val)
+                        {
                           setState(() {
-                            yourFollower=val;
+                            youFollow = val;
                           });
-                          privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
+                          privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
 
                         },
+
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 8,
                       ),
                       TitleAndSwitchWidget(
-                        title: "No one expect ",
-                        subTitle: "550 people",
-                        isActive: followAndFollowerNoone,
-                        onToggle: (val){
+                        title: "No One Expect Specific Profiles",
+                        subTitle: "",
+                        isActive: noone!,
+                        onToggle: (val)
+                        {
                           setState(() {
-                            followAndFollowerNoone=val;
+                            noone = val;
                           });
-                          privacyController.privacyMessageControl(everyOne, yourFollower, followAndFollowerNoone);
+                          privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
 
                         },
                       ),

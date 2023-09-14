@@ -153,8 +153,50 @@ class PollResults {
     return data;
   }
 }
+class ComentPrivacy{
+  bool? everyone;
+  bool? youFollow;
+  bool? yourFollowers;
+  bool? followAndFollowers;
+  ComentPrivacy({
+    this.everyone,
+    this.youFollow,
+    this.yourFollowers,
+    this.followAndFollowers
+});
+  ComentPrivacy.fromJson(Map<String,dynamic>json){
+    everyone= json['everyone'];
+    youFollow= json['follow'];
+    yourFollowers=json['followers'];
+    followAndFollowers=json['follow_and_followers'];
+  }
+}
+class PostPrivacy{
+
+  bool? everyone;
+  bool? yourFollower;
+  bool? noOne;
+
+
+  PostPrivacy({
+   this.everyone,
+   this.yourFollower,
+   this.noOne
+   });
+
+  PostPrivacy.fromJson(Map<String,dynamic>json){
+    everyone = json['everyone'];
+    yourFollower = json['followers'];
+    noOne = json['no_one'];
+  }
+}
 
 class UserSchema {
+  ComentPrivacy? cmnt_priv;
+  PostPrivacy? post_priv;
+  PostPrivacy? mess_priv;
+  PostPrivacy? live_priv;
+  PostPrivacy? ment_priv;
   String? ProfilePic;
   String? mobileNumber;
   String? loginOtp;
@@ -181,7 +223,12 @@ class UserSchema {
   String? displayName;
 
   UserSchema(
-      {this.mobileNumber,
+      {this.cmnt_priv,
+        this.post_priv,
+        this.ment_priv,
+        this.live_priv,
+        this.mess_priv,
+        this.mobileNumber,
       this.loginOtp,
       this.personalTemplate,
       this.sId,
@@ -207,6 +254,13 @@ class UserSchema {
       this.displayName});
 
   UserSchema.fromJson(Map<String, dynamic> json) {
+    post_priv=json['post_privacy'] == null ? null : PostPrivacy.fromJson(json['post_privacy']);
+    cmnt_priv=json['comment_privacy'] == null ? null : ComentPrivacy.fromJson(json['comment_privacy']);
+    live_priv=json['live_privacy'] == null ? null : PostPrivacy.fromJson(json['live_privacy']);
+    ment_priv=json['mention_privacy'] == null ? null : PostPrivacy.fromJson(json['mention_privacy']);
+    mess_priv=json['message_privacy'] == null ? null : PostPrivacy.fromJson(json['message_privacy']);
+
+
     ProfilePic = json["ProfilePic"];
     mobileNumber = json['mobile_number'];
     loginOtp = json['login_otp'];

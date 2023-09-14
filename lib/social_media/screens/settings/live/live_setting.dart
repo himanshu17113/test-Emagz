@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/auth/jwtcontroller.dart';
 import '../../../controller/privacy/privacy_controller.dart';
+import '../../../models/post_model.dart';
 
 class LiveSettingScreen extends StatefulWidget {
   LiveSettingScreen({Key? key}) : super(key: key);
@@ -15,13 +17,27 @@ class LiveSettingScreen extends StatefulWidget {
 }
 
 class _LiveSettingScreenState extends State<LiveSettingScreen> {
-  bool youFollow = false;
+  var jwtController= Get.put(JWTController());
+  UserSchema? user;
+  bool? youFollow ;
+  bool? everyOne;
+  bool? noone;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
 
-  bool everyOne = true;
+  asyncInit() async {
 
-  bool yourFollower = false;
+    user = await jwtController.getCurrentUserDetail();
+    youFollow= user!.live_priv!.yourFollower;
 
-  bool followAndFollowerNoone = false;
+    everyOne= user!.live_priv!.everyone;
+    noone=user!.live_priv!.noOne;
+
+    setState(() {});
+  }
   final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
@@ -48,7 +64,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(15),
-              height: 260,
+              // height: 175,
               width: double.infinity,
               decoration: BoxDecoration(
                 color: whiteColor,
@@ -57,21 +73,14 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Live",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500),
-                  ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Hide your stories from",
+                    "Allow Like And View from",
                     style: TextStyle(
-                        color: signInHeading,
-                        fontSize: 11,
+                        color: toggleInactive,
+                        fontSize: 10,
                         fontWeight: FontWeight.w400),
                   ),
                   const SizedBox(
@@ -90,89 +99,17 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
                       FlutterSwitch(
                           activeColor: whiteAcent,
                           toggleColor: blueColor,
-                          padding: 1,
-                          height: 20,
-                          width: 50,
+                          padding: 0,
+                          height: 15,
+                          width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne,
+                          value: everyOne!,
                           onToggle: (val) {
                             setState(() {
-                              everyOne=val;
+                              everyOne = val;
                             });
-                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
-
-                            // setState(() {
-                            //   everyOne = val;
-                            // });
-                          }),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Followers",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlutterSwitch(
-                          activeColor: whiteAcent,
-                          toggleColor: blueColor,
-                          padding: 1,
-                          height: 20,
-                          width: 50,
-                          inactiveColor: lightgrayColor,
-                          inactiveToggleColor: toggleInactive,
-                          value: yourFollower,
-                          onToggle: (val) {
-                            setState(() {
-                              yourFollower=val;
-                            });
-                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
-
-                            // setState(() {
-                            //   everyOne = val;
-                            // });
-                          }),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Noone",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlutterSwitch(
-                          activeColor: whiteAcent,
-                          toggleColor: blueColor,
-                          padding: 1,
-                          height: 20,
-                          width: 50,
-                          inactiveColor: lightgrayColor,
-                          inactiveToggleColor: toggleInactive,
-                          value: followAndFollowerNoone,
-                          onToggle: (val) {
-                            setState(() {
-                              followAndFollowerNoone=val;
-                            });
-                            privacyController.privacyLiveControl(everyOne, yourFollower, followAndFollowerNoone);
-
-                            // setState(() {
-                            //   everyOne = val;
-                            // });
+                            privacyController.privacyLiveControl(everyOne!, youFollow!, noone!);
                           }),
                     ],
                   ),
@@ -180,33 +117,35 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
                     height: 10,
                   ),
                   TitleAndSwitchWidget(
-                    title: "Close Friends",
+                    title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: youFollow!,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        youFollow = val;
+                      });
+                      privacyController.privacyLiveControl(everyOne!, youFollow!, noone!);
+
+                    },
+
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Specific Person",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const Spacer(),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 12,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                    ],
-                  )
+                  TitleAndSwitchWidget(
+                    title: "No One Expect Specific Profiles",
+                    subTitle: "",
+                    isActive: noone!,
+                    onToggle: (val)
+                    {
+                      setState(() {
+                        noone = val;
+                      });
+                      privacyController.privacyLiveControl(everyOne!, youFollow!, noone!);
+
+                    },
+                  ),
                 ],
               ),
             ),

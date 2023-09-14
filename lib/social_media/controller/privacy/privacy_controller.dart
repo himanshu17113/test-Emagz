@@ -123,7 +123,7 @@ class PrivacyController extends GetxController{
     debugPrint(body.toString());
     if(response.statusCode==200)
     {
-      CustomSnackbar.showSucess("User Mention Privacy Updated");
+      CustomSnackbar.showSucess("User Story Privacy Updated");
     }
     else{
       print(data.toString());
