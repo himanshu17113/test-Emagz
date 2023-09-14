@@ -26,7 +26,7 @@ class _MessageViewState extends State<MessageView> {
 
   bool isReciver(String messageUserId) => !(messageUserId == widget.senderId);
 
-  final socketController = Get.put(SocketController());
+  final socketController = Get.find<SocketController>();
   List<Message> liveMessages = [];
   @override
   initState() {
@@ -119,8 +119,7 @@ class _MessageViewState extends State<MessageView> {
             String toPut = socketController.toPut.value;
 
             if (index >= 1) {
-              DateTime prev = DateTime.parse(
-                  socketController.liveMessages[index - 1].createdAt!);
+              DateTime prev = DateTime.parse(socketController.liveMessages[index - 1].createdAt!);
               DateTime curr = DateTime.now();
               DateTime msgDate = DateTime.parse(data.createdAt!);
               Duration diff = curr.difference(msgDate);
@@ -149,8 +148,7 @@ class _MessageViewState extends State<MessageView> {
                       )
                     : const SizedBox.shrink(),
                 Container(
-                  padding: const EdgeInsets.only(
-                      left: 14, right: 14, top: 10, bottom: 10),
+                  padding: const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                   child: socketController.isUserSender!.value
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -163,12 +161,9 @@ class _MessageViewState extends State<MessageView> {
                                   bottomRight: Radius.circular(10),
                                   topLeft: Radius.circular(10),
                                 ),
-                                color: (socketController.isUserSender!.value
-                                    ? const Color(0xffAFB6FD).withOpacity(.5)
-                                    : chipColor),
+                                color: (socketController.isUserSender!.value ? const Color(0xffAFB6FD).withOpacity(.5) : chipColor),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -177,21 +172,15 @@ class _MessageViewState extends State<MessageView> {
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w700,
-                                      color: (socketController.isUserSender!.value
-                                          ? blackButtonColor
-                                          : chipColor),
+                                      color: (socketController.isUserSender!.value ? blackButtonColor : chipColor),
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   Text(
-                                    DateFormat.jm().format(
-                                        DateTime.parse(data.createdAt!)),
-                                    style: TextStyle(
-                                        fontSize: 7,
-                                        fontWeight: FontWeight.w700,
-                                        color: lightBlack),
+                                    DateFormat.jm().format(DateTime.parse(data.createdAt!)),
+                                    style: TextStyle(fontSize: 7, fontWeight: FontWeight.w700, color: lightBlack),
                                   ),
                                 ],
                               ),
@@ -209,12 +198,9 @@ class _MessageViewState extends State<MessageView> {
                                   bottomLeft: Radius.circular(10),
                                   topLeft: Radius.circular(10),
                                 ),
-                                color: (socketController.isUserSender!.value
-                                    ? chatContainer
-                                    : chipColor),
+                                color: (socketController.isUserSender!.value ? chatContainer : chipColor),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -223,22 +209,16 @@ class _MessageViewState extends State<MessageView> {
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontWeight: FontWeight.w700,
-                                      color: (socketController.isUserSender!.value
-                                          ? blackButtonColor
-                                          : whiteColor),
+                                      color: (socketController.isUserSender!.value ? blackButtonColor : whiteColor),
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
                                   Text(
-                                    DateFormat.jm().format(
-                                        DateTime.parse(data.createdAt!)),
+                                    DateFormat.jm().format(DateTime.parse(data.createdAt!)),
                                     //DateTime dt = DateTime.parse('2020-01-02 03:04:05');
-                                    style: TextStyle(
-                                        fontSize: 7,
-                                        fontWeight: FontWeight.w700,
-                                        color: whiteColor.withOpacity(.5)),
+                                    style: TextStyle(fontSize: 7, fontWeight: FontWeight.w700, color: whiteColor.withOpacity(.5)),
                                   ),
                                 ],
                               ),

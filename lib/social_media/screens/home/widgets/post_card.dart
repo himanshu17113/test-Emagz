@@ -337,19 +337,21 @@ class _PostCardState extends State<PostCard> {
                         //    const Expanded(child: SizedBox()),
                         GestureDetector(
                             onTap: () {
-                              homePostController.likePost(post!.sId!);
-                              setState(() {
-                                if (homePostController.posts![widget.index!].isLike!) {
+                              if (homePostController.posts![widget.index!].isLike!) {
+                                setState(() {
                                   homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
                                   //      post!.likes!.removeLast();
                                   homePostController.posts![widget.index!].isLike = false;
-                                } else {
+                                });
+                                homePostController.likePost(post!.sId!, false, post?.user?.sId ?? "");
+                              } else {
+                                setState(() {
                                   homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
                                   //  post!.likes!.add(widget.myUserId!);
                                   homePostController.posts![widget.index!].isLike = true;
-                                  socketController.sendLikeNotification(post?.user?.sId ?? "", jwtController.user?.value.username ?? "");
-                                }
-                              });
+                                });
+                                homePostController.likePost(post!.sId!, true, post?.user?.sId ?? "");
+                              }
                             },
                             child: (post!.isLike ?? false)
                                 ? Image.asset(

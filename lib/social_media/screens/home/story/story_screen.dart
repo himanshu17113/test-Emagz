@@ -178,6 +178,7 @@ class StoryScreen extends StatelessWidget {
                                                 comments: stories[buttonClickedTimes.value].comments!,
                                                 postId: stories[buttonClickedTimes.value].sId!,
                                                 isStory: true,
+                                                postuID: stories[buttonClickedTimes.value].userId,
                                               ),
                                             );
                                           }).then((value) => controller.pause()).whenComplete(() {

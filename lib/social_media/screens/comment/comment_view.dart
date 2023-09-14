@@ -87,6 +87,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                           isblurNeeded: false,
                           comments: widget.post.comments!,
                           postId: widget.post.sId!,
+                          postuID: widget.post.user?.sId,
                         )
                       ]
                     ]),

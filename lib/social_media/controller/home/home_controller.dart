@@ -5,6 +5,7 @@ import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
@@ -15,10 +16,10 @@ class HomePostsController extends GetxController {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
-  ScrollController scrollController = ScrollController();
+final  ScrollController scrollController = ScrollController();
   bool ispostloading = false;
-  final jwtController = Get.put(JWTController());
-
+  final jwtController = Get.find<JWTController>();
+  final socketController = Get.put(SocketController());
   // String? userId;
 
   @override
@@ -169,18 +170,20 @@ class HomePostsController extends GetxController {
     // }
   }
 
-  Future<bool> likePost(String postId) async {
+  Future<bool> likePost(String postId, bool islike, String uid) async {
+      if (islike) {
+      socketController.sendLikeNotification(uid, jwtController.user?.value.username ?? jwtController.user?.value.displayName ?? "");
+    }
     try {
       Dio dio = Dio();
-      // debugPrint(ApiEndpoint.likePost(postId));
-      // var token = await JWTController().getAuthToken();
-      // var userId = await JWTController().getUserId();
+    
       dio.options.headers["authorization"] = token;
       var data = {
         "userId": userId,
       };
       var response = await dio.post(ApiEndpoint.likePost(postId), data: data);
-      //  debugPrint(response.data);
+      debugPrint(response.data);
+    
       return true;
     } catch (e) {
       //  debugPrint(e);
@@ -190,7 +193,6 @@ class HomePostsController extends GetxController {
 
   Future postPoll(String postId, String vote) async {
     try {
-      
       // var userId = await JWTController().getUserId();
       // var token = await JWTController().getAuthToken();
       Dio dio = Dio();
@@ -199,11 +201,10 @@ class HomePostsController extends GetxController {
       dio.options.headers["Authorization"] = token;
       var response = await dio.post(ApiEndpoint.doPoll(postId), data: data);
       debugPrint(response.data.toString());
-      if ( response.statusCode== 200) {
-            Polldetail(postId);
+      if (response.statusCode == 200) {
+        Polldetail(postId);
       }
-      
-  
+
       return true;
     } catch (e) {
       debugPrint(e.toString());
@@ -222,7 +223,7 @@ class HomePostsController extends GetxController {
       var response = await dio.get(
         ApiEndpoint.pollResults(postId),
       );
-   Poll poll =   Poll.fromJson(response.data);
+      Poll poll = Poll.fromJson(response.data);
       print(json.encode(response.data));
       return true;
     } catch (e) {

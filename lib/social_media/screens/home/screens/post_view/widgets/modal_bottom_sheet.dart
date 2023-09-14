@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
@@ -16,6 +16,7 @@ import 'glass.dart';
 class PostCommentsModalBottomSheet extends StatefulWidget {
   VoidCallback? update;
   final String postId;
+  final String? postuID;
   bool? islike;
   int? likelength;
   final int? index;
@@ -32,6 +33,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
     required this.comments,
     this.isblurNeeded = false,
     this.isStory = false,
+    this.postuID,
   }) : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
 class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSheet> {
   final commentsController = Get.put(CommentController());
   final homePostController = Get.find<HomePostsController>();
-
+  final socketController = Get.find<SocketController>();
   //final getXStoryController = Get.find<GetXStoryController>();
   final jwt = Get.find<JWTController>();
   double mainHeight = 450;
@@ -147,9 +149,12 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.arrow_back_sharp,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: () => Get.back(),
+                      child: const Icon(
+                        Icons.arrow_back_sharp,
+                        color: Colors.white,
+                      ),
                     ),
                     const SizedBox(
                       width: 15,
@@ -286,6 +291,9 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                   widget.update!();
                                   commentsController.controller.clear();
                                 });
+                                if (widget.postuID != null) {
+                                  socketController.sendCommentNotification(widget.postuID!, true, null);
+                                }
                               } else {
                                 if (commentsController.isPosting.value) {
                                   debugPrint("sending comment");
@@ -305,6 +313,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                           );
                                       commentsController.controller.clear();
                                     });
+                                    //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
                                   }
                                 }
                               }
@@ -315,17 +324,18 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                 //     :
                                 String x = await commentsController.commentStory(widget.postId);
                                 setState(() {
-                                  widget.comments.add(
-                                      //x
-                                      Comment(
-                                          text: commentsController.controller.text,
-                                          userId: jwt.user?.value ??
-                                              UserSchema(
-                                                  sId: commentsController.userId,
-                                                  ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value,
-                                                  username: jwt.user?.value.username),
-                                          comments: [],
-                                          sId: x));
+                                  widget.comments.add(Comment(
+                                      text: commentsController.controller.text,
+                                      userId: jwt.user?.value ??
+                                          UserSchema(
+                                              sId: commentsController.userId,
+                                              ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value,
+                                              username: jwt.user?.value.username),
+                                      comments: [],
+                                      sId: x));
+                                  if (widget.postuID != null) {
+                                    socketController.sendCommentNotification(widget.postuID!, false, null);
+                                  }
                                   commentsController.controller.clear();
                                 });
                               } else {

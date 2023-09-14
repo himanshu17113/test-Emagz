@@ -57,18 +57,20 @@ class PostView extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      homePostController.likePost(post.sId!);
                       if (post.isLike!) {
                         homePostController.posts![index!].isLike = false;
                         homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! - 1;
+
                         //    post.likes!.remove(myId);
                         setInnerState(() {});
+                        homePostController.likePost(post.sId!, false, post.user?.sId ?? "" );
                       } else {
                         homePostController.posts![index].isLike = true;
                         homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! + 1;
 
                         //    post.likes!.add(myId);
                         setInnerState(() {});
+                        homePostController.likePost(post.sId!, true, post.user?.sId ?? "" );
                       }
                       update();
                     },
@@ -113,6 +115,7 @@ class PostView extends StatelessWidget {
                                 likelength: post.likeCount,
                                 comments: post.comments!,
                                 postId: post.sId!,
+                                postuID: post.user?.sId,
                               ),
                             );
                           },
