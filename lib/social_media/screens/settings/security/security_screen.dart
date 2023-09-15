@@ -91,18 +91,20 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: purpleColor,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        size: 25,
-                        weight: .5,
-                        color: Colors.white,
+
+                      child: IconButton(
+                        onPressed: ()
+                        {
+                          Get.back();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          size: 25,
+                          weight: .5,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
                   const SizedBox(
                     width: 20,
                   ),

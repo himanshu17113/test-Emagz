@@ -134,7 +134,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
                     isActive: noone!,
                     onToggle: (val)

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
@@ -6,6 +8,8 @@ import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
+import '../models/reuqest_model.dart';
+import 'package:http/http.dart' as http;
 class ConversationController extends GetxController {
   //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
@@ -133,5 +137,29 @@ class ConversationController extends GetxController {
       //  debugPrint(e.toString());
       return "";
     }
+  }
+  List<Requests?>? req;
+  Future<List<Requests?>?> getAllRequests() async {
+    req=[];
+    try{
+      var token = await jwtController.getAuthToken();
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.requestList), headers: headers);
+      var body = jsonDecode(response.body);
+      print(body);
+      body.forEach((e) {
+        var temp = Requests.fromJson(e);
+        req?.add(temp);
+      });
+      req?.shuffle();
+      return req;
+    }
+    catch(e)
+    {
+      print(e);
+    }
+    return null;
+
   }
 }

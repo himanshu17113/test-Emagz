@@ -136,7 +136,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
                     isActive: noone!,
                     onToggle: (val)

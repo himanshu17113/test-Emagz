@@ -151,7 +151,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             height: 32,
                             decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff3A0DBB)),
                             child: FormHeadingText(
-                              headings: "40+",
+                              headings: "+",
                               color: whiteColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 10,
@@ -313,7 +313,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                               width: 40,
                               inactiveColor: lightgrayColor,
                               inactiveToggleColor: toggleInactive,
-                              value: everyOne!,
+                              value: everyOne?? true!,
                               onToggle: (val) {
                                 setState(() {
                                   everyOne = val;
@@ -328,7 +328,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "People you follow",
                         subTitle: "53 People",
-                        isActive: youFollow!,
+                        isActive: youFollow??false!,
                         onToggle: (val)
                         {
                           setState(() {
@@ -343,9 +343,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                         height: 8,
                       ),
                       TitleAndSwitchWidget(
-                        title: "No One Expect Specific Profiles",
+                        title: "No One Except Specific Profiles",
                         subTitle: "",
-                        isActive: noone!,
+                        isActive: noone??false,
                         onToggle: (val)
                         {
                           setState(() {

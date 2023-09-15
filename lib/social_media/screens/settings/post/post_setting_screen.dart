@@ -261,7 +261,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
                     isActive: noone!,
                     onToggle: (val)
@@ -356,7 +356,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
                     isActive: noone!,
                     onToggle: (val){
