@@ -1,6 +1,7 @@
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
+import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../models/post_model.dart';
 
 class CommentSetting extends StatefulWidget {
   const CommentSetting({Key? key}) : super(key: key);
@@ -17,10 +19,29 @@ class CommentSetting extends StatefulWidget {
 }
 
 class _CommentSettingState extends State<CommentSetting> {
-  bool youFollow = false;
-  bool everyOne = true;
-  bool yourFollower = false;
-  bool followAndFollower = false;
+  var jwtController= Get.put(JWTController());
+  UserSchema? user;
+  bool? youFollow ;
+  bool? everyOne;
+  bool? yourFollower;
+  bool? followAndFollower;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
+
+  asyncInit() async {
+
+    user = await jwtController.getCurrentUserDetail();
+    youFollow= user!.cmnt_priv!.youFollow;
+    yourFollower= user!.cmnt_priv!.yourFollowers;
+    everyOne= user!.cmnt_priv!.everyone;
+    followAndFollower=user!.cmnt_priv!.followAndFollowers;
+
+    setState(() {});
+  }
+
   final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
@@ -221,13 +242,13 @@ class _CommentSettingState extends State<CommentSetting> {
                           width: 50,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne,
+                          value: everyOne!,
                           onToggle: (val) {
 
                             setState(() {
                               everyOne = val;
                             });
-                            privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                            privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
                           }),
                     ],
                   ),
@@ -237,13 +258,13 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: youFollow!,
                     onToggle: (val)
                     {
                       setState(() {
                         youFollow = val;
                       });
-                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                      privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
                     },
                   ),
                   const SizedBox(
@@ -252,13 +273,13 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "Your followers",
                     subTitle: "53 People",
-                    isActive: yourFollower,
+                    isActive: yourFollower!,
                     onToggle: (val)
                     {
                       setState(() {
                         yourFollower = val;
                       });
-                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                      privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
                     },
                   ),
                   const SizedBox(
@@ -267,13 +288,13 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "People you follow and your followers",
                     subTitle: "550 People",
-                    isActive: followAndFollower,
+                    isActive: followAndFollower!,
                     onToggle: (val)
                     {
                       setState(() {
                        followAndFollower = val;
                       });
-                      privacyController.privacyCommentControl(everyOne, yourFollower, youFollow, followAndFollower);
+                      privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
                     },
                   )
                 ],

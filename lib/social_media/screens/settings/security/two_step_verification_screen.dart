@@ -1,5 +1,7 @@
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -66,11 +68,12 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: purpleColor,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Icon(
+                    child: IconButton(
+                      onPressed: ()
+                      {
+                        Get.back();
+                      },
+                      icon: Icon(
                         Icons.arrow_back_ios,
                         size: 25,
                         weight: .5,
@@ -160,6 +163,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                         height: 20,
                       ),
                       PinCodeTextField(
+                        keyboardType: TextInputType.number,
                         enableActiveFill: true,
                         appContext: context,
                         pinTheme: PinTheme(
@@ -183,18 +187,23 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 51,
-                        decoration: BoxDecoration(
-                          color: const Color(0xff3A0DBB),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: FormHeadingText(
-                          headings: "Submit",
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 14,
+                      GestureDetector(
+                        onTap: (){
+                          CustomSnackbar.showSucess('Hi Your OTP is 8978');
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 51,
+                          decoration: BoxDecoration(
+                            color: const Color(0xff3A0DBB),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: FormHeadingText(
+                            headings: "Submit",
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                       const SizedBox(

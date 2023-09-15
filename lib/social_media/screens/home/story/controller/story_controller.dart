@@ -26,7 +26,7 @@ class GetXStoryController extends GetxController {
   }
 
   getStories() async {
-    try {
+    //try {
       stories?.clear();
 
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
@@ -57,12 +57,13 @@ class GetXStoryController extends GetxController {
         // stories![story.userId!]![story.sId!] = story;
       });
       // debugPrint(stories.toString());
+      //
       //    return stories!;
-    } catch (e) {
-      debugPrint('stoey all post errror');
-      debugPrint(e.toString());
-      //return null;
-    }
+    // } catch (e) {
+    //   debugPrint('stoey all post errror');
+    //   debugPrint(e.toString());
+    //   //return null;
+    // }
   }
 
   Future<List<Story?>?> getmyStories() async {

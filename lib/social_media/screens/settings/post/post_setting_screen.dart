@@ -6,7 +6,9 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 import '../../../common/title_switch/title_and_switch_widget.dart';
+import '../../../controller/auth/jwtcontroller.dart';
 import '../../../controller/privacy/privacy_controller.dart';
+import '../../../models/post_model.dart';
 
 class PostSettingScreen extends StatefulWidget {
   const PostSettingScreen({Key? key}) : super(key: key);
@@ -16,10 +18,27 @@ class PostSettingScreen extends StatefulWidget {
 }
 
 class _PostSettingScreenState extends State<PostSettingScreen> {
-  bool youFollow = false;
-  bool everyOne = true;
-  bool yourFollowerNoOne = false;
-  bool followAndFollower = false;
+  var jwtController= Get.put(JWTController());
+  UserSchema? user;
+  bool? youFollow ;
+  bool? everyOne;
+  bool? noone;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
+
+  asyncInit() async {
+
+    user = await jwtController.getCurrentUserDetail();
+    youFollow= user!.post_priv!.yourFollower;
+
+    everyOne= user!.post_priv!.everyone;
+    noone=user!.post_priv!.noOne;
+
+    setState(() {});
+  }
   final privacyController= Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
@@ -212,12 +231,12 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne,
+                          value: everyOne!,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
                             });
-                            privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                            privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
                           }),
                     ],
                   ),
@@ -227,28 +246,31 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: youFollow!,
                     onToggle: (val)
                     {
                       setState(() {
                         youFollow = val;
                       });
-                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
+
                     },
+
                   ),
                   const SizedBox(
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollowerNoOne,
+                    isActive: noone!,
                     onToggle: (val)
                     {
                       setState(() {
-                        yourFollowerNoOne = val;
+                        noone = val;
                       });
-                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
+
                     },
                   ),
                 ],
@@ -303,13 +325,13 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne,
+                          value: everyOne!,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
                             });
+                            privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
 
-                            privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
                           }),
                     ],
                   ),
@@ -319,14 +341,14 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow,
+                    isActive: youFollow!,
                     onToggle: (val){
 
                       setState(() {
                         youFollow = val;
                       });
 
-                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
                     },
 
                   ),
@@ -334,16 +356,16 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                     height: 8,
                   ),
                   TitleAndSwitchWidget(
-                    title: "No One Expect Specific Profiles",
+                    title: "No One Except Specific Profiles",
                     subTitle: "",
-                    isActive: yourFollowerNoOne,
+                    isActive: noone!,
                     onToggle: (val){
 
                       setState(() {
-                        yourFollowerNoOne = val;
+                        noone = val;
                       });
 
-                      privacyController.privacyPostControl(everyOne, youFollow, yourFollowerNoOne);
+                      privacyController.privacyPostControl(everyOne!, youFollow!, noone!);
                     },
                   ),
                 ],

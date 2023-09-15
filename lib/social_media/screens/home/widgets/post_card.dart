@@ -177,7 +177,7 @@ class _PostCardState extends State<PostCard> {
                       if (temp == null) {
                         Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
                       } else {
-                        if (temp[0] == 'T') {
+                        if (temp.isEmpty || temp[0] == 'T') {
                           Get.snackbar('This is a Old account ', 'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }

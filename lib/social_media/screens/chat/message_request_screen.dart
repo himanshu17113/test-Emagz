@@ -1,11 +1,15 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/social_media/controller/chat/chat_controller.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../notification/notification_screen.dart';
 import '../settings/personal_page/personal_page_setting.dart';
+import 'models/chat_model.dart';
+import 'models/reuqest_model.dart';
 
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
@@ -19,6 +23,9 @@ class MessageRequestScreen extends StatefulWidget {
 
 class _MessageRequestScreenState extends State<MessageRequestScreen> {
   String selectedValue = "Latest Request";
+  var convController= Get.put(ConversationController());
+  final ScrollController scrollController = ScrollController();
+
   int? selectedIndex;
   @override
   Widget build(BuildContext context) {
@@ -72,129 +79,236 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                 ],
               ),
             )),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              width: 150,
-              margin: const EdgeInsets.symmetric(horizontal: 18),
-              decoration: BoxDecoration(
-                color: chatContainer,
-                borderRadius: BorderRadius.circular(10),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 20,
               ),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButtonFormField(
-                  isExpanded: true,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(
-                        left: 10, right: 10, top: 10, bottom: 10),
-                    border: InputBorder.none,
-                    isDense: true,
+              Container(
+                width: 150,
+                margin: const EdgeInsets.symmetric(horizontal: 18),
+                decoration: BoxDecoration(
+                  color: chatContainer,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField(
+                    isExpanded: true,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.only(
+                          left: 10, right: 10, top: 10, bottom: 10),
+                      border: InputBorder.none,
+                      isDense: true,
+                    ),
+                    value: selectedValue.isNotEmpty ? null : selectedValue,
+                    icon: const Icon(Icons.keyboard_arrow_down),
+                    items: ["Latest Request", "Old request"].map((String items) {
+                      return DropdownMenuItem(
+                        value: items,
+                        child: Text(
+                          items,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12),
+                        ),
+                      );
+                    }).toList(),
+                    hint: FormHeadingText(
+                      headings: "Latest Request",
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    onChanged: (val) {
+                      // setState(() {
+                      //   dropdownvalue = newValue!;
+                      // });
+                    },
                   ),
-                  value: selectedValue.isNotEmpty ? null : selectedValue,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  items: ["Latest Request", "Old request"].map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Text(
-                        items,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                    );
-                  }).toList(),
-                  hint: FormHeadingText(
-                    headings: "Latest Request",
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  onChanged: (val) {
-                    // setState(() {
-                    //   dropdownvalue = newValue!;
-                    // });
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                child: FutureBuilder<List<Requests?>?>(
+                  future: convController.getAllRequests(),
+
+                  builder: (context,snapshot) {
+                    if (snapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const CircularProgressIndicator(); // Show a loading indicator
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          controller: scrollController,
+                          physics: const ScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (ctx, index) {
+                            return InkWell(
+                              onTap: () {
+                                if (selectedIndex == index) {
+                                  setState(() {
+                                    selectedIndex = null;
+                                  });
+                                } else {
+                                  setState(() {
+                                    selectedIndex = index;
+                                  });
+                                }
+                              },
+                              child: Column(
+                                children: [
+                                   IgnorePointer(child: UserChat(
+                                    userData: UserData(
+                                      id: snapshot.data![index]!.sender!.id,
+                                      username: snapshot.data![index]!.sender!.username,
+                                      email: snapshot.data![index]!.sender!.email,
+                                      profilePic: snapshot.data![index]!.sender!.ProfilePic
+                                    ),
+                                    resentMessage: ResentMessage(
+                                      text: snapshot.data![index]!.sender!.displayName
+                                    ),
+                                    conversationId: "Error message _ request Screen 150",
+                                    senderId: "Error message _ request Screen 150",)),
+                                  selectedIndex == index
+                                      ? Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10, bottom: 10),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xff4DD74A)
+                                                  .withOpacity(.12),
+                                            ),
+                                            child: FormHeadingText(
+                                              headings: "Accept Request",
+                                              color: const Color(0xff4DD74A),
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xffFE5151)
+                                                  .withOpacity(.13),
+                                            ),
+                                            child: FormHeadingText(
+                                              headings: "Reject & Block",
+                                              color: const Color(0xffFE5151),
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                      : const SizedBox()
+                                ],
+                              ),
+                            );
+                          });
+                    } else {
+                      return const Center(
+                        child: Text("Loading..."),
+                      );
+                    }
+
                   },
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      if (selectedIndex == index) {
-                        setState(() {
-                          selectedIndex = null;
-                        });
-                      } else {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      }
-                    },
-                    child: Column(
-                      children: [
-                        const IgnorePointer(child: UserChat(
-                          conversationId: "Error message _ request Screen 150",
-                          senderId: "Error message _ request Screen 150",)),
-                        selectedIndex == index
-                            ? Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, bottom: 10),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xff4DD74A)
-                                              .withOpacity(.12),
-                                        ),
-                                        child: FormHeadingText(
-                                          headings: "Accept Request",
-                                          color: const Color(0xff4DD74A),
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xffFE5151)
-                                              .withOpacity(.13),
-                                        ),
-                                        child: FormHeadingText(
-                                          headings: "Reject & Block",
-                                          color: const Color(0xffFE5151),
-                                          fontSize: 12,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              )
-                            : const SizedBox()
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: 8,
+              //     itemBuilder: (context, index) {
+              //       return InkWell(
+              //         onTap: () {
+              //           if (selectedIndex == index) {
+              //             setState(() {
+              //               selectedIndex = null;
+              //             });
+              //           } else {
+              //             setState(() {
+              //               selectedIndex = index;
+              //             });
+              //           }
+              //         },
+              //         child: Column(
+              //           children: [
+              //             const IgnorePointer(child: UserChat(
+              //               conversationId: "Error message _ request Screen 150",
+              //               senderId: "Error message _ request Screen 150",)),
+              //             selectedIndex == index
+              //                 ? Padding(
+              //                     padding: const EdgeInsets.only(
+              //                         left: 10, right: 10, bottom: 10),
+              //                     child: Row(
+              //                       children: [
+              //                         Expanded(
+              //                           child: Container(
+              //                             alignment: Alignment.center,
+              //                             padding: const EdgeInsets.symmetric(
+              //                                 vertical: 10),
+              //                             decoration: BoxDecoration(
+              //                               color: const Color(0xff4DD74A)
+              //                                   .withOpacity(.12),
+              //                             ),
+              //                             child: FormHeadingText(
+              //                               headings: "Accept Request",
+              //                               color: const Color(0xff4DD74A),
+              //                               fontSize: 12,
+              //                             ),
+              //                           ),
+              //                         ),
+              //                         const SizedBox(
+              //                           width: 10,
+              //                         ),
+              //                         Expanded(
+              //                           child: Container(
+              //                             alignment: Alignment.center,
+              //                             padding: const EdgeInsets.symmetric(
+              //                                 vertical: 10),
+              //                             decoration: BoxDecoration(
+              //                               color: const Color(0xffFE5151)
+              //                                   .withOpacity(.13),
+              //                             ),
+              //                             child: FormHeadingText(
+              //                               headings: "Reject & Block",
+              //                               color: const Color(0xffFE5151),
+              //                               fontSize: 12,
+              //                             ),
+              //                           ),
+              //                         )
+              //                       ],
+              //                     ),
+              //                   )
+              //                 : const SizedBox()
+              //           ],
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );
