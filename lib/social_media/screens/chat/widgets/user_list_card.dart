@@ -32,11 +32,11 @@ class _UserChatState extends State<UserChat> {
   final chatController = Get.find<ConversationController>();
 //  UserSchema? sender;
 
-  @override
-  void initState() {
-    super.initState();
-    getInitUser();
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//  //   getInitUser();
+//   }
 
   Future getInitUser() async {
     debugPrint("id in list item : ${widget.senderId}");
@@ -94,17 +94,11 @@ class _UserChatState extends State<UserChat> {
                 widget.userData == null
                     ? Text(
                         "loading",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.25),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black.withOpacity(0.25), fontSize: 12, fontWeight: FontWeight.w400),
                       )
                     : Text(
                         "${widget.userData?.username}",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
                       ),
                 const SizedBox(
                   height: 3,
@@ -112,17 +106,11 @@ class _UserChatState extends State<UserChat> {
                 widget.resentMessage == null
                     ? Text(
                         "loading",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       )
                     : Text(
                         widget.resentMessage?.text ?? "last text",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
               ],
             ),
@@ -145,10 +133,7 @@ class _UserChatState extends State<UserChat> {
                   )
                 : const Text(
                     "",
-                    style: TextStyle(
-                        color: Color(0xffA1A1A1),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: Color(0xffA1A1A1), fontSize: 10, fontWeight: FontWeight.w600),
                   ),
             const SizedBox(
               width: 30,
