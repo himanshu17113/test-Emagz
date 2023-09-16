@@ -25,6 +25,8 @@ class _CommentSettingState extends State<CommentSetting> {
   bool? everyOne;
   bool? yourFollower;
   bool? followAndFollower;
+  bool showBox=false;
+  bool showSearch=false;
   @override
   void initState() {
     super.initState();
@@ -139,12 +141,20 @@ class _CommentSettingState extends State<CommentSetting> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                "Everyone",
-                                style: TextStyle(
-                                    color: purpleColor,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap:(){
+                                  showBox=!showBox;
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Text(
+                                  "Everyone",
+                                  style: TextStyle(
+                                      color: purpleColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                               const SizedBox(
                                 width: 7,
@@ -160,12 +170,21 @@ class _CommentSettingState extends State<CommentSetting> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "0 people",
-                                style: TextStyle(
-                                    color: purpleColor,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap: ()
+                                {
+                                  showSearch=!showSearch;
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Text(
+                                  "0 people",
+                                  style: TextStyle(
+                                      color: purpleColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                               const SizedBox(
                                 width: 8,
@@ -202,7 +221,7 @@ class _CommentSettingState extends State<CommentSetting> {
             const SizedBox(
               height: 20,
             ),
-            Container(
+            showBox?Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(15),
               height: 210,
@@ -242,7 +261,7 @@ class _CommentSettingState extends State<CommentSetting> {
                           width: 50,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne!,
+                          value: everyOne?? true,
                           onToggle: (val) {
 
                             setState(() {
@@ -258,7 +277,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow!,
+                    isActive: youFollow??true,
                     onToggle: (val)
                     {
                       setState(() {
@@ -273,7 +292,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "Your followers",
                     subTitle: "53 People",
-                    isActive: yourFollower!,
+                    isActive: yourFollower??false,
                     onToggle: (val)
                     {
                       setState(() {
@@ -288,7 +307,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   TitleAndSwitchWidget(
                     title: "People you follow and your followers",
                     subTitle: "550 People",
-                    isActive: followAndFollower!,
+                    isActive: followAndFollower??true,
                     onToggle: (val)
                     {
                       setState(() {
@@ -299,11 +318,11 @@ class _CommentSettingState extends State<CommentSetting> {
                   )
                 ],
               ),
-            ),
+            ):SizedBox(),
             const SizedBox(
               height: 20,
             ),
-            Container(
+            showSearch?Container(
               margin: const EdgeInsets.symmetric(horizontal: 10),
               padding: const EdgeInsets.all(15),
               height: 120,
@@ -348,7 +367,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   )
                 ],
               ),
-            )
+            ):SizedBox(),
           ],
         ),
       ),

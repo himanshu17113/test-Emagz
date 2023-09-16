@@ -188,7 +188,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
-                child: const Row(
+                child:  Row(
                   children: [
                     UserOnlineCircle(),
                     SizedBox(

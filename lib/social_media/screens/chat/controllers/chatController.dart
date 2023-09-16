@@ -15,6 +15,7 @@ class ConversationController extends GetxController {
 //  RxList<Message>? messages;
 
   final jwtController = Get.find<JWTController>();
+  RxList<Requests?>? req= <Requests>[].obs;
 
   String? token;
   String? userId;
@@ -22,6 +23,7 @@ class ConversationController extends GetxController {
   onInit() async {
     token = jwtController.token;
     userId = jwtController.userId;
+    getAllRequests();
     if (token == null || userId == null) {
       await storedData();
     }
@@ -138,9 +140,10 @@ class ConversationController extends GetxController {
       return "";
     }
   }
-  List<Requests?>? req;
+
   Future<List<Requests?>?> getAllRequests() async {
-    req=[];
+    print('😛');
+    req?.clear();
     try{
       var token = await jwtController.getAuthToken();
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
@@ -152,7 +155,6 @@ class ConversationController extends GetxController {
         var temp = Requests.fromJson(e);
         req?.add(temp);
       });
-      req?.shuffle();
       return req;
     }
     catch(e)

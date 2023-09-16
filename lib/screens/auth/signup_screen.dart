@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
@@ -5,6 +7,7 @@ import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
  
 import 'widgets/my_custom_textfiled.dart';
@@ -131,28 +134,63 @@ class SignUpScreen extends StatelessWidget {
             SizedBox(
               height: size.height * .02,
             ),
-            Container(
-              // margin: const EdgeInsets.only(top: 10),
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: whiteColor,
-                    radius: 15,
-                    backgroundImage: const CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: whiteColor,
-                    radius: 15,
-                    backgroundImage: const CachedNetworkImageProvider(
-                        "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
-                  ),
-                ],
+            Center(
+              child: Container(
+                width: 200,
+                // margin: const EdgeInsets.only(top: 10),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: whiteColor,
+                      radius: 15,
+                      backgroundImage: const CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: whiteColor,
+                      radius: 15,
+                      backgroundImage: const CachedNetworkImageProvider(
+                          "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                  ],
+                ),
               ),
+
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Center(
+              child:Platform.isIOS?
+              Container(
+                width: 400,
+                child: SignInWithAppleButton(
+                    style: SignInWithAppleButtonStyle.black,
+                    text: 'Sign In With Apple',
+                    borderRadius: BorderRadius.circular(20),
+                    onPressed: ()async
+                    {
+                      final credential = await SignInWithApple.getAppleIDCredential(
+                          scopes: [
+                            AppleIDAuthorizationScopes.email,
+                            AppleIDAuthorizationScopes.fullName,
+                          ]
+                      );
+                      print(credential);
+
+
+                    }
+                ),
+              ):
+              SizedBox(),
             ),
             const SizedBox(
               height: 20,
