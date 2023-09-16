@@ -73,6 +73,8 @@ dependencies:
   url_launcher: ^6.1.11
   webview_flutter: ^4.2.4
   logger: ^2.0.1
+  firebase_auth: ^4.9.0
+  firebase_core: ^2.15.1
 
   
 dev_dependencies:

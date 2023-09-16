@@ -44,7 +44,49 @@ class AuthController extends GetxController {
   int? selectedChoiseIndex;
   Set<int> selectedChoices = {};
   Set<String> selectedInterest = {};
+  appleRegister(String email, String password, String imgUrl, String fullName) async {
+    try {
 
+      Map<String, String> header = {'Content-type': 'application/json; charset=utf-8'};
+
+      Map body = {"email": email, "password": password, "username": fullName, "dob": imgUrl};
+      debugPrint(body.toString());
+      print('Apple sign in Started');
+      http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.register),
+        headers: header,
+        body: jsonEncode(body),
+      );
+      debugPrint(response.body);
+
+      var data = json.decode(response.body);
+      if (response.statusCode == 200) {
+        if (data['status'] == true) {
+
+          Get.snackbar("Success", data['message']);
+          Get.off(() => const ChooseIntrestScreen());
+        }
+
+        return true;
+      } else if (response.statusCode == 201) {
+        if (data['status'] == true) {
+          Get.snackbar("Success", data['message']);
+          Get.off(() => const ChooseIntrestScreen());
+        }
+
+        return true;
+      } else {
+
+        Get.snackbar("Error", data['message']);
+        return false;
+      }
+    } catch (e) {
+
+      Get.snackbar("Error", "Something went wrong! please try again later");
+      debugPrint(e.toString());
+      return false;
+    }
+  }
   checkPassword(String v) {
     if (v.isEmpty) {
       isLowerText.value = false;

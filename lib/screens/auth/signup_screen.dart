@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
-
+import 'package:crypto/crypto.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
- 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,13 @@ import 'widgets/my_custom_textfiled.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
+  final _firebaseAuth = FirebaseAuth.instance;
   final authController = Get.put(AuthController());
+  String sha256ofString(String input) {
+    final bytes = utf8.encode(input);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -178,16 +185,61 @@ class SignUpScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     onPressed: ()async
                     {
-                      final credential = await SignInWithApple.getAppleIDCredential(
-                          scopes: [
-                            AppleIDAuthorizationScopes.email,
-                            AppleIDAuthorizationScopes.fullName,
-                          ]
-                      );
-                      print(credential);
+
+                        // To prevent replay attacks with the credential returned from Apple, we
+                        // include a nonce in the credential request. When signing in in with
+                        // Firebase, the nonce in the id token returned by Apple, is expected to
+                        // match the sha256 hash of `rawNonce`.
+                        final rawNonce = generateNonce();
+                        final nonce = sha256ofString(rawNonce);
+
+                        try {
+                          // Request credential for the currently signed in Apple account.
+                          final appleCredential = await SignInWithApple.getAppleIDCredential(
+                            scopes: [
+                              AppleIDAuthorizationScopes.email,
+                              AppleIDAuthorizationScopes.fullName,
+                            ],
+                            nonce: nonce,
+                          );
+
+                          print(appleCredential.authorizationCode);
+
+                          // Create an `OAuthCredential` from the credential returned by Apple.
+                          final oauthCredential = OAuthProvider("apple.com").credential(
+                            idToken: appleCredential.identityToken,
+                            rawNonce: rawNonce,
+                          );
+
+                          // Sign in the user with Firebase. If the nonce we generated earlier does
+                          // not match the nonce in `appleCredential.identityToken`, sign in will fail.
+                          final authResult =
+                          await _firebaseAuth.signInWithCredential(oauthCredential);
+
+                          final displayName =
+                              '${appleCredential.givenName} ${appleCredential.familyName}';
+                          final userEmail = '${appleCredential.email}';
+                          final photoUrl='${appleCredential.identityToken}';
+                          if(appleCredential.email!=null && appleCredential.givenName!=null && appleCredential.familyName!=null && appleCredential.identityToken!=null) {
+                            authController.appleRegister(
+                                appleCredential.email!, appleCredential.identityToken!,photoUrl, displayName);
+                          }
+                          else{
+                            Get.snackbar('Error',"Did not recieve credentials from Apple.");
+                          }
+
+                          final firebaseUser = authResult.user;
+                          print(displayName);
+                          print(firebaseUser?.displayName);
+                          debugPrint(firebaseUser.toString());
+                        } catch (exception) {
+                          print(exception);
+
+                        }
+                      }
 
 
-                    }
+
                 ),
               ):
               SizedBox(),
