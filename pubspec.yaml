@@ -71,7 +71,7 @@ dependencies:
   sign_in_with_apple: ^5.0.0
   google_sign_in: ^6.1.4
   url_launcher: ^6.1.11
-  webview_flutter: ^4.2.3
+  webview_flutter: ^4.2.4
   logger: ^2.0.1
 
   

@@ -171,9 +171,9 @@ class _PostCardState extends State<PostCard> {
                       //         //  messages: messages ?? [],
                       //       ));
                       // }
-                      var tok = await jwtController.getAuthToken();
+                      final tok = jwtController.token ?? await jwtController.getAuthToken();
 
-                      String temp = post!.user!.personalTemplate!;
+                      String? temp = post!.user!.personalTemplate;
                       if (temp == null) {
                         Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
                       } else {
@@ -181,7 +181,7 @@ class _PostCardState extends State<PostCard> {
                           Get.snackbar('This is a Old account ', 'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
-                        Get.to(() => WebViewPersona(token: tok!, userId: widget.myUserId!, personaUserId: post!.user!.sId!, templateId: temp));
+                        Get.to(() => WebViewPersona(token: tok!, userId: widget.myUserId!, personaUserId: post!.user!.sId!, templateId: temp!));
                       }
                     },
                     child: Column(

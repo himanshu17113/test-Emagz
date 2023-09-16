@@ -48,8 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
     if (userId == null) {
       userId = chatController.userId;
       if (userId == null) {
-        var hiveBox = Hive.box("secretes");
-        userId = await hiveBox.get("userId");
+        userId = await jwtController.getUserId();
       }
     }
   }

@@ -13,52 +13,61 @@ class GetXStoryController extends GetxController {
   RxInt currentStoryIndex = RxInt(0);
   RxList<Story>? stories = <Story>[].obs;
   List<Stories> mystory = [];
-  RxString myId = RxString("");
+  String? myId;
   RxDouble storyUploadPercentage = RxDouble(0);
   RxBool isUploading = RxBool(false);
   String? token;
   final JWTController jwtController = Get.put(JWTController());
   @override
   void onInit() {
-    getStories();
+   // if (jwtController.isAuthorised.value ) {
+      getStories();
+  //  }
 
     super.onInit();
   }
 
   getStories() async {
     //try {
-      stories?.clear();
+    stories?.clear();
 
-      debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
-      debugPrint(ApiEndpoint.story);
-      if (jwtController.token == null || jwtController.token!.isEmpty || jwtController.userId == null) {
-        token = await jwtController.getAuthToken();
-        myId.value = (await jwtController.getUserId())!;
-      }
+    debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
+    debugPrint(ApiEndpoint.story);
 
-      await getmyStories();
-      //   debugPrint(token);
+    if (jwtController.token == null ||
+        jwtController.token!.isEmpty ||
+        jwtController.userId == null) {
+      token = await jwtController.getAuthToken();
+      myId = await jwtController.getUserId();
+    }
 
-      final headers = {'Content-Type': 'application/json', "Authorization": jwtController.token ?? token!};
+    await getmyStories();
+    //   debugPrint(token);
 
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
-      var body = jsonDecode(response.body);
-      // debugPrint(body.toString());
-      body.forEach((e) {
-        debugPrint('story');
-        // stories ??= Map();
-        // debugPrint(e.toString());
-        var story = Story.fromJson(e);
-        // print(story);
-        stories?.add(story);
-        // if (stories![story.userId!] == null) {
-        //   stories![story.userId] = {};
-        // }
-        // stories![story.userId!]![story.sId!] = story;
-      });
-      // debugPrint(stories.toString());
-      //
-      //    return stories!;
+    final headers = {
+      'Content-Type': 'application/json',
+      "Authorization": jwtController.token ?? token!
+    };
+
+    http.Response response =
+        await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+    var body = jsonDecode(response.body);
+    // debugPrint(body.toString());
+    body.forEach((e) {
+      debugPrint('story');
+      // stories ??= Map();
+      // debugPrint(e.toString());
+      var story = Story.fromJson(e);
+      // print(story);
+      stories?.add(story);
+      // if (stories![story.userId!] == null) {
+      //   stories![story.userId] = {};
+      // }
+      // stories![story.userId!]![story.sId!] = story;
+    });
+    // debugPrint(stories.toString());
+    //
+    //    return stories!;
     // } catch (e) {
     //   debugPrint('stoey all post errror');
     //   debugPrint(e.toString());
@@ -72,14 +81,23 @@ class GetXStoryController extends GetxController {
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
       // if (myId.value == "" || token == null) {
       debugPrint(ApiEndpoint.story);
-      if (jwtController.token == null || jwtController.token!.isEmpty || jwtController.userId == null) {
+      if (jwtController.token == null ||
+          jwtController.token!.isEmpty ||
+          jwtController.userId == null) {
         token = await jwtController.getAuthToken();
-        myId.value = (await jwtController.getUserId())!;
+        myId = await jwtController.getUserId();
       }
-      //  }
-      final headers = {'Content-Type': 'application/json', "Authorization": token!};
-      debugPrint(ApiEndpoint.Storybyid(myId.value));
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(jwtController.userId ?? myId.value)), headers: headers);
+      debugPrint("TOKEN : $token myId : $myId");
+      debugPrint(
+          "TOKEN : ${jwtController.token} userId : ${jwtController.userId}");
+      final headers = {
+        'Content-Type': 'application/json',
+        "Authorization": jwtController.token ?? token!
+      };
+      debugPrint(ApiEndpoint.Storybyid(jwtController.userId?? myId!));
+      http.Response response = await http.get(
+          Uri.parse(ApiEndpoint.Storybyid(jwtController.userId ?? myId!)),
+          headers: headers);
       var body = jsonDecode(response.body);
       //  debugPrint(body.toString());
 
@@ -139,9 +157,15 @@ class GetXStoryController extends GetxController {
     try {
       var token = await jwtController.getAuthToken();
       var userId = await jwtController.getUserId();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
       Map body = {"userId": userId};
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
+      http.Response response = await http.post(
+          Uri.parse(ApiEndpoint.likeStroy(storyId)),
+          headers: headers,
+          body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -157,7 +181,10 @@ class GetXStoryController extends GetxController {
     debugPrint("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.commentStroy(storyId)),
+        headers: headers,
+        body: jsonEncode(body));
     debugPrint(response.body);
   }
 
