@@ -1,3 +1,4 @@
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/chat/chat_controller.dart';
@@ -139,12 +140,14 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                           shrinkWrap: true,
                           itemCount: convController.req!.length,
                           itemBuilder: (ctx, index) {
+                            bool x=false;
                             if(convController.req![index]==null || convController.req![index]!.sender==null)
                               {
                                 return SizedBox();
                               }
                             else {
                               return InkWell(
+
                                 onTap: () {
                                   if (selectedIndex == index) {
                                     setState(() {
@@ -156,7 +159,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                     });
                                   }
                                 },
-                                child: Column(
+                                child:convController.req![index]!.status=="pending"? Column(
                                   children: [
                                     IgnorePointer(child: UserChat(
                                       userData: UserData(
@@ -173,7 +176,8 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                               .displayName
                                       ),
                                       conversationId: "Error message _ request Screen 150",
-                                      senderId: "Error message _ request Screen 150",)),
+                                      senderId: convController.req![index]!.sender!
+                                          .id!,)),
                                     selectedIndex == index
                                         ? Padding(
                                       padding: const EdgeInsets.only(
@@ -190,10 +194,20 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                                 color: const Color(0xff4DD74A)
                                                     .withOpacity(.12),
                                               ),
-                                              child: FormHeadingText(
-                                                headings: "Accept Request",
-                                                color: const Color(0xff4DD74A),
-                                                fontSize: 12,
+                                              child: GestureDetector(
+                                                onTap: ()async
+                                                {
+                                                    await convController.acceptreq(convController.req![index]!.id!, index);
+                                                    setState(() {
+                                                      selectedIndex = null;
+                                                    });
+                                                    },
+
+                                                child: FormHeadingText(
+                                                  headings: "Accept Request",
+                                                  color: const Color(0xff4DD74A),
+                                                  fontSize: 12,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -210,10 +224,19 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                                 color: const Color(0xffFE5151)
                                                     .withOpacity(.13),
                                               ),
-                                              child: FormHeadingText(
-                                                headings: "Reject & Block",
-                                                color: const Color(0xffFE5151),
-                                                fontSize: 12,
+                                              child: GestureDetector(
+                                                onTap: ()async
+                                              {
+                                                await convController.rejectreq(convController.req![index]!.id!, index);
+                                                setState(() {
+                                                  selectedIndex = null;
+                                                });
+                                              },
+                                                child: FormHeadingText(
+                                                  headings: "Reject & Block",
+                                                  color: const Color(0xffFE5151),
+                                                  fontSize: 12,
+                                                ),
                                               ),
                                             ),
                                           )
@@ -222,7 +245,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                     )
                                         : const SizedBox()
                                   ],
-                                ),
+                                ): SizedBox(),
                               );
                             }
                           }
