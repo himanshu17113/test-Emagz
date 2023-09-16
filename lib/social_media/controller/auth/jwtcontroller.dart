@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/models/user_model.dart';
-import 'package:flutter/cupertino.dart';
+ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
@@ -17,7 +16,7 @@ class JWTController extends GetxController {
 
   Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
-    token ??= (await getAuthToken())!;
+    token ??= (await getAuthToken()) !;
 
     userId ??= (await getUserId())!;
     dio.options.headers["Authorization"] = token ??
@@ -54,8 +53,8 @@ class JWTController extends GetxController {
   Future setAuthToken(String? tokenx, String? id) async {
     await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
-    // token = RxString(tokenx!);
-    // userId = id!;
+           token = tokenx;
+    userId = id;
     if (tokenx != null && id != null) {
       isAuthorised.value = true;
       if (token == null || userId == null) {
@@ -84,7 +83,7 @@ class JWTController extends GetxController {
     return token!;
   }
 
-  Future<String?> getUserId() async {
+  Future<String?> getUserId () async {
     if (userId != null) {
       //  debugPrint("done fastly");
       return userId!;
@@ -92,9 +91,9 @@ class JWTController extends GetxController {
     debugPrint(
         "gettttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttting the user id    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-    final u = await hiveBox.get("userId");
-    userId = u;
-    return u;
+ userId = await hiveBox.get("userId");
+ 
+    return userId;
   }
 
   Future setProfileImage(String imageUrl) async {
@@ -112,8 +111,9 @@ class JWTController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    token = (await getAuthToken())!;
-    userId = (await getUserId())!;
+    token ??= await getAuthToken();
+
+    userId ??= await getUserId();
     getCurrentUserDetail();
     debugPrint(token);
     debugPrint(userId);

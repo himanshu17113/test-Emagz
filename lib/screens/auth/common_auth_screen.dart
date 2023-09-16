@@ -101,7 +101,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                             controller: authController.tabController,
                             children: [
                               SignUpScreen(),
-                              SignInScreen(),
+                              const SignInScreen(),
                             ],
                           ),
                         ),

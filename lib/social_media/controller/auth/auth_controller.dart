@@ -2,8 +2,7 @@ import 'package:emagz_vendor/screens/auth/forgot_password/change_password_screen
 import 'package:emagz_vendor/screens/auth/forgot_password/otp_verification_screen.dart';
 import 'package:emagz_vendor/screens/auth/signin_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/screens/account/business_profile_setup.dart';
+ import 'package:emagz_vendor/social_media/screens/account/business_profile_setup.dart';
 import 'package:emagz_vendor/social_media/screens/account/personal_account.dart';
 import 'package:emagz_vendor/social_media/screens/account/personal_profile_setup.dart';
 import 'package:emagz_vendor/social_media/screens/intrest/choose_intrest.dart';
@@ -277,7 +276,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       isUserRegiserting.value = false;
       CustomSnackbar.show("password reset Successful");
-      Get.to(() => SignInScreen());
+      Get.to(() => const SignInScreen());
       isUserRegiserting.value = false;
     } else {
       isUserRegiserting.value = false;

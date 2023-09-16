@@ -121,12 +121,12 @@ class StoryScreen extends StatelessWidget {
 
                                         setState(() {
                                           if (stories[buttonClickedTimes.value].isLike ??
-                                              stories[buttonClickedTimes.value].likes!.contains(storyController.myId.value)) {
+                                              stories[buttonClickedTimes.value].likes!.contains(storyController.myId)) {
                                             stories[buttonClickedTimes.value].isLike = false;
-                                            stories[buttonClickedTimes.value].likes!.remove(storyController.myId.value);
+                                            stories[buttonClickedTimes.value].likes!.remove(storyController.myId);
                                           } else {
                                             stories[buttonClickedTimes.value].isLike = true;
-                                            stories[buttonClickedTimes.value].likes!.add(storyController.myId.value);
+                                            stories[buttonClickedTimes.value].likes!.add(storyController.myId!);
                                           }
                                         });
                                       },
@@ -136,7 +136,7 @@ class StoryScreen extends StatelessWidget {
                                               width: 22,
                                             ))
                                           : (stories[buttonClickedTimes.value].isLike ??
-                                                  stories[buttonClickedTimes.value].likes!.contains(storyController.myId.value))
+                                                  stories[buttonClickedTimes.value].likes!.contains(storyController.myId))
                                               ? Padding(
                                                   padding: const EdgeInsets.all(8.0),
                                                   child: Image.asset(
