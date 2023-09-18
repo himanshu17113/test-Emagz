@@ -97,9 +97,7 @@ class SocketController extends GetxController {
 
   initSocket() async {
     userId = jwtController.userId ?? chatController.userId;
-    if (userId == null) {
-      userId = await jwtController.getUserId();
-    }
+    userId ??= await jwtController.getUserId();
   }
 
   void sendLikeNotification(String id, String name) {

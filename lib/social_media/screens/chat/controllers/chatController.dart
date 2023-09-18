@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 
 import '../models/reuqest_model.dart';
 import 'package:http/http.dart' as http;
+
 class ConversationController extends GetxController {
   //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
@@ -36,8 +37,11 @@ class ConversationController extends GetxController {
 
   Future<List<Message>> getMessages(String conversationId) async {
     try {
+        if (token == null || userId == null) {
+        await storedData();
+      }
       Dio dio = Dio();
-      dio.options.headers["Authorization"] = token;
+      dio.options.headers["Authorization"] = jwtController.token ?? token;
       debugPrint(ApiEndpoint.getMessages(conversationId));
       var response = await dio.get(ApiEndpoint.getMessages(conversationId));
       debugPrint(response.data);
@@ -56,9 +60,10 @@ class ConversationController extends GetxController {
   Future<List<Conversation>> getChatList() async {
     try {
       Dio dio = Dio();
-      dio.options.headers["Authorization"] = token;
-      debugPrint(ApiEndpoint.getConversation(userId!));
-      var response = await dio.get(ApiEndpoint.getConversation(userId!));
+      dio.options.headers["Authorization"] = jwtController.token ?? token;
+      debugPrint(ApiEndpoint.getConversation(jwtController.userId ?? userId!));
+      var response = await dio
+          .get(ApiEndpoint.getConversation(jwtController.userId ?? userId!));
       debugPrint("Chat list");
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
@@ -83,8 +88,12 @@ class ConversationController extends GetxController {
   Future postChat(String text, String conversationId) async {
     try {
       Dio dio = Dio();
-      dio.options.headers["Authorization"] = token;
-      var body = {"conversationId": conversationId, "sender": userId, "text": text};
+      dio.options.headers["Authorization"] = jwtController.token ?? token;
+      var body = {
+        "conversationId": conversationId,
+        "sender": jwtController.userId ?? userId,
+        "text": text
+      };
       var response = await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
       debugPrint(e.toString());
@@ -95,10 +104,11 @@ class ConversationController extends GetxController {
     try {
       debugPrint("🧣🧣🧣🧣🧣 start");
       Dio dio = Dio();
-      dio.options.headers["Authorization"] = token;
-      debugPrint(ApiEndpoint.getConID(userId!, receiverId));
+      dio.options.headers["Authorization"] = jwtController.token ?? token;
+      debugPrint(
+          ApiEndpoint.getConID(jwtController.userId ?? userId!, receiverId));
       var response = await dio.get(
-        ApiEndpoint.getConID(userId!, receiverId),
+        ApiEndpoint.getConID(jwtController.userId ?? userId!, receiverId),
       );
       //   debugPrint("🧣🧣🧣🧣🧣 hit");
       debugPrint(response.data);
@@ -127,8 +137,11 @@ class ConversationController extends GetxController {
     try {
       debugPrint("🧣🧣🧣🧣🧣 start2");
       Dio dio = Dio();
-      dio.options.headers["Authorization"] = token;
-      var body = {"senderId": userId, "receiverId": receiverId};
+      dio.options.headers["Authorization"] = jwtController.token ?? token;
+      var body = {
+        "senderId": jwtController.userId ?? userId,
+        "receiverId": receiverId
+      };
       var response = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
       //  debugPrint(response.data["_id"].toString());
       //   final conversation = Conversation.fromJson(response.data);
@@ -138,14 +151,19 @@ class ConversationController extends GetxController {
       return "";
     }
   }
+
   List<Requests?>? req;
   Future<List<Requests?>?> getAllRequests() async {
-    req=[];
-    try{
+    req = [];
+    try {
       var token = await jwtController.getAuthToken();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
 
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.requestList), headers: headers);
+      http.Response response =
+          await http.get(Uri.parse(ApiEndpoint.requestList), headers: headers);
       var body = jsonDecode(response.body);
       print(body);
       body.forEach((e) {
@@ -154,12 +172,9 @@ class ConversationController extends GetxController {
       });
       req?.shuffle();
       return req;
-    }
-    catch(e)
-    {
+    } catch (e) {
       print(e);
     }
     return null;
-
   }
 }
