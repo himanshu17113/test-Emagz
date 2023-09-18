@@ -170,7 +170,48 @@ class AuthController extends GetxController {
       return false;
     }
   }
+  Future<bool> appleSignIn(String email,String password)async{
+    try {
+      isUserlogging.value = true;
+      Map body = {
+        "email": email,
+        "password": password,
+      };
+      var headers = {'Content-Type': 'application/json'};
 
+      var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
+      var data = jsonDecode(response.body);
+
+      debugPrint(data["data"]["_id"]);
+      if (response.statusCode == 200) {
+        clearValue();
+        CustomSnackbar.showSucess("User Loggedin Successfully");
+        await jwtController.setAuthToken(data["token"], data["data"]["_id"]);
+        jwtController.token = data["token"].toString();
+        jwtController.userId = data["data"]["_id"].toString();
+        jwtController.isAuthorised.value = true;
+
+        isUserlogging.value = false;
+        return true;
+      } else if (response.statusCode == 401) {
+        CustomSnackbar.show(data['message']);
+        isUserlogging.value = false;
+        return false;
+      } else if (response.statusCode == 400) {
+        CustomSnackbar.show(data['error']);
+        isUserlogging.value = false;
+        return false;
+      } else {
+        CustomSnackbar.show("User Registration Failed ! Try again later");
+        isUserlogging.value = false;
+        return false;
+      }
+    } catch (e) {
+      CustomSnackbar.show(e.toString());
+      isUserlogging.value = false;
+      return false;
+    }
+  }
   Future<bool> signInuser() async {
     try {
       isUserlogging.value = true;
