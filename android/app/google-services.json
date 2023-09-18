@@ -1,37 +1,81 @@
 {
   "project_info": {
-    "project_number": "424015912860",
-    "project_id": "emagz-39f3d",
-    "storage_bucket": "emagz-39f3d.appspot.com"
+    "project_number": "105788726998",
+    "project_id": "emagz-wo",
+    "storage_bucket": "emagz-wo.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:424015912860:android:c78ae0b9c295d1f3a73259",
+        "mobilesdk_app_id": "1:105788726998:android:a33659ba08d8b211657377",
         "android_client_info": {
           "package_name": "app.vendor.emagz_vendor"
         }
       },
       "oauth_client": [
         {
-          "client_id": "424015912860-lnhf2inkmf9508crd703b6a80rkckn0r.apps.googleusercontent.com",
+          "client_id": "105788726998-oqdqrjt0coivgftt33kaefvd2oio95r5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.vendor.emagz_vendor",
+            "certificate_hash": "922de8dc9737617a9927a1f50ed6f7c30236f643"
+          }
+        },
+        {
+          "client_id": "105788726998-egc0m4nqf5iqgegct97hl08nul47tvja.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIknnJtWh32zEtk-IhiKaNkvMmZ5MTV6Q"
+          "current_key": "AIzaSyCc_cChiEFJf6PqXOa6xmVstGrk7-qcC90"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "424015912860-lnhf2inkmf9508crd703b6a80rkckn0r.apps.googleusercontent.com",
+              "client_id": "105788726998-egc0m4nqf5iqgegct97hl08nul47tvja.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr.apps.googleusercontent.com",
+              "client_id": "105788726998-k18uij98q32mdj9o7s36gtd4341o4ptc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.vendor.emagzVendor"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105788726998:android:a4f7e99380aa957d657377",
+        "android_client_info": {
+          "package_name": "com.emagz.emagz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105788726998-egc0m4nqf5iqgegct97hl08nul47tvja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc_cChiEFJf6PqXOa6xmVstGrk7-qcC90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105788726998-egc0m4nqf5iqgegct97hl08nul47tvja.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "105788726998-k18uij98q32mdj9o7s36gtd4341o4ptc.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "app.vendor.emagzVendor"

@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr.apps.googleusercontent.com</string>
+	<string>105788726998-k18uij98q32mdj9o7s36gtd4341o4ptc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.424015912860-feg3ntuptvdhe1m5m6e09gr1jnbl6lmr</string>
+	<string>com.googleusercontent.apps.105788726998-k18uij98q32mdj9o7s36gtd4341o4ptc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>105788726998-oqdqrjt0coivgftt33kaefvd2oio95r5.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAfIlXfirK85OK7-ha4FWapEEaNjGWc6Mo</string>
+	<string>AIzaSyDtrgBgGBkCL3Fn6VBKBwB0UuoT4o_dUUk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>424015912860</string>
+	<string>105788726998</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>app.vendor.emagzVendor</string>
 	<key>PROJECT_ID</key>
-	<string>emagz-39f3d</string>
+	<string>emagz-wo</string>
 	<key>STORAGE_BUCKET</key>
-	<string>emagz-39f3d.appspot.com</string>
+	<string>emagz-wo.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:424015912860:ios:4406cc1889c6eb49a73259</string>
+	<string>1:105788726998:ios:33a3019396db3c65657377</string>
 </dict>
 </plist>

@@ -7,13 +7,19 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'firebase_options.dart';
 import 'social_media/controller/bottom_nav_controller.dart';
+import 'package:firebase_core/firebase_core.dart';
+Future main() async {
 
-void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await Hive.openBox("secretes");
+  await Firebase.initializeApp(
+    name: 'EmagzIos',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Get.put(NavController());
 
   runApp(const MyApp());

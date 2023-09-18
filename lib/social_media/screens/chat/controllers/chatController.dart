@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
@@ -16,6 +17,7 @@ class ConversationController extends GetxController {
 //  RxList<Message>? messages;
 
   final jwtController = Get.find<JWTController>();
+  RxList<Requests?>? req= <Requests>[].obs;
 
   String? token;
   String? userId;
@@ -23,6 +25,7 @@ class ConversationController extends GetxController {
   onInit() async {
     token = jwtController.token;
     userId = jwtController.userId;
+    getAllRequests();
     if (token == null || userId == null) {
       await storedData();
     }
@@ -152,25 +155,55 @@ class ConversationController extends GetxController {
     }
   }
 
-  List<Requests?>? req;
+  Future<bool> acceptreq(String id,int index) async
+  {
+    debugPrint("🧣🧣🧣🧣🧣 start2");
+    Dio dio = Dio();
+    dio.options.headers["Authorization"] = token;
+    print('${ApiEndpoint.requestList}/${id}/accept');
+    var response = await dio.post('${ApiEndpoint.requestList}/${id}/accept');
+    if(response.statusCode==200)
+      {
+        CustomSnackbar.showSucess('Reuqest ');
+        req?.removeAt(index);
+        return true;
+      }
+    if(response.statusCode!=200)
+      {
+        CustomSnackbar.show('Reuqest Not found');
+      }
+    return false;
+  }
+  Future<bool> rejectreq(String id,int index) async
+  {
+    Dio dio = Dio();
+    dio.options.headers["Authorization"] = token;
+    var response = await dio.delete('${ApiEndpoint.removeRequest}/${id}');
+    if(response.statusCode==200)
+    {
+      CustomSnackbar.showSucess('Reuqest ');
+      req?.removeAt(index);
+      return true;
+    }
+    else
+      {
+        CustomSnackbar.show('hello');
+      }
+    return false;
+  }
   Future<List<Requests?>?> getAllRequests() async {
-    req = [];
-    try {
+    print('😛');
+    req?.clear();
+    try{
       var token = await jwtController.getAuthToken();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
-
-      http.Response response =
-          await http.get(Uri.parse(ApiEndpoint.requestList), headers: headers);
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}'), headers: headers);
       var body = jsonDecode(response.body);
       print(body);
       body.forEach((e) {
         var temp = Requests.fromJson(e);
         req?.add(temp);
       });
-      req?.shuffle();
       return req;
     } catch (e) {
       print(e);

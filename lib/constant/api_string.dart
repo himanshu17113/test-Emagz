@@ -63,6 +63,7 @@ class ApiEndpoint {
 
   static String blockUser = "$baseUrl/chat_setting/block";
   static String requestList = "$baseUrl/chat_setting/requests";
+  static String removeRequest= "$baseUrl/chat_setting/removeRequest";
   static String acceptRequest(String userId) => "$baseUrl/chat_setting/requests/$userId/accept";
   static String strikeFirstCon = "$baseUrl/conversations/";
   static String getConID(String userId, String secUserId) => "$baseUrl/conversations/find/$userId/$secUserId";

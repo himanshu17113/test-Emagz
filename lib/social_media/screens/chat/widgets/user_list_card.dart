@@ -83,7 +83,7 @@ class _UserChatState extends State<UserChat> {
             const SizedBox(
               width: 10,
             ),
-            const UserOnlineCircle(),
+             UserOnlineCircle(url:widget.userData!.profilePic),
             const SizedBox(
               width: 15,
             ),

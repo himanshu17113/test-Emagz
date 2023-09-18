@@ -1,3 +1,4 @@
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/chat/chat_controller.dart';
@@ -131,110 +132,128 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                 height: 30,
               ),
               Container(
-                child: FutureBuilder<List<Requests?>?>(
-                  future: convController.getAllRequests(),
-
-                  builder: (context,snapshot) {
-                    if (snapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return const CircularProgressIndicator(); // Show a loading indicator
-                    }
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-
-                    if (snapshot.hasData) {
-                      return ListView.builder(
+                child:
+                    ListView.builder(
                           scrollDirection: Axis.vertical,
                           controller: scrollController,
                           physics: const ScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: snapshot.data!.length,
+                          itemCount: convController.req!.length,
                           itemBuilder: (ctx, index) {
-                            return InkWell(
-                              onTap: () {
-                                if (selectedIndex == index) {
-                                  setState(() {
-                                    selectedIndex = null;
-                                  });
-                                } else {
-                                  setState(() {
-                                    selectedIndex = index;
-                                  });
-                                }
-                              },
-                              child: Column(
-                                children: [
-                                   IgnorePointer(child: UserChat(
-                                    userData: UserData(
-                                      id: snapshot.data![index]!.sender!.id,
-                                      username: snapshot.data![index]!.sender!.username,
-                                      email: snapshot.data![index]!.sender!.email,
-                                      profilePic: snapshot.data![index]!.sender!.ProfilePic
-                                    ),
-                                    resentMessage: ResentMessage(
-                                      text: snapshot.data![index]!.sender!.displayName
-                                    ),
-                                    conversationId: "Error message _ request Screen 150",
-                                    senderId: "Error message _ request Screen 150",)),
-                                  selectedIndex == index
-                                      ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, right: 10, bottom: 10),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xff4DD74A)
-                                                  .withOpacity(.12),
-                                            ),
-                                            child: FormHeadingText(
-                                              headings: "Accept Request",
-                                              color: const Color(0xff4DD74A),
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xffFE5151)
-                                                  .withOpacity(.13),
-                                            ),
-                                            child: FormHeadingText(
-                                              headings: "Reject & Block",
-                                              color: const Color(0xffFE5151),
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  )
-                                      : const SizedBox()
-                                ],
-                              ),
-                            );
-                          });
-                    } else {
-                      return const Center(
-                        child: Text("Loading..."),
-                      );
-                    }
+                            bool x=false;
+                            if(convController.req![index]==null || convController.req![index]!.sender==null)
+                              {
+                                return SizedBox();
+                              }
+                            else {
+                              return InkWell(
 
-                  },
+                                onTap: () {
+                                  if (selectedIndex == index) {
+                                    setState(() {
+                                      selectedIndex = null;
+                                    });
+                                  } else {
+                                    setState(() {
+                                      selectedIndex = index;
+                                    });
+                                  }
+                                },
+                                child:convController.req![index]!.status=="pending"? Column(
+                                  children: [
+                                    IgnorePointer(child: UserChat(
+                                      userData: UserData(
+                                          id: convController.req![index]!.sender!.id,
+                                          username: convController.req![index]!
+                                              .sender!.username,
+                                          email: convController.req![index]!.sender!
+                                              .email,
+                                          profilePic: convController.req![index]!
+                                              .sender!.ProfilePic
+                                      ),
+                                      resentMessage: ResentMessage(
+                                          text: convController.req![index]!.sender!
+                                              .displayName
+                                      ),
+                                      conversationId: "Error message _ request Screen 150",
+                                      senderId: convController.req![index]!.sender!
+                                          .id!,)),
+                                    selectedIndex == index
+                                        ? Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10, right: 10, bottom: 10),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets
+                                                  .symmetric(
+                                                  vertical: 10),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xff4DD74A)
+                                                    .withOpacity(.12),
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: ()async
+                                                {
+                                                    await convController.acceptreq(convController.req![index]!.id!, index);
+                                                    setState(() {
+                                                      selectedIndex = null;
+                                                    });
+                                                    },
+
+                                                child: FormHeadingText(
+                                                  headings: "Accept Request",
+                                                  color: const Color(0xff4DD74A),
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              padding: const EdgeInsets
+                                                  .symmetric(
+                                                  vertical: 10),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xffFE5151)
+                                                    .withOpacity(.13),
+                                              ),
+                                              child: GestureDetector(
+                                                onTap: ()async
+                                              {
+                                                await convController.rejectreq(convController.req![index]!.id!, index);
+                                                setState(() {
+                                                  selectedIndex = null;
+                                                });
+                                              },
+                                                child: FormHeadingText(
+                                                  headings: "Reject & Block",
+                                                  color: const Color(0xffFE5151),
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                        : const SizedBox()
+                                  ],
+                                ): SizedBox(),
+                              );
+                            }
+                          }
+                          )
                 ),
+          ]
               ),
+      ),
               // Expanded(
               //   child: ListView.builder(
               //     itemCount: 8,
@@ -307,10 +326,8 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
               //     },
               //   ),
               // ),
-            ],
+
           ),
-        ),
-      ),
     );
   }
 }
