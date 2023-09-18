@@ -47,7 +47,7 @@ class AuthController extends GetxController {
   appleRegister(String email, String password, String imgUrl, String fullName) async {
     try {
 
-      Map<String, String> header = {'Content-type': 'application/json; charset=utf-8'};
+      Map<String, String> header = {'Content-type': 'application/json'};
 
       Map body = {"email": email, "password": password, "username": fullName, "dob": imgUrl};
       debugPrint(body.toString());
@@ -57,6 +57,8 @@ class AuthController extends GetxController {
         headers: header,
         body: jsonEncode(body),
       );
+      debugPrint('Hii');
+      debugPrint(response.body);
       debugPrint(response.body);
 
       var data = json.decode(response.body);

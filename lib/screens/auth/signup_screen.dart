@@ -185,11 +185,6 @@ class SignUpScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                     onPressed: ()async
                     {
-
-                        // To prevent replay attacks with the credential returned from Apple, we
-                        // include a nonce in the credential request. When signing in in with
-                        // Firebase, the nonce in the id token returned by Apple, is expected to
-                        // match the sha256 hash of `rawNonce`.
                         final rawNonce = generateNonce();
                         final nonce = sha256ofString(rawNonce);
 
