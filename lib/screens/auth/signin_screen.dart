@@ -43,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
   final homePostController = Get.put(HomePostsController());
   final _firebaseAuth = FirebaseAuth.instance;
 
-  final authController = Get.put(AuthController());
+  final authController = Get.find<AuthController>();
 
   var jwtController = Get.put(JWTController());
   final GetXStoryController storyController = Get.put(GetXStoryController());

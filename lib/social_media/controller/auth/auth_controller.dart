@@ -21,7 +21,7 @@ class AuthController extends GetxController {
   RxString suggestedName = RxString("");
   RxString Otp = RxString("");
 
-  var jwtController = Get.put(JWTController());
+  final jwtController = Get.put(JWTController());
 
   final userNameController = TextEditingController();
   // conflict between username and Name
