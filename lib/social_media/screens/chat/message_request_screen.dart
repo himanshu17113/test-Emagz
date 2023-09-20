@@ -1,17 +1,14 @@
-import 'package:emagz_vendor/common/common_snackbar.dart';
-import 'package:emagz_vendor/constant/colors.dart';
+ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/social_media/controller/chat/chat_controller.dart';
-import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
+ import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../notification/notification_screen.dart';
-import '../settings/personal_page/personal_page_setting.dart';
+ import '../settings/personal_page/personal_page_setting.dart';
 import 'models/chat_model.dart';
-import 'models/reuqest_model.dart';
-
+ 
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
@@ -48,7 +45,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() => const SocialNotificationScreen());
+                          Get.to(() =>   NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",

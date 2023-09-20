@@ -7,8 +7,7 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/chatControlle
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 import '../models/notification_model.dart';
 
@@ -116,14 +115,14 @@ class SocketController extends GetxController {
       };
       socket.emit("chatMessage", data);
       isUserSender = (userId == id).obs;
-      DateTime curr = DateTime.now();
-      String formattedTime = DateFormat.jm().format(curr); //05:00Pm
-      liveMessages.add(Message(
-          conversationId: room,
-          sender: id,
-          text: message,
-          createdAt: curr.toString() //formattedTime
-          ));
+    //  DateTime curr = DateTime.now();
+    //  String formattedTime = DateFormat.jm().format(curr); //05:00Pm
+      // liveMessages.add(Message(
+      //     conversationId: room,
+      //     sender: id,
+      //     text: message,
+      //     createdAt: curr.toString() //formattedTime
+      //     ));
       // liveMessage.value = Message(
       //     conversationId: room,
       //     sender: id,

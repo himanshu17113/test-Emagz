@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../notification/notification_screen.dart';
-import '../temp_attech_screen.dart';
+ import '../temp_attech_screen.dart';
 
 class SocialHomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -80,7 +80,7 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(() => const SocialNotificationScreen());
+                  Get.to(() =>   NotificationScreen());
                 },
                 child: Image.asset(
                   "assets/png/notification_bell.png",

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/personal_page_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,7 +54,7 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(() => const SocialNotificationScreen());
+                  Get.to(() =>   NotificationScreen());
                 },
                 child: Image.asset(
                   "assets/png/notification_bell.png",

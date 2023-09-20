@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/MessagesView/messages_view.dart';
@@ -76,7 +77,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Get.to(() => const SocialNotificationScreen());
+                        Get.to(() =>   NotificationScreen());
                       },
                       child: Image.asset(
                         "assets/png/notification_bell.png",

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
  
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
@@ -13,8 +14,7 @@ import 'package:get/get.dart';
 import '../../common/title_switch/title_and_switch_widget.dart';
 import '../../controller/auth/jwtcontroller.dart';
 import '../../models/post_model.dart';
-import '../notification/notification_screen.dart';
-
+ 
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
@@ -76,7 +76,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() => const SocialNotificationScreen());
+                          Get.to(() =>   NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",

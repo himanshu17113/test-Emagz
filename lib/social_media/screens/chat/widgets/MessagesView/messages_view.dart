@@ -45,7 +45,7 @@ class _MessageViewState extends State<MessageView> {
         itemCount: socketController.liveMessages.length,
         shrinkWrap: true,
         padding: const EdgeInsets.only(top: 10, bottom: 10),
-        physics: const NeverScrollableScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         itemBuilder: (context, index) {
           // debugPrint(snapshot.data![index % 2].sender!);
           final Message data = socketController.liveMessages[index];

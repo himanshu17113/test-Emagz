@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_setting_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
@@ -70,7 +71,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() => const SocialNotificationScreen());
+                          Get.to(() =>   NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",
