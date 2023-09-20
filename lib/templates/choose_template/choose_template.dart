@@ -283,7 +283,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                    var token = await jwtController.getAuthToken();
                    var userId = await jwtController.getUserId();
 
-                  Get.to(()=>WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId!, templateId: id.toString()));
+                  Get.to(()=>WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId, templateId: id.toString()));
                 },
                 child: Container(
                   height: 45,

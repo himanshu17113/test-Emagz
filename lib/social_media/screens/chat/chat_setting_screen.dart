@@ -313,7 +313,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                               width: 40,
                               inactiveColor: lightgrayColor,
                               inactiveToggleColor: toggleInactive,
-                              value: everyOne?? true!,
+                              value: everyOne?? true,
                               onToggle: (val) {
                                 setState(() {
                                   everyOne = val;
@@ -328,7 +328,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "People you follow",
                         subTitle: "53 People",
-                        isActive: youFollow??false!,
+                        isActive: youFollow??false,
                         onToggle: (val)
                         {
                           setState(() {

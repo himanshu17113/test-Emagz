@@ -6,7 +6,6 @@ import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../../models/post_model.dart';
@@ -318,7 +317,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   )
                 ],
               ),
-            ):SizedBox(),
+            ):const SizedBox(),
             const SizedBox(
               height: 20,
             ),
@@ -367,7 +366,7 @@ class _CommentSettingState extends State<CommentSetting> {
                   )
                 ],
               ),
-            ):SizedBox(),
+            ):const SizedBox(),
           ],
         ),
       ),

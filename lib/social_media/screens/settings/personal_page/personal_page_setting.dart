@@ -3,7 +3,6 @@ import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/models/user_model.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets/setting_common_tile.dart';
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_setting_screen.dart';

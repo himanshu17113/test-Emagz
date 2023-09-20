@@ -4,7 +4,6 @@ import 'package:emagz_vendor/social_media/screens/settings/personal_page/persona
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../screens/notification/notification_screen.dart';
 
 class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;

@@ -7,7 +7,6 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/socketControl
 import 'package:emagz_vendor/social_media/screens/chat/widgets/MessagesView/messages_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../notification/notification_screen.dart';
 import 'chat_list_screen.dart';
 import 'models/chat_model.dart';
 

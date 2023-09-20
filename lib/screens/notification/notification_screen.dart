@@ -49,42 +49,61 @@ class NotificationScreen extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Slidable(
-                  startActionPane: ActionPane(
-                    motion: const ScrollMotion(),
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 3),
-                        alignment: Alignment.center,
-                        height: 100,
-                        width: 180,
-                        color: const Color(0xff298B27),
-                        child: const Text(
-                          'Mute notification about this topic',
-                          style: TextStyle(
-                            fontSize: 9,
-                            color: Colors.white,
-                          ),
+                  key: UniqueKey(),
+                  // startActionPane: ActionPane(
+                  //   motion: const ScrollMotion(),
+                  //   children: [
+                  //     Container(
+                  //       margin: const EdgeInsets.only(top: 3),
+                  //       alignment: Alignment.center,
+                  //       height: 100,
+                  //       width: 180,
+                  //       color: const Color(0xff298B27),
+                  //       child: const Text(
+                  //         'Mute notification about this topic',
+                  //         style: TextStyle(
+                  //           fontSize: 9,
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  endActionPane: ActionPane(
+                      dragDismissible: true,
+                      dismissible: DismissiblePane(onDismissed: () {
+                        socketController.notifications.removeAt(index);
+                        socketController.removeSingleNotification(
+                            notificationModel.id!  );
+                      }),
+                      extentRatio: 1 / 2.2,
+                      motion: const ScrollMotion(),
+                      children: [
+                        // Container(
+                        //   margin: const EdgeInsets.symmetric(vertical: 5),
+                        //   alignment: Alignment.center,
+                        //   //  height: 90,
+                        //   //  width: 180,
+                        //   color: const Color(0xffFE5151),
+                        //   child: const Text(
+                        //     "     Remove Notification     ",
+                        //     style: TextStyle(
+                        //       fontSize: 12,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        // )
+                        SlidableAction(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          onPressed: (context) =>
+                              socketController.removeSingleNotification(
+                                  notificationModel.id!),
+                          backgroundColor: const Color(0xFFFE4A49),
+                          foregroundColor: Colors.white,
+                          icon: Icons.delete,
+                          label: '     Remove Notification     ',
                         ),
-                      )
-                    ],
-                  ),
-                  endActionPane:
-                      ActionPane(motion: const ScrollMotion(), children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 3),
-                      alignment: Alignment.center,
-                      height: 90,
-                      width: 180,
-                      color: const Color(0xffFE5151),
-                      child: const Text(
-                        "Remove Notification",
-                        style: TextStyle(
-                          fontSize: 9,
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  ]),
+                      ]),
                   child: ListTile(
                     tileColor: Colors.white,
                     leading: CircleAvatar(
@@ -106,24 +125,27 @@ class NotificationScreen extends StatelessWidget {
             },
             //  separatorBuilder: (context, index) => const Divider(),
           )),
-      bottomNavigationBar: Container(
-        alignment: Alignment.center,
-        height: 50,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey,
-                offset: Offset(0, -1),
-                blurRadius: 5,
-                spreadRadius: 1),
-          ],
-        ),
-        child: const Text(
-          "Clear Notifiction",
-          style: TextStyle(
-            fontSize: 10,
-            color: Colors.lightBlue,
+      bottomNavigationBar: InkWell(
+        onTap: () => socketController.clearAllNotification(),
+        child: Container(
+          alignment: Alignment.center,
+          height: 50,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, -1),
+                  blurRadius: 5,
+                  spreadRadius: 1),
+            ],
+          ),
+          child: const Text(
+            "Clear Notifiction",
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.lightBlue,
+            ),
           ),
         ),
       ),

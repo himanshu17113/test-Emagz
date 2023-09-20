@@ -58,7 +58,7 @@ class PostView extends StatelessWidget {
                   InkWell(
                     onTap: () {
                       if (post.isLike!) {
-                        homePostController.posts![index!].isLike = false;
+                        homePostController.posts![index].isLike = false;
                         homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! - 1;
 
                         //    post.likes!.remove(myId);

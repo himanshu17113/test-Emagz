@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';

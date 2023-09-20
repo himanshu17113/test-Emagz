@@ -236,7 +236,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
 
                   });
-                  Get.to(() => StorySettingScreen());
+                  Get.to(() => const StorySettingScreen());
                 },
                 child: PreferenceTile(
                   isBlue:stor,
@@ -255,7 +255,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
 
 
                   });
-                  Get.to(() => LiveSettingScreen());
+                  Get.to(() => const LiveSettingScreen());
                 },
                 child: PreferenceTile(
                   isBlue:live,

@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -73,7 +72,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       {
                         Get.back();
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         size: 25,
                         weight: .5,

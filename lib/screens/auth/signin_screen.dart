@@ -252,7 +252,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 ),
               ):
-              SizedBox(),
+              const SizedBox(),
             )
           ],
         ),

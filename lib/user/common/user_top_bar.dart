@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
-import 'package:emagz_vendor/user/screens/notifiction_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

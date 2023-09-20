@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../common/common_snackbar.dart';
@@ -24,9 +23,9 @@ class SecurityController extends GetxController{
     };
 
     debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=${userId}');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=${userId}'),
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'),
         body: jsonEncode(bodymain), headers: headers);
     Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
@@ -55,9 +54,9 @@ class SecurityController extends GetxController{
     };
 
     debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=${userId}');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=${userId}'),
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'),
         body: jsonEncode(bodymain), headers: headers);
     Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
@@ -87,9 +86,9 @@ class SecurityController extends GetxController{
     };
 
     debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=${userId}');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=${userId}'),
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'),
         body: jsonEncode(bodymain), headers: headers);
     Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
@@ -116,9 +115,9 @@ class SecurityController extends GetxController{
     };
 
     debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=${userId}');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=${userId}'),
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'),
         body: jsonEncode(bodymain), headers: headers);
     Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");

@@ -10,7 +10,7 @@ import '../../../controller/privacy/privacy_controller.dart';
 import '../../../models/post_model.dart';
 
 class LiveSettingScreen extends StatefulWidget {
-  LiveSettingScreen({Key? key}) : super(key: key);
+  const LiveSettingScreen({Key? key}) : super(key: key);
 
   @override
   State<LiveSettingScreen> createState() => _LiveSettingScreenState();

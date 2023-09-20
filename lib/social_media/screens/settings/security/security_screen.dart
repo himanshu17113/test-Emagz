@@ -97,7 +97,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         {
                           Get.back();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.arrow_back_ios,
                           size: 25,
                           weight: .5,
@@ -316,7 +316,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateDob(BuildContext context) {
-    TextEditingController dob= new TextEditingController();
+    TextEditingController dob= TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -433,7 +433,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateAddress(BuildContext context) {
-    TextEditingController address= new TextEditingController();
+    TextEditingController address= TextEditingController();
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
         context: context,
@@ -674,11 +674,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateName(BuildContext context) async{
-    TextEditingController name= new TextEditingController();
+    TextEditingController name= TextEditingController();
 
 
-    TextEditingController MobileNumber= new TextEditingController();
-    TextEditingController address= new TextEditingController();
+    TextEditingController MobileNumber= TextEditingController();
+    TextEditingController address= TextEditingController();
 
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
@@ -804,7 +804,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   otpVerificationModal(BuildContext context) {
-    TextEditingController email= new TextEditingController();
+    TextEditingController email= TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -937,7 +937,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateMobileNo(BuildContext context) {
-    TextEditingController mobile= new TextEditingController();
+    TextEditingController mobile= TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -1052,7 +1052,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateEmail(BuildContext context) {
-    TextEditingController email= new TextEditingController();
+    TextEditingController email= TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,

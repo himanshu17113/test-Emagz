@@ -1,26 +1,27 @@
 import 'dart:convert';
-
+import 'dart:math';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
-
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
- import 'package:socket_io_client/socket_io_client.dart' as IO;
-
+import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../models/notification_model.dart';
 
 class SocketController extends GetxController {
   IO.Socket socket = IO.io(ApiEndpoint.socketUrl, <String, dynamic>{
     'transports': ['websocket'],
   });
-
+  static Client client = http.Client();
   String? userId;
   RxBool? isUserSender = false.obs;
   final chatController = Get.put(ConversationController());
 
   final jwtController = Get.find<JWTController>();
+  String? token;
   // Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
   RxList<NotificationModel> notifications = <NotificationModel>[].obs;
@@ -115,8 +116,8 @@ class SocketController extends GetxController {
       };
       socket.emit("chatMessage", data);
       isUserSender = (userId == id).obs;
-    //  DateTime curr = DateTime.now();
-    //  String formattedTime = DateFormat.jm().format(curr); //05:00Pm
+      //  DateTime curr = DateTime.now();
+      //  String formattedTime = DateFormat.jm().format(curr); //05:00Pm
       // liveMessages.add(Message(
       //     conversationId: room,
       //     sender: id,
@@ -134,7 +135,9 @@ class SocketController extends GetxController {
 
   initSocket() async {
     userId = jwtController.userId ?? chatController.userId;
+    token = jwtController.token ?? chatController.token;
     userId ??= await jwtController.getUserId();
+    token ??= await jwtController.getAuthToken();
   }
 
   void sendLikeNotification(String id, String name) {
@@ -174,6 +177,72 @@ class SocketController extends GetxController {
           : "${jwtController.user?.value.displayName} Commented on your Story ",
     };
     socket.emit("notification", data);
+  }
+
+  Future<bool> removeSingleNotification(
+      String NotificationId ) async {
+    try {
+      //  notifications.removeAt(index);
+      Map<String, String> header = {
+        'authorization': token!,
+      };
+
+      String url = ApiEndpoint.removeSingleNotification(NotificationId);
+
+      debugPrint(url);
+      http.Response response = await client.get(
+        Uri.parse(url),
+        headers: header,
+      );
+
+      debugPrint(response.toString());
+      debugPrint(url);
+
+      debugPrint('Response Code: ${response.body}');
+      debugPrint(response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+     //   notifications.removeWhere((element) => element.id == NotificationId);
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
+  }
+
+  Future<bool> clearAllNotification() async {
+    try {
+      Map<String, String> header = {
+        'authorization': token!,
+      };
+
+      String url = ApiEndpoint.clearAllNotification(userId!);
+
+      debugPrint(url);
+      http.Response response = await client.get(
+        Uri.parse(url),
+        headers: header,
+      );
+
+      debugPrint(response.toString());
+      debugPrint(url);
+
+      debugPrint('Response Code: ${response.body}');
+      debugPrint(response.statusCode.toString());
+
+      if (response.statusCode == 200) {
+        notifications.clear();
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return false;
+    }
   }
 
   @override

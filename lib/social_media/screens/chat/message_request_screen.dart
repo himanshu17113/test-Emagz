@@ -150,7 +150,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                       bool x = false;
                       if (convController.req![index] == null ||
                           convController.req![index]!.sender == null) {
-                        return SizedBox();
+                        return const SizedBox();
                       }
                       else {
                         return InkWell(
@@ -258,7 +258,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                   : const SizedBox()
                             ],
                           )
-                              : SizedBox(),
+                              : const SizedBox(),
                         );
                       }
                     }

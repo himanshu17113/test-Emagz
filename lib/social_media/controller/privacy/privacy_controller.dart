@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../common/common_snackbar.dart';
@@ -43,7 +42,7 @@ class PrivacyController extends GetxController{
     }
 
   }
-  privacyPostControl(bool everyone,bool followers, bool no_one ) async
+  privacyPostControl(bool everyone,bool followers, bool noOne ) async
   {
     var token = await jwtController.getAuthToken();
     var headers = {
@@ -53,7 +52,7 @@ class PrivacyController extends GetxController{
     Map bodymain={
       "everyone": everyone,
       "followers": followers,
-      "no_one": no_one,
+      "no_one": noOne,
     };
     Map body = {"post_privacy": bodymain};
     debugPrint(ApiEndpoint.postPrivacy);
@@ -73,7 +72,7 @@ class PrivacyController extends GetxController{
     }
 
   }
-  privacyMentionControl(bool everyone,bool followers, bool no_one ) async
+  privacyMentionControl(bool everyone,bool followers, bool noOne ) async
   {
     var token = await jwtController.getAuthToken();
     var headers = {
@@ -83,7 +82,7 @@ class PrivacyController extends GetxController{
     Map bodymain={
       "everyone": everyone,
       "followers": followers,
-      "no_one": no_one,
+      "no_one": noOne,
     };
     Map body = {"mention_privacy": bodymain};
     debugPrint(ApiEndpoint.mentionPrivacy);
@@ -159,7 +158,7 @@ class PrivacyController extends GetxController{
       CustomSnackbar.show(data.toString());
     }
   }
-  privacyMessageControl(bool everyone,bool followers, bool no_one ) async
+  privacyMessageControl(bool everyone,bool followers, bool noOne ) async
   {
     var token = await jwtController.getAuthToken();
     var headers = {
@@ -169,7 +168,7 @@ class PrivacyController extends GetxController{
     Map bodymain={
       "everyone": everyone,
       "followers": followers,
-      "no_one": no_one,
+      "no_one": noOne,
     };
     Map body = {"message_privacy": bodymain};
 

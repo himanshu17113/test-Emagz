@@ -164,8 +164,8 @@ class ConversationController extends GetxController {
     debugPrint("🧣🧣🧣🧣🧣 start2");
     Dio dio = Dio();
     dio.options.headers["Authorization"] = token;
-    print('${ApiEndpoint.requestList}/${id}/accept');
-    var response = await dio.post('${ApiEndpoint.requestList}/${id}/accept');
+    print('${ApiEndpoint.requestList}/$id/accept');
+    var response = await dio.post('${ApiEndpoint.requestList}/$id/accept');
     if(response.statusCode==200)
       {
         CustomSnackbar.showSucess('Reuqest ');
@@ -182,7 +182,7 @@ class ConversationController extends GetxController {
   {
     Dio dio = Dio();
     dio.options.headers["Authorization"] = token;
-    var response = await dio.delete('${ApiEndpoint.removeRequest}/${id}');
+    var response = await dio.delete('${ApiEndpoint.removeRequest}/$id');
     if(response.statusCode==200)
     {
       CustomSnackbar.showSucess('Reuqest ');
@@ -200,9 +200,9 @@ class ConversationController extends GetxController {
     req?.clear();
     try{
       var token = await jwtController.getAuthToken();
-      debugPrint('${ApiEndpoint.requestList}?filter=${filter}');
+      debugPrint('${ApiEndpoint.requestList}?filter=$filter');
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
-      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=${filter}'), headers: headers);
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=$filter'), headers: headers);
       var body = jsonDecode(response.body);
       print(body);
       body.forEach((e) {
