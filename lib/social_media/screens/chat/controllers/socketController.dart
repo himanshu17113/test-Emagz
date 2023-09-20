@@ -22,7 +22,7 @@ class SocketController extends GetxController {
   final chatController = Get.put(ConversationController());
 
   final jwtController = Get.find<JWTController>();
-  Rx<Message> liveMessage = Message().obs;
+  // Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
   RxList<NotificationModel> notifications = <NotificationModel>[].obs;
   RxList<String> timeStamps = <String>[].obs;
@@ -52,26 +52,50 @@ class SocketController extends GetxController {
     });
   }
 
+  void disconnectToServer(String room) {
+    socket.emit("leaveRoom", room);
+    socket.clearListeners();
+  }
+
   void connectToServer(String room) {
-    socket.onConnect((_) {
-      socket.emit("joinRoom", room);
-    });
+    debugPrint("Connect to Server");
+//    socket.connect();
+    socket.emit("joinRoom", room);
+    // socket.onConnect((_) {
+    //   debugPrint("socket is connected to the room $room");
+    //   socket.emit("joinRoom", room);
+    // });
+
     socket.on("chatHistory", (payload) {
+      debugPrint("Getting Chat History");
+      print(payload.toString());
       for (var payloadx in payload) {
+        // print(payloadx);
         liveMessages.add(Message.fromJson(payloadx));
       }
     });
 
     socket.onDisconnect((_) => debugPrint('disconnect'));
-
+    socket.on(
+        'receive_message_$room',
+        (message) => {
+              liveMessages.add(Message(
+                sId: message['_id'],
+                conversationId: message['conversationId'],
+                sender: message['sender'],
+                text: message['text'],
+                createdAt: message['createdAt'],
+              ))
+            });
     socket.on('message_$room', (message) {
-      liveMessage.value = Message(
-        sId: message['_id'],
-        conversationId: message['conversationId'],
-        sender: message['sender'],
-        text: message['text'],
-        createdAt: message['createdAt'],
-      );
+      // liveMessage.value = Message(
+      //   sId: message['_id'],
+      //   conversationId: message['conversationId'],
+      //   sender: message['sender'],
+      //   text: message['text'],
+      //   createdAt: message['createdAt'],
+      // );
+
       liveMessages.add(Message(
         sId: message['_id'],
         conversationId: message['conversationId'],
@@ -84,14 +108,28 @@ class SocketController extends GetxController {
 
   void sendMessage(String message, String room, String id) async {
     if (message.isNotEmpty) {
-      await chatController.postChat(message, room);
+      //    await chatController.postChat(message, room);'
+      Map<String, dynamic> data = {
+        "room": room,
+        "sender": userId,
+        "message": message,
+      };
+      socket.emit("chatMessage", data);
       isUserSender = (userId == id).obs;
       DateTime curr = DateTime.now();
       String formattedTime = DateFormat.jm().format(curr); //05:00Pm
-      liveMessages.add(Message(conversationId: room, sender: id, text: message, createdAt: curr.toString() //formattedTime
+      liveMessages.add(Message(
+          conversationId: room,
+          sender: id,
+          text: message,
+          createdAt: curr.toString() //formattedTime
           ));
-      liveMessage.value = Message(conversationId: room, sender: id, text: message, createdAt: curr.toString() //formattedtime
-          );
+      // liveMessage.value = Message(
+      //     conversationId: room,
+      //     sender: id,
+      //     text: message,
+      //     createdAt: curr.toString() //formattedtime
+      //     );
     }
   }
 
@@ -112,13 +150,16 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(
+      String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
+      "message": ispost
+          ? "$name Share a post with you"
+          : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }

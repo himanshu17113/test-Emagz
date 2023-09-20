@@ -1,11 +1,9 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controllers/chatController.dart';
 import '../models/chat_model.dart';
 
 class UserChat extends StatefulWidget {
@@ -28,8 +26,8 @@ class UserChat extends StatefulWidget {
 }
 
 class _UserChatState extends State<UserChat> {
-  final jwtController = Get.find<JWTController>();
-  final chatController = Get.find<ConversationController>();
+//  final jwtController = Get.find<JWTController>();
+  //final chatController = Get.find<ConversationController>();
 //  UserSchema? sender;
 
 //   @override
@@ -39,7 +37,7 @@ class _UserChatState extends State<UserChat> {
 //   }
 
   Future getInitUser() async {
-    debugPrint("id in list item : ${widget.senderId}");
+    // debugPrint("id in list item : ${widget.senderId}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       //   sender = await jwtController.getUserDetail(widget.senderId);
       setState(() {});
@@ -60,11 +58,13 @@ class _UserChatState extends State<UserChat> {
         } else {
           //   List<Message>? messages = [];
           //  messages = await chatController.getMessages(widget.conversationId);
-          Get.to(() => ChatScreen(
-                user: widget.userData,
-                conversationId: widget.conversationId,
-                //  messages: messages,
-              ));
+          Get.to(
+              () => ChatScreen(
+                    user: widget.userData,
+                    conversationId: widget.conversationId,
+                    //  messages: messages,
+                  ),
+              duration: const Duration(seconds: 0));
         }
       },
       child: Container(
@@ -83,7 +83,7 @@ class _UserChatState extends State<UserChat> {
             const SizedBox(
               width: 10,
             ),
-             UserOnlineCircle(url:widget.userData!.profilePic),
+            UserOnlineCircle(url: widget.userData!.profilePic),
             const SizedBox(
               width: 15,
             ),
@@ -94,11 +94,17 @@ class _UserChatState extends State<UserChat> {
                 widget.userData == null
                     ? Text(
                         "loading",
-                        style: TextStyle(color: Colors.black.withOpacity(0.25), fontSize: 12, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.25),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       )
                     : Text(
                         "${widget.userData?.username}",
-                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       ),
                 const SizedBox(
                   height: 3,
@@ -106,11 +112,17 @@ class _UserChatState extends State<UserChat> {
                 widget.resentMessage == null
                     ? Text(
                         "loading",
-                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
                       )
                     : Text(
                         widget.resentMessage?.text ?? "last text",
-                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
                       ),
               ],
             ),
@@ -133,7 +145,10 @@ class _UserChatState extends State<UserChat> {
                   )
                 : const Text(
                     "",
-                    style: TextStyle(color: Color(0xffA1A1A1), fontSize: 10, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: Color(0xffA1A1A1),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600),
                   ),
             const SizedBox(
               width: 30,

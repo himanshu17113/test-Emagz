@@ -189,7 +189,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   child:  Row(
                     children: [
                       UserOnlineCircle(),
-                      SizedBox(
+                    const  SizedBox(
                         width: 10,
                       ),
                       // UserOnlineCircle(),

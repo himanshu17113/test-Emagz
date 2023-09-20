@@ -2,7 +2,7 @@ import 'package:emagz_vendor/screens/auth/forgot_password/change_password_screen
 import 'package:emagz_vendor/screens/auth/forgot_password/otp_verification_screen.dart';
 import 'package:emagz_vendor/screens/auth/signin_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
- import 'package:emagz_vendor/social_media/screens/account/business_profile_setup.dart';
+import 'package:emagz_vendor/social_media/screens/account/business_profile_setup.dart';
 import 'package:emagz_vendor/social_media/screens/account/personal_account.dart';
 import 'package:emagz_vendor/social_media/screens/account/personal_profile_setup.dart';
 import 'package:emagz_vendor/social_media/screens/intrest/choose_intrest.dart';
@@ -44,12 +44,19 @@ class AuthController extends GetxController {
   int? selectedChoiseIndex;
   Set<int> selectedChoices = {};
   Set<String> selectedInterest = {};
-  appleRegister(String email, String password, String imgUrl, String fullName) async {
+  appleRegister(
+      String email, String password, String imgUrl, String fullName) async {
     try {
+      Map<String, String> header = {
+        'Content-type': 'application/json; charset=utf-8'
+      };
 
-      Map<String, String> header = {'Content-type': 'application/json; charset=utf-8'};
-
-      Map body = {"email": email, "password": password, "username": fullName, "dob": imgUrl};
+      Map body = {
+        "email": email,
+        "password": password,
+        "username": fullName,
+        "dob": imgUrl
+      };
       debugPrint(body.toString());
       print('Apple sign in Started');
       http.Response response = await http.post(
@@ -62,7 +69,6 @@ class AuthController extends GetxController {
       var data = json.decode(response.body);
       if (response.statusCode == 200) {
         if (data['status'] == true) {
-
           Get.snackbar("Success", data['message']);
           Get.off(() => const ChooseIntrestScreen());
         }
@@ -76,17 +82,16 @@ class AuthController extends GetxController {
 
         return true;
       } else {
-
         Get.snackbar("Error", data['message']);
         return false;
       }
     } catch (e) {
-
       Get.snackbar("Error", "Something went wrong! please try again later");
       debugPrint(e.toString());
       return false;
     }
   }
+
   checkPassword(String v) {
     if (v.isEmpty) {
       isLowerText.value = false;
@@ -135,7 +140,8 @@ class AuthController extends GetxController {
       };
       debugPrint(ApiEndpoint.register);
       debugPrint(body.toString());
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.register), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(Uri.parse(ApiEndpoint.register),
+          body: jsonEncode(body), headers: headers);
 
       debugPrint(response.body);
       Map data = jsonDecode(response.body);
@@ -144,11 +150,14 @@ class AuthController extends GetxController {
         clearValue();
         CustomSnackbar.showSucess("User Registered Successfully");
         isUserRegiserting.value = false;
-        var token = data["token"];
-        var userId = data["userId"];
+        final token = data["token"];
+        final userId = data["userId"];
         debugPrint("TOKEN : $token userId : $userId");
+        jwtController.token = token;
+        jwtController.userId = userId;
         jwtController.setAuthToken(token, userId);
-        Get.to(() => const ChooseIntrestScreen(), transition: Transition.rightToLeftWithFade);
+        Get.to(() => const ChooseIntrestScreen(),
+            transition: Transition.rightToLeftWithFade);
         return true;
       } else if (response.statusCode == 401) {
         CustomSnackbar.show(data['error']);
@@ -170,7 +179,8 @@ class AuthController extends GetxController {
       return false;
     }
   }
-  Future<bool> appleSignIn(String email,String password)async{
+
+  Future<bool> appleSignIn(String email, String password) async {
     try {
       isUserlogging.value = true;
       Map body = {
@@ -179,7 +189,8 @@ class AuthController extends GetxController {
       };
       var headers = {'Content-Type': 'application/json'};
 
-      var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
+      var response = await http.post(Uri.parse(ApiEndpoint.login),
+          body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
 
       debugPrint(data["data"]["_id"]);
@@ -212,6 +223,7 @@ class AuthController extends GetxController {
       return false;
     }
   }
+
   Future<bool> signInuser() async {
     try {
       isUserlogging.value = true;
@@ -221,7 +233,8 @@ class AuthController extends GetxController {
       };
       var headers = {'Content-Type': 'application/json'};
 
-      var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
+      var response = await http.post(Uri.parse(ApiEndpoint.login),
+          body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
 
       debugPrint(data["data"]["_id"]);
@@ -264,7 +277,11 @@ class AuthController extends GetxController {
   }
 
   Future<void> pickDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950), lastDate: DateTime.now());
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1950),
+        lastDate: DateTime.now());
     if (pickedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       dobController.text = formattedDate;
@@ -282,12 +299,20 @@ class AuthController extends GetxController {
     try {
       var userId = await jwtController.getUserId();
       var token = await jwtController.getAuthToken();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
       var accountTypes = ["Error", "personal", "professional"];
       Map body = {"accountType": accountTypes[value]};
-      http.Response response = await http.put(Uri.parse(ApiEndpoint.accountType(userId!)), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.put(
+          Uri.parse(ApiEndpoint.accountType(userId!)),
+          body: jsonEncode(body),
+          headers: headers);
       if (response.statusCode == 200) {
-        (value == 1) ? Get.to(() => PersonalProfileSetup()) : Get.to(() => const BusinessProfileSetupScreen());
+        (value == 1)
+            ? Get.to(() => PersonalProfileSetup())
+            : Get.to(() => const BusinessProfileSetupScreen());
       }
       isUserlogging.value = false;
     } catch (e) {
@@ -304,7 +329,8 @@ class AuthController extends GetxController {
     }
     var headers = {'Content-Type': 'application/json'};
     Map body = {"email": email};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.sendOtp), body: jsonEncode(body), headers: headers);
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.sendOtp),
+        body: jsonEncode(body), headers: headers);
     debugPrint(response.body);
     var responseData = jsonDecode(response.body);
 
@@ -332,7 +358,8 @@ class AuthController extends GetxController {
     var headers = {'Content-Type': 'application/json'};
     Map body = {"email": email, "otp": typedOtp};
     // debugPrint(body);
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.verifyOtp), body: jsonEncode(body), headers: headers);
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.verifyOtp),
+        body: jsonEncode(body), headers: headers);
     var responseData = jsonDecode(response.body);
     if (response.statusCode == 200) {
       isUserRegiserting.value = false;
@@ -353,8 +380,14 @@ class AuthController extends GetxController {
   changePassword(String newPassword) async {
     isUserRegiserting.value = true;
     var headers = {'Content-Type': 'application/json'};
-    Map body = {"email": forgotPasswordEmailController.text, "password": newPassword};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.changePassword), body: jsonEncode(body), headers: headers);
+    Map body = {
+      "email": forgotPasswordEmailController.text,
+      "password": newPassword
+    };
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.changePassword),
+        body: jsonEncode(body),
+        headers: headers);
     //  var responseBody = jsonDecode(response.body);
     if (response.statusCode == 200) {
       isUserRegiserting.value = false;
@@ -372,20 +405,28 @@ class AuthController extends GetxController {
       isUserlogging.value = true;
 
       var token = await jwtController.getAuthToken();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
       var userId = await jwtController.getUserId();
       Map body = {
         "_id": userId,
         "interestName": selectedChoices.toList(),
       };
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.chooseIntrest), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(
+          Uri.parse(ApiEndpoint.chooseIntrest),
+          body: jsonEncode(body),
+          headers: headers);
       debugPrint(response.body);
       if (response.statusCode == 200) {
-        http.Response uniqueNameResponse = await http.get(Uri.parse(ApiEndpoint.uniqueName(userId!)), headers: headers);
+        http.Response uniqueNameResponse = await http
+            .get(Uri.parse(ApiEndpoint.uniqueName(userId!)), headers: headers);
         var uniqRes = jsonDecode(uniqueNameResponse.body);
         suggestedName.value = uniqRes["GetstatedName"];
         isUserlogging.value = false;
-        Get.to(PersonalAccountScreen(suggestedName: suggestedName.value), transition: Transition.rightToLeft);
+        Get.to(PersonalAccountScreen(suggestedName: suggestedName.value),
+            transition: Transition.rightToLeft);
       } else {
         isUserlogging.value = false;
         CustomSnackbar.show("Cant Proceed Further");

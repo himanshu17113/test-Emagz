@@ -62,6 +62,10 @@ class ConversationController extends GetxController {
 
   Future<List<Conversation>> getChatList() async {
     try {
+      
+      if (token == null || userId == null) {
+        await storedData();
+      }
       Dio dio = Dio();
       dio.options.headers["Authorization"] = jwtController.token ?? token;
       debugPrint(ApiEndpoint.getConversation(jwtController.userId ?? userId!));

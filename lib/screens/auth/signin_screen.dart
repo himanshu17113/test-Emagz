@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:crypto/crypto.dart';
-import 'dart:convert';
-import 'dart:io';
-import 'package:crypto/crypto.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
@@ -15,22 +12,13 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
 
 import 'widgets/my_custom_textfiled.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-import '../../common/common_snackbar.dart';
 import '../../social_media/common/bottom_nav/bottom_nav.dart';
 import '../../social_media/controller/home/home_controller.dart';
 import 'forgot_password/forgot_password_screen.dart';
-import 'widgets/form_haeding_text.dart';
-import 'widgets/my_custom_textfiled.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -199,7 +187,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             Center(
               child:Platform.isIOS?
-              Container(
+              SizedBox(
                 width: 400,
                 child: SignInWithAppleButton(
                     style: SignInWithAppleButtonStyle.black,
