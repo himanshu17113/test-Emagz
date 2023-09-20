@@ -25,7 +25,7 @@ class ConversationController extends GetxController {
   onInit() async {
     token = jwtController.token;
     userId = jwtController.userId;
-    getAllRequests();
+    getAllRequests('new');
     if (token == null || userId == null) {
       await storedData();
     }
@@ -195,13 +195,14 @@ class ConversationController extends GetxController {
       }
     return false;
   }
-  Future<List<Requests?>?> getAllRequests() async {
+  Future<List<Requests?>?> getAllRequests(String filter) async {
     print('😛');
     req?.clear();
     try{
       var token = await jwtController.getAuthToken();
+      debugPrint('${ApiEndpoint.requestList}?filter=${filter}');
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
-      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}'), headers: headers);
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=${filter}'), headers: headers);
       var body = jsonDecode(response.body);
       print(body);
       body.forEach((e) {

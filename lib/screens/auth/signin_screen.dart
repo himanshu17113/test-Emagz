@@ -232,7 +232,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         final photoUrl='${appleCredential.identityToken}';
                         if(appleCredential.email!=null && appleCredential.givenName!=null && appleCredential.familyName!=null && appleCredential.identityToken!=null) {
                           authController.appleSignIn(
-                              appleCredential.email!, appleCredential.identityToken!);
+                              userEmail,photoUrl);
                         }
                         else{
                           Get.snackbar('Error',"Did not recieve credentials from Apple.");

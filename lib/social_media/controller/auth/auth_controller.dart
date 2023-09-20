@@ -64,6 +64,8 @@ class AuthController extends GetxController {
         headers: header,
         body: jsonEncode(body),
       );
+      debugPrint('Hii');
+      debugPrint(response.body);
       debugPrint(response.body);
 
       var data = json.decode(response.body);

@@ -121,9 +121,20 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                     onChanged: (val) {
-                      // setState(() {
-                      //   dropdownvalue = newValue!;
-                      // });
+                      if(val=="Old request")
+                        {
+                          convController.req?.clear();
+                          setState(() {
+                            convController.getAllRequests('old');
+                          });
+                        }
+                      else
+                        {
+                          convController.req?.clear();
+                          setState(() {
+                            convController.getAllRequests('new');
+                          });
+                        }
                     },
                   ),
                 ),
@@ -131,126 +142,132 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Container(
-                child:
-                    ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          controller: scrollController,
-                          physics: const ScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: convController.req!.length,
-                          itemBuilder: (ctx, index) {
-                            bool x=false;
-                            if(convController.req![index]==null || convController.req![index]!.sender==null)
-                              {
-                                return SizedBox();
-                              }
-                            else {
-                              return InkWell(
+              Obx(() {
+                return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    controller: scrollController,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: convController.req!.length,
+                    itemBuilder: (ctx, index) {
+                      bool x = false;
+                      if (convController.req![index] == null ||
+                          convController.req![index]!.sender == null) {
+                        return SizedBox();
+                      }
+                      else {
+                        return InkWell(
 
-                                onTap: () {
-                                  if (selectedIndex == index) {
-                                    setState(() {
-                                      selectedIndex = null;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      selectedIndex = index;
-                                    });
-                                  }
-                                },
-                                child:convController.req![index]!.status=="pending"? Column(
+                          onTap: () {
+                            if (selectedIndex == index) {
+                              setState(() {
+                                selectedIndex = null;
+                              });
+                            } else {
+                              setState(() {
+                                selectedIndex = index;
+                              });
+                            }
+                          },
+                          child: convController.req![index]!.status == "pending"
+                              ? Column(
+                            children: [
+                              IgnorePointer(child: UserChat(
+                                userData: UserData(
+                                    id: convController.req![index]!.sender!.id,
+                                    username: convController.req![index]!
+                                        .sender!.username,
+                                    email: convController.req![index]!.sender!
+                                        .email,
+                                    profilePic: convController.req![index]!
+                                        .sender!.ProfilePic
+                                ),
+                                resentMessage: ResentMessage(
+                                    text: convController.req![index]!.sender!
+                                        .displayName
+                                ),
+                                conversationId: "Error message _ request Screen 150",
+                                senderId: convController.req![index]!.sender!
+                                    .id!,)),
+                              selectedIndex == index
+                                  ? Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, bottom: 10),
+                                child: Row(
                                   children: [
-                                    IgnorePointer(child: UserChat(
-                                      userData: UserData(
-                                          id: convController.req![index]!.sender!.id,
-                                          username: convController.req![index]!
-                                              .sender!.username,
-                                          email: convController.req![index]!.sender!
-                                              .email,
-                                          profilePic: convController.req![index]!
-                                              .sender!.ProfilePic
-                                      ),
-                                      resentMessage: ResentMessage(
-                                          text: convController.req![index]!.sender!
-                                              .displayName
-                                      ),
-                                      conversationId: "Error message _ request Screen 150",
-                                      senderId: convController.req![index]!.sender!
-                                          .id!,)),
-                                    selectedIndex == index
-                                        ? Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, right: 10, bottom: 10),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  vertical: 10),
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xff4DD74A)
-                                                    .withOpacity(.12),
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: ()async
-                                                {
-                                                    await convController.acceptreq(convController.req![index]!.id!, index);
-                                                    setState(() {
-                                                      selectedIndex = null;
-                                                    });
-                                                    },
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xff4DD74A)
+                                              .withOpacity(.12),
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () async
+                                          {
+                                            await convController.acceptreq(
+                                                convController.req![index]!.id!,
+                                                index);
+                                            setState(() {
+                                              selectedIndex = null;
+                                            });
+                                          },
 
-                                                child: FormHeadingText(
-                                                  headings: "Accept Request",
-                                                  color: const Color(0xff4DD74A),
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ),
+                                          child: FormHeadingText(
+                                            headings: "Accept Request",
+                                            color: const Color(0xff4DD74A),
+                                            fontSize: 12,
                                           ),
-                                          const SizedBox(
-                                            width: 10,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            vertical: 10),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffFE5151)
+                                              .withOpacity(.13),
+                                        ),
+                                        child: GestureDetector(
+                                          onTap: () async
+                                          {
+                                            await convController.rejectreq(
+                                                convController.req![index]!.id!,
+                                                index);
+                                            setState(() {
+                                              selectedIndex = null;
+                                            });
+                                          },
+                                          child: FormHeadingText(
+                                            headings: "Reject & Block",
+                                            color: const Color(0xffFE5151),
+                                            fontSize: 12,
                                           ),
-                                          Expanded(
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  vertical: 10),
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xffFE5151)
-                                                    .withOpacity(.13),
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: ()async
-                                              {
-                                                await convController.rejectreq(convController.req![index]!.id!, index);
-                                                setState(() {
-                                                  selectedIndex = null;
-                                                });
-                                              },
-                                                child: FormHeadingText(
-                                                  headings: "Reject & Block",
-                                                  color: const Color(0xffFE5151),
-                                                  fontSize: 12,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                        ],
+                                        ),
                                       ),
                                     )
-                                        : const SizedBox()
                                   ],
-                                ): SizedBox(),
-                              );
-                            }
-                          }
+                                ),
+                              )
+                                  : const SizedBox()
+                            ],
                           )
-                ),
+                              : SizedBox(),
+                        );
+                      }
+                    }
+                );
+              }
+              ),
           ]
               ),
       ),
