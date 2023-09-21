@@ -17,10 +17,12 @@ class EditorScreen extends StatefulWidget {
   final String? fileType;
   final String? fileExtension;
   final Uint8List? image;
-  final int? imageHeight;
-  final int? imageWidth;
+  // final int? imageHeight;
+  // final int? imageWidth;
   const EditorScreen(
-      {super.key, required this.onSubmit, required this.image, this.fileType, this.imageHeight, this.imageWidth, required this.fileExtension});
+      {super.key, required this.onSubmit, required this.image, this.fileType, 
+ //     this.imageHeight, this.imageWidth, 
+      required this.fileExtension});
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();

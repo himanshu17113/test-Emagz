@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
@@ -16,7 +17,7 @@ class HomePostsController extends GetxController {
   var logger = Logger(
     printer: PrettyPrinter(),
   );
-final  ScrollController scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   bool ispostloading = false;
   final jwtController = Get.find<JWTController>();
   final socketController = Get.put(SocketController());
@@ -47,9 +48,12 @@ final  ScrollController scrollController = ScrollController();
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !ispostloading) {
       await getPost();
-    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent - 50) {}
   }
 
   RxList<Post>? posts = <Post>[].obs;
@@ -68,7 +72,8 @@ final  ScrollController scrollController = ScrollController();
       Dio dio = Dio();
       // var token = await jwtController.getAuthToken();
       // userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] =
+          token ?? await jwtController.getAuthToken();
       debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
       //  debugPrint(ApiEndpoint.posts(skip.value));
       final String endPoint = ApiEndpoint.posts(skip.value);
@@ -76,7 +81,8 @@ final  ScrollController scrollController = ScrollController();
       print(endPoint);
       var resposne = await dio.get(endPoint);
       // logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null &&
+          resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -171,19 +177,23 @@ final  ScrollController scrollController = ScrollController();
   }
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
-      if (islike) {
-      socketController.sendLikeNotification(uid, jwtController.user?.value.username ?? jwtController.user?.value.displayName ?? "");
+    if (islike) {
+      socketController.sendLikeNotification(
+          uid,
+          jwtController.user?.value.username ??
+              jwtController.user?.value.displayName ??
+              "");
     }
     try {
       Dio dio = Dio();
-    
+
       dio.options.headers["authorization"] = token;
       var data = {
         "userId": userId,
       };
       var response = await dio.post(ApiEndpoint.likePost(postId), data: data);
       debugPrint(response.data);
-    
+
       return true;
     } catch (e) {
       //  debugPrint(e);
@@ -191,7 +201,7 @@ final  ScrollController scrollController = ScrollController();
     }
   }
 
-  Future postPoll(String postId, String vote) async {
+  Future<Poll?>  postPoll(String postId, String vote) async {
     try {
       // var userId = await JWTController().getUserId();
       // var token = await JWTController().getAuthToken();
@@ -201,34 +211,38 @@ final  ScrollController scrollController = ScrollController();
       dio.options.headers["Authorization"] = token;
       var response = await dio.post(ApiEndpoint.doPoll(postId), data: data);
       debugPrint(response.data.toString());
-      if (response.statusCode == 200) {
-        Polldetail(postId);
-      }
+      // if (response.statusCode == 200) {
+      //   Polldetail(postId);
+      // }
 
-      return true;
+      return Polldetail(postId);
+     
     } catch (e) {
       debugPrint(e.toString());
-      return false;
+    //  return false;
     }
   }
 
-  Future Polldetail(String postId) async {
+  Future<Poll?> Polldetail(String postId) async {
     try {
       // var userId = await JWTController().getUserId();
       // var token = await JWTController().getAuthToken();
       Dio dio = Dio();
-      debugPrint(ApiEndpoint.doPoll(postId));
+      //  debugPrint(ApiEndpoint.pollResults(postId));
       // var data = {"vote": vote, "userId": userId};
       dio.options.headers["Authorization"] = token;
       var response = await dio.get(
         ApiEndpoint.pollResults(postId),
       );
-      Poll poll = Poll.fromJson(response.data);
-      print(json.encode(response.data));
-      return true;
+      //print(response.data);
+      //log(response.data);
+      Poll poll = Poll.fromMap(jsonDecode(jsonEncode(response.data)));
+      //   print(json.encode(response.data)["isVoted"]);
+      return poll;
+      // return json.decode(response.data)["isVoted"];
     } catch (e) {
       debugPrint(e.toString());
-      return false;
+      //   return false;
     }
   }
 }

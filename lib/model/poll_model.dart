@@ -1,16 +1,15 @@
 import 'dart:convert';
 
-import '../social_media/models/post_model.dart';
-
 class Poll {
-  Post? post;
-  List<PollResult>? pollResults;
+  Postx? postx;
+  //List<PollResult>? pollResults;
   PollCalculation? pollCalculation;
-
+  bool? isVoted;
   Poll({
-    this.post,
-    this.pollResults,
+    this.postx,
+    // this.pollResults,
     this.pollCalculation,
+    this.isVoted,
   });
 
   factory Poll.fromJson(String str) => Poll.fromMap(json.decode(str));
@@ -18,34 +17,98 @@ class Poll {
   String toJson() => json.encode(toMap());
 
   factory Poll.fromMap(Map<String, dynamic> json) => Poll(
-        post: json["post"] == null ? null : Post.fromJson(json["post"]),
-        pollResults: json["PollResults"] == null ? [] : List<PollResult>.from(json["PollResults"]!.map((x) => PollResult.fromMap(x))),
-        pollCalculation: json["pollCalculation"] == null ? null : PollCalculation.fromMap(json["pollCalculation"]),
+        postx: json["post"] == null
+            ? null
+            : Postx.fromJson(jsonDecode(jsonEncode(json["post"]))),
+        //   pollResults: json["PollResults"] == null ? [] : List<PollResult>.from(json["PollResults"]!.map((x) => PollResult.fromMap(x))),
+        pollCalculation: json["pollCalculation"] == null
+            ? null
+            : PollCalculation.fromMap(json["pollCalculation"]),
+        isVoted: json["isVoted"],
       );
 
   Map<String, dynamic> toMap() => {
-     //   "post": post?.toMap(),
-        "PollResults": pollResults == null ? [] : List<dynamic>.from(pollResults!.map((x) => x.toMap())),
+        //   "postx": postx?.toMap(),
+        //   "PollResults": pollResults == null ? [] : List<dynamic>.from(pollResults!.map((x) => x.toMap())),
         "pollCalculation": pollCalculation?.toMap(),
       };
 }
 
+class Postx {
+  Privacy? privacy;
+  String? id;
+  int? likeCount;
+  bool? enabledpoll;
+  bool? showPollResults;
+  int? setTimer;
+  List<String>? customPollData;
+  bool? customPollEnabled;
+  DateTime? pollDuration;
+
+  Postx({
+    this.privacy,
+    this.id,
+    this.likeCount,
+    this.enabledpoll,
+    this.showPollResults,
+    this.setTimer,
+    this.customPollData,
+    this.customPollEnabled,
+    this.pollDuration,
+  });
+
+  factory Postx.fromRawJson(String str) => Postx.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
+
+  factory Postx.fromJson(Map<String, dynamic> json) => Postx(
+        //     privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
+        id: json["_id"],
+        likeCount: json["LikeCount"],
+        enabledpoll: json["Enabledpoll"],
+        showPollResults: json["ShowPollResults"],
+        setTimer: json["setTimer"],
+        customPollData: json["customPollData"] == null
+            ? []
+            : List<String>.from(json["customPollData"]!.map((x) => x)),
+        customPollEnabled: json["customPollEnabled"],
+        pollDuration: json["pollDuration"] == null
+            ? null
+            : DateTime.parse(json["pollDuration"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "privacy": privacy?.toJson(),
+        "_id": id,
+        "LikeCount": likeCount,
+        "Enabledpoll": enabledpoll,
+        "ShowPollResults": showPollResults,
+        "setTimer": setTimer,
+        "customPollData": customPollData == null
+            ? []
+            : List<dynamic>.from(customPollData!.map((x) => x)),
+        "customPollEnabled": customPollEnabled,
+        "pollDuration": pollDuration?.toIso8601String(),
+      };
+}
+
 class PollCalculation {
-  int? yesPercentage;
-  int? noPercentage;
+  double? yesPercentage;
+  double? noPercentage;
 
   PollCalculation({
     this.yesPercentage,
     this.noPercentage,
   });
 
-  factory PollCalculation.fromJson(String str) => PollCalculation.fromMap(json.decode(str));
+  factory PollCalculation.fromJson(String str) =>
+      PollCalculation.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory PollCalculation.fromMap(Map<String, dynamic> json) => PollCalculation(
-        yesPercentage: json["yesPercentage"],
-        noPercentage: json["noPercentage"],
+        yesPercentage: json["yesPercentage"].toDouble(),
+        noPercentage: json["noPercentage"].toDouble(),
       );
 
   Map<String, dynamic> toMap() => {
@@ -67,7 +130,8 @@ class PollResult {
     this.timestamp,
   });
 
-  factory PollResult.fromJson(String str) => PollResult.fromMap(json.decode(str));
+  factory PollResult.fromJson(String str) =>
+      PollResult.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
@@ -75,7 +139,9 @@ class PollResult {
         userId: json["userId"],
         vote: json["vote"],
         id: json["_id"],
-        timestamp: json["timestamp"] == null ? null : DateTime.parse(json["timestamp"]),
+        timestamp: json["timestamp"] == null
+            ? null
+            : DateTime.parse(json["timestamp"]),
       );
 
   Map<String, dynamic> toMap() => {
@@ -86,7 +152,7 @@ class PollResult {
       };
 }
 
-// class Post {
+// class Postx {
 //   Privacy? privacy;
 //   Privacy? tagPrivacy;
 //   String? id;
@@ -99,7 +165,7 @@ class PollResult {
 //   bool? showPollResults;
 //   int? setTimer;
 //   String? caption;
-//   List<dynamic>? postHide;
+//   List<dynamic>? postxHide;
 //   List<dynamic>? tagPeople;
 //   List<dynamic>? reacted;
 //   List<dynamic>? likes;
@@ -110,7 +176,7 @@ class PollResult {
 //   DateTime? updatedAt;
 //   int? v;
 
-//   Post({
+//   Postx({
 //     this.privacy,
 //     this.tagPrivacy,
 //     this.id,
@@ -123,7 +189,7 @@ class PollResult {
 //     this.showPollResults,
 //     this.setTimer,
 //     this.caption,
-//     this.postHide,
+//     this.postxHide,
 //     this.tagPeople,
 //     this.reacted,
 //     this.likes,
@@ -135,11 +201,11 @@ class PollResult {
 //     this.v,
 //   });
 
-//   factory Post.fromJson(String str) => Post.fromMap(json.decode(str));
+//   factory Postx.fromJson(String str) => Postx.fromMap(json.decode(str));
 
 //   String toJson() => json.encode(toMap());
 
-//   factory Post.fromMap(Map<String, dynamic> json) => Post(
+//   factory Postx.fromMap(Map<String, dynamic> json) => Postx(
 //         privacy: json["privacy"] == null ? null : Privacy.fromMap(json["privacy"]),
 //         tagPrivacy: json["tag_privacy"] == null ? null : Privacy.fromMap(json["tag_privacy"]),
 //         id: json["_id"],
@@ -152,7 +218,7 @@ class PollResult {
 //         showPollResults: json["ShowPollResults"],
 //         setTimer: json["setTimer"],
 //         caption: json["caption"],
-//         postHide: json["post_hide"] == null ? [] : List<dynamic>.from(json["post_hide"]!.map((x) => x)),
+//         postxHide: json["postx_hide"] == null ? [] : List<dynamic>.from(json["postx_hide"]!.map((x) => x)),
 //         tagPeople: json["tagPeople"] == null ? [] : List<dynamic>.from(json["tagPeople"]!.map((x) => x)),
 //         reacted: json["Reacted"] == null ? [] : List<dynamic>.from(json["Reacted"]!.map((x) => x)),
 //         likes: json["Likes"] == null ? [] : List<dynamic>.from(json["Likes"]!.map((x) => x)),
@@ -177,7 +243,7 @@ class PollResult {
 //         "ShowPollResults": showPollResults,
 //         "setTimer": setTimer,
 //         "caption": caption,
-//         "post_hide": postHide == null ? [] : List<dynamic>.from(postHide!.map((x) => x)),
+//         "postx_hide": postxHide == null ? [] : List<dynamic>.from(postxHide!.map((x) => x)),
 //         "tagPeople": tagPeople == null ? [] : List<dynamic>.from(tagPeople!.map((x) => x)),
 //         "Reacted": reacted == null ? [] : List<dynamic>.from(reacted!.map((x) => x)),
 //         "Likes": likes == null ? [] : List<dynamic>.from(likes!.map((x) => x)),

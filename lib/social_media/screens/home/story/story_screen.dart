@@ -217,15 +217,16 @@ class StoryScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      showModalBottomSheet(
-                                        shape: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-                                        isScrollControlled: true,
-                                        context: context,
-                                        builder: (context) {
-                                          return const ShareStory();
-                                        },
-                                      );
+                                   //         Share.share("http://emagz.live/Story/${widget.post.sId}");
+                                      // showModalBottomSheet(
+                                      //   shape: const OutlineInputBorder(
+                                      //       borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                      //   isScrollControlled: true,
+                                      //   context: context,
+                                      //   builder: (context) {
+                                      //     return const ShareStory();
+                                      //   },
+                                      // );
                                     },
                                     child: Image.asset(
                                       "assets/png/share_icon.png",

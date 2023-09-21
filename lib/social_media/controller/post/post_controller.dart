@@ -52,7 +52,7 @@ class PostController extends GetxController {
   Future makePost(
     bool enablePoll,
     String tagPrivacy,
-    String? setTimer,
+    int? setTimer,
   ) async {
     isPosting.value = true;
 
@@ -104,7 +104,8 @@ class PostController extends GetxController {
         "post_hide": "[]",
         "tag_privacy":
             '{"everyone": false, "followers": true, "no_one": false}',
-        "pollDuration": 2,
+        "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
+        // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]"
       });

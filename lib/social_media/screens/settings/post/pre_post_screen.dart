@@ -34,7 +34,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
   List chooseOption = ["A. Yes", "B. No"];
   int selectedOption = -1;
 
-  List timerOptionList = ["1D", "2D", "7D"];
+  List timerOptionList = [1, 2, 7];
   int selectedTimer = -1;
 
   bool isPollEnable = false;
@@ -84,11 +84,13 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         Container(
                             alignment: Alignment.center,
                             height: 170,
-                            decoration: const BoxDecoration(color: Colors.black),
+                            decoration:
+                                const BoxDecoration(color: Colors.black),
                             child: (widget.postType == PostType.gallery)
                                 ? Image.memory(widget.image!)
                                 : Image.file(
-                                    File(widget.image ?? postController.textPost!),
+                                    File(widget.image ??
+                                        postController.textPost!),
                                     width: 200, // Adjust the width as needed
                                     height: 400,
                                   )
@@ -131,12 +133,16 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               margin: const EdgeInsets.only(right: 10),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: selectedOption == index ? lightSkyAcent : null,
+                                color: selectedOption == index
+                                    ? lightSkyAcent
+                                    : null,
                                 border: Border.all(color: lightSkyAcent),
                               ),
                               child: FormHeadingText(
                                 headings: chooseOption[index],
-                                color: selectedOption != index ? lightSkyAcent : Colors.white,
+                                color: selectedOption != index
+                                    ? lightSkyAcent
+                                    : Colors.white,
                               ),
                             ),
                           ),
@@ -167,7 +173,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                   ),
                   Text(
                     "Set Timer".toUpperCase(),
-                    style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
                     height: 20,
@@ -191,13 +200,17 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               margin: const EdgeInsets.only(right: 12),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                  color: selectedTimer == index ? lightSkyAcent : null,
+                                  color: selectedTimer == index
+                                      ? lightSkyAcent
+                                      : null,
                                   // border: Border.all(color: lightSkyAcent),
                                   shape: BoxShape.circle),
                               child: Center(
                                 child: FormHeadingText(
-                                  headings: timerOptionList[index],
-                                  color: selectedTimer != index ? Colors.black : Colors.white,
+                                  headings: "${timerOptionList[index]}D",
+                                  color: selectedTimer != index
+                                      ? Colors.black
+                                      : Colors.white,
                                 ),
                               ),
                             ),
@@ -215,9 +228,15 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       InkWell(
                         onTap: () async {
                           DateTime? pickedDate = await showDatePicker(
-                              context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
-                          TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                          var time = pickedDate!.add(Duration(hours: pickedTime!.hour, minutes: pickedTime.minute));
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2060));
+                          TimeOfDay? pickedTime = await showTimePicker(
+                              context: context, initialTime: TimeOfDay.now());
+                          var time = pickedDate!.add(Duration(
+                              hours: pickedTime!.hour,
+                              minutes: pickedTime.minute));
                           var timeDifference = time.difference(DateTime.now());
                           debugPrint(timeDifference.inDays.toString());
                           timerOptionList.add("${timeDifference.inDays}D");
@@ -226,7 +245,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         },
                         child: Text(
                           "Set Custom".toUpperCase(),
-                          style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
@@ -236,7 +258,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                   ),
                   Text(
                     "Describe your feeling".toUpperCase(),
-                    style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
                     height: 25,
@@ -245,13 +270,18 @@ class _PrePostScreenState extends State<PrePostScreen> {
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: const Color(0xff28282836).withOpacity(.21), width: 1.5),
+                      border: Border.all(
+                          color: const Color(0xff28282836).withOpacity(.21),
+                          width: 1.5),
                     ),
                     child: TextField(
                       maxLength: 32,
                       controller: postController.captionController,
                       maxLines: 2,
-                      decoration: const InputDecoration(isDense: true, border: InputBorder.none, contentPadding: EdgeInsets.all(0)),
+                      decoration: const InputDecoration(
+                          isDense: true,
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.all(0)),
                     ),
                   ),
                   const SizedBox(
@@ -259,7 +289,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                   ),
                   Text(
                     "Post Settings".toUpperCase(),
-                    style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
                     height: 20,
@@ -277,7 +310,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       children: [
                         Text(
                           "Post",
-                          style: TextStyle(color: blackButtonColor, fontSize: 15, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: blackButtonColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 15,
@@ -287,13 +323,20 @@ class _PrePostScreenState extends State<PrePostScreen> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                Text("Likes & View",
+                                    style: TextStyle(
+                                        color: blackButtonColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600)),
                                 const SizedBox(
                                   height: 15,
                                 ),
                                 Text(
                                   "Hide like & views control",
-                                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: blackButtonColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 const SizedBox(
                                   height: 2,
@@ -302,7 +345,11 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   width: 140,
                                   child: Text(
                                     "Manage your likes and view on your post",
-                                    style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                                    style: TextStyle(
+                                        letterSpacing: .3,
+                                        color: signInHeading,
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ],
@@ -319,20 +366,32 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                         showModalBottomSheet(
                                           isScrollControlled: true,
                                           shape: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  topRight:
+                                                      Radius.circular(20))),
                                           context: context,
                                           builder: (context) {
-                                            return LikesAndViewsOptions(onTap: (value, showValue) {
-                                              postController.privacyLikesAndViewsUI.value = showValue;
-                                              postController.privacyLikesAndViews.value = value;
+                                            return LikesAndViewsOptions(
+                                                onTap: (value, showValue) {
+                                              postController
+                                                  .privacyLikesAndViewsUI
+                                                  .value = showValue;
+                                              postController
+                                                  .privacyLikesAndViews
+                                                  .value = value;
                                             });
                                           },
                                         );
                                       },
                                       child: Obx(
                                         () => Text(
-                                          postController.privacyLikesAndViewsUI.value,
-                                          style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                          postController
+                                              .privacyLikesAndViewsUI.value,
+                                          style: TextStyle(
+                                              color: purpleColor,
+                                              fontSize: 11,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ),
                                     ),
@@ -355,7 +414,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                         showModalBottomSheet(
                                           isScrollControlled: true,
                                           shape: const OutlineInputBorder(
-                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                              borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(20),
+                                                  topRight:
+                                                      Radius.circular(20))),
                                           context: context,
                                           builder: (context) {
                                             return const FollowingList();
@@ -364,7 +426,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                       },
                                       child: Text(
                                         "0 people",
-                                        style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                        style: TextStyle(
+                                            color: purpleColor,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600),
                                       ),
                                     ),
                                     const SizedBox(
@@ -384,7 +449,11 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   // width: 140,
                                   child: Text(
                                     "",
-                                    style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                                    style: TextStyle(
+                                        letterSpacing: .3,
+                                        color: signInHeading,
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ),
                               ],
@@ -414,7 +483,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         ),
                         Text(
                           "Allow Tag from",
-                          style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              color: signInHeading,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(
                           height: 10,
@@ -507,7 +579,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         : noOne
                             ? "noOne"
                             : "everyone"),
-                isPollEnable ? timerOptionList[selectedTimer].toString().split("D")[0] : null),
+                isPollEnable ? timerOptionList[selectedTimer] : null),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               alignment: Alignment.center,
@@ -523,10 +595,13 @@ class _PrePostScreenState extends State<PrePostScreen> {
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
-                              CircularProgressIndicator(value: postController.uploadPercentage.value, color: Colors.white),
+                              CircularProgressIndicator(
+                                  value: postController.uploadPercentage.value,
+                                  color: Colors.white),
                               Text(
                                 "${(postController.uploadPercentage.value * 100).toInt().toString()}%",
-                                style: const TextStyle(color: Colors.white, fontSize: 10),
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 10),
                               )
                             ],
                           ),

@@ -36,16 +36,14 @@ class NotificationScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: const Text(
           "Notification",
-          style: TextStyle(
-              fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
+          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
         ),
         elevation: 0.0,
       ),
       body: Obx(() => ListView.builder(
             itemCount: socketController.notifications.length,
             itemBuilder: (context, index) {
-              final NotificationModel notificationModel =
-                  socketController.notifications[index];
+              final NotificationModel notificationModel = socketController.notifications[index];
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2),
                 child: Slidable(
@@ -73,8 +71,7 @@ class NotificationScreen extends StatelessWidget {
                       dragDismissible: true,
                       dismissible: DismissiblePane(onDismissed: () {
                         socketController.notifications.removeAt(index);
-                        socketController.removeSingleNotification(
-                            notificationModel.id!  );
+                        socketController.removeSingleNotification(notificationModel.id!);
                       }),
                       extentRatio: 1 / 2.2,
                       motion: const ScrollMotion(),
@@ -95,9 +92,10 @@ class NotificationScreen extends StatelessWidget {
                         // )
                         SlidableAction(
                           padding: const EdgeInsets.symmetric(vertical: 5),
-                          onPressed: (context) =>
-                              socketController.removeSingleNotification(
-                                  notificationModel.id!),
+                          onPressed: (context) {
+                            socketController.notifications.removeAt(index);
+                            socketController.removeSingleNotification(notificationModel.id!);
+                          },
                           backgroundColor: const Color(0xFFFE4A49),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -107,8 +105,7 @@ class NotificationScreen extends StatelessWidget {
                   child: ListTile(
                     tileColor: Colors.white,
                     leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                          notificationModel.notificationFrom!.profilePic!),
+                      backgroundImage: CachedNetworkImageProvider(notificationModel.notificationFrom!.profilePic!),
                       // child: CachedNetworkImage(
                       //   imageUrl: notificationModel.notificationFrom!.profilePic!,
                       //   placeholder: (context, url) => const CircularProgressIndicator(),
@@ -133,11 +130,7 @@ class NotificationScreen extends StatelessWidget {
           decoration: const BoxDecoration(
             color: Colors.white,
             boxShadow: [
-              BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, -1),
-                  blurRadius: 5,
-                  spreadRadius: 1),
+              BoxShadow(color: Colors.grey, offset: Offset(0, -1), blurRadius: 5, spreadRadius: 1),
             ],
           ),
           child: const Text(

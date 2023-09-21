@@ -5,6 +5,7 @@ import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 
 class PostView extends StatelessWidget {
   VoidCallback update;
@@ -63,14 +64,14 @@ class PostView extends StatelessWidget {
 
                         //    post.likes!.remove(myId);
                         setInnerState(() {});
-                        homePostController.likePost(post.sId!, false, post.user?.sId ?? "" );
+                        homePostController.likePost(post.sId!, false, post.user?.sId ?? "");
                       } else {
                         homePostController.posts![index].isLike = true;
                         homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! + 1;
 
                         //    post.likes!.add(myId);
                         setInnerState(() {});
-                        homePostController.likePost(post.sId!, true, post.user?.sId ?? "" );
+                        homePostController.likePost(post.sId!, true, post.user?.sId ?? "");
                       }
                       update();
                     },
@@ -102,8 +103,7 @@ class PostView extends StatelessWidget {
                           // enableDrag: true,
                           enableDrag: true,
                           isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                           context: context,
                           builder: (context) {
                             return Padding(
@@ -137,9 +137,12 @@ class PostView extends StatelessWidget {
                   const SizedBox(
                     width: 30,
                   ),
-                  Image.asset(
-                    "assets/png/share_icon.png",
-                    width: 26,
+                  GestureDetector(
+                    onTap: () => Share.share("http://emagz.live/Post/${post.sId}"),
+                    child: Image.asset(
+                      "assets/png/share_icon.png",
+                      width: 26,
+                    ),
                   ),
                 ],
               ),

@@ -1,6 +1,6 @@
 class Post {
   //Privacy? privacy;
-   List<PollResults?>? pollResults;
+ // List<PollResults?>? pollResults;
   int? likeCount;
   String? sId;
   UserSchema? user;
@@ -17,67 +17,64 @@ class Post {
   dynamic pollDuration;
   List<Comment?>? comments;
 
+  List<String>? customPollData;
+  bool? customPollEnabled;
+
 //   DateTime? createdAt;
 //   DateTime? updatedAt;
 //  // int? v;
   bool? isLike;
 
-  Post(
-      { //this.privacy,
-  //    this.pollResults,
-      this.sId,
-      this.likeCount,
-      this.user,
-      this.mediaType,
-      this.mediaUrl,
-      this.enabledpoll,
-      this.showPollResults,
-      this.setTimer,
-      this.caption,
-      // this.tagPrivacy,
-      this.reacted,
-      this.likes,
-      this.shares,
-      this.pollDuration,
-      this.comments,
-      this.isLike,
-      
-      // this.createdAt,
-      // this.updatedAt,
-      //  this.iV
-      });
+  Post({
+    //this.privacy,
+//      this.pollResults,
+    this.sId,
+    this.likeCount,
+    this.user,
+    this.mediaType,
+    this.mediaUrl,
+    this.enabledpoll,
+    this.showPollResults,
+    this.setTimer,
+    this.caption,
+    // this.tagPrivacy,
+    this.reacted,
+    this.likes,
+    this.shares,
+    this.pollDuration,
+    this.comments,
+    this.isLike,
+this.customPollData,
+this.customPollEnabled,
+ 
+    // this.createdAt,
+    // this.updatedAt,
+    //  this.iV
+  });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
         //privacy: json["privacy"] == null ? null : Privacy.fromJson(json["privacy"]),
-   //     pollResults: json["PollResults"] == null
-            // ? []
-            // : List<PollResults>.from(
-            //     json["PollResults"]!.map((x) => PollResults.fromJson(x))),
+        //     pollResults: json["PollResults"] == null
+        // ? []
+        // : List<PollResults>.from(
+        //     json["PollResults"]!.map((x) => PollResults.fromJson(x))),
         likeCount: json["LikeCount"],
         sId: json["_id"],
-        user:
-            json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
+        user: json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
         mediaType: json["mediaType"],
         mediaUrl: json["mediaUrl"],
         enabledpoll: json["Enabledpoll"],
         showPollResults: json["ShowPollResults"],
-   setTimer: json["setTimer"],
+        setTimer: json["setTimer"],
         caption: json["caption"],
         // tagPrivacy: json["tagPrivacy"],
-        reacted: json["Reacted"] == null
-            ? []
-            : List<String?>.from(json["Reacted"].map((x) => x)),
-        likes: json["Likes"] == null
-            ? []
-            : List<String?>.from(json["Likes"].map((x) => x)),
-        shares: json["shares"] == null
-            ? []
-            : List<String?>.from(json["shares"].map((x) => x)),
+        reacted: json["Reacted"] == null ? [] : List<String?>.from(json["Reacted"].map((x) => x)),
+        likes: json["Likes"] == null ? [] : List<String?>.from(json["Likes"].map((x) => x)),
+        shares: json["shares"] == null ? [] : List<String?>.from(json["shares"].map((x) => x)),
         pollDuration: json["pollDuration"],
-        comments: json["Comments"] == null
-            ? []
-            : List<Comment?>.from(
-                json["Comments"].map((x) => Comment.fromJson(x))),
+        comments: json["Comments"] == null ? [] : List<Comment?>.from(json["Comments"].map((x) => Comment.fromJson(x))),
+        customPollData: json["customPollData"] == null ? [] : List<String>.from(json["customPollData"]!.map((x) => x)),
+        customPollEnabled: json["customPollEnabled"],
         // createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
         // updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         // v: json["__v"],
@@ -153,38 +150,29 @@ class PollResults {
     return data;
   }
 }
-class ComentPrivacy{
+
+class ComentPrivacy {
   bool? everyone;
   bool? youFollow;
   bool? yourFollowers;
   bool? followAndFollowers;
-  ComentPrivacy({
-    this.everyone,
-    this.youFollow,
-    this.yourFollowers,
-    this.followAndFollowers
-});
-  ComentPrivacy.fromJson(Map<String,dynamic>json){
-    everyone= json['everyone'];
-    youFollow= json['follow'];
-    yourFollowers=json['followers'];
-    followAndFollowers=json['follow_and_followers'];
+  ComentPrivacy({this.everyone, this.youFollow, this.yourFollowers, this.followAndFollowers});
+  ComentPrivacy.fromJson(Map<String, dynamic> json) {
+    everyone = json['everyone'];
+    youFollow = json['follow'];
+    yourFollowers = json['followers'];
+    followAndFollowers = json['follow_and_followers'];
   }
 }
-class PostPrivacy{
 
+class PostPrivacy {
   bool? everyone;
   bool? yourFollower;
   bool? noOne;
 
+  PostPrivacy({this.everyone, this.yourFollower, this.noOne});
 
-  PostPrivacy({
-   this.everyone,
-   this.yourFollower,
-   this.noOne
-   });
-
-  PostPrivacy.fromJson(Map<String,dynamic>json){
+  PostPrivacy.fromJson(Map<String, dynamic> json) {
     everyone = json['everyone'];
     yourFollower = json['followers'];
     noOne = json['no_one'];
@@ -218,17 +206,17 @@ class UserSchema {
   List<String?>? search;
   String? createdAt;
   String? updatedAt;
- // int? iV;
+  // int? iV;
   String? getstatedName;
   String? displayName;
 
   UserSchema(
       {this.cmnt_priv,
-        this.post_priv,
-        this.ment_priv,
-        this.live_priv,
-        this.mess_priv,
-        this.mobileNumber,
+      this.post_priv,
+      this.ment_priv,
+      this.live_priv,
+      this.mess_priv,
+      this.mobileNumber,
       this.loginOtp,
       this.personalTemplate,
       this.sId,
@@ -248,18 +236,17 @@ class UserSchema {
       this.search,
       this.createdAt,
       this.updatedAt,
-    //  this.iV,
+      //  this.iV,
       this.getstatedName,
       this.ProfilePic,
       this.displayName});
 
   UserSchema.fromJson(Map<String, dynamic> json) {
-    post_priv=json['post_privacy'] == null ? null : PostPrivacy.fromJson(json['post_privacy']);
-    cmnt_priv=json['comment_privacy'] == null ? null : ComentPrivacy.fromJson(json['comment_privacy']);
-    live_priv=json['live_privacy'] == null ? null : PostPrivacy.fromJson(json['live_privacy']);
-    ment_priv=json['mention_privacy'] == null ? null : PostPrivacy.fromJson(json['mention_privacy']);
-    mess_priv=json['message_privacy'] == null ? null : PostPrivacy.fromJson(json['message_privacy']);
-
+    post_priv = json['post_privacy'] == null ? null : PostPrivacy.fromJson(json['post_privacy']);
+    cmnt_priv = json['comment_privacy'] == null ? null : ComentPrivacy.fromJson(json['comment_privacy']);
+    live_priv = json['live_privacy'] == null ? null : PostPrivacy.fromJson(json['live_privacy']);
+    ment_priv = json['mention_privacy'] == null ? null : PostPrivacy.fromJson(json['mention_privacy']);
+    mess_priv = json['message_privacy'] == null ? null : PostPrivacy.fromJson(json['message_privacy']);
 
     ProfilePic = json["ProfilePic"];
     mobileNumber = json['mobile_number'];
@@ -282,7 +269,7 @@ class UserSchema {
     //  search = json['search'].cast<String>();
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-  //  iV = json['__v'];
+    //  iV = json['__v'];
     getstatedName = json['GetstatedName'];
     displayName = json['displayName'];
   }
@@ -309,7 +296,7 @@ class UserSchema {
     data['search'] = search;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
-   // data['__v'] = iV;
+    // data['__v'] = iV;
     data['GetstatedName'] = getstatedName;
     data['displayName'] = displayName;
     return data;
@@ -367,26 +354,18 @@ class Comment {
   });
 
   factory Comment.fromJson(Map<String, dynamic> json) => Comment(
-        userId:
-            json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
+        userId: json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
         text: json["text"],
         sId: json["_id"],
-        comments: json["Comments"] == null
-            ? []
-            : List<Comment>.from(
-                json["Comments"]!.map((x) => Comment.fromJson(x))),
-        timestamp: json["timestamp"] == null
-            ? null
-            : DateTime.parse(json["timestamp"]),
+        comments: json["Comments"] == null ? [] : List<Comment>.from(json["Comments"]!.map((x) => Comment.fromJson(x))),
+        timestamp: json["timestamp"] == null ? null : DateTime.parse(json["timestamp"]),
       );
 
   Map<String, dynamic> toJson() => {
         "userId": userId?.toJson(),
         "text": text,
         "_id": sId,
-        "Comments": comments == null
-            ? []
-            : List<dynamic>.from(comments!.map((x) => x.toJson())),
+        "Comments": comments == null ? [] : List<dynamic>.from(comments!.map((x) => x.toJson())),
         "timestamp": timestamp?.toIso8601String(),
       };
 }
