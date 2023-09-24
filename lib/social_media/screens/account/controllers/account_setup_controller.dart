@@ -23,10 +23,14 @@ class SetupAccount extends GetxController {
   final TextEditingController businessTypeController = TextEditingController();
 
   RxBool isUserRegiserting = RxBool(false);
-  List<Template>? templates=[];
-
+  RxList<Template>? templates=<Template>[].obs;
   // setBusinessLogo
 
+  @override
+  onInit() async {
+    getAllTempltes();
+    super.onInit();
+  }
   checkUserName() async {
     // will recive api
     return false;
@@ -149,10 +153,9 @@ class SetupAccount extends GetxController {
   }
 
   Future<List<Template?>?> getAllTempltes() async {
-    templates=[];
+    if(templates!=null)templates!.clear();
     try{
       var token = await jwtController.getAuthToken();
-      print(token);
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
 
       http.Response response = await http.get(Uri.parse(ApiEndpoint.template), headers: headers);

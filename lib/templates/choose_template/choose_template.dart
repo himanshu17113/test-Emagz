@@ -133,92 +133,35 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                     const SizedBox(
                       height: 28,
                     ),
-                    Container(
-                      child: FutureBuilder<List<Template?>?>(
-                        future: accountSetUpController.getAllTempltes(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator(); // Show a loading indicator
-                          }
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          }
-                          if (snapshot.hasData) {
-                            return ListView.builder(
-                                scrollDirection: Axis.vertical,
-                                controller: _scrollController,
-                                physics: const ScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (ctx, index) {
-                                  String url = snapshot.data![index]!.thumbnail
-                                      .toString();
-                                  String url2 =
-                                      snapshot.data![index]!.id.toString();
-                                  if (url == 'null' || url2 == 'null') {
-                                  } else {
-                                    return Persona(
-                                        snapshot.data![index]!.id,
-                                        snapshot.data![index]!.introImage,
-                                        snapshot.data![index]!.thumbnail,
-                                        const Color.fromRGBO(255, 199, 1, 1.0),
-                                        index + 1);
-                                  }
-                                  return null;
-                                });
+                    Obx(()
+                    {
+                      return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        physics: const ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: accountSetUpController.templates!.length,
+                        itemBuilder: (ctx,index){
+                          String url = accountSetUpController.templates![index]!.thumbnail.toString();
+                          String url2 = accountSetUpController.templates![index]!.id.toString();
+                          if (url == 'null' || url2 == 'null') {
                           } else {
-                            return const Center(
-                              child: Text("Loading..."),
-                            );
+                            return Persona(
+                                accountSetUpController.templates![index]!.id,
+                                accountSetUpController.templates![index]!.thumbnail,
+                                const Color.fromRGBO(255, 199, 1, 1.0),
+                                index + 1);
                           }
+                          return null;
                         },
-                      ),
-                    )
-                    // Expanded(
-                    //   child: ListView(children: [
-                    //     Persona("assets/template IMG/Group 613.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),1),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/iPhone 13 Pro Max - 6.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),2),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/iPhone 14 Pro Max - 1.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),3),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/Persona -- 2.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),4),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/iPhone 14 Pro Max - 8.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),5),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/iPhone 13 Pro Max - 13.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),6),
-                    //     SizedBox(height: 20,),
-                    //     Persona("assets/template IMG/Frame 71.png", " ", const Color.fromRGBO(255, 199, 1, 1.0),7),
-                    //     SizedBox(height: 20,),
-                    //     Persona(
-                    //         "assets/png/cameronWilliamson.png",
-                    //         "assets/png/cameronMobile.png",
-                    //         const Color.fromRGBO(255, 199, 1, 1.0),8),
-                    //     const SizedBox(
-                    //       height: 20,
-                    //     ),
-                    //     Persona(
-                    //         "assets/template IMG/Frame 72.png",
-                    //         " ",
-                    //         const Color.fromRGBO(202, 42, 243, 1.0),9),
-                    //     const SizedBox(
-                    //       height: 20,
-                    //     ),
-                    //     Persona(
-                    //         "assets/template IMG/MacBook Pro 16_ - 11.png",
-                    //         " ",
-                    //         const Color.fromRGBO(255, 199, 1, 1.0),10),
-                    //     const SizedBox(
-                    //       height: 20,
-                    //     ),
-                    //   ]),
-                    // )
+                      );
+                    }),
+
+
                   ]),
             )));
   }
 
-  Widget Persona(String? id, String? ImgPath, String? MobileImgPath,
+  Widget Persona(String? id, String? ImgPath,
       Color BackGround, int ind) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
@@ -255,22 +198,6 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                     child: CachedNetworkImage(
                       imageUrl: ImgPath,
                       fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-          MobileImgPath == null
-              ? Container()
-              : Positioned(
-                  top: 80,
-                  left: 245,
-                  child: SizedBox(
-                    height: 140,
-                    child: AspectRatio(
-                      aspectRatio: 0.5,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.cover, imageUrl: MobileImgPath,
-                        //height: 100,
-                      ),
                     ),
                   ),
                 ),
@@ -341,7 +268,6 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   Widget customYesNoButton(String text, int index, int tmpInd) {
     return InkWell(
       onTap: () {
-        //_launchUrl();
         if (index == 1) {
           accountSetUpController
               .userTemplate(accountSetUpController.templates![tmpInd].id!);
@@ -375,25 +301,5 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     );
   }
 
-  Future<void> _launchUrl() async {
-    final Uri url = Uri.parse(
-        'http://ec2-15-207-150-14.ap-south-1.compute.amazonaws.com/Template8');
-    if (await canLaunchUrl(url)) {
-      await launchUrl(
-        url, mode: LaunchMode.inAppWebView,
-        webViewConfiguration: const WebViewConfiguration(
-            enableJavaScript: true,
-            enableDomStorage: true,
-            headers: <String, String>{
-              'Authorization':
-                  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGM0ZjUxZjkzZGExZjNjNTIxM2Q1MDkiLCJpYXQiOjE2OTE2NDk0NTN9.-3p_gugs-9SnBoaprWnEMkGM9NhsEnZQPpq8dKSPyeQ'
-            }),
 
-        // forceWebView = true,
-        // enableJavaScript = false
-      );
-    } else {
-      throw Exception('Could not launch $url');
-    }
-  }
 }
