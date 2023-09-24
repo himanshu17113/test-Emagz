@@ -177,8 +177,6 @@ class SetupAccount extends GetxController {
 
   userTemplate(String? templateId) async
   {
-    print('hehrehere');
-    print(templateId.toString());
     var userId= await jwtController.getUserId();
     var token = await jwtController.getAuthToken();
     Map body = {
@@ -191,13 +189,12 @@ class SetupAccount extends GetxController {
     Map data= jsonDecode(response.body);
     if(response.statusCode==200)
       {
-        print('succes');
-        print(data);
-
+        //CustomSnackbar.showSucess('Your persona is set');
         Get.back();
       }
     else{
       print('expected error');
+      Get.back();
     }
 
   }

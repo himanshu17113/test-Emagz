@@ -1,5 +1,6 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/templates/choose_template/template_model.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
@@ -23,7 +24,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
   final ScrollController _scrollController = ScrollController();
-  Future<void> _showMyDialog(int indexx) async {
+  Future<void> _showMyDialog(String? indexx) async {
     return showDialog<void>(
       context: context,
       //barrierDismissible: false, // user must tap button!
@@ -167,7 +168,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
         onTap: () {
-          _showMyDialog(ind);
+          _showMyDialog(id);
           print(id);
         }, //_launchUrl
 
@@ -265,12 +266,13 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     );
   }
 
-  Widget customYesNoButton(String text, int index, int tmpInd) {
+  Widget customYesNoButton(String text, int index, String?tmpInd) {
     return InkWell(
-      onTap: () {
+      onTap: () async{
         if (index == 1) {
-          accountSetUpController
-              .userTemplate(accountSetUpController.templates![tmpInd].id!);
+          await accountSetUpController
+              .userTemplate(tmpInd!);
+          CustomSnackbar.showSucess('Your persona was set');
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
         } else {
           Navigator.pop(context);
