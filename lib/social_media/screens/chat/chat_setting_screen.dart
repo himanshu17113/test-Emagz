@@ -3,6 +3,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
  
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
  
@@ -28,8 +29,11 @@ class ChatSettingScreen extends StatefulWidget {
 class _ChatSettingScreenState extends State<ChatSettingScreen> {
   String selectedValue = "Latest Request";
   int? selectedIndex;
+  bool showBox=false;
+  bool showSearch=false;
 
   var jwtController= Get.put(JWTController());
+  var chatController= Get.put(ConversationController());
   UserSchema? user;
   bool? youFollow ;
   bool? everyOne;
@@ -151,7 +155,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             height: 32,
                             decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff3A0DBB)),
                             child: FormHeadingText(
-                              headings: "+",
+                              headings: "${chatController.req!.length}",
                               color: whiteColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 10,
@@ -203,9 +207,18 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                           const Spacer(),
                           Row(
                             children: [
-                              Text(
-                                "Everyone",
-                                style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap:()
+                                {
+                                  setState(() {
+                                    showBox=!showBox;
+                                    showSearch=false;
+                                  });
+                                },
+                                child: Text(
+                                  "Everyone",
+                                  style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                ),
                               ),
                               const SizedBox(
                                 width: 7,
@@ -227,9 +240,18 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                "Block comment from",
-                                style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                              GestureDetector(
+
+                                child: Text(
+                                  "Block comment from",
+                                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                ),
+                                onTap: ()
+                                {
+                                  setState(() {
+                                    showSearch=!showSearch;
+                                  });
+                                },
                               ),
                               const SizedBox(
                                 height: 2,

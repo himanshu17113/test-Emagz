@@ -23,6 +23,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
   bool? youFollow ;
   bool? everyOne;
   bool? noone;
+
   @override
   void initState() {
     super.initState();
@@ -106,7 +107,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne!,
+                          value: everyOne??true,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
@@ -121,7 +122,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow!,
+                    isActive: youFollow??true,
                     onToggle: (val)
                     {
                       setState(() {
@@ -138,7 +139,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Except Specific Profiles",
                     subTitle: "",
-                    isActive: noone!,
+                    isActive: noone??false,
                     onToggle: (val)
                     {
                       setState(() {

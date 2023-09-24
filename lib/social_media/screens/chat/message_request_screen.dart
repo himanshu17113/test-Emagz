@@ -207,7 +207,9 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                           {
                                             await convController.acceptreq(
                                                 convController.req![index]!.id!,
-                                                index);
+                                                index,
+                                                convController.req![index]!.sender!.id!,
+                                            );
                                             setState(() {
                                               selectedIndex = null;
                                             });

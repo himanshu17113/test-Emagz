@@ -24,7 +24,6 @@ class AuthController extends GetxController {
   final jwtController = Get.put(JWTController());
 
   final userNameController = TextEditingController();
-  // conflict between username and Name
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final forgotPasswordEmailController = TextEditingController();
@@ -69,7 +68,14 @@ class AuthController extends GetxController {
       debugPrint(response.body);
 
       var data = json.decode(response.body);
+      print(response.statusCode);
       if (response.statusCode == 200) {
+        isUserRegiserting.value = false;
+        var token = data["token"];
+        var userId = data["userId"];
+        debugPrint("TOKEN : $token userId : $userId");
+        jwtController.setAuthToken(token, userId);
+        Get.off(() => const ChooseIntrestScreen());
         if (data['status'] == true) {
           Get.snackbar("Success", data['message']);
           Get.off(() => const ChooseIntrestScreen());
@@ -77,6 +83,11 @@ class AuthController extends GetxController {
 
         return true;
       } else if (response.statusCode == 201) {
+        isUserRegiserting.value = false;
+        var token = data["token"];
+        var userId = data["userId"];
+        debugPrint("TOKEN : $token userId : $userId");
+        jwtController.setAuthToken(token, userId);
         if (data['status'] == true) {
           Get.snackbar("Success", data['message']);
           Get.off(() => const ChooseIntrestScreen());
@@ -89,7 +100,7 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar("Error", "Something went wrong! please try again later");
-      debugPrint(e.toString());
+      Get.snackbar('Hey', 'User already existes with that email');
       return false;
     }
   }

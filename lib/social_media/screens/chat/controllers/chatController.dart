@@ -18,7 +18,6 @@ class ConversationController extends GetxController {
 
   final jwtController = Get.find<JWTController>();
   RxList<Requests?>? req= <Requests>[].obs;
-
   String? token;
   String? userId;
   @override
@@ -159,7 +158,7 @@ class ConversationController extends GetxController {
     }
   }
 
-  Future<bool> acceptreq(String id,int index) async
+  Future<bool> acceptreq(String id,int index,String recieverId) async
   {
     debugPrint("🧣🧣🧣🧣🧣 start2");
     Dio dio = Dio();
@@ -170,6 +169,13 @@ class ConversationController extends GetxController {
       {
         CustomSnackbar.showSucess('Reuqest ');
         req?.removeAt(index);
+        var body = {
+          "senderId": jwtController.userId ?? userId,
+          "receiverId": recieverId
+        };
+        var x= body;
+        debugPrint(x.toString());
+        var respose = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
         return true;
       }
     if(response.statusCode!=200)
