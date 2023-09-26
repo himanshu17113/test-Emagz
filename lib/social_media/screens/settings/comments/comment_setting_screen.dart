@@ -144,7 +144,7 @@ class _CommentSettingState extends State<CommentSetting> {
                                 onTap:(){
                                   showBox=!showBox;
                                   setState(() {
-
+                                    showSearch=false;
                                   });
                                 },
                                 child: Text(

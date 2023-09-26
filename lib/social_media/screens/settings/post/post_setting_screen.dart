@@ -23,6 +23,8 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
   bool? youFollow ;
   bool? everyOne;
   bool? noone;
+  bool showBox1=false;
+  bool showBox22=false;
   @override
   void initState() {
     super.initState();
@@ -126,12 +128,21 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                         children: [
                           Row(
                             children: [
-                              Text(
-                                "Everyone",
-                                style: TextStyle(
-                                    color: purpleColor,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap:()
+                                {
+                                  setState(() {
+                                    showBox1=!showBox1;
+                                    showBox22=false;
+                                  });
+                                },
+                                child: Text(
+                                  "Everyone",
+                                  style: TextStyle(
+                                      color: purpleColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                               const SizedBox(
                                 width: 7,
@@ -147,12 +158,21 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           ),
                           Row(
                             children: [
-                              Text(
-                                "0 people",
-                                style: TextStyle(
-                                    color: purpleColor,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600),
+                              GestureDetector(
+                                onTap: ()
+                                {
+                                  setState(() {
+                                    showBox22=!showBox22;
+
+                                  });
+                                },
+                                child: Text(
+                                  "0 people",
+                                  style: TextStyle(
+                                      color: purpleColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                               const SizedBox(
                                 width: 8,
@@ -188,6 +208,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
             const SizedBox(
               height: 20,
             ),
+            showBox1?
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(15),
@@ -231,7 +252,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne!,
+                          value: everyOne??true,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
@@ -246,7 +267,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow!,
+                    isActive: youFollow??true,
                     onToggle: (val)
                     {
                       setState(() {
@@ -263,7 +284,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Except Specific Profiles",
                     subTitle: "",
-                    isActive: noone!,
+                    isActive: noone??false,
                     onToggle: (val)
                     {
                       setState(() {
@@ -275,13 +296,14 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   ),
                 ],
               ),
-            ),
+            ):SizedBox(),
           
           
           
             const SizedBox(
               height: 20,
             ),
+            showBox22?
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -325,7 +347,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           width: 40,
                           inactiveColor: lightgrayColor,
                           inactiveToggleColor: toggleInactive,
-                          value: everyOne!,
+                          value: everyOne??true,
                           onToggle: (val) {
                             setState(() {
                               everyOne = val;
@@ -341,7 +363,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "People you follow",
                     subTitle: "53 People",
-                    isActive: youFollow!,
+                    isActive: youFollow??true,
                     onToggle: (val){
 
                       setState(() {
@@ -358,7 +380,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   TitleAndSwitchWidget(
                     title: "No One Except Specific Profiles",
                     subTitle: "",
-                    isActive: noone!,
+                    isActive: noone??true,
                     onToggle: (val){
 
                       setState(() {
@@ -370,7 +392,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   ),
                 ],
               ),
-            ),
+            ):SizedBox(),
           ],
         ),
       ),

@@ -22,10 +22,14 @@ class SetupAccount extends GetxController {
   final TextEditingController businessTypeController = TextEditingController();
 
   RxBool isUserRegiserting = RxBool(false);
-  List<Template>? templates = [];
-
+  RxList<Template>? templates=<Template>[].obs;
   // setBusinessLogo
 
+  @override
+  onInit() async {
+    getAllTempltes();
+    super.onInit();
+  }
   checkUserName() async {
     // will recive api
     return false;
@@ -132,10 +136,9 @@ class SetupAccount extends GetxController {
   }
 
   Future<List<Template?>?> getAllTempltes() async {
-    templates = [];
-    try {
+    if(templates!=null)templates!.clear();
+    try{
       var token = await jwtController.getAuthToken();
-      print(token);
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
 
       http.Response response = await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
@@ -152,26 +155,22 @@ class SetupAccount extends GetxController {
     return null;
   }
 
-  userTemplate(String? templateId) async {
-    print('hehrehere');
-    print(templateId.toString());
-    var userId = await jwtController.getUserId();
+  userTemplate(String? templateId) async
+  {
+    var userId= await jwtController.getUserId();
     var token = await jwtController.getAuthToken();
     Map body = {"userId": userId, "templateId": templateId, "finalTemplateData": {}};
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
-    http.Response response = await http.post(
-      Uri.parse(ApiEndpoint.userTemplate),
-      headers: headers,
-      body: jsonEncode(body),
-    );
-    Map data = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      print('succes');
-      print(data);
-
-      Get.back();
-    } else {
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.userTemplate), headers: headers,body: jsonEncode(body),);
+    Map data= jsonDecode(response.body);
+    if(response.statusCode==200)
+      {
+        //CustomSnackbar.showSucess('Your persona is set');
+        Get.back();
+      }
+    else{
       print('expected error');
+      Get.back();
     }
   }
 }

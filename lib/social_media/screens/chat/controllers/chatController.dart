@@ -17,8 +17,8 @@ class ConversationController extends GetxController {
 //  RxList<Message>? messages;
 
   final jwtController = Get.find<JWTController>();
-  RxList<Requests?>? req= <Requests>[].obs;
 
+  RxList<Requests?>? req= <Requests>[].obs;
   String? token;
   String? userId;
   @override
@@ -62,7 +62,6 @@ class ConversationController extends GetxController {
 
   Future<List<Conversation>> getChatList() async {
     try {
-      
       if (token == null || userId == null) {
         await storedData();
       }
@@ -159,7 +158,7 @@ class ConversationController extends GetxController {
     }
   }
 
-  Future<bool> acceptreq(String id,int index) async
+  Future<bool> acceptreq(String id,int index,String recieverId) async
   {
     debugPrint("🧣🧣🧣🧣🧣 start2");
     Dio dio = Dio();
@@ -168,10 +167,41 @@ class ConversationController extends GetxController {
     var response = await dio.post('${ApiEndpoint.requestList}/$id/accept');
     if(response.statusCode==200)
       {
-        CustomSnackbar.showSucess('Reuqest ');
+
         req?.removeAt(index);
+        var body = {
+          "senderId": jwtController.userId ?? userId,
+          "receiverId": recieverId
+        };
+        var x= body;
+        debugPrint(x.toString());
+        var respose;
+        try {
+          respose = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
+          debugPrint(respose.toString());
+          // if(respose.statusCode==200)
+          //   {
+          //     getChatList();
+          //   }
+
+        }
+        catch(e)
+        {
+          if(respose==null)
+            {
+              CustomSnackbar.show('You have already chat with this person');
+              return true;
+            }
+          if(respose.statusCode!=200)
+          {
+            CustomSnackbar.show('You have already chat with this person');
+            return true;
+          }
+        }
+        CustomSnackbar.showSucess('Reuqest ');
         return true;
       }
+
     if(response.statusCode!=200)
       {
         CustomSnackbar.show('Reuqest Not found');
