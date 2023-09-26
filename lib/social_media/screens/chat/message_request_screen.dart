@@ -53,6 +53,34 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                           color: blackButtonColor,
                         ),
                       ),
+                      //     Center(
+                      //   child: GestureDetector(
+                      //     onTap: () => Get.to(() => NotificationScreen()),
+                      //     child:
+                      //         Stack(alignment: Alignment.topRight, children: [
+                      //       Image.asset(
+                      //         "assets/png/notification_bell.png",
+                      //         height: 28,
+                      //         width: 28,
+                      //       ),
+                      //       if (socketController.notifications.isNotEmpty)
+                      //         Positioned(
+                      //           top: 0,
+                      //           right: 0,
+                      //           child: CircleAvatar(
+                      //             radius: 8,
+                      //             backgroundColor: Colors.red,
+                      //             child: Obx(() => Text(
+                      //                   socketController.notifications.length
+                      //                       .toString(),
+                      //                   style: const TextStyle(fontSize: 12),
+                      //                 )),
+                      //           ),
+                      //         )
+                      //     ]),
+                      //   ),
+                      // ),
+          
                       const SizedBox(
                         width: 25,
                       ),

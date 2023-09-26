@@ -40,7 +40,7 @@ class _TextPostScreenState extends State<TextPostScreen> {
         centerText: "",
         onDone: (v) {
           debugPrint("Story address : $v");
-          postController.setPost(v, PostAssetType.text);
+          postController.setPost(v, PostType.text);
           //   storyController.postStory("text", v);
           // showDialog(
           //   useSafeArea: true,

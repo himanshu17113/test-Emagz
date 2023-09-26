@@ -16,17 +16,17 @@ import 'package:path_provider/path_provider.dart';
 
 import '../home/home_controller.dart';
 
-enum PostAssetType { image, video, text }
+//enum PostAssetType { image, video, text }
 
 class PostController extends GetxController {
   TextEditingController captionController = TextEditingController();
   RxDouble uploadPercentage = RxDouble(0);
   RxString privacyLikesAndViews = RxString("hideFromEveryone");
   RxString privacyLikesAndViewsUI = RxString("Everyone");
-  PostAssetType? assetType;
+  PostType? assetType;
   Uint8List? imagePath;
   String? textPost;
-  Rx<PostType>? currentType;
+  //Rx<PostType>? currentType;
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
   // RxList<String>
@@ -34,17 +34,17 @@ class PostController extends GetxController {
   RxString imagePathUpload = "".obs;
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-  HomePostsController homePostsController = Get.put(HomePostsController());
-  var jwtController = Get.put(JWTController());
-  var bottomNavController = Get.put(NavController());
-  Future setPost(image, PostAssetType assetType) async {
+ final HomePostsController homePostsController = Get.put(HomePostsController());
+  final jwtController = Get.find<JWTController>();
+  final bottomNavController = Get.find<NavController>();
+  Future setPost(image, PostType assetTyp) async {
     isSettingImage.value = true;
-    if (assetType == PostAssetType.text) {
+    if (assetTyp == PostType.text) {
       textPost = image;
     } else {
       imagePath = image;
     }
-    this.assetType = assetType;
+    assetType = assetTyp;
     isSettingImage.value = false;
     //update();
   }
@@ -76,7 +76,7 @@ class PostController extends GetxController {
       //todo : Remove The New File Making Process With Filtered File
       final tempDir = await getTemporaryDirectory();
       File file = await File('${tempDir.path}/image.png').create();
-      if (assetType != PostAssetType.text) {
+      if (assetType != PostType.text) {
         Uint8List imageInUnit8List = imagePath!;
 
         file.writeAsBytesSync(imageInUnit8List);
@@ -90,7 +90,7 @@ class PostController extends GetxController {
         "mediaType": "image",
         // assetType.toString().split(".")[1].substring(0),
         "mediaUrl": MultipartFile.fromFileSync(
-          assetType == PostAssetType.text ? textPost! : file.path.toString(),
+          assetType == PostType.text ? textPost! : file.path.toString(),
         ),
 
         "Enabledpoll": enablePoll ? true : false,
@@ -128,7 +128,7 @@ class PostController extends GetxController {
       bottomNavController.pageUpdate(0);
       homePostsController.posts?.clear();
       homePostsController.getPost();
-      Get.offAll(() => const BottomNavBar());
+      Get.offAll(() =>    BottomNavBar());
     } catch (e) {
       //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;

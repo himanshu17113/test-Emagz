@@ -162,7 +162,7 @@ class PersonalProfileSetup extends StatelessWidget {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () => Get.to(() => const BottomNavBar()),
+                        onTap: () => Get.to(() =>   BottomNavBar()),
                         child: const Text(
                           "Skip For Now",
                           style: TextStyle(

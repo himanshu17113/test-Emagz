@@ -166,21 +166,25 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(String id, bool ispost, String? shareLink) {
+  void sendCommentNotification(
+      String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       //   "notification": {"link": shareLink},
       "title": "Comment",
       "message": ispost
-          ? "${jwtController.user?.value.displayName} Commented on your post "
-          : "${jwtController.user?.value.displayName} Commented on your Story ",
+          ? isReply
+              ? "${jwtController.user?.value.displayName} Replied on your post "
+              : "${jwtController.user?.value.displayName} Commented on your post "
+          : isReply
+              ? "${jwtController.user?.value.displayName} Replied on your Story "
+              : "${jwtController.user?.value.displayName} Commented on your Story ",
     };
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(
-      String NotificationId ) async {
+  Future<bool> removeSingleNotification(String NotificationId) async {
     try {
       //  notifications.removeAt(index);
       Map<String, String> header = {
@@ -202,7 +206,7 @@ class SocketController extends GetxController {
       debugPrint(response.statusCode.toString());
 
       if (response.statusCode == 200) {
-     //   notifications.removeWhere((element) => element.id == NotificationId);
+        //   notifications.removeWhere((element) => element.id == NotificationId);
         return true;
       } else {
         return false;

@@ -4,14 +4,15 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
+import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class CommentController extends GetxController {
-  Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
-
-  final jwtController = Get.put(JWTController());
+//  Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
+  final socketController = Get.find<SocketController>();
+  final jwtController = Get.find<JWTController>();
   @override
   onInit() async {
     await storedData();
@@ -30,8 +31,10 @@ class CommentController extends GetxController {
   TextEditingController controller = TextEditingController();
   final focusNode = FocusNode();
   RxBool isCommentingOnPost = RxBool(true);
+  RxBool isCommentingOnReply = RxBool(true);
   RxString commentOwner = RxString("");
   RxInt commentindex = RxInt(0);
+  RxInt replyindex = RxInt(0);
   RxString commentId = RxString("");
 //  RxBool isSending = RxBool(false);
   setCommentId(String id, String commentedBy, int index) {
@@ -39,10 +42,21 @@ class CommentController extends GetxController {
     commentOwner.value = commentedBy;
     commentindex.value = index;
     isCommentingOnPost.value = false;
+    isCommentingOnReply.value = false;
     focusNode.requestFocus();
   }
 
+  setReplyId(String id, String commentedBy, int index) {
+    focusNode.requestFocus();
+    commentId.value = id;
+    commentOwner.value = commentedBy;
+    replyindex= RxInt(index) ;
+    isCommentingOnReply.value = true;
+    isCommentingOnPost.value = false;
+  }
+
   setedCommentIdclear() {
+    isCommentingOnReply = RxBool(false);
     isCommentingOnPost = RxBool(true);
     commentOwner = RxString("");
     commentindex = RxInt(5000000);
@@ -51,7 +65,7 @@ class CommentController extends GetxController {
     focusNode.unfocus();
   }
 
-  Future<dynamic> postComment(String postId) async {
+  Future<dynamic> postComment(String postId, String postuID) async {
     var comment = controller.text;
     if (comment == "") {
       Get.snackbar("Invalid Comment", "Cant post Empty Comment");
@@ -68,11 +82,16 @@ class CommentController extends GetxController {
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
       // print(resposne);
-      List<dynamic> list = resposne.data["post"]["Comments"];
+      if (resposne.statusCode == 200) {
+        List<dynamic> list = resposne.data["post"]["Comments"];
 
-      isPosting.value = false;
-      final Comment commentx = Comment.fromJson(list.last);
-      return commentx;
+        isPosting.value = false;
+        socketController.sendCommentNotification(postuID, true, null, false);
+
+        final Comment commentx = Comment.fromJson(list.last);
+
+        return commentx;
+      }
     } catch (e) {
       isPosting.value = false;
       //   update();
@@ -112,7 +131,7 @@ class CommentController extends GetxController {
     }
   }
 
-  commentStory(String storyId) async {
+  commentStory(String storyId, String postuID) async {
     var comment = controller.text;
     if (token == null) {
       token = await jwtController.getAuthToken();
@@ -126,20 +145,18 @@ class CommentController extends GetxController {
     http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
     List<dynamic> list = jsonDecode(response.body)["stories"]["Comments"];
-    // String s = list.last["_id"];
-    // String s = list.last["text"];
 
     print("grrgf ${list.last}");
     isPosting.value = false;
     //  controller.clear();
-
+    socketController.sendCommentNotification(postuID, false, null, false);
     isPosting.value = false;
     //final Comment commentx = Comment.fromJson(jsonDecode(list.last));
     //  return commentx;
     return list.last["_id"];
   }
 
-  replyStory(String postId, String commentID, String? comment) async {
+  replyStory(String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyStory(postId, commentID, userId!));
@@ -159,7 +176,7 @@ class CommentController extends GetxController {
       debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
-
+      socketController.sendCommentNotification(postuID, false, null, true);
       return false;
     } catch (e) {
       isPosting.value = false;
@@ -168,7 +185,7 @@ class CommentController extends GetxController {
     }
   }
 
-  Future<dynamic> postReply(String postId, String commentID, String? comment) async {
+  Future<dynamic> postReply(String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
@@ -180,11 +197,10 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       Dio dio = Dio();
-      // var token = await jwtController.getAuthToken();
-      // var userId = await jwtController.getUserId();
+
       debugPrint(token);
       dio.options.headers["Authorization"] = token;
-      var data = {"text": comment ?? controller.text};
+      Map<String, String> data = {"text": comment ?? controller.text};
       var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
       isPosting.value = false;
@@ -192,8 +208,7 @@ class CommentController extends GetxController {
 
       isPosting.value = false;
       final Comment commentx = Comment.fromJson(resposne.data["comment"]);
-      //    instantComments.value.add(Comment(text: comment, userId: UserSchema(sId: userId), comments: [], sId: userId));
-
+      socketController.sendCommentNotification(postuID, true, null, true);
       //  update();
       return commentx;
     } catch (e) {

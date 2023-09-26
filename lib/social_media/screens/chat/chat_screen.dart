@@ -74,14 +74,30 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 Row(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        Get.to(() =>   NotificationScreen());
-                      },
-                      child: Image.asset(
-                        "assets/png/notification_bell.png",
-                        width: 22,
-                        color: blackButtonColor,
+                    Center(
+                      child: GestureDetector(
+                        onTap: () => Get.to(() => NotificationScreen()),
+                        child: Stack(alignment: Alignment.topRight, children: [
+                          Image.asset(
+                            "assets/png/notification_bell.png",
+                            height: 28,
+                            width: 28,
+                          ),
+                          if (socketController.notifications.isNotEmpty)
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                radius: 8,
+                                backgroundColor: Colors.red,
+                                child: Obx(() => Text(
+                                      socketController.notifications.length
+                                          .toString(),
+                                      style: const TextStyle(fontSize: 12),
+                                    )),
+                              ),
+                            )
+                        ]),
                       ),
                     ),
                     Padding(
@@ -89,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: InkWell(
                         onTap: () {},
                         child: CachedNetworkImage(
-                          imageUrl: url,
+                          imageUrl: jwtController.user?.value.ProfilePic ?? url,
                           placeholder: (context, url) =>
                               const CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
@@ -61,7 +60,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       children: [
                         Text(
                           "Chat",
-                          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 21, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -70,7 +70,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() =>   NotificationScreen());
+                          Get.to(() => NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",
@@ -78,6 +78,35 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           color: blackButtonColor,
                         ),
                       ),
+
+                      // Center(
+                      //   child: GestureDetector(
+                      //     onTap: () => Get.to(() => NotificationScreen()),
+                      //     child:
+                      //         Stack(alignment: Alignment.topRight, children: [
+                      //       Image.asset(
+                      //         "assets/png/notification_bell.png",
+                      //         height: 28,
+                      //         width: 28,
+                      //       ),
+                      //       if (socketController.notifications.isNotEmpty)
+                      //         Positioned(
+                      //           top: 0,
+                      //           right: 0,
+                      //           child: CircleAvatar(
+                      //             radius: 8,
+                      //             backgroundColor: Colors.red,
+                      //             child: Obx(() => Text(
+                      //                   socketController.notifications.length
+                      //                       .toString(),
+                      //                   style: const TextStyle(fontSize: 12),
+                      //                 )),
+                      //           ),
+                      //         )
+                      //     ]),
+                      //   ),
+                      // ),
+
                       const SizedBox(
                         width: 25,
                       ),
@@ -90,7 +119,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(url),
+                                    fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(5)),
                           )),
                       const SizedBox(
@@ -118,7 +149,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           child: Container(
                         // margin: EdgeInsets.symmetric(),
                         height: 42,
-                        decoration: BoxDecoration(color: const Color(0xffF0F0F0), borderRadius: BorderRadius.circular(10)),
+                        decoration: BoxDecoration(
+                            color: const Color(0xffF0F0F0),
+                            borderRadius: BorderRadius.circular(10)),
                         child: TextField(
                           controller: QueryControl,
                           onSubmitted: (value) {
@@ -137,8 +170,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           showCursor: false,
                           decoration: InputDecoration(
                               hintText: "Search",
-                              hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
-                              contentPadding: const EdgeInsets.only(left: 10, top: 5),
+                              hintStyle: TextStyle(
+                                  fontSize: 13, color: blackButtonColor),
+                              contentPadding:
+                                  const EdgeInsets.only(left: 10, top: 5),
                               prefixIcon: const Icon(
                                 Icons.search,
                                 color: Colors.black,
@@ -178,18 +213,22 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   margin: const EdgeInsets.symmetric(horizontal: 18),
                   child: Text(
                     "Online",
-                    style: TextStyle(color: blackButtonColor, fontSize: 15.5, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: blackButtonColor,
+                        fontSize: 15.5,
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
-                  child:  Row(
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+                  child: Row(
                     children: [
                       UserOnlineCircle(),
-                    const  SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       // UserOnlineCircle(),
@@ -231,7 +270,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                         : (myFuture == null)
                             ? const CircularProgressIndicator()
                             : RefreshIndicator(
-                                onRefresh: () => myFuture = chatController.getChatList(),
+                                onRefresh: () =>
+                                    myFuture = chatController.getChatList(),
                                 child: UserChats(
                                   data: myFuture!,
                                 ),

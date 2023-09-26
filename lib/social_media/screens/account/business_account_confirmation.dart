@@ -53,20 +53,14 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                 children: [
                   Text(
                     "Congratulations",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: blackButtonColor, fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Text(
                     "your Professional persona is created successfully",
-                    style: TextStyle(
-                        color: lightBlack,
-                        fontSize: 7,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: lightBlack, fontSize: 7, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 20,
@@ -77,29 +71,19 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         height: 40,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffFCFCFC),
-                            borderRadius: BorderRadius.circular(5)),
+                        decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                         child: Text(
                           "View Insights",
-                          style: TextStyle(
-                              color: lightBlack,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                       ),
                       Container(
                         alignment: Alignment.center,
                         height: 40,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffFCFCFC),
-                            borderRadius: BorderRadius.circular(5)),
+                        decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                         child: Text(
                           "Analysis your post",
-                          style: TextStyle(
-                              color: lightBlack,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
@@ -114,15 +98,10 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         child: Container(
                           alignment: Alignment.center,
                           height: 40,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFCFCFC),
-                              borderRadius: BorderRadius.circular(5)),
+                          decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                           child: Text(
                             "Personalized Professional persona",
-                            style: TextStyle(
-                                color: lightBlack,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -130,15 +109,10 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         child: Container(
                           alignment: Alignment.center,
                           height: 40,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFCFCFC),
-                              borderRadius: BorderRadius.circular(5)),
+                          decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                           child: Text(
                             "Redirect to store",
-                            style: TextStyle(
-                                color: lightBlack,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -152,10 +126,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                     child: Text(
                       "View Audience Base",
                       textAlign: TextAlign.start,
-                      style: TextStyle(
-                          color: lightBlack,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                     ),
                   ),
                   const SizedBox(
@@ -167,30 +138,20 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         height: 40,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffFCFCFC),
-                            borderRadius: BorderRadius.circular(5)),
+                        decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                         child: Text(
                           "Promote Posts",
-                          style: TextStyle(
-                              color: lightBlack,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
                       ),
                       Expanded(
                         child: Container(
                           alignment: Alignment.center,
                           height: 40,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffFCFCFC),
-                              borderRadius: BorderRadius.circular(5)),
+                          decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
                           child: Text(
                             "Upload product images",
-                            style: TextStyle(
-                                color: lightBlack,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -201,20 +162,15 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => const BottomNavBar());
+                      Get.to(() => BottomNavBar());
                     },
                     child: Container(
                       alignment: Alignment.center,
                       height: 48,
-                      decoration: BoxDecoration(
-                          color: chipColor,
-                          borderRadius: BorderRadius.circular(10)),
+                      decoration: BoxDecoration(color: chipColor, borderRadius: BorderRadius.circular(10)),
                       child: Text(
                         "Get Started",
-                        style: TextStyle(
-                            color: whiteColor,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: whiteColor, fontSize: 9, fontWeight: FontWeight.w600),
                       ),
                     ),
                   ),

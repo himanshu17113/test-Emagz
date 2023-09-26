@@ -44,12 +44,29 @@ class SocialMediaHomePage extends StatelessWidget {
             ),
           ),
           actions: [
-            GestureDetector(
-              onTap: () => Get.to(()=>NotificationScreen()),
-              child: Image.asset(
-                "assets/png/notification_bell.png",
-                // height: 18,
-                width: 22,
+            Center(
+              child: GestureDetector(
+                onTap: () => Get.to(() => NotificationScreen()),
+                child: Stack(alignment: Alignment.topRight, children: [
+                  Image.asset(
+                    "assets/png/notification_bell.png",
+                    height: 28,
+                    width: 28,
+                  ),
+                  if (socketController.notifications.isNotEmpty)
+                    Positioned(
+                      top: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 8,
+                        backgroundColor: Colors.red,
+                        child: Obx(() => Text(
+                              socketController.notifications.length.toString(),
+                              style: const TextStyle(fontSize: 12),
+                            )),
+                      ),
+                    )
+                ]),
               ),
             ),
             const SizedBox(
@@ -106,7 +123,8 @@ class SocialMediaHomePage extends StatelessWidget {
             storyController.getStories();
             return homePostController.getPost();
           },
-          child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
+          child: HomePosts(
+              myUserId: jwtController.userId ?? homePostController.userId),
         ),
       ),
     );

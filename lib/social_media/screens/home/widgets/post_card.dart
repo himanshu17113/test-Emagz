@@ -42,7 +42,10 @@ class PostCard extends StatefulWidget {
   State<PostCard> createState() => _PostCardState();
 }
 
+enum reportcharacter { Spam, Misinformation, Harmful, Misleading, Hateful }
+
 class _PostCardState extends State<PostCard> {
+  reportcharacter? _character = reportcharacter.Spam;
   bool isShowPoll = false;
   bool isvoted = false;
   Poll? poll;
@@ -67,20 +70,20 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    //todo change logic
-    var yesCount = 0;
-    var noCount = 0;
-    // var yesCount = post?.pollResults?[0]?.yes ?? 0;
-    // var noCount = post?.pollResults?[0]?.no ?? 0;
-    late double yesPercentage;
-    late double noPercentage;
-    if (yesCount + noCount != 0) {
-      yesPercentage = (yesCount / (yesCount + noCount)) * 100;
-      noPercentage = 100 - yesPercentage;
-    } else {
-      yesPercentage = 0;
-      noPercentage = 0;
-    }
+    // //todo change logic
+    // var yesCount = 0;
+    // var noCount = 0;
+    // // var yesCount = post?.pollResults?[0]?.yes ?? 0;
+    // // var noCount = post?.pollResults?[0]?.no ?? 0;
+    // late double yesPercentage;
+    // late double noPercentage;
+    // if (yesCount + noCount != 0) {
+    //   yesPercentage = (yesCount / (yesCount + noCount)) * 100;
+    //   noPercentage = 100 - yesPercentage;
+    // } else {
+    //   yesPercentage = 0;
+    //   noPercentage = 0;
+    // }
     return Container(
       //    height: Get.size.height / 1.6,
       margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -148,7 +151,6 @@ class _PostCardState extends State<PostCard> {
               return Text("unknown type : ${post!.mediaType}");
             }
           }),
-
           Positioned(
             top: 15,
             left: 15,
@@ -213,7 +215,124 @@ class _PostCardState extends State<PostCard> {
               ),
             ),
           ),
-          //const Spacer(),
+          Positioned(
+            top: 15,
+            right: 15,
+            child: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        backgroundColor: Colors.transparent,
+                        iconColor: Colors.amberAccent,
+                        content: StatefulBuilder(builder: (
+                          BuildContext context,
+                          StateSetter setState,
+                        ) {
+                          return Theme(
+                            data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                primaryColor: Colors.amber,
+                                textTheme: Typography.whiteCupertino),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: const Color.fromARGB(255, 17, 17, 16),
+                              ),
+                              width: MediaQuery.of(context).size.width * 0.75,
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: Column(
+                                children: [
+                                  const Padding(
+                                      padding: EdgeInsets.all(15.0),
+                                      child: Text('Report Post',
+                                          style: TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          textAlign: TextAlign.center)),
+                                  RadioListTile<reportcharacter>(
+                                    title: const Text('Spam'),
+                                    value: reportcharacter.Spam,
+                                    groupValue: _character,
+                                    onChanged: (reportcharacter? value) {
+                                      setState(() {
+                                        _character = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile<reportcharacter>(
+                                    title: const Text('Misinformation'),
+                                    value: reportcharacter.Misinformation,
+                                    groupValue: _character,
+                                    onChanged: (reportcharacter? value) {
+                                      setState(() {
+                                        _character = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile<reportcharacter>(
+                                    title: const Text('Harmful'),
+                                    value: reportcharacter.Harmful,
+                                    groupValue: _character,
+                                    onChanged: (reportcharacter? value) {
+                                      setState(() {
+                                        _character = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile<reportcharacter>(
+                                    title: const Text('Misleading'),
+                                    value: reportcharacter.Misleading,
+                                    groupValue: _character,
+                                    onChanged: (reportcharacter? value) {
+                                      setState(() {
+                                        _character = value;
+                                      });
+                                    },
+                                  ),
+                                  RadioListTile<reportcharacter>(
+                                    title: const Text('Hateful'),
+                                    value: reportcharacter.Hateful,
+                                    groupValue: _character,
+                                    onChanged: (reportcharacter? value) {
+                                      setState(() {
+                                        _character = value;
+                                      });
+                                    },
+                                  ),
+                                  const Spacer(),
+                                  ButtonBar(
+                                    children: <Widget>[
+                                      TextButton(
+                                        child: const Text('Ok'),
+                                        onPressed: () async {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      TextButton(
+                                        child: const Text('Cancel'),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }));
+                  },
+                );
+              },
+              icon: const Icon(
+                Icons.info,
+                color: Colors.white38,
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -276,7 +395,6 @@ class _PostCardState extends State<PostCard> {
                                           fontWeight: FontWeight.w700),
                                     ),
                                   ),
-
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 10),
@@ -298,77 +416,6 @@ class _PostCardState extends State<PostCard> {
                                       ),
                                     ),
                                   )
-                                  // SizedBox(
-                                  //   width: width * .8,
-                                  //   height: 5,
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Expanded(
-                                  //           flex: poll?.pollCalculation
-                                  //                   ?.yesPercentage
-                                  //                   ?.toInt() ??
-                                  //               (100 -
-                                  //                   (poll?.pollCalculation
-                                  //                           ?.noPercentage
-                                  //                           ?.toInt() ??
-                                  //                       50)),
-                                  //           child: Container(
-                                  //             color: const Color.fromRGBO(
-                                  //                 76, 101, 168, 0.9),
-                                  //           )),
-                                  //       Expanded(
-                                  //           flex: poll?.pollCalculation
-                                  //                   ?.noPercentage
-                                  //                   ?.toInt() ??
-                                  //               (100 -
-                                  //                   (poll?.pollCalculation
-                                  //                           ?.yesPercentage
-                                  //                           ?.toInt() ??
-                                  //                       50)),
-                                  //           child: Container(
-                                  //             color: const Color.fromRGBO(
-                                  //                 217, 217, 217, 1),
-                                  //           ))
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                  // const SizedBox(
-                                  //   height: 15,
-                                  // ),
-                                  // SizedBox(
-                                  //   width: width * .8,
-                                  //   height: 5,
-                                  //   child: Row(
-                                  //     children: [
-                                  //       Expanded(
-                                  //           flex: poll?.pollCalculation
-                                  //                   ?.noPercentage
-                                  //                   ?.toInt() ??
-                                  //               (100 -
-                                  //                   (poll?.pollCalculation
-                                  //                           ?.yesPercentage
-                                  //                           ?.toInt() ??
-                                  //                       50)),
-                                  //           child: Container(
-                                  //             color: const Color.fromRGBO(
-                                  //                 76, 101, 168, 0.9),
-                                  //           )),
-                                  //       Expanded(
-                                  //           flex: poll?.pollCalculation
-                                  //                   ?.yesPercentage
-                                  //                   ?.toInt() ??
-                                  //               (100 -
-                                  //                   (poll?.pollCalculation
-                                  //                           ?.noPercentage
-                                  //                           ?.toInt() ??
-                                  //                       50)),
-                                  //           child: Container(
-                                  //             color: const Color.fromRGBO(
-                                  //                 217, 217, 217, 1),
-                                  //           )),
-                                  //     ],
-                                  //   ),
-                                  // )
                                 ],
                               ),
                             )
@@ -423,41 +470,6 @@ class _PostCardState extends State<PostCard> {
                                             : Colors.black,
                                       ),
                                     ),
-                                    // (selectedOption != -1)
-                                    //     ? ((index == 0)
-                                    //         ? Container(
-                                    //           alignment: Alignment
-                                    //               .bottomCenter,
-                                    //           height: 52,
-                                    //           width: yesPercentage,
-                                    //           decoration:
-                                    //               BoxDecoration(
-                                    //                   color: Colors
-                                    //                       .black
-                                    //                       .withOpacity(
-                                    //                           0.5)),
-                                    //           child: Text("$yesCount",
-                                    //               style:
-                                    //                   const TextStyle(
-                                    //                       color: Colors
-                                    //                           .white)),
-                                    //         )
-                                    //         : Container(
-                                    //             alignment: Alignment
-                                    //                 .bottomCenter,
-                                    //             height: 52,
-                                    //             width: noPercentage,
-                                    //             decoration: BoxDecoration(
-                                    //                 color: Colors.black
-                                    //                     .withOpacity(
-                                    //                         0.5)),
-                                    //             child: Text("$noCount",
-                                    //                 style:
-                                    //                     const TextStyle(
-                                    //                         color: Colors
-                                    //                             .white)),
-                                    //           ))
-                                    //     : const SizedBox()
                                   ),
                                 ),
                               ),
@@ -474,8 +486,6 @@ class _PostCardState extends State<PostCard> {
                         setState(() {
                           isShowPoll = !isShowPoll;
                           isvoted = poll?.isVoted ?? false;
-
-                          //     }  //     isShowPoll = !isShowPoll;
                         });
                       },
                       child: Padding(

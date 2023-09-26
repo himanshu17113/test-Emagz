@@ -8,6 +8,7 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_tile.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../../../constant/colors.dart';
 import '../../../../../../screens/auth/widgets/form_haeding_text.dart';
@@ -43,7 +44,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
 class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSheet> {
   final commentsController = Get.put(CommentController());
   final homePostController = Get.find<HomePostsController>();
-  final socketController = Get.find<SocketController>();
+//  final socketController = Get.find<SocketController>();
   //final getXStoryController = Get.find<GetXStoryController>();
   final jwt = Get.find<JWTController>();
   double mainHeight = 450;
@@ -62,16 +63,15 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
     // debugPrint(MediaQuery.of(context).size.height);
 
     return GlassmorphicContainer(
-        // borderRadius: 33,
-        // blur: 6,
+        //   borderRadius: 33,
+        //  blur: 6,
         borderRadius: widget.isblurNeeded ? 33 : 0,
         blur: widget.isblurNeeded ? 6 : 0,
         //  width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * .56,
         // keyboardVisible ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .7,
         child: Container(
-          decoration: const BoxDecoration(
-              color: Colors.black12, borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
+          decoration: const BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
@@ -165,20 +165,20 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
-                    const Spacer(),
-                    FormHeadingText(
-                      color: Colors.white,
-                      headings: "Latest",
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Colors.white,
-                    ),
+                    // const Spacer(),
+                    // FormHeadingText(
+                    //   color: Colors.white,
+                    //   headings: "Latest",
+                    //   fontSize: 12,
+                    //   fontWeight: FontWeight.w600,
+                    // ),
+                    // const SizedBox(
+                    //   width: 5,
+                    // ),
+                    // const Icon(
+                    //   Icons.keyboard_arrow_down,
+                    //   color: Colors.white,
+                    // ),
                   ],
                 ),
               ),
@@ -274,10 +274,8 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                       decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          gradient: LinearGradient(
-                              end: Alignment.bottomRight,
-                              begin: Alignment.topLeft,
-                              colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
+                          gradient:
+                              LinearGradient(end: Alignment.bottomRight, begin: Alignment.topLeft, colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
                       child: IconButton(
                           onPressed: () async {
                             if (!widget.isStory!) {
@@ -285,35 +283,67 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                 //  commentsController.isPosting.value
                                 //     ? debugPrint("sending comment")
                                 //     :
-                                var x = await commentsController.postComment(widget.postId);
+                                var x = await commentsController.postComment(widget.postId, widget.postuID!);
                                 setState(() {
                                   widget.comments.add(x);
                                   widget.update!();
                                   commentsController.controller.clear();
                                 });
-                                if (widget.postuID != null) {
-                                  socketController.sendCommentNotification(widget.postuID!, true, null);
-                                }
+                                // if (widget.postuID != null) {
+                                //   socketController.sendCommentNotification(widget.postuID!, true, null);
+                                // }
                               } else {
                                 if (commentsController.isPosting.value) {
                                   debugPrint("sending comment");
                                 } else {
-                                  var x = await commentsController.postReply(
-                                      widget.postId, commentsController.commentId.value, commentsController.controller.text);
-                                  if (x != false) {
-                                    setState(() {
-                                      widget.comments[commentsController.commentindex.value]?.comments?.add(x
-                                          // Comment(
-                                          //   text: commentsController.controller.text,
-                                          //   userId: UserSchema(
-                                          //       //       username: ,
-                                          //       sId: commentsController.userId),
-                                          //   comments: [],
-                                          //   sId: commentsController.userId)
-                                          );
-                                      commentsController.controller.clear();
-                                    });
-                                    //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
+                                  if (!commentsController.isCommentingOnReply.value) {
+                                    var x =
+                                        await commentsController.postReply(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    if (x != false) {
+                                      setState(() {
+                                        widget.comments[commentsController.commentindex.value]?.comments?.add(x
+                                            // Comment(
+                                            //   text: commentsController.controller.text,
+                                            //   userId: UserSchema(
+                                            //       //       username: ,
+                                            //       sId: commentsController.userId),
+                                            //   comments: [],
+                                            //   sId: commentsController.userId)
+                                            );
+                                        commentsController.controller.clear();
+                                      });
+                                      //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
+                                    }
+                                  } else {
+                                    var x =
+                                        await commentsController.postReply(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    if (x != false) {
+                                      setState(() {
+                                        widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments?.add(x
+                                            // Comment(
+                                            //   text: commentsController.controller.text,
+                                            //   userId: UserSchema(
+                                            //       //       username: ,
+                                            //       sId: commentsController.userId),
+                                            //   comments: [],
+                                            //   sId: commentsController.userId)
+                                            );
+                                        commentsController.controller.clear();
+                                      });
+                                      //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
+                                    } else {
+                                      setState(() {
+                                        widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments?.add(Comment(
+                                            text: commentsController.controller.text,
+                                            userId: jwt.user?.value ??
+                                                UserSchema(
+                                                    //    username: ,
+                                                    sId: commentsController.userId),
+                                            comments: [],
+                                            sId: commentsController.userId));
+                                        commentsController.controller.clear();
+                                      });
+                                    }
                                   }
                                 }
                               }
@@ -322,36 +352,31 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                 //  commentsController.isPosting.value
                                 //     ? debugPrint("sending comment")
                                 //     :
-                                String x = await commentsController.commentStory(widget.postId);
+                                String x = await commentsController.commentStory(widget.postId, widget.postuID!);
                                 setState(() {
                                   widget.comments.add(Comment(
                                       text: commentsController.controller.text,
                                       userId: jwt.user?.value ??
                                           UserSchema(
-                                              sId: commentsController.userId,
-                                              ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value,
-                                              username: jwt.user?.value.username),
+                                              sId: commentsController.userId, ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value, username: jwt.user?.value.username),
                                       comments: [],
                                       sId: x));
-                                  if (widget.postuID != null) {
-                                    socketController.sendCommentNotification(widget.postuID!, false, null);
-                                  }
+                                  // if (widget.postuID != null) {
+                                  //   socketController.sendCommentNotification(widget.postuID!, false, null);
+                                  // }
                                   commentsController.controller.clear();
                                 });
                               } else {
                                 commentsController.isPosting.value
                                     ? debugPrint("sending comment")
-                                    : commentsController.replyStory(
-                                        widget.postId, commentsController.commentId.value, commentsController.controller.text);
+                                    : commentsController.replyStory(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
 
                                 setState(() {
                                   widget.comments[commentsController.commentindex.value]?.comments?.add(Comment(
                                       text: commentsController.controller.text,
                                       userId: jwt.user?.value ??
                                           UserSchema(
-                                              sId: commentsController.userId,
-                                              ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value,
-                                              username: jwt.user?.value.username),
+                                              sId: commentsController.userId, ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value, username: jwt.user?.value.username),
                                       comments: [],
                                       sId: commentsController.userId));
                                   commentsController.controller.clear();

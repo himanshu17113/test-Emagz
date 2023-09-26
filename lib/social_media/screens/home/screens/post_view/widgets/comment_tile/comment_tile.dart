@@ -15,7 +15,7 @@ class PostCommentTile extends StatelessWidget {
   PostCommentTile({super.key, required this.comment, required this.index});
 
   //var storyController = Get.put(GetXStoryController());
-  final storyController = Get.put(CommentController());
+  final storyController = Get.find<CommentController>();
 
   // @override
   @override
@@ -58,17 +58,17 @@ class PostCommentTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    FormHeadingText(
-                        headings: (comment.userId?.username == null)
-                            ? "loading "
-                            : (comment.userId!.username!.length > 20)
-                                ? "${comment.userId?.username?.substring(17)}..."
-                                : comment.userId!.username!,
-                        fontSize: 10,
-                        color: Colors.white70),
+                    Text(
+                      (comment.userId?.username == null)
+                          ? "loading "
+                          : (comment.userId!.username!.length > 20)
+                              ? "${comment.userId?.username?.substring(17)}..."
+                              : comment.userId!.username!,
+                      style: const TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
+                    ),
                     Text(
                       "${comment.text}",
-                      style: const TextStyle(fontSize: 14, color: Colors.white70),
+                      style: const TextStyle(fontSize: 16.2, color: Colors.white, letterSpacing: 0.32),
                     ),
                     // FormHeadingText(
                     //   headings: ,
@@ -77,29 +77,30 @@ class PostCommentTile extends StatelessWidget {
                     // ),
                     Row(
                       children: [
-                        FormHeadingText(
-                          headings: "4+ Loves",
-                          fontSize: 8,
-                          color: Colors.white70,
+                        const Text(
+                          "4+ Loves",
+                          style: TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: GestureDetector(
-                            onTap: () {
-                              storyController.setCommentId(comment.sId!, comment.userId?.username ?? "jjk", index);
-                            },
-                            child: FormHeadingText(headings: "Reply", fontSize: 10, color: Colors.white70),
-                          ),
+                              onTap: () {
+                                storyController.setCommentId(comment.sId!, comment.userId?.username ?? "jjk", index);
+                              },
+                              child: const Text(
+                                "Reply",
+                                style: TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
+                              )),
                         ),
-                        FormHeadingText(headings: "Love Back", fontSize: 8, color: Colors.white70),
+                        FormHeadingText(headings: "Love Back", fontSize: 11.5, color: Colors.white60),
                       ],
                     )
                   ],
                 ),
                 const Spacer(),
-                FormHeadingText(
-                  headings: "3+",
-                  fontSize: 12,
+                const Text(
+                  "3+",
+                  style: TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(
                   width: 10,
@@ -126,11 +127,13 @@ class PostCommentTile extends StatelessWidget {
         ),
         if (comment.comments != null) ...[
           Column(
-            children: List.generate(comment.comments!.length, (index) {
+            children: List.generate(comment.comments!.length, (inde) {
               if (comment.comments!.isNotEmpty) {
                 return CommentReplyTile(
-                  last: comment.comments!.length == index + 1,
-                  comment: comment.comments![index],
+                  last: comment.comments!.length == inde + 1,
+                  comment: comment.comments![inde],
+                  index: inde,
+                  commentindex:index,
                 );
               } else {
                 return const SizedBox();

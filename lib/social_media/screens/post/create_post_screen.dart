@@ -49,19 +49,29 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
   }
 
-  Future<Uint8List?> _capturePhoto() async {
+  Future _capturePhoto() async {
     final picker = ImagePicker();
     final XFile? pickedFile =
         await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
-      postController.setPost(pickedFile.path, postController.assetType!);
-      isLoading = false;
+      postController.setPost(pickedFile.path, PostType.text);
 
-      final Uint8List? image = await xFileToUint8List(pickedFile);
-      return image;
+      Uint8List? image = await xFileToUint8List(pickedFile);
+      Get.to(
+          () => EditorScreen(
+              fileExtension: fileExtension,
+              image: image,
+              onSubmit: (editedImage) {
+                postController.setPost(
+                    editedImage.readAsBytesSync(), PostType.gallery);
+                Get.off(() => PrePostScreen(
+                    postType: PostType.gallery,
+                    image: postController.imagePath));
+              }),
+          curve: Curves.bounceIn);
+      //  return image;
     }
-    return null;
   }
 
   final GlobalKey _imageKey = GlobalKey();
@@ -275,8 +285,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.poll),
+                          onTap: () => setState(
+                              () => postController.assetType = PostType.poll),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -297,8 +307,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.gallery),
+                          onTap: () => setState(() =>
+                              postController.assetType = PostType.gallery),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -319,8 +329,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           width: 10,
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController
-                              .currentType?.value = PostType.text),
+                          onTap: () => setState(
+                              () => postController.assetType = PostType.text),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
@@ -330,8 +340,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: InkWell(
-                              onTap: () => setState(() => postController
-                                  .currentType?.value = PostType.gallery),
+                              onTap: () => setState(() =>
+                                  postController.assetType = PostType.gallery),
                               child: FormHeadingText(
                                 headings: "v-Magz",
                                 fontWeight: FontWeight.bold,
@@ -346,32 +356,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ),
                         InkWell(
                           onTap: () async {
-                            postController.currentType?.value = PostType.text;
-                            final Uint8List? image = await _capturePhoto();
-                            print("image $image");
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditorScreen(
-                                      fileExtension: fileExtension,
-                                      image: image,
-                                      onSubmit: (editedImage) {
-                                        postController.setPost(
-                                            editedImage.readAsBytesSync(),
-                                            postController.assetType!);
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  PrePostScreen(
-                                                      postType:
-                                                          PostType.gallery,
-                                                      image: postController
-                                                          .imagePath)),
-                                        );
-                                        //Get.off(() => PrePostScreen(postType: PostType.gallery, image: postController.imagePath));
-                                      }),
-                                ));
+                            await _capturePhoto();
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -400,11 +385,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                       setState(() {});
                       fileExtension = assetEntity.mimeType!.split("/")[1];
                       if (assetEntity.type == AssetType.image) {
-                        postController.setPost(imageData, PostAssetType.image);
+                        postController.setPost(imageData, PostType.gallery);
                       } else if (assetEntity.type == AssetType.video) {
-                        postController.setPost(imageData, PostAssetType.video);
+                        postController.setPost(imageData, PostType.gallery);
                       } else {
-                        postController.setPost(imageData, PostAssetType.image);
+                        postController.setPost(imageData, PostType.gallery);
                       }
                     },
                   ))
@@ -539,16 +524,15 @@ class _GridGalleryState extends State<GridGallery> {
                             ? () async {
                                 if (asset.type == AssetType.image) {
                                   postController.setPost(
-                                      snapshot.data, PostAssetType.image);
+                                      snapshot.data, PostType.gallery);
                                 } else if (asset.type == AssetType.video) {
                                   postController.setPost(
-                                      snapshot.data, PostAssetType.video);
+                                      snapshot.data, PostType.gallery);
                                 } else {
                                   postController.setPost(
-                                      snapshot.data, PostAssetType.image);
+                                      snapshot.data, PostType.gallery);
                                 }
-                                postController.currentType?.value =
-                                    PostType.gallery;
+                                postController.assetType = PostType.gallery;
                                 // File filr = File.fromRawPath(snapshot.data!);
                                 // debugPrint(postController.imagePath.toString());
 

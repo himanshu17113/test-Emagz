@@ -8,6 +8,7 @@ import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
@@ -19,9 +20,10 @@ class HomePostsController extends GetxController {
   );
   final ScrollController scrollController = ScrollController();
   bool ispostloading = false;
-  final jwtController = Get.find<JWTController>();
+  final jwtController = Get.put(JWTController());
   final socketController = Get.put(SocketController());
   // String? userId;
+  bool isVisible = true;
 
   @override
   onInit() async {
@@ -34,6 +36,18 @@ class HomePostsController extends GetxController {
       //  setState(() {});
     }
     scrollController.addListener(() {
+      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+        // User is scrolling down
+        if (isVisible) {
+          isVisible = false;
+        }
+      }
+      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
+        // User is scrolling up
+        if (!isVisible) {
+          isVisible = true;
+        }
+      }
       loadMoreData();
     });
     //  getPost();
@@ -48,12 +62,9 @@ class HomePostsController extends GetxController {
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent &&
-        !ispostloading) {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
       await getPost();
-    } else if (scrollController.position.pixels ==
-        scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
   }
 
   RxList<Post>? posts = <Post>[].obs;
@@ -72,8 +83,7 @@ class HomePostsController extends GetxController {
       Dio dio = Dio();
       // var token = await jwtController.getAuthToken();
       // userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] =
-          token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] = token ?? await jwtController.getAuthToken();
       debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
       //  debugPrint(ApiEndpoint.posts(skip.value));
       final String endPoint = ApiEndpoint.posts(skip.value);
@@ -81,8 +91,7 @@ class HomePostsController extends GetxController {
       print(endPoint);
       var resposne = await dio.get(endPoint);
       // logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null &&
-          resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -178,11 +187,7 @@ class HomePostsController extends GetxController {
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
     if (islike) {
-      socketController.sendLikeNotification(
-          uid,
-          jwtController.user?.value.username ??
-              jwtController.user?.value.displayName ??
-              "");
+      socketController.sendLikeNotification(uid, jwtController.user?.value.username ?? jwtController.user?.value.displayName ?? "");
     }
     try {
       Dio dio = Dio();
@@ -201,7 +206,7 @@ class HomePostsController extends GetxController {
     }
   }
 
-  Future<Poll?>  postPoll(String postId, String vote) async {
+  Future<Poll?> postPoll(String postId, String vote) async {
     try {
       // var userId = await JWTController().getUserId();
       // var token = await JWTController().getAuthToken();
@@ -216,10 +221,9 @@ class HomePostsController extends GetxController {
       // }
 
       return Polldetail(postId);
-     
     } catch (e) {
       debugPrint(e.toString());
-    //  return false;
+      return null;
     }
   }
 
@@ -242,7 +246,7 @@ class HomePostsController extends GetxController {
       // return json.decode(response.data)["isVoted"];
     } catch (e) {
       debugPrint(e.toString());
-      //   return false;
+      return null;
     }
   }
 }

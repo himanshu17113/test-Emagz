@@ -84,7 +84,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                       children: [
                         InkWell(
                           onLongPress: () {
-                            Get.to(() => const BottomNavBar());
+                            Get.to(() =>   BottomNavBar());
                           },
                           onTap: () {
                             setState(() {

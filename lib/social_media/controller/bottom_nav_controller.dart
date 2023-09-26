@@ -7,10 +7,18 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../screens/explore/explpre_screen.dart';
 import '../screens/post/create_post_screen.dart';
+import 'home/home_controller.dart';
 
 class NavController extends GetxController {
-  int? position;
-  bool isEdit = false;
+  // int? position;
+  // bool isEdit = false;
+  final homePostController = Get.put(HomePostsController());
+  bool show = true;
+  @override
+  onInit() async {
+    super.onInit();
+    show = homePostController.isVisible;
+  }
 
   List<Widget> screen = [
     SocialMediaHomePage(),
@@ -80,6 +88,9 @@ class NavController extends GetxController {
 
   pageUpdate(int index) {
     page = index;
+    if (index == 0) {
+      homePostController.scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.bounceOut);
+    }
     update();
   }
 }

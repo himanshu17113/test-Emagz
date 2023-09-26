@@ -117,7 +117,7 @@ class EmagzScreen extends StatelessWidget {
                           InkWell(
                             onTap: () {
                               // Get.to(() => const SocialMediaHomePage());
-                              Get.offAll(() => const BottomNavBar());
+                              Get.offAll(() =>   BottomNavBar());
                             },
                             child: Container(
                               alignment: Alignment.center,
