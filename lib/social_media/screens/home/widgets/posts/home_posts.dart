@@ -60,7 +60,7 @@ class HomePosts extends StatelessWidget {
                             barrierColor: Colors.black.withOpacity(.5),
                             context: context,
                             builder: (context) {
-                              return const AlertDialog(
+                              return AlertDialog(
                                 insetPadding: EdgeInsets.zero,
                                 iconPadding: EdgeInsets.zero,
                                 titlePadding: EdgeInsets.zero,
@@ -80,15 +80,20 @@ class HomePosts extends StatelessWidget {
                                       HomePagePopupWidget(
                                         isBorder: false,
                                         title: "View Post",
+                                        post: homePostController.posts![index-1]!,
+
                                       ),
                                       HomePagePopupWidget(
                                         title: "View Stats",
+                                        post: homePostController.posts![index-1]!,
                                       ),
                                       HomePagePopupWidget(
                                         title: "Download",
+                                        post: homePostController.posts![index-1]!,
                                       ),
                                       HomePagePopupWidget(
                                         title: "Share",
+                                        post: homePostController.posts![index-1]!,
                                       )
                                     ],
                                   ),

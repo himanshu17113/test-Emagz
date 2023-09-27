@@ -76,6 +76,7 @@ dependencies:
   firebase_auth: ^4.9.0
   firebase_core: ^2.15.1
   flutter_facebook_auth: ^6.0.2
+  flutter_file_dialog: ^3.0.2
 
   
 dev_dependencies:

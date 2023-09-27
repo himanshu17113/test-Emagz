@@ -1,4 +1,5 @@
 import 'package:emagz_vendor/social_media/models/post_model.dart';
+import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -122,11 +123,11 @@ class _ShareStoryState extends State<ShareStory> {
               height: 30,
               child: Center(
                   child: Text(
-                "Share",
-                style: TextStyle(color: Colors.black.withOpacity(0.60), fontSize: 18, fontWeight: FontWeight.w500),
-              )),
+                    "Share",
+                    style: TextStyle(color: Colors.black.withOpacity(0.60), fontSize: 18, fontWeight: FontWeight.w500),
+                  )),
             ),
-          ),
+          )
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(

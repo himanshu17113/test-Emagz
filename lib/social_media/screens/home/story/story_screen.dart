@@ -5,6 +5,7 @@ import 'package:emagz_vendor/social_media/screens/home/story/controller/story_co
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:share_plus/share_plus.dart';
 import "package:story_view/story_view.dart";
 
 import '../../../../screens/auth/widgets/form_haeding_text.dart';
@@ -217,16 +218,17 @@ class StoryScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                   //         Share.share("http://emagz.live/Story/${widget.post.sId}");
-                                      // showModalBottomSheet(
-                                      //   shape: const OutlineInputBorder(
-                                      //       borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
-                                      //   isScrollControlled: true,
-                                      //   context: context,
-                                      //   builder: (context) {
-                                      //     return const ShareStory();
-                                      //   },
-                                      // );
+                                          // Share.share("http://emagz.live/Story/");
+                                      showModalBottomSheet(
+                                        backgroundColor: Colors.transparent,
+                                        shape: const OutlineInputBorder(
+                                            borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+                                        isScrollControlled: true,
+                                        context: context,
+                                        builder: (context) {
+                                          return const ShareStory();
+                                        },
+                                      );
                                     },
                                     child: Image.asset(
                                       "assets/png/share_icon.png",
