@@ -114,6 +114,17 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 20,
                 ),
+                SizedBox(
+                  width: 331,
+                  child: FormHeadingText(
+                      headings: "NOTE: If not reactivated for 3 months, Your account data and User Data will be deleted from our DataBase ",
+                      fontSize: 8,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xff212121)),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(
