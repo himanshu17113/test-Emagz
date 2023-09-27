@@ -127,7 +127,7 @@ class _ShareStoryState extends State<ShareStory> {
                     style: TextStyle(color: Colors.black.withOpacity(0.60), fontSize: 18, fontWeight: FontWeight.w500),
                   )),
             ),
-          )
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
