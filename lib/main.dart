@@ -36,15 +36,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      //home: PTemplateTwoScreen(),
-      // home: TemplateFiveScreen(),
-      //home: DefaultBusinesstempScreen(),
-      // home: PersonalProfileInsightScreen(),
-      //  home: SupportScreen(),
-      //home: ChooseTemplate()
-      // home: const BottomNavBar(),
       home: Obx(() => authController.isAuthorised.value ? BottomNavBar() : const CommonAuthScreen()),
-      // home: ChatScreen(),
     );
   }
 }

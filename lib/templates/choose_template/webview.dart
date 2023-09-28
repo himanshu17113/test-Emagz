@@ -10,13 +10,15 @@ class WebViewPersona extends StatefulWidget {
   String token;
   String userId;
   String personaUserId;
-  String templateId;
+
+
   WebViewPersona(
       {Key? key,
       required this.token,
       required this.userId,
       required this.personaUserId,
-      required this.templateId})
+
+  })
       : super(key: key);
 
   @override

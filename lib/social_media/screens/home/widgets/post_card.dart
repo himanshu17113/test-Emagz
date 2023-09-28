@@ -189,7 +189,7 @@ class _PostCardState extends State<PostCard> {
                             token: tok!,
                             userId: widget.myUserId!,
                             personaUserId: post!.user!.sId!,
-                            templateId: temp!));
+                            ));
                       }
                     },
                     child: Column(

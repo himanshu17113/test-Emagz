@@ -182,7 +182,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => const ChooseTemplate());
+                            Get.to(() => ChooseTemplate(isReg:false));
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(

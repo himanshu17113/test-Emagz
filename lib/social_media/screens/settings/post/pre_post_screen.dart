@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
+import 'package:emagz_vendor/social_media/screens/settings/post/custom_poll_select_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,8 @@ class _PrePostScreenState extends State<PrePostScreen> {
   int selectedTimer = -1;
 
   bool isPollEnable = false;
+  bool isCustomPoll=false;
+  bool isShowAudience=false;
 
   bool isFollowing = false;
 
@@ -171,6 +174,66 @@ class _PrePostScreenState extends State<PrePostScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                  isPollEnable?
+                  Container(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+                          children: [
+                            FormHeadingText(headings: "Custom Poll"),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            FlutterSwitch(
+                                padding: 0,
+                              height: 21,
+                              width: 45,
+                              activeColor: lightSkyAcent.withOpacity(.8),
+                              activeToggleColor: const Color(0xff2E5EE2),
+                              onToggle: (bool value) {
+
+                                setState(() {
+                                  isCustomPoll = value;
+                                });
+                                if(value==true)
+                                  {
+                                    Get.to(()=>CustomPollSelectScreen(image:widget.image,postType:widget.postType));
+                                  }
+                              },
+                              value: isCustomPoll,
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FormHeadingText(headings: "Show Results to audience"),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            FlutterSwitch(
+                              padding: 0,
+                              height: 21,
+                              width: 45,
+                              activeColor: lightSkyAcent.withOpacity(.8),
+                              activeToggleColor: const Color(0xff2E5EE2),
+                              onToggle: (bool value) {
+                                setState(() {
+                                  isShowAudience = value;
+                                });
+                              },
+                              value: isShowAudience,
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 40,),
+                      ],
+                    ),
+                  ):
+                  SizedBox(),
                   Text(
                     "Set Timer".toUpperCase(),
                     style: GoogleFonts.inter(

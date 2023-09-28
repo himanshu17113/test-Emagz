@@ -11,6 +11,8 @@ import "package:story_view/story_view.dart";
 import '../../../../screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 
+import '../../../../templates/choose_template/webview.dart';
+import '../../../controller/auth/jwtcontroller.dart';
 import '../screens/post_view/widgets/modal_bottom_sheet.dart';
 import '../widgets/bottomSheet/share_bottom_sheet.dart';
 
@@ -83,9 +85,18 @@ class StoryScreen extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            userId.username ?? "loading...",
-                            style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
+                          GestureDetector(
+                            onTap:()async{
+                              var jwtController = Get.put(JWTController());
+                              var token = await jwtController.getAuthToken();
+                              var userIdd = await jwtController.getUserId();
+
+                              Get.to(()=>WebViewPersona(token: token!, userId: userIdd!, personaUserId: userId.sId!));
+                          },
+                            child: Text(
+                              userId.username ?? "loading...",
+                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
+                            ),
                           ),
                           Text(userId.sId ?? "loading...", style: TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
                         ],
@@ -244,7 +255,13 @@ class StoryScreen extends StatelessWidget {
                 ),
               ],
             ))
-        : const Text('No Story');
+        : Container(
+      color: Colors.white38,
+        child:
+            Center(child:
+              FormHeadingText(headings: 'No Story found for you\n Please upload',)
+        )
+    );
   }
 
   updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
