@@ -14,6 +14,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../templates/choose_template/webview.dart';
 import '../../profile_insight/profile_insight_screen.dart';
 
 class PersonalPageSetting extends StatefulWidget {
@@ -73,7 +74,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                height: 255,
+                height: 300,
                 decoration: BoxDecoration(
                   color: whiteAcent,
                   borderRadius: BorderRadius.circular(15),
@@ -180,6 +181,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               fontSize: 10,
                               fontWeight: FontWeight.w600),
                         ),
+
                         GestureDetector(
                           onTap: () {
                             Get.to(() => ChooseTemplate(isReg:false));
@@ -201,6 +203,33 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           ),
                         )
                       ],
+                    ),
+                    SizedBox(height: 18,),
+                    GestureDetector(
+                      onTap: () async{
+                        var jwtController = Get.put(JWTController());
+                        var token = await jwtController.getAuthToken();
+                        var userId = await jwtController.getUserId();
+
+
+                        Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId!));
+
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 12),
+                        decoration: BoxDecoration(
+                          // borderRadius: BorderRadius.circular(10),
+                          color: chipColor,
+                        ),
+                        child: Text(
+                          "View/Edit your persona",
+                          style: TextStyle(
+                              color: whiteColor,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ),
                     ),
                   ],
                 ),

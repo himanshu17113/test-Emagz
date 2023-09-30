@@ -20,6 +20,14 @@ import '../home/home_controller.dart';
 
 class PostController extends GetxController {
   TextEditingController captionController = TextEditingController();
+
+  TextEditingController button1Controller = TextEditingController();
+
+  TextEditingController button2Controller = TextEditingController();
+
+  TextEditingController button3Controller = TextEditingController();
+  TextEditingController button4Controller = TextEditingController();
+
   RxDouble uploadPercentage = RxDouble(0);
   RxString privacyLikesAndViews = RxString("hideFromEveryone");
   RxString privacyLikesAndViewsUI = RxString("Everyone");
@@ -53,6 +61,7 @@ class PostController extends GetxController {
     bool enablePoll,
     String tagPrivacy,
     int? setTimer,
+      bool? isCustomPoll,
   ) async {
     isPosting.value = true;
 
@@ -107,8 +116,11 @@ class PostController extends GetxController {
         "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
-        "tagPeople": "[]"
+        "tagPeople": "[]",
+        "customPollEnabled" : isCustomPoll,
+        "customPollData":"[${button1Controller.text},${button2Controller.text}]"
       });
+
 
       await dio.post(
         ApiEndpoint.makePost,

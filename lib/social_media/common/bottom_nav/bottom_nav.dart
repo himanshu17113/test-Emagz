@@ -48,46 +48,46 @@ class BottomNavBar extends StatelessWidget {
                   items: [
                     BottomNavigationBarItem(
                         icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Image.asset(
                             "assets/png/home_icon.png",
-                            width: 19,
+                            width: 15,
                           ),
                         ),
                         label: "Feed"),
                     BottomNavigationBarItem(
                         icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Image.asset(
                             "assets/png/explore_icon.png",
-                            width: 19,
+                            width: 15,
                           ),
                         ),
                         label: "Explore"),
                     BottomNavigationBarItem(
                         icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Image.asset(
                             "assets/png/create_icon.png",
-                            width: 19,
+                            width: 15,
                           ),
                         ),
                         label: "Create"),
                     BottomNavigationBarItem(
                         icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Image.asset(
                             "assets/png/chat_icon.png",
-                            width: 19,
+                            width: 15,
                           ),
                         ),
                         label: "Chat"),
                     BottomNavigationBarItem(
                         icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 0),
                           child: Image.asset(
                             "assets/png/more_icon.png",
-                            width: 19,
+                            width: 15,
                           ),
                         ),
                         label: "More"),

@@ -642,7 +642,9 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         : noOne
                             ? "noOne"
                             : "everyone"),
-                isPollEnable ? timerOptionList[selectedTimer] : null),
+                isPollEnable ? timerOptionList[selectedTimer] : null,
+            isCustomPoll,
+            ),
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               alignment: Alignment.center,

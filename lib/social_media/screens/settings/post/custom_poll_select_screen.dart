@@ -38,28 +38,62 @@ class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
           Positioned(
               bottom: 0,
               child: GlassmorphicContainer(
+                colour: Colors.grey,
+                height: 280,
                 borderRadius: 2,
                 blur: 5,
                 child:  Column(
                   children: [
-                    FormHeadingText(headings: 'Custom Poll',color: Colors.white38,),
+                    FormHeadingText(headings: 'Custom Poll',color: Colors.white,),
                     SizedBox(height: 10,),
-                    FormHeadingText(headings: 'Minimum 2 and Max 4 buttons',color: Colors.white38,),
+                    FormHeadingText(headings: 'Minimum 2 and Max 4 buttons',color: Colors.white,),
                     SizedBox(height: 10,),
                     Row(
                       children: [
-                        TextField(
-                            decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.grey[200], // Gray background color
-                            border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
-                            borderSide: BorderSide.none, // No border
-                            ),
-                            hintText: 'Enter text',)
-                        )
+                        SizedBox(
+                          width:150,
+                          child: TextField(
+                            controller: postController.button1Controller,
+
+                              decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey[200], // Gray background color
+                              border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                              borderSide: BorderSide.none, // No border
+                              ),
+                              hintText: 'Button 1',)
+                          ),
+                        ),
+                        SizedBox(width: 50,),
+                        SizedBox(
+                          width: 150,
+                          child: TextField(
+                            controller: postController.button2Controller,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.grey[200], // Gray background color
+                                border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                                  borderSide: BorderSide.none, // No border
+                                ),
+                                hintText: 'Button 2',)
+                          ),
+                        ),
+
+
                       ],
-                    )
+                    ),
+                    SizedBox(height: 50,),
+                    Icon(Icons.add),
+                    ElevatedButton(
+                        onPressed: ()async
+                        {
+                            Get.back();
+                        },
+
+                         child: Text('Continue'))
+
 
                   ],
                 ),
