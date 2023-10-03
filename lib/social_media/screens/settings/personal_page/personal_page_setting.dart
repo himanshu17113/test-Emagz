@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
+import 'package:emagz_vendor/screens/support/support_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
@@ -316,7 +317,16 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   title: "Security",
                 ),
               ),
-
+              InkWell(
+                onTap: () {
+                  Get.to(() => const SupportScreen());
+                },
+                child: PreferenceTile(
+                  isBlue: false,
+                  title: "Support",
+                  textDesc: 'We are here to Help',
+                ),
+              ),
               Container(
                 height: 64,
                 margin: const EdgeInsets.only(top: 10),
