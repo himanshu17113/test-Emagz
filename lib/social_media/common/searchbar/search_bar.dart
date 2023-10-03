@@ -9,7 +9,6 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: EdgeInsets.symmetric(),
       height: 42,
       decoration: BoxDecoration(
           color: const Color(0xffF0F0F0),

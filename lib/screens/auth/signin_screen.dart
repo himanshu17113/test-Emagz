@@ -135,7 +135,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                       if (homePostController.posts!.isNotEmpty) {
                         //    Get.appUpdate();
-                        Get.offAll(() =>   BottomNavBar());
+                        Get.offAll(() =>  BottomNavBar());
                       }
                     } else {}
                   }

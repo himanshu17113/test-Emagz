@@ -69,6 +69,7 @@ LinearGradient buttonGradient = const LinearGradient(
 Color blueColor = const Color(0xff0E37C8);
 Color grayColor = const Color(0xffD2D2D2);
 Color borderColor = const Color(0xffB5B5B5);
+Color textSetting= const Color(0xff999999);
 Color lightgrayColor = const Color(0xffEFEFEF);
 Color lightgrayAcent = const Color(0xffECECEC);
 Color blueButtonColor = const Color(0xff3C83E6);

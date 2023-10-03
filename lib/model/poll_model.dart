@@ -107,8 +107,8 @@ class PollCalculation {
   String toJson() => json.encode(toMap());
 
   factory PollCalculation.fromMap(Map<String, dynamic> json) => PollCalculation(
-        yesPercentage: json["yesPercentage"].toDouble(),
-        noPercentage: json["noPercentage"].toDouble(),
+        yesPercentage: json["yesPercentage"]==null?null:json["yesPercentage"].toDouble(),
+        noPercentage: json["noPercentage"]==null?null:json["noPercentage"].toDouble(),
       );
 
   Map<String, dynamic> toMap() => {

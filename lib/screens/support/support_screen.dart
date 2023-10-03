@@ -2,8 +2,12 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/common/common_top_bar.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
 import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_textField.dart';
+import 'package:emagz_vendor/screens/support/create_support.dart';
+import 'package:emagz_vendor/screens/support/support_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../social_media/common/common_appbar.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({Key? key}) : super(key: key);
@@ -11,187 +15,127 @@ class SupportScreen extends StatefulWidget {
   @override
   State<SupportScreen> createState() => _SupportScreenState();
 }
-
-class _SupportScreenState extends State<SupportScreen> {
-  var _selectedIssue;
+class _SupportScreenState extends State<SupportScreen>{
+  var supportController = Get.put(SupportController());
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+      var w= MediaQuery.of(context).size.width;
+      return Scaffold(
+        backgroundColor: socialBack,
+        appBar: SocialMediaSettingAppBar(title: 'Support',),
+        body: Container(
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 15,
-                ),
-                const commonTopBar(
-                  title: 'Support',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "We are here to help you",
-                  style: TextStyle(
-                      color: blackButtonColor,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const AddCouponHeadingText(
-                  headings: "Name",
-                ),
-                AddCouponTextfiled(),
-                const AddCouponHeadingText(
-                  headings: "E-mail/ Phone No.",
-                ),
-                AddCouponTextfiled(),
-                const AddCouponHeadingText(
-                  headings: " Please Select Your Issue",
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: myCustomRadio(
-                        "Order Issue",
-                      ),
+              mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Text('Recent',
+                      style:  TextStyle(
+                      color:  textSetting,
+                        fontSize: 14,
+                      fontWeight: FontWeight.w500),
                     ),
-                    Expanded(
-                      child: myCustomRadio(
-                        "Wrong Delivery",
-                      ),
+                  ),
+                  Obx(()
+                  {
+                    return ListView.builder(
+
+                      scrollDirection: Axis.vertical,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: supportController.supports!.length,
+                      itemBuilder: (ctx,index){
+                        return ListTile(
+                          tileColor: Colors.white,
+                          isThreeLine: true,
+
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+
+                            children: [
+                              Text('12 sept 2022',
+                                style: TextStyle(
+                                    color:  textSetting,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              const Divider(),
+                            ],
+                          ),
+                          trailing: Text('Closed',
+                            style: TextStyle(
+                                color:  textSetting,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          title: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Ticket No#${supportController.supports![index].ticketNumber??"12345"}',
+                                  style: TextStyle(
+                                      color:  textSetting,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(height: 4,),
+                              Text(supportController.supports![index].message!),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  }),
+
+                  Padding(
+
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Text('History',
+                      style:  TextStyle(
+                          color:  textSetting,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: myCustomRadio(
-                        "Delivery Issue",
-                      ),
-                    ),
-                    Expanded(
-                      child: myCustomRadio(
-                        "Other Issue",
-                      ),
-                    ),
-                  ],
-                ),
-                myCustomRadio(
-                  "Website Issue",
-                ),
-                myCustomRadio(
-                  "Customer",
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 120,
-                        decoration: BoxDecoration(color: lightgrayColor),
-                        child: const AddCouponHeadingText(headings: "Upload Image"),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 120,
-                        decoration: BoxDecoration(color: lightgrayColor),
-                        child: const AddCouponHeadingText(headings: "Upload Image"),
-                      ),
-                    ),
-                  ],
-                ),
-                const AddCouponHeadingText(
-                  headings: "Message",
-                ),
-                AddCouponTextfiled(
-                  maxLines: 5,
-                ),
-              ],
+                  ),
+                  Obx(()
+                  {
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: supportController.supports!.length,
+                      itemBuilder: (ctx,index){
+                        //print(supportController.supports![index].message);
+                        return ListTile(
+                          leading: Text(supportController.supports![index].ticketNumber??'12345'),
+                            trailing: Text('Closed'),
+                          title: Text(supportController.supports![index].message??'Hello'),
+                        );
+                      },
+                    );
+                  }),
+
+
+
+
+                ],
             ),
           ),
         ),
-      ),
-      bottomNavigationBar: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-        width: size.width,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                Get.back();
+        bottomNavigationBar: Container(
+          width: w,
+          height: 76,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(primary: chipColor),
+              onPressed: (){
+                  Get.to(()=>CreateSupport());
               },
-              child: Container(
-                width: size.width / 2.15,
-                alignment: Alignment.center,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: blackButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Text(
-                  "Back",
-                  style: TextStyle(color: whiteColor),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                // Get.to(() => const AddProductScreen());
-              },
-              child: Container(
-                width: size.width / 2.15,
-                alignment: Alignment.center,
-                height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Text(
-                  "Submit",
-                  style: TextStyle(color: whiteColor),
-                ),
-              ),
-            ),
-          ],
+              child: Text('Raise Ticket')
+          ),
         ),
-      ),
-    );
-  }
+      );
 
-  Widget myCustomRadio(String value) {
-    return Container(
-      margin: const EdgeInsets.symmetric(
-        vertical: 5,
-      ),
-      height: 20,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Radio(
-              value: value,
-              groupValue: _selectedIssue,
-              onChanged: (value) {
-                setState(() {
-                  _selectedIssue = value;
-                });
-              }),
-          AddCouponHeadingText(headings: value)
-        ],
-      ),
-    );
   }
 }
+

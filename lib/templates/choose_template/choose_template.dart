@@ -14,7 +14,8 @@ import '../../social_media/screens/account/controllers/account_setup_controller.
 import 'package:url_launcher/url_launcher.dart';
 
 class ChooseTemplate extends StatefulWidget {
-  const ChooseTemplate({Key? key}) : super(key: key);
+  bool isReg;
+  ChooseTemplate({Key? key, required this.isReg}) : super(key: key);
 
   @override
   State<ChooseTemplate> createState() => _ChooseTemplateState();
@@ -23,6 +24,7 @@ class ChooseTemplate extends StatefulWidget {
 class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
+
   final ScrollController _scrollController = ScrollController();
   Future<void> _showMyDialog(String? indexx) async {
     return showDialog<void>(
@@ -74,6 +76,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
 
   @override
   Widget build(BuildContext context) {
+    double width= MediaQuery.of(context).size.width;
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -150,7 +153,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                                 accountSetUpController.templates![index]!.id,
                                 accountSetUpController.templates![index]!.thumbnail,
                                 const Color.fromRGBO(255, 199, 1, 1.0),
-                                index + 1);
+                                index + 1,width);
                           }
                           return null;
                         },
@@ -163,7 +166,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   }
 
   Widget Persona(String? id, String? ImgPath,
-      Color BackGround, int ind) {
+      Color BackGround, int ind,double width) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
@@ -175,7 +178,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         child: Stack(children: [
           Container(
             height: 220,
-            width: 450,
+            width: width*0.9,
             decoration: BoxDecoration(
               color: BackGround,
               borderRadius: BorderRadius.circular(10),
@@ -187,9 +190,10 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 )
               : Positioned(
                   top: 60,
-                  left: 50,
+                  left:width*0.1,
+                  right: width*0.1,
                   child: Container(
-                    width: 250.0,
+                    width: width*0.7,
                     height: 160.0,
                     decoration: const BoxDecoration(
                       borderRadius:
@@ -203,7 +207,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                   ),
                 ),
           Positioned(
-              left: 300,
+              left: width*0.7,
               top: 20,
               child: GestureDetector(
                 onTap: () async {
@@ -272,7 +276,16 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         if (index == 1) {
           await accountSetUpController
               .userTemplate(tmpInd!);
+          if(widget.isReg==true)
           CustomSnackbar.showSucess('Your persona was set');
+          else
+            {
+              var jwtController = Get.put(JWTController());
+              var token = await jwtController.getAuthToken();
+              var userId = await jwtController.getUserId();
+
+              Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId!));
+            }
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
         } else {
           Navigator.pop(context);

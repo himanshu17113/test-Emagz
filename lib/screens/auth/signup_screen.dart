@@ -15,15 +15,24 @@ import '../../common/common_snackbar.dart';
  
 import 'widgets/my_custom_textfiled.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   SignUpScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final _firebaseAuth = FirebaseAuth.instance;
+
   final authController = Get.put(AuthController());
+
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
     ],
   );
+
   Future<void> _handleSignIn() async {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
     debugPrint(googleUser?.email);
@@ -36,6 +45,7 @@ class SignUpScreen extends StatelessWidget {
           googleUser.displayName.toString());
     }
   }
+
   Future<void> _handleFacebookSignIn() async{
     final LoginResult login=await FacebookAuth.instance.login();
     final OAuthCredential facebookauthCredential=FacebookAuthProvider.credential(login.accessToken!.token);
@@ -48,11 +58,16 @@ class SignUpScreen extends StatelessWidget {
 
 
   }
+
   String sha256ofString(String input) {
     final bytes = utf8.encode(input);
     final digest = sha256.convert(bytes);
     return digest.toString();
   }
+  String _selectedGender=' Male'; // Variable to hold the selected gender
+
+  // List of genders for the dropdown
+  List<String> _genders = [' Male', ' Female', ' Other'];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -93,6 +108,45 @@ class SignUpScreen extends StatelessWidget {
               onTap: () async => await authController.pickDate(context),
               controller: authController.dobController,
             ),
+            SizedBox(
+              height: size.height * .01,
+            ),
+            FormHeadingText(
+              color: signInHeading,
+              headings: "Choose Gender",
+            ),
+        Padding(
+          padding: EdgeInsets.all(4),
+          child: Container(
+            //color: Color(0xffF2F2F2) ,
+            decoration: BoxDecoration(
+               color: const Color(0xffF2F2F2),
+                borderRadius: BorderRadius.circular(10)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                style: TextStyle(
+                  backgroundColor:  Color(0xffF2F2F2), // Set the dropdown's background color here
+                ),
+                value: _selectedGender,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    _selectedGender = newValue!;
+                  });
+                },
+                items: _genders.map<DropdownMenuItem<String>>((String gender) {
+                  return DropdownMenuItem<String>(
+                    value: gender,
+                    child: FormHeadingText(
+                      color: signInHeading,
+                      headings:gender,
+                    ),
+                  );
+                }).toList(),
+                hint: Text('Select Gender'), // Hint text for the dropdown
+              ),
+            ),
+          ),
+        ),
             SizedBox(
               height: size.height * .01,
             ),

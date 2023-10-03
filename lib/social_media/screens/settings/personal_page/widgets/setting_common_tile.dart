@@ -4,8 +4,9 @@ import '../../../../../constant/colors.dart';
 
 class PreferenceTile extends StatelessWidget {
   final String title;
+  final String? textDesc;
   bool? isBlue;
-  PreferenceTile({Key? key, required this.title, this.isBlue=false})
+  PreferenceTile({Key? key, required this.title, this.isBlue=false, this.textDesc})
       : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class PreferenceTile extends StatelessWidget {
               fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
-          "Manage your privacy",
+          textDesc??"Manage Your Privacy",
           style: TextStyle(
               color: isBlue == true ? whiteColor : blackButtonColor,
               fontSize: 10,

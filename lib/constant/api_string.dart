@@ -94,6 +94,8 @@ class ApiEndpoint {
   static String postPrivacy = "$baseUrl/auth/change-post-privacy";
 
   static String commentprivacy = "$baseUrl/auth/change-comment-privacy";
-
+  static String getAllSupport= "$baseUrl/support/get";
+  static String getSupportById= "$baseUrl/support/getById";
+  static String createSupport= "$baseUrl/support/create";
   static String updateUserDetails = "$baseUrl/auth/update-user-details";
 }
