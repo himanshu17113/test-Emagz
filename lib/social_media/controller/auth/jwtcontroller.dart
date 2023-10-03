@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
- import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+
+String? gprofilePic = 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
 
 class JWTController extends GetxController {
   String? token;
@@ -16,18 +18,23 @@ class JWTController extends GetxController {
 
   Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
-    token ??= (await getAuthToken()) !;
+    token ??= (await getAuthToken())!;
 
     userId ??= (await getUserId())!;
     dio.options.headers["Authorization"] = token ??
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
-    var response = await dio.get(ApiEndpoint.userInfo(userId!));
-    debugPrint(ApiEndpoint.userInfo(userId!));
-    // debugPrint(response.data);
-    var userDetails = UserSchema.fromJson(response.data);
-    user?.value = userDetails;
-    return userDetails;
+    if (userId != null) {
+      var response = await dio.get(ApiEndpoint.userInfo(userId!));
+      debugPrint(ApiEndpoint.userInfo(userId!));
+      // debugPrint(response.data);
+      UserSchema userDetails = UserSchema.fromJson(response.data);
+      user?.value = userDetails;
+      gprofilePic = userDetails.ProfilePic;
+      return userDetails;
+    } else {
+      return UserSchema();
+    }
   }
 
   Future<UserSchema?> getUserDetail(String id) async {
@@ -53,7 +60,7 @@ class JWTController extends GetxController {
   Future setAuthToken(String? tokenx, String? id) async {
     await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
-           token = tokenx;
+    token = tokenx;
     userId = id;
     if (tokenx != null && id != null) {
       isAuthorised.value = true;
@@ -83,7 +90,7 @@ class JWTController extends GetxController {
     return token!;
   }
 
-  Future<String?> getUserId () async {
+  Future<String?> getUserId() async {
     if (userId != null) {
       //  debugPrint("done fastly");
       return userId!;
@@ -91,8 +98,8 @@ class JWTController extends GetxController {
     debugPrint(
         "gettttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttting the user id    ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
- userId = await hiveBox.get("userId");
- 
+    userId = await hiveBox.get("userId");
+
     return userId;
   }
 

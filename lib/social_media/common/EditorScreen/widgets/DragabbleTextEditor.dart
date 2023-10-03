@@ -5,11 +5,7 @@ class DraggableTextEditor extends StatefulWidget {
   final Function(String text, TextStyle style) onSubmit;
   String? text;
   TextStyle? style;
-  DraggableTextEditor(
-      {super.key,
-      required this.onSubmit,
-      required this.text,
-      required this.style});
+  DraggableTextEditor({super.key, required this.onSubmit, required this.text, required this.style});
 
   @override
   State<DraggableTextEditor> createState() => _DraggableTextEditorState();
@@ -124,10 +120,8 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                 child: Container(
                   height: 38,
                   width: 38,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.white),
-                      color: textBackgroundColor),
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8), border: Border.all(color: Colors.white), color: textBackgroundColor),
                 ))),
         Positioned(
             top: 8,
@@ -144,10 +138,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                 },
                 child: Text(
                   "B",
-                  style: TextStyle(
-                      fontSize: 28,
-                      color: Colors.white,
-                      fontWeight: inputWeight),
+                  style: TextStyle(fontSize: 28, color: Colors.white, fontWeight: inputWeight),
                 ))),
         Positioned(
             top: 15,
@@ -177,8 +168,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                   fontSize = fontSize! + 1;
                   setState(() {});
                 },
-                child: const Text("+",
-                    style: TextStyle(color: Colors.white, fontSize: 21)),
+                child: const Text("+", style: TextStyle(color: Colors.white, fontSize: 21)),
               ),
               const SizedBox(
                 width: 10,
@@ -226,11 +216,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
               focusNode: inputFocusNode,
               decoration: const InputDecoration(border: InputBorder.none),
               style: TextStyle(
-                  fontStyle: inputStyle,
-                  backgroundColor: textBackgroundColor,
-                  fontSize: fontSize,
-                  fontWeight: inputWeight,
-                  color: textColor),
+                  fontStyle: inputStyle, backgroundColor: textBackgroundColor, fontSize: fontSize, fontWeight: inputWeight, color: textColor),
             ),
           ),
         ),
@@ -252,7 +238,7 @@ class _DraggableTextEditorState extends State<DraggableTextEditor> {
                   },
                 ),
               )
-            : Container()
+            : const SizedBox()
       ]),
     );
   }

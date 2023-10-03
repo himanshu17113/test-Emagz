@@ -1,12 +1,9 @@
- 
-
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vs_story_designer/vs_story_designer.dart';
-
 
 class TextPostScreen extends StatefulWidget {
   const TextPostScreen({super.key});
@@ -23,7 +20,7 @@ class _TextPostScreenState extends State<TextPostScreen> {
     return Scaffold(
       body: VSStoryDesigner(
         fileName: "savedTextFile",
-        middleBottomWidget: Container(),
+        middleBottomWidget: const SizedBox(),
         onDoneButtonStyle: Container(
           margin: const EdgeInsets.only(right: 10),
           padding: const EdgeInsets.all(10),
@@ -40,7 +37,8 @@ class _TextPostScreenState extends State<TextPostScreen> {
         centerText: "",
         onDone: (v) {
           debugPrint("Story address : $v");
-          postController.setPost(v, PostType.text);
+          postController.images.add(v);
+         //     setPost(v, PostType.text);
           //   storyController.postStory("text", v);
           // showDialog(
           //   useSafeArea: true,
@@ -88,7 +86,7 @@ class _TextPostScreenState extends State<TextPostScreen> {
           // );
           Get.off(() => PrePostScreen(
                 postType: PostType.text,
-                image:  v,
+                image: v,
               ));
         },
       ),

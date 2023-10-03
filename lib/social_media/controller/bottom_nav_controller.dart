@@ -3,22 +3,14 @@ import 'package:emagz_vendor/social_media/screens/home_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/personal_page_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../screens/explore/explpre_screen.dart';
 import '../screens/post/create_post_screen.dart';
-import 'home/home_controller.dart';
-
+ 
 class NavController extends GetxController {
   // int? position;
   // bool isEdit = false;
-  final homePostController = Get.put(HomePostsController());
-  bool show = true;
-  @override
-  onInit() async {
-    super.onInit();
-    show = homePostController.isVisible;
-  }
+ 
 
   List<Widget> screen = [
     SocialMediaHomePage(),
@@ -84,13 +76,16 @@ class NavController extends GetxController {
     //   ),
     // ),
   ];
-  int page = 0;
+  RxInt page = RxInt(0);
 
-  pageUpdate(int index) {
-    page = index;
-    if (index == 0) {
-      homePostController.scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.bounceOut);
-    }
-    update();
-  }
+  // pageUpdate(int index) {
+  //   page.value = index;
+  //   if (index == 0) {
+  //     if (homePostController.scrollController.positions.isNotEmpty) {
+  //       homePostController.scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.bounceOut);
+  //     }
+  
+  //   }
+  //   //   update();
+  // }
 }

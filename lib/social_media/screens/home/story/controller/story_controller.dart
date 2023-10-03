@@ -17,7 +17,7 @@ class GetXStoryController extends GetxController {
   RxDouble storyUploadPercentage = RxDouble(0);
   RxBool isUploading = RxBool(false);
   String? token;
-  final JWTController jwtController = Get.put(JWTController());
+  final JWTController jwtController = Get.find<JWTController>();
   @override
   void onInit() {
    // if (jwtController.isAuthorised.value ) {

@@ -7,26 +7,38 @@ import 'package:get/get.dart';
 class BottomNavBar extends StatelessWidget {
   BottomNavBar({Key? key}) : super(key: key);
   final homePostController = Get.put(HomePostsController());
-
+  final value = Get.put(NavController());
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<NavController>(
-      //  dispose: (state) => ,
-      autoRemove: false,
-      init: NavController(),
-      builder: (value) {
-        return Stack(
-          children: [
-            Center(
-              child: value.screen[value.page],
-            ),
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: AnimatedContainer(
-                height: value.show ? kBottomNavigationBarHeight : 0,
-                duration: Duration(milliseconds: 200),
-                margin: const EdgeInsets.only(bottom: 10, left: 10, right: 10),
-                decoration: BoxDecoration(color: Colors.black.withOpacity(.2), borderRadius: BorderRadius.circular(15)),
+    // return GetBuilder<NavController>(
+    //   //  dispose: (state) => ,
+    //   autoRemove: false,
+    //   init: NavController(),
+    //   builder: (value) {
+    return Stack(
+      children: [
+        Obx(() => Center(
+              child: value.screen[value.page.value],
+            )),
+        Obx(
+          () => Align(
+            alignment: Alignment.bottomLeft,
+            child: AnimatedContainer(
+              height:
+                  //    homePostController.isVisible.value
+                  homePostController.isVisible.value
+                      ? kBottomNavigationBarHeight + 10
+                      : 0,
+              duration: const Duration(milliseconds: 200),
+              child: Container(
+                height: kBottomNavigationBarHeight,
+                margin: EdgeInsets.only(
+                    bottom: homePostController.isVisible.value ? 10 : 0,
+                    left: 10,
+                    right: 10),
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(.2),
+                    borderRadius: BorderRadius.circular(15)),
                 child: BottomNavigationBar(
                   selectedItemColor: whiteColor,
                   unselectedItemColor: whiteColor,
@@ -34,15 +46,25 @@ class BottomNavBar extends StatelessWidget {
                   showSelectedLabels: true,
                   // currentIndex: value.page,
                   type: BottomNavigationBarType.fixed,
-                  selectedLabelStyle: TextStyle(fontSize: 7, color: blackButtonColor),
-                  unselectedLabelStyle: TextStyle(fontSize: 7, color: grayColor),
+                  selectedLabelStyle:
+                      TextStyle(fontSize: 7, color: blackButtonColor),
+                  unselectedLabelStyle:
+                      TextStyle(fontSize: 7, color: grayColor),
                   backgroundColor: Colors.transparent,
-                  currentIndex: value.page,
+                  currentIndex: value.page.value,
                   elevation: 0.0,
                   onTap: (i) {
-                    value.pageUpdate(i);
+                    value.page.value = i;
                     if (i == 0) {
-                      homePostController.scrollController.animateTo(0, duration: Duration(seconds: 1), curve: Curves.bounceOut);
+                      if (homePostController
+                          .scrollController.positions.isNotEmpty) {
+                        homePostController.scrollController.animateTo(0,
+                            duration: const Duration(seconds: 1),
+                            curve: Curves.bounceOut);
+                      }
+                      // if (i == 0) {
+                      //   homePostController.scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.bounceOut);
+                      // }
                     }
                   },
                   items: [
@@ -95,9 +117,11 @@ class BottomNavBar extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        );
-      },
+          ),
+        )
+      ],
+      //   );
+      // },
     );
   }
 }

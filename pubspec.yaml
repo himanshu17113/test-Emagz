@@ -77,7 +77,7 @@ dependencies:
   firebase_core: ^2.15.1
   flutter_facebook_auth: ^6.0.2
   flutter_file_dialog: ^3.0.2
-
+  crop_your_image: ^0.7.5
   
 dev_dependencies:
   flutter_test:

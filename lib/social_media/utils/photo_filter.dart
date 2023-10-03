@@ -20,7 +20,28 @@ const SEPIA_MATRIX = [
   1.0,
   0.0
 ];
-
+const NONE = <double>[
+  1,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+];
 const GREYSCALE_MATRIX = [
   0.2126,
   0.7152,

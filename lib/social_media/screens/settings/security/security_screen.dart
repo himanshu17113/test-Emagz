@@ -677,8 +677,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
     TextEditingController name= TextEditingController();
 
 
-    TextEditingController MobileNumber= TextEditingController();
-    TextEditingController address= TextEditingController();
+    // TextEditingController MobileNumber= TextEditingController();
+    // TextEditingController address= TextEditingController();
 
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),

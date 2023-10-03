@@ -38,7 +38,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    Get.to(() =>   StoryEditorScreen());
+                    Get.to(() => StoryEditorScreen());
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -111,7 +111,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
                         Get.close(2);
                       }
                     },
-                    image: imageData,
+                    image: [imageData],
                     fileType: assetEntity.mimeType!.split("/")[0],
                     fileExtension: assetEntity.mimeType!.split("/")[1],
                   ));

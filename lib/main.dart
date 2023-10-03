@@ -43,7 +43,9 @@ class MyApp extends StatelessWidget {
       //  home: SupportScreen(),
       //home: ChooseTemplate()
       // home: const BottomNavBar(),
-      home: Obx(() => authController.isAuthorised.value ? BottomNavBar() : const CommonAuthScreen()),
+      home: Obx(() => authController.isAuthorised.value
+          ? BottomNavBar()
+          : const CommonAuthScreen()),
       // home: ChatScreen(),
     );
   }

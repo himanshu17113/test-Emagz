@@ -13,7 +13,7 @@ class StoryEditorScreen extends StatelessWidget {
     return Scaffold(
       body: VSStoryDesigner(
         fileName: "savedTextFile",
-        middleBottomWidget: Container(),
+        middleBottomWidget: const SizedBox(),
         onDoneButtonStyle: Container(
           margin: const EdgeInsets.only(right: 10),
           padding: const EdgeInsets.all(10),
