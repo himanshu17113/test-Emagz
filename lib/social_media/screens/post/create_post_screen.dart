@@ -421,7 +421,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                               postType: PostType.text,
                                               image: editedImage.path)),
                                     );
-                                  }),
+                                  },
+                                    onSubmits: (editedImage) {
+                                    postController.addPost(editedImage);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PrePostScreen(
+                                              postType: PostType.text,
+                                              image: editedImage.path)),
+                                    );
+                                  }
+                                  
+                                  ),
                               fullscreenDialog: true));
                     },
                   ),

@@ -668,7 +668,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
             ),
           ),
         ),
-      ),
+   
     );
   }
 }

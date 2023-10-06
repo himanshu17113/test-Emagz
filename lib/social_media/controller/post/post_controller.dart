@@ -52,8 +52,15 @@ class PostController extends GetxController {
     //update();
   }
 
-  void addPost(Uint8List image) {
-    imagePaths.add(image);
+  // void addPost(Uint8List image) {
+  //   imagePaths.add(image);
+  // }
+  void addPost(List<Uint8List> imagex) {
+    for (Uint8List imageBytes in imagex) {
+      File imageFile = File.fromRawPath(
+          imageBytes); // this creates a File object from the Uint8List
+      images.add(imageFile.path); // this adds the File object to the List
+    }
   }
 
   uploadPost(String imagePath) {
@@ -64,7 +71,7 @@ class PostController extends GetxController {
     bool enablePoll,
     String tagPrivacy,
     int? setTimer,
-      bool? isCustomPoll,
+    bool? isCustomPoll,
   ) async {
     isPosting.value = true;
     try {
@@ -119,12 +126,12 @@ class PostController extends GetxController {
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
-        "customPollEnabled" : isCustomPoll,
-        "customPollData":"[${button1Controller.text},${button2Controller.text}]"
+        "customPollEnabled": isCustomPoll,
+        "customPollData":
+            "[${button1Controller.text},${button2Controller.text}]"
       });
 
-
-      await dio.post(
+      var res = await dio.post(
         ApiEndpoint.makePost,
         data: reqData,
         onSendProgress: (count, total) {
@@ -139,7 +146,7 @@ class PostController extends GetxController {
 
       homePostsController.skip.value = -10;
 
-   //   bottomNavController.pageUpdate(0);
+      //   bottomNavController.pageUpdate(0);
       homePostsController.posts?.clear();
       homePostsController.getPost();
       Get.offAll(() => BottomNavBar());
