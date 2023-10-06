@@ -1,9 +1,9 @@
 import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 import '../../social_media/screens/chat/models/chat_model.dart';
 
 class WebViewPersona extends StatefulWidget {
@@ -122,6 +122,30 @@ class _WebViewOnlyViewState extends State<WebViewOnlyView> {
           child: WebViewWidget(controller: controller),
         ),
       ],
+    );
+  }
+}
+
+class OwnWebView extends StatefulWidget {
+  String token;
+  String userId;
+  String personaUserId;
+  String templateId;
+  OwnWebView({Key? key,
+  required this.token,
+  required this.userId,
+  required this.personaUserId,
+  required this.templateId}) : super(key: key);
+
+  @override
+  State<OwnWebView> createState() => _OwnWebViewState();
+}
+
+class _OwnWebViewState extends State<OwnWebView> {
+  @override
+  Widget build(BuildContext context) {
+    return InAppWebView(initialUrlRequest:
+    URLRequest(url: Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))
     );
   }
 }

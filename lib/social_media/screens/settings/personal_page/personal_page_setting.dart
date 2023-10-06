@@ -213,7 +213,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         var userId = await jwtController.getUserId();
 
 
-                        Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId!));
+                        Get.to(()=>OwnWebView(token: token!, userId: userId!, personaUserId: userId!,templateId: 'w',));
 
                       },
                       child: Container(
