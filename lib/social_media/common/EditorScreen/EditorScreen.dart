@@ -13,8 +13,9 @@ import 'package:emagz_vendor/social_media/common/EditorScreen/widgets/DragabbleT
 import '../../utils/photo_filter.dart';
 
 class EditorScreen extends StatefulWidget {
-  final Function(File editedImage) onSubmit;
-   final Function( List<File> editedImage)? onSubmits;
+  final Function(File editedImage)? onSubmit;
+  final Function(List<File> editedImage)? onSubmits;
+  final Function(List<Uint8List?> editedImage)? onSubmitS;
 
   final String? fileType;
   final String? fileExtension;
@@ -22,10 +23,12 @@ class EditorScreen extends StatefulWidget {
 
   const EditorScreen(
       {super.key,
-      required this.onSubmit,
+      this.onSubmit,
       required this.image,
       this.fileType,
-      required this.fileExtension,   this.onSubmits});
+      required this.fileExtension,
+      this.onSubmits,
+      this.onSubmitS});
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();
@@ -147,7 +150,7 @@ class _EditorScreenState extends State<EditorScreen> {
             : null,
         actions: [
           IconButton(
-              onPressed: () async {
+              onPressed: () {
                 showDialog(
                   useSafeArea: true,
                   barrierDismissible: false,
@@ -165,21 +168,27 @@ class _EditorScreenState extends State<EditorScreen> {
                     );
                   },
                 );
+                List<Uint8List?>? images = [];
+                for (int i = 0; i < screenshotController.length; i++) {
+                  screenshotController[i]
+                      .capture(delay: Duration.zero)
+                      .then((capturedImage) {
+                    images.add(capturedImage);
 
-                screenshotController[0]
-                    .capture(delay: const Duration(milliseconds: 0))
-                    .then((capturedImage) async {
-                  Uint8List? editedImage = capturedImage;
-                  final tempDir = await getTemporaryDirectory();
-                  File file = await File("${tempDir.path}.jpeg").create();
-                  await file.writeAsBytes(editedImage!);
-
-                  Navigator.of(context, rootNavigator: true).pop();
-
-                  widget.onSubmit(file);
-                }).catchError((onError) {
-                  debugPrint(onError);
-                });
+                    debugPrint("imag ${images.length}");
+                    if (i == screenshotController.length - 1) {
+                      Navigator.of(context, rootNavigator: true).pop();
+                      debugPrint("images ${images.length}");
+                      widget.onSubmitS!(images);
+                    }
+                    //   Uint8List? editedImage = capturedImage;
+                    //   final tempDir = await getTemporaryDirectory();
+                    // final  File file = await File("${tempDir.path}.jpeg").create();
+                    //   await file.writeAsBytes(editedImage!);
+                  }).catchError((onError) {
+                    debugPrint(onError.toString());
+                  });
+                }
               },
               icon: const Icon(Icons.arrow_right_alt))
         ],
@@ -248,15 +257,16 @@ class _EditorScreenState extends State<EditorScreen> {
                               child: Container(
                                 padding: const EdgeInsets.only(bottom: 10),
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    colorFilter: filter[itemIndex] == -1
-                                        ? null
-                                        : ColorFilter.matrix(
-                                            filters[filter[itemIndex]]),
-                                    image:
-                                        MemoryImage(widget.image[itemIndex]!),
-                                  ),
-                                ),
+                                    image: widget.image[itemIndex] != null
+                                        ? DecorationImage(
+                                            colorFilter: filter[itemIndex] == -1
+                                                ? null
+                                                : ColorFilter.matrix(
+                                                    filters[filter[itemIndex]]),
+                                            image: MemoryImage(
+                                                widget.image[itemIndex]!),
+                                          )
+                                        : null),
                               ),
                             ),
                     ),

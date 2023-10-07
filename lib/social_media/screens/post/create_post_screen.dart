@@ -69,7 +69,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               image: [image],
               onSubmit: (editedImage) {
                 //postController.setPost(editedImage.path, PostType.text);
-                postController.uploadPost(editedImage.path);
+                postController.imagePaths.add(editedImage.path);
                 Get.off(() => PrePostScreen(
                     postType: PostType.text, image: editedImage.path));
               }),
@@ -411,29 +411,34 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           MaterialPageRoute(
                               builder: (context) => EditorScreen(
                                   fileExtension: fileExtension,
-                                  image: postController.imagePaths,
-                                  onSubmit: (editedImage) {
-                                    postController.uploadPost(editedImage.path);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PrePostScreen(
-                                              postType: PostType.text,
-                                              image: editedImage.path)),
-                                    );
-                                  },
-                                    onSubmits: (editedImage) {
-                                    postController.addPost(editedImage);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PrePostScreen(
-                                              postType: PostType.text,
-                                              image: editedImage.path)),
-                                    );
-                                  }
-                                  
-                                  ),
+                                  image: postController.images,
+                                  // onSubmit: (editedImage) {
+                                  //   postController.uploadPost(editedImage.path);
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => PrePostScreen(
+                                  //             postType: PostType.text,
+                                  //             image: editedImage.path)),
+                                  //   );
+                                  // },
+                                  onSubmitS: (editedImage) {
+                                    debugPrint(
+                                        "image submit ${editedImage.length}");
+                                    postController.images = editedImage;
+                                    Get.to(() => PrePostScreen(
+                                        postType: PostType.gallery,
+                                        images: postController.images));
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context)=> PrePostScreen(
+                                    //           postType: PostType.gallery,
+                                    //           images: postController.images)
+
+                                    //      ),
+                                    // );
+                                  }),
                               fullscreenDialog: true));
                     },
                   ),
@@ -508,9 +513,9 @@ class _GridGalleryState extends State<GridGallery> {
                         onTap: () {
                           isSelected.value = !isSelected.value;
                           if (isSelected.value) {
-                            postController.imagePaths.add(snapshot.data);
+                            postController.images.add(snapshot.data);
                           } else {
-                            postController.imagePaths.remove(snapshot.data);
+                            postController.images.remove(snapshot.data);
                           }
                           //   if (asset.type == AssetType.image) {
                           //     postController.setPost(

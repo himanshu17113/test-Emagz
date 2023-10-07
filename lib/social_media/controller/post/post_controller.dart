@@ -28,8 +28,8 @@ class PostController extends GetxController {
   RxString privacyLikesAndViewsUI = RxString("Everyone");
   PostType? assetType;
   Uint8List? imagePath;
-  List<Uint8List?> imagePaths = [];
-  List<String?> images = [];
+  List<Uint8List?> images = [];
+  List<String?> imagePaths = [];
   String? textPost;
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
@@ -55,17 +55,17 @@ class PostController extends GetxController {
   // void addPost(Uint8List image) {
   //   imagePaths.add(image);
   // }
-  void addPost(List<Uint8List> imagex) {
-    for (Uint8List imageBytes in imagex) {
-      File imageFile = File.fromRawPath(
-          imageBytes); // this creates a File object from the Uint8List
-      images.add(imageFile.path); // this adds the File object to the List
-    }
-  }
+  // void addPost(List<Uint8List> imagex) {
+  //   for (Uint8List imageBytes in imagex) {
+  //     File imageFile = File.fromRawPath(
+  //         imageBytes); // this creates a File object from the Uint8List
+  //     images.add(imageFile.path); // this adds the File object to the List
+  //   }
+  // }
 
-  uploadPost(String imagePath) {
-    images.add(imagePath);
-  }
+  // uploadPost(String imagePath) {
+  //   images.add(imagePath);
+  // }
 
   Future makePost(
     bool enablePoll,
@@ -106,7 +106,7 @@ class PostController extends GetxController {
         "mediaType": "image",
         // assetType.toString().split(".")[1].substring(0),
         "mediaUrl": [
-          MultipartFile.fromFileSync(images[0]!
+          MultipartFile.fromFileSync(imagePaths[0]!
               //   assetType == PostType.text ? textPost! : file.path.toString(),
               ),
         ],
