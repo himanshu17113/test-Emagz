@@ -78,10 +78,11 @@ class _PrePostScreenState extends State<PrePostScreen> {
                     if (widget.images != null) ...[
                       CarouselSlider(
                         options: CarouselOptions(height: 200.0),
-                        items: widget.images?.map((i) {
+                        items: //widget.images?
+                            postController.images.map((i) {
                           return Builder(
                             builder: (BuildContext context) {
-                              return i == null
+                              return i != null
                                   ?
                                   // Container(
                                   //     width: MediaQuery.of(context).size.width,
@@ -90,8 +91,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   //     decoration: const BoxDecoration(
                                   //         color: Colors.amber),
                                   //     child:
-                                  SizedBox(height: 150, child: Image.memory(i!))
-                                  //   )
+                                  SizedBox(height: 150, child: Image.memory(i)
+                                      //  Image.file(File(i)
+                                      //  )
+                                      )
                                   : SizedBox(
                                       child: Container(
                                         height: 45,
@@ -104,23 +107,23 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         }).toList(),
                       )
 
-                      //   Container(
-                      //       alignment: Alignment.center,
-                      //       height: 170,
-                      //       decoration: const BoxDecoration(color: Colors.black),
-                      //       child: (widget.postType == PostType.gallery)
-                      //           ? Image.memory(widget.images?[0])
-                      //           : Image.file(
-                      //               File(
-                      //                   widget.image ?? postController.textPost!),
-                      //               width: 200, // Adjust the width as needed
-                      //               height: 400,
-                      //             )
+                      // Container(
+                      //     alignment: Alignment.center,
+                      //     height: 170,
+                      //     decoration: const BoxDecoration(color: Colors.black),
+                      //     child: (widget.postType == PostType.gallery)
+                      //         ? Image.memory(widget.images![2]!)
+                      //         : Image.file(
+                      //             File(
+                      //                 widget.image ?? postController.textPost!),
+                      //             width: 200, // Adjust the width as needed
+                      //             height: 400,
+                      //           )
 
-                      //       // const SizedBox(
-                      //       //     child: Text("EDITABLE TEXT"),
-                      //       //   )
-                      //       ),
+                      //     //       // const SizedBox(
+                      //     //       //     child: Text("EDITABLE TEXT"),
+                      //     //       //   )
+                      //     ),
                     ],
                     GestureDetector(
                       onTap: () => Get.close(1),

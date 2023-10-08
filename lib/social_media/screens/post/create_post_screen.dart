@@ -422,23 +422,24 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   //             image: editedImage.path)),
                                   //   );
                                   // },
-                                  onSubmitS: (editedImage) {
-                                    debugPrint(
-                                        "image submit ${editedImage.length}");
-                                    postController.images = editedImage;
-                                    Get.to(() => PrePostScreen(
-                                        postType: PostType.gallery,
-                                        images: postController.images));
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //       builder: (context)=> PrePostScreen(
-                                    //           postType: PostType.gallery,
-                                    //           images: postController.images)
+                                  // onSubmitS: (editedImage) {
+                                  //   debugPrint(
+                                  //       "image submit ${editedImage.length}");
+                                  //   postController.images = editedImage;
+                                  //   Get.to(() => PrePostScreen(
+                                  //       postType: PostType.gallery,
+                                  //       images: postController.images));
+                                  //   // Navigator.push(
+                                  //   //   context,
+                                  //   //   MaterialPageRoute(
+                                  //   //       builder: (context)=> PrePostScreen(
+                                  //   //           postType: PostType.gallery,
+                                  //   //           images: postController.images)
 
-                                    //      ),
-                                    // );
-                                  }),
+                                  //   //      ),
+                                  //   // );
+                                  // }
+                                  ),
                               fullscreenDialog: true));
                     },
                   ),
@@ -510,45 +511,46 @@ class _GridGalleryState extends State<GridGallery> {
                   children: <Widget>[
                     Positioned.fill(
                       child: InkWell(
-                        onTap: () {
-                          isSelected.value = !isSelected.value;
-                          if (isSelected.value) {
-                            postController.images.add(snapshot.data);
-                          } else {
-                            postController.images.remove(snapshot.data);
-                          }
-                          //   if (asset.type == AssetType.image) {
-                          //     postController.setPost(
-                          //         snapshot.data, PostType.gallery);
-                          //   } else if (asset.type == AssetType.video) {
-                          //     postController.setPost(
-                          //         snapshot.data, PostType.gallery);
-                          //   } else {
-                          //     postController.setPost(
-                          //         snapshot.data, PostType.gallery);
-                          //   }
-                          //   postController.assetType = PostType.gallery;
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: MemoryImage(
-                                    snapshot.data!,
-                                  ),
-                                  fit: BoxFit.cover),
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
-                              border: Border.all(
-                                  width: 4,
-                                  color: longPressed.value
-                                      ? Colors.amber
-                                      : Colors.transparent)),
-                          // child: Image.memory(
-                          //   snapshot.data!,
-                          //   fit: BoxFit.cover,
-                          // ),
-                        ),
-                      ),
+                          onTap: () {
+                            isSelected.value = !isSelected.value;
+                            if (isSelected.value) {
+                              postController.images.add(snapshot.data);
+                            } else {
+                              postController.images.remove(snapshot.data);
+                            }
+                            //   if (asset.type == AssetType.image) {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   } else if (asset.type == AssetType.video) {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   } else {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   }
+                            //   postController.assetType = PostType.gallery;
+                          },
+                          child: snapshot.data != null
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: MemoryImage(
+                                            snapshot.data!,
+                                          ),
+                                          fit: BoxFit.cover),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      border: Border.all(
+                                          width: 4,
+                                          color: longPressed.value
+                                              ? Colors.amber
+                                              : Colors.transparent)),
+                                  // child: Image.memory(
+                                  //   snapshot.data!,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                )
+                              : const SizedBox()),
                     ),
                     if (asset.type == AssetType.video)
                       const Align(
