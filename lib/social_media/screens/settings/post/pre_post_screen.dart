@@ -79,7 +79,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       CarouselSlider(
                         options: CarouselOptions(height: 200.0),
                         items: //widget.images?
-                            postController.images.map((i) {
+                            widget.images!.map((i) {
                           return Builder(
                             builder: (BuildContext context) {
                               return i != null
@@ -91,10 +91,13 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   //     decoration: const BoxDecoration(
                                   //         color: Colors.amber),
                                   //     child:
-                                  SizedBox(height: 150, child: Image.memory(i)
-                                      //  Image.file(File(i)
-                                      //  )
-                                      )
+                                  Image.memory(
+                                      i,
+                                      height: 200,
+                                    )
+                                  //  Image.file(File(i)
+                                  //  )
+
                                   : SizedBox(
                                       child: Container(
                                         height: 45,
