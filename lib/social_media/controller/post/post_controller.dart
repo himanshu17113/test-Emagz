@@ -19,7 +19,7 @@ import '../home/home_controller.dart';
 //enum PostAssetType { image, video, text }
 
 class PostController extends GetxController {
-  TextEditingController captionController = TextEditingController();
+  final captionController =  TextEditingController().obs;
 
   TextEditingController button1Controller = TextEditingController();
 
@@ -105,7 +105,7 @@ class PostController extends GetxController {
         "Enabledpoll": enablePoll ? true : false,
 
         //  "setTimer": enablePoll ? setTimer:"",
-        "caption": captionController.text,
+        "caption": captionController.value.text,
 
         "ShowPollResults": true,
 
@@ -131,9 +131,10 @@ class PostController extends GetxController {
       );
       //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;
-
+      captionController.value.clear();
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
+
 
       homePostsController.skip.value = -10;
 

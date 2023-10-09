@@ -13,7 +13,7 @@ import 'social_media/controller/bottom_nav_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();//generic
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   await Permission.camera.request();

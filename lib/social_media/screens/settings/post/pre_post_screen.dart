@@ -339,7 +339,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                     ),
                     child: TextField(
                       maxLength: 32,
-                      controller: postController.captionController,
+                      controller: postController.captionController.value,
                       maxLines: 2,
                       decoration: const InputDecoration(
                           isDense: true,
