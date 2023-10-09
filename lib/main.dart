@@ -1,9 +1,7 @@
 import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -39,7 +37,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: Obx(() => authController.isAuthorised.value ? BottomNavBar() : const CommonAuthScreen()),
+      //home: PTemplateTwoScreen(),
+      // home: TemplateFiveScreen(),
+      //home: DefaultBusinesstempScreen(),
+      // home: PersonalProfileInsightScreen(),
+      //  home: SupportScreen(),
+      //home: ChooseTemplate()
+      // home: const BottomNavBar(),
+      home: Obx(() => authController.isAuthorised.value
+          ? BottomNavBar()
+          : const CommonAuthScreen()),
+      // home: ChatScreen(),
     );
   }
 }

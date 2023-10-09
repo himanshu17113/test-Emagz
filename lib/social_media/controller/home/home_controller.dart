@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
+import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +23,10 @@ class HomePostsController extends GetxController {
   bool ispostloading = false;
   final jwtController = Get.put(JWTController());
   final socketController = Get.put(SocketController());
-  // String? userId;
-  bool isVisible = true;
-
+  //// final navController = Get.find<NavController>();
+  // final navController = Get.put(NavController());
+  RxBool isVisible = RxBool(true);
+ 
   @override
   onInit() async {
     await storedData();
@@ -38,15 +40,18 @@ class HomePostsController extends GetxController {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
         // User is scrolling down
-        if (isVisible) {
-          isVisible = false;
+        if (isVisible.value) {
+          isVisible.value = false;
         }
+       
+      
       }
       if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
         // User is scrolling up
-        if (!isVisible) {
-          isVisible = true;
-        }
+        if (!isVisible.value) {
+          isVisible.value = true;
+         }
+ 
       }
       loadMoreData();
     });

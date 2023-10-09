@@ -8,11 +8,7 @@ class CustomVideoPlayer extends StatelessWidget {
   final Post post;
   final double aspectRatio;
   final String videoUrl;
-  CustomVideoPlayer(
-      {super.key,
-      required this.post,
-      required this.videoUrl,
-      required this.aspectRatio});
+  CustomVideoPlayer({super.key, required this.post, required this.videoUrl, required this.aspectRatio});
 
   var videoPlayerController = Get.put(GetXVideoPlayerController());
 
@@ -27,15 +23,13 @@ class CustomVideoPlayer extends StatelessWidget {
               },
               child: Stack(alignment: Alignment.center, children: [
                 AspectRatio(
-                  aspectRatio: aspectRatio ??
-                      videoPlayerController.controller?.value.aspectRatio ??
-                      1,
+                  aspectRatio: aspectRatio ?? videoPlayerController.controller?.value.aspectRatio ?? 1,
                   child: VideoPlayer(
                     videoPlayerController.controller!,
                   ),
                 ),
                 Obx(() => videoPlayerController.isPlayed.value
-                    ? Container()
+                    ? const SizedBox()
                     : Stack(
                         alignment: Alignment.center,
                         children: [
@@ -45,8 +39,7 @@ class CustomVideoPlayer extends StatelessWidget {
                             size: 50,
                           ),
                           Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.80)),
+                            decoration: BoxDecoration(color: Colors.black.withOpacity(0.80)),
                           )
                         ],
                       ))

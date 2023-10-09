@@ -22,10 +22,7 @@ class MyAddressCard extends StatelessWidget {
               ),
               Text(
                 "Home",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 15),
+                style: TextStyle(color: blackButtonColor, fontWeight: FontWeight.w600, fontSize: 15),
               ),
               const SizedBox(
                 width: 3,
@@ -36,19 +33,16 @@ class MyAddressCard extends StatelessWidget {
                       width: 2,
                       color: blackButtonColor,
                     )
-                  : Container(),
+                  : const SizedBox(),
               const SizedBox(
                 width: 3,
               ),
               isCurrent == true
                   ? const Text(
                       "Current Delivery ",
-                      style: TextStyle(
-                          color: Color(0xff3918FF),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 15),
+                      style: TextStyle(color: Color(0xff3918FF), fontWeight: FontWeight.w600, fontSize: 15),
                     )
-                  : Container(),
+                  : const SizedBox(),
             ],
           ),
           const SizedBox(
@@ -56,10 +50,7 @@ class MyAddressCard extends StatelessWidget {
           ),
           Text(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In habitant semper tristique metus hac. Consectetur tellus gravida gravida tellus risus mattis. Vivamus vitae, erat eget et, non ullamcorper. A sed orci vestibulum non sit id. Est arcu, varius enim elit lectus est. Vel in quis urna venenatis, metus, sit posuere augue feugiat.",
-            style: TextStyle(
-                color: blackButtonColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 8.5),
+            style: TextStyle(color: blackButtonColor, fontWeight: FontWeight.w500, fontSize: 8.5),
           )
         ],
       ),

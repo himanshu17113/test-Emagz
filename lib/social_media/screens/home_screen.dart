@@ -12,7 +12,6 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
-
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 
 import 'package:path_provider/path_provider.dart';
@@ -133,8 +132,7 @@ class SocialMediaHomePage extends StatelessWidget {
             storyController.getStories();
             return homePostController.getPost();
           },
-          child: HomePosts(
-              myUserId: jwtController.userId ?? homePostController.userId),
+          child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
         ),
       ),
     );
@@ -153,7 +151,7 @@ class HomePagePopupWidget extends StatelessWidget {
     this.url,
     this.isBorder = true,
   });
-  Future<void> _saveImage(String _url,BuildContext context) async {
+  Future<void> _saveImage(String _url, BuildContext context) async {
     String? message;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
@@ -182,29 +180,20 @@ class HomePagePopupWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()
-      {
-        if(title=='View Post')
-          {
-            Get.back();
-          }
-        else if(title=='Share')
-          {
-            Get.back();
-            Share.share(
-                "http://emagz.live/Post/${post?.sId}");
-          }
-        else if(title=='Download')
-          {
-            Get.back();
-            print(post?.mediaUrl);
-            _saveImage(post!.mediaUrl!,context);
-          }
-        else
-          {
-            Get.back();
-            CustomSnackbar.show("No Stats for this post ");
-          }
+      onTap: () {
+        if (title == 'View Post') {
+          Get.back();
+        } else if (title == 'Share') {
+          Get.back();
+          Share.share("http://emagz.live/Post/${post?.sId}");
+        } else if (title == 'Download') {
+          Get.back();
+          print(post?.mediaUrl);
+          _saveImage(post!.mediaUrl!, context);
+        } else {
+          Get.back();
+          CustomSnackbar.show("No Stats for this post ");
+        }
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
@@ -11,15 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
-
 import 'package:path_provider/path_provider.dart';
-
 import '../home/home_controller.dart';
 
-//enum PostAssetType { image, video, text }
-
 class PostController extends GetxController {
-  final captionController =  TextEditingController().obs;
+  TextEditingController captionController = TextEditingController();
 
   TextEditingController button1Controller = TextEditingController();
 
@@ -33,16 +28,16 @@ class PostController extends GetxController {
   RxString privacyLikesAndViewsUI = RxString("Everyone");
   PostType? assetType;
   Uint8List? imagePath;
+  List<Uint8List?> images = [];
+  List<String?> imagePaths = [];
   String? textPost;
-  //Rx<PostType>? currentType;
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
-  // RxList<String>
-  RxString mediaType = "".obs;
-  RxString imagePathUpload = "".obs;
+
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
- final HomePostsController homePostsController = Get.put(HomePostsController());
+  final HomePostsController homePostsController =
+      Get.put(HomePostsController());
   final jwtController = Get.find<JWTController>();
   final bottomNavController = Get.find<NavController>();
   Future setPost(image, PostType assetTyp) async {
@@ -57,14 +52,28 @@ class PostController extends GetxController {
     //update();
   }
 
+  // void addPost(Uint8List image) {
+  //   imagePaths.add(image);
+  // }
+  // void addPost(List<Uint8List> imagex) {
+  //   for (Uint8List imageBytes in imagex) {
+  //     File imageFile = File.fromRawPath(
+  //         imageBytes); // this creates a File object from the Uint8List
+  //     images.add(imageFile.path); // this adds the File object to the List
+  //   }
+  // }
+
+  // uploadPost(String imagePath) {
+  //   images.add(imagePath);
+  // }
+
   Future makePost(
     bool enablePoll,
     String tagPrivacy,
     int? setTimer,
-      bool? isCustomPoll,
+    bool? isCustomPoll,
   ) async {
     isPosting.value = true;
-
     try {
       // if(setTimer == "-1"){
       //   CustomSnackbar.show("please setTimer");
@@ -76,13 +85,11 @@ class PostController extends GetxController {
       //   isPosting.value = false;
       //   return;
       // }
-
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
-      var token = await jwtController.getAuthToken();
-      var userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token;
-      //todo : Remove The New File Making Process With Filtered File
+      dio.options.headers["Authorization"] =
+          jwtController.token ?? await jwtController.getAuthToken();
+
       final tempDir = await getTemporaryDirectory();
       File file = await File('${tempDir.path}/image.png').create();
       if (assetType != PostType.text) {
@@ -90,22 +97,24 @@ class PostController extends GetxController {
 
         file.writeAsBytesSync(imageInUnit8List);
       }
-      debugPrint(
-        file.path.toString(),
-      );
+      // debugPrint(
+      //   file.path.toString(),
+      // );
 
       FormData reqData = FormData.fromMap({
-        "userId": userId,
+        "userId": jwtController.userId ?? jwtController.getUserId(),
         "mediaType": "image",
         // assetType.toString().split(".")[1].substring(0),
-        "mediaUrl": MultipartFile.fromFileSync(
-          assetType == PostType.text ? textPost! : file.path.toString(),
-        ),
+        "mediaUrl": [
+          MultipartFile.fromFileSync(imagePaths[0]!
+              //   assetType == PostType.text ? textPost! : file.path.toString(),
+              ),
+        ],
 
         "Enabledpoll": enablePoll ? true : false,
 
         //  "setTimer": enablePoll ? setTimer:"",
-        "caption": captionController.value.text,
+        "caption": captionController.text,
 
         "ShowPollResults": true,
 
@@ -117,12 +126,12 @@ class PostController extends GetxController {
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
-        "customPollEnabled" : isCustomPoll,
-        "customPollData":"[${button1Controller.text},${button2Controller.text}]"
+        "customPollEnabled": isCustomPoll,
+        "customPollData":
+            "[${button1Controller.text},${button2Controller.text}]"
       });
 
-
-      await dio.post(
+      var res = await dio.post(
         ApiEndpoint.makePost,
         data: reqData,
         onSendProgress: (count, total) {
@@ -131,17 +140,16 @@ class PostController extends GetxController {
       );
       //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;
-      captionController.value.clear();
+      print("status : ${res.statusCode}");
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
 
-
       homePostsController.skip.value = -10;
 
-      bottomNavController.pageUpdate(0);
+      //   bottomNavController.pageUpdate(0);
       homePostsController.posts?.clear();
       homePostsController.getPost();
-      Get.offAll(() =>    BottomNavBar());
+      Get.offAll(() => BottomNavBar());
     } catch (e) {
       //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;

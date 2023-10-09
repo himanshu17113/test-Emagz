@@ -8,19 +8,16 @@ class LiveFullScreenLandScapeMode extends StatefulWidget {
   const LiveFullScreenLandScapeMode({super.key});
 
   @override
-  State<LiveFullScreenLandScapeMode> createState() =>
-      _LiveFullScreenLandScapeModeState();
+  State<LiveFullScreenLandScapeMode> createState() => _LiveFullScreenLandScapeModeState();
 }
 
-class _LiveFullScreenLandScapeModeState
-    extends State<LiveFullScreenLandScapeMode> {
+class _LiveFullScreenLandScapeModeState extends State<LiveFullScreenLandScapeMode> {
   late VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+    _controller = VideoPlayerController.network('https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
       ..initialize().then((_) {
         _controller.play();
 
@@ -110,15 +107,10 @@ class _LiveFullScreenLandScapeModeState
 
                     height: 24,
                     // width: 96,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xffDBDEFF).withOpacity(.05)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: const Color(0xffDBDEFF).withOpacity(.05)),
                     child: Text(
                       "@username Very Good",
-                      style: GoogleFonts.inter(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
+                      style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
@@ -129,10 +121,7 @@ class _LiveFullScreenLandScapeModeState
                     width: size.width / 1.5,
                     child: Text(
                       "Lorem ipsum dolor sit amet consectetur. Nulla ac tortor vitae ac gravida tempus. Mi integer duis sit amet et.",
-                      style: GoogleFonts.inter(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
+                      style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
@@ -145,15 +134,10 @@ class _LiveFullScreenLandScapeModeState
                         alignment: Alignment.center,
                         height: 24,
                         width: 96,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color(0xffDBDEFF).withOpacity(.05)),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: const Color(0xffDBDEFF).withOpacity(.05)),
                         child: Text(
                           "20+ Joined Live",
-                          style: GoogleFonts.inter(
-                              fontSize: 10,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400),
+                          style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w400),
                         ),
                       ),
                       const SizedBox(
@@ -164,15 +148,10 @@ class _LiveFullScreenLandScapeModeState
                         alignment: Alignment.center,
                         height: 24,
                         // width: 96,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: const Color(0xffDBDEFF).withOpacity(.05)),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: const Color(0xffDBDEFF).withOpacity(.05)),
                         child: Text(
                           "#Nature",
-                          style: GoogleFonts.inter(
-                              fontSize: 10,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w400),
+                          style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w400),
                         ),
                       )
                     ],
@@ -185,21 +164,16 @@ class _LiveFullScreenLandScapeModeState
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     alignment: Alignment.center,
                     height: 32,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(0),
-                        color: redAcent),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(0), color: redAcent),
                     child: Text(
                       "End LIVE".toUpperCase(),
-                      style: GoogleFonts.inter(
-                          fontSize: 10,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
+                      style: GoogleFonts.inter(fontSize: 10, color: Colors.white, fontWeight: FontWeight.w400),
                     ),
                   ),
                 ),
               ],
             )
-          : Container(),
+          : const SizedBox(),
     );
   }
 

@@ -26,13 +26,7 @@ class AddPostScren extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(1, 1),
-                            color: grayColor.withOpacity(.5),
-                            blurRadius: 2,
-                            spreadRadius: 1)
-                      ]),
+                      boxShadow: [BoxShadow(offset: const Offset(1, 1), color: grayColor.withOpacity(.5), blurRadius: 2, spreadRadius: 1)]),
                   child: const Icon(Icons.close),
                 ),
               ),
@@ -80,11 +74,8 @@ class AddPostScren extends StatelessWidget {
               children: [
                 Container(
                   margin: const EdgeInsets.only(right: 5),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  decoration: BoxDecoration(
-                      color: lightgrayAcent,
-                      borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                  decoration: BoxDecoration(color: lightgrayAcent, borderRadius: BorderRadius.circular(5)),
                   child: const Text(
                     "Image",
                     style: TextStyle(fontSize: 12),
@@ -92,11 +83,8 @@ class AddPostScren extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.only(right: 5),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  decoration: BoxDecoration(
-                      color: lightgrayAcent,
-                      borderRadius: BorderRadius.circular(5)),
+                  padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                  decoration: BoxDecoration(color: lightgrayAcent, borderRadius: BorderRadius.circular(5)),
                   child: const Text(
                     "Video",
                     style: TextStyle(fontSize: 12),
@@ -108,11 +96,8 @@ class AddPostScren extends StatelessWidget {
                     showAlertDialog(context);
                   },
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                    decoration: BoxDecoration(
-                        color: lightgrayAcent,
-                        borderRadius: BorderRadius.circular(5)),
+                    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                    decoration: BoxDecoration(color: lightgrayAcent, borderRadius: BorderRadius.circular(5)),
                     child: const Text(
                       "Stream",
                       style: TextStyle(fontSize: 12),
@@ -125,14 +110,10 @@ class AddPostScren extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10),
               alignment: Alignment.center,
               height: 35,
-              decoration: BoxDecoration(
-                  color: chipColor, borderRadius: BorderRadius.circular(5)),
+              decoration: BoxDecoration(color: chipColor, borderRadius: BorderRadius.circular(5)),
               child: Text(
                 "Create a post",
-                style: TextStyle(
-                    color: whiteColor,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: whiteColor, fontSize: 11, fontWeight: FontWeight.w600),
               ),
             ),
           ],
@@ -145,8 +126,7 @@ class AddPostScren extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     AlertDialog alert = AlertDialog(
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(25.0))),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(25.0))),
         contentPadding: EdgeInsets.zero,
         content: Container(
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -164,8 +144,7 @@ class AddPostScren extends StatelessWidget {
                       ),
                       Text(
                         "Are your ready to\ngo live ",
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.w700),
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
@@ -199,7 +178,7 @@ class AddPostScren extends StatelessWidget {
                     textAlign: TextAlign.start,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                   ),
-                  Container()
+                  const SizedBox()
                 ],
               ),
               const SizedBox(
@@ -212,10 +191,7 @@ class AddPostScren extends StatelessWidget {
                 decoration: BoxDecoration(color: chipColor),
                 child: Text(
                   "Go Live",
-                  style: TextStyle(
-                      color: whiteColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600),
+                  style: TextStyle(color: whiteColor, fontSize: 15, fontWeight: FontWeight.w600),
                 ),
               ),
               const SizedBox(

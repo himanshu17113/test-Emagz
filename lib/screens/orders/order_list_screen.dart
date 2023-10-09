@@ -39,7 +39,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+//    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Padding(

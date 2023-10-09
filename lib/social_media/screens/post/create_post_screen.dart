@@ -9,7 +9,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:screenshot/screenshot.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
 import '../../controller/post/post_controller.dart';
 import '../../utils/photo_filter.dart';
@@ -32,7 +31,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     FILTER_4,
     FILTER_5,
   ];
-  bool isLoading = false;
+  RxBool isLoading = RxBool(false);
+  @override
+  void initState() {
+    postController.imagePaths.clear();
+    postController.images.clear();
+    super.initState();
+  }
 
   final postController = Get.put(PostController());
   Uint8List? imagePath;
@@ -61,16 +66,14 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       Get.to(
           () => EditorScreen(
               fileExtension: fileExtension,
-              image: image,
+              image: [image],
               onSubmit: (editedImage) {
-                postController.setPost(
-                    editedImage.readAsBytesSync(), PostType.gallery);
+                //postController.setPost(editedImage.path, PostType.text);
+                postController.imagePaths.add(editedImage.path);
                 Get.off(() => PrePostScreen(
-                    postType: PostType.gallery,
-                    image: postController.imagePath));
+                    postType: PostType.text, image: editedImage.path));
               }),
           curve: Curves.bounceIn);
-      //  return image;
     }
   }
 
@@ -84,158 +87,131 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         body: Stack(children: [
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  postController.imagePath == null
-                      ? SizedBox(
-                          height: 250,
-                          child: Center(
-                            child: FormHeadingText(
-                              headings: "No Image Selected",
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontSize: 14,
-                            ),
-                          ),
-                        )
-                      : Obx(() {
-                          return postController.isSettingImage.value
-                              ? const SizedBox()
-                              : Container(
-                                  height: 250,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        colorFilter: index == -1
-                                            ? null
-                                            : ColorFilter.matrix(
-                                                filters[index]),
-                                        image: MemoryImage(
-                                            postController.imagePath!),
-                                        fit: BoxFit.cover),
-                                  ),
-                                );
-                        }),
-                  //   SizedBox.expand(),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      FormHeadingText(
-                        headings: "Landscape",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                      FormHeadingText(
-                        headings: "Portrait",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                      FormHeadingText(
-                        headings: "Scale",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                      FormHeadingText(
-                        headings: "Rotate",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        fontSize: 12,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  postController.imagePath == null
-                      ? Container()
-                      : Container(
-                          color: const Color(0xffDFECFF),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Obx(() {
-                              return postController.isSettingImage.value
-                                  ? const SizedBox()
-                                  : postController.imagePath == null
-                                      ? const SizedBox()
-                                      : Row(
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  index = -1;
-                                                });
-                                              },
-                                              child: Container(
-                                                margin: const EdgeInsets.only(
-                                                    right: 10),
-                                                height: 50,
-                                                width: 70,
-                                                key: _imageKey,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                      // colorFilter: index == -1
-                                                      //     ? null
-                                                      //     : ColorFilter.matrix(filters[index]),
-                                                      image: MemoryImage(
-                                                          postController
-                                                              .imagePath!),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                            ),
-                                            postController.isSettingImage.value
-                                                ? const SizedBox()
-                                                : postController.imagePath ==
-                                                        null
-                                                    ? const SizedBox()
-                                                    : Row(
-                                                        children: List.generate(
-                                                          filters.length,
-                                                          (index) => InkWell(
-                                                            onTap: () async {
-                                                              setState(() {
-                                                                this.index =
-                                                                    index;
-                                                              });
-                                                            },
-                                                            child: Container(
-                                                              margin:
-                                                                  const EdgeInsets
-                                                                      .only(
-                                                                      right:
-                                                                          10),
-                                                              height: 50,
-                                                              width: 70,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                image: DecorationImage(
-                                                                    colorFilter:
-                                                                        ColorFilter.matrix(filters[
-                                                                            index]),
-                                                                    image: MemoryImage(
-                                                                        postController
-                                                                            .imagePath!),
-                                                                    fit: BoxFit
-                                                                        .cover),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                          ],
-                                        );
-                            }),
-                          ),
-                        ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  // postController.imagePath == null
+                  //     ? SizedBox(
+                  //         height: 250,
+                  //         child: Center(
+                  //           child: FormHeadingText(
+                  //             headings: "No Image Selected",
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Colors.black,
+                  //             fontSize: 14,
+                  //           ),
+                  //         ),
+                  //       )
+                  //     : postController.isSettingImage.value
+                  //         ? const SizedBox(
+                  //             height: 10,
+                  //           )
+                  //         : Container(
+                  //             height: context.height * .33,
+                  //             padding: const EdgeInsets.only(bottom: 10),
+                  //             decoration: BoxDecoration(
+                  //               image: DecorationImage(
+                  //                   colorFilter: index == -1
+                  //                       ? null
+                  //                       : ColorFilter.matrix(filters[index]),
+                  //                   image:
+                  //                       MemoryImage(postController.imagePath!),
+                  //                   fit: BoxFit.fitHeight),
+                  //             ),
+                  //           ),
+
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     Text(
+                  //       "Landscape",
+                  //       style: TextStyle(
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.black,
+                  //         fontSize: 12,
+                  //       ),
+                  //     ),
+                  //     Text("Portrait",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.black,
+                  //           fontSize: 12,
+                  //         )),
+                  //     Text("Rotate",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.black,
+                  //           fontSize: 12,
+                  //         )),
+                  //     Text("Scale",
+                  //         style: TextStyle(
+                  //           fontWeight: FontWeight.bold,
+                  //           color: Colors.black,
+                  //           fontSize: 12,
+                  //         )),
+                  //   ],
+                  // ),
+                  // postController.imagePath == null
+                  //     ? const SizedBox(
+                  //         height: 10,
+                  //       )
+                  //     : SingleChildScrollView(
+                  //         scrollDirection: Axis.horizontal,
+                  //         child: postController.isSettingImage.value &&
+                  //                 postController.imagePath != null
+                  //             ? const SizedBox()
+                  //             : Row(
+                  //                 children: [
+                  //                   InkWell(
+                  //                     onTap: () {
+                  //                       setState(() {
+                  //                         index = -1;
+                  //                       });
+                  //                     },
+                  //                     child: Container(
+                  //                       margin:
+                  //                           const EdgeInsets.only(right: 10),
+                  //                       height: 70,
+                  //                       width: 70,
+                  //                       key: _imageKey,
+                  //                       decoration: BoxDecoration(
+                  //                         image: DecorationImage(
+                  //                             image: MemoryImage(
+                  //                                 postController.imagePath!),
+                  //                             fit: BoxFit.cover),
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                   Row(
+                  //                     children: List.generate(
+                  //                       filters.length,
+                  //                       (index) => InkWell(
+                  //                         onTap: () async {
+                  //                           setState(() {
+                  //                             this.index = index;
+                  //                           });
+                  //                         },
+                  //                         child: Container(
+                  //                           margin: const EdgeInsets.only(
+                  //                               right: 10),
+                  //                           height: 70,
+                  //                           width: 70,
+                  //                           decoration: BoxDecoration(
+                  //                             image: DecorationImage(
+                  //                                 colorFilter:
+                  //                                     ColorFilter.matrix(
+                  //                                         filters[index]),
+                  //                                 image: MemoryImage(
+                  //                                     postController
+                  //                                         .imagePath!),
+                  //                                 fit: BoxFit.cover),
+                  //                           ),
+                  //                         ),
+                  //                       ),
+                  //                     ),
+                  //                   ),
+                  //                 ],
+                  //               )),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -255,6 +231,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
                             height: 42,
                             decoration: BoxDecoration(
@@ -275,19 +252,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               ),
                             ),
                           ),
-                          // onTap: () {
-                          //   setState(() {
-                          //     postController.currentType?.value = PostType.text;
-                          //   });
-                          // },
-                        ),
-                        const SizedBox(
-                          width: 10,
                         ),
                         InkWell(
                           onTap: () => setState(
                               () => postController.assetType = PostType.poll),
                           child: Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
                             height: 42,
@@ -303,14 +273,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         InkWell(
                           onTap: () => setState(() =>
                               postController.assetType = PostType.gallery),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
                             height: 42,
                             decoration: BoxDecoration(
@@ -325,14 +293,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         InkWell(
                           onTap: () => setState(
                               () => postController.assetType = PostType.text),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
                             height: 42,
                             decoration: BoxDecoration(
@@ -351,15 +317,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
                         InkWell(
                           onTap: () async {
                             await _capturePhoto();
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
+                            margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
                             height: 42,
                             decoration: BoxDecoration(
@@ -378,87 +342,109 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                  Expanded(child: GridGallery(
-                    onPostTapped: (imageData, assetEntity) {
-                      setState(() {});
-                      fileExtension = assetEntity.mimeType!.split("/")[1];
-                      if (assetEntity.type == AssetType.image) {
-                        postController.setPost(imageData, PostType.gallery);
-                      } else if (assetEntity.type == AssetType.video) {
-                        postController.setPost(imageData, PostType.gallery);
-                      } else {
-                        postController.setPost(imageData, PostType.gallery);
-                      }
-                    },
-                  ))
+                  const Expanded(
+                      child: GridGallery(
+                          //     onPostTapped: (imageData, assetEntity) {
+                          // //      setState(() {});
+                          //       fileExtension = assetEntity.mimeType!.split("/")[1];
+                          //       if (assetEntity.type == AssetType.image) {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       } else if (assetEntity.type == AssetType.video) {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       } else {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       }
+                          //     },
+                          //     onPostSelected: (imageData, assetEntity) {
+                          //       setState(() {});
+                          //       fileExtension = assetEntity.mimeType!.split("/")[1];
+                          //       if (assetEntity.type == AssetType.image) {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       } else if (assetEntity.type == AssetType.video) {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       } else {
+                          //         postController.setPost(imageData, PostType.gallery);
+                          //       }
+                          //     },
+                          ))
                 ],
               ),
             ),
           ),
-          Obx(
-            () => postController.isSettingImage.value
-                ? const SizedBox()
-                : postController.imagePath == null
-                    ? const SizedBox()
-                    : Positioned(
-                        bottom: 70,
-                        right: 30,
-                        child: AnimatedOpacity(
-                          opacity: postController.imagePath == null ? 0 : 1,
-                          duration: const Duration(milliseconds: 500),
-                          child: ElevatedButton(
-                            child: Text(isLoading ? "loading..." : "next"),
-                            onPressed: () async {
-                              setState(() {
-                                isLoading = true;
-                              });
+          // if (!postController.isSettingImage.value &&
+          //     postController.imagePath != null)
 
-                              UI.Image realImage = await ScreenshotController
-                                  .widgetToUiImage(index == -1
-                                      ? Image.memory(postController.imagePath!)
-                                      : ColorFiltered(
-                                          colorFilter: ColorFilter.matrix(
-                                              filters[index]),
-                                          child: Image.memory(
-                                              postController.imagePath!)));
-                              var buffer = await realImage.toByteData(
-                                  format: UI.ImageByteFormat.png);
-                              var imageData = buffer!.buffer.asUint8List();
-                              // var image = await screenshotController.capture();
-                              // realImage.();
-                              postController.setPost(
-                                  imageData, postController.assetType!);
-                              isLoading = false;
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => EditorScreen(
-                                        fileExtension: fileExtension,
-                                        image: postController.imagePath,
-                                        onSubmit: (editedImage) {
-                                          postController.setPost(
-                                              editedImage.readAsBytesSync(),
-                                              postController.assetType!);
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PrePostScreen(
-                                                        postType:
-                                                            PostType.gallery,
-                                                        image: postController
-                                                            .imagePath)),
-                                          );
-                                          //Get.off(() => PrePostScreen(postType: PostType.gallery, image: postController.imagePath));
-                                        }),
-                                  ));
-                            },
-                          ),
-                        ),
-                      ),
-          )
+          (postController.imagePaths.isNotEmpty ||
+                  postController.images.isNotEmpty)
+              ? Positioned(
+                  bottom: 70,
+                  right: 30,
+                  child: ElevatedButton(
+                    child: Obx(
+                        () => Text(isLoading.value ? "loading..." : "next")),
+                    onPressed: () async {
+                      //  setState(() {
+                      isLoading.value = true;
+                      //   });
+
+                      // UI.Image realImage =
+                      //     await ScreenshotController.widgetToUiImage(index == -1
+                      //         ? Image.memory(postController.imagePath!)
+                      //         : ColorFiltered(
+                      //             colorFilter:
+                      //                 ColorFilter.matrix(filters[index]),
+                      //             child:
+                      //                 Image.memory(postController.imagePath!)));
+                      // var buffer = await realImage.toByteData(
+                      //     format: UI.ImageByteFormat.png);
+                      // var imageData = buffer!.buffer.asUint8List();
+
+                      // postController.setPost(
+                      //     imageData, postController.assetType!);
+
+                      // isLoading.value = false;
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditorScreen(
+                                  fileExtension: fileExtension,
+                                  image: postController.images,
+                                  // onSubmit: (editedImage) {
+                                  //   postController.uploadPost(editedImage.path);
+                                  //   Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => PrePostScreen(
+                                  //             postType: PostType.text,
+                                  //             image: editedImage.path)),
+                                  //   );
+                                  // },
+                                  // onSubmitS: (editedImage) {
+                                  //   debugPrint(
+                                  //       "image submit ${editedImage.length}");
+                                  //   postController.images = editedImage;
+                                  //   Get.to(() => PrePostScreen(
+                                  //       postType: PostType.gallery,
+                                  //       images: postController.images));
+                                  //   // Navigator.push(
+                                  //   //   context,
+                                  //   //   MaterialPageRoute(
+                                  //   //       builder: (context)=> PrePostScreen(
+                                  //   //           postType: PostType.gallery,
+                                  //   //           images: postController.images)
+
+                                  //   //      ),
+                                  //   // );
+                                  // }
+                                  ),
+                              fullscreenDialog: true));
+                    },
+                  ),
+                )
+              : const SizedBox(),
         ]),
       ),
     );
@@ -469,10 +455,13 @@ class GridGallery extends StatefulWidget {
   final ScrollController? scrollCtr;
   final void Function(Uint8List? imageData, AssetEntity assetEntity)?
       onPostTapped;
+  final void Function(Uint8List? imageData, AssetEntity assetEntity)?
+      onPostSelected;
   const GridGallery({
     Key? key,
     this.onPostTapped,
     this.scrollCtr,
+    this.onPostSelected,
   }) : super(key: key);
 
   @override
@@ -483,6 +472,7 @@ class _GridGalleryState extends State<GridGallery> {
   final List<Widget> _mediaList = [];
   int currentPage = 0;
   int? lastPage;
+  RxBool longPressed = RxBool(false);
   final postController = Get.put(PostController());
   @override
   void initState() {
@@ -504,10 +494,11 @@ class _GridGalleryState extends State<GridGallery> {
     if (ps.isAuth) {
       List<AssetPathEntity> albums =
           await PhotoManager.getAssetPathList(onlyAll: true);
-      List<AssetEntity> media = await albums[0]
-          .getAssetListPaged(size: 60, page: currentPage); //preloading files
-      List<Widget> temp = [];
+      List<AssetEntity> media =
+          await albums[0].getAssetListPaged(size: 60, page: currentPage);
+      RxList temp = <Widget>[].obs;
       for (var asset in media) {
+        RxBool isSelected = RxBool(false);
         temp.add(
           FutureBuilder(
             future: asset.thumbnailDataWithSize(
@@ -520,56 +511,46 @@ class _GridGalleryState extends State<GridGallery> {
                   children: <Widget>[
                     Positioned.fill(
                       child: InkWell(
-                        onTap: widget.onPostTapped == null
-                            ? () async {
-                                if (asset.type == AssetType.image) {
-                                  postController.setPost(
-                                      snapshot.data, PostType.gallery);
-                                } else if (asset.type == AssetType.video) {
-                                  postController.setPost(
-                                      snapshot.data, PostType.gallery);
-                                } else {
-                                  postController.setPost(
-                                      snapshot.data, PostType.gallery);
-                                }
-                                postController.assetType = PostType.gallery;
-                                // File filr = File.fromRawPath(snapshot.data!);
-                                // debugPrint(postController.imagePath.toString());
-
-                                // debugPrint(snapshot.data.toString());
-                                // setState(() {
-
-                                if (mounted) {}
-                                // await Navigator.push(
-                                //todo look after
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => ImageEditor(
-                                //       image: snapshot.data, // <-- Uint8List of image
-                                //     ),
-                                //   ),
-                                // ).then((value) async {
-                                //   await postController.setImage(value);
-                                //   setState(() {
-                                //     // postController.imagePath = snapshot.data;
-                                //   });
-                                // });
-                                // });
-
-                                //todo : STORY IMAGE VIEW
-
-                                // Get.to(() => ImageStoryView(
-                                //       snapshot: snapshot.data!,
-                                //     ));
-                              }
-                            : () {
-                                widget.onPostTapped!(snapshot.data, asset);
-                              },
-                        child: Image.memory(
-                          snapshot.data!,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                          onTap: () {
+                            isSelected.value = !isSelected.value;
+                            if (isSelected.value) {
+                              postController.images.add(snapshot.data);
+                            } else {
+                              postController.images.remove(snapshot.data);
+                            }
+                            //   if (asset.type == AssetType.image) {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   } else if (asset.type == AssetType.video) {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   } else {
+                            //     postController.setPost(
+                            //         snapshot.data, PostType.gallery);
+                            //   }
+                            //   postController.assetType = PostType.gallery;
+                          },
+                          child: snapshot.data != null
+                              ? Container(
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: MemoryImage(
+                                            snapshot.data!,
+                                          ),
+                                          fit: BoxFit.cover),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
+                                      border: Border.all(
+                                          width: 4,
+                                          color: longPressed.value
+                                              ? Colors.amber
+                                              : Colors.transparent)),
+                                  // child: Image.memory(
+                                  //   snapshot.data!,
+                                  //   fit: BoxFit.cover,
+                                  // ),
+                                )
+                              : const SizedBox()),
                     ),
                     if (asset.type == AssetType.video)
                       const Align(
@@ -582,21 +563,30 @@ class _GridGalleryState extends State<GridGallery> {
                           ),
                         ),
                       ),
+                    Obx(() => isSelected.value
+                        ? const Align(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: EdgeInsets.only(right: 5, bottom: 5),
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          )
+                        : const SizedBox())
                   ],
                 );
               }
-              return Container();
+              return const SizedBox();
             },
           ),
         );
       }
       setState(() {
-        _mediaList.addAll(temp);
+        _mediaList.addAll(temp as Iterable<Widget>);
         currentPage++;
       });
-    } else {
-      // fail
-      /// if result is fail, you can call `PhotoManager.openSetting();`  to open android/ios applicaton's setting to get permission
     }
   }
 
