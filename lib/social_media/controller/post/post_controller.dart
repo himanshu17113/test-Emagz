@@ -74,7 +74,7 @@ class PostController extends GetxController {
     bool? isCustomPoll,
   ) async {
     isPosting.value = true;
-    try {
+     try {
       // if(setTimer == "-1"){
       //   CustomSnackbar.show("please setTimer");
       //   isPosting.value = false;
