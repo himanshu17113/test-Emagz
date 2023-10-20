@@ -54,6 +54,7 @@ class _EditorScreenState extends State<EditorScreen> {
   List<int> rotate = [];
   List<GlobalKey> key = [];
   List<bool> crop = [];
+  List<bool> transform = [];
   List<double> roatation = [];
   List<bool> enableRoatation = [];
   List<bool> enablebrightness = [];
@@ -94,6 +95,7 @@ class _EditorScreenState extends State<EditorScreen> {
     editableItems = List.generate(nIm, (i) => []);
     key = List.generate(nIm, (index) => GlobalKey());
     crop = List.filled(nIm, false);
+    transform = List.filled(nIm, false);
     rotate = List.filled(nIm, 0);
     filter = List.filled(nIm, 0);
     enablebrightness = List.filled(nIm, false);
@@ -248,46 +250,52 @@ class _EditorScreenState extends State<EditorScreen> {
                         children: [
                           Transform.rotate(
                             angle: roatation[itemIndex],
-                            child: RotatedBox(
-                              quarterTurns: rotate[itemIndex],
-                              child: crop[itemIndex]
-                                  ? imagefilter(
-                                      blur: blur[itemIndex],
-                                      hue: hue[itemIndex] - 1,
-                                      brightness: brightness[itemIndex] - 1,
-                                      saturation: saturation[itemIndex] - 1,
-                                      child: ColorFiltered(
-                                        colorFilter: ColorFilter.matrix(
-                                            filters[filter[itemIndex]]),
-                                        child: Crop(
-                                          initialSize: 0.9,
-                                          baseColor: Colors.black12,
-                                          controller: _controller,
-                                          image: widget.image[itemIndex]!,
-                                          onCropped: (cropped) {
-                                            debugPrint("cropped");
-                                            widget.image[itemIndex] = cropped;
-                                            setState(() {
-                                              crop[itemindex] =
-                                                  !crop[itemindex];
-                                            });
-                                          },
+                            child: Transform.flip(
+                              flipX: transform[itemIndex],
+                              //    flipY: transform[itemIndex],
+                              child: RotatedBox(
+                                quarterTurns: rotate[itemIndex],
+                                child: crop[itemIndex]
+                                    ? imagefilter(
+                                        blur: blur[itemIndex],
+                                        hue: hue[itemIndex] - 1,
+                                        brightness: brightness[itemIndex] - 1,
+                                        saturation: saturation[itemIndex] - 1,
+                                        child: ColorFiltered(
+                                          colorFilter: ColorFilter.matrix(
+                                              filters[filter[itemIndex]]),
+                                          child: Crop(
+                                            initialSize: 0.9,
+                                            baseColor: Colors.black12,
+                                            controller: _controller,
+                                            image: widget.image[itemIndex]!,
+                                            onCropped: (cropped) {
+                                              debugPrint("cropped");
+                                              widget.image[itemIndex] = cropped;
+                                              setState(() {
+                                                crop[itemindex] =
+                                                    !crop[itemindex];
+                                              });
+                                            },
+                                          ),
                                         ),
+                                      )
+                                    : Container(
+                                        color: Colors.amber,
+                                        child: imagefilter(
+                                            blur: blur[itemIndex],
+                                            hue: hue[itemIndex] - 1,
+                                            brightness:
+                                                brightness[itemIndex] - 1,
+                                            saturation:
+                                                saturation[itemIndex] - 1,
+                                            child: ColorFiltered(
+                                                colorFilter: ColorFilter.matrix(
+                                                    filters[filter[itemIndex]]),
+                                                child: Image.memory(
+                                                    widget.image[itemIndex]!))),
                                       ),
-                                    )
-                                  : Container(
-                                      color: Colors.amber,
-                                      child: imagefilter(
-                                          blur: blur[itemIndex],
-                                          hue: hue[itemIndex] - 1,
-                                          brightness: brightness[itemIndex] - 1,
-                                          saturation: saturation[itemIndex] - 1,
-                                          child: ColorFiltered(
-                                              colorFilter: ColorFilter.matrix(
-                                                  filters[filter[itemIndex]]),
-                                              child: Image.memory(
-                                                  widget.image[itemIndex]!))),
-                                    ),
+                              ),
                             ),
                           ),
                           ...editableItems[itemIndex]
@@ -465,6 +473,18 @@ class _EditorScreenState extends State<EditorScreen> {
                                         ),
                                       ),
                                     ),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, right: 25),
+                                        child: ElevatedButton.icon(
+                                          style: raisedButtonStyle,
+                                          onPressed: () => setState(() =>
+                                              transform[itemindex] =
+                                                  !transform[itemindex]),
+                                          icon: const Icon(Icons.flip,
+                                              color: Colors.white70),
+                                          label: const Text(' Transform '),
+                                        )),
                                     Padding(
                                         padding: const EdgeInsets.only(
                                             bottom: 10, right: 25),
