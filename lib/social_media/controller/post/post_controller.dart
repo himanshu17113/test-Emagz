@@ -75,8 +75,7 @@ class PostController extends GetxController {
   Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
       bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
-    try {
-      await addPost(images);
+     try {
       // if(setTimer == "-1"){
       //   CustomSnackbar.show("please setTimer");
       //   isPosting.value = false;

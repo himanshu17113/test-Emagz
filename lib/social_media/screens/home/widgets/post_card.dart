@@ -185,10 +185,11 @@ class _PostCardState extends State<PostCard> {
                               'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
-                        Get.to(() => WebViewPersona(
-                              token: tok!,
-                              userId: widget.myUserId!,
-                              personaUserId: post!.user!.sId!,
+                        Get.to(() => OwnWebView(
+                            token: tok!,
+                            userId: widget.myUserId!,
+                            personaUserId: post!.user!.sId!,
+                          templateId: ' ',
                             ));
                       }
                     },
@@ -241,13 +242,14 @@ class _PostCardState extends State<PostCard> {
                                 color: const Color.fromARGB(255, 17, 17, 16),
                               ),
                               width: MediaQuery.of(context).size.width * 0.75,
-                              height: MediaQuery.of(context).size.height * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.75,
                               child: Column(
                                 children: [
                                   const Padding(
                                       padding: EdgeInsets.all(15.0),
                                       child: Text('Report Post',
                                           style: TextStyle(
+                                            color: Colors.white,
                                             fontSize: 19,
                                             fontWeight: FontWeight.w700,
                                           ),

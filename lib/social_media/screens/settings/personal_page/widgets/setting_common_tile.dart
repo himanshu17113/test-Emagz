@@ -16,8 +16,12 @@ class PreferenceTile extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       decoration: BoxDecoration(
          // color: isBlue == true ? chipColor : whiteColor,
-          borderRadius: BorderRadius.circular(10)),
+          borderRadius: BorderRadius.circular(20)),
       child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+
+        ),
         selected: isBlue!,
         selectedTileColor: chipColor,
         hoverColor: chipColor,

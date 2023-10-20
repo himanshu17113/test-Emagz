@@ -73,7 +73,6 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       },
     );
   }
-
   @override
   Widget build(BuildContext context) {
     double width= MediaQuery.of(context).size.width;
