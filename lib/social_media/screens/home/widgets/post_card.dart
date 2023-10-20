@@ -143,7 +143,7 @@ class _PostCardState extends State<PostCard> {
               return CustomVideoPlayer(
                 post: post!,
                 // videoUrl: videoUrl,
-                videoUrl: post!.mediaUrl!,
+                videoUrl: post!.mediaUrl![0]!,
                 aspectRatio: (Get.size.height / 2.62) /
                     (MediaQuery.of(context).size.width - 10),
               );
@@ -186,9 +186,9 @@ class _PostCardState extends State<PostCard> {
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
                         Get.to(() => WebViewPersona(
-                            token: tok!,
-                            userId: widget.myUserId!,
-                            personaUserId: post!.user!.sId!,
+                              token: tok!,
+                              userId: widget.myUserId!,
+                              personaUserId: post!.user!.sId!,
                             ));
                       }
                     },

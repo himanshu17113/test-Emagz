@@ -23,7 +23,7 @@ enum PostType { text, poll, gallery, camera }
 class PrePostScreen extends StatefulWidget {
   final PostType postType;
   final dynamic image;
-  final List<Uint8List?>? images;
+  final List<Uint8List>? images;
   const PrePostScreen({
     Key? key,
     required this.postType,
@@ -70,81 +70,76 @@ class _PrePostScreenState extends State<PrePostScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                Column(
-                  children: [
-                    if (widget.images != null) ...[
-                      CarouselSlider(
-                        options: CarouselOptions(height: 200.0),
-                        items: //widget.images?
-                            widget.images!.map((i) {
-                          return Builder(
-                            builder: (BuildContext context) {
-                              return i != null
-                                  ?
-                                  // Container(
-                                  //     width: MediaQuery.of(context).size.width,
-                                  //     margin: const EdgeInsets.symmetric(
-                                  //         horizontal: 5.0),
-                                  //     decoration: const BoxDecoration(
-                                  //         color: Colors.amber),
-                                  //     child:
-                                  Image.memory(
-                                      i,
-                                      height: 200,
-                                    )
-                                  //  Image.file(File(i)
-                                  //  )
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Column(
+                    children: [
+                      if (widget.images != null) ...[
+                        CarouselSlider(
+                          // options: CarouselOptions(
+                          //     enlargeCenterPage: true,
+                          //     enlargeFactor: 0.5,
+                          //     enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                          //     height: 300,
+                          //     viewportFraction: 0.8),
+                          options: CarouselOptions(
+                            autoPlay: true,
+                            // aspectRatio: 2.0,
+                            enlargeCenterPage: true,
+                          ),
+                          items: List.generate(
+                              widget.images!.length,
+                              (i) =>
+                                  //widget.images?
 
-                                  : SizedBox(
-                                      child: Container(
-                                        height: 45,
-                                        width: 45,
-                                        color: Colors.blueGrey,
-                                      ),
-                                    );
-                            },
-                          );
-                        }).toList(),
-                      )
+                                  SizedBox(
+                                    child: Image.memory(
+                                      widget.images![i],
+                                      height: 300,
+                                      filterQuality: FilterQuality.high,
+                                      //   fit: BoxFit.fitHeight,
+                                      //        width: 1000.0
+                                    ),
+                                  )
+                              //  Image.file(File(i)
+                              //  )
 
-                      // Container(
-                      //     alignment: Alignment.center,
-                      //     height: 170,
-                      //     decoration: const BoxDecoration(color: Colors.black),
-                      //     child: (widget.postType == PostType.gallery)
-                      //         ? Image.memory(widget.images![2]!)
-                      //         : Image.file(
-                      //             File(
-                      //                 widget.image ?? postController.textPost!),
-                      //             width: 200, // Adjust the width as needed
-                      //             height: 400,
-                      //           )
+                              ).toList(),
+                        )
 
-                      //     //       // const SizedBox(
-                      //     //       //     child: Text("EDITABLE TEXT"),
-                      //     //       //   )
-                      //     ),
-                    ],
-                    GestureDetector(
-                      onTap: () => Get.close(1),
-                      child: Container(
-                        alignment: Alignment.center,
-                        height: 35,
-                        decoration: const BoxDecoration(color: Colors.black),
-                        child: FormHeadingText(
-                          headings: "Edit Post",
-                          fontSize: 12,
-                          color: Colors.white,
+                        // Container(
+                        //     alignment: Alignment.center,
+                        //     height: 170,
+                        //     decoration: const BoxDecoration(color: Colors.black),
+                        //     child: (widget.postType == PostType.gallery)
+                        //         ? Image.memory(widget.images![2]!)
+                        //         : Image.file(
+                        //             File(
+                        //                 widget.image ?? postController.textPost!),
+                        //             width: 200, // Adjust the width as needed
+                        //             height: 400,
+                        //           )
+
+                        //     //       // const SizedBox(
+                        //     //       //     child: Text("EDITABLE TEXT"),
+                        //     //       //   )
+                        //     ),
+                      ],
+                      GestureDetector(
+                        onTap: () => Get.close(1),
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 35,
+                          decoration: const BoxDecoration(color: Colors.black),
+                          child: FormHeadingText(
+                            headings: "Edit Post",
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 25,
+                    ],
+                  ),
                 ),
                 Row(
                   children: [
@@ -660,17 +655,17 @@ class _PrePostScreenState extends State<PrePostScreen> {
         ),
         bottomNavigationBar: InkWell(
           onTap: () => postController.makePost(
-            isPollEnable,
-            everyOne
-                ? "everyone"
-                : (peopleYouFollow
-                    ? "peopleYouFollow"
-                    : noOne
-                        ? "noOne"
-                        : "everyone"),
-            isPollEnable ? timerOptionList[selectedTimer] : null,
-            isCustomPoll,
-          ),
+              isPollEnable,
+              everyOne
+                  ? "everyone"
+                  : (peopleYouFollow
+                      ? "peopleYouFollow"
+                      : noOne
+                          ? "noOne"
+                          : "everyone"),
+              isPollEnable ? timerOptionList[selectedTimer] : null,
+              isCustomPoll,
+              widget.images!),
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             alignment: Alignment.center,

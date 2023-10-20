@@ -41,7 +41,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String url = widget.post.mediaUrl!;
+    final String url = widget.post.mediaUrl![0]!;
 
     return Scaffold(
       body: Stack(

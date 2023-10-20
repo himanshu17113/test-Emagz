@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:math';
+import 'dart:ui' as ui;
 import 'dart:ui';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/colorfiltergenerater.dart';
@@ -49,7 +52,10 @@ class _EditorScreenState extends State<EditorScreen> {
   int nIm = 0;
   int itemindex = 0;
   List<int> rotate = [];
+  List<GlobalKey> key = [];
   List<bool> crop = [];
+  List<double> roatation = [];
+  List<bool> enableRoatation = [];
   List<bool> enablebrightness = [];
   List<double> brightness = [];
   List<bool> enablehue = [];
@@ -76,16 +82,17 @@ class _EditorScreenState extends State<EditorScreen> {
     FILTER_5,
   ];
   bool enableEffect = false;
+
   Uint8List? currentimage;
-  List<Uint8List?> localImages = [];
+  List<Uint8List> localImages = [];
+
   @override
   void initState() {
     currentimage = widget.image[0];
 
     nIm = widget.image.length;
     editableItems = List.generate(nIm, (i) => []);
-
-    //  editableItems = List.filled(nIm, []);
+    key = List.generate(nIm, (index) => GlobalKey());
     crop = List.filled(nIm, false);
     rotate = List.filled(nIm, 0);
     filter = List.filled(nIm, 0);
@@ -97,37 +104,44 @@ class _EditorScreenState extends State<EditorScreen> {
     saturation = List.filled(nIm, 1.0);
     enableBlur = List.filled(nIm, false);
     blur = List.filled(nIm, 0.0);
+    enableRoatation = List.filled(nIm, false);
+    roatation = List.filled(nIm, 0);
+
     super.initState();
   }
 
-  final GlobalKey _globalKey = GlobalKey();
-  PageController _pageController = PageController();
-  void capturePages() {
+  final PageController _pageController = PageController();
+
+//  final GlobalKey _globalKey = GlobalKey();
+
+  Future<Uint8List?> captureImage(int i) async {
+    RenderRepaintBoundary bound =
+        key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
+
+    if (bound.debugNeedsPaint) {
+      Timer(const Duration(seconds: 1), () => convertWidgetToImage());
+      return null;
+    }
+    ui.Image image = await bound.toImage();
+    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+
+    if (byteData != null) {
+      Uint8List pngBytes = byteData.buffer.asUint8List();
+      localImages.add(pngBytes);
+      return pngBytes;
+    }
+    return null;
+  }
+
+  Future<void> convertWidgetToImage() async {
+    _pageController.jumpToPage(0);
     localImages.clear();
     for (int i = 0; i < nIm; i++) {
-      // Scroll to the next page
-      screenshotControlle
-          //  .captureFromWidget(widget)
-          .capture(delay: const Duration(milliseconds: 500))
-          .then((capturedImage) {
-        localImages.add(capturedImage);
-      });
-
-      // Optionally wait for a brief moment before scrolling to the next page
-      Future.delayed(const Duration(seconds: 1), () {
-        // Check if this is the last page
-        if (i == nIm - 1) {
-          Get.to(() =>
-              PrePostScreen(postType: PostType.gallery, images: localImages));
-        } else {
-          // Scroll to the next page
-          _pageController =
-              PageController(initialPage: i + 1, viewportFraction: 1);
-          _pageController.animateToPage(i + 1,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut);
-        }
-      });
+      await _pageController
+          .animateToPage(i,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut)
+          .then((value) async => await captureImage(i));
     }
   }
 
@@ -176,9 +190,7 @@ class _EditorScreenState extends State<EditorScreen> {
                       },
                       icon: const Icon(Icons.text_fields)),
                   IconButton(
-                      onPressed: () {
-                        capturePages();
-                      },
+                      onPressed: () {},
                       icon: const Icon(
                         Icons.music_note,
                       ))
@@ -205,120 +217,84 @@ class _EditorScreenState extends State<EditorScreen> {
                     );
                   },
                 );
-                localImages.clear();
-                _pageController.jumpToPage(0);
-                for (int i = 0; i < nIm; i++) {
-                  await _pageController.animateToPage(i,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOut);
+                await convertWidgetToImage();
 
-                  Future.delayed(const Duration(milliseconds: 500));
-                  await screenshotControlle
-                      //       .captureFromWidget(widget)
-                      .capture(delay: Duration.zero)
-                      .then((capturedImage) {
-                    localImages.add(capturedImage);
-                    debugPrint("edited image length ${localImages.length}");
-                  });
-                  //.whenComplete(() => _pageController.jumpToPage(i + 2));
-                  // .whenComplete(() {
-                  //   if (i == nIm - 1) {
-                  //     debugPrint("edited image length ${localImages.length}");
-                  //     Get.to(() => PrePostScreen(
-                  //         postType: PostType.gallery, images: localImages));
-                  //   }
-                  // });
-                  //   if (i == nIm - 1) {}
-                }
                 debugPrint("edited image length ${localImages.length}");
                 Get.to(() => PrePostScreen(
                     postType: PostType.gallery, images: localImages));
               },
-//  _pageController.jumpToPage(i);
-//         Future.delayed(Duration(milliseconds: 500)); // Wait for widgets to build (optional)
-
-//       RenderRepaintBoundary boundary = _globalKey.currentContext.findRenderObject();
-//       var image =   boundary.toImage();
-//       var byteData = await image.(format: ImageByteFormat.png);
-//       var pngBytes = byteData.buffer.asUint8List();
-
               icon: const Icon(Icons.arrow_right_alt))
         ],
       ),
-      body: Screenshot(
-        controller: screenshotControlle,
-        child: Center(
-          child: PageView(
-              // physics: const PageScrollPhysics(),
-              // scrollBehavior: const MaterialScrollBehavior(),
-              scrollDirection: Axis.horizontal,
-              controller: _pageController,
-              onPageChanged: (value) => setState(() {
-                    currentimage = widget.image[value];
-                    debugPrint("pageViewIndex  $value");
-                    itemindex = value;
-                  }),
-              children: List.generate(
-                  nIm,
-                  growable: false,
-                  (itemIndex) => Stack(
+      body: PageView(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          physics: const PageScrollPhysics(),
+          scrollBehavior: const MaterialScrollBehavior(),
+          scrollDirection: Axis.horizontal,
+          controller: _pageController,
+          onPageChanged: (value) => setState(() {
+                currentimage = widget.image[value];
+                debugPrint("pageViewIndex  $value");
+                itemindex = value;
+              }),
+          children: List.generate(
+              nIm,
+              growable: false,
+              (itemIndex) => Center(
+                    child: RepaintBoundary(
+                      key: key[itemIndex],
+                      child: Stack(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         children: [
-                          RotatedBox(
-                            quarterTurns: rotate[itemIndex],
-                            child: crop[itemIndex]
-                                ? imagefilter(
-                                    blur: blur[itemIndex],
-                                    hue: hue[itemIndex] - 1,
-                                    brightness: brightness[itemIndex] - 1,
-                                    saturation: saturation[itemIndex] - 1,
-                                    child: ColorFiltered(
-                                      colorFilter: ColorFilter.matrix(
-                                          filters[filter[itemIndex]]),
-                                      child: Crop(
-                                        initialSize: 0.9,
-                                        baseColor: Colors.black12,
-                                        controller: _controller,
-                                        image: widget.image[itemIndex]!,
-                                        onCropped: (cropped) {
-                                          debugPrint("cropped");
-                                          widget.image[itemIndex] = cropped;
-                                          setState(() {
-                                            crop[itemindex] = !crop[itemindex];
-                                          });
-                                        },
+                          Transform.rotate(
+                            angle: roatation[itemIndex],
+                            child: RotatedBox(
+                              quarterTurns: rotate[itemIndex],
+                              child: crop[itemIndex]
+                                  ? imagefilter(
+                                      blur: blur[itemIndex],
+                                      hue: hue[itemIndex] - 1,
+                                      brightness: brightness[itemIndex] - 1,
+                                      saturation: saturation[itemIndex] - 1,
+                                      child: ColorFiltered(
+                                        colorFilter: ColorFilter.matrix(
+                                            filters[filter[itemIndex]]),
+                                        child: Crop(
+                                          initialSize: 0.9,
+                                          baseColor: Colors.black12,
+                                          controller: _controller,
+                                          image: widget.image[itemIndex]!,
+                                          onCropped: (cropped) {
+                                            debugPrint("cropped");
+                                            widget.image[itemIndex] = cropped;
+                                            setState(() {
+                                              crop[itemindex] =
+                                                  !crop[itemindex];
+                                            });
+                                          },
+                                        ),
                                       ),
+                                    )
+                                  : Container(
+                                      color: Colors.amber,
+                                      child: imagefilter(
+                                          blur: blur[itemIndex],
+                                          hue: hue[itemIndex] - 1,
+                                          brightness: brightness[itemIndex] - 1,
+                                          saturation: saturation[itemIndex] - 1,
+                                          child: ColorFiltered(
+                                              colorFilter: ColorFilter.matrix(
+                                                  filters[filter[itemIndex]]),
+                                              child: Image.memory(
+                                                  widget.image[itemIndex]!))),
                                     ),
-                                  )
-                                : imagefilter(
-                                    blur: blur[itemIndex],
-                                    hue: hue[itemIndex] - 1,
-                                    brightness: brightness[itemIndex] - 1,
-                                    saturation: saturation[itemIndex] - 1,
-                                    child: Container(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10),
-                                      decoration: BoxDecoration(
-                                          image: widget.image[itemIndex] != null
-                                              ? DecorationImage(
-                                                  colorFilter:
-                                                      filter[itemIndex] == -1
-                                                          ? null
-                                                          : ColorFilter.matrix(
-                                                              filters[filter[
-                                                                  itemIndex]]),
-                                                  image: MemoryImage(
-                                                      widget.image[itemIndex]!),
-                                                )
-                                              : null),
-                                    ),
-                                  ),
+                            ),
                           ),
                           ...editableItems[itemIndex]
                         ],
-                      ))),
-        ),
-      ),
+                      ),
+                    ),
+                  ))),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 25),
         child: !enableEffect
@@ -454,193 +430,267 @@ class _EditorScreenState extends State<EditorScreen> {
                           ),
                         ],
                       )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          if (crop[itemindex]) ...[
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(bottom: 10, right: 25),
-                              child: ElevatedButton(
-                                style: raisedButtonStyle,
-                                onPressed: () {
-                                  _controller.crop();
-                                },
-                                child: const Text(' Done '),
-                              ),
-                            )
-                          ],
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: GlassmorphicContainer(
-                                    borderRadius: 33,
-                                    blur: 2.5,
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 16),
-                                    colour: Colors.white24,
-                                    child: TextButton.icon(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(
-                                            EdgeInsets.symmetric(
-                                                horizontal: 15)),
-                                        splashFactory: InkSparkle.splashFactory,
-                                      ),
-                                      onPressed: () =>
-                                          setState(() => rotate[itemindex]++),
-                                      icon: const Icon(Icons.rotate_right,
-                                          color: Colors.white70),
-                                      label: const Text(
-                                        "Rotate ",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16),
+                    : enableRoatation[itemindex]
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              if (enableRoatation[itemindex]) ...[
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 25),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 16),
+                                        colour: Colors.white24,
+                                        child: IconButton(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () => setState(
+                                              () => rotate[itemindex]++),
+                                          icon: const Icon(Icons.rotate_right,
+                                              color: Colors.white70),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GlassmorphicContainer(
-                                    borderRadius: 33,
-                                    blur: 2.5,
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 15),
-                                    colour: Colors.white24,
-                                    child: TextButton.icon(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(
-                                            EdgeInsets.symmetric(
-                                                horizontal: 15)),
-                                        splashFactory: InkSparkle.splashFactory,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          crop[itemindex] = !crop[itemindex];
-                                        });
-                                      },
-                                      icon: const Icon(Icons.crop,
-                                          color: Colors.white70),
-                                      label: const Text(
-                                        "Crop ",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GlassmorphicContainer(
-                                    borderRadius: 33,
-                                    blur: 2.5,
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 12),
-                                    colour: Colors.white24,
-                                    child: TextButton.icon(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(
-                                            EdgeInsets.symmetric(
-                                                horizontal: 15)),
-                                        splashFactory: InkSparkle.splashFactory,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          enablebrightness[itemindex] = true;
-                                        });
-                                      },
-                                      icon: const Icon(Icons.wb_sunny_outlined,
-                                          color: Colors.white70),
-                                      label: const Text(
-                                        "Adjustment ",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GlassmorphicContainer(
-                                    borderRadius: 33,
-                                    blur: 2.5,
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 12),
-                                    colour: Colors.white24,
-                                    child: TextButton.icon(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(
-                                            EdgeInsets.symmetric(
-                                                horizontal: 15)),
-                                        splashFactory: InkSparkle.splashFactory,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          enableEffect = true;
-                                        });
-                                      },
-                                      icon: const Icon(Icons.colorize,
-                                          color: Colors.white70),
-                                      label: const Text(
-                                        "Effects ",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GlassmorphicContainer(
-                                    borderRadius: 33,
-                                    blur: 2.5,
-                                    height: 40,
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10, horizontal: 15),
-                                    colour: Colors.white24,
-                                    child: TextButton.icon(
-                                      style: const ButtonStyle(
-                                        padding: MaterialStatePropertyAll(
-                                            EdgeInsets.symmetric(
-                                                horizontal: 15)),
-                                        splashFactory: InkSparkle.splashFactory,
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          enablehue[itemindex] =
-                                              !enablehue[itemindex];
-                                          enablesaturation[itemindex] =
-                                              !enablesaturation[itemindex];
-                                        });
-                                      },
-                                      icon: const Icon(Icons.adjust,
-                                          color: Colors.white70),
-                                      label: const Text(
-                                        "Filter",
-                                        style: TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 16),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                    Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, right: 25),
+                                        child: ElevatedButton(
+                                          style: raisedButtonStyle,
+                                          onPressed: () => setState(() =>
+                                              enableRoatation[itemindex] =
+                                                  false),
+                                          child: const Text(' Done '),
+                                        )),
+                                  ],
+                                )
                               ],
-                            ),
-                          ),
-                        ],
-                      )
+                              Slider(
+                                secondaryActiveColor: Colors.cyanAccent,
+                                thumbColor: Colors.white,
+                                activeColor: Colors.white70,
+                                inactiveColor: Colors.white24,
+                                value: roatation[itemindex],
+                                onChanged: (value) {
+                                  setState(() {
+                                    roatation[itemindex] = value;
+                                  });
+                                },
+                                min: 0.0,
+                                max: pi,
+                                label: 'Roatation: ${roatation[itemindex]}',
+                              ),
+                            ],
+                          )
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              if (crop[itemindex]) ...[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      bottom: 10, right: 25),
+                                  child: ElevatedButton(
+                                    style: raisedButtonStyle,
+                                    onPressed: () {
+                                      _controller.crop();
+                                    },
+                                    child: const Text(' Done '),
+                                  ),
+                                )
+                              ],
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 16),
+                                        colour: Colors.white24,
+                                        child: TextButton.icon(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () => setState(() =>
+                                              enableRoatation[itemindex] =
+                                                  true),
+                                          icon: const Icon(Icons.rotate_right,
+                                              color: Colors.white70),
+                                          label: const Text(
+                                            "Rotate ",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 15),
+                                        colour: Colors.white24,
+                                        child: TextButton.icon(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              crop[itemindex] =
+                                                  !crop[itemindex];
+                                            });
+                                          },
+                                          icon: const Icon(Icons.crop,
+                                              color: Colors.white70),
+                                          label: const Text(
+                                            "Crop ",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 12),
+                                        colour: Colors.white24,
+                                        child: TextButton.icon(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              enablebrightness[itemindex] =
+                                                  true;
+                                            });
+                                          },
+                                          icon: const Icon(
+                                              Icons.wb_sunny_outlined,
+                                              color: Colors.white70),
+                                          label: const Text(
+                                            "Adjustment ",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 12),
+                                        colour: Colors.white24,
+                                        child: TextButton.icon(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              enableEffect = true;
+                                            });
+                                          },
+                                          icon: const Icon(Icons.colorize,
+                                              color: Colors.white70),
+                                          label: const Text(
+                                            "Effects ",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: GlassmorphicContainer(
+                                        borderRadius: 33,
+                                        blur: 2.5,
+                                        height: 40,
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 15),
+                                        colour: Colors.white24,
+                                        child: TextButton.icon(
+                                          style: const ButtonStyle(
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              enablehue[itemindex] =
+                                                  !enablehue[itemindex];
+                                              enablesaturation[itemindex] =
+                                                  !enablesaturation[itemindex];
+                                            });
+                                          },
+                                          icon: const Icon(Icons.adjust,
+                                              color: Colors.white70),
+                                          label: const Text(
+                                            "Filter",
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.end,

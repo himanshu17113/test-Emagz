@@ -69,7 +69,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               image: [image],
               onSubmit: (editedImage) {
                 //postController.setPost(editedImage.path, PostType.text);
-                postController.imagePaths.add(editedImage.path);
+                postController.imagePaths.add(editedImage!.path);
                 Get.off(() => PrePostScreen(
                     postType: PostType.text, image: editedImage.path));
               }),
@@ -410,35 +410,35 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => EditorScreen(
-                                  fileExtension: fileExtension,
-                                  image: postController.images,
-                                  // onSubmit: (editedImage) {
-                                  //   postController.uploadPost(editedImage.path);
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => PrePostScreen(
-                                  //             postType: PostType.text,
-                                  //             image: editedImage.path)),
-                                  //   );
-                                  // },
-                                  // onSubmitS: (editedImage) {
-                                  //   debugPrint(
-                                  //       "image submit ${editedImage.length}");
-                                  //   postController.images = editedImage;
-                                  //   Get.to(() => PrePostScreen(
-                                  //       postType: PostType.gallery,
-                                  //       images: postController.images));
-                                  //   // Navigator.push(
-                                  //   //   context,
-                                  //   //   MaterialPageRoute(
-                                  //   //       builder: (context)=> PrePostScreen(
-                                  //   //           postType: PostType.gallery,
-                                  //   //           images: postController.images)
+                                    fileExtension: fileExtension,
+                                    image: postController.images,
+                                    // onSubmit: (editedImage) {
+                                    //   postController.uploadPost(editedImage.path);
+                                    //   Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) => PrePostScreen(
+                                    //             postType: PostType.text,
+                                    //             image: editedImage.path)),
+                                    //   );
+                                    // },
+                                    // onSubmitS: (editedImage) {
+                                    //   debugPrint(
+                                    //       "image submit ${editedImage.length}");
+                                    //   postController.images = editedImage;
+                                    //   Get.to(() => PrePostScreen(
+                                    //       postType: PostType.gallery,
+                                    //       images: postController.images));
+                                    //   // Navigator.push(
+                                    //   //   context,
+                                    //   //   MaterialPageRoute(
+                                    //   //       builder: (context)=> PrePostScreen(
+                                    //   //           postType: PostType.gallery,
+                                    //   //           images: postController.images)
 
-                                  //   //      ),
-                                  //   // );
-                                  // }
+                                    //   //      ),
+                                    //   // );
+                                    // }
                                   ),
                               fullscreenDialog: true));
                     },
@@ -514,7 +514,8 @@ class _GridGalleryState extends State<GridGallery> {
                           onTap: () {
                             isSelected.value = !isSelected.value;
                             if (isSelected.value) {
-                              postController.images.add(snapshot.data);
+                              postController.images
+                                  .addIf(snapshot.data != null, snapshot.data!);
                             } else {
                               postController.images.remove(snapshot.data);
                             }

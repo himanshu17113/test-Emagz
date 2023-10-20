@@ -28,8 +28,8 @@ class PostController extends GetxController {
   RxString privacyLikesAndViewsUI = RxString("Everyone");
   PostType? assetType;
   Uint8List? imagePath;
-  List<Uint8List?> images = [];
-  List<String?> imagePaths = [];
+  List<Uint8List> images = [];
+  List<String> imagePaths = [];
   String? textPost;
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
@@ -55,26 +55,28 @@ class PostController extends GetxController {
   // void addPost(Uint8List image) {
   //   imagePaths.add(image);
   // }
-  // void addPost(List<Uint8List> imagex) {
-  //   for (Uint8List imageBytes in imagex) {
-  //     File imageFile = File.fromRawPath(
-  //         imageBytes); // this creates a File object from the Uint8List
-  //     images.add(imageFile.path); // this adds the File object to the List
-  //   }
-  // }
+  Future<void> addPost(List<Uint8List> imagex) async {
+    imagePaths.clear();
+    for (var i = 0; i < imagex.length; i++) {
+      final tempDir = await getTemporaryDirectory();
+      File imageFile = await File('${tempDir.path}/image$i.jpg')
+          .create(); // this is the File object with the desired path and extension
+      await imageFile.writeAsBytes(imagex[i]);
+      // File imageFile = File.fromRawPath(
+      //     imageBytes); // this creates a File object from the Uint8List
+      imagePaths.add(imageFile.path); // this adds the File object to the List
+    }
+  }
 
   // uploadPost(String imagePath) {
   //   images.add(imagePath);
   // }
 
-  Future makePost(
-    bool enablePoll,
-    String tagPrivacy,
-    int? setTimer,
-    bool? isCustomPoll,
-  ) async {
+  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
+      bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
     try {
+      await addPost(images);
       // if(setTimer == "-1"){
       //   CustomSnackbar.show("please setTimer");
       //   isPosting.value = false;
@@ -89,27 +91,25 @@ class PostController extends GetxController {
       debugPrint(privacyLikesAndViews.value);
       dio.options.headers["Authorization"] =
           jwtController.token ?? await jwtController.getAuthToken();
+      debugPrint(jwtController.token);
+      debugPrint(jwtController.userId);
+      // final tempDir = await getTemporaryDirectory();
+      // File file = await File('${tempDir.path}/image.png').create();
+      // if (assetType != PostType.text) {
+      //   Uint8List imageInUnit8List = imagePath!;
 
-      final tempDir = await getTemporaryDirectory();
-      File file = await File('${tempDir.path}/image.png').create();
-      if (assetType != PostType.text) {
-        Uint8List imageInUnit8List = imagePath!;
-
-        file.writeAsBytesSync(imageInUnit8List);
-      }
-      // debugPrint(
-      //   file.path.toString(),
-      // );
+      //   file.writeAsBytesSync(imageInUnit8List);
+      // }
 
       FormData reqData = FormData.fromMap({
         "userId": jwtController.userId ?? jwtController.getUserId(),
         "mediaType": "image",
         // assetType.toString().split(".")[1].substring(0),
-        "mediaUrl": [
-          MultipartFile.fromFileSync(imagePaths[0]!
-              //   assetType == PostType.text ? textPost! : file.path.toString(),
-              ),
-        ],
+        "mediaUrl":
+
+            /// MultipartFile.fromFileSync(imagePaths[0]),
+            List.generate(imagePaths.length,
+                (i) => MultipartFile.fromFileSync(imagePaths[i])),
 
         "Enabledpoll": enablePoll ? true : false,
 
@@ -118,17 +118,16 @@ class PostController extends GetxController {
 
         "ShowPollResults": true,
 
-        "privacy": '{"everyone": false, "followers": true, "no_one": false}',
+        "privacy": '{"everyone": true, "followers": false, "no_one": false}',
         "post_hide": "[]",
-        "tag_privacy":
-            '{"everyone": false, "followers": true, "no_one": false}',
+        "tag_privacy": '{"everyone":true,"followers":false,"no_one":false}',
         "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
-        "customPollEnabled": isCustomPoll,
-        "customPollData":
-            "[${button1Controller.text},${button2Controller.text}]"
+        //  "customPollEnabled": isCustomPoll,
+        // "customPollData":
+        //     "[${button1Controller.text},${button2Controller.text}]"
       });
 
       var res = await dio.post(
@@ -146,7 +145,7 @@ class PostController extends GetxController {
 
       homePostsController.skip.value = -10;
 
-      //   bottomNavController.pageUpdate(0);
+      bottomNavController.page(0);
       homePostsController.posts?.clear();
       homePostsController.getPost();
       Get.offAll(() => BottomNavBar());
@@ -159,35 +158,92 @@ class PostController extends GetxController {
     }
   }
 
-  // createPost() async {
+  // Future makePost(
+  //   bool enablePoll,
+  //   String tagPrivacy,
+  //   int? setTimer,
+  // ) async {
+  //   isPosting.value = true;
+
   //   try {
-  //     var headers = {'Content-Type': 'application/json'};
-  //     var request =
-  //         http.Request('POST', Uri.parse('http://localhost:3000/api/post/'));
-  //     request.body = json.encode({
-  //       "userId": "646b48233e167cca56acd355",
+  //     // if(setTimer == "-1"){
+  //     //   CustomSnackbar.show("please setTimer");
+  //     //   isPosting.value = false;
+  //     //   return;
+  //     // }
+  //     // if(captionController.text == ""){
+  //     //   CustomSnackbar.show("please fill captions");
+  //     //   isPosting.value = false;
+  //     //   return;
+  //     // }
+
+  //     Dio dio = Dio();
+  //     debugPrint(privacyLikesAndViews.value);
+  //     var token = await jwtController.getAuthToken();
+  //     var userId = await jwtController.getUserId();
+  //     dio.options.headers["Authorization"] = token;
+  //     //todo : Remove The New File Making Process With Filtered File
+  //     // final tempDir = await getTemporaryDirectory();
+  //     // File file = await File('${tempDir.path}/image.png').create();
+  //     // if (assetType != PostType.text) {
+  //     //   Uint8List imageInUnit8List = imagePath!;
+
+  //     //   file.writeAsBytesSync(imageInUnit8List);
+  //     // }
+  //     // debugPrint(
+  //     //   file.path.toString(),
+  //     // );
+
+  //     FormData reqData = FormData.fromMap({
+  //       "userId": userId,
   //       "mediaType": "image",
-  //       "mediaUrl": "family image here",
-  //       "Enabledpoll": "yes",
-  //       "ShowPollResults": "yes",
-  //       "setTimer": "3",
-  //       "caption": "it is my first post",
-  //       "privacy": {
-  //         "likesAndViews": "peopleYouFollow",
-  //         "hideLikeAndViewsControl": "0"
-  //       },
-  //       "tagPrivacy": "noOne",
-  //       "pollDuration": "3"
+  //       // assetType.toString().split(".")[1].substring(0),
+  //       "mediaUrl": MultipartFile.fromFileSync(imagePaths[0]
+  //           // assetType == PostType.text ? textPost! : file.path.toString(),
+  //           ),
+
+  //       "Enabledpoll": enablePoll ? true : false,
+
+  //       //  "setTimer": enablePoll ? setTimer:"",
+  //       "caption": captionController.text,
+
+  //       "ShowPollResults": true,
+
+  //       "privacy": '{"everyone": false, "followers": true, "no_one": false}',
+  //       "post_hide": "[]",
+  //       "tag_privacy":
+  //           '{"everyone": false, "followers": true, "no_one": false}',
+  //       "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
+  //       // DateTime(2024, 9, 7, 17, 30),
+  //       "tags": "[]",
+  //       "tagPeople": "[]"
   //     });
-  //     request.headers.addAll(headers);
-  //
-  //     http.StreamedResponse response = await request.send();
-  //
-  //     if (response.statusCode == 200) {
-  //       debugPrint(await response.stream.bytesToString());
-  //     } else {
-  //       debugPrint(response.reasonPhrase);
-  //     }
-  //   } catch (e) {}
+
+  //     await dio.post(
+  //       ApiEndpoint.makePost,
+  //       data: reqData,
+  //       onSendProgress: (count, total) {
+  //         uploadPercentage.value = (count / total);
+  //       },
+  //     );
+  //     //debugPrint(reqData.toString());
+  //     uploadPercentage.value = 0.0;
+
+  //     CustomSnackbar.showSucess("Post  successful");
+  //     isPosting.value = false;
+
+  //     homePostsController.skip.value = -10;
+
+  //     //bottomNavController.pageUpdate(0);
+  //     homePostsController.posts?.clear();
+  //     homePostsController.getPost();
+  //     Get.offAll(() => BottomNavBar());
+  //   } catch (e) {
+  //     //debugPrint(reqData.toString());
+  //     uploadPercentage.value = 0.0;
+  //     isPosting.value = false;
+  //     Get.snackbar("Cant Post", "Some Internal Error");
+  //     debugPrint("posting video error $e");
+  //   }
   // }
 }

@@ -35,26 +35,39 @@ class MyStory extends StatelessWidget {
           turns: const AlwaysStoppedAnimation(-48 / 360),
           child: Stack(
             children: [
+              Container(
+                height: 55,
+                width: 55,
+                alignment: Alignment.centerRight,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/png/story_border.png"),
+                      fit: BoxFit.contain),
+                ),
+              ),
               Positioned(
                 top: 24,
                 left: 7.3,
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    //   border: Border.all( color: ),
-                    image: DecorationImage(
-                        image: CachedNetworkImageProvider(stories!.isNotEmpty
-                            ? stories![0].mediaUrl ??
-                                "https://picsum.photos/500/500?random=0"
-                            : "https://picsum.photos/500/500?random=0"),
-                        fit: BoxFit.cover),
+                child: RotationTransition(
+                  turns: const AlwaysStoppedAnimation(48 / 360),
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      //   border: Border.all( color: ),
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(stories!.isNotEmpty
+                              ? stories![0].mediaUrl ??
+                                  "https://picsum.photos/500/500?random=0"
+                              : "https://picsum.photos/500/500?random=0"),
+                          fit: BoxFit.cover),
+                    ),
+                    // child: Image.network(
+                    //   url,
+                    //   fit: BoxFit.cover,
+                    // ),
                   ),
-                  // child: Image.network(
-                  //   url,
-                  //   fit: BoxFit.cover,
-                  // ),
                 ),
               ),
               Positioned(
@@ -75,14 +88,18 @@ class MyStory extends StatelessWidget {
                   },
                   icon: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(33),
+                      shape: BoxShape.circle,
+                      //   borderRadius: BorderRadius.circular(33),
                       border: Border.all(color: Colors.white, width: 2),
                       color: const Color(0xff3B12AA),
                     ),
-                    child: const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 15,
+                    child: const RotationTransition(
+                      turns: AlwaysStoppedAnimation(48 / 360),
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 15,
+                      ),
                     ),
                   ),
                 ),

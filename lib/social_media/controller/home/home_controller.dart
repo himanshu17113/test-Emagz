@@ -26,7 +26,7 @@ class HomePostsController extends GetxController {
   //// final navController = Get.find<NavController>();
   // final navController = Get.put(NavController());
   RxBool isVisible = RxBool(true);
- 
+
   @override
   onInit() async {
     await storedData();
@@ -38,20 +38,19 @@ class HomePostsController extends GetxController {
       //  setState(() {});
     }
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
         // User is scrolling down
         if (isVisible.value) {
           isVisible.value = false;
         }
-       
-      
       }
-      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
         // User is scrolling up
         if (!isVisible.value) {
           isVisible.value = true;
-         }
- 
+        }
       }
       loadMoreData();
     });
@@ -67,9 +66,12 @@ class HomePostsController extends GetxController {
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !ispostloading) {
       await getPost();
-    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent - 50) {}
   }
 
   RxList<Post>? posts = <Post>[].obs;
@@ -88,7 +90,8 @@ class HomePostsController extends GetxController {
       Dio dio = Dio();
       // var token = await jwtController.getAuthToken();
       // userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] =
+          token ?? await jwtController.getAuthToken();
       debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
       //  debugPrint(ApiEndpoint.posts(skip.value));
       final String endPoint = ApiEndpoint.posts(skip.value);
@@ -96,7 +99,8 @@ class HomePostsController extends GetxController {
       print(endPoint);
       var resposne = await dio.get(endPoint);
       // logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null &&
+          resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -192,7 +196,11 @@ class HomePostsController extends GetxController {
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
     if (islike) {
-      socketController.sendLikeNotification(uid, jwtController.user?.value.username ?? jwtController.user?.value.displayName ?? "");
+      socketController.sendLikeNotification(
+          uid,
+          jwtController.user?.value.username ??
+              jwtController.user?.value.displayName ??
+              "");
     }
     try {
       Dio dio = Dio();

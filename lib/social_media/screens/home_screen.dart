@@ -189,7 +189,7 @@ class HomePagePopupWidget extends StatelessWidget {
         } else if (title == 'Download') {
           Get.back();
           print(post?.mediaUrl);
-          _saveImage(post!.mediaUrl!, context);
+          _saveImage(post!.mediaUrl![0]!, context);
         } else {
           Get.back();
           CustomSnackbar.show("No Stats for this post ");
