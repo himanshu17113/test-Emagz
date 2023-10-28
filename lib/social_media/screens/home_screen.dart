@@ -7,15 +7,13 @@ import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/bottom_nav_controller.dart';
 import 'chat/controllers/socketController.dart';
 
 class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
   final jwtController = Get.put(JWTController());
-
-  //final bool _showAppbar = true;
+ 
 
   final homePostController = Get.put(HomePostsController());
   final GetXStoryController storyController = Get.put(GetXStoryController());
@@ -28,11 +26,7 @@ class SocialMediaHomePage extends StatelessWidget {
       () => Scaffold(
         backgroundColor: socialBack,
         appBar: homePostController.isVisible.value
-            ?
-
-            // _showAppbar
-            //     ?
-            AppBar(
+            ? AppBar(
                 backgroundColor: socialBack,
                 leading: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -58,14 +52,12 @@ class SocialMediaHomePage extends StatelessWidget {
                             top: 0,
                             right: 0,
                             child: CircleAvatar(
-                              radius: 8,
-                              backgroundColor: Colors.red,
-                              child: Obx(() => Text(
-                                    socketController.notifications.length
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 12),
-                                  )),
-                            ),
+                                radius: 8,
+                                backgroundColor: Colors.red,
+                                child: Text(
+                                  socketController.notifications.length.toString(),
+                                  style: const TextStyle(fontSize: 12),
+                                )),
                           )
                       ]),
                     ),
@@ -84,8 +76,7 @@ class SocialMediaHomePage extends StatelessWidget {
             storyController.getStories();
             return homePostController.getPost();
           },
-          child: HomePosts(
-              myUserId: jwtController.userId ?? homePostController.userId),
+          child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
         ),
       ),
     ));
