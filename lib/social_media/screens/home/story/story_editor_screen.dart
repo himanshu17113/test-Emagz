@@ -6,7 +6,7 @@ import 'package:vs_story_designer/vs_story_designer.dart';
 class StoryEditorScreen extends StatelessWidget {
   StoryEditorScreen({super.key});
 
-  var storyController = Get.put(GetXStoryController());
+  final storyController = Get.put(GetXStoryController());
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,9 @@ class StoryEditorScreen extends StatelessWidget {
           debugPrint("Story address : $v");
 
           dialog(context);
-          final bool x = await storyController.postStory("image", v);
+          storyController.imagePaths.clear();
+          storyController.imagePaths = [v];
+          final bool x = await storyController.postStory("image", []);
           if (x) {
             Get.close(2);
           }

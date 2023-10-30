@@ -36,8 +36,7 @@ class PostController extends GetxController {
 
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-  final HomePostsController homePostsController =
-      Get.put(HomePostsController());
+  final HomePostsController homePostsController = Get.put(HomePostsController());
   final jwtController = Get.find<JWTController>();
   final bottomNavController = Get.find<NavController>();
   Future setPost(image, PostType assetTyp) async {
@@ -59,8 +58,7 @@ class PostController extends GetxController {
     imagePaths.clear();
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg')
-          .create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -72,10 +70,10 @@ class PostController extends GetxController {
   //   images.add(imagePath);
   // }
 
-  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
-      bool? isCustomPoll, List<Uint8List> images) async {
+  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer, bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
-     try {
+    try {
+      await addPost(images);
       // if(setTimer == "-1"){
       //   CustomSnackbar.show("please setTimer");
       //   isPosting.value = false;
@@ -88,8 +86,7 @@ class PostController extends GetxController {
       // }
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
-      dio.options.headers["Authorization"] =
-          jwtController.token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] = jwtController.token ?? await jwtController.getAuthToken();
       debugPrint(jwtController.token);
       debugPrint(jwtController.userId);
       // final tempDir = await getTemporaryDirectory();
@@ -107,8 +104,7 @@ class PostController extends GetxController {
         "mediaUrl":
 
             /// MultipartFile.fromFileSync(imagePaths[0]),
-            List.generate(imagePaths.length,
-                (i) => MultipartFile.fromFileSync(imagePaths[i])),
+            List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
 
         "Enabledpoll": enablePoll ? true : false,
 

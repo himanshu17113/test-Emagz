@@ -26,7 +26,7 @@ class HomePostsController extends GetxController {
   //// final navController = Get.find<NavController>();
   // final navController = Get.put(NavController());
   RxBool isVisible = RxBool(true);
- 
+
   @override
   onInit() async {
     await storedData();
@@ -43,15 +43,12 @@ class HomePostsController extends GetxController {
         if (isVisible.value) {
           isVisible.value = false;
         }
-       
-      
       }
       if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
         // User is scrolling up
         if (!isVisible.value) {
           isVisible.value = true;
-         }
- 
+        }
       }
       loadMoreData();
     });
@@ -72,7 +69,8 @@ class HomePostsController extends GetxController {
     } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
   }
 
-  RxList<Post>? posts = <Post>[].obs;
+  List<Post>? posts = [] ;
+  // RxList<Post>? posts = <Post>[].obs;
   RxInt skip = RxInt(-10);
 
   getPost() async {
@@ -112,6 +110,7 @@ class HomePostsController extends GetxController {
             posts!.add(post!);
           }
         });
+        update();
         ispostloading = false;
         //   return posts!.reversed.toList();
       }
