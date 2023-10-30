@@ -574,7 +574,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         height: Get.size.height / 2.7,
                         child: PostCard(
                           isBorder: false,
-                          url: imageList,
+                          url: imageList.first,
                         ),
                       );
                     },
