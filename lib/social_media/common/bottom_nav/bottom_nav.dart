@@ -114,7 +114,8 @@ class BottomNavBar extends StatelessWidget {
                         ),
                         label: "More"),
                   ],
-                ):SizedBox.shrink(),
+                ):
+                SizedBox.shrink(),
               ),
             ),
           ),
