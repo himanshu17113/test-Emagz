@@ -27,8 +27,6 @@ class SocketController extends GetxController {
   RxList<NotificationModel> notifications = <NotificationModel>[].obs;
   RxList<String> timeStamps = <String>[].obs;
   RxString? conversationId;
-  RxBool isDate = false.obs;
-  RxString toPut = ''.obs;
 
   void getNotification() {
     socket.connect();

@@ -40,6 +40,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: socialBack,
+
       appBar: const SocialMediaAppBar(title: "Explore"),
       body: Column(
         children: [
