@@ -49,47 +49,45 @@ class _MessageViewState extends State<MessageView> {
         itemBuilder: (context, index) {
           // debugPrint(snapshot.data![index % 2].sender!);
           final Message data = socketController.liveMessages[index];
-          bool isDate = socketController.isDate.value;
-          String toPut = socketController.toPut.value;
 
-          if (index >= 1) {
-            DateTime prev =
-                socketController.liveMessages[index - 1].createdAt == null
-                    ? DateTime.now()
-                    : DateTime.parse(
-                        socketController.liveMessages[index - 1].createdAt!);
-            DateTime curr = DateTime.now();
-            DateTime msgDate = data.createdAt != null
-                ? DateTime.parse(data.createdAt!)
-                : DateTime.now();
-            Duration diff = curr.difference(msgDate);
-            Duration diff2 = msgDate.difference(prev);
+          bool isDayNeeded=true;
+          Object dayName=data.createdAt!=null?
+          DateFormat('MMM d, yyyy').format(DateTime.parse(data.createdAt!)):DateTime.now().day;
+          if(index>=1)
+            {
+              DateTime previous= DateTime.parse(
+                  socketController.liveMessages[index - 1].createdAt??DateTime.now().toString());
 
-            if (diff.inDays == 0 && diff2.inDays == 1) {
-              isDate = !isDate;
-              toPut = 'Today';
-            } else if (diff.inDays == 1 && diff2.inDays == 1) {
-              isDate = !isDate;
-              toPut = 'Yesterday';
-            } else if (diff2.inDays == 1) {
-              isDate = !isDate;
-              toPut = DateFormat('yyyy-MM-dd – kk:mm').format(curr);
-            } else {
-              isDate = !isDate;
+              DateTime currentMsg= DateTime.parse(
+                  socketController.liveMessages[index].createdAt??DateTime.now().toString());
+
+              if(DateUtils.isSameDay(previous, currentMsg))
+                {
+                  isDayNeeded=false;
+                }
+
+              if(isDayNeeded==true)
+                {
+
+                  if(DateUtils.isSameDay(currentMsg, DateTime.now()))
+                  {
+                      dayName="Today";
+                  }
+                }
             }
-          }
+
           return Column(
             children: [
-              isDate
+              isDayNeeded
                   ? Center(
-                      child: Text(toPut),
+                      child: Text(dayName.toString()),
                     )
                   : const SizedBox.shrink(),
               Container(
                 padding: const EdgeInsets.only(
                     left: 14, right: 14, top: 10, bottom: 10),
                 child: // socketController.isUserSender!.value
-                    isReciver(data.sender!)
+                    isReciver(data.sender?? 'f')
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -169,7 +167,7 @@ class _MessageViewState extends State<MessageView> {
                                         fontWeight: FontWeight.w700,
                                         color: (
                                             //socketController.isUserSender!.value
-                                            isReciver(data.sender!)
+                                            isReciver(data.sender??widget.senderId??'f')
                                                 ? blackButtonColor
                                                 : whiteColor),
                                       ),

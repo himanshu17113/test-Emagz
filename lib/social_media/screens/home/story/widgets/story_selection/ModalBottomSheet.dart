@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
@@ -5,17 +8,47 @@ import 'package:emagz_vendor/social_media/screens/home/story/story_editor_screen
 import 'package:emagz_vendor/social_media/screens/post/create_post_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class StorySelectionBottomSheet extends StatelessWidget {
-  const StorySelectionBottomSheet({super.key});
+  StorySelectionBottomSheet({super.key});
+  var storyController = Get.put(GetXStoryController());
+  Future<Uint8List?> xFileToUint8List(XFile xFile) async {
+    File file = File(xFile.path);
+    if (await file.exists()) {
+      List<int> imageBytes = await file.readAsBytes();
+      return Uint8List.fromList(imageBytes);
+    } else {
+      return null;
+    }
+  }
+
+  Future _capturePhoto() async {
+    final picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      Uint8List? image = await xFileToUint8List(pickedFile);
+      Get.to(
+          () => EditorScreen(
+                isStory: true,
+                // fileExtension: fileExtension,
+                image: [image],
+                // onSubmit: (editedImage) {
+                //   postController.imagePaths.add(editedImage.path);
+                //   Get.off(() => PrePostScreen(postType: PostType.text, image: editedImage.path));
+                // }
+              ),
+          curve: Curves.bounceIn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var storyController = Get.put(GetXStoryController());
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: const EdgeInsets.symmetric(horizontal: 5),
-      height: 500,
+      height: Get.height * .85 ?? 500,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -28,7 +61,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: FormHeadingText(
-              headings: "Update eMagz",
+              headings: "Update e-Magz",
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -78,8 +111,13 @@ class StorySelectionBottomSheet extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Expanded(
+              InkWell(
+                onTap: () async {
+                  await _capturePhoto();
+                },
                 child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
                   alignment: Alignment.center,
                   height: 42,
                   decoration: BoxDecoration(
@@ -99,23 +137,41 @@ class StorySelectionBottomSheet extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Expanded(child: GridGallery(
-            onPostTapped: (imageData, assetEntity) {
-              debugPrint("image Data : ${assetEntity.mimeType!.split("/")[1]}");
-              Get.to(() => EditorScreen(
-                    onSubmit: (editedImage) async {
-                      final bool x = await storyController.postStory(
-                          assetEntity.mimeType!.split("/")[0],
-                          editedImage.path);
-                      if (x) {
-                        Get.close(2);
-                      }
-                    },
-                    image: [imageData],
-                    fileType: assetEntity.mimeType!.split("/")[0],
-                    fileExtension: assetEntity.mimeType!.split("/")[1],
-                  ));
-            },
+          Expanded(
+              child: Stack(
+            children: [
+              const GridGallery(
+                isStory: true,
+              ),
+              Obx(() => Visibility(
+                    visible: storyController.imagesNotEmpty.value,
+                    child: Positioned(
+                      bottom: 70,
+                      right: 30,
+                      child: IconButton(
+                        icon: const CircleAvatar(
+                          radius: 35,
+                          backgroundColor: Colors.blue,
+                          child: Icon(
+                            Icons.check_sharp,
+                          ),
+                        ),
+                        onPressed: () {
+                          storyController.images.isNotEmpty
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditorScreen(
+                                            isStory: true,
+                                            image: storyController.images,
+                                          ),
+                                      fullscreenDialog: true))
+                              : null;
+                        },
+                      ),
+                    ),
+                  )),
+            ],
           ))
         ],
       ),

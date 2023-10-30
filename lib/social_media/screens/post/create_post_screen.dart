@@ -2,10 +2,12 @@ import 'dart:io';
 import 'dart:ui' as UI;
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart';
+import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/post/text-post.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
@@ -56,8 +58,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   Future _capturePhoto() async {
     final picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.camera);
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
       postController.setPost(pickedFile.path, PostType.text);
@@ -65,19 +66,18 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       Uint8List? image = await xFileToUint8List(pickedFile);
       Get.to(
           () => EditorScreen(
-              fileExtension: fileExtension,
-              image: [image],
-              onSubmit: (editedImage) {
-                //postController.setPost(editedImage.path, PostType.text);
-                postController.imagePaths.add(editedImage!.path);
-                Get.off(() => PrePostScreen(
-                    postType: PostType.text, image: editedImage.path));
-              }),
+                // fileExtension: fileExtension,
+                image: [image],
+                // onSubmit: (editedImage) {
+                //   postController.imagePaths.add(editedImage.path);
+                //   Get.off(() => PrePostScreen(postType: PostType.text, image: editedImage.path));
+                // }
+              ),
           curve: Curves.bounceIn);
     }
   }
 
-  final GlobalKey _imageKey = GlobalKey();
+  // final GlobalKey _imageKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
@@ -90,136 +90,33 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  // postController.imagePath == null
-                  //     ? SizedBox(
-                  //         height: 250,
-                  //         child: Center(
-                  //           child: FormHeadingText(
-                  //             headings: "No Image Selected",
-                  //             fontWeight: FontWeight.bold,
-                  //             color: Colors.black,
-                  //             fontSize: 14,
-                  //           ),
-                  //         ),
-                  //       )
-                  //     : postController.isSettingImage.value
-                  //         ? const SizedBox(
-                  //             height: 10,
-                  //           )
-                  //         : Container(
-                  //             height: context.height * .33,
-                  //             padding: const EdgeInsets.only(bottom: 10),
-                  //             decoration: BoxDecoration(
-                  //               image: DecorationImage(
-                  //                   colorFilter: index == -1
-                  //                       ? null
-                  //                       : ColorFilter.matrix(filters[index]),
-                  //                   image:
-                  //                       MemoryImage(postController.imagePath!),
-                  //                   fit: BoxFit.fitHeight),
-                  //             ),
-                  //           ),
-
-                  // const Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Text(
-                  //       "Landscape",
-                  //       style: TextStyle(
-                  //         fontWeight: FontWeight.bold,
-                  //         color: Colors.black,
-                  //         fontSize: 12,
-                  //       ),
-                  //     ),
-                  //     Text("Portrait",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Colors.black,
-                  //           fontSize: 12,
-                  //         )),
-                  //     Text("Rotate",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Colors.black,
-                  //           fontSize: 12,
-                  //         )),
-                  //     Text("Scale",
-                  //         style: TextStyle(
-                  //           fontWeight: FontWeight.bold,
-                  //           color: Colors.black,
-                  //           fontSize: 12,
-                  //         )),
-                  //   ],
-                  // ),
-                  // postController.imagePath == null
-                  //     ? const SizedBox(
-                  //         height: 10,
-                  //       )
-                  //     : SingleChildScrollView(
-                  //         scrollDirection: Axis.horizontal,
-                  //         child: postController.isSettingImage.value &&
-                  //                 postController.imagePath != null
-                  //             ? const SizedBox()
-                  //             : Row(
-                  //                 children: [
-                  //                   InkWell(
-                  //                     onTap: () {
-                  //                       setState(() {
-                  //                         index = -1;
-                  //                       });
-                  //                     },
-                  //                     child: Container(
-                  //                       margin:
-                  //                           const EdgeInsets.only(right: 10),
-                  //                       height: 70,
-                  //                       width: 70,
-                  //                       key: _imageKey,
-                  //                       decoration: BoxDecoration(
-                  //                         image: DecorationImage(
-                  //                             image: MemoryImage(
-                  //                                 postController.imagePath!),
-                  //                             fit: BoxFit.cover),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   Row(
-                  //                     children: List.generate(
-                  //                       filters.length,
-                  //                       (index) => InkWell(
-                  //                         onTap: () async {
-                  //                           setState(() {
-                  //                             this.index = index;
-                  //                           });
-                  //                         },
-                  //                         child: Container(
-                  //                           margin: const EdgeInsets.only(
-                  //                               right: 10),
-                  //                           height: 70,
-                  //                           width: 70,
-                  //                           decoration: BoxDecoration(
-                  //                             image: DecorationImage(
-                  //                                 colorFilter:
-                  //                                     ColorFilter.matrix(
-                  //                                         filters[index]),
-                  //                                 image: MemoryImage(
-                  //                                     postController
-                  //                                         .imagePath!),
-                  //                                 fit: BoxFit.cover),
-                  //                           ),
-                  //                         ),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                 ],
-                  //               )),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "Post",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          height: 2, fontSize: 25, fontWeight: FontWeight.w600),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Post",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(height: 2, fontSize: 25, fontWeight: FontWeight.w600),
+                      ),
+                      GestureDetector(
+                        onTap: () => (postController.imagePaths.isNotEmpty || postController.images.isNotEmpty)
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  maintainState: true,
+                                    builder: (context) => EditorScreen(
+                                          //   fileExtension: fileExtension,
+                                          image: postController.images,
+                                        ),
+                                    fullscreenDialog: true))
+                            : null,
+                        child: SvgPicture.asset(
+                          "assets/png/nextforward.svg",
+                          height: 32,
+                          width: 32,
+                        ),
+                      )
+                    ],
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -254,8 +151,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => setState(
-                              () => postController.assetType = PostType.poll),
+                          onTap: () => setState(() => postController.assetType = PostType.poll),
                           child: Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -274,8 +170,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => setState(() =>
-                              postController.assetType = PostType.gallery),
+                          onTap: () => setState(() => postController.assetType = PostType.gallery),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -294,8 +189,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => setState(
-                              () => postController.assetType = PostType.text),
+                          onTap: () => setState(() => postController.assetType = PostType.text),
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -306,8 +200,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: InkWell(
-                              onTap: () => setState(() =>
-                                  postController.assetType = PostType.gallery),
+                              onTap: () => setState(() => postController.assetType = PostType.gallery),
                               child: FormHeadingText(
                                 headings: "v-Magz",
                                 fontWeight: FontWeight.bold,
@@ -344,107 +237,32 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Expanded(
-                      child: GridGallery(
-                          //     onPostTapped: (imageData, assetEntity) {
-                          // //      setState(() {});
-                          //       fileExtension = assetEntity.mimeType!.split("/")[1];
-                          //       if (assetEntity.type == AssetType.image) {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       } else if (assetEntity.type == AssetType.video) {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       } else {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       }
-                          //     },
-                          //     onPostSelected: (imageData, assetEntity) {
-                          //       setState(() {});
-                          //       fileExtension = assetEntity.mimeType!.split("/")[1];
-                          //       if (assetEntity.type == AssetType.image) {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       } else if (assetEntity.type == AssetType.video) {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       } else {
-                          //         postController.setPost(imageData, PostType.gallery);
-                          //       }
-                          //     },
-                          ))
+                  const Expanded(child: GridGallery())
                 ],
               ),
             ),
           ),
-          // if (!postController.isSettingImage.value &&
-          //     postController.imagePath != null)
+          // (postController.imagePaths.isNotEmpty || postController.images.isNotEmpty)
+          //     ? Positioned(
+          //         bottom: 70,
+          //         right: 30,
+          //         child: ElevatedButton(
+          //           child: Obx(() => Text(isLoading.value ? "loading..." : "next")),
+          //           onPressed: () async {
+          //             isLoading.value = true;
 
-          (postController.imagePaths.isNotEmpty ||
-                  postController.images.isNotEmpty)
-              ? Positioned(
-                  bottom: 70,
-                  right: 30,
-                  child: ElevatedButton(
-                    child: Obx(
-                        () => Text(isLoading.value ? "loading..." : "next")),
-                    onPressed: () async {
-                      //  setState(() {
-                      isLoading.value = true;
-                      //   });
-
-                      // UI.Image realImage =
-                      //     await ScreenshotController.widgetToUiImage(index == -1
-                      //         ? Image.memory(postController.imagePath!)
-                      //         : ColorFiltered(
-                      //             colorFilter:
-                      //                 ColorFilter.matrix(filters[index]),
-                      //             child:
-                      //                 Image.memory(postController.imagePath!)));
-                      // var buffer = await realImage.toByteData(
-                      //     format: UI.ImageByteFormat.png);
-                      // var imageData = buffer!.buffer.asUint8List();
-
-                      // postController.setPost(
-                      //     imageData, postController.assetType!);
-
-                      // isLoading.value = false;
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EditorScreen(
-                                    fileExtension: fileExtension,
-                                    image: postController.images,
-                                    // onSubmit: (editedImage) {
-                                    //   postController.uploadPost(editedImage.path);
-                                    //   Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => PrePostScreen(
-                                    //             postType: PostType.text,
-                                    //             image: editedImage.path)),
-                                    //   );
-                                    // },
-                                    // onSubmitS: (editedImage) {
-                                    //   debugPrint(
-                                    //       "image submit ${editedImage.length}");
-                                    //   postController.images = editedImage;
-                                    //   Get.to(() => PrePostScreen(
-                                    //       postType: PostType.gallery,
-                                    //       images: postController.images));
-                                    //   // Navigator.push(
-                                    //   //   context,
-                                    //   //   MaterialPageRoute(
-                                    //   //       builder: (context)=> PrePostScreen(
-                                    //   //           postType: PostType.gallery,
-                                    //   //           images: postController.images)
-
-                                    //   //      ),
-                                    //   // );
-                                    // }
-                                  ),
-                              fullscreenDialog: true));
-                    },
-                  ),
-                )
-              : const SizedBox(),
+          //             Navigator.push(
+          //                 context,
+          //                 MaterialPageRoute(
+          //                     builder: (context) => EditorScreen(
+          //                           fileExtension: fileExtension,
+          //                           image: postController.images,
+          //                         ),
+          //                     fullscreenDialog: true));
+          //           },
+          //         ),
+          //       )
+          //     : const SizedBox(),
         ]),
       ),
     );
@@ -453,15 +271,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
 class GridGallery extends StatefulWidget {
   final ScrollController? scrollCtr;
-  final void Function(Uint8List? imageData, AssetEntity assetEntity)?
-      onPostTapped;
-  final void Function(Uint8List? imageData, AssetEntity assetEntity)?
-      onPostSelected;
+  final bool isStory;
+  //final void Function(Uint8List? imageData, AssetEntity assetEntity)? onPostTapped;
+  // final void Function(Uint8List? imageData, AssetEntity assetEntity)? onPostSelected;
   const GridGallery({
     Key? key,
-    this.onPostTapped,
+//    this.onPostTapped,
     this.scrollCtr,
-    this.onPostSelected,
+    this.isStory = false,
+
+    ///    this.onPostSelected,
   }) : super(key: key);
 
   @override
@@ -474,6 +293,8 @@ class _GridGalleryState extends State<GridGallery> {
   int? lastPage;
   RxBool longPressed = RxBool(false);
   final postController = Get.put(PostController());
+  final storyController = Get.put(GetXStoryController());
+
   @override
   void initState() {
     super.initState();
@@ -492,10 +313,8 @@ class _GridGalleryState extends State<GridGallery> {
     lastPage = currentPage;
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
     if (ps.isAuth) {
-      List<AssetPathEntity> albums =
-          await PhotoManager.getAssetPathList(onlyAll: true);
-      List<AssetEntity> media =
-          await albums[0].getAssetListPaged(size: 60, page: currentPage);
+      List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(onlyAll: true);
+      List<AssetEntity> media = await albums[0].getAssetListPaged(size: 60, page: currentPage);
       RxList temp = <Widget>[].obs;
       for (var asset in media) {
         RxBool isSelected = RxBool(false);
@@ -504,8 +323,7 @@ class _GridGalleryState extends State<GridGallery> {
             future: asset.thumbnailDataWithSize(
               const ThumbnailSize(720, 1080),
             ),
-            builder:
-                (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Stack(
                   children: <Widget>[
@@ -513,23 +331,25 @@ class _GridGalleryState extends State<GridGallery> {
                       child: InkWell(
                           onTap: () {
                             isSelected.value = !isSelected.value;
-                            if (isSelected.value) {
-                              postController.images
-                                  .addIf(snapshot.data != null, snapshot.data!);
+                            if (widget.isStory) {
+                              if (isSelected.value) {
+                                storyController.images.addIf(snapshot.data != null, snapshot.data!);
+                                if (storyController.images.length == 1) {
+                                  storyController.imagesNotEmpty.value = true;
+                                }
+                              } else {
+                                storyController.images.remove(snapshot.data);
+                                if (storyController.images.isEmpty) {
+                                  storyController.imagesNotEmpty.value = false;
+                                }
+                              }
                             } else {
-                              postController.images.remove(snapshot.data);
+                              if (isSelected.value) {
+                                postController.images.addIf(snapshot.data != null, snapshot.data!);
+                              } else {
+                                postController.images.remove(snapshot.data);
+                              }
                             }
-                            //   if (asset.type == AssetType.image) {
-                            //     postController.setPost(
-                            //         snapshot.data, PostType.gallery);
-                            //   } else if (asset.type == AssetType.video) {
-                            //     postController.setPost(
-                            //         snapshot.data, PostType.gallery);
-                            //   } else {
-                            //     postController.setPost(
-                            //         snapshot.data, PostType.gallery);
-                            //   }
-                            //   postController.assetType = PostType.gallery;
                           },
                           child: snapshot.data != null
                               ? Container(
@@ -539,17 +359,8 @@ class _GridGalleryState extends State<GridGallery> {
                                             snapshot.data!,
                                           ),
                                           fit: BoxFit.cover),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(8)),
-                                      border: Border.all(
-                                          width: 4,
-                                          color: longPressed.value
-                                              ? Colors.amber
-                                              : Colors.transparent)),
-                                  // child: Image.memory(
-                                  //   snapshot.data!,
-                                  //   fit: BoxFit.cover,
-                                  // ),
+                                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                                      border: Border.all(width: 4, color: longPressed.value ? Colors.amber : Colors.transparent)),
                                 )
                               : const SizedBox()),
                     ),
@@ -601,8 +412,7 @@ class _GridGalleryState extends State<GridGallery> {
       child: GridView.builder(
           controller: widget.scrollCtr,
           itemCount: _mediaList.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
           itemBuilder: (BuildContext context, int index) {
             return _mediaList[index];
           }),

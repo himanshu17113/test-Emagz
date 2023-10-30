@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
+import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/personal_page_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:emagz_vendor/common/common_snackbar.dart';
 
 class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -18,6 +19,7 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
       child: Row(
@@ -42,9 +44,15 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(
                   width: 12,
                 ),
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                Row(
+                  children: [
+                    customBackButton(),
+                    SizedBox(width: 3,),
+                    Text(
+                      title,
+                      style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                    ),
+                  ],
                 ),
               ],
             ),

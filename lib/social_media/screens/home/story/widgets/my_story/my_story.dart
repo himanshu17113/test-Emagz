@@ -79,10 +79,10 @@ class MyStory extends StatelessWidget {
                     showModalBottomSheet(
                         elevation: 0.0,
                         backgroundColor: Colors.transparent,
-                        barrierColor: Colors.transparent,
+                        barrierColor: Colors.black45,
                         context: context,
                         builder: (context) {
-                          return const StorySelectionBottomSheet();
+                          return   StorySelectionBottomSheet();
                         });
                   },
                   icon: Container(

@@ -29,10 +29,10 @@ class StoryViewCard extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           RotationTransition(
-            turns: const AlwaysStoppedAnimation(0 / 360),
+            turns: const AlwaysStoppedAnimation(183 / 360),
             child: Container(
-              height: 50,
-              width: 50,
+              height: 58,
+              width: 58,
               alignment: Alignment.centerRight,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,

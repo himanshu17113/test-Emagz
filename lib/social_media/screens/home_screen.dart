@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
+import 'package:emagz_vendor/social_media/screens/home/temp_attech_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +15,6 @@ class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
   final jwtController = Get.put(JWTController());
- 
 
   final homePostController = Get.put(HomePostsController());
   final GetXStoryController storyController = Get.put(GetXStoryController());
@@ -38,6 +39,11 @@ class SocialMediaHomePage extends StatelessWidget {
                   ),
                 ),
                 actions: [
+                  InkWell(
+                      onTap: () {
+                        Get.to(() => const TempAttachScreen());
+                      },
+                      child: CircleAvatar(radius: 20, backgroundImage: CachedNetworkImageProvider(gprofilePic ?? ""))),
                   Center(
                     child: GestureDetector(
                       onTap: () => Get.to(() => NotificationScreen()),
