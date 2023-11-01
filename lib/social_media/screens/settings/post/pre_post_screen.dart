@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/custom_poll_select_screen.dart';
@@ -85,6 +86,15 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   )).toList(),
                         )
                       ],
+                      if (widget.image != null) ...[
+                        SizedBox(
+                          child: Image.file(
+                            File(widget.image),
+                            height: 300,
+                            filterQuality: FilterQuality.high,
+                          ),
+                        ),
+                      ],
                       GestureDetector(
                         onTap: () => Get.close(1),
                         child: Container(
@@ -128,89 +138,89 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       ),
                     ),
                     const Spacer(),
-                    FormHeadingText(headings: "Enable Poll"),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    FlutterSwitch(
-                      padding: 0,
-                      height: 21,
-                      width: 45,
-                      activeColor: lightSkyAcent.withOpacity(.8),
-                      activeToggleColor: const Color(0xff2E5EE2),
-                      onToggle: (bool value) {
-                        setState(() {
-                          isPollEnable = value;
-                        });
-                      },
-                      value: isPollEnable,
-                    )
+                    // FormHeadingText(headings: "Enable Poll"),
+                    // const SizedBox(
+                    //   width: 5,
+                    // ),
+                    // FlutterSwitch(
+                    //   padding: 0,
+                    //   height: 21,
+                    //   width: 45,
+                    //   activeColor: lightSkyAcent.withOpacity(.8),
+                    //   activeToggleColor: const Color(0xff2E5EE2),
+                    //   onToggle: (bool value) {
+                    //     setState(() {
+                    //       isPollEnable = value;
+                    //     });
+                    //   },
+                    //   value: isPollEnable,
+                    // )
                   ],
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                isPollEnable
-                    ? SizedBox(
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                FormHeadingText(headings: "Custom Poll"),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                FlutterSwitch(
-                                  padding: 0,
-                                  height: 21,
-                                  width: 45,
-                                  activeColor: lightSkyAcent.withOpacity(.8),
-                                  activeToggleColor: const Color(0xff2E5EE2),
-                                  onToggle: (bool value) {
-                                    setState(() {
-                                      isCustomPoll = value;
-                                    });
-                                    if (value == true) {
-                                      Get.to(() => CustomPollSelectScreen(image: widget.image, postType: widget.postType));
-                                    }
-                                  },
-                                  value: isCustomPoll,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                FormHeadingText(headings: "Show Results to audience"),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                FlutterSwitch(
-                                  padding: 0,
-                                  height: 21,
-                                  width: 45,
-                                  activeColor: lightSkyAcent.withOpacity(.8),
-                                  activeToggleColor: const Color(0xff2E5EE2),
-                                  onToggle: (bool value) {
-                                    setState(() {
-                                      isShowAudience = value;
-                                    });
-                                  },
-                                  value: isShowAudience,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
+                // isPollEnable
+                //     ? SizedBox(
+                //         child: Column(
+                //           children: [
+                //             Row(
+                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: [
+                //                 FormHeadingText(headings: "Custom Poll"),
+                //                 const SizedBox(
+                //                   width: 5,
+                //                 ),
+                //                 FlutterSwitch(
+                //                   padding: 0,
+                //                   height: 21,
+                //                   width: 45,
+                //                   activeColor: lightSkyAcent.withOpacity(.8),
+                //                   activeToggleColor: const Color(0xff2E5EE2),
+                //                   onToggle: (bool value) {
+                //                     setState(() {
+                //                       isCustomPoll = value;
+                //                     });
+                //                     if (value == true) {
+                //                       Get.to(() => CustomPollSelectScreen(image: widget.image, images: widget.images?[0], postType: widget.postType));
+                //                     }
+                //                   },
+                //                   value: isCustomPoll,
+                //                 )
+                //               ],
+                //             ),
+                //             const SizedBox(
+                //               height: 10,
+                //             ),
+                //             Row(
+                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //               children: [
+                //                 FormHeadingText(headings: "Show Results to audience"),
+                //                 const SizedBox(
+                //                   width: 5,
+                //                 ),
+                //                 FlutterSwitch(
+                //                   padding: 0,
+                //                   height: 21,
+                //                   width: 45,
+                //                   activeColor: lightSkyAcent.withOpacity(.8),
+                //                   activeToggleColor: const Color(0xff2E5EE2),
+                //                   onToggle: (bool value) {
+                //                     setState(() {
+                //                       isShowAudience = value;
+                //                     });
+                //                   },
+                //                   value: isShowAudience,
+                //                 )
+                //               ],
+                //             ),
+                //             const SizedBox(
+                //               height: 40,
+                //             ),
+                //           ],
+                //         ),
+                //       )
+                //     : const SizedBox(),
                 Text(
                   "Set Timer".toUpperCase(),
                   style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),

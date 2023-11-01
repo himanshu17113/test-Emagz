@@ -64,17 +64,13 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               Text(
                 "Account",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 10,
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 height: 300,
                 decoration: BoxDecoration(
                   color: whiteAcent,
@@ -89,9 +85,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           children: [
                             CircleAvatar(
                               backgroundImage: CachedNetworkImageProvider(
-                                jwtController.user?.value.ProfilePic
-                                        .toString() ??
-                                    jwtController.profilePic.toString(),
+                                jwtController.user?.value.ProfilePic.toString() ?? jwtController.profilePic.toString(),
                               ),
                               maxRadius: 45,
                             ),
@@ -103,10 +97,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                   backgroundColor: whiteColor,
                                   child: IconButton(
                                     onPressed: () async {
-                                      image = await picker.pickImage(
-                                          source: ImageSource.gallery);
-                                      await accountSetupController
-                                          .uploadProfilePic(image);
+                                      image = await picker.pickImage(source: ImageSource.gallery);
+                                      await accountSetupController.uploadProfilePic(image);
 
                                       setState(() {});
                                     },
@@ -127,25 +119,18 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           children: [
                             Text(
                               overflow: TextOverflow.ellipsis,
-                              jwtController.user?.value.displayName ??
-                                  "loding..",
+                              jwtController.user?.value.displayName ?? "loding..",
                               // user != null
                               //     ? user!.accountType == "professional"
                               //         ? user!.username!
                               //         : user?.displayName ?? 'loding..'
                               //     : "laoding...",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
                             ),
                             Text(
                               overflow: TextOverflow.ellipsis,
                               jwtController.user?.value.username ?? "loding..",
-                              style: TextStyle(
-                                  color: bottomBarIconColor.withOpacity(.8),
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600),
+                              style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -156,18 +141,11 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     ),
                     Text(
                       "Bio",
-                      style: TextStyle(
-                          color: bottomBarIconColor.withOpacity(.8),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 11, fontWeight: FontWeight.w600),
                     ),
                     Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
-                      style: TextStyle(
-                          letterSpacing: .5,
-                          color: black,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400),
+                      style: TextStyle(letterSpacing: .5, color: black, fontSize: 10, fontWeight: FontWeight.w400),
                     ),
                     const SizedBox(
                       height: 15,
@@ -177,58 +155,51 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       children: [
                         Text(
                           "Change to business account",
-                          style: TextStyle(
-                              color: black,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: black, fontSize: 10, fontWeight: FontWeight.w600),
                         ),
-
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => ChooseTemplate(isReg:false));
+                            Get.to(() => ChooseTemplate(isReg: false));
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                             decoration: BoxDecoration(
                               // borderRadius: BorderRadius.circular(10),
                               color: chipColor,
                             ),
                             child: Text(
                               "Change Theme",
-                              style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                             ),
                           ),
                         )
                       ],
                     ),
-                    SizedBox(height: 18,),
+                    const SizedBox(
+                      height: 18,
+                    ),
                     GestureDetector(
-                      onTap: () async{
+                      onTap: () async {
                         var jwtController = Get.put(JWTController());
                         var token = await jwtController.getAuthToken();
                         var userId = await jwtController.getUserId();
 
-
-                        Get.to(()=>OwnWebView(token: token!, userId: userId!, personaUserId: userId!,templateId: 'w',));
-
+                        Get.to(() => OwnWebView(
+                              token: token!,
+                              userId: userId!,
+                              personaUserId: userId,
+                              templateId: 'w',
+                            ));
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                         decoration: BoxDecoration(
                           // borderRadius: BorderRadius.circular(10),
                           color: chipColor,
                         ),
                         child: Text(
                           "View/Edit your persona",
-                          style: TextStyle(
-                              color: whiteColor,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400),
+                          style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                         ),
                       ),
                     ),
@@ -240,18 +211,12 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               Text(
                 "Account",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 2),
               Text(
                 "Your friends and contacts will see when you’re active ",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
               ),
               const SizedBox(
                 height: 5,
@@ -272,10 +237,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       }),
                   Text(
                     "  Show my friends and contact when i’m active",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400),
+                    style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w400),
                   ),
                 ],
               ),
@@ -284,10 +246,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               Text(
                 "Preferance",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
               // const SizedBox(height: 10),
               InkWell(
@@ -330,8 +289,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               Container(
                 height: 64,
                 margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
                 child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -340,10 +298,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                       Text(
                         "Enable my \nlocation",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       const Spacer(),
                       FlutterSwitch(
@@ -367,8 +322,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               Container(
                 height: 64,
                 margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
                 child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -377,10 +331,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                       Text(
                         "Play Sound When i get \nnotification",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       const Spacer(),
                       FlutterSwitch(
@@ -403,8 +354,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               Container(
                 height: 64,
                 margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
                 child: Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -413,10 +363,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                       Text(
                         "Enable desktop  \nnotification",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       const Spacer(),
                       FlutterSwitch(
@@ -441,10 +388,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               Text(
                 "Blocked Users",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 5,
@@ -452,21 +396,14 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
               Text(
                 "Once you blocked someone they will no longer to see things that you post on your feed , tag you , invite you or start a conversation with you. However you can unblock them later if you want ",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 12,
-                    letterSpacing: .6,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(color: blackButtonColor, fontSize: 12, letterSpacing: .6, fontWeight: FontWeight.w400),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
                 "Manage blocked users",
-                style: TextStyle(
-                    color: chipColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: chipColor, fontSize: 12, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 30,
@@ -481,15 +418,10 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   alignment: Alignment.center,
                   width: double.infinity,
                   height: 54,
-                  decoration: BoxDecoration(
-                      color: blackShaded,
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: blackShaded, borderRadius: BorderRadius.circular(10)),
                   child: Text(
                     "Log Out",
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -502,10 +434,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 child: Text(
                   "Add another account",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: blackShaded,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                  style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),
               const SizedBox(

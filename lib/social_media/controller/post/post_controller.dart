@@ -74,29 +74,14 @@ class PostController extends GetxController {
     isPosting.value = true;
     try {
       await addPost(images);
-      // if(setTimer == "-1"){
-      //   CustomSnackbar.show("please setTimer");
-      //   isPosting.value = false;
-      //   return;
-      // }
-      // if(captionController.text == ""){
-      //   CustomSnackbar.show("please fill captions");
-      //   isPosting.value = false;
-      //   return;
-      // }
+     
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
       dio.options.headers["Authorization"] = jwtController.token ?? await jwtController.getAuthToken();
       debugPrint(jwtController.token);
       debugPrint(jwtController.userId);
-      // final tempDir = await getTemporaryDirectory();
-      // File file = await File('${tempDir.path}/image.png').create();
-      // if (assetType != PostType.text) {
-      //   Uint8List imageInUnit8List = imagePath!;
-
-      //   file.writeAsBytesSync(imageInUnit8List);
-      // }
-
+ 
+      debugPrint(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $isCustomPoll");
       FormData reqData = FormData.fromMap({
         "userId": jwtController.userId ?? jwtController.getUserId(),
         "mediaType": "image",
@@ -106,7 +91,8 @@ class PostController extends GetxController {
             /// MultipartFile.fromFileSync(imagePaths[0]),
             List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
 
-        "Enabledpoll": enablePoll ? true : false,
+        "Enabledpoll": true,
+        // enablePoll ? true : false,
 
         //  "setTimer": enablePoll ? setTimer:"",
         "caption": captionController.text,
@@ -120,9 +106,9 @@ class PostController extends GetxController {
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
-        //  "customPollEnabled": isCustomPoll,
-        // "customPollData":
-        //     "[${button1Controller.text},${button2Controller.text}]"
+        "customPollEnabled":  true,
+        //isCustomPoll,
+        "customPollData": "[${button1Controller.text},${button2Controller.text}]"
       });
 
       var res = await dio.post(

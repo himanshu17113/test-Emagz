@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
@@ -7,10 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controller/post/post_controller.dart';
+
 class CustomPollSelectScreen extends StatefulWidget {
-  dynamic image;
+  final String? image;
+  final Uint8List? images;
   PostType postType;
-  CustomPollSelectScreen({Key? key,required this.image, required  this.postType}) : super(key: key);
+  CustomPollSelectScreen({Key? key, this.image, required this.postType, this.images}) : super(key: key);
 
   @override
   State<CustomPollSelectScreen> createState() => _CustomPollSelectScreenState();
@@ -20,89 +23,129 @@ class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
   final postController = Get.put(PostController());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
+    return Material(
+      child: Stack(
         children: [
-          widget.image==null?Container():
-             (widget.postType == PostType.gallery)
-                ? Image.memory(widget.image!,fit: BoxFit.cover,height: double.infinity,
-               width: double.infinity,
-               alignment: Alignment.center,)
-                : Image.file(
-              File(widget.image ??
-                  postController.textPost!,)
-               ,fit: BoxFit.cover,height: double.infinity,
-               width: double.infinity,
-               alignment: Alignment.center,
+          if (widget.image != null) ...[
+            Image.file(
+              File(
+                widget.image ?? postController.textPost!,
+              ),
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
+              alignment: Alignment.center,
             ),
+          ],
+          if (widget.images != null) ...[
+            Image.memory(
+              widget.images!,
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
+              alignment: Alignment.center,
+            )
+          ],
           Positioned(
+              left: 0,
+              right: 0,
               bottom: 0,
               child: GlassmorphicContainer(
-                colour: Colors.grey,
-                height: 280,
-                borderRadius: 2,
+                colour: Colors.white24,
+                height: 450,
+                borderRadius: 20,
                 blur: 5,
-                child:  Column(
-                  children: [
-                    FormHeadingText(headings: 'Custom Poll',color: Colors.white,),
-                    SizedBox(height: 10,),
-                    FormHeadingText(headings: 'Minimum 2 and Max 4 buttons',color: Colors.white,),
-                    SizedBox(height: 10,),
-                    Row(
+                child: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+                    child: Column(
+                      //   mainAxisAlignment: MainAxisAlignment.,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width:150,
-                          child: TextField(
-                            controller: postController.button1Controller,
-
-                              decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.grey[200], // Gray background color
-                              border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
-                              borderSide: BorderSide.none, // No border
-                              ),
-                              hintText: 'Button 1',)
-                          ),
+                        const Text(
+                          'Custom Poll',
+                          style: TextStyle(color: Colors.white, fontSize: 24),
                         ),
-                        SizedBox(width: 50,),
-                        SizedBox(
-                          width: 150,
-                          child: TextField(
-                            controller: postController.button2Controller,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200], // Gray background color
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
-                                  borderSide: BorderSide.none, // No border
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Minimum 2 and Max 4 buttons',
+                          style: TextStyle(color: Colors.white, fontSize: 14),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 150,
+                              child: TextField(
+                                  controller: postController.button1Controller,
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white10, // Gray background color
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                                      borderSide: BorderSide.none, // No border
+                                    ),
+                                    hintText: 'Button 1',
+                                  )),
+                            ),
+                            SizedBox(
+                              width: 150,
+                              child: TextField(
+                                  controller: postController.button2Controller,
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white10, // Gray background color
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                                      borderSide: BorderSide.none, // No border
+                                    ),
+                                    hintText: 'Button 2',
+                                  )),
+                            ),
+                          ],
+                        ),
+                        const Spacer(
+                          flex: 4,
+                        ),
+
+                        // const Icon(Icons.add),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () async {
+                                  Get.back();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blueAccent.withOpacity(0.2),
                                 ),
-                                hintText: 'Button 2',)
-                          ),
-                        ),
-
-
+                                child: const Text('  Cancel  ')),
+                            ElevatedButton(
+                                onPressed: () async {
+                                
+                                  Get.back();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  
+                                  backgroundColor: Colors.blueAccent,
+                                ),
+                                child: const Text('  Continue  ')),
+                          ],
+                        )
                       ],
                     ),
-                    SizedBox(height: 50,),
-                    Icon(Icons.add),
-                    ElevatedButton(
-                        onPressed: ()async
-                        {
-                            Get.back();
-                        },
-
-                         child: Text('Continue'))
-
-
-                  ],
+                  ),
                 ),
-              )
-          )
-
+              ))
         ],
       ),
-
     );
   }
 }

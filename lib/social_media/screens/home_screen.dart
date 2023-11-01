@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
@@ -7,6 +8,7 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/temp_attech_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
+import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -35,151 +37,125 @@ class SocialMediaHomePage extends StatelessWidget {
     //   myUserId = await jwtController.getUserId();
     // }
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: socialBack,
-        appBar:
-            // _showAppbar
-            //     ?
-            AppBar(
+      child: Obx(
+        () => Scaffold(
           backgroundColor: socialBack,
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset(
-              "assets/png/new_logo.png",
-              color: const Color(0xff1B47C1),
-              height: 38,
-              width: 36,
-            ),
-          ),
-          actions: [
-            Center(
-              child: GestureDetector(
-                onTap: () => Get.to(() => NotificationScreen()),
-                child: Stack(alignment: Alignment.topRight, children: [
-                  Image.asset(
-                    "assets/png/notification_bell.png",
-                    height: 28,
-                    width: 28,
-                  ),
-                  if (socketController.notifications.isNotEmpty)
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: CircleAvatar(
-                        radius: 8,
-                        backgroundColor: Colors.red,
-                        child: Obx(() => Text(
-                              socketController.notifications.length.toString(),
-                              style: const TextStyle(fontSize: 12),
-                            )),
-                      ),
-                    )
-                ]),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            // InkWell(
-            //   onTap: () {
-            //     Get.back();
-            //     // ZoomDrawer.of(context)!.toggle();
-            //   },
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: FlipCard(
-            //       // key: cardKey,
-            //       front: InkWell(
-            //           onTap: () {
-            //             Get.to(() => const TempAttachScreen());
-            //           },
-            //           child: Container(
-            //             margin: const EdgeInsets.only(right: 10),
-            //             padding: const EdgeInsets.all(12.0),
-            //             height: 55,
-            //             width: 55,
-            //             decoration: BoxDecoration(
-            //               shape: BoxShape.circle,
-            //               color: const Color(0xff1B47C1).withOpacity(.9),
-            //             ),
-            //             child:
-            //                 SvgPicture.asset("assets/svg/Ebusiness-Icon.svg"),
-            //           )),
-            //       back: const CircleAvatar(
-            //         radius: 30,
-            //         backgroundImage: CachedNetworkImageProvider(
-            //             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
-        )
-        // : null
-        ,
-        //    scrollBehavior: const MaterialScrollBehavior(),
-        //       controller: scrollController,
-        // floatHeaderSlivers: true,
-        // headerSliverBuilder: (context, innerBoxIsScrolled) {
-        //   return [const SliverSocialMediaAppBar()];
-        // },
-        appBar: homePostController.isVisible.value
-            ? AppBar(
-                backgroundColor: socialBack,
-                leading: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    "assets/png/new_logo.png",
-                    color: const Color(0xff1B47C1),
-                    height: 38,
-                    width: 36,
-                  ),
-                ),
-                actions: [
-                  InkWell(
-                      onTap: () {
-                        Get.to(() => const TempAttachScreen());
-                      },
-                      child: CircleAvatar(radius: 20, backgroundImage: CachedNetworkImageProvider(gprofilePic ?? ""))),
-                  Center(
-                    child: GestureDetector(
-                      onTap: () => Get.to(() => NotificationScreen()),
-                      child: Stack(alignment: Alignment.topRight, children: [
-                        Image.asset(
-                          "assets/png/notification_bell.png",
-                          height: 28,
-                          width: 28,
-                        ),
-                        if (socketController.notifications.isNotEmpty)
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: CircleAvatar(
-                                radius: 8,
-                                backgroundColor: Colors.red,
-                                child: Text(
-                                  socketController.notifications.length.toString(),
-                                  style: const TextStyle(fontSize: 12),
-                                )),
-                          )
-                      ]),
+
+          // InkWell(
+          //   onTap: () {
+          //     Get.back();
+          //     // ZoomDrawer.of(context)!.toggle();
+          //   },
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(8.0),
+          //     child: FlipCard(
+          //       // key: cardKey,
+          //       front: InkWell(
+          //           onTap: () {
+          //             Get.to(() => const TempAttachScreen());
+          //           },
+          //           child: Container(
+          //             margin: const EdgeInsets.only(right: 10),
+          //             padding: const EdgeInsets.all(12.0),
+          //             height: 55,
+          //             width: 55,
+          //             decoration: BoxDecoration(
+          //               shape: BoxShape.circle,
+          //               color: const Color(0xff1B47C1).withOpacity(.9),
+          //             ),
+          //             child:
+          //                 SvgPicture.asset("assets/svg/Ebusiness-Icon.svg"),
+          //           )),
+          //       back: const CircleAvatar(
+          //         radius: 30,
+          //         backgroundImage: CachedNetworkImageProvider(
+          //             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
+          // : null
+
+          //    scrollBehavior: const MaterialScrollBehavior(),
+          //       controller: scrollController,
+          // floatHeaderSlivers: true,
+          // headerSliverBuilder: (context, innerBoxIsScrolled) {
+          //   return [const SliverSocialMediaAppBar()];
+          // },
+          appBar: homePostController.isVisible.value
+              ? AppBar(
+                  backgroundColor: socialBack,
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset(
+                      "assets/png/new_logo.png",
+                      color: const Color(0xff1B47C1),
+                      height: 38,
+                      width: 36,
                     ),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                ],
-              )
-            : null,
-        body: RefreshIndicator(
-          onRefresh: () {
-            homePostController.skip.value = -10;
-            homePostController.posts?.clear();
-            storyController.stories?.clear();
-            storyController.getStories();
-            return homePostController.getPost();
-          },
-          child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
+                  actions: [
+                    GestureDetector(
+                      onTap: () async {
+                        var jwtController = Get.put(JWTController());
+                        var token = await jwtController.getAuthToken();
+                        var userId = await jwtController.getUserId();
+
+                        Get.to(() => OwnWebView(
+                              token: token!,
+                              userId: userId!,
+                              personaUserId: userId,
+                              templateId: 'w',
+                            ));
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                          jwtController.user?.value.ProfilePic.toString() ?? jwtController.profilePic.toString(),
+                        ),
+                        maxRadius: 15,
+                      ),
+                    ),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () => Get.to(() => NotificationScreen()),
+                        child: Stack(alignment: Alignment.topRight, children: [
+                          Image.asset(
+                            "assets/png/notification_bell.png",
+                            height: 28,
+                            width: 28,
+                          ),
+                          if (socketController.notifications.isNotEmpty)
+                            Positioned(
+                              top: 0,
+                              right: 0,
+                              child: CircleAvatar(
+                                  radius: 8,
+                                  backgroundColor: Colors.red,
+                                  child: Text(
+                                    socketController.notifications.length.toString(),
+                                    style: const TextStyle(fontSize: 12),
+                                  )),
+                            )
+                        ]),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                  ],
+                )
+              : null,
+          body: RefreshIndicator(
+            onRefresh: () {
+              homePostController.skip.value = -10;
+              homePostController.posts?.clear();
+              storyController.stories?.clear();
+              storyController.getStories();
+              return homePostController.getPost();
+            },
+            child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
+          ),
         ),
       ),
     );
@@ -198,12 +174,12 @@ class HomePagePopupWidget extends StatelessWidget {
     this.url,
     this.isBorder = true,
   });
-  Future<void> _saveImage(String _url, BuildContext context) async {
+  Future<void> _saveImage(String url, BuildContext context) async {
     String? message;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
     try {
-      final http.Response response = await http.get(Uri.parse(_url));
+      final http.Response response = await http.get(Uri.parse(url));
       final dir = await getTemporaryDirectory();
       var filename = '${dir.path}/${post!.sId}.png';
       final file = File(filename);
