@@ -525,7 +525,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       : noOne
                           ? "noOne"
                           : "everyone"),
-              isPollEnable ? timerOptionList[selectedTimer] : null,
+              isPollEnable ? selectedTimer==-1?null:timerOptionList[selectedTimer] : null,
               isCustomPoll,
               widget.images ?? []),
           child: Container(

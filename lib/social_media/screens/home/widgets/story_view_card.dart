@@ -46,22 +46,33 @@ class StoryViewCard extends StatelessWidget {
             // : 20,
             // top: 15,
             // left: 15,
-            child: ClipPath(
-              clipper: ParallelogramClipper(),
+            child: RotationTransition(
+              turns: const AlwaysStoppedAnimation(224 / 360),
               child: Container(
-                height: 60,
-                width: 50,
+                height: 40,
+                width: 40,
                 decoration: BoxDecoration(
+
+                      border: Border.all(width: 0,color: Colors.transparent),
+                      borderRadius: BorderRadius.circular(10), //<-- SEE HERE
                     color: Colors.grey,
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: CachedNetworkImageProvider(url)
+                    )
 
                     //    border: Border.all(color: whiteColor, width: 1),
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: CachedNetworkImageProvider(url),
-                        fit: BoxFit.cover)),
-              ),
+                    //borderRadius: BorderRadius.circular(100),
+
+
+
+                ),
+
+
+                  ),
+            )
+
             ),
-          ),
           Positioned(
             top: 66,
             left: 20,
