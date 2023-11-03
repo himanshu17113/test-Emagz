@@ -48,9 +48,7 @@ class _PostCardState extends State<PostCard> {
   List chooseOption = ["A. Yes", "B. No"];
   int selectedOption = -1;
   final homePostController = Get.find<HomePostsController>();
-  // final jwtController = Get.put(JWTController());
-  // final ConversationController chatController = Get.put(ConversationController());
-  // final socketController = Get.find<SocketController>();
+
   Post? post;
   @override
   void initState() {
@@ -67,11 +65,16 @@ class _PostCardState extends State<PostCard> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+      margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
       decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(20),
-          border: widget.isBorder == true ? Border.all(color: const Color(0xff46F2DB), width: 2.2, style: BorderStyle.solid) : null),
+          border: widget.isBorder == true
+              ? Border.all(
+                  color: const Color(0xff46F2DB),
+                  width: 2.2,
+                  style: BorderStyle.solid)
+              : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Stack(fit: StackFit.loose, children: [
@@ -92,7 +95,8 @@ class _PostCardState extends State<PostCard> {
                 imageUrl: widget.url,
                 placeholder: (context, url) => const Center(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 180.0, vertical: 250),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 180.0, vertical: 250),
                     child: CircularProgressIndicator(
                       backgroundColor: Colors.amberAccent,
                       strokeWidth: 2,
@@ -109,7 +113,8 @@ class _PostCardState extends State<PostCard> {
               post: post!,
               // videoUrl: videoUrl,
               videoUrl: post!.mediaUrl![0]!,
-              aspectRatio: (Get.size.height / 2.62) / (MediaQuery.of(context).size.width - 10),
+              aspectRatio: (Get.size.height / 2.62) /
+                  (MediaQuery.of(context).size.width - 10),
             )
           ],
           Positioned(
@@ -124,7 +129,8 @@ class _PostCardState extends State<PostCard> {
                   CircleAvatar(
                     radius: 16,
                     backgroundImage: post!.mediaType == "video"
-                        ? const CachedNetworkImageProvider("https://picsum.photos/500/500?random=851")
+                        ? const CachedNetworkImageProvider(
+                            "https://picsum.photos/500/500?random=851")
                         : CachedNetworkImageProvider(widget.userImg!),
                   ),
                   const SizedBox(
@@ -136,10 +142,12 @@ class _PostCardState extends State<PostCard> {
 
                       String? temp = post!.user!.personalTemplate;
                       if (temp == null) {
-                        Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
+                        Get.snackbar('No persona Choosen by this user',
+                            'Hi No persona here');
                       } else {
                         if (temp.isEmpty || temp[0] == 'T') {
-                          Get.snackbar('This is a Old account ', 'Persona wont work properly');
+                          Get.snackbar('This is a Old account ',
+                              'Persona wont work properly');
                           temp = '64e8f2c3b9b30c1ed4b28bb6';
                         }
                         Get.to(() => OwnWebView(
@@ -156,9 +164,16 @@ class _PostCardState extends State<PostCard> {
                         Text(
                           "${post?.user!.username.toString()}",
                           // "${post!.userId}",
-                          style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
+                          style: TextStyle(
+                              fontSize: 9,
+                              fontWeight: FontWeight.w600,
+                              color: whiteColor),
                         ),
-                        Text("@${post?.user!.getstatedName.toString()}", style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
+                        Text("@${post?.user!.getstatedName.toString()}",
+                            style: TextStyle(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w600,
+                                color: whiteColor)),
                       ],
                     ),
                   )
@@ -182,7 +197,10 @@ class _PostCardState extends State<PostCard> {
                           StateSetter setState,
                         ) {
                           return Theme(
-                            data: ThemeData(unselectedWidgetColor: Colors.grey, primaryColor: Colors.amber, textTheme: Typography.whiteCupertino),
+                            data: ThemeData(
+                                unselectedWidgetColor: Colors.grey,
+                                primaryColor: Colors.amber,
+                                textTheme: Typography.whiteCupertino),
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -307,19 +325,30 @@ class _PostCardState extends State<PostCard> {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       "Yes ${poll?.pollCalculation?.yesPercentage ?? (100 - (poll?.pollCalculation?.noPercentage ?? 50))}",
-                                      style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 10, bottom: 20),
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 20),
                                     child: SizedBox(
                                       width: width * .7,
                                       child: LinearProgressIndicator(
                                         borderRadius: BorderRadius.circular(15),
                                         minHeight: 10,
-                                        value: poll?.pollCalculation?.yesPercentage ?? (100 - (poll?.pollCalculation?.noPercentage ?? 50)),
-                                        color: const Color.fromRGBO(76, 101, 168, 0.9),
-                                        backgroundColor: const Color.fromRGBO(217, 217, 217, 0.8),
+                                        value: poll?.pollCalculation
+                                                ?.yesPercentage ??
+                                            (100 -
+                                                (poll?.pollCalculation
+                                                        ?.noPercentage ??
+                                                    50)),
+                                        color: const Color.fromRGBO(
+                                            76, 101, 168, 0.9),
+                                        backgroundColor: const Color.fromRGBO(
+                                            217, 217, 217, 0.8),
                                       ),
                                     ),
                                   ),
@@ -327,19 +356,30 @@ class _PostCardState extends State<PostCard> {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       "No ${poll?.pollCalculation?.noPercentage ?? (100 - (poll?.pollCalculation?.yesPercentage ?? 50))}",
-                                      style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 5, bottom: 10),
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 10),
                                     child: SizedBox(
                                       width: width * .7,
                                       child: LinearProgressIndicator(
                                         borderRadius: BorderRadius.circular(15),
                                         minHeight: 10,
-                                        value: poll?.pollCalculation?.noPercentage ?? (100 - (poll?.pollCalculation?.yesPercentage ?? 50)),
-                                        color: const Color.fromRGBO(76, 101, 168, 0.9),
-                                        backgroundColor: const Color.fromRGBO(217, 217, 217, 0.8),
+                                        value: poll?.pollCalculation
+                                                ?.noPercentage ??
+                                            (100 -
+                                                (poll?.pollCalculation
+                                                        ?.yesPercentage ??
+                                                    50)),
+                                        color: const Color.fromRGBO(
+                                            76, 101, 168, 0.9),
+                                        backgroundColor: const Color.fromRGBO(
+                                            217, 217, 217, 0.8),
                                       ),
                                     ),
                                   )
@@ -373,7 +413,9 @@ class _PostCardState extends State<PostCard> {
                                         return;
                                       }
                                       selectedOption = index;
-                                      poll = await homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
+                                      poll = await homePostController.postPoll(
+                                          post!.sId!,
+                                          (index == 0 ? "yes" : "no"));
 
                                       setState(() {});
                                     },
@@ -383,12 +425,16 @@ class _PostCardState extends State<PostCard> {
                                       width: 100,
                                       padding: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                        color: selectedOption == index ? whiteColor : null,
+                                        color: selectedOption == index
+                                            ? whiteColor
+                                            : null,
                                         border: Border.all(color: whiteColor),
                                       ),
                                       child: FormHeadingText(
                                         headings: chooseOption[index],
-                                        color: selectedOption != index ? whiteColor : Colors.black,
+                                        color: selectedOption != index
+                                            ? whiteColor
+                                            : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -404,7 +450,7 @@ class _PostCardState extends State<PostCard> {
                     child: InkWell(
                       onTap: () async {
                         poll = await homePostController.Polldetail(post!.sId!);
-                        print(poll!.postx!.customPollData);
+                        //  print(poll!.postx!.customPollData);
                         setState(() {
                           isShowPoll = !isShowPoll;
                           isvoted = poll?.isVoted ?? false;
@@ -436,83 +482,114 @@ class _PostCardState extends State<PostCard> {
                         border: Border.all(
                           color: const Color(0xFFffffff).withOpacity(.2),
                         ),
-                        gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
-                          const Color(0xFFffffff).withOpacity(0.20),
-                          const Color(0xFFFFFFFF).withOpacity(0.25),
-                        ], stops: const [
-                          2,
-                          0.1,
-                        ]),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                            colors: [
+                              const Color(0xFFffffff).withOpacity(0.20),
+                              const Color(0xFFFFFFFF).withOpacity(0.25),
+                            ],
+                            stops: const [
+                              2,
+                              0.1,
+                            ]),
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20),
                         ),
                       ),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                        SizedBox(
-                          width: Get.size.width / 2,
-                          child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
-                        ),
-                        //    const Expanded(child: SizedBox()),
-                        GestureDetector(
-                            onTap: () {
-                              if (homePostController.posts![widget.index!].isLike!) {
-                                setState(() {
-                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
-                                  //      post!.likes!.removeLast();
-                                  homePostController.posts![widget.index!].isLike = false;
-                                });
-                                homePostController.likePost(post!.sId!, false, post?.user?.sId ?? "");
-                              } else {
-                                setState(() {
-                                  homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
-                                  //  post!.likes!.add(widget.myUserId!);
-                                  homePostController.posts![widget.index!].isLike = true;
-                                });
-                                homePostController.likePost(post!.sId!, true, post?.user?.sId ?? "");
-                              }
-                            },
-                            child: (post!.isLike ?? false)
-                                ? Image.asset(
-                                    "assets/png/liked_icon.png",
-                                    width: 26,
-                                  )
-                                : Image.asset(
-                                    "assets/png/unlike_icon.png",
-                                    width: 22,
-                                  )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
-                          child: Text(
-                            "${homePostController.posts?[widget.index!].likeCount}",
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                          ),
-                        ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            SizedBox(
+                              width: Get.size.width / 2,
+                              child: Text("${post!.caption}",
+                                  style: TextStyle(
+                                      fontSize: 7,
+                                      fontWeight: FontWeight.w400,
+                                      color: whiteColor)),
+                            ),
+                            //    const Expanded(child: SizedBox()),
+                            GestureDetector(
+                                onTap: () {
+                                  if (homePostController
+                                      .posts![widget.index!].isLike!) {
+                                    setState(() {
+                                      homePostController.posts![widget.index!]
+                                          .likeCount = homePostController
+                                              .posts![widget.index!]
+                                              .likeCount! -
+                                          1;
+                                      //      post!.likes!.removeLast();
+                                      homePostController
+                                          .posts![widget.index!].isLike = false;
+                                    });
+                                    homePostController.likePost(post!.sId!,
+                                        false, post?.user?.sId ?? "");
+                                  } else {
+                                    setState(() {
+                                      homePostController.posts![widget.index!]
+                                          .likeCount = homePostController
+                                              .posts![widget.index!]
+                                              .likeCount! +
+                                          1;
+                                      //  post!.likes!.add(widget.myUserId!);
+                                      homePostController
+                                          .posts![widget.index!].isLike = true;
+                                    });
+                                    homePostController.likePost(post!.sId!,
+                                        true, post?.user?.sId ?? "");
+                                  }
+                                },
+                                child: (post!.isLike ?? false)
+                                    ? Image.asset(
+                                        "assets/png/liked_icon.png",
+                                        width: 26,
+                                      )
+                                    : Image.asset(
+                                        "assets/png/unlike_icon.png",
+                                        width: 22,
+                                      )),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 6),
+                              child: Text(
+                                "${homePostController.posts?[widget.index!].likeCount}",
+                                style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: whiteColor),
+                              ),
+                            ),
 
-                        Image.asset(
-                          "assets/png/comment_icon.png",
-                          width: 22,
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          "${post!.comments?.length}",
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Share.share("http://emagz.live/Post/${post?.sId}");
-                          },
-                          child: Image.asset(
-                            "assets/png/share_icon.png",
-                            width: 26,
-                          ),
-                        ),
-                      ])),
+                            Image.asset(
+                              "assets/png/comment_icon.png",
+                              width: 22,
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              "${post!.comments?.length}",
+                              style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  color: whiteColor),
+                            ),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Share.share(
+                                    "http://emagz.live/Post/${post?.sId}");
+                              },
+                              child: Image.asset(
+                                "assets/png/share_icon.png",
+                                width: 26,
+                              ),
+                            ),
+                          ])),
                 ),
               ],
             ),
