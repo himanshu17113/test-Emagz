@@ -48,7 +48,8 @@ class _EditorScreenState extends State<EditorScreen> {
     List<String> path = [];
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg')
+          .create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -71,6 +72,7 @@ class _EditorScreenState extends State<EditorScreen> {
   final storyController = Get.find<GetXStoryController>();
 
   ScreenshotController screenshotControlle = ScreenshotController();
+  List<ScreenshotController> screenshotController = [];
   int nIm = 0;
   int itemindex = 0;
   List<int> rotate = [];
@@ -115,6 +117,8 @@ class _EditorScreenState extends State<EditorScreen> {
 
     nIm = widget.image.length;
     editableItems = List.generate(nIm, (i) => []);
+    screenshotController =
+        List.generate(nIm, (index) => ScreenshotController());
     key = List.generate(nIm, (index) => GlobalKey());
     crop = List.filled(nIm, false);
     transform = List.filled(nIm, false);
@@ -136,10 +140,19 @@ class _EditorScreenState extends State<EditorScreen> {
 
   final PageController _pageController = PageController();
 
+  Future<Uint8List?> captureScreenshot(int i) async {
+    await screenshotController[i].capture().then(
+          (value) => localImages.addIf(value != null, value!),
+        );
+    return null;
+  }
+
   Future<Uint8List?> captureImage(int i) async {
     await Future.delayed(const Duration(milliseconds: 100));
     // RenderRepaintBoundary boundary = key[i].currentContext!.findRenderObject();
-    RenderRepaintBoundary bound = key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
+    //RenderRepaintBoundary bound = key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
+    RenderRepaintBoundary bound =
+        key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
 
     if (bound.debugNeedsPaint) {
       Timer(const Duration(seconds: 1), () => captureImage(i));
@@ -160,7 +173,11 @@ class _EditorScreenState extends State<EditorScreen> {
     _pageController.jumpToPage(0);
     localImages.clear();
     for (int i = 0; i < nIm; i++) {
-      await _pageController.animateToPage(i, duration: const Duration(milliseconds: 100), curve: Curves.easeInOut).then((value) async => await captureImage(i));
+      await _pageController
+          .animateToPage(i,
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeInOut)
+          .then((value) async => await captureScreenshot(i));
     }
   }
 
@@ -255,7 +272,8 @@ class _EditorScreenState extends State<EditorScreen> {
                 }
               } else {
                 Navigator.of(context, rootNavigator: true).pop();
-                Get.to(() => PrePostScreen(postType: PostType.gallery, images: localImages));
+                Get.to(() => PrePostScreen(
+                    postType: PostType.gallery, images: localImages));
               }
 
               debugPrint("edited image length ${localImages.length}");
@@ -268,74 +286,91 @@ class _EditorScreenState extends State<EditorScreen> {
           )
         ],
       ),
-      body: PageView(
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          physics: const PageScrollPhysics(),
-          scrollBehavior: const MaterialScrollBehavior(),
-          scrollDirection: Axis.horizontal,
-          controller: _pageController,
-          onPageChanged: (value) => setState(() {
-                //       currentimage = widget.image[value];
-                debugPrint("pageViewIndex  $value");
-                itemindex = value;
-              }),
-          children: List.generate(
-              nIm,
-              growable: false,
-              (itemIndex) => Center(
-                    child: RepaintBoundary(
-                      key: key[itemIndex],
-                      child: Stack(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        children: [
-                          Transform.rotate(
-                            angle: roatation[itemIndex],
-                            child: Transform.flip(
-                              flipX: transform[itemIndex],
-                              //    flipY: transform[itemIndex],
-                              child: RotatedBox(
-                                quarterTurns: rotate[itemIndex],
-                                child: crop[itemIndex]
-                                    ? imagefilter(
-                                        blur: blur[itemIndex],
-                                        hue: hue[itemIndex] - 1,
-                                        brightness: brightness[itemIndex] - 1,
-                                        saturation: saturation[itemIndex] - 1,
-                                        child: ColorFiltered(
-                                          colorFilter: ColorFilter.matrix(filters[filter[itemIndex]]),
-                                          child: Crop(
-                                            initialSize: 0.9,
-                                            baseColor: Colors.black12,
-                                            controller: _controller,
-                                            image: widget.image[itemIndex]!,
-                                            onCropped: (cropped) {
-                                              debugPrint("cropped");
-                                              widget.image[itemIndex] = cropped;
-                                              setState(() {
-                                                crop[itemindex] = !crop[itemindex];
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      )
-                                    : Container(
-                                        color: Colors.amber,
-                                        child: imagefilter(
+      body: ColoredBox(
+        color: Colors.white24,
+        child: PageView(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            physics: const PageScrollPhysics(),
+            scrollBehavior: const MaterialScrollBehavior(),
+            scrollDirection: Axis.horizontal,
+            controller: _pageController,
+            onPageChanged: (value) => setState(() {
+                  //       currentimage = widget.image[value];
+                  debugPrint("pageViewIndex  $value");
+                  itemindex = value;
+                }),
+            children: List.generate(
+                nIm,
+                growable: false,
+                (itemIndex) => Center(
+                      child: RepaintBoundary(
+                        key: key[itemIndex],
+                        child: Screenshot(
+                          controller: screenshotController[itemIndex],
+                          child: Stack(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            children: [
+                              Transform.rotate(
+                                angle: roatation[itemIndex],
+                                child: Transform.flip(
+                                  flipX: transform[itemIndex],
+                                  //    flipY: transform[itemIndex],
+                                  child: RotatedBox(
+                                    quarterTurns: rotate[itemIndex],
+                                    child: crop[itemIndex]
+                                        ? imagefilter(
                                             blur: blur[itemIndex],
                                             hue: hue[itemIndex] - 1,
-                                            brightness: brightness[itemIndex] - 1,
-                                            saturation: saturation[itemIndex] - 1,
+                                            brightness:
+                                                brightness[itemIndex] - 1,
+                                            saturation:
+                                                saturation[itemIndex] - 1,
                                             child: ColorFiltered(
-                                                colorFilter: ColorFilter.matrix(filters[filter[itemIndex]]), child: Image.memory(widget.image[itemIndex]!))),
-                                      ),
+                                              colorFilter: ColorFilter.matrix(
+                                                  filters[filter[itemIndex]]),
+                                              child: Crop(
+                                                initialSize: 0.9,
+                                                baseColor: Colors.black12,
+                                                controller: _controller,
+                                                image: widget.image[itemIndex]!,
+                                                onCropped: (cropped) {
+                                                  debugPrint("cropped");
+                                                  widget.image[itemIndex] =
+                                                      cropped;
+                                                  setState(() {
+                                                    crop[itemindex] =
+                                                        !crop[itemindex];
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          )
+                                        : Container(
+                                            color: Colors.amber,
+                                            child: imagefilter(
+                                                blur: blur[itemIndex],
+                                                hue: hue[itemIndex] - 1,
+                                                brightness:
+                                                    brightness[itemIndex] - 1,
+                                                saturation:
+                                                    saturation[itemIndex] - 1,
+                                                child: ColorFiltered(
+                                                    colorFilter: ColorFilter
+                                                        .matrix(filters[
+                                                            filter[itemIndex]]),
+                                                    child: Image.memory(widget
+                                                        .image[itemIndex]!))),
+                                          ),
+                                  ),
+                                ),
                               ),
-                            ),
+                              ...editableItems[itemIndex]
+                            ],
                           ),
-                          ...editableItems[itemIndex]
-                        ],
+                        ),
                       ),
-                    ),
-                  ))),
+                    ))),
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 25),
         child: !enableEffect
@@ -346,10 +381,12 @@ class _EditorScreenState extends State<EditorScreen> {
                     children: [
                       if (enablebrightness[itemindex]) ...[
                         Padding(
-                            padding: const EdgeInsets.only(bottom: 10, right: 25),
+                            padding:
+                                const EdgeInsets.only(bottom: 10, right: 25),
                             child: ElevatedButton(
                               style: raisedButtonStyle,
-                              onPressed: () => setState(() => enablebrightness[itemindex] = false),
+                              onPressed: () => setState(
+                                  () => enablebrightness[itemindex] = false),
                               child: const Text(' Done '),
                             ))
                       ],
@@ -370,14 +407,18 @@ class _EditorScreenState extends State<EditorScreen> {
                       ),
                     ],
                   )
-                : enablehue[itemindex] || enablesaturation[itemindex] || enableBlur[itemindex]
+                : enablehue[itemindex] ||
+                        enablesaturation[itemindex] ||
+                        enableBlur[itemindex]
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          if (enablehue[itemindex] || enablesaturation[itemindex]) ...[
+                          if (enablehue[itemindex] ||
+                              enablesaturation[itemindex]) ...[
                             Padding(
-                                padding: const EdgeInsets.only(bottom: 10, right: 25),
+                                padding: const EdgeInsets.only(
+                                    bottom: 10, right: 25),
                                 child: ElevatedButton(
                                   style: raisedButtonStyle,
                                   onPressed: () => setState(() {
@@ -394,7 +435,8 @@ class _EditorScreenState extends State<EditorScreen> {
                               "     Hue",
                               textAlign: TextAlign.start,
                               textDirection: TextDirection.ltr,
-                              style: TextStyle(color: Colors.white60, fontSize: 18),
+                              style: TextStyle(
+                                  color: Colors.white60, fontSize: 18),
                             ),
                           ),
                           Slider(
@@ -418,7 +460,8 @@ class _EditorScreenState extends State<EditorScreen> {
                               "     Saturation",
                               textAlign: TextAlign.start,
                               textDirection: TextDirection.ltr,
-                              style: TextStyle(color: Colors.white60, fontSize: 18),
+                              style: TextStyle(
+                                  color: Colors.white60, fontSize: 18),
                             ),
                           ),
                           Slider(
@@ -442,7 +485,8 @@ class _EditorScreenState extends State<EditorScreen> {
                               "     Blur",
                               textAlign: TextAlign.start,
                               textDirection: TextDirection.ltr,
-                              style: TextStyle(color: Colors.white60, fontSize: 18),
+                              style: TextStyle(
+                                  color: Colors.white60, fontSize: 18),
                             ),
                           ),
                           Slider(
@@ -469,39 +513,54 @@ class _EditorScreenState extends State<EditorScreen> {
                             children: [
                               if (enableRoatation[itemindex]) ...[
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 25),
                                       child: GlassmorphicContainer(
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 16),
                                         colour: Colors.white24,
                                         child: IconButton(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
-                                          onPressed: () => setState(() => rotate[itemindex]++),
-                                          icon: const Icon(Icons.rotate_right, color: Colors.white70),
+                                          onPressed: () => setState(
+                                              () => rotate[itemindex]++),
+                                          icon: const Icon(Icons.rotate_right,
+                                              color: Colors.white70),
                                         ),
                                       ),
                                     ),
                                     Padding(
-                                        padding: const EdgeInsets.only(bottom: 10, right: 25),
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, right: 25),
                                         child: ElevatedButton.icon(
                                           style: raisedButtonStyle,
-                                          onPressed: () => setState(() => transform[itemindex] = !transform[itemindex]),
-                                          icon: const Icon(Icons.flip, color: Colors.white70),
+                                          onPressed: () => setState(() =>
+                                              transform[itemindex] =
+                                                  !transform[itemindex]),
+                                          icon: const Icon(Icons.flip,
+                                              color: Colors.white70),
                                           label: const Text(' Transform '),
                                         )),
                                     Padding(
-                                        padding: const EdgeInsets.only(bottom: 10, right: 25),
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, right: 25),
                                         child: ElevatedButton(
                                           style: raisedButtonStyle,
-                                          onPressed: () => setState(() => enableRoatation[itemindex] = false),
+                                          onPressed: () => setState(() =>
+                                              enableRoatation[itemindex] =
+                                                  false),
                                           child: const Text(' Done '),
                                         )),
                                   ],
@@ -530,7 +589,8 @@ class _EditorScreenState extends State<EditorScreen> {
                             children: [
                               if (crop[itemindex]) ...[
                                 Padding(
-                                  padding: const EdgeInsets.only(bottom: 10, right: 25),
+                                  padding: const EdgeInsets.only(
+                                      bottom: 10, right: 25),
                                   child: ElevatedButton(
                                     style: raisedButtonStyle,
                                     onPressed: () {
@@ -545,23 +605,33 @@ class _EditorScreenState extends State<EditorScreen> {
                                 child: Row(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10),
                                       child: GlassmorphicContainer(
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 16),
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
-                                          onPressed: () => setState(() => enableRoatation[itemindex] = true),
-                                          icon: const Icon(Icons.rotate_right, color: Colors.white70),
+                                          onPressed: () => setState(() =>
+                                              enableRoatation[itemindex] =
+                                                  true),
+                                          icon: const Icon(Icons.rotate_right,
+                                              color: Colors.white70),
                                           label: const Text(
                                             "Rotate ",
-                                            style: TextStyle(color: Colors.white70, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -572,22 +642,30 @@ class _EditorScreenState extends State<EditorScreen> {
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 15),
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              crop[itemindex] = !crop[itemindex];
+                                              crop[itemindex] =
+                                                  !crop[itemindex];
                                             });
                                           },
-                                          icon: const Icon(Icons.crop, color: Colors.white70),
+                                          icon: const Icon(Icons.crop,
+                                              color: Colors.white70),
                                           label: const Text(
                                             "Crop ",
-                                            style: TextStyle(color: Colors.white70, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -598,22 +676,31 @@ class _EditorScreenState extends State<EditorScreen> {
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 12),
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              enablebrightness[itemindex] = true;
+                                              enablebrightness[itemindex] =
+                                                  true;
                                             });
                                           },
-                                          icon: const Icon(Icons.wb_sunny_outlined, color: Colors.white70),
+                                          icon: const Icon(
+                                              Icons.wb_sunny_outlined,
+                                              color: Colors.white70),
                                           label: const Text(
                                             "Adjustment ",
-                                            style: TextStyle(color: Colors.white70, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -624,22 +711,29 @@ class _EditorScreenState extends State<EditorScreen> {
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 12),
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
                                             setState(() {
                                               enableEffect = true;
                                             });
                                           },
-                                          icon: const Icon(Icons.colorize, color: Colors.white70),
+                                          icon: const Icon(Icons.colorize,
+                                              color: Colors.white70),
                                           label: const Text(
                                             "Effects ",
-                                            style: TextStyle(color: Colors.white70, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -650,23 +744,32 @@ class _EditorScreenState extends State<EditorScreen> {
                                         borderRadius: 33,
                                         blur: 2.5,
                                         height: 40,
-                                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10, horizontal: 15),
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
-                                            splashFactory: InkSparkle.splashFactory,
+                                            padding: MaterialStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 15)),
+                                            splashFactory:
+                                                InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
                                             setState(() {
-                                              enablehue[itemindex] = !enablehue[itemindex];
-                                              enablesaturation[itemindex] = !enablesaturation[itemindex];
+                                              enablehue[itemindex] =
+                                                  !enablehue[itemindex];
+                                              enablesaturation[itemindex] =
+                                                  !enablesaturation[itemindex];
                                             });
                                           },
-                                          icon: const Icon(Icons.adjust, color: Colors.white70),
+                                          icon: const Icon(Icons.adjust,
+                                              color: Colors.white70),
                                           label: const Text(
                                             "Filter",
-                                            style: TextStyle(color: Colors.white70, fontSize: 16),
+                                            style: TextStyle(
+                                                color: Colors.white70,
+                                                fontSize: 16),
                                           ),
                                         ),
                                       ),
@@ -711,7 +814,12 @@ class _EditorScreenState extends State<EditorScreen> {
                               width: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: filter[itemindex] != index ? null : Border.all(color: const Color.fromRGBO(53, 222, 217, 1), width: 2),
+                                border: filter[itemindex] != index
+                                    ? null
+                                    : Border.all(
+                                        color: const Color.fromRGBO(
+                                            53, 222, 217, 1),
+                                        width: 2),
                                 gradient: LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
@@ -721,7 +829,11 @@ class _EditorScreenState extends State<EditorScreen> {
                                   ],
                                 ),
                                 image: DecorationImage(
-                                    colorFilter: ColorFilter.matrix(filters[index]), image: MemoryImage(widget.image[itemindex]!), fit: BoxFit.cover),
+                                    colorFilter:
+                                        ColorFilter.matrix(filters[index]),
+                                    image:
+                                        MemoryImage(widget.image[itemindex]!),
+                                    fit: BoxFit.cover),
                               ),
                             ),
                           ),
@@ -735,15 +847,18 @@ class _EditorScreenState extends State<EditorScreen> {
 
   Widget imagefilter({brightness, saturation, hue, child, blur}) {
     return ColorFiltered(
-        colorFilter: ColorFilter.matrix(Colorfiltergenerator.brightnessadjustmatrix(
+        colorFilter:
+            ColorFilter.matrix(Colorfiltergenerator.brightnessadjustmatrix(
           value: brightness,
         )),
         child: ColorFiltered(
-            colorFilter: ColorFilter.matrix(Colorfiltergenerator.saturationadjustmatrix(
+            colorFilter:
+                ColorFilter.matrix(Colorfiltergenerator.saturationadjustmatrix(
               value: saturation,
             )),
             child: ColorFiltered(
-                colorFilter: ColorFilter.matrix(Colorfiltergenerator.hueadjustmatrix(
+                colorFilter:
+                    ColorFilter.matrix(Colorfiltergenerator.hueadjustmatrix(
                   value: hue,
                 )),
                 child: Stack(children: [
@@ -810,7 +925,9 @@ class _DraggableTextState extends State<DraggableText> {
               },
             );
           },
-          child: SizedBox(width: context.width / 2, child: Text(widget.text, style: widget.style)),
+          child: SizedBox(
+              width: context.width / 2,
+              child: Text(widget.text, style: widget.style)),
         ),
       ),
     );
