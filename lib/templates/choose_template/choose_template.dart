@@ -2,7 +2,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/templates/choose_template/template_model.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +10,6 @@ import 'dart:math' as math;
 import '../../constant/colors.dart';
 import '../../social_media/controller/auth/jwtcontroller.dart';
 import '../../social_media/screens/account/controllers/account_setup_controller.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ChooseTemplate extends StatefulWidget {
   bool isReg;
@@ -144,13 +142,13 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                         shrinkWrap: true,
                         itemCount: accountSetUpController.templates!.length,
                         itemBuilder: (ctx,index){
-                          String url = accountSetUpController.templates![index]!.thumbnail.toString();
-                          String url2 = accountSetUpController.templates![index]!.id.toString();
+                          String url = accountSetUpController.templates![index].thumbnail.toString();
+                          String url2 = accountSetUpController.templates![index].id.toString();
                           if (url == 'null' || url2 == 'null') {
                           } else {
                             return Persona(
-                                accountSetUpController.templates![index]!.id,
-                                accountSetUpController.templates![index]!.thumbnail,
+                                accountSetUpController.templates![index].id,
+                                accountSetUpController.templates![index].thumbnail,
                                 const Color.fromRGBO(255, 199, 1, 1.0),
                                 index + 1,width);
                           }
@@ -275,15 +273,15 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         if (index == 1) {
           await accountSetUpController
               .userTemplate(tmpInd!);
-          if(widget.isReg==true)
-          CustomSnackbar.showSucess('Your persona was set');
-          else
+          if(widget.isReg==true) {
+            CustomSnackbar.showSucess('Your persona was set');
+          } else
             {
               var jwtController = Get.put(JWTController());
               var token = await jwtController.getAuthToken();
               var userId = await jwtController.getUserId();
 
-              Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId!));
+              Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId));
             }
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
         } else {

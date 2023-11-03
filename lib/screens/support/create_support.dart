@@ -2,7 +2,6 @@ import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/support/support_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../constant/colors.dart';
 import '../../social_media/common/common_appbar.dart';
@@ -22,13 +21,13 @@ class _CreateSupportState extends State<CreateSupport> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: socialBack,
-      appBar: SocialMediaSettingAppBar(title: 'Support',),
+      appBar: const SocialMediaSettingAppBar(title: 'Support',),
       body: Container(
         child: Column(
           children: [
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 62,
               decoration: BoxDecoration(
                   color: const Color(0xffFFFFFF),
@@ -50,10 +49,10 @@ class _CreateSupportState extends State<CreateSupport> {
                     border: InputBorder.none),
               ),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
 
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 62,
               decoration: BoxDecoration(
                   color: const Color(0xffFFFFFF),
@@ -75,9 +74,9 @@ class _CreateSupportState extends State<CreateSupport> {
                     border: InputBorder.none),
               ),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 250,
               decoration: BoxDecoration(
                   color: const Color(0xffFFFFFF),
@@ -103,10 +102,10 @@ class _CreateSupportState extends State<CreateSupport> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: chipColor),
+                  style: ElevatedButton.styleFrom(backgroundColor: chipColor),
                     onPressed: () async
                     {
-                      if(emailControl.text==null || msgControl.text==null || reasonControl.text==null || emailControl.text==' ' || msgControl.text==' ' || reasonControl.text==' ')
+                      if(emailControl.text==' ' || msgControl.text==' ' || reasonControl.text==' ')
                         {
                           CustomSnackbar.show('Please enter all the fields');
                         }
@@ -121,7 +120,7 @@ class _CreateSupportState extends State<CreateSupport> {
                       }
 
                     },
-                    child: Text('Submit')
+                    child: const Text('Submit')
                 ),
                 const SizedBox(width: 30,)
               ],

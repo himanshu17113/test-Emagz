@@ -2,10 +2,8 @@ import 'dart:convert';
 
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/support/support_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
 import '../../constant/api_string.dart';
 import '../../social_media/controller/auth/jwtcontroller.dart';
 class SupportController extends GetxController{

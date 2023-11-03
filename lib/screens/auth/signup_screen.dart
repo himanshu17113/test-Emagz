@@ -16,7 +16,7 @@ import '../../common/common_snackbar.dart';
 import 'widgets/my_custom_textfiled.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -27,7 +27,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final authController = Get.put(AuthController());
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
     ],
@@ -67,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String _selectedGender=' Male'; // Variable to hold the selected gender
 
   // List of genders for the dropdown
-  List<String> _genders = [' Male', ' Female', ' Other'];
+  final List<String> _genders = [' Male', ' Female', ' Other'];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -116,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               headings: "Choose Gender",
             ),
         Padding(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           child: Container(
             //color: Color(0xffF2F2F2) ,
             decoration: BoxDecoration(
@@ -124,7 +124,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 borderRadius: BorderRadius.circular(10)),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                style: TextStyle(
+                style: const TextStyle(
                   backgroundColor:  Color(0xffF2F2F2), // Set the dropdown's background color here
                 ),
                 value: _selectedGender,
@@ -142,7 +142,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   );
                 }).toList(),
-                hint: Text('Select Gender'), // Hint text for the dropdown
+                hint: const Text('Select Gender'), // Hint text for the dropdown
               ),
             ),
           ),
@@ -268,12 +268,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
 
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Center(
               child:Platform.isIOS?
-              Container(
+              SizedBox(
                 width: 400,
                 child: SignInWithAppleButton(
                     style: SignInWithAppleButtonStyle.black,
@@ -333,7 +333,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 ),
               ):
-              SizedBox(),
+              const SizedBox(),
             ),
             const SizedBox(
               height: 20,

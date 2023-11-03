@@ -99,9 +99,9 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                           // height: 200,
                           child: TabBarView(
                             controller: authController.tabController,
-                            children: [
+                            children: const [
                               SignUpScreen(),
-                              const SignInScreen(),
+                              SignInScreen(),
                             ],
                           ),
                         ),

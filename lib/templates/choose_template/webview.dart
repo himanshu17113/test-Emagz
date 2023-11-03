@@ -96,7 +96,7 @@ class _OwnWebViewState extends State<OwnWebView> {
           if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
             int len= uri!.path.length;
 
-            int index=int.parse(uri!.path[len-1]);
+            int index=int.parse(uri.path[len-1]);
             print(index);
             final List<Conversation> list = await chatController.getChatList();
             Get.off(()=>ChatScreen(

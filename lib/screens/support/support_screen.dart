@@ -1,7 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/common/common_top_bar.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_heading.dart';
-import 'package:emagz_vendor/screens/coupon/widgets/add_coupon_textField.dart';
 import 'package:emagz_vendor/screens/support/create_support.dart';
 import 'package:emagz_vendor/screens/support/support_controller.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +19,7 @@ class _SupportScreenState extends State<SupportScreen>{
       var w= MediaQuery.of(context).size.width;
       return Scaffold(
         backgroundColor: socialBack,
-        appBar: SocialMediaSettingAppBar(title: 'Support',),
+        appBar: const SocialMediaSettingAppBar(title: 'Support',),
         body: Container(
           child: SingleChildScrollView(
             child: Column(
@@ -79,7 +76,7 @@ class _SupportScreenState extends State<SupportScreen>{
                                       fontSize: 10,
                                       fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(height: 4,),
+                              const SizedBox(height: 4,),
                               Text(supportController.supports![index].message!),
                             ],
                           ),
@@ -109,7 +106,7 @@ class _SupportScreenState extends State<SupportScreen>{
                         //print(supportController.supports![index].message);
                         return ListTile(
                           leading: Text(supportController.supports![index].ticketNumber??'12345'),
-                            trailing: Text('Closed'),
+                            trailing: const Text('Closed'),
                           title: Text(supportController.supports![index].message??'Hello'),
                         );
                       },
@@ -123,15 +120,15 @@ class _SupportScreenState extends State<SupportScreen>{
             ),
           ),
         ),
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           width: w,
           height: 76,
           child: ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: chipColor),
+            style: ElevatedButton.styleFrom(backgroundColor: chipColor),
               onPressed: (){
-                  Get.to(()=>CreateSupport());
+                  Get.to(()=>const CreateSupport());
               },
-              child: Text('Raise Ticket')
+              child: const Text('Raise Ticket')
           ),
         ),
       );

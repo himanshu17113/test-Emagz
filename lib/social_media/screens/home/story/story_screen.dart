@@ -5,7 +5,6 @@ import 'package:emagz_vendor/social_media/screens/home/story/controller/story_co
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:share_plus/share_plus.dart';
 import "package:story_view/story_view.dart";
 
 import '../../../../screens/auth/widgets/form_haeding_text.dart';

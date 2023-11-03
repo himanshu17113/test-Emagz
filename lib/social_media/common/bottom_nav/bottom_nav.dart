@@ -27,7 +27,7 @@ class BottomNavBar extends StatelessWidget {
               height:
                   //    homePostController.isVisible.value
                   homePostController.isVisible.value
-                      ? kBottomNavigationBarHeight +21
+                      ? kBottomNavigationBarHeight + 21
                       : 0,
               duration: const Duration(milliseconds: 200),
               child: Container(
@@ -39,83 +39,84 @@ class BottomNavBar extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.black.withOpacity(.2),
                     borderRadius: BorderRadius.circular(15)),
-                child: homePostController.isVisible.value?BottomNavigationBar(
-                  selectedItemColor: whiteColor,
-                  unselectedItemColor: whiteColor,
+                child: homePostController.isVisible.value
+                    ? BottomNavigationBar(
+                        selectedItemColor: whiteColor,
+                        unselectedItemColor: whiteColor,
 
-                  showSelectedLabels: true,
-                  // currentIndex: value.page,
-                  type: BottomNavigationBarType.fixed,
-                  selectedLabelStyle:
-                      TextStyle(fontSize: 7, color: blackButtonColor),
-                  unselectedLabelStyle:
-                      TextStyle(fontSize: 7, color: grayColor),
-                  backgroundColor: Colors.transparent,
-                  currentIndex: value.page.value,
-                  elevation: 0.0,
-                  onTap: (i) {
-                    value.page.value = i;
-                    if (i == 0) {
-                      if (homePostController
-                          .scrollController.positions.isNotEmpty) {
-                        homePostController.scrollController.animateTo(0,
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.bounceOut);
-                      }
-                      // if (i == 0) {
-                      //   homePostController.scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.bounceOut);
-                      // }
-                    }
-                  },
-                  items: [
-                    BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Image.asset(
-                            "assets/png/home_icon.png",
-                            width: 15,
-                          ),
-                        ),
-                        label: "Feed"),
-                    BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Image.asset(
-                            "assets/png/explore_icon.png",
-                            width: 15,
-                          ),
-                        ),
-                        label: "Explore"),
-                    BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Image.asset(
-                            "assets/png/create_icon.png",
-                            width: 15,
-                          ),
-                        ),
-                        label: "Create"),
-                    BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Image.asset(
-                            "assets/png/chat_icon.png",
-                            width: 15,
-                          ),
-                        ),
-                        label: "Chat"),
-                    BottomNavigationBarItem(
-                        icon: Padding(
-                          padding: const EdgeInsets.only(bottom: 0),
-                          child: Image.asset(
-                            "assets/png/more_icon.png",
-                            width: 15,
-                          ),
-                        ),
-                        label: "More"),
-                  ],
-                ):
-                SizedBox.shrink(),
+                        showSelectedLabels: true,
+                        // currentIndex: value.page,
+                        type: BottomNavigationBarType.fixed,
+                        selectedLabelStyle:
+                            TextStyle(fontSize: 7, color: blackButtonColor),
+                        unselectedLabelStyle:
+                            TextStyle(fontSize: 7, color: grayColor),
+                        backgroundColor: Colors.transparent,
+                        currentIndex: value.page.value,
+                        elevation: 0.0,
+                        onTap: (i) {
+                          value.page.value = i;
+                          if (i == 0) {
+                            if (homePostController
+                                .scrollController.positions.isNotEmpty) {
+                              homePostController.scrollController.animateTo(0,
+                                  duration: const Duration(seconds: 1),
+                                  curve: Curves.bounceOut);
+                            }
+                            // if (i == 0) {
+                            //   homePostController.scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.bounceOut);
+                            // }
+                          }
+                        },
+                        items: [
+                          BottomNavigationBarItem(
+                              icon: Padding(
+                                padding: const EdgeInsets.only(bottom: 0),
+                                child: Image.asset(
+                                  "assets/png/home_icon.png",
+                                  width: 15,
+                                ),
+                              ),
+                              label: "Feed"),
+                          BottomNavigationBarItem(
+                              icon: Padding(
+                                padding: const EdgeInsets.only(bottom: 0),
+                                child: Image.asset(
+                                  "assets/png/explore_icon.png",
+                                  width: 15,
+                                ),
+                              ),
+                              label: "Explore"),
+                          BottomNavigationBarItem(
+                              icon: Padding(
+                                padding: const EdgeInsets.only(bottom: 0),
+                                child: Image.asset(
+                                  "assets/png/create_icon.png",
+                                  width: 15,
+                                ),
+                              ),
+                              label: "Create"),
+                          BottomNavigationBarItem(
+                              icon: Padding(
+                                padding: const EdgeInsets.only(bottom: 0),
+                                child: Image.asset(
+                                  "assets/png/chat_icon.png",
+                                  width: 15,
+                                ),
+                              ),
+                              label: "Chat"),
+                          BottomNavigationBarItem(
+                              icon: Padding(
+                                padding: const EdgeInsets.only(bottom: 0),
+                                child: Image.asset(
+                                  "assets/png/more_icon.png",
+                                  width: 15,
+                                ),
+                              ),
+                              label: "More"),
+                        ],
+                      )
+                    : const SizedBox.shrink(),
               ),
             ),
           ),

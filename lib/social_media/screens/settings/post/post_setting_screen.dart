@@ -296,7 +296,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   ),
                 ],
               ),
-            ):SizedBox(),
+            ):const SizedBox(),
           
           
           
@@ -392,7 +392,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   ),
                 ],
               ),
-            ):SizedBox(),
+            ):const SizedBox(),
           ],
         ),
       ),

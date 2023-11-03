@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 

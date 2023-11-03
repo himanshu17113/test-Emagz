@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:emagz_vendor/social_media/screens/settings/post/custom_poll_select_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
-import 'package:get/get.dart';
+ import 'package:flutter/material.dart';
+ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
@@ -111,175 +109,175 @@ class _PrePostScreenState extends State<PrePostScreen> {
                     ],
                   ),
                 ),
-                Row(
-                  children: [
-                    Row(
-                      children: List.generate(
-                        chooseOption.length,
-                        (index) => InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectedOption = index;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: selectedOption == index ? lightSkyAcent : null,
-                              border: Border.all(color: lightSkyAcent),
-                            ),
-                            child: FormHeadingText(
-                              headings: chooseOption[index],
-                              color: selectedOption != index ? lightSkyAcent : Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    // FormHeadingText(headings: "Enable Poll"),
-                    // const SizedBox(
-                    //   width: 5,
-                    // ),
-                    // FlutterSwitch(
-                    //   padding: 0,
-                    //   height: 21,
-                    //   width: 45,
-                    //   activeColor: lightSkyAcent.withOpacity(.8),
-                    //   activeToggleColor: const Color(0xff2E5EE2),
-                    //   onToggle: (bool value) {
-                    //     setState(() {
-                    //       isPollEnable = value;
-                    //     });
-                    //   },
-                    //   value: isPollEnable,
-                    // )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                // isPollEnable
-                //     ? SizedBox(
-                //         child: Column(
-                //           children: [
-                //             Row(
-                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //               children: [
-                //                 FormHeadingText(headings: "Custom Poll"),
-                //                 const SizedBox(
-                //                   width: 5,
-                //                 ),
-                //                 FlutterSwitch(
-                //                   padding: 0,
-                //                   height: 21,
-                //                   width: 45,
-                //                   activeColor: lightSkyAcent.withOpacity(.8),
-                //                   activeToggleColor: const Color(0xff2E5EE2),
-                //                   onToggle: (bool value) {
-                //                     setState(() {
-                //                       isCustomPoll = value;
-                //                     });
-                //                     if (value == true) {
-                //                       Get.to(() => CustomPollSelectScreen(image: widget.image, images: widget.images?[0], postType: widget.postType));
-                //                     }
-                //                   },
-                //                   value: isCustomPoll,
-                //                 )
-                //               ],
+                // Row(
+                //   children: [
+                //     Row(
+                //       children: List.generate(
+                //         chooseOption.length,
+                //         (index) => InkWell(
+                //           onTap: () {
+                //             setState(() {
+                //               selectedOption = index;
+                //             });
+                //           },
+                //           child: Container(
+                //             margin: const EdgeInsets.only(right: 10),
+                //             padding: const EdgeInsets.all(10),
+                //             decoration: BoxDecoration(
+                //               color: selectedOption == index ? lightSkyAcent : null,
+                //               border: Border.all(color: lightSkyAcent),
                 //             ),
-                //             const SizedBox(
-                //               height: 10,
+                //             child: FormHeadingText(
+                //               headings: chooseOption[index],
+                //               color: selectedOption != index ? lightSkyAcent : Colors.white,
                 //             ),
-                //             Row(
-                //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //               children: [
-                //                 FormHeadingText(headings: "Show Results to audience"),
-                //                 const SizedBox(
-                //                   width: 5,
-                //                 ),
-                //                 FlutterSwitch(
-                //                   padding: 0,
-                //                   height: 21,
-                //                   width: 45,
-                //                   activeColor: lightSkyAcent.withOpacity(.8),
-                //                   activeToggleColor: const Color(0xff2E5EE2),
-                //                   onToggle: (bool value) {
-                //                     setState(() {
-                //                       isShowAudience = value;
-                //                     });
-                //                   },
-                //                   value: isShowAudience,
-                //                 )
-                //               ],
-                //             ),
-                //             const SizedBox(
-                //               height: 40,
-                //             ),
-                //           ],
+                //           ),
                 //         ),
-                //       )
-                //     : const SizedBox(),
-                Text(
-                  "Set Timer".toUpperCase(),
-                  style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width - 120,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: timerOptionList.length,
-                        itemBuilder: (context, index) => InkWell(
-                          onTap: () {
-                            setState(() {
-                              selectedTimer = index;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(color: selectedTimer == index ? lightSkyAcent : null, shape: BoxShape.circle),
-                            child: Center(
-                              child: FormHeadingText(
-                                headings: "${timerOptionList[index]}D",
-                                color: selectedTimer != index ? Colors.black : Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    InkWell(
-                      onTap: () async {
-                        DateTime? pickedDate =
-                            await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
-                        TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                        var time = pickedDate!.add(Duration(hours: pickedTime!.hour, minutes: pickedTime.minute));
-                        var timeDifference = time.difference(DateTime.now());
-                        debugPrint(timeDifference.inDays.toString());
-                        timerOptionList.add("${timeDifference.inDays}D");
-                        selectedTimer = timerOptionList.length - 1;
-                        setState(() {});
-                      },
-                      child: Text(
-                        "Set Custom".toUpperCase(),
-                        style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
+                //       ),
+                //     ),
+                //     const Spacer(),
+                //     // FormHeadingText(headings: "Enable Poll"),
+                //     // const SizedBox(
+                //     //   width: 5,
+                //     // ),
+                //     // FlutterSwitch(
+                //     //   padding: 0,
+                //     //   height: 21,
+                //     //   width: 45,
+                //     //   activeColor: lightSkyAcent.withOpacity(.8),
+                //     //   activeToggleColor: const Color(0xff2E5EE2),
+                //     //   onToggle: (bool value) {
+                //     //     setState(() {
+                //     //       isPollEnable = value;
+                //     //     });
+                //     //   },
+                //     //   value: isPollEnable,
+                //     // )
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // // isPollEnable
+                // //     ? SizedBox(
+                // //         child: Column(
+                // //           children: [
+                // //             Row(
+                // //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // //               children: [
+                // //                 FormHeadingText(headings: "Custom Poll"),
+                // //                 const SizedBox(
+                // //                   width: 5,
+                // //                 ),
+                // //                 FlutterSwitch(
+                // //                   padding: 0,
+                // //                   height: 21,
+                // //                   width: 45,
+                // //                   activeColor: lightSkyAcent.withOpacity(.8),
+                // //                   activeToggleColor: const Color(0xff2E5EE2),
+                // //                   onToggle: (bool value) {
+                // //                     setState(() {
+                // //                       isCustomPoll = value;
+                // //                     });
+                // //                     if (value == true) {
+                // //                       Get.to(() => CustomPollSelectScreen(image: widget.image, images: widget.images?[0], postType: widget.postType));
+                // //                     }
+                // //                   },
+                // //                   value: isCustomPoll,
+                // //                 )
+                // //               ],
+                // //             ),
+                // //             const SizedBox(
+                // //               height: 10,
+                // //             ),
+                // //             Row(
+                // //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // //               children: [
+                // //                 FormHeadingText(headings: "Show Results to audience"),
+                // //                 const SizedBox(
+                // //                   width: 5,
+                // //                 ),
+                // //                 FlutterSwitch(
+                // //                   padding: 0,
+                // //                   height: 21,
+                // //                   width: 45,
+                // //                   activeColor: lightSkyAcent.withOpacity(.8),
+                // //                   activeToggleColor: const Color(0xff2E5EE2),
+                // //                   onToggle: (bool value) {
+                // //                     setState(() {
+                // //                       isShowAudience = value;
+                // //                     });
+                // //                   },
+                // //                   value: isShowAudience,
+                // //                 )
+                // //               ],
+                // //             ),
+                // //             const SizedBox(
+                // //               height: 40,
+                // //             ),
+                // //           ],
+                // //         ),
+                // //       )
+                // //     : const SizedBox(),
+                // Text(
+                //   "Set Timer".toUpperCase(),
+                //   style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // Row(
+                //   children: [
+                //     SizedBox(
+                //       height: 50,
+                //       width: MediaQuery.of(context).size.width - 120,
+                //       child: ListView.builder(
+                //         shrinkWrap: true,
+                //         scrollDirection: Axis.horizontal,
+                //         itemCount: timerOptionList.length,
+                //         itemBuilder: (context, index) => InkWell(
+                //           onTap: () {
+                //             setState(() {
+                //               selectedTimer = index;
+                //             });
+                //           },
+                //           child: Container(
+                //             margin: const EdgeInsets.only(right: 12),
+                //             padding: const EdgeInsets.all(10),
+                //             decoration: BoxDecoration(color: selectedTimer == index ? lightSkyAcent : null, shape: BoxShape.circle),
+                //             child: Center(
+                //               child: FormHeadingText(
+                //                 headings: "${timerOptionList[index]}D",
+                //                 color: selectedTimer != index ? Colors.black : Colors.white,
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     const Spacer(),
+                //     InkWell(
+                //       onTap: () async {
+                //         DateTime? pickedDate =
+                //             await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
+                //         TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+                //         var time = pickedDate!.add(Duration(hours: pickedTime!.hour, minutes: pickedTime.minute));
+                //         var timeDifference = time.difference(DateTime.now());
+                //         debugPrint(timeDifference.inDays.toString());
+                //         timerOptionList.add("${timeDifference.inDays}D");
+                //         selectedTimer = timerOptionList.length - 1;
+                //         setState(() {});
+                //       },
+                //       child: Text(
+                //         "Set Custom".toUpperCase(),
+                //         style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
                 Text(
                   "Describe your feeling".toUpperCase(),
                   style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),

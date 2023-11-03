@@ -18,7 +18,6 @@ import 'package:screenshot/screenshot.dart';
 
 import 'package:emagz_vendor/social_media/common/EditorScreen/colorfiltergenerater.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/widgets/DragabbleTextEditor.dart';
-import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 

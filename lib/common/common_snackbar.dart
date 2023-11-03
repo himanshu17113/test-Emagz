@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:emagz_vendor/social_media/screens/home_screen.dart';
-import 'package:emagz_vendor/user/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -47,5 +45,5 @@ class CustomSnackbar {
 }
 final nav= Get.put(NavController());
 Widget customBackButton() {
-  return Platform.isIOS?IconButton(onPressed: (){nav.page=0.obs;Get.off(()=>BottomNavBar());}, icon: Icon(Icons.arrow_back_ios)):SizedBox.shrink();
+  return Platform.isIOS?IconButton(onPressed: (){nav.page=0.obs;Get.off(()=>BottomNavBar());}, icon: const Icon(Icons.arrow_back_ios)):const SizedBox.shrink();
 }

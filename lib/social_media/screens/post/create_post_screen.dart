@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:ui' as UI;
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';

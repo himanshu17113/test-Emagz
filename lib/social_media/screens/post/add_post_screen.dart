@@ -169,16 +169,16 @@ class AddPostScren extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Now everyone can watch you live ",
                     textAlign: TextAlign.start,
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox()
+                  SizedBox()
                 ],
               ),
               const SizedBox(
