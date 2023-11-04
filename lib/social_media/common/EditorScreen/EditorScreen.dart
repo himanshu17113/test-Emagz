@@ -76,7 +76,7 @@ class _EditorScreenState extends State<EditorScreen> {
   int nIm = 0;
   int itemindex = 0;
   List<int> rotate = [];
-  List<GlobalKey> key = [];
+ // List<GlobalKey> key = [];
   List<bool> crop = [];
   List<bool> transform = [];
   List<double> roatation = [];
@@ -108,18 +108,17 @@ class _EditorScreenState extends State<EditorScreen> {
   ];
   bool enableEffect = false;
 
-//  Uint8List? currentimage;
-  List<Uint8List> localImages = [];
+   List<Uint8List> localImages = [];
 
   @override
   void initState() {
-//    currentimage = widget.image[0];
+ 
 
     nIm = widget.image.length;
     editableItems = List.generate(nIm, (i) => []);
     screenshotController =
         List.generate(nIm, (index) => ScreenshotController());
-    key = List.generate(nIm, (index) => GlobalKey());
+  //  key = List.generate(nIm, (index) => GlobalKey());
     crop = List.filled(nIm, false);
     transform = List.filled(nIm, false);
     rotate = List.filled(nIm, 0);
@@ -147,27 +146,27 @@ class _EditorScreenState extends State<EditorScreen> {
     return null;
   }
 
-  Future<Uint8List?> captureImage(int i) async {
-    await Future.delayed(const Duration(milliseconds: 100));
-    // RenderRepaintBoundary boundary = key[i].currentContext!.findRenderObject();
-    //RenderRepaintBoundary bound = key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
-    RenderRepaintBoundary bound =
-        key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
+  // Future<Uint8List?> captureImage(int i) async {
+  //   await Future.delayed(const Duration(milliseconds: 100));
+  //   // RenderRepaintBoundary boundary = key[i].currentContext!.findRenderObject();
+  //   //RenderRepaintBoundary bound = key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
+  //   RenderRepaintBoundary bound =
+  //   //    key[i].currentContext!.findRenderObject() as RenderRepaintBoundary;
 
-    if (bound.debugNeedsPaint) {
-      Timer(const Duration(seconds: 1), () => captureImage(i));
-      return null;
-    }
-    ui.Image image = await bound.toImage();
-    ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+  //   if (bound.debugNeedsPaint) {
+  //     Timer(const Duration(seconds: 1), () => captureImage(i));
+  //     return null;
+  //   }
+  //   ui.Image image = await bound.toImage();
+  //   ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
 
-    if (byteData != null) {
-      Uint8List pngBytes = byteData.buffer.asUint8List();
-      localImages.add(pngBytes);
-      return pngBytes;
-    }
-    return null;
-  }
+  //   if (byteData != null) {
+  //     Uint8List pngBytes = byteData.buffer.asUint8List();
+  //     localImages.add(pngBytes);
+  //     return pngBytes;
+  //   }
+  //   return null;
+  // }
 
   Future<void> convertWidgetToImage() async {
     _pageController.jumpToPage(0);
@@ -286,39 +285,64 @@ class _EditorScreenState extends State<EditorScreen> {
           )
         ],
       ),
-      body: ColoredBox(
-        color: Colors.white24,
-        child: PageView(
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            physics: const PageScrollPhysics(),
-            scrollBehavior: const MaterialScrollBehavior(),
-            scrollDirection: Axis.horizontal,
-            controller: _pageController,
-            onPageChanged: (value) => setState(() {
-                  //       currentimage = widget.image[value];
-                  debugPrint("pageViewIndex  $value");
-                  itemindex = value;
-                }),
-            children: List.generate(
-                nIm,
-                growable: false,
-                (itemIndex) => Center(
-                      child: RepaintBoundary(
-                        key: key[itemIndex],
-                        child: Screenshot(
-                          controller: screenshotController[itemIndex],
-                          child: Stack(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            children: [
-                              Transform.rotate(
-                                angle: roatation[itemIndex],
-                                child: Transform.flip(
-                                  flipX: transform[itemIndex],
-                                  //    flipY: transform[itemIndex],
-                                  child: RotatedBox(
-                                    quarterTurns: rotate[itemIndex],
-                                    child: crop[itemIndex]
-                                        ? imagefilter(
+      body: PageView(
+         // clipBehavior: Clip.antiAliasWithSaveLayer,
+          physics: const PageScrollPhysics(),
+          scrollBehavior: const MaterialScrollBehavior(),
+          scrollDirection: Axis.horizontal,
+          controller: _pageController,
+          onPageChanged: (value) => setState(() {
+                //       currentimage = widget.image[value];
+                debugPrint("pageViewIndex  $value");
+                itemindex = value;
+              }),
+          children: List.generate(
+              nIm,
+              growable: false,
+              (itemIndex) => Center(
+                    child: Screenshot(
+                      controller: screenshotController[itemIndex],
+                      child: Stack(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        children: [
+                          Transform.rotate(
+                            angle: roatation[itemIndex],
+                            child: Transform.flip(
+                              flipX: transform[itemIndex],
+                              //    flipY: transform[itemIndex],
+                              child: RotatedBox(
+                                quarterTurns: rotate[itemIndex],
+                                child: crop[itemIndex]
+                                    ? imagefilter(
+                                        blur: blur[itemIndex],
+                                        hue: hue[itemIndex] - 1,
+                                        brightness:
+                                            brightness[itemIndex] - 1,
+                                        saturation:
+                                            saturation[itemIndex] - 1,
+                                        child: ColorFiltered(
+                                          colorFilter: ColorFilter.matrix(
+                                              filters[filter[itemIndex]]),
+                                          child: Crop(
+                                            initialSize: 0.9,
+                                            baseColor: Colors.black12,
+                                            controller: _controller,
+                                            image: widget.image[itemIndex]!,
+                                            onCropped: (cropped) {
+                                              debugPrint("cropped");
+                                              widget.image[itemIndex] =
+                                                  cropped;
+                                              setState(() {
+                                                crop[itemindex] =
+                                                    !crop[itemindex];
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    : Container(
+                                        color: Colors.amber,
+                                        child: imagefilter(
                                             blur: blur[itemIndex],
                                             hue: hue[itemIndex] - 1,
                                             brightness:
@@ -326,51 +350,20 @@ class _EditorScreenState extends State<EditorScreen> {
                                             saturation:
                                                 saturation[itemIndex] - 1,
                                             child: ColorFiltered(
-                                              colorFilter: ColorFilter.matrix(
-                                                  filters[filter[itemIndex]]),
-                                              child: Crop(
-                                                initialSize: 0.9,
-                                                baseColor: Colors.black12,
-                                                controller: _controller,
-                                                image: widget.image[itemIndex]!,
-                                                onCropped: (cropped) {
-                                                  debugPrint("cropped");
-                                                  widget.image[itemIndex] =
-                                                      cropped;
-                                                  setState(() {
-                                                    crop[itemindex] =
-                                                        !crop[itemindex];
-                                                  });
-                                                },
-                                              ),
-                                            ),
-                                          )
-                                        : Container(
-                                            color: Colors.amber,
-                                            child: imagefilter(
-                                                blur: blur[itemIndex],
-                                                hue: hue[itemIndex] - 1,
-                                                brightness:
-                                                    brightness[itemIndex] - 1,
-                                                saturation:
-                                                    saturation[itemIndex] - 1,
-                                                child: ColorFiltered(
-                                                    colorFilter: ColorFilter
-                                                        .matrix(filters[
-                                                            filter[itemIndex]]),
-                                                    child: Image.memory(widget
-                                                        .image[itemIndex]!))),
-                                          ),
-                                  ),
-                                ),
+                                                colorFilter: ColorFilter
+                                                    .matrix(filters[
+                                                        filter[itemIndex]]),
+                                                child: Image.memory(widget
+                                                    .image[itemIndex]!))),
+                                      ),
                               ),
-                              ...editableItems[itemIndex]
-                            ],
+                            ),
                           ),
-                        ),
+                          ...editableItems[itemIndex]
+                        ],
                       ),
-                    ))),
-      ),
+                    ),
+                  ))),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 25),
         child: !enableEffect
