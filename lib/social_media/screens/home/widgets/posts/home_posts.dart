@@ -30,8 +30,8 @@ class HomePosts extends StatelessWidget {
               } else {
                 if (homePostController.posts!.isNotEmpty) {
                   if (index == 1) {
-                    debugPrint("///////////////////////////////////////////////////////////");
-                    debugPrint(homePostController.posts![0].sId.toString());
+                    // debugPrint("///////////////////////////////////////////////////////////");
+                    // debugPrint(homePostController.posts![0].sId.toString());
                   }
                   if (homePostController.posts![index - 1].mediaUrl!.isNotEmpty && homePostController.posts?[index - 1].mediaUrl?[0] != null) {
                     if (homePostController.posts![index - 1].mediaUrl![0]!.endsWith(".svg")) {

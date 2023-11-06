@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../social_media/common/bottom_nav/bottom_nav.dart';
-import '../social_media/controller/bottom_nav_controller.dart';
 
 class CustomSnackbar {
   static void show(String message) {
@@ -40,10 +40,16 @@ class CustomSnackbar {
       reverseAnimationCurve: Curves.easeInBack,
     );
   }
-
-
 }
-final nav= Get.put(NavController());
+
+final HomePostsController homePostsController = Get.put(HomePostsController());
 Widget customBackButton() {
-  return Platform.isIOS?IconButton(onPressed: (){nav.page=0.obs;Get.off(()=>BottomNavBar());}, icon: const Icon(Icons.arrow_back_ios)):const SizedBox.shrink();
+  return Platform.isIOS
+      ? IconButton(
+          onPressed: () {
+            homePostsController.pageUpdate(0);
+            Get.off(() => BottomNavBar());
+          },
+          icon: const Icon(Icons.arrow_back_ios))
+      : const SizedBox.shrink();
 }

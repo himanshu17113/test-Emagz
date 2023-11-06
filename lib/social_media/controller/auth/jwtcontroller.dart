@@ -5,15 +5,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 
-String? gprofilePic = 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
+String? gprofilePic =
+    'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
 
 class JWTController extends GetxController {
   String? token;
-  RxString? profilePic = 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg'.obs;
+  RxString? profilePic =
+      'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg'
+          .obs;
   String? userId;
   Rx<UserSchema>? currentUser;
   Rx<UserSchema>? user = UserSchema().obs;
-  RxBool isAuthorised = false.obs;
+
   var hiveBox = Hive.box("secretes");
 
   Future<UserSchema> getCurrentUserDetail() async {
@@ -63,14 +66,15 @@ class JWTController extends GetxController {
     token = tokenx;
     userId = id;
     if (tokenx != null && id != null) {
-      isAuthorised.value = true;
+      //  isAuthorised.value = true;
       if (token == null || userId == null) {
         token = tokenx;
         userId = id;
       }
-    } else {
-      isAuthorised.value = false;
     }
+    // else {
+    //   isAuthorised.value = false;
+    // }
   }
 
   Future<String?> getAuthToken() async {
@@ -81,12 +85,12 @@ class JWTController extends GetxController {
     //  debugPrint("DONE SLOWLY");
     final t = await hiveBox.get("token");
     token = t;
-    if (token != null) {
-      isAuthorised.value = true;
-    } else {
-      isAuthorised.value = false;
-      return null;
-    }
+    // if (token != null) {
+    //   isAuthorised.value = true;
+    // } else {
+    //   isAuthorised.value = false;
+    //   return null;
+    // }
     return token!;
   }
 
@@ -110,7 +114,8 @@ class JWTController extends GetxController {
 
   Future<String> getProfileImage() async {
     var imageUrl = await hiveBox.get('ProfilePic');
-    imageUrl ??= 'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
+    imageUrl ??=
+        'https://res.cloudinary.com/dzarrma99/image/upload/v1693398992/ykw3kzomhtuvqy3celpt.jpg';
     profilePic = RxString(imageUrl!);
     return imageUrl;
   }
@@ -128,7 +133,8 @@ class JWTController extends GetxController {
       debugPrint("NO AUTH");
     } else {
       debugPrint("AUTH");
-      isAuthorised.value = true;
+
+      update();
     }
   }
 }

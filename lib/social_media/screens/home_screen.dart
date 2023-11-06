@@ -25,63 +25,16 @@ class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
   final jwtController = Get.put(JWTController());
-
   final homePostController = Get.put(HomePostsController());
   final GetXStoryController storyController = Get.put(GetXStoryController());
   final socketController = Get.put(SocketController());
-  // final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    // if (myUserId == null)async {
-    //   myUserId = await jwtController.getUserId();
-    // }
     return SafeArea(
       child: Obx(
         () => Scaffold(
           backgroundColor: socialBack,
-
-          // InkWell(
-          //   onTap: () {
-          //     Get.back();
-          //     // ZoomDrawer.of(context)!.toggle();
-          //   },
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: FlipCard(
-          //       // key: cardKey,
-          //       front: InkWell(
-          //           onTap: () {
-          //             Get.to(() => const TempAttachScreen());
-          //           },
-          //           child: Container(
-          //             margin: const EdgeInsets.only(right: 10),
-          //             padding: const EdgeInsets.all(12.0),
-          //             height: 55,
-          //             width: 55,
-          //             decoration: BoxDecoration(
-          //               shape: BoxShape.circle,
-          //               color: const Color(0xff1B47C1).withOpacity(.9),
-          //             ),
-          //             child:
-          //                 SvgPicture.asset("assets/svg/Ebusiness-Icon.svg"),
-          //           )),
-          //       back: const CircleAvatar(
-          //         radius: 30,
-          //         backgroundImage: CachedNetworkImageProvider(
-          //             "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // : null
-
-          //    scrollBehavior: const MaterialScrollBehavior(),
-          //       controller: scrollController,
-          // floatHeaderSlivers: true,
-          // headerSliverBuilder: (context, innerBoxIsScrolled) {
-          //   return [const SliverSocialMediaAppBar()];
-          // },
           appBar: homePostController.isVisible.value
               ? AppBar(
                   backgroundColor: socialBack,
@@ -96,21 +49,22 @@ class SocialMediaHomePage extends StatelessWidget {
                   ),
                   actions: [
                     GestureDetector(
-                      onTap: () async {
+                      onTap: () {
                         var jwtController = Get.put(JWTController());
-                        var token = await jwtController.getAuthToken();
-                        var userId = await jwtController.getUserId();
+                        // var token = await jwtController.getAuthToken();
+                        // var userId = await jwtController.getUserId();
 
                         Get.to(() => OwnWebView(
-                              token: token!,
-                              userId: userId!,
-                              personaUserId: userId,
+                              token: jwtController.token!,
+                              userId: jwtController.userId!,
+                              personaUserId: jwtController.userId!,
                               templateId: 'w',
                             ));
                       },
                       child: CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
-                          jwtController.user?.value.ProfilePic.toString() ?? jwtController.profilePic.toString(),
+                          jwtController.user?.value.ProfilePic.toString() ??
+                              jwtController.profilePic.toString(),
                         ),
                         maxRadius: 15,
                       ),
@@ -132,7 +86,8 @@ class SocialMediaHomePage extends StatelessWidget {
                                   radius: 8,
                                   backgroundColor: Colors.red,
                                   child: Text(
-                                    socketController.notifications.length.toString(),
+                                    socketController.notifications.length
+                                        .toString(),
                                     style: const TextStyle(fontSize: 12),
                                   )),
                             )
@@ -153,7 +108,8 @@ class SocialMediaHomePage extends StatelessWidget {
               storyController.getStories();
               return homePostController.getPost();
             },
-            child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
+            child: HomePosts(
+                myUserId: jwtController.userId ?? homePostController.userId),
           ),
         ),
       ),

@@ -96,7 +96,7 @@ class _PostCardState extends State<PostCard> {
                 placeholder: (context, url) => const Center(
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 180.0, vertical: 250),
+                        EdgeInsets.symmetric(horizontal: 180.0, vertical: 200),
                     child: CircularProgressIndicator(
                       backgroundColor: Colors.amberAccent,
                       strokeWidth: 2,
@@ -118,67 +118,62 @@ class _PostCardState extends State<PostCard> {
             )
           ],
           Positioned(
-            top: 15,
-            left: 15,
-            child: Container(
-              height: 55,
-              margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 16,
-                    backgroundImage: post!.mediaType == "video"
-                        ? const CachedNetworkImageProvider(
-                            "https://picsum.photos/500/500?random=851")
-                        : CachedNetworkImageProvider(widget.userImg!),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      //     final tok = jwtController.token ?? await jwtController.getAuthToken();
+            top: 30,
+            left: 27,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 16,
+                  backgroundImage: post!.mediaType == "video"
+                      ? const CachedNetworkImageProvider(
+                          "https://picsum.photos/500/500?random=851")
+                      : CachedNetworkImageProvider(widget.userImg!),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    //     final tok = jwtController.token ?? await jwtController.getAuthToken();
 
-                      String? temp = post!.user!.personalTemplate;
-                      if (temp == null) {
-                        Get.snackbar('No persona Choosen by this user',
-                            'Hi No persona here');
-                      } else {
-                        if (temp.isEmpty || temp[0] == 'T') {
-                          Get.snackbar('This is a Old account ',
-                              'Persona wont work properly');
-                          temp = '64e8f2c3b9b30c1ed4b28bb6';
-                        }
-                        Get.to(() => OwnWebView(
-                              token: homePostController.token!,
-                              userId: widget.myUserId!,
-                              personaUserId: post!.user!.sId!,
-                              templateId: ' ',
-                            ));
+                    String? temp = post!.user!.personalTemplate;
+                    if (temp == null) {
+                      Get.snackbar('No persona Choosen by this user',
+                          'Hi No persona here');
+                    } else {
+                      if (temp.isEmpty || temp[0] == 'T') {
+                        Get.snackbar('This is a Old account ',
+                            'Persona wont work properly');
+                        temp = '64e8f2c3b9b30c1ed4b28bb6';
                       }
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${post?.user!.username.toString()}",
-                          // "${post!.userId}",
+                      Get.to(() => OwnWebView(
+                            token: homePostController.token!,
+                            userId: widget.myUserId!,
+                            personaUserId: post!.user!.sId!,
+                            templateId: ' ',
+                          ));
+                    }
+                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${post?.user!.username.toString()}",
+                        style: TextStyle(
+                            fontSize: 9,
+                            fontWeight: FontWeight.w600,
+                            color: whiteColor),
+                      ),
+                      Text("@${post?.user!.getstatedName.toString()}",
                           style: TextStyle(
                               fontSize: 9,
                               fontWeight: FontWeight.w600,
-                              color: whiteColor),
-                        ),
-                        Text("@${post?.user!.getstatedName.toString()}",
-                            style: TextStyle(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w600,
-                                color: whiteColor)),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                              color: whiteColor)),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
           Positioned(

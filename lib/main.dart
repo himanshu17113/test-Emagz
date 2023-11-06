@@ -21,7 +21,7 @@ Future main() async {
     name: 'EmagzIos',
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  Get.put(NavController());
+
   runApp(const MyApp());
 }
 
@@ -31,24 +31,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //  Get.lazyPut<SocketController>(() => SocketController());
-    JWTController authController = Get.put(JWTController(), permanent: true);
-    return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'eMAGZ',
-        theme: ThemeData.light().copyWith(
-          textTheme: GoogleFonts.poppinsTextTheme(),
-        ),
-        //home: PTemplateTwoScreen(),
-        // home: TemplateFiveScreen(),
-        //home: DefaultBusinesstempScreen(),
-        // home: PersonalProfileInsightScreen(),
-        //  home: SupportScreen(),
-        //home: ChooseTemplate()
-        // home: const BottomNavBar(),
-        home: authController.isAuthorised.value
-            ? BottomNavBar()
-            : const CommonAuthScreen()
-        // home: ChatScreen(),
-        );
+//JWTController authController = Get.put(JWTController(), permanent: true);
+    return GetBuilder<JWTController>(
+      init: JWTController(),
+      initState: (_) {},
+      builder: (authController) {
+        return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'eMAGZ',
+            theme: ThemeData.light().copyWith(
+              textTheme: GoogleFonts.poppinsTextTheme(),
+            ),
+            home: (authController.token != null)
+                ? BottomNavBar()
+                : const CommonAuthScreen()
+            // home: ChatScreen(),
+            );
+      },
+    );
   }
 }

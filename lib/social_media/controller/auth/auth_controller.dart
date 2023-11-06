@@ -213,7 +213,7 @@ class AuthController extends GetxController {
         await jwtController.setAuthToken(data["token"], data["data"]["_id"]);
         jwtController.token = data["token"].toString();
         jwtController.userId = data["data"]["_id"].toString();
-        jwtController.isAuthorised.value = true;
+        //   jwtController.isAuthorised.value = true;
 
         isUserlogging.value = false;
         return true;
@@ -257,7 +257,7 @@ class AuthController extends GetxController {
         await jwtController.setAuthToken(data["token"], data["data"]["_id"]);
         jwtController.token = data["token"].toString();
         jwtController.userId = data["data"]["_id"].toString();
-        jwtController.isAuthorised.value = true;
+        //   jwtController.isAuthorised.value = true;
 
         isUserlogging.value = false;
         return true;

@@ -6,12 +6,11 @@ import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
-
-//import '../../../model/poll_model.dart';
 
 class HomePostsController extends GetxController {
   var logger = Logger(
@@ -21,78 +20,79 @@ class HomePostsController extends GetxController {
   bool ispostloading = false;
   final jwtController = Get.put(JWTController());
   final socketController = Get.put(SocketController());
-  //// final navController = Get.find<NavController>();
-  // final navController = Get.put(NavController());
+  String? token;
+  String? userId;
   RxBool isVisible = RxBool(true);
+  int page = 0;
+  List<Post>? posts = [];
 
+  RxInt skip = RxInt(-10);
   @override
   onInit() async {
     await storedData();
     await getPost();
     if (posts!.length < 2) {
-      //  postController.audiovideopostList.clear();
-      //  print("gggggggggggvvvvvvvvvvvvvv");
       getPost();
-      //  setState(() {});
     }
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
-        // User is scrolling down
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
         if (isVisible.value) {
           isVisible.value = false;
+          update();
         }
       }
-      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
-        // User is scrolling up
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
         if (!isVisible.value) {
           isVisible.value = true;
+          update();
         }
       }
       loadMoreData();
     });
-    //  getPost();
+
     super.onInit();
   }
 
-  String? token;
-  String? userId;
+  void pageUpdate(int i) {
+    page = i;
+    update();
+  }
+
   Future<void> storedData() async {
     token = await jwtController.getAuthToken();
     userId = await jwtController.getUserId();
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !ispostloading) {
       await getPost();
-    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent - 50) {}
   }
-
-  List<Post>? posts = [] ;
-  // RxList<Post>? posts = <Post>[].obs;
-  RxInt skip = RxInt(-10);
 
   getPost() async {
     ispostloading = true;
-    // if (skip.value == -10) {
 
-    // } else {
-
-    // }
     skip.value = skip.value + 10;
 
     try {
       Dio dio = Dio();
-      // var token = await jwtController.getAuthToken();
-      // userId = await jwtController.getUserId();
-      dio.options.headers["Authorization"] = token ?? await jwtController.getAuthToken();
+
+      dio.options.headers["Authorization"] =
+          token ?? await jwtController.getAuthToken();
       debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
-      //  debugPrint(ApiEndpoint.posts(skip.value));
+
       final String endPoint = ApiEndpoint.posts(skip.value);
       debugPrint("pppppppppppppppp🧣🧣🧣🧣🧣🧣🧣🧣🧣pppppppp");
       print(endPoint);
       var resposne = await dio.get(endPoint);
-      // logger.d(resposne.data);
-      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
+
+      if (resposne.data['AllPost'] != null &&
+          resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -102,7 +102,6 @@ class HomePostsController extends GetxController {
             print(err.toString());
             ispostloading = false;
           }
-          //debugPrint(post.mediaUrl!);
 
           if (post?.user != null) {
             posts!.add(post!);
@@ -110,13 +109,10 @@ class HomePostsController extends GetxController {
         });
         update();
         ispostloading = false;
-        //   return posts!.reversed.toList();
       }
-      //   return [];
     } catch (e) {
       debugPrint('hey get post not working');
-      //    debugPrint(e.toString());
-      //   return [];
+
       ispostloading = false;
     }
   }
@@ -125,18 +121,16 @@ class HomePostsController extends GetxController {
     skip.value = -10;
     try {
       Dio dio = Dio();
-      // var token = await jwtController.getAuthToken();
-      // userId = await jwtController.getUserId();
+
       dio.options.headers["Authorization"] = token;
-      //  debugPrint(ApiEndpoint.posts(skip.value));
+
       var endPoint = ApiEndpoint.posts(0);
       var resposne = await dio.get(endPoint);
       if (resposne.data['AllPost'] != null) {
         resposne.data["AllPost"].forEach((e) {
           posts ??= RxList();
-          // rating is at 159 post
+
           var post = Post.fromJson(e);
-          //debugPrint(post.mediaUrl!);
 
           if (post.user != null) {
             posts!.insert(0, post);
@@ -151,45 +145,15 @@ class HomePostsController extends GetxController {
       debugPrint(e.toString());
       return [];
     }
-    // if (posts == null) {
-    // } else {
-    //   posts!.value = [];
-    // }
-    // //  debugPrint(skip.value);
-    // try {
-    //   Dio dio = Dio();
-    //   // var token = await jwtController.getAuthToken();
-    //   // userId = await jwtController.getUserId();
-    //   dio.options.headers["Authorization"] = token;
-    //   //    debugPrint(ApiEndpoint.posts(skip.value));
-    //   var endPoint = ApiEndpoint.posts(0);
-    //   var resposne = await dio.get(endPoint);
-    //
-    //   resposne.data["AllPost"].forEach((e) {
-    //     posts ??= RxList();
-    //     // rating is at 159 post
-    //     try {
-    //       debugPrint(e);
-    //       var post = Post.fromJson(e);
-    //       posts!.add(post);
-    //     } catch (ee) {
-    //       debugPrint('eor');
-    //       debugPrint(ee.toString());
-    //     }
-    //     // debugPrint(post.mediaUrl);
-    //   });
-    //
-    //   return posts!.reversed.toList();
-    // } catch (e) {
-    //   debugPrint('eroror');
-    //   debugPrint(e.toString());
-    //   return [];
-    // }
   }
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
     if (islike) {
-      socketController.sendLikeNotification(uid, jwtController.user?.value.username ?? jwtController.user?.value.displayName ?? "");
+      socketController.sendLikeNotification(
+          uid,
+          jwtController.user?.value.username ??
+              jwtController.user?.value.displayName ??
+              "");
     }
     try {
       Dio dio = Dio();
@@ -203,24 +167,18 @@ class HomePostsController extends GetxController {
 
       return true;
     } catch (e) {
-      //  debugPrint(e);
       return false;
     }
   }
 
   Future<Poll?> postPoll(String postId, String vote) async {
     try {
-      // var userId = await JWTController().getUserId();
-      // var token = await JWTController().getAuthToken();
       Dio dio = Dio();
       debugPrint(ApiEndpoint.doPoll(postId));
       var data = {"vote": vote, "userId": userId};
       dio.options.headers["Authorization"] = token;
       var response = await dio.post(ApiEndpoint.doPoll(postId), data: data);
       debugPrint(response.data.toString());
-      // if (response.statusCode == 200) {
-      //   Polldetail(postId);
-      // }
 
       return Polldetail(postId);
     } catch (e) {
@@ -231,21 +189,16 @@ class HomePostsController extends GetxController {
 
   Future<Poll?> Polldetail(String postId) async {
     try {
-      // var userId = await JWTController().getUserId();
-      // var token = await JWTController().getAuthToken();
       Dio dio = Dio();
-      //  debugPrint(ApiEndpoint.pollResults(postId));
-      // var data = {"vote": vote, "userId": userId};
+
       dio.options.headers["Authorization"] = token;
       var response = await dio.get(
         ApiEndpoint.pollResults(postId),
       );
-      //print(response.data);
-      //log(response.data);
+
       Poll poll = Poll.fromMap(jsonDecode(jsonEncode(response.data)));
-      //   print(json.encode(response.data)["isVoted"]);
+
       return poll;
-      // return json.decode(response.data)["isVoted"];
     } catch (e) {
       debugPrint(e.toString());
       return null;
