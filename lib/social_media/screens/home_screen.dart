@@ -50,7 +50,7 @@ class SocialMediaHomePage extends StatelessWidget {
                   actions: [
                     GestureDetector(
                       onTap: () {
-                        var jwtController = Get.put(JWTController());
+                         
                         // var token = await jwtController.getAuthToken();
                         // var userId = await jwtController.getUserId();
 

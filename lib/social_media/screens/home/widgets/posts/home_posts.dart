@@ -26,15 +26,22 @@ class HomePosts extends StatelessWidget {
               if (index == homePostController.posts!.length + 1) {
                 return const CupertinoActivityIndicator();
               } else if (index == 0) {
-                return StoryView(sid: myUserId ?? homePostController.userId ?? "");
+                return StoryView(
+                    sid: myUserId ?? homePostController.userId ?? "");
               } else {
                 if (homePostController.posts!.isNotEmpty) {
-                  if (index == 1) {
-                    // debugPrint("///////////////////////////////////////////////////////////");
-                    // debugPrint(homePostController.posts![0].sId.toString());
-                  }
-                  if (homePostController.posts![index - 1].mediaUrl!.isNotEmpty && homePostController.posts?[index - 1].mediaUrl?[0] != null) {
-                    if (homePostController.posts![index - 1].mediaUrl![0]!.endsWith(".svg")) {
+                  // if (index == 1) {
+                  //   // debugPrint("///////////////////////////////////////////////////////////");
+                  //   // debugPrint(homePostController.posts![0].sId.toString());
+                  // }
+                  if (homePostController
+                          .posts![index - 1].mediaUrl!.isNotEmpty &&
+                      homePostController.posts?[index - 1].mediaUrl?[0] !=
+                          null) {
+                    if (homePostController.posts![index - 1].mediaUrl![0]!
+                            .endsWith(".svg") ||
+                        homePostController.posts?[index - 1].mediaUrl?[0] ==
+                            null) {
                       return const SizedBox();
                     } else {
                       return GestureDetector(
@@ -57,25 +64,31 @@ class HomePosts extends StatelessWidget {
                                     content: SizedBox(
                                       height: 250,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           HomePagePopupWidget(
                                             isBorder: false,
                                             title: "View Post",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "View Stats",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Download",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Share",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           )
                                         ],
                                       ),
@@ -87,10 +100,18 @@ class HomePosts extends StatelessWidget {
                               ? const SizedBox()
                               : PostCard(
                                   index: index - 1,
-                                  isLiked: homePostController.posts?[index - 1].likes!.contains(myUserId),
+                                  isLiked: homePostController
+                                      .posts?[index - 1].likes!
+                                      .contains(myUserId),
                                   myUserId: myUserId,
-                                  url: homePostController.posts![index - 1].mediaUrl!.isNotEmpty ? homePostController.posts![index - 1].mediaUrl![0]! : "",
-                                  userImg: homePostController.posts?[index - 1].user?.ProfilePic ?? "",
+                                  url: homePostController.posts![index - 1]
+                                          .mediaUrl!.isNotEmpty
+                                      ? homePostController
+                                          .posts![index - 1].mediaUrl![0]!
+                                      : "",
+                                  userImg: homePostController
+                                          .posts?[index - 1].user?.ProfilePic ??
+                                      "",
                                 ));
                     }
                   } else {

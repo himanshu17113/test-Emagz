@@ -21,9 +21,9 @@ class JWTController extends GetxController {
 
   Future<UserSchema> getCurrentUserDetail() async {
     Dio dio = Dio();
-    token ??= (await getAuthToken())!;
+    token ??= (await getAuthToken());
 
-    userId ??= (await getUserId())!;
+    userId ??= (await getUserId());
     dio.options.headers["Authorization"] = token ??
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ";
     //userToken;
@@ -33,6 +33,8 @@ class JWTController extends GetxController {
       // debugPrint(response.data);
       UserSchema userDetails = UserSchema.fromJson(response.data);
       user?.value = userDetails;
+      debugPrint("-----------");
+      debugPrint(user?.value.ProfilePic);
       gprofilePic = userDetails.ProfilePic;
       return userDetails;
     } else {
@@ -91,7 +93,7 @@ class JWTController extends GetxController {
     //   isAuthorised.value = false;
     //   return null;
     // }
-    return token!;
+    return token;
   }
 
   Future<String?> getUserId() async {

@@ -30,9 +30,11 @@ class HomePostsController extends GetxController {
   @override
   onInit() async {
     await storedData();
-    await getPost();
-    if (posts!.length < 2) {
-      getPost();
+    if (token != null) {
+      await getPost();
+      if (posts!.length < 2) {
+        getPost();
+      }
     }
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==

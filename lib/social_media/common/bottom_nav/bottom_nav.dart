@@ -30,7 +30,7 @@ class BottomNavBar extends StatelessWidget {
         return Stack(
           children: [
             Center(
-              child: screen[homePostController.page ],
+              child: screen[homePostController.page],
             ),
             Align(
               alignment: Alignment.bottomLeft,
@@ -66,7 +66,8 @@ class BottomNavBar extends StatelessWidget {
                           currentIndex: homePostController.page,
                           elevation: 0.0,
                           onTap: (i) {
-                            homePostController.page = i;
+                            homePostController.pageUpdate(i);
+                            //    page = i;
                             //  if (i == 0) {
                             // if (homePostController
                             //     .scrollController.positions.isNotEmpty) {
