@@ -97,7 +97,7 @@ class HomePosts extends StatelessWidget {
                                 });
                           },
                           child: homePostController.posts?[index - 1] == null
-                              ? const SizedBox()
+                              ? const SizedBox.shrink()
                               : PostCard(
                                   index: index - 1,
                                   isLiked: homePostController

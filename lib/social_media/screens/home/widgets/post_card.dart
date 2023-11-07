@@ -15,12 +15,12 @@ import 'package:emagz_vendor/templates/choose_template/webview.dart';
 class PostCard extends StatefulWidget {
   // Post? post;
 
-  bool isBorder;
-  bool? isLiked;
-  String? myUserId;
-  String? userImg;
+  final bool isBorder;
+  final bool? isLiked;
+  final String? myUserId;
+  final String? userImg;
   final int? index;
-  PostCard({
+  const PostCard({
     Key? key,
     // this.post,
 
