@@ -4,7 +4,6 @@ import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/screens/support/support_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets/setting_common_tile.dart';
@@ -32,13 +31,16 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
-  UserSchema? user;
+  // UserSchema? user;
 
   @override
   void initState() {
     super.initState();
-    if (jwtController.user == null) {
-      jwtController.getCurrentUserDetail();
+    debugPrint("pp ${jwtController.user?.value.ProfilePic.toString()} ");
+
+    if (jwtController.user?.value.sId == null) {
+      final user = jwtController.getCurrentUserDetail();
+      debugPrint(user.toString());
     }
   }
 
@@ -46,7 +48,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
   bool myLocation = true;
   bool playNotification = true;
   bool desktopNotification = true;
-  final nav= Get.put(NavController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,33 +56,34 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
       appBar: const SocialMediaSettingAppBar(
         title: "Setting",
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Account",
-                    style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                    height: 300,
-                    decoration: BoxDecoration(
-                      color: whiteAcent,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Account",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                height: 300,
+                decoration: BoxDecoration(
+                  color: whiteAcent,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Obx(() => Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -89,7 +92,9 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               children: [
                                 CircleAvatar(
                                   backgroundImage: CachedNetworkImageProvider(
-                                    jwtController.user?.value.ProfilePic.toString() ?? jwtController.profilePic.toString(),
+                                    jwtController.user?.value.ProfilePic
+                                            .toString() ??
+                                        jwtController.profilePic.toString(),
                                   ),
                                   maxRadius: 45,
                                 ),
@@ -101,8 +106,10 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                       backgroundColor: whiteColor,
                                       child: IconButton(
                                         onPressed: () async {
-                                          image = await picker.pickImage(source: ImageSource.gallery);
-                                          await accountSetupController.uploadProfilePic(image);
+                                          image = await picker.pickImage(
+                                              source: ImageSource.gallery);
+                                          await accountSetupController
+                                              .uploadProfilePic(image);
 
                                           setState(() {});
                                         },
@@ -123,18 +130,26 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               children: [
                                 Text(
                                   overflow: TextOverflow.ellipsis,
-                                  jwtController.user?.value.displayName ?? "loding..",
+                                  jwtController.user?.value.displayName ??
+                                      "loding..",
                                   // user != null
                                   //     ? user!.accountType == "professional"
                                   //         ? user!.username!
                                   //         : user?.displayName ?? 'loding..'
                                   //     : "laoding...",
-                                  style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: blackButtonColor,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 Text(
                                   overflow: TextOverflow.ellipsis,
-                                  jwtController.user?.value.username ?? "loding..",
-                                  style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
+                                  jwtController.user?.value.username ??
+                                      "loding..",
+                                  style: TextStyle(
+                                      color: bottomBarIconColor.withOpacity(.8),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ],
                             ),
@@ -145,11 +160,18 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         ),
                         Text(
                           "Bio",
-                          style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 11, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              color: bottomBarIconColor.withOpacity(.8),
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600),
                         ),
                         Text(
                           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
-                          style: TextStyle(letterSpacing: .5, color: black, fontSize: 10, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              letterSpacing: .5,
+                              color: black,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400),
                         ),
                         const SizedBox(
                           height: 15,
@@ -159,21 +181,28 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           children: [
                             Text(
                               "Change to business account",
-                              style: TextStyle(color: black, fontSize: 10, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  color: black,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600),
                             ),
                             GestureDetector(
                               onTap: () {
                                 Get.to(() => ChooseTemplate(isReg: false));
                               },
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8, horizontal: 12),
                                 decoration: BoxDecoration(
                                   // borderRadius: BorderRadius.circular(10),
                                   color: chipColor,
                                 ),
                                 child: Text(
                                   "Change Theme",
-                                  style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
+                                  style: TextStyle(
+                                      color: whiteColor,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400),
                                 ),
                               ),
                             )
@@ -196,277 +225,302 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                 ));
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
                             decoration: BoxDecoration(
                               // borderRadius: BorderRadius.circular(10),
                               color: chipColor,
                             ),
                             child: Text(
                               "View/Edit your persona",
-                              style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
+                              style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400),
                             ),
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                    )),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Account",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                "Your friends and contacts will see when you’re active ",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  FlutterSwitch(
+                      activeColor: whiteAcent,
+                      toggleColor: pendingColor,
+                      padding: 2,
+                      height: 20,
+                      width: 45,
+                      value: activeUser,
+                      onToggle: (val) {
+                        setState(() {
+                          activeUser = val;
+                        });
+                      }),
                   Text(
-                    "Account",
-                    style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
+                    "  Show my friends and contact when i’m active",
+                    style: TextStyle(
+                        color: blackButtonColor,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox(height: 2),
-                  Text(
-                    "Your friends and contacts will see when you’re active ",
-                    style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Row(
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Preferance",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              // const SizedBox(height: 10),
+              InkWell(
+                onTap: () {
+                  Get.to(() => const ProfileInsightScreen());
+                },
+                child: PreferenceTile(
+                  title: "Persona Insights  ",
+                  isBlue: false,
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.to(() => const PrivacyScreen());
+                },
+                child: PreferenceTile(
+                  isBlue: false,
+                  title: "Privacy",
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.to(() => const SecurityScreen());
+                },
+                child: PreferenceTile(
+                  isBlue: false,
+                  title: "Security",
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  Get.to(() => const SupportScreen());
+                },
+                child: PreferenceTile(
+                  isBlue: false,
+                  title: "Support",
+                  textDesc: 'We are here to Help',
+                ),
+              ),
+              Container(
+                height: 64,
+                margin: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Text(
+                        "Enable my \nlocation",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Spacer(),
                       FlutterSwitch(
                           activeColor: whiteAcent,
                           toggleColor: pendingColor,
                           padding: 2,
                           height: 20,
                           width: 45,
-                          value: activeUser,
+                          value: myLocation,
                           onToggle: (val) {
                             setState(() {
-                              activeUser = val;
+                              myLocation = val;
                             });
                           }),
-                      Text(
-                        "  Show my friends and contact when i’m active",
-                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w400),
+                      const SizedBox(
+                        width: 25,
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Preferance",
-                    style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                  // const SizedBox(height: 10),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const ProfileInsightScreen());
-                    },
-                    child: PreferenceTile(
-                      title: "Persona Insights  ",
-                      isBlue: false,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const PrivacyScreen());
-                    },
-                    child: PreferenceTile(
-                      isBlue: false,
-                      title: "Privacy",
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const SecurityScreen());
-                    },
-                    child: PreferenceTile(
-                      isBlue: false,
-                      title: "Security",
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      Get.to(() => const SupportScreen());
-                    },
-                    child: PreferenceTile(
-                      isBlue: false,
-                      title: "Support",
-                      textDesc: 'We are here to Help',
-                    ),
-                  ),
-                  Container(
-                    height: 64,
-                    margin: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
-                    child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Text(
-                            "Enable my \nlocation",
-                            style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
-                          ),
-                          const Spacer(),
-                          FlutterSwitch(
-                              activeColor: whiteAcent,
-                              toggleColor: pendingColor,
-                              padding: 2,
-                              height: 20,
-                              width: 45,
-                              value: myLocation,
-                              onToggle: (val) {
-                                setState(() {
-                                  myLocation = val;
-                                });
-                              }),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                        ]),
-                  ),
-
-                  Container(
-                    height: 64,
-                    margin: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
-                    child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Text(
-                            "Play Sound When i get \nnotification",
-                            style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
-                          ),
-                          const Spacer(),
-                          FlutterSwitch(
-                              activeColor: whiteAcent,
-                              toggleColor: pendingColor,
-                              padding: 2,
-                              height: 20,
-                              width: 45,
-                              value: playNotification,
-                              onToggle: (val) {
-                                setState(() {
-                                  playNotification = val;
-                                });
-                              }),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                        ]),
-                  ),
-                  Container(
-                    height: 64,
-                    margin: const EdgeInsets.only(top: 10),
-                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
-                    child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            width: 25,
-                          ),
-                          Text(
-                            "Enable desktop  \nnotification",
-                            style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
-                          ),
-                          const Spacer(),
-                          FlutterSwitch(
-                              activeColor: whiteAcent,
-                              toggleColor: pendingColor,
-                              padding: 2,
-                              height: 20,
-                              width: 45,
-                              value: desktopNotification,
-                              onToggle: (val) {
-                                setState(() {
-                                  desktopNotification = val;
-                                });
-                              }),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                        ]),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Blocked Users",
-                    style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-
-                  Text(
-                    "Once you blocked someone they will no longer to see things that you post on your feed , tag you , invite you or start a conversation with you. However you can unblock them later if you want ",
-                    style: TextStyle(color: blackButtonColor, fontSize: 12, letterSpacing: .6, fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Manage blocked users",
-                    style: TextStyle(color: chipColor, fontSize: 12, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      //   Get.deleteAll(force: true);
-                      await jwtController.setAuthToken(null, null);
-                      Get.off(() => const CommonAuthScreen());
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: double.infinity,
-                      height: 54,
-                      decoration: BoxDecoration(color: blackShaded, borderRadius: BorderRadius.circular(10)),
-                      child: Text(
-                        "Log Out",
-                        style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 20),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Add another account",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
+                    ]),
               ),
-            ),
-            GestureDetector(
-              onHorizontalDragUpdate: (details)
-              {
 
-                nav.page.value = 0;
-                //Get.offAll(() => BottomNavBar());
+              Container(
+                height: 64,
+                margin: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Text(
+                        "Play Sound When i get \nnotification",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Spacer(),
+                      FlutterSwitch(
+                          activeColor: whiteAcent,
+                          toggleColor: pendingColor,
+                          padding: 2,
+                          height: 20,
+                          width: 45,
+                          value: playNotification,
+                          onToggle: (val) {
+                            setState(() {
+                              playNotification = val;
+                            });
+                          }),
+                      const SizedBox(
+                        width: 25,
+                      ),
+                    ]),
+              ),
+              Container(
+                height: 64,
+                margin: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                    color: whiteColor, borderRadius: BorderRadius.circular(15)),
+                child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 25,
+                      ),
+                      Text(
+                        "Enable desktop  \nnotification",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      const Spacer(),
+                      FlutterSwitch(
+                          activeColor: whiteAcent,
+                          toggleColor: pendingColor,
+                          padding: 2,
+                          height: 20,
+                          width: 45,
+                          value: desktopNotification,
+                          onToggle: (val) {
+                            setState(() {
+                              desktopNotification = val;
+                            });
+                          }),
+                      const SizedBox(
+                        width: 25,
+                      ),
+                    ]),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Blocked Users",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
 
-
-                //Get.offAll(()=>SocialMediaHomePage());
-              },
-              child: ColoredBox(
-                color: Colors.transparent,
-                child: SizedBox(
-
-                  height: double.maxFinite,
-                  width: 30,
+              Text(
+                "Once you blocked someone they will no longer to see things that you post on your feed , tag you , invite you or start a conversation with you. However you can unblock them later if you want ",
+                style: TextStyle(
+                    color: blackButtonColor,
+                    fontSize: 12,
+                    letterSpacing: .6,
+                    fontWeight: FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Manage blocked users",
+                style: TextStyle(
+                    color: chipColor,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              InkWell(
+                onTap: () async {
+                  //   Get.deleteAll(force: true);
+                  await jwtController.setAuthToken(null, null);
+                  Get.off(() => const CommonAuthScreen());
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  height: 54,
+                  decoration: BoxDecoration(
+                      color: blackShaded,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    "Log Out",
+                    style: TextStyle(
+                        color: whiteColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600),
+                  ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                alignment: Alignment.center,
+                child: Text(
+                  "Add another account",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: blackShaded,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ],
+          ),
         ),
       ),
     );
