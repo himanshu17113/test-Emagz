@@ -45,5 +45,5 @@ class CustomSnackbar {
 }
 final nav= Get.put(NavController());
 Widget customBackButton() {
-  return Platform.isIOS?IconButton(onPressed: (){nav.page=0.obs;Get.off(()=>BottomNavBar());}, icon: const Icon(Icons.arrow_back_ios)):const SizedBox.shrink();
+  return Platform.isIOS?IconButton(onPressed: (){nav.page.value=0;}, icon: const Icon(Icons.arrow_back_ios)):const SizedBox.shrink();
 }

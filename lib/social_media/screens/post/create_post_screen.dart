@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
+import '../../controller/bottom_nav_controller.dart';
 import '../../controller/post/post_controller.dart';
 import '../../utils/photo_filter.dart';
 
@@ -41,6 +42,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   final postController = Get.put(PostController());
+  final nav= Get.put(NavController());
   Uint8List? imagePath;
   String? fileExtension;
 
@@ -87,156 +89,180 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
+              child: Stack(
+                alignment: Alignment.centerLeft,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      const Text(
-                        "Post",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(height: 2, fontSize: 25, fontWeight: FontWeight.w600),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Post",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(height: 2, fontSize: 25, fontWeight: FontWeight.w600),
+                          ),
+                          GestureDetector(
+                            onTap: () => (postController.imagePaths.isNotEmpty || postController.images.isNotEmpty)
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      maintainState: true,
+                                        builder: (context) => EditorScreen(
+                                              //   fileExtension: fileExtension,
+                                              image: postController.images,
+                                            ),
+                                        fullscreenDialog: true))
+                                : null,
+                            child: SvgPicture.asset(
+                              "assets/png/nextforward.svg",
+                              height: 32,
+                              width: 32,
+                            ),
+                          )
+                        ],
                       ),
-                      GestureDetector(
-                        onTap: () => (postController.imagePaths.isNotEmpty || postController.images.isNotEmpty)
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  maintainState: true,
-                                    builder: (context) => EditorScreen(
-                                          //   fileExtension: fileExtension,
-                                          image: postController.images,
-                                        ),
-                                    fullscreenDialog: true))
-                            : null,
-                        child: SvgPicture.asset(
-                          "assets/png/nextforward.svg",
-                          height: 32,
-                          width: 32,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Get.to(() => const TextPostScreen());
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(
+                                    255,
+                                    223,
+                                    236,
+                                    255,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Text(
+                                  "Text",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xff054BFF),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => setState(() => postController.assetType = PostType.poll),
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                alignment: Alignment.center,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffDFECFF),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: FormHeadingText(
+                                  headings: "Poll",
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xff054BFF),
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => setState(() => postController.assetType = PostType.gallery),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffDFECFF),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: FormHeadingText(
+                                  headings: "Gallery",
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xff054BFF),
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => setState(() => postController.assetType = PostType.text),
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffDFECFF),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: InkWell(
+                                  onTap: () => setState(() => postController.assetType = PostType.gallery),
+                                  child: FormHeadingText(
+                                    headings: "v-Magz",
+                                    fontWeight: FontWeight.bold,
+                                    color: const Color(0xff054BFF),
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await _capturePhoto();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                margin: const EdgeInsets.symmetric(horizontal: 10),
+                                alignment: Alignment.center,
+                                height: 42,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffDFECFF),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: FormHeadingText(
+                                  headings: "Camera",
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color(0xff054BFF),
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Expanded(child: GridGallery())
                     ],
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const TextPostScreen());
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(
-                                255,
-                                223,
-                                236,
-                                255,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: const Text(
-                              "Text",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff054BFF),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.poll),
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: FormHeadingText(
-                              headings: "Poll",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.gallery),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: FormHeadingText(
-                              headings: "Gallery",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.text),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: InkWell(
-                              onTap: () => setState(() => postController.assetType = PostType.gallery),
-                              child: FormHeadingText(
-                                headings: "v-Magz",
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xff054BFF),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            await _capturePhoto();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: FormHeadingText(
-                              headings: "Camera",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ],
+                  GestureDetector(
+                    onHorizontalDragUpdate: (details)
+                    {
+
+                      nav.page.value = 0;
+                      //Get.offAll(() => BottomNavBar());
+
+
+                      //Get.offAll(()=>SocialMediaHomePage());
+                    },
+                    child: ColoredBox(
+                      color: Colors.transparent,
+                      child: SizedBox(
+
+                        height: double.maxFinite,
+                        width: 60,
+                      ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Expanded(child: GridGallery())
                 ],
               ),
             ),

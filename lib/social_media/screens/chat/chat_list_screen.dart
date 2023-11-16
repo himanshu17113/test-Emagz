@@ -3,6 +3,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
+import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_setting_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
@@ -30,6 +31,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
 
   final jwtController = Get.find<JWTController>();
   final chatController = Get.put(ConversationController());
+  final nav= Get.put(NavController());
   late Future<List<Conversation>>? myFuture;
   @override
   void initState() {
@@ -132,153 +134,178 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 ],
               ),
             )),
-        body: RefreshIndicator(
-          onRefresh: () => myFuture = chatController.getChatList(),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 18),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: Container(
-                        // margin: EdgeInsets.symmetric(),
-                        height: 42,
-                        decoration: BoxDecoration(
-                            color: const Color(0xffF0F0F0),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextField(
-                          controller: QueryControl,
-                          onSubmitted: (value) {
-                            debugPrint('uefibdjv');
-
-                            setState(() {
-                              isSearch = true;
-                              searchQuery = QueryControl.text;
-                            });
-                          },
-                          onTapOutside: (p) {
-                            setState(() {
-                              isSearch = false;
-                            });
-                          },
-                          showCursor: false,
-                          decoration: InputDecoration(
-                              hintText: "Search",
-                              hintStyle: TextStyle(
-                                  fontSize: 13, color: blackButtonColor),
-                              contentPadding:
-                                  const EdgeInsets.only(left: 10, top: 5),
-                              prefixIcon: const Icon(
-                                Icons.search,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                              border: InputBorder.none),
-                        ),
-                      )),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const ChatSettingScreen());
-                        },
-                        child: Container(
-                            padding: const EdgeInsets.all(12),
-                            height: 45,
-                            width: 45,
-                            decoration: BoxDecoration(
+        body: Stack(
+          alignment: Alignment.centerLeft,
+          children: [
+            RefreshIndicator(
+            onRefresh: () => myFuture = chatController.getChatList(),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Container(
+                          // margin: EdgeInsets.symmetric(),
+                          height: 42,
+                          decoration: BoxDecoration(
                               color: const Color(0xffF0F0F0),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: SvgPicture.asset(
-                              "assets/svg/setting.svg",
-                              // width: 20,
-                              // height: 10,
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 18),
-                  child: Text(
-                    "Online",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 15.5,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
-                  child: Row(
-                    children: [
-                      UserOnlineCircle(),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      // UserOnlineCircle(),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // UserOnlineCircle(),
-                      // SizedBox(
-                      //   width: 10,
-                      // ),
-                      // UserOnlineCircle(),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 10),
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.only(left: 10),
-                  height: 37,
-                  // width: 45,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffF0F0F0),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: FormHeadingText(
-                    headings: "DIRECT MESSAGE",
-                    fontSize: 12,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                (userId == null)
-                    ? const CircularProgressIndicator()
-                    : (isSearch)
-                        ? UserChatsWithSearch(
-                            userId: userId!,
-                            senderName: searchQuery,
-                          )
-                        : (myFuture == null)
-                            ? const CircularProgressIndicator()
-                            : RefreshIndicator(
-                                onRefresh: () =>
-                                    myFuture = chatController.getChatList(),
-                                child: UserChats(
-                                  data: myFuture!,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: TextField(
+                            controller: QueryControl,
+                            onSubmitted: (value) {
+                              debugPrint('uefibdjv');
+
+                              setState(() {
+                                isSearch = true;
+                                searchQuery = QueryControl.text;
+                              });
+                            },
+                            onTapOutside: (p) {
+                              setState(() {
+                                isSearch = false;
+                              });
+                            },
+                            showCursor: false,
+                            decoration: InputDecoration(
+                                hintText: "Search",
+                                hintStyle: TextStyle(
+                                    fontSize: 13, color: blackButtonColor),
+                                contentPadding:
+                                    const EdgeInsets.only(left: 10, top: 5),
+                                prefixIcon: const Icon(
+                                  Icons.search,
+                                  color: Colors.black,
+                                  size: 20,
                                 ),
+                                border: InputBorder.none),
+                          ),
+                        )),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(() => const ChatSettingScreen());
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(12),
+                              height: 45,
+                              width: 45,
+                              decoration: BoxDecoration(
+                                color: const Color(0xffF0F0F0),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-              ],
+                              child: SvgPicture.asset(
+                                "assets/svg/setting.svg",
+                                // width: 20,
+                                // height: 10,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 18),
+                    child: Text(
+                      "Online",
+                      style: TextStyle(
+                          color: blackButtonColor,
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+                    child: Row(
+                      children: [
+                        UserOnlineCircle(),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        // UserOnlineCircle(),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // UserOnlineCircle(),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // UserOnlineCircle(),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10, bottom: 10),
+                    alignment: Alignment.centerLeft,
+                    padding: const EdgeInsets.only(left: 10),
+                    height: 37,
+                    // width: 45,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffF0F0F0),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: FormHeadingText(
+                      headings: "DIRECT MESSAGE",
+                      fontSize: 12,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  (userId == null)
+                      ? const CircularProgressIndicator()
+                      : (isSearch)
+                          ? UserChatsWithSearch(
+                              userId: userId!,
+                              senderName: searchQuery,
+                            )
+                          : (myFuture == null)
+                              ? const CircularProgressIndicator()
+                              : RefreshIndicator(
+                                  onRefresh: () =>
+                                      myFuture = chatController.getChatList(),
+                                  child: UserChats(
+                                    data: myFuture!,
+                                  ),
+                                ),
+                ],
+              ),
             ),
+
           ),
+            GestureDetector(
+              onHorizontalDragUpdate: (details)
+              {
+
+                nav.page.value = 0;
+                //Get.offAll(() => BottomNavBar());
+
+
+                //Get.offAll(()=>SocialMediaHomePage());
+              },
+              child: ColoredBox(
+                color: Colors.transparent,
+                child: SizedBox(
+
+                  height: double.maxFinite,
+                  width: 60,
+                ),
+              ),
+            ),
+    ]
         ),
       ),
     );
