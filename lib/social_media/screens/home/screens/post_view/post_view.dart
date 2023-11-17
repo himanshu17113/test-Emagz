@@ -20,7 +20,7 @@ class PostView extends StatelessWidget {
       required this.myId,
       required this.index});
 
-  final homePostController = Get.put(HomePostsController());
+  final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/EditorScreen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/post/text-post.dart';
@@ -12,7 +11,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
 import '../../controller/post/post_controller.dart';
-import '../../utils/photo_filter.dart';
 
 class CreatePostScreen extends StatefulWidget {
   const CreatePostScreen({super.key});
@@ -22,16 +20,6 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
-  final List<List<double>> filters = [
-    SEPIA_MATRIX,
-    GREYSCALE_MATRIX,
-    VINTAGE_MATRIX,
-    FILTER_1,
-    FILTER_2,
-    FILTER_3,
-    FILTER_4,
-    FILTER_5,
-  ];
   RxBool isLoading = RxBool(false);
   @override
   void initState() {
@@ -40,11 +28,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     super.initState();
   }
 
-  final postController = Get.put(PostController());
-  Uint8List? imagePath;
-  String? fileExtension;
+  final postController = Get.put(PostController(), tag: "PostController");
 
-  int index = -1;
+  //String? fileExtension;
+  bool isPoll = false;
+  RxBool ispoll = RxBool(false);
   Future<Uint8List?> xFileToUint8List(XFile xFile) async {
     File file = File(xFile.path);
     if (await file.exists()) {
@@ -65,24 +53,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       Uint8List? image = await xFileToUint8List(pickedFile);
       Get.to(
           () => EditorScreen(
-                // fileExtension: fileExtension,
                 image: [image],
-                // onSubmit: (editedImage) {
-                //   postController.imagePaths.add(editedImage.path);
-                //   Get.off(() => PrePostScreen(postType: PostType.text, image: editedImage.path));
-                // }
               ),
           curve: Curves.bounceIn);
     }
   }
 
-  // final GlobalKey _imageKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: socialBack,
+        backgroundColor: Colors.white,
         body: Stack(children: [
           SafeArea(
             child: Padding(
@@ -93,7 +74,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
-                        "Post",
+                        "  Post  ",
                         textAlign: TextAlign.left,
                         style: TextStyle(height: 2, fontSize: 25, fontWeight: FontWeight.w600),
                       ),
@@ -102,9 +83,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ? Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  maintainState: true,
+                                    maintainState: true,
                                     builder: (context) => EditorScreen(
-                                          //   fileExtension: fileExtension,
                                           image: postController.images,
                                         ),
                                     fullscreenDialog: true))
@@ -126,10 +106,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             Get.to(() => const TextPostScreen());
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
-                            height: 42,
+                            height: 36,
                             decoration: BoxDecoration(
                               color: const Color.fromARGB(
                                 255,
@@ -150,14 +130,22 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.poll),
+                          onTap: () => setState(() {
+                            isPoll = !isPoll;
+                            if (!isPoll) {
+                              postController.assetType = PostType.gallery;
+                            } else {
+                              postController.assetType = PostType.poll;
+                            }
+                          }),
                           child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             alignment: Alignment.center,
-                            height: 42,
+                            height: 36,
                             decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
+                              border: isPoll ? Border.all(color: const Color(0xff054BFF), width: 2.5) : null,
+                              color: const Color(0xFFDFECFF),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: FormHeadingText(
@@ -168,56 +156,58 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ),
                         ),
-                        InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.gallery),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: FormHeadingText(
-                              headings: "Gallery",
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => setState(() => postController.assetType = PostType.text),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            margin: const EdgeInsets.symmetric(horizontal: 10),
-                            alignment: Alignment.center,
-                            height: 42,
-                            decoration: BoxDecoration(
-                              color: const Color(0xffDFECFF),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: InkWell(
-                              onTap: () => setState(() => postController.assetType = PostType.gallery),
-                              child: FormHeadingText(
-                                headings: "v-Magz",
-                                fontWeight: FontWeight.bold,
-                                color: const Color(0xff054BFF),
-                                fontSize: 14,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // InkWell(
+                        //   onTap: () => setState(() => postController.assetType = PostType.gallery),
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(horizontal: 30),
+                        //     margin: const EdgeInsets.symmetric(horizontal: 10),
+                        //     alignment: Alignment.center,
+                        //     height: 36,
+                        //     decoration: BoxDecoration(
+                        //       color: const Color(0xffDFECFF),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     child: FormHeadingText(
+                        //       headings: "Gallery",
+                        //       fontWeight: FontWeight.bold,
+                        //       color: const Color(0xff054BFF),
+                        //       fontSize: 14,
+                        //     ),
+                        //   ),
+                        // ),
+
+                        // InkWell(
+                        //   onTap: () => setState(() => postController.assetType = PostType.text),
+                        //   child: Container(
+                        //     padding: const EdgeInsets.symmetric(horizontal: 30),
+                        //     margin: const EdgeInsets.symmetric(horizontal: 10),
+                        //     alignment: Alignment.center,
+                        //     height: 36,
+                        //     decoration: BoxDecoration(
+                        //       color: const Color(0xffDFECFF),
+                        //       borderRadius: BorderRadius.circular(10),
+                        //     ),
+                        //     child: InkWell(
+                        //       onTap: () => setState(() => postController.assetType = PostType.gallery),
+                        //       child: FormHeadingText(
+                        //         headings: "v-Magz",
+                        //         fontWeight: FontWeight.bold,
+                        //         color: const Color(0xff054BFF),
+                        //         fontSize: 14,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+
                         InkWell(
                           onTap: () async {
                             await _capturePhoto();
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
                             margin: const EdgeInsets.symmetric(horizontal: 10),
                             alignment: Alignment.center,
-                            height: 42,
+                            height: 36,
                             decoration: BoxDecoration(
                               color: const Color(0xffDFECFF),
                               borderRadius: BorderRadius.circular(10),
@@ -241,27 +231,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               ),
             ),
           ),
-          // (postController.imagePaths.isNotEmpty || postController.images.isNotEmpty)
-          //     ? Positioned(
-          //         bottom: 70,
-          //         right: 30,
-          //         child: ElevatedButton(
-          //           child: Obx(() => Text(isLoading.value ? "loading..." : "next")),
-          //           onPressed: () async {
-          //             isLoading.value = true;
-
-          //             Navigator.push(
-          //                 context,
-          //                 MaterialPageRoute(
-          //                     builder: (context) => EditorScreen(
-          //                           fileExtension: fileExtension,
-          //                           image: postController.images,
-          //                         ),
-          //                     fullscreenDialog: true));
-          //           },
-          //         ),
-          //       )
-          //     : const SizedBox(),
         ]),
       ),
     );
@@ -269,21 +238,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 }
 
 class GridGallery extends StatefulWidget {
-  final ScrollController? scrollCtr;
   final bool isStory;
-  //final void Function(Uint8List? imageData, AssetEntity assetEntity)? onPostTapped;
-  // final void Function(Uint8List? imageData, AssetEntity assetEntity)? onPostSelected;
-  const GridGallery({
-    Key? key,
-//    this.onPostTapped,
-    this.scrollCtr,
-    this.isStory = false,
-
-    ///    this.onPostSelected,
-  }) : super(key: key);
+  const GridGallery({super.key, this.isStory = false});
 
   @override
-  _GridGalleryState createState() => _GridGalleryState();
+  State<GridGallery> createState() => _GridGalleryState();
 }
 
 class _GridGalleryState extends State<GridGallery> {
@@ -291,8 +250,8 @@ class _GridGalleryState extends State<GridGallery> {
   int currentPage = 0;
   int? lastPage;
   RxBool longPressed = RxBool(false);
-  final postController = Get.put(PostController());
-  final storyController = Get.put(GetXStoryController());
+  final postController = Get.find<PostController>(tag: "PostController");
+  final storyController = Get.find<GetXStoryController>(tag: "GetXStoryController");
 
   @override
   void initState() {
@@ -379,9 +338,14 @@ class _GridGalleryState extends State<GridGallery> {
                             alignment: Alignment.topRight,
                             child: Padding(
                               padding: EdgeInsets.only(right: 5, bottom: 5),
-                              child: Icon(
-                                Icons.circle,
-                                color: Colors.grey,
+                              child: CircleAvatar(
+                                radius: 13,
+                                backgroundColor: Colors.blue,
+                                child: Icon(
+                                  Icons.check,
+                                  size: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           )
@@ -409,7 +373,6 @@ class _GridGalleryState extends State<GridGallery> {
         return false;
       },
       child: GridView.builder(
-          controller: widget.scrollCtr,
           itemCount: _mediaList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, mainAxisSpacing: 5, crossAxisSpacing: 5),
           itemBuilder: (BuildContext context, int index) {

@@ -1,19 +1,17 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
-import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
+ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_list_screen.dart';
 import 'package:emagz_vendor/social_media/screens/explore/explpre_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home_screen.dart';
 import 'package:emagz_vendor/social_media/screens/post/create_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../screens/settings/personal_page/personal_page_setting.dart';
 
 class BottomNavBar extends StatelessWidget {
-  BottomNavBar({Key? key}) : super(key: key);
+   BottomNavBar({Key? key}) : super(key: key);
 
-  List<Widget> screen = [
+  final List<Widget> screen = [
     SocialMediaHomePage(),
     const ExploreScreen(),
     const CreatePostScreen(),
@@ -23,7 +21,7 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomePostsController>(
-      //  dispose: (state) => ,
+      tag: "HomePostsController",
       autoRemove: false,
       init: HomePostsController(),
       builder: (homePostController) {
@@ -35,50 +33,25 @@ class BottomNavBar extends StatelessWidget {
             Align(
               alignment: Alignment.bottomLeft,
               child: AnimatedContainer(
-                height:
-                    //    homePostController.isVisible.value
-                    homePostController.isVisible.value
-                        ? kBottomNavigationBarHeight + 21
-                        : 0,
+                height: homePostController.isVisible ? kBottomNavigationBarHeight + 21 : 0,
                 duration: const Duration(milliseconds: 200),
                 child: Container(
                   height: kBottomNavigationBarHeight,
-                  margin: EdgeInsets.only(
-                      bottom: homePostController.isVisible.value ? 10 : 0,
-                      left: 10,
-                      right: 10),
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(.2),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: homePostController.isVisible.value
+                  margin: EdgeInsets.only(bottom: homePostController.isVisible ? 10 : 0, left: 10, right: 10),
+                  decoration: BoxDecoration(color: Colors.black.withOpacity(.2), borderRadius: BorderRadius.circular(15)),
+                  child: homePostController.isVisible
                       ? BottomNavigationBar(
                           selectedItemColor: whiteColor,
                           unselectedItemColor: whiteColor,
-
                           showSelectedLabels: true,
-                          // currentIndex: value.page,
                           type: BottomNavigationBarType.fixed,
-                          selectedLabelStyle:
-                              TextStyle(fontSize: 7, color: blackButtonColor),
-                          unselectedLabelStyle:
-                              TextStyle(fontSize: 7, color: grayColor),
+                          selectedLabelStyle: TextStyle(fontSize: 7, color: blackButtonColor),
+                          unselectedLabelStyle: TextStyle(fontSize: 7, color: grayColor),
                           backgroundColor: Colors.transparent,
                           currentIndex: homePostController.page,
                           elevation: 0.0,
                           onTap: (i) {
                             homePostController.pageUpdate(i);
-                            //    page = i;
-                            //  if (i == 0) {
-                            // if (homePostController
-                            //     .scrollController.positions.isNotEmpty) {
-                            //   homePostController.scrollController.animateTo(0,
-                            //       duration: const Duration(seconds: 1),
-                            //       curve: Curves.bounceOut);
-                            // }
-                            // if (i == 0) {
-                            //   homePostController.scrollController.animateTo(0, duration: const Duration(seconds: 1), curve: Curves.bounceOut);
-                            // }
-                            // }
                           },
                           items: [
                             BottomNavigationBarItem(

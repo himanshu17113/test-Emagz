@@ -11,19 +11,25 @@ import '../../../controller/post/post_controller.dart';
 
 class CustomPollSelectScreen extends StatefulWidget {
   final String? image;
-  final Uint8List? images;
-  PostType postType;
-  CustomPollSelectScreen({Key? key, this.image, required this.postType, this.images}) : super(key: key);
+  final List<Uint8List>? images;
+  final PostType postType;
+  const CustomPollSelectScreen({Key? key, this.image, required this.postType, this.images}) : super(key: key);
 
   @override
   State<CustomPollSelectScreen> createState() => _CustomPollSelectScreenState();
 }
 
 class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
-  final postController = Get.put(PostController());
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // final postController = Get.put(PostController(), tag: "PostController");
+  final postController = Get.find<PostController>(tag: "PostController");
   @override
   Widget build(BuildContext context) {
-    return SizedBox.expand(
+    return Material(
       child: Stack(
         children: [
           if (widget.image != null) ...[
@@ -38,82 +44,120 @@ class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
             ),
           ],
           if (widget.images != null) ...[
-            Image.memory(
-              widget.images!,
-              fit: BoxFit.cover,
-              height: double.infinity,
-              width: double.infinity,
-              alignment: Alignment.center,
-            )
+            PageView.builder(
+              itemCount: widget.images!.length,
+              itemBuilder: (context, index) => Center(
+                  child: Image.memory(
+                widget.images![index],
+                filterQuality: FilterQuality.high,
+              )),
+            ),
           ],
           Positioned(
+              // curve: Curves.bounceInOut,
+              // duration: const Duration(milliseconds: 50),
               bottom: 0,
-              child: GlassmorphicContainer(
-                colour: Colors.grey,
-                height: 280,
-                borderRadius: 2,
-                blur: 5,
-                child: Column(
-                  children: [
-                    FormHeadingText(
-                      headings: 'Custom Poll',
-                      color: Colors.white,
+              left: 0,
+              right: 0,
+              child: Center(
+                child: GlassmorphicContainer(
+                  colour: Colors.white10,
+                  height: 380 + MediaQuery.of(context).viewInsets.bottom,
+                  borderRadius: 20,
+                  blur: 5,
+                  child: SizedBox(
+                    width: Get.width,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(50, 15, 50, 25 + MediaQuery.of(context).viewInsets.bottom),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Custom Poll',
+                            style: TextStyle(color: Colors.white, fontSize: 24),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          const Text(
+                            '  Mini 2 and Max 4 buttons',
+                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          ),
+
+                          const Spacer(
+                            flex: 2,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                child: TextField(
+                                    style: const TextStyle(color: Colors.white70),
+                                    textAlign: TextAlign.center,
+                                    controller: postController.button1Controller,
+                                    decoration: const InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white12, // Gray background color
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                                          borderSide: BorderSide.none, // No border
+                                        ),
+                                        hintTextDirection: TextDirection.rtl,
+                                        hintText: 'Button 1',
+                                        hintStyle: TextStyle(color: Colors.white70))),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: TextField(
+                                    style: const TextStyle(color: Colors.white70),
+                                    controller: postController.button2Controller,
+                                    decoration: const InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white12, // Gray background color
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
+                                          borderSide: BorderSide.none, // No border
+                                        ),
+                                        hintText: 'Button 2',
+                                        hintStyle: TextStyle(color: Colors.white70))),
+                              ),
+                            ],
+                          ),
+                          const Spacer(
+                            flex: 10,
+                          ),
+
+                          // const Icon(Icons.add),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(10),
+                                    backgroundColor: const Color.fromRGBO(27, 71, 193, 0.28),
+                                  ),
+                                  child: const Text('     Cancel     ')),
+                              ElevatedButton(
+                                  onPressed: () async {
+                                    Get.back();
+                                  },
+                                  style: ElevatedButton.styleFrom(padding: const EdgeInsets.all(10), backgroundColor: Colors.blueAccent
+                                      // const Color.fromRGBO(27, 71, 193, 1),
+                                      ),
+                                  child: const Text('     Continue     ')),
+                            ],
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    FormHeadingText(
-                      headings: 'Minimum 2 and Max 4 buttons',
-                      color: Colors.white,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          child: TextField(
-                              controller: postController.button1Controller,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200], // Gray background color
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
-                                  borderSide: BorderSide.none, // No border
-                                ),
-                                hintText: 'Button 1',
-                              )),
-                        ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                        SizedBox(
-                          width: 150,
-                          child: TextField(
-                              controller: postController.button2Controller,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[200], // Gray background color
-                                border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(10.0)), // Border radius
-                                  borderSide: BorderSide.none, // No border
-                                ),
-                                hintText: 'Button 2',
-                              )),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    const Icon(Icons.add),
-                    ElevatedButton(
-                        onPressed: () async {
-                          Get.back();
-                        },
-                        child: const Text('Continue'))
-                  ],
+                  ),
                 ),
               ))
         ],

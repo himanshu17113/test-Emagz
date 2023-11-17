@@ -4,7 +4,6 @@ import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/controller/bottom_nav_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,8 +35,9 @@ class PostController extends GetxController {
 
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-  final HomePostsController homePostsController =
-      Get.put(HomePostsController());
+  final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
+
+ // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
   final jwtController = Get.find<JWTController>();
 
   Future setPost(image, PostType assetTyp) async {
@@ -59,8 +59,7 @@ class PostController extends GetxController {
     imagePaths.clear();
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg')
-          .create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -72,16 +71,14 @@ class PostController extends GetxController {
   //   images.add(imagePath);
   // }
 
-  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
-      bool? isCustomPoll, List<Uint8List> images) async {
+  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer, bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
     try {
       await addPost(images);
 
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
-      dio.options.headers["Authorization"] =
-          jwtController.token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] = jwtController.token ?? await jwtController.getAuthToken();
       debugPrint(jwtController.token);
       debugPrint(jwtController.userId);
 
@@ -92,9 +89,7 @@ class PostController extends GetxController {
         // assetType.toString().split(".")[1].substring(0),
         "mediaUrl":
 
-            /// MultipartFile.fromFileSync(imagePaths[0]),
-            List.generate(imagePaths.length,
-                (i) => MultipartFile.fromFileSync(imagePaths[i])),
+             List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
 
         "Enabledpoll": true,
         // enablePoll ? true : false,
@@ -113,8 +108,7 @@ class PostController extends GetxController {
         "tagPeople": "[]",
         "customPollEnabled": true,
         //isCustomPoll,
-        "customPollData":
-            "[${button1Controller.text},${button2Controller.text}]"
+        "customPollData": "[${button1Controller.text},${button2Controller.text}]"
       });
 
       var res = await dio.post(

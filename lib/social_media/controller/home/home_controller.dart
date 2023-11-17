@@ -22,7 +22,8 @@ class HomePostsController extends GetxController {
   final socketController = Get.put(SocketController());
   String? token;
   String? userId;
-  RxBool isVisible = RxBool(true);
+ // RxBool isVisible = RxBool(true);
+  bool isVisible = true;
   int page = 0;
   List<Post>? posts = [];
 
@@ -39,15 +40,15 @@ class HomePostsController extends GetxController {
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
-        if (isVisible.value) {
-          isVisible.value = false;
+        if (isVisible) {
+          isVisible = false;
           update();
         }
       }
       if (scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
-        if (!isVisible.value) {
-          isVisible.value = true;
+        if (!isVisible) {
+          isVisible = true;
           update();
         }
       }

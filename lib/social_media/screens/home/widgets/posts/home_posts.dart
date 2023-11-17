@@ -13,35 +13,24 @@ class HomePosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomePostsController>(
+        tag: "HomePostsController",
         init: HomePostsController(),
-        initState: (_) {},
+        autoRemove: false,
         builder: (homePostController) {
           return ListView.builder(
             cacheExtent: 2000,
             padding: const EdgeInsets.only(bottom: 80.0),
             controller: homePostController.scrollController,
-            //   physics: const BouncingScrollPhysics(),
             itemCount: homePostController.posts!.length + 2,
             itemBuilder: (context, index) {
               if (index == homePostController.posts!.length + 1) {
                 return const CupertinoActivityIndicator();
               } else if (index == 0) {
-                return StoryView(
-                    sid: myUserId ?? homePostController.userId ?? "");
+                return StoryView(sid: myUserId ?? homePostController.userId ?? "");
               } else {
                 if (homePostController.posts!.isNotEmpty) {
-                  // if (index == 1) {
-                  //   // debugPrint("///////////////////////////////////////////////////////////");
-                  //   // debugPrint(homePostController.posts![0].sId.toString());
-                  // }
-                  if (homePostController
-                          .posts![index - 1].mediaUrl!.isNotEmpty &&
-                      homePostController.posts?[index - 1].mediaUrl?[0] !=
-                          null) {
-                    if (homePostController.posts![index - 1].mediaUrl![0]!
-                            .endsWith(".svg") ||
-                        homePostController.posts?[index - 1].mediaUrl?[0] ==
-                            null) {
+                  if (homePostController.posts![index - 1].mediaUrl!.isNotEmpty && homePostController.posts?[index - 1].mediaUrl?[0] != null) {
+                    if (homePostController.posts![index - 1].mediaUrl![0]!.endsWith(".svg") || homePostController.posts?[index - 1].mediaUrl?[0] == null) {
                       return const SizedBox();
                     } else {
                       return GestureDetector(
@@ -64,31 +53,25 @@ class HomePosts extends StatelessWidget {
                                     content: SizedBox(
                                       height: 250,
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.center,
                                         children: [
                                           HomePagePopupWidget(
                                             isBorder: false,
                                             title: "View Post",
-                                            post: homePostController
-                                                .posts![index - 1],
+                                            post: homePostController.posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "View Stats",
-                                            post: homePostController
-                                                .posts![index - 1],
+                                            post: homePostController.posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Download",
-                                            post: homePostController
-                                                .posts![index - 1],
+                                            post: homePostController.posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Share",
-                                            post: homePostController
-                                                .posts![index - 1],
+                                            post: homePostController.posts![index - 1],
                                           )
                                         ],
                                       ),
@@ -100,18 +83,10 @@ class HomePosts extends StatelessWidget {
                               ? const SizedBox.shrink()
                               : PostCard(
                                   index: index - 1,
-                                  isLiked: homePostController
-                                      .posts?[index - 1].likes!
-                                      .contains(myUserId),
+                                  isLiked: homePostController.posts?[index - 1].likes!.contains(myUserId),
                                   myUserId: myUserId,
-                                  url: homePostController.posts![index - 1]
-                                          .mediaUrl!.isNotEmpty
-                                      ? homePostController
-                                          .posts![index - 1].mediaUrl![0]!
-                                      : "",
-                                  userImg: homePostController
-                                          .posts?[index - 1].user?.ProfilePic ??
-                                      "",
+                                  url: homePostController.posts![index - 1].mediaUrl!.isNotEmpty ? homePostController.posts![index - 1].mediaUrl![0]! : "",
+                                  userImg: homePostController.posts?[index - 1].user?.ProfilePic ?? "",
                                 ));
                     }
                   } else {

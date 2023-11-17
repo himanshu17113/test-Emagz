@@ -36,7 +36,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
     setState(() => opacityLevel = opacityLevel == 0 ? 1.0 : 0.0);
   }
 
-  var homePostController = Get.find<HomePostsController>();
+  final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
   var commentsController = Get.put(CommentController());
 
   @override
@@ -68,9 +68,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(0, 0, 0, 0.2),
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
+                  decoration: const BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.2), borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
                   child: SizedBox(
                     width: Get.width,
                     child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [

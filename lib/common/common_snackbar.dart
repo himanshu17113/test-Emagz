@@ -42,12 +42,12 @@ class CustomSnackbar {
   }
 }
 
-final HomePostsController homePostsController = Get.put(HomePostsController());
+final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
 Widget customBackButton() {
   return Platform.isIOS
       ? IconButton(
           onPressed: () {
-            homePostsController.pageUpdate(0);
+            homePostController.pageUpdate(0);
             Get.off(() => BottomNavBar());
           },
           icon: const Icon(Icons.arrow_back_ios))

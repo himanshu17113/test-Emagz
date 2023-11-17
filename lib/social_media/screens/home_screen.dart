@@ -25,94 +25,92 @@ class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
   final jwtController = Get.put(JWTController());
-  final homePostController = Get.put(HomePostsController());
-  final GetXStoryController storyController = Get.put(GetXStoryController());
+ // final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
+  final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
   final socketController = Get.put(SocketController());
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          backgroundColor: socialBack,
-          appBar: homePostController.isVisible.value
-              ? AppBar(
-                  backgroundColor: socialBack,
-                  leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      "assets/png/new_logo.png",
-                      color: const Color(0xff1B47C1),
-                      height: 38,
-                      width: 36,
-                    ),
-                  ),
-                  actions: [
-                    GestureDetector(
-                      onTap: () {
-                         
-                        // var token = await jwtController.getAuthToken();
-                        // var userId = await jwtController.getUserId();
-
-                        Get.to(() => OwnWebView(
-                              token: jwtController.token!,
-                              userId: jwtController.userId!,
-                              personaUserId: jwtController.userId!,
-                              templateId: 'w',
-                            ));
-                      },
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                          jwtController.user?.value.ProfilePic.toString() ??
-                              jwtController.profilePic.toString(),
-                        ),
-                        maxRadius: 15,
+      child:   GetBuilder<HomePostsController>(
+      tag: "HomePostsController",
+      autoRemove: false,
+      init: HomePostsController(),
+      builder: (homePostController) =>
+         Scaffold(
+            backgroundColor: socialBack,
+            appBar: homePostController.isVisible 
+                ? AppBar(
+                    backgroundColor: socialBack,
+                    leading: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "assets/png/new_logo.png",
+                        color: const Color(0xff1B47C1),
+                        height: 38,
+                        width: 36,
                       ),
                     ),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () => Get.to(() => NotificationScreen()),
-                        child: Stack(alignment: Alignment.topRight, children: [
-                          Image.asset(
-                            "assets/png/notification_bell.png",
-                            height: 28,
-                            width: 28,
+                    actions: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => OwnWebView(
+                                token: jwtController.token!,
+                                userId: jwtController.userId!,
+                                personaUserId: jwtController.userId!,
+                                templateId: 'w',
+                              ));
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: CachedNetworkImageProvider(
+                            jwtController.user?.value.ProfilePic.toString() ?? jwtController.profilePic.toString(),
                           ),
-                          if (socketController.notifications.isNotEmpty)
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: CircleAvatar(
-                                  radius: 8,
-                                  backgroundColor: Colors.red,
-                                  child: Text(
-                                    socketController.notifications.length
-                                        .toString(),
-                                    style: const TextStyle(fontSize: 12),
-                                  )),
-                            )
-                        ]),
+                          maxRadius: 15,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                )
-              : null,
-          body: RefreshIndicator(
-            onRefresh: () {
-              homePostController.skip.value = -10;
-              homePostController.posts?.clear();
-              storyController.stories?.clear();
-              storyController.getStories();
-              return homePostController.getPost();
-            },
-            child: HomePosts(
-                myUserId: jwtController.userId ?? homePostController.userId),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () => Get.to(() => NotificationScreen()),
+                          child: Stack(alignment: Alignment.topRight, children: [
+                            Image.asset(
+                              "assets/png/notification_bell.png",
+                              height: 28,
+                              width: 28,
+                            ),
+                            if (socketController.notifications.isNotEmpty)
+                              Positioned(
+                                top: 0,
+                                right: 0,
+                                child: CircleAvatar(
+                                    radius: 8,
+                                    backgroundColor: Colors.red,
+                                    child: Text(
+                                      socketController.notifications.length.toString(),
+                                      style: const TextStyle(fontSize: 12),
+                                    )),
+                              )
+                          ]),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
+                  )
+                : null,
+            body: RefreshIndicator(
+              onRefresh: () {
+                homePostController.skip.value = -10;
+                homePostController.posts?.clear();
+                storyController.stories?.clear();
+                storyController.getStories();
+                return homePostController.getPost();
+              },
+              child: HomePosts(myUserId: jwtController.userId ?? homePostController.userId),
+            ),
           ),
         ),
-      ),
+    
     );
   }
 }
@@ -146,7 +144,6 @@ class HomePagePopupWidget extends StatelessWidget {
         message = 'Image saved to disk';
       }
     } catch (e) {
-      print(e);
       message = 'An error occurred while saving the image';
     }
 
@@ -166,7 +163,7 @@ class HomePagePopupWidget extends StatelessWidget {
           Share.share("http://emagz.live/Post/${post?.sId}");
         } else if (title == 'Download') {
           Get.back();
-          print(post?.mediaUrl);
+
           _saveImage(post!.mediaUrl!.first!, context);
         } else {
           Get.back();
