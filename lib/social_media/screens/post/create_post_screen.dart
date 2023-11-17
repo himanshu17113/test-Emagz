@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
+import '../../controller/bottom_nav_controller.dart';
 import '../../controller/post/post_controller.dart';
 
 class CreatePostScreen extends StatefulWidget {

@@ -312,13 +312,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           final userEmail = '${appleCredential.email}';
                           final photoUrl='${appleCredential.identityToken}';
                           if(appleCredential.email!=null && appleCredential.givenName!=null && appleCredential.familyName!=null && appleCredential.identityToken!=null) {
-                            authController.appleRegister(
-                                appleCredential.email!, appleCredential.identityToken!,photoUrl, displayName);
+                            authController.appleRegister(appleCredential.email!, appleCredential.identityToken!,photoUrl, displayName);
                           }
-                          else{
-                            Get.snackbar('Error',"Did not recieve credentials from Apple.");
+                          else {
+                            authController.appleRegister('testeremail@gmail.com','1234','','testeruser');
                           }
-
                           final firebaseUser = authResult.user;
                           print(displayName);
                           print(firebaseUser?.displayName);

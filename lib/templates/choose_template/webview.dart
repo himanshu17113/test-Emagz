@@ -2,6 +2,7 @@ import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -89,37 +90,43 @@ class _OwnWebViewState extends State<OwnWebView> {
   final chatController = Get.find<ConversationController>();
   @override
   Widget build(BuildContext context) {
-    return InAppWebView(
-        onUpdateVisitedHistory: (_, Uri? uri, __) async{
-          // uri containts newly loaded url
-          print(uri.toString());
-          if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
-            int len= uri!.path.length;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    return Container(
+      height: 200,
+      width: 90,
+      padding: EdgeInsets.symmetric(horizontal: 1),
+      child: InAppWebView(
+          onUpdateVisitedHistory: (_, Uri? uri, __) async{
+            // uri containts newly loaded url
+            print(uri.toString());
+            if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
+              int len= uri!.path.length;
 
-            int index=int.parse(uri.path[len-1]);
-            print(index);
-            final List<Conversation> list = await chatController.getChatList();
-            Get.off(()=>ChatScreen(
-              user: list[index].userData,
-              conversationId: list[index].data!.id!,
-              //  messages: messages,
-            ));
-
-
-          }
-
-          if (uri.toString().startsWith('http://www.emagz.live/ChoseTemplate')) {
-
-            Get.off(() => ChooseTemplate(
-              isReg:false,
-            ));
-
-          }
+              int index=int.parse(uri.path[len-1]);
+              print(index);
+              final List<Conversation> list = await chatController.getChatList();
+              Get.off(()=>ChatScreen(
+                user: list[index].userData,
+                conversationId: list[index].data!.id!,
+                //  messages: messages,
+              ));
 
 
-        },
-        initialUrlRequest:
-        URLRequest(url: Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))
+            }
+
+            if (uri.toString().startsWith('http://www.emagz.live/ChoseTemplate')) {
+
+              Get.off(() => ChooseTemplate(
+                isReg:false,
+              ));
+
+            }
+
+
+          },
+          initialUrlRequest:
+          URLRequest(url: Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))
+      ),
     );
   }
 }

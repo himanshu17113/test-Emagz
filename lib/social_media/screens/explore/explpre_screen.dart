@@ -11,6 +11,9 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
 import '../../../user/models/product_model.dart';
+import '../../common/bottom_nav/bottom_nav.dart';
+import '../../controller/bottom_nav_controller.dart';
+import '../home_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen({Key? key}) : super(key: key);
@@ -36,97 +39,126 @@ class _ExploreScreenState extends State<ExploreScreen> {
     QuiltedGridTile(1, 2),
   ];
   List<String> selectedReportList = [];
+  final nav= Get.put(NavController());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: socialBack,
+    return
 
-      appBar: const SocialMediaAppBar(title: "Explore"),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 15,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 30,
-              ),
-              Text(
-                "Explore your \nWorld",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-              ),
-              const Expanded(child: SizedBox()),
-              InkWell(
-                onTap: () {
-                  Get.to(() => const SearchScreen());
+         Scaffold(
+          backgroundColor: socialBack,
+
+          appBar: const SocialMediaAppBar(title: "Explore"),
+          body: Stack(
+            alignment: Alignment.centerLeft,
+            children:[
+
+              Column(
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Text(
+                      "Explore your \nWorld",
+                      style: TextStyle(
+                          color: blackButtonColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    const Expanded(child: SizedBox()),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const SearchScreen());
+                      },
+                      child: SvgPicture.asset(
+                        "assets/svg/MagnifyingGlass.svg",
+                        width: 25,
+                        color: blackButtonColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: MultiSelectChip(
+                    reportList,
+                    onSelectionChanged: (selectedList) {
+                      setState(() {
+                        selectedReportList = selectedList;
+                        debugPrint(selectedList.toList().toString());
+                      });
+                    },
+                    maxSelection: 2,
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                Expanded(
+                  child: GridView.custom(
+                    // cacheExtent: 10,
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    gridDelegate: SliverQuiltedGridDelegate(
+                        crossAxisCount: 5,
+                        mainAxisSpacing: 6,
+                        crossAxisSpacing: 6,
+                        repeatPattern: QuiltedGridRepeatPattern.inverted,
+                        pattern: pattern),
+                    childrenDelegate: SliverChildBuilderDelegate(
+                      childCount: imageList.length,
+                      (context, index) {
+                        final tile = pattern[index % pattern.length];
+                        return InkWell(
+                          onTap: () {
+                            Get.to(() => const ExplorePostDetails());
+                          },
+                          child: ImageTile(
+                            index: index,
+                            width: tile.crossAxisCount * 100,
+                            // width: 200,
+                            // height: 300,
+                            height: tile.mainAxisCount * 100,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+              GestureDetector(
+                onHorizontalDragUpdate: (details)
+                {
+
+                  nav.page.value = 0;
+                  //Get.offAll(() => BottomNavBar());
+
+
+                  //Get.offAll(()=>SocialMediaHomePage());
                 },
-                child: SvgPicture.asset(
-                  "assets/svg/MagnifyingGlass.svg",
-                  width: 25,
-                  color: blackButtonColor,
+                child: ColoredBox(
+                  color: Colors.transparent,
+                  child: SizedBox(
+
+                    height: double.maxFinite,
+                    width: 30,
+                  ),
                 ),
               ),
-              const SizedBox(
-                width: 30,
-              ),
-            ],
+    ]
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
-            child: MultiSelectChip(
-              reportList,
-              onSelectionChanged: (selectedList) {
-                setState(() {
-                  selectedReportList = selectedList;
-                  debugPrint(selectedList.toList().toString());
-                });
-              },
-              maxSelection: 2,
-            ),
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Expanded(
-            child: GridView.custom(
-              // cacheExtent: 10,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              gridDelegate: SliverQuiltedGridDelegate(
-                  crossAxisCount: 5,
-                  mainAxisSpacing: 6,
-                  crossAxisSpacing: 6,
-                  repeatPattern: QuiltedGridRepeatPattern.inverted,
-                  pattern: pattern),
-              childrenDelegate: SliverChildBuilderDelegate(
-                childCount: imageList.length,
-                (context, index) {
-                  final tile = pattern[index % pattern.length];
-                  return InkWell(
-                    onTap: () {
-                      Get.to(() => const ExplorePostDetails());
-                    },
-                    child: ImageTile(
-                      index: index,
-                      width: tile.crossAxisCount * 100,
-                      // width: 200,
-                      // height: 300,
-                      height: tile.mainAxisCount * 100,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+      );
   }
 }
 
