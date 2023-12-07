@@ -14,11 +14,11 @@ import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../templates/choose_template/webview.dart';
+import '../../../controller/home/home_controller.dart';
 import '../../profile_insight/profile_insight_screen.dart';
 
 class PersonalPageSetting extends StatefulWidget {
@@ -37,8 +37,6 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
   @override
   void initState() {
     super.initState();
-    //debugPrint("pp ${jwtController.user?.value.ProfilePic.toString()} ");
-
     if (constuser?.sId == null) {
       HiveDB.getCurrentUserDetail();
       setState(() {});
@@ -107,8 +105,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                             onPressed: () async {
                                               image = await picker.pickImage(source: ImageSource.gallery);
                                               user.ProfilePic = await accountSetupController.uploadProfilePic(image);
-                                                 
-                                                box.put('user', user);
+
+                                              box.put('user', user);
                                             },
                                             icon: Icon(
                                               Icons.camera_alt,
@@ -177,7 +175,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                 color: chipColor,
                               ),
                               child: Text(
-                                "Change Theme",
+                                "Change Persona",
                                 style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                               ),
                             ),
@@ -417,6 +415,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               InkWell(
                 onTap: () async {
+                  final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
+                  homePostsController.page = 0;
                   //   Get.deleteAll(force: true);
                   await HiveDB.clearDB();
                   Get.off(() => const CommonAuthScreen());

@@ -83,12 +83,14 @@ class SetupAccount extends GetxController {
     var token = await HiveDB.getAuthToken();
     var id = await HiveDB.getUserID();
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
-    Map body = {"_id": id, "displayName": displayNameController.text, "personalTemplate": "https://example.com/personal-template.html"};
+    Map body = {"_id": id, "displayName": displayNameController.text, "personalTemplate": ""};
     http.Response response = await http.post(Uri.parse(ApiEndpoint.setupPeronalAccount), body: jsonEncode(body), headers: headers);
 
-    Map data = jsonDecode(response.body);
+    final data = jsonDecode(response.body);
 
     if (response.statusCode == 200) {
+      constuser = await HiveDB.getCurrentUserDetail();
+      // debugPrint(data.toString());
       isUserRegiserting.value = false;
       //lead to main page
 

@@ -53,7 +53,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
   final postController = Get.find<PostController>(tag: "PostController");
   @override
   Widget build(BuildContext context) {
-    print(postController.assetType);
+//    print(postController.assetType);
     return SafeArea(
       top: false,
       child: Scaffold(

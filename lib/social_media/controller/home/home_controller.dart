@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
-import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';

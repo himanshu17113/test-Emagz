@@ -19,12 +19,7 @@ class MyCustomTextfiled extends StatelessWidget {
           borderRadius: BorderRadius.circular(10)),
       height: maxLines == 1 ? 44 : null,
       child: TextFormField(
-        onTap: () {
-          if (onTap == Null) {
-          } else {
-            onTap;
-          }
-        },
+      
         controller: controller,
         maxLines: maxLines,
         cursorColor: grayColor,

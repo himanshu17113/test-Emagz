@@ -159,7 +159,7 @@ class AuthController {
         globToken = token;
         globUserId = userId;
         HiveDB.setAuthData(token, userId);
-
+       
         return true;
       } else if (response.statusCode == 401) {
         CustomSnackbar.show(data['error']);
@@ -300,7 +300,7 @@ class AuthController {
       http.Response response =
           await http.put(Uri.parse(ApiEndpoint.accountType((globUserId ?? await HiveDB.getUserID())!)), body: jsonEncode(body), headers: headers);
       if (response.statusCode == 200) {
-        (value == 1) ? Get.to(() => PersonalProfileSetup()) : Get.to(() => const BusinessProfileSetupScreen());
+        (value == 1) ? Get.to(() => const PersonalProfileSetup()) : Get.to(() => const BusinessProfileSetupScreen());
       }
       isUserlogging = false;
     } catch (e) {

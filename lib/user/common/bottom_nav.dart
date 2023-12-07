@@ -1,4 +1,3 @@
-
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/controller/bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ class UserBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserNavController>(
+      autoRemove: false,
       init: UserNavController(),
       builder: (value) {
         return Scaffold(
@@ -20,8 +20,7 @@ class UserBottomNavBar extends StatelessWidget {
                 selectedItemColor: blackButtonColor,
                 unselectedItemColor: bottomBarIconColor,
                 type: BottomNavigationBarType.fixed,
-                selectedLabelStyle:
-                    TextStyle(fontSize: 8, color: blackButtonColor),
+                selectedLabelStyle: TextStyle(fontSize: 8, color: blackButtonColor),
                 unselectedLabelStyle: TextStyle(fontSize: 8, color: grayColor),
                 backgroundColor: Colors.transparent,
                 currentIndex: value.page,
@@ -34,18 +33,14 @@ class UserBottomNavBar extends StatelessWidget {
                       icon: value.page == 0
                           ? Container(
                               margin: const EdgeInsets.only(left: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
-                                  colors: [
-                                    Color(0xff0F0AA4),
-                                    Color(0xff2992E3)
-                                  ],
+                                  colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
                               child: Row(
@@ -53,8 +48,7 @@ class UserBottomNavBar extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.home_outlined,
                                       color: whiteColor,
@@ -73,14 +67,12 @@ class UserBottomNavBar extends StatelessWidget {
                             )
                           : Container(
                               margin: const EdgeInsets.only(left: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               child: const Row(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.home_outlined,
                                       color: signInHeading,
@@ -89,10 +81,7 @@ class UserBottomNavBar extends StatelessWidget {
                                   ),
                                   Text(
                                     "Home",
-                                    style: TextStyle(
-                                        color: signInHeading,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: signInHeading, fontSize: 15, fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),
@@ -102,18 +91,14 @@ class UserBottomNavBar extends StatelessWidget {
                       icon: value.page == 1
                           ? Container(
                               margin: const EdgeInsets.only(left: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
-                                  colors: [
-                                    Color(0xff0F0AA4),
-                                    Color(0xff2992E3)
-                                  ],
+                                  colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
                               child: Row(
@@ -121,8 +106,7 @@ class UserBottomNavBar extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.shopping_cart,
                                       color: whiteColor,
@@ -141,14 +125,12 @@ class UserBottomNavBar extends StatelessWidget {
                             )
                           : Container(
                               margin: const EdgeInsets.only(left: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               child: const Row(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.shopping_cart,
                                       color: signInHeading,
@@ -157,10 +139,7 @@ class UserBottomNavBar extends StatelessWidget {
                                   ),
                                   Text(
                                     "Bag",
-                                    style: TextStyle(
-                                        color: signInHeading,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: signInHeading, fontSize: 15, fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),
@@ -170,18 +149,14 @@ class UserBottomNavBar extends StatelessWidget {
                       icon: value.page == 2
                           ? Container(
                               margin: const EdgeInsets.only(right: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
-                                  colors: [
-                                    Color(0xff0F0AA4),
-                                    Color(0xff2992E3)
-                                  ],
+                                  colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
                               child: Row(
@@ -189,8 +164,7 @@ class UserBottomNavBar extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.person_pin,
                                       color: whiteColor,
@@ -209,14 +183,12 @@ class UserBottomNavBar extends StatelessWidget {
                             )
                           : Container(
                               margin: const EdgeInsets.only(left: 10),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
                               child: const Row(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.person_pin,
                                       color: signInHeading,
@@ -225,10 +197,7 @@ class UserBottomNavBar extends StatelessWidget {
                                   ),
                                   Text(
                                     "Profile",
-                                    style: TextStyle(
-                                        color: signInHeading,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: signInHeading, fontSize: 15, fontWeight: FontWeight.bold),
                                   )
                                 ],
                               ),

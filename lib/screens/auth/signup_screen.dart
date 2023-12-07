@@ -13,6 +13,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
 
+import 'widgets/dob.dart';
 import 'widgets/my_custom_textfiled.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -103,8 +104,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: signInHeading,
               ),
             ),
-            MyCustomTextfiled(
-              onTap: () async => await authController.pickDate(context),
+            RDOBInputField(
+              label: "dob",
               controller: authController.dobController,
             ),
             SizedBox(
