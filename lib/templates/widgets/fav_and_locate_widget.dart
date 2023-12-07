@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FavouriteAndLocateWidget extends StatelessWidget {
-  bool isWhite;
-  FavouriteAndLocateWidget({Key? key, this.isWhite = false}) : super(key: key);
+ final bool isWhite;
+  const FavouriteAndLocateWidget({Key? key, this.isWhite = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

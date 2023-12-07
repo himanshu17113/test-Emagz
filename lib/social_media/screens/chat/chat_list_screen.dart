@@ -27,7 +27,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
   String? userId;
   bool isSearch = false;
   String searchQuery = 'XXXXXXX';
-  TextEditingController QueryControl = TextEditingController();
+  TextEditingController queryControl = TextEditingController();
 
   //final jwtController = JWTController();
   final chatController = Get.put(ConversationController());
@@ -148,13 +148,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           height: 42,
                           decoration: BoxDecoration(color: const Color(0xffF0F0F0), borderRadius: BorderRadius.circular(10)),
                           child: TextField(
-                            controller: QueryControl,
+                            controller: queryControl,
                             onSubmitted: (value) {
                               debugPrint('uefibdjv');
 
                               setState(() {
                                 isSearch = true;
-                                searchQuery = QueryControl.text;
+                                searchQuery = queryControl.text;
                               });
                             },
                             onTapOutside: (p) {

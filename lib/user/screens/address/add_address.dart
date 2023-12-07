@@ -32,27 +32,27 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
             const SizedBox(
               height: 20,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "Name",
                       ),
                       ManageAddressTextfiled(),
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "Phone Number",
                       ),
                       ManageAddressTextfiled(),
@@ -67,33 +67,33 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
             const ManageAddressHeading(
               title: "Address",
             ),
-            ManageAddressTextfiled(
+            const ManageAddressTextfiled(
               maxLines: 3,
             ),
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "City",
                       ),
                       ManageAddressTextfiled(),
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "State",
                       ),
                       ManageAddressTextfiled(),
@@ -105,27 +105,27 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "Locality",
                       ),
                       ManageAddressTextfiled(),
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ManageAddressHeading(
+                      ManageAddressHeading(
                         title: "Pincode",
                       ),
                       ManageAddressTextfiled(),
@@ -147,10 +147,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 const Text(
                   "Set as current address",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: blackButtonColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600),
+                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
                 )
               ],
             )
@@ -171,9 +168,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 width: size.width / 2.15,
                 height: 45,
                 alignment: Alignment.center,
-                child: const Text("Back ",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: blackButtonColor, fontSize: 15)),
+                child: const Text("Back ", textAlign: TextAlign.center, style: TextStyle(color: blackButtonColor, fontSize: 15)),
               ),
             ),
             InkWell(
@@ -184,9 +179,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(1)),
+                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(1)),
                 child: const Text(
                   "Add New Address",
                   style: TextStyle(color: whiteColor),

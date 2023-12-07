@@ -9,11 +9,11 @@ class UserNavController extends GetxController {
   bool isEdit = false;
 
   List<Widget> screen = [
-     HomeScren(),
-   BagScreen(),
+    const HomeScren(),
+    BagScreen(),
 
     // const Text("data"),
-   const ProfileScreenUser()
+    const ProfileScreenUser()
   ];
   int page = 0;
 

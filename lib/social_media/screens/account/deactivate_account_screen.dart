@@ -209,7 +209,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                       BoxShadow(
                           offset: const Offset(0, 4.07),
                           blurRadius: 20,
-                          color: const Color(0xff00000040).withOpacity(.25))
+                          color: const Color(0xff000040).withOpacity(.25))
                     ],
                   ),
                   child: const FormHeadingText(

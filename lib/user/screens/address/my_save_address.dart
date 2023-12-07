@@ -1,4 +1,3 @@
-
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/user/common/user_top_bar.dart';
 import 'package:emagz_vendor/user/screens/address/add_address.dart';
@@ -20,12 +19,12 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: const UserTopBar(title: "Manage Address"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
+            SizedBox(
               height: 20,
             ),
             MyAddressCard(
@@ -50,11 +49,8 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blackButtonColor,
-                    borderRadius: BorderRadius.circular(1)),
-                child: const Text("Manage Address ",
-                    style: TextStyle(color: whiteColor)),
+                decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(1)),
+                child: const Text("Manage Address ", style: TextStyle(color: whiteColor)),
               ),
             ),
             InkWell(
@@ -65,9 +61,7 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(1)),
+                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(1)),
                 child: const Text(
                   "Add New Address",
                   style: TextStyle(color: whiteColor),

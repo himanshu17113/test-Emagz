@@ -2,8 +2,8 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class MyAddressCard extends StatelessWidget {
-  bool isCurrent;
-  MyAddressCard({
+ final bool isCurrent;
+  const MyAddressCard({
     Key? key,
     this.isCurrent = false,
   }) : super(key: key);

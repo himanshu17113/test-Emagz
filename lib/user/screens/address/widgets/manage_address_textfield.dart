@@ -2,12 +2,12 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class ManageAddressTextfiled extends StatelessWidget {
-  TextEditingController? controller;
-  TextInputType? inputType;
-  String? hint;
-  int? maxLines;
+ final TextEditingController? controller;
+ final TextInputType? inputType;
+ final String? hint;
+ final int? maxLines;
 
-  ManageAddressTextfiled({
+  const ManageAddressTextfiled({
     Key? key,
     this.controller,
     this.hint,

@@ -98,12 +98,12 @@ class _OwnWebViewState extends State<OwnWebView> {
       child: InAppWebView(
           onUpdateVisitedHistory: (_, Uri? uri, __) async{
             // uri containts newly loaded url
-            print(uri.toString());
+            debugPrint(uri.toString());
             if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
               int len= uri!.path.length;
 
               int index=int.parse(uri.path[len-1]);
-              print(index);
+              debugPrint(index.toString());
               final List<Conversation> list = await chatController.getChatList();
               Get.off(()=>ChatScreen(
                 user: list[index].userData,
@@ -160,7 +160,7 @@ class _WebViewOnlyViewState extends State<WebViewOnlyView> {
         onPageStarted: (url) {},
         onProgress: (progress) {},
         onPageFinished: (url) {
-          print('http://persona.emagz.live/${widget.userId}/${widget.token}');
+          debugPrint('http://persona.emagz.live/${widget.userId}/${widget.token}');
         },
       ))
       ..loadRequest(

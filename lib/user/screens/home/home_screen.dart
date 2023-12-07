@@ -6,9 +6,9 @@ import 'package:emagz_vendor/user/screens/home/widgets/product_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeScren extends StatelessWidget {
-  HomeScren({Key? key}) : super(key: key);
+  const HomeScren({Key? key}) : super(key: key);
 
-  String imageUrl =
+  final String imageUrl =
       "https://images.unsplash.com/photo-1647221598398-934ed5cb0e4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8c2hvcHBpbmclMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60";
 
   @override
@@ -22,8 +22,7 @@ class HomeScren extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10),
               height: 200,
               decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(imageUrl), fit: BoxFit.cover),
+                image: DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
               ),
             ),
             const SizedBox(
@@ -47,8 +46,7 @@ class HomeScren extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return Container(
-                      margin:
-                          const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,10 +59,7 @@ class HomeScren extends StatelessWidget {
                           ),
                           Text(
                             products[index].category.toString(),
-                            style: const TextStyle(
-                                color: blackButtonColor,
-                                fontSize: 9,
-                                fontWeight: FontWeight.w600),
+                            style: const TextStyle(color: blackButtonColor, fontSize: 9, fontWeight: FontWeight.w600),
                           )
                         ],
                       ),
@@ -85,17 +80,11 @@ class HomeScren extends StatelessWidget {
                     children: [
                       Text(
                         "New",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         "Arrivals",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 17, fontWeight: FontWeight.w600),
                       ),
                     ],
                   ),
@@ -131,17 +120,11 @@ class HomeScren extends StatelessWidget {
                 children: [
                   Text(
                     "Fashion",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: blackButtonColor, fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "View More",
-                    style: TextStyle(
-                        color: Color(0xff292929),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: Color(0xff292929), fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -157,12 +140,8 @@ class HomeScren extends StatelessWidget {
                   Expanded(
                     child: GridView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisSpacing: 5,
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 2,
-                              childAspectRatio: 1 / 1.4),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 5, crossAxisCount: 2, mainAxisSpacing: 2, childAspectRatio: 1 / 1.4),
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: 4,
@@ -180,17 +159,11 @@ class HomeScren extends StatelessWidget {
                             ),
                             const Text(
                               "Product",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w500),
                             ),
                             Text(
                               "₹ ${products[index].price.toString()}",
-                              style: const TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w500),
+                              style: const TextStyle(color: blackButtonColor, fontSize: 8, fontWeight: FontWeight.w500),
                             ),
                           ],
                         );
@@ -248,17 +221,11 @@ class HomeScren extends StatelessWidget {
                 children: [
                   Text(
                     "Top Products",
-                    style: TextStyle(
-                        color: blackButtonColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: blackButtonColor, fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "View More",
-                    style: TextStyle(
-                        color: Color(0xff292929),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: Color(0xff292929), fontSize: 12, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -268,11 +235,8 @@ class HomeScren extends StatelessWidget {
             ),
             GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 4,
-                  childAspectRatio: 1 / 1.7),
+              gridDelegate:
+                  const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, crossAxisCount: 4, mainAxisSpacing: 4, childAspectRatio: 1 / 1.7),
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: products.length,
@@ -290,17 +254,11 @@ class HomeScren extends StatelessWidget {
                     ),
                     const Text(
                       "Product",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     Text(
                       "₹ ${products[index].price.toString()}",
-                      style: const TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 8,
-                          fontWeight: FontWeight.w500),
+                      style: const TextStyle(color: blackButtonColor, fontSize: 8, fontWeight: FontWeight.w500),
                     ),
                   ],
                 );

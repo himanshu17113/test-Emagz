@@ -55,7 +55,7 @@ class _TemplateThreeState extends State<TemplateThree> {
               const SizedBox(
                 height: 10,
               ),
-              FavouriteAndLocateWidget(),
+              const FavouriteAndLocateWidget(),
               const SizedBox(
                 height: 30,
               ),
@@ -232,16 +232,12 @@ class _TemplateThreeState extends State<TemplateThree> {
                 // cacheExtent: 10,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 gridDelegate: SliverQuiltedGridDelegate(
-                    crossAxisCount: 4,
-                    mainAxisSpacing: 6,
-                    crossAxisSpacing: 6,
-                    repeatPattern: QuiltedGridRepeatPattern.inverted,
-                    pattern: pattern),
+                    crossAxisCount: 4, mainAxisSpacing: 6, crossAxisSpacing: 6, repeatPattern: QuiltedGridRepeatPattern.inverted, pattern: pattern),
                 childrenDelegate: SliverChildBuilderDelegate(
                   childCount: imageList.length,
                   (context, index) {
                     // final tile = pattern[index % pattern.length];
-                    final tile = pattern[index % pattern.length];
+                    //    final tile = pattern[index % pattern.length];
 
                     return SizedBox(
                       // width: tile.crossAxisCount * 100,

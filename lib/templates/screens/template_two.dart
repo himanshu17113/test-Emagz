@@ -194,7 +194,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                 ),
               ],
             ),
-            FavouriteAndLocateWidget(),
+            const FavouriteAndLocateWidget(),
             SizedBox(
               height: 320,
               child: Stack(
@@ -255,8 +255,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                             height: 140,
                             // width: 250,
                             decoration: BoxDecoration(
-                              image:
-                                  DecorationImage(image: CachedNetworkImageProvider(products[index].image.toString()), fit: BoxFit.cover),
+                              image: DecorationImage(image: CachedNetworkImageProvider(products[index].image.toString()), fit: BoxFit.cover),
                             ),
                           ),
                           Container(
@@ -364,8 +363,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 2.0),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.3)),
+                        color: (Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black).withOpacity(_current == entry.key ? 0.9 : 0.3)),
                   ),
                 );
               }).toList(),
