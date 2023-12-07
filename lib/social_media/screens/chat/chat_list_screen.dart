@@ -9,6 +9,7 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/chatControlle
 import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/UserChats/user_chats.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
+import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -28,8 +29,6 @@ class _ChatListScreenState extends State<ChatListScreen> {
   bool isSearch = false;
   String searchQuery = 'XXXXXXX';
   TextEditingController queryControl = TextEditingController();
-
-  //final jwtController = JWTController();
   final chatController = Get.put(ConversationController());
   final nav = Get.put(NavController());
   late Future<List<Conversation>>? myFuture;
@@ -54,78 +53,71 @@ class _ChatListScreenState extends State<ChatListScreen> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
             child: Container(
-              margin: const EdgeInsets.only(top: 10, right: 30, left: 30),
+              margin: const EdgeInsets.only(top: 10, right: 30, left: 30, bottom: 10),
               child: Row(
                 children: [
-                  const Expanded(
-                    child: Row(
-                      children: [
-                        Text(
-                          "Chat",
-                          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                  const Text(
+                    "Chat",
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => NotificationScreen());
+                    },
+                    child: Image.asset(
+                      "assets/png/notification_bell.png",
+                      width: 22,
+                      color: blackButtonColor,
                     ),
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => NotificationScreen());
-                        },
-                        child: Image.asset(
-                          "assets/png/notification_bell.png",
-                          width: 22,
-                          color: blackButtonColor,
+
+                  // Center(
+                  //   child: GestureDetector(
+                  //     onTap: () => Get.to(() => NotificationScreen()),
+                  //     child:
+                  //         Stack(alignment: Alignment.topRight, children: [
+                  //       Image.asset(
+                  //         "assets/png/notification_bell.png",
+                  //         height: 28,
+                  //         width: 28,
+                  //       ),
+                  //       if (socketController.notifications.isNotEmpty)
+                  //         Positioned(
+                  //           top: 0,
+                  //           right: 0,
+                  //           child: CircleAvatar(
+                  //             radius: 8,
+                  //             backgroundColor: Colors.red,
+                  //             child: Obx(() => Text(
+                  //                   socketController.notifications.length
+                  //                       .toString(),
+                  //                   style: const TextStyle(fontSize: 12),
+                  //                 )),
+                  //           ),
+                  //         )
+                  //     ]),
+                  //   ),
+                  // ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.to(() => OwnWebView(
+                              token: globToken!,
+                              userId: globUserId!,
+                              personaUserId: globUserId!,
+                              templateId: 'w',
+                            ));
+                      },
+                      child: CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                          constuser?.ProfilePic.toString() ?? "",
                         ),
+                        maxRadius: 15,
                       ),
-
-                      // Center(
-                      //   child: GestureDetector(
-                      //     onTap: () => Get.to(() => NotificationScreen()),
-                      //     child:
-                      //         Stack(alignment: Alignment.topRight, children: [
-                      //       Image.asset(
-                      //         "assets/png/notification_bell.png",
-                      //         height: 28,
-                      //         width: 28,
-                      //       ),
-                      //       if (socketController.notifications.isNotEmpty)
-                      //         Positioned(
-                      //           top: 0,
-                      //           right: 0,
-                      //           child: CircleAvatar(
-                      //             radius: 8,
-                      //             backgroundColor: Colors.red,
-                      //             child: Obx(() => Text(
-                      //                   socketController.notifications.length
-                      //                       .toString(),
-                      //                   style: const TextStyle(fontSize: 12),
-                      //                 )),
-                      //           ),
-                      //         )
-                      //     ]),
-                      //   ),
-                      // ),
-
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      InkWell(
-                          onTap: () {
-                            debugPrint("Profile ICon");
-                            // Get.to(() => const PersonalPageSetting());
-                          },
-                          child: Container(
-                            height: 30,
-                            width: 30,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover), borderRadius: BorderRadius.circular(5)),
-                          )),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),

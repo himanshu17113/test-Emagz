@@ -25,8 +25,7 @@ class GetXStoryController extends GetxController {
   RxBool isUploading = RxBool(false);
   String? token;
   List<String> imagePaths = [];
-  //final JWTController jwtController = JWTController();
-  @override
+   @override
   void onInit() {
     getStories();
 

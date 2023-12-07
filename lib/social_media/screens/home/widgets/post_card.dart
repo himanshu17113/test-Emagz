@@ -86,16 +86,20 @@ class _PostCardState extends State<PostCard> {
                     ));
               },
               child: CachedNetworkImage(
+                width: width,
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.center,
                 imageUrl: widget.url,
                 placeholder: (context, url) => const Center(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 180.0, vertical: 200),
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.amberAccent,
-                      strokeWidth: 2,
-                      color: Colors.white,
+                    padding: EdgeInsets.symmetric(  vertical: 100),
+                    child: SizedBox.square(
+                      dimension: 20,
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.amberAccent,
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

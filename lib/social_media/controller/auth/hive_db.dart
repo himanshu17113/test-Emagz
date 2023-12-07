@@ -102,6 +102,32 @@ class HiveDB {
     final hiveBox = Hive.box("secretes");
     UserSchema? user = hiveBox.get("user");
     user?.ProfilePic = pic;
-  await hiveBox.put('user', user);
+    await hiveBox.put('user', user);
+  }
+
+  static Future<UserSchema?> getUserDetail(String id) async {
+    debugPrint("Api hit getUserDetail");
+    //Box hiveBox = await Hive.openBox("secretes");
+    // final hiveBox = Hive.box("secretes");
+    Dio dio = Dio();
+    dio.options.headers["Authorization"] = globToken ?? getAuthToken();
+    if (globUserId == null) {
+      await getUserID();
+    }
+    if (globUserId != null) {
+      var response = await dio.get(ApiEndpoint.userInfo(id));
+      debugPrint(ApiEndpoint.userInfo(globUserId!));
+      // debugPrint(response.data);
+      if (response.statusCode == 200) {
+        final user = UserSchema.fromJson(response.data);
+        // await hiveBox.put('user', user);
+        // constuser = user;
+
+        return user;
+      }
+    } else {
+      return UserSchema();
+    }
+    return null;
   }
 }

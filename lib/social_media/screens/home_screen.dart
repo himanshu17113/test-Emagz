@@ -9,6 +9,7 @@ import 'package:emagz_vendor/social_media/screens/home/story/controller/story_co
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
@@ -30,43 +31,45 @@ class SocialMediaHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GetBuilder<HomePostsController>(
-        tag: "HomePostsController",
-        autoRemove: false,
-        init: HomePostsController(),
-        builder: (homePostController) => Scaffold(
-          backgroundColor: socialBack,
-          appBar: homePostController.isVisible
-              ? AppBar(
-                  backgroundColor: socialBack,
-                  leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      "assets/png/new_logo.png",
-                      color: const Color(0xff1B47C1),
-                      height: 38,
-                      width: 36,
+    return GetBuilder<HomePostsController>(
+      tag: "HomePostsController",
+      autoRemove: false,
+      init: HomePostsController(),
+      builder: (homePostController) => Scaffold(
+        backgroundColor: socialBack,
+        appBar: homePostController.isVisible
+            ? AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(  systemNavigationBarColor: socialBack),
+                backgroundColor: socialBack,
+                leading: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    "assets/png/new_logo.png",
+                    color: const Color(0xff1B47C1),
+                    height: 38,
+                    width: 36,
+                  ),
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => OwnWebView(
+                            token: globToken!,
+                            userId: globUserId!,
+                            personaUserId: globUserId!,
+                            templateId: 'w',
+                          ));
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                        constuser?.ProfilePic.toString() ?? "",
+                      ),
+                      maxRadius: 15,
                     ),
                   ),
-                  actions: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.to(() => OwnWebView(
-                              token: globToken!,
-                              userId: globUserId!,
-                              personaUserId: globUserId!,
-                              templateId: 'w',
-                            ));
-                      },
-                      child: CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(
-                          constuser?.ProfilePic.toString() ?? "",
-                        ),
-                        maxRadius: 15,
-                      ),
-                    ),
-                    Center(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Center(
                       child: GestureDetector(
                         onTap: () => Get.to(() => NotificationScreen()),
                         child: Stack(alignment: Alignment.topRight, children: [
@@ -90,25 +93,22 @@ class SocialMediaHomePage extends StatelessWidget {
                         ]),
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                )
-              : null,
-          body: RefreshIndicator(
-            onRefresh: () {
-              homePostController.skip = -10;
-              homePostController.posts?.clear();
-              homePostController.posts?.clear();
-              homePostController.endOfPost = false;
+                  ),
+                ],
+              )
+            : null,
+        body: RefreshIndicator(
+          onRefresh: () {
+            homePostController.skip = -10;
+            homePostController.posts?.clear();
+            homePostController.posts?.clear();
+            homePostController.endOfPost = false;
 
-              storyController.stories?.clear();
-              storyController.getStories();
-              return homePostController.getPost();
-            },
-            child: HomePosts(myUserId: globUserId ?? homePostController.userId),
-          ),
+            storyController.stories?.clear();
+            storyController.getStories();
+            return homePostController.getPost();
+          },
+          child: HomePosts(myUserId: globUserId ?? homePostController.userId),
         ),
       ),
     );

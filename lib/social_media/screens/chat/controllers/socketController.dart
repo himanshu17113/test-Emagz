@@ -20,7 +20,7 @@ class SocketController extends GetxController {
   RxBool? isUserSender = false.obs;
   final chatController = Get.put(ConversationController());
 
- // final jwtController = JWTController();
+  // final jwtController = JWTController();
   String? token;
   // Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
@@ -161,13 +161,13 @@ class SocketController extends GetxController {
       "notification_to": id,
       //   "notification": {"link": shareLink},
       "title": "Comment",
-      // "message": ispost
-      //     ? isReply
-      //         ? "${jwtController.user?.displayName} Replied on your post "
-      //         : "${jwtController.user?.displayName} Commented on your post "
-      //     : isReply
-      //         ? "${jwtController.user?.displayName} Replied on your Story "
-      //         : "${jwtController.user?.displayName} Commented on your Story ",
+      "message": ispost
+          ? isReply
+              ? "${constuser?.displayName} Replied on your post "
+              : "${constuser?.displayName} Commented on your post "
+          : isReply
+              ? "${constuser?.displayName} Replied on your Story "
+              : "${constuser?.displayName} Commented on your Story ",
     };
     socket.emit("notification", data);
   }

@@ -1,3 +1,4 @@
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:get/get.dart';
 import 'package:emagz_vendor/constant/colors.dart';
@@ -25,7 +26,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
   }
 
   asyncInit() async {
-  //  var user = await storyController.jwtController.getUserDetail(widget.userId);
+   // var user = HiveDB.getUserDetail(widget.userId);
     // userName = user!.username!;
     // profileUrl = user.sId;
     setState(() {});
@@ -89,7 +90,6 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                       width: 10,
                     ),
                     FormHeadingText(
-
                       headings: "Reply..",
                       fontSize: 8,
                       color: Colors.white,
@@ -126,8 +126,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                   BoxShadow(color: toggleInactive),
                 ],
               ),
-              child:
-                  Image.asset("assets/png/liked_icon.png", color: purpleColor),
+              child: Image.asset("assets/png/liked_icon.png", color: purpleColor),
             ),
             const SizedBox(
               width: 20,

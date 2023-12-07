@@ -4,6 +4,7 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -25,6 +26,7 @@ class PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Post post = homePostController.posts![index];
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(systemNavigationBarIconBrightness: Brightness.dark));
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,

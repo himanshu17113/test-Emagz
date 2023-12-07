@@ -7,7 +7,7 @@ import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
 
 class UserChats extends StatelessWidget {
-  Future<List<Conversation>> data;
+ final Future<List<Conversation>> data;
   UserChats({
     Key? key,
     required this.data,

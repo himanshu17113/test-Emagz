@@ -1,9 +1,11 @@
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_online_circle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../models/user_schema.dart';
 import '../models/chat_model.dart';
 
 class UserChat extends StatefulWidget {
@@ -28,7 +30,7 @@ class UserChat extends StatefulWidget {
 class _UserChatState extends State<UserChat> {
 //  final jwtController = Get.find<JWTController>();
   //final chatController = Get.find<ConversationController>();
-//  UserSchema? sender;
+   UserSchema? sender;
 
 //   @override
 //   void initState() {
@@ -39,7 +41,7 @@ class _UserChatState extends State<UserChat> {
   Future getInitUser() async {
     // debugPrint("id in list item : ${widget.senderId}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      //   sender = await jwtController.getUserDetail(widget.senderId);
+     sender = await HiveDB.getUserDetail(widget.senderId);
       setState(() {});
     });
     //setState(() {});

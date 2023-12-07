@@ -30,8 +30,6 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
   int? selectedIndex;
   bool showBox=false;
   bool showSearch=false;
-
-  //var jwtController= JWTController() ;
   var chatController= Get.put(ConversationController());
   UserSchema? user;
   bool? youFollow ;
