@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/material.dart';
@@ -92,8 +91,9 @@ class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                                 child: TextField(
+                                    cursorColor: Colors.white54,
                                     style: const TextStyle(color: Colors.white70),
                                     textAlign: TextAlign.center,
                                     controller: postController.button1Controller,
@@ -109,8 +109,9 @@ class _CustomPollSelectScreenState extends State<CustomPollSelectScreen> {
                                         hintStyle: TextStyle(color: Colors.white70))),
                               ),
                               SizedBox(
-                                width: 150,
+                                width: 130,
                                 child: TextField(
+                                     cursorColor: Colors.white54,
                                     style: const TextStyle(color: Colors.white70),
                                     controller: postController.button2Controller,
                                     decoration: const InputDecoration(

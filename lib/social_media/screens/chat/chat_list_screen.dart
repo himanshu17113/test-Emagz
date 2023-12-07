@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
@@ -29,13 +30,13 @@ class _ChatListScreenState extends State<ChatListScreen> {
   String searchQuery = 'XXXXXXX';
   TextEditingController QueryControl = TextEditingController();
 
-  final jwtController = Get.find<JWTController>();
+  //final jwtController = JWTController();
   final chatController = Get.put(ConversationController());
-  final nav= Get.put(NavController());
+  final nav = Get.put(NavController());
   late Future<List<Conversation>>? myFuture;
   @override
   void initState() {
-    userId = jwtController.userId;
+    userId = globUserId;
     myFuture = chatController.getChatList();
     super.initState();
   }
@@ -62,8 +63,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       children: [
                         Text(
                           "Chat",
-                          style: TextStyle(
-                              fontSize: 21, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -121,10 +121,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: CachedNetworkImageProvider(url),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(5)),
+                                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover), borderRadius: BorderRadius.circular(5)),
                           )),
                       const SizedBox(
                         width: 5,
@@ -134,18 +131,14 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 ],
               ),
             )),
-        body: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            RefreshIndicator(
+        body: Stack(alignment: Alignment.topCenter, children: [
+          RefreshIndicator(
             onRefresh: () => myFuture = chatController.getChatList(),
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 18),
                     child: Row(
@@ -154,9 +147,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             child: Container(
                           // margin: EdgeInsets.symmetric(),
                           height: 42,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF0F0F0),
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: const Color(0xffF0F0F0), borderRadius: BorderRadius.circular(10)),
                           child: TextField(
                             controller: QueryControl,
                             onSubmitted: (value) {
@@ -175,10 +166,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             showCursor: false,
                             decoration: InputDecoration(
                                 hintText: "Search",
-                                hintStyle: TextStyle(
-                                    fontSize: 13, color: blackButtonColor),
-                                contentPadding:
-                                    const EdgeInsets.only(left: 10, top: 5),
+                                hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
+                                contentPadding: const EdgeInsets.only(left: 10, top: 5),
                                 prefixIcon: const Icon(
                                   Icons.search,
                                   color: Colors.black,
@@ -218,22 +207,18 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 18),
                     child: Text(
                       "Online",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 15.5,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: blackButtonColor, fontSize: 15.5, fontWeight: FontWeight.w600),
                     ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Container(
-                    margin:
-                        const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
-                    child: Row(
+                    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+                    child: const Row(
                       children: [
                         UserOnlineCircle(),
-                        const SizedBox(
+                        SizedBox(
                           width: 10,
                         ),
                         // UserOnlineCircle(),
@@ -258,7 +243,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                       color: const Color(0xffF0F0F0),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "DIRECT MESSAGE",
                       fontSize: 12,
                       color: Colors.black,
@@ -275,8 +260,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           : (myFuture == null)
                               ? const CircularProgressIndicator()
                               : RefreshIndicator(
-                                  onRefresh: () =>
-                                      myFuture = chatController.getChatList(),
+                                  onRefresh: () => myFuture = chatController.getChatList(),
                                   child: UserChats(
                                     data: myFuture!,
                                   ),
@@ -284,29 +268,23 @@ class _ChatListScreenState extends State<ChatListScreen> {
                 ],
               ),
             ),
-
           ),
-            GestureDetector(
-              onHorizontalDragUpdate: (details)
-              {
+          GestureDetector(
+            onHorizontalDragUpdate: (details) {
+              nav.page.value = 0;
+              //Get.offAll(() => BottomNavBar());
 
-                nav.page.value = 0;
-                //Get.offAll(() => BottomNavBar());
-
-
-                //Get.offAll(()=>SocialMediaHomePage());
-              },
-              child: ColoredBox(
-                color: Colors.transparent,
-                child: SizedBox(
-
-                  height: double.maxFinite,
-                  width: 60,
-                ),
+              //Get.offAll(()=>SocialMediaHomePage());
+            },
+            child: const ColoredBox(
+              color: Colors.transparent,
+              child: SizedBox(
+                height: double.maxFinite,
+                width: 60,
               ),
             ),
-    ]
-        ),
+          ),
+        ]),
       ),
     );
   }

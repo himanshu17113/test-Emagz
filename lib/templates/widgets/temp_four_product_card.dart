@@ -2,7 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../constant/strings.dart';
+import '../../constant/data.dart';
 
 class TemplateFourproductCard extends StatelessWidget {
   final String imgUrl;

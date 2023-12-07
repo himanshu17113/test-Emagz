@@ -16,7 +16,7 @@ class ChooseIntrestScreen extends StatefulWidget {
 }
 
 class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
-  final authController = Get.put(AuthController());
+  final authController =  AuthController() ;
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
             const SizedBox(
               height: 20,
             ),
-            Center(
+            const Center(
               child: FormHeadingText(
                 headings: "Choose Your",
                 fontSize: 14,
               ),
             ),
-            Center(
+            const Center(
               child: FormHeadingText(
                 headings: "Interest",
                 fontSize: 22,
@@ -181,7 +181,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                   gradient: buttonGradient,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: authController.isUserRegiserting.value
+                child: authController.isUserRegiserting 
                     ? const CircularProgressIndicator(
                         color: Colors.white,
                       )

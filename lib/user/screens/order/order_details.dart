@@ -123,7 +123,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(
+                            const Text(
                               "Delivered Estimated :",
                               style:
                                   TextStyle(fontSize: 10, color: signInHeading),
@@ -186,7 +186,7 @@ class OrderDetailsScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 83,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -207,7 +207,7 @@ class OrderDetailsScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(
+                          const Text(
                             "Sold by: MAVfashion ",
                             style:
                                 TextStyle(fontSize: 11, color: signInHeading),
@@ -259,7 +259,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       "Visa ending in 0024",
                       style: TextStyle(fontSize: 12, color: signInHeading),
                     ),
@@ -276,7 +276,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       "2118 Thornridge Cir. Syracuse, Connecticut 35624",
                       style: TextStyle(fontSize: 14, color: signInHeading),
                     ),
@@ -293,7 +293,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       "2118 Thornridge Cir. Syracuse, Connecticut 35624",
                       style: TextStyle(fontSize: 14, color: signInHeading),
                     ),

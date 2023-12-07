@@ -90,7 +90,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Privacy policy",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,

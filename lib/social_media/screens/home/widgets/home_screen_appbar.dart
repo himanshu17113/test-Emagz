@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../controller/auth/jwtcontroller.dart';
-import '../temp_attech_screen.dart';
+import '../../../../constant/data.dart';
+ import '../temp_attech_screen.dart';
 
 class SocialHomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String title;
@@ -104,7 +104,7 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
                       ),
                       child: SvgPicture.asset("assets/svg/Ebusiness-Icon.svg"),
                     )),
-                back: CircleAvatar(radius: 30, backgroundImage: CachedNetworkImageProvider(gprofilePic ?? "")),
+                back: CircleAvatar(radius: 30, backgroundImage: CachedNetworkImageProvider(globProfilePic ?? "")),
               ),
             ),
           ),

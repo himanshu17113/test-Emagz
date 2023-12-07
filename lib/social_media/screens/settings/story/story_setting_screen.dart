@@ -69,7 +69,7 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Hide your stories from",
                     style: TextStyle(
                         color: signInHeading,

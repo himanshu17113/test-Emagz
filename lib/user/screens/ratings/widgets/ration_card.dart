@@ -122,7 +122,7 @@ class RatingCard extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          SizedBox(height: 35, child: MyCustomTextfiled()),
+          const SizedBox(height: 35, child: MyCustomTextfiled()),
         ],
       ),
     );

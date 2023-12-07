@@ -10,8 +10,10 @@ class ApiEndpoint {
   //     "http://ec2-15-206-157-157.ap-south-1.compute.amazonaws.com:3000/api";
 
   // static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
-  static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
-  static String socketUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/socket_connection";
+  //static String baseUrl = "https://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
+  static String baseUrl = "https://emagz.live/api";
+
+  static String socketUrl = "https://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/socket_connection";
   static String userInfo(String userId) => "$baseUrl/auth/get-user-details/$userId";
 
   static String register = "$baseUrl/auth/register";

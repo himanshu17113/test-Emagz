@@ -25,9 +25,9 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
   }
 
   asyncInit() async {
-    var user = await storyController.jwtController.getUserDetail(widget.userId);
-    userName = user!.username!;
-    profileUrl = user.sId;
+  //  var user = await storyController.jwtController.getUserDetail(widget.userId);
+    // userName = user!.username!;
+    // profileUrl = user.sId;
     setState(() {});
   }
 
@@ -78,14 +78,14 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                   headings: widget.text,
                   fontSize: 14,
                 ),
-                Row(
+                const Row(
                   children: [
                     FormHeadingText(
                       headings: "4+ Loves",
                       fontSize: 8,
                       color: Colors.white,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     FormHeadingText(
@@ -94,7 +94,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
                       fontSize: 8,
                       color: Colors.white,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     FormHeadingText(
@@ -107,7 +107,7 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
               ],
             ),
             const Spacer(),
-            FormHeadingText(
+            const FormHeadingText(
               color: Colors.white,
               headings: "3+",
               fontSize: 12,

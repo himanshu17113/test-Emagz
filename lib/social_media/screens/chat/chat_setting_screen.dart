@@ -3,6 +3,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
  
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
@@ -32,7 +33,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
   bool showBox=false;
   bool showSearch=false;
 
-  var jwtController= Get.put(JWTController());
+  //var jwtController= JWTController() ;
   var chatController= Get.put(ConversationController());
   UserSchema? user;
   bool? youFollow ;
@@ -46,7 +47,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
 
   asyncInit() async {
 
-    user = await jwtController.getCurrentUserDetail();
+   // user = await jwtController.getCurrentUserDetail();
     youFollow= user!.mess_priv!.yourFollower;
 
     everyOne= user!.mess_priv!.everyone;
@@ -136,7 +137,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              FormHeadingText(
+                              const FormHeadingText(
                                 headings: "Message Request",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -167,8 +168,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10),
                   child: FormHeadingText(
                     headings: "Chat Setting",
                     fontSize: 12,
@@ -256,7 +257,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                               const SizedBox(
                                 height: 2,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 140,
                                 child: Text(
                                   "Any message from people you block will not be visible to anyone but them",

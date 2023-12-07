@@ -92,7 +92,7 @@ class PostCommentTile extends StatelessWidget {
                                 style: TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
                               )),
                         ),
-                        FormHeadingText(headings: "Love Back", fontSize: 11.5, color: Colors.white60),
+                        const FormHeadingText(headings: "Love Back", fontSize: 11.5, color: Colors.white60),
                       ],
                     )
                   ],

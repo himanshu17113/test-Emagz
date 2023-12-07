@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/constant/strings.dart' as text;
+import 'package:emagz_vendor/constant/data.dart' as text;
 import 'package:emagz_vendor/templates/common/appbar/common_appbar.dart';
 import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:emagz_vendor/constant/data.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,30 +11,40 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'firebase_options.dart';
+import 'social_media/models/user_schema.dart';
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
+}
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
+   Hive.registerAdapter(UserSchemaAdapter());
   await Permission.camera.request();
-
-  final hiveBox = await Hive.openBox("secretes");
-  final String? token = await hiveBox.get("token");
-  final bool isAutharized = token != null;
-
+  await Hive.openBox("secretes");
+  globToken = await HiveDB.getAuthToken();
+  globUserId = await HiveDB.getUserID();
+  if (globUserId != null) {
+    constuser = await HiveDB.getCurrentUserDetail();
+  }
   await Firebase.initializeApp(
     name: 'EmagzIos',
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp(isAuthorized: isAutharized));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final bool isAuthorized;
   const MyApp({
     Key? key,
-    this.isAuthorized = false,
   }) : super(key: key);
 
   @override
@@ -42,6 +55,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData.light().copyWith(
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),
-        home: isAuthorized ? BottomNavBar() : const CommonAuthScreen());
+        home: globUserId != null ? BottomNavBar() : const CommonAuthScreen());
   }
 }

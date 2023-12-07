@@ -47,10 +47,10 @@ class PersonalInformationTile extends StatelessWidget {
             onTap: () {
               onTap();
             },
-            child: FormHeadingText(
+            child: const FormHeadingText(
               headings: "Update",
               fontSize: 10,
-              color: const Color(0xff1B47C1),
+              color: Color(0xff1B47C1),
             ),
           ),
         ],

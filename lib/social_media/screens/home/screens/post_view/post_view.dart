@@ -26,6 +26,7 @@ class PostView extends StatelessWidget {
   Widget build(BuildContext context) {
     final Post post = homePostController.posts![index];
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
       // backgroundColor: socialBack,
       body: Stack(alignment: Alignment.center, fit: StackFit.loose, children: [
@@ -37,11 +38,9 @@ class PostView extends StatelessWidget {
               //  fit: BoxFit.fill,
               imageUrl: post.mediaUrl![index]!,
               filterQuality: FilterQuality.high,
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  const Center(
+              progressIndicatorBuilder: (context, url, downloadProgress) => const Center(
                 child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 180.0, vertical: 200),
+                  padding: EdgeInsets.symmetric(horizontal: 180.0, vertical: 200),
                   child: CircularProgressIndicator(
                     //    value: downloadProgress.progress,
                     backgroundColor: Colors.amberAccent,
@@ -62,8 +61,7 @@ class PostView extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon:
-                    const Icon(color: Colors.white, Icons.arrow_back_rounded))),
+                icon: const Icon(color: Colors.white, Icons.arrow_back_rounded))),
         Positioned(
           bottom: 30,
           child: Material(
@@ -77,22 +75,18 @@ class PostView extends StatelessWidget {
                     onTap: () {
                       if (post.isLike!) {
                         homePostController.posts![index].isLike = false;
-                        homePostController.posts![index].likeCount =
-                            homePostController.posts![index].likeCount! - 1;
+                        homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! - 1;
 
                         //    post.likes!.remove(myId);
                         setInnerState(() {});
-                        homePostController.likePost(
-                            post.sId!, false, post.user?.sId ?? "");
+                        homePostController.likePost(post.sId!, false, post.user?.sId ?? "");
                       } else {
                         homePostController.posts![index].isLike = true;
-                        homePostController.posts![index].likeCount =
-                            homePostController.posts![index].likeCount! + 1;
+                        homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! + 1;
 
                         //    post.likes!.add(myId);
                         setInnerState(() {});
-                        homePostController.likePost(
-                            post.sId!, true, post.user?.sId ?? "");
+                        homePostController.likePost(post.sId!, true, post.user?.sId ?? "");
                       }
                       update();
                     },
@@ -111,10 +105,7 @@ class PostView extends StatelessWidget {
                   ),
                   Text(
                     "${post.likeCount}",
-                    style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: whiteColor),
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 30,
@@ -127,16 +118,11 @@ class PostView extends StatelessWidget {
                           // enableDrag: true,
                           enableDrag: true,
                           isScrollControlled: true,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  topRight: Radius.circular(20))),
+                          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
                           context: context,
                           builder: (context) {
                             return Padding(
-                              padding: EdgeInsets.only(
-                                  bottom:
-                                      MediaQuery.of(context).viewInsets.bottom),
+                              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                               child: PostCommentsModalBottomSheet(
                                 update: update,
                                 index: index,
@@ -161,17 +147,13 @@ class PostView extends StatelessWidget {
                   ),
                   Text(
                     "${post.comments?.length.toString()}",
-                    style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: whiteColor),
+                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 30,
                   ),
                   GestureDetector(
-                    onTap: () =>
-                        Share.share("http://emagz.live/Post/${post.sId}"),
+                    onTap: () => Share.share("http://emagz.live/Post/${post.sId}"),
                     child: Image.asset(
                       "assets/png/share_icon.png",
                       width: 26,

@@ -2,22 +2,14 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class MyCustomTextfiled extends StatelessWidget {
-  TextEditingController? controller;
-  TextInputType? inputType;
-  String? hint;
-  int? maxLines;
+  final TextEditingController? controller;
+  final TextInputType? inputType;
+  final String? hint;
+  final int? maxLines;
   final Function? onTap;
   final Function(String text)? onChange;
 
-  MyCustomTextfiled({
-    Key? key,
-    this.controller,
-    this.hint,
-    this.maxLines = 1,
-    this.onTap,
-    this.inputType,
-    this.onChange
-  }) : super(key: key);
+  const MyCustomTextfiled({Key? key, this.controller, this.hint, this.maxLines = 1, this.onTap, this.inputType, this.onChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +20,17 @@ class MyCustomTextfiled extends StatelessWidget {
       height: maxLines == 1 ? 44 : null,
       child: TextFormField(
         onTap: () {
-          if (onTap==Null)
-          {
-
-          }
-          else {
+          if (onTap == Null) {
+          } else {
             onTap;
           }
         },
         controller: controller,
         maxLines: maxLines,
         cursorColor: grayColor,
-        onChanged: (value){
-          onChange == null ? null:onChange!(value);
-          },
+        onChanged: (value) {
+          onChange == null ? null : onChange!(value);
+        },
         keyboardType: inputType,
         minLines: maxLines,
         // autofocus: true,
@@ -51,8 +40,7 @@ class MyCustomTextfiled extends StatelessWidget {
         decoration: InputDecoration(
             fillColor: const Color(0xffF2F2F2),
             isDense: true,
-            contentPadding:
-                const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+            contentPadding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
             hintText: hint,
             filled: true,
             border: OutlineInputBorder(

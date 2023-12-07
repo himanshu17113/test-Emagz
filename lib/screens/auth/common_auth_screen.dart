@@ -2,7 +2,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/signup_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'signin_screen.dart';
 
@@ -13,9 +12,8 @@ class CommonAuthScreen extends StatefulWidget {
   State<CommonAuthScreen> createState() => _CommonAuthScreenState();
 }
 
-class _CommonAuthScreenState extends State<CommonAuthScreen>
-    with SingleTickerProviderStateMixin {
-  final authController = Get.put(AuthController());
+class _CommonAuthScreenState extends State<CommonAuthScreen> with SingleTickerProviderStateMixin {
+  final authController = AuthController();
 
   @override
   void initState() {
@@ -61,16 +59,12 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                         Container(
                           color: Colors.white,
                           height: 45,
-                          margin: const EdgeInsets.only(
-                              left: 25, right: 25, top: 30),
+                          margin: const EdgeInsets.only(left: 25, right: 25, top: 30),
                           child: TabBar(
                             controller: authController.tabController,
                             indicatorPadding: EdgeInsets.zero,
                             labelPadding: EdgeInsets.zero,
-                            indicator: BoxDecoration(
-                                gradient: buttonGradient,
-                                borderRadius: BorderRadius.circular(90),
-                                color: blueColor),
+                            indicator: BoxDecoration(gradient: buttonGradient, borderRadius: BorderRadius.circular(90), color: blueColor),
                             labelStyle: TextStyle(
                                 color: blackButtonColor,
                                 fontWeight: FontWeight.w600,
@@ -78,8 +72,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen>
                                 fontSize: 16),
                             labelColor: Colors.white,
                             unselectedLabelColor: unselectedLabel,
-                            unselectedLabelStyle: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 16),
+                            unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                             tabs: const [
                               Tab(
                                 text: "Sign Up",

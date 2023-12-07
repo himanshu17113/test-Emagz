@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
@@ -18,11 +19,10 @@ class HomePostsController extends GetxController {
   );
   final ScrollController scrollController = ScrollController();
   bool ispostloading = false;
-  final jwtController = Get.put(JWTController());
   final socketController = Get.put(SocketController());
   String? token;
   String? userId;
- // RxBool isVisible = RxBool(true);
+  // RxBool isVisible = RxBool(true);
   bool isVisible = true;
   int page = 0;
   List<Post>? posts = [];
@@ -30,7 +30,8 @@ class HomePostsController extends GetxController {
   RxInt skip = RxInt(-10);
   @override
   onInit() async {
-    await storedData();
+    token = globToken;
+    userId = globUserId;
     if (token != null) {
       await getPost();
       if (posts!.length < 2) {
@@ -38,15 +39,13 @@ class HomePostsController extends GetxController {
       }
     }
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
+      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
         if (isVisible) {
           isVisible = false;
           update();
         }
       }
-      if (scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
+      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
         if (!isVisible) {
           isVisible = true;
           update();
@@ -63,18 +62,10 @@ class HomePostsController extends GetxController {
     update();
   }
 
-  Future<void> storedData() async {
-    token = await jwtController.getAuthToken();
-    userId = await jwtController.getUserId();
-  }
-
   loadMoreData() async {
-    if (scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent &&
-        !ispostloading) {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
       await getPost();
-    } else if (scrollController.position.pixels ==
-        scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
   }
 
   getPost() async {
@@ -85,8 +76,7 @@ class HomePostsController extends GetxController {
     try {
       Dio dio = Dio();
 
-      dio.options.headers["Authorization"] =
-          token ?? await jwtController.getAuthToken();
+      dio.options.headers["Authorization"] = token  ;
       debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
 
       final String endPoint = ApiEndpoint.posts(skip.value);
@@ -94,8 +84,7 @@ class HomePostsController extends GetxController {
       print(endPoint);
       var resposne = await dio.get(endPoint);
 
-      if (resposne.data['AllPost'] != null &&
-          resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -152,11 +141,7 @@ class HomePostsController extends GetxController {
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
     if (islike) {
-      socketController.sendLikeNotification(
-          uid,
-          jwtController.user?.value.username ??
-              jwtController.user?.value.displayName ??
-              "");
+      socketController.sendLikeNotification(uid, constuser?.username ?? constuser?.displayName ?? "");
     }
     try {
       Dio dio = Dio();

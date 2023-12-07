@@ -50,35 +50,31 @@ class MyStory extends StatelessWidget {
                 top: 21,
                 //  right: 5,
                 child: SizedBox(
-                  height: 39,
-                  width: 39,
-                  child:  RotationTransition(
-                turns: const AlwaysStoppedAnimation(222 / 360),
-                child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
+                    height: 39,
+                    width: 39,
+                    child: RotationTransition(
+                      turns: const AlwaysStoppedAnimation(222 / 360),
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: BoxDecoration(
+                            border: Border.all(width: 0, color: Colors.transparent),
+                            borderRadius: BorderRadius.circular(10), //<-- SEE HERE
+                            color: Colors.grey,
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: CachedNetworkImageProvider(
+                                  stories!.isNotEmpty
+                                      ? stories![0].mediaUrl ?? "https://picsum.photos/500/500?random=0"
+                                      : "https://picsum.photos/500/500?random=0",
+                                ))
 
-                      border: Border.all(width: 0,color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(10), //<-- SEE HERE
-                      color: Colors.grey,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: CachedNetworkImageProvider(stories!.isNotEmpty ? stories![0].mediaUrl ?? "https://picsum.photos/500/500?random=0" : "https://picsum.photos/500/500?random=0",
-                          )
-                      )
+                            //    border: Border.all(color: whiteColor, width: 1),
+                            //borderRadius: BorderRadius.circular(100),
 
-                    //    border: Border.all(color: whiteColor, width: 1),
-                    //borderRadius: BorderRadius.circular(100),
-
-
-
-                  ),
-
-
-                ),
-              )
-                ),
+                            ),
+                      ),
+                    )),
               ),
 
               Positioned(
@@ -94,7 +90,7 @@ class MyStory extends StatelessWidget {
                         barrierColor: Colors.black45,
                         context: context,
                         builder: (context) {
-                          return   StorySelectionBottomSheet();
+                          return  StorySelectionBottomSheet();
                         });
                   },
                   icon: Container(

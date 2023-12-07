@@ -100,7 +100,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    FormHeadingText(
+                                    const FormHeadingText(
                                       headings: "User name",
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,

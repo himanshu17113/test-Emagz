@@ -27,7 +27,7 @@ class CommentReplyTile extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment:
             MainAxisAlignment.spaceBetween,
@@ -44,7 +44,7 @@ class CommentReplyTile extends StatelessWidget {
               FormHeadingText(
                 headings: "Now",
                 fontSize: 6,
-                color: const Color(0xff323232),
+                color: Color(0xff323232),
               ),
             ],
           ),

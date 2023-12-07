@@ -2,8 +2,8 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class UserOnlineCircle extends StatelessWidget {
-  String? url;
-   UserOnlineCircle({
+final  String? url;
+   const UserOnlineCircle({
     Key? key, this.url,
   }) : super(key: key);
 

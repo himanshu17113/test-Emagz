@@ -1,3 +1,5 @@
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -17,8 +19,7 @@ class LiveSettingScreen extends StatefulWidget {
 }
 
 class _LiveSettingScreenState extends State<LiveSettingScreen> {
-  var jwtController= Get.put(JWTController());
-  UserSchema? user;
+   UserSchema? user;
   bool? youFollow ;
   bool? everyOne;
   bool? noone;
@@ -30,7 +31,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
 
   asyncInit() async {
 
-    user = await jwtController.getCurrentUserDetail();
+    user = await HiveDB.getCurrentUserDetail();
     youFollow= user!.live_priv!.yourFollower;
 
     everyOne= user!.live_priv!.everyone;

@@ -140,7 +140,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                         ),
                       );
                     }).toList(),
-                    hint: FormHeadingText(
+                    hint: const FormHeadingText(
                       headings: "Latest Request",
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
@@ -243,9 +243,9 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                             });
                                           },
 
-                                          child: FormHeadingText(
+                                          child: const FormHeadingText(
                                             headings: "Accept Request",
-                                            color: const Color(0xff4DD74A),
+                                            color: Color(0xff4DD74A),
                                             fontSize: 12,
                                           ),
                                         ),
@@ -274,9 +274,9 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                                               selectedIndex = null;
                                             });
                                           },
-                                          child: FormHeadingText(
+                                          child: const FormHeadingText(
                                             headings: "Reject & Block",
-                                            color: const Color(0xffFE5151),
+                                            color: Color(0xffFE5151),
                                             fontSize: 12,
                                           ),
                                         ),

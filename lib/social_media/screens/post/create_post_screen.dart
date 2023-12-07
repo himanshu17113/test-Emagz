@@ -10,7 +10,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 import '../../../screens/auth/widgets/form_haeding_text.dart';
-import '../../controller/bottom_nav_controller.dart';
 import '../../controller/post/post_controller.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -149,10 +148,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               color: const Color(0xFFDFECFF),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: FormHeadingText(
+                            child: const FormHeadingText(
                               headings: "Poll",
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
+                              color: Color(0xff054BFF),
                               fontSize: 14,
                             ),
                           ),
@@ -213,10 +212,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               color: const Color(0xffDFECFF),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: FormHeadingText(
+                            child: const FormHeadingText(
                               headings: "Camera",
                               fontWeight: FontWeight.bold,
-                              color: const Color(0xff054BFF),
+                              color: Color(0xff054BFF),
                               fontSize: 14,
                             ),
                           ),
@@ -251,7 +250,7 @@ class _GridGalleryState extends State<GridGallery> {
   int currentPage = 0;
   int? lastPage;
   RxBool longPressed = RxBool(false);
-  final postController = Get.find<PostController>(tag: "PostController");
+  final postController = Get.put(PostController(), tag: "PostController");
   final storyController = Get.find<GetXStoryController>(tag: "GetXStoryController");
 
   @override

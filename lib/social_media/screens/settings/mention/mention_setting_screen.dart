@@ -1,3 +1,5 @@
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -5,10 +7,8 @@ import 'package:get/get.dart';
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
-import '../../../controller/auth/jwtcontroller.dart';
-import '../../../controller/privacy/privacy_controller.dart';
-import '../../../models/post_model.dart';
-
+ import '../../../controller/privacy/privacy_controller.dart';
+ 
 class MentionSettingScreen extends StatefulWidget {
   const MentionSettingScreen({Key? key}) : super(key: key);
 
@@ -18,8 +18,7 @@ class MentionSettingScreen extends StatefulWidget {
 
 class _MentionSettingScreenState extends State<MentionSettingScreen> {
 
-  var jwtController= Get.put(JWTController());
-  UserSchema? user;
+   UserSchema? user;
   bool? youFollow ;
   bool? everyOne;
   bool? noone;
@@ -32,7 +31,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
 
   asyncInit() async {
 
-    user = await jwtController.getCurrentUserDetail();
+    user = await HiveDB.getCurrentUserDetail();
     youFollow= user!.ment_priv!.yourFollower;
 
     everyOne= user!.ment_priv!.everyone;

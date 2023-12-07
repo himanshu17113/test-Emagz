@@ -126,7 +126,7 @@ class _PostCardState extends State<PostCard> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    //     final tok = jwtController.token ?? await jwtController.getAuthToken();
+                    //     final tok = globToken ??  await HiveDB.getAuthToken();
 
                     String? temp = post!.user!.personalTemplate;
                     if (temp == null) {
@@ -295,10 +295,60 @@ class _PostCardState extends State<PostCard> {
             child: Column(
               children: [
                 if (isShowPoll) ...[
-                  poll?.isVoted ?? false
-                      ? (poll?.postx?.customPollEnabled ?? false)
-                          ? const SizedBox()
-                          : SizedBox(
+                  (post!.customPollEnabled!)
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FormHeadingText(
+                              headings: "Choose\nyour poll",
+                              color: whiteColor,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: List.generate(
+                                post!.customPollData!.length,
+                                (index) => Padding(
+                                  padding: const EdgeInsets.only(right: 10),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      if (index == selectedOption) {
+                                        selectedOption = -1;
+                                        setState(() {});
+                                        return;
+                                      }
+                                      selectedOption = index;
+                                      poll = await homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
+
+                                      setState(() {});
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      height: 52,
+                                      width: 100,
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: selectedOption == index ? whiteColor : null,
+                                        border: Border.all(color: whiteColor),
+                                      ),
+                                      child: FormHeadingText(
+                                        headings: post!.customPollData![index],
+                                        color: selectedOption != index ? whiteColor : Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      : poll?.isVoted ?? false
+                          ? SizedBox(
                               width: width * .7,
                               child: Column(
                                 children: [
@@ -352,69 +402,74 @@ class _PostCardState extends State<PostCard> {
                                 ],
                               ),
                             )
-                      : Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FormHeadingText(
-                              headings: "Choose\nyour poll",
-                              color: whiteColor,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w600,
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: List.generate(
-                                chooseOption.length,
-                                (index) => Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      if (index == selectedOption) {
-                                        selectedOption = -1;
-                                        setState(() {});
-                                        return;
-                                      }
-                                      selectedOption = index;
-                                      poll = await homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
+                              children: [
+                                FormHeadingText(
+                                  headings: "Choose\nyour poll",
+                                  color: whiteColor,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: List.generate(
+                                    chooseOption.length,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          if (index == selectedOption) {
+                                            selectedOption = -1;
+                                            setState(() {});
+                                            return;
+                                          }
+                                          selectedOption = index;
+                                          poll = await homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
 
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 52,
-                                      width: 100,
-                                      padding: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        color: selectedOption == index ? whiteColor : null,
-                                        border: Border.all(color: whiteColor),
-                                      ),
-                                      child: FormHeadingText(
-                                        headings: chooseOption[index],
-                                        color: selectedOption != index ? whiteColor : Colors.black,
+                                          setState(() {});
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 52,
+                                          width: 100,
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            color: selectedOption == index ? whiteColor : null,
+                                            border: Border.all(color: whiteColor),
+                                          ),
+                                          child: FormHeadingText(
+                                            headings: chooseOption[index],
+                                            color: selectedOption != index ? whiteColor : Colors.black,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ],
-                        )
+                              ],
+                            )
                 ],
                 if (post!.enabledpoll!) ...[
                   Align(
                     alignment: Alignment.bottomRight,
                     child: InkWell(
                       onTap: () async {
-                        poll = await homePostController.Polldetail(post!.sId!);
-                        //  print(poll!.postx!.customPollData);
-                        setState(() {
-                          isShowPoll = !isShowPoll;
-                          isvoted = poll?.isVoted ?? false;
-                        });
+                        if (post!.customPollEnabled!) {
+                          setState(() {
+                            isShowPoll = !isShowPoll;
+                          });
+                        } else {
+                          poll = await homePostController.Polldetail(post!.sId!);
+                          setState(() {
+                            isShowPoll = !isShowPoll;
+                            isvoted = poll?.isVoted ?? false;
+                          });
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right: 15, bottom: 15),

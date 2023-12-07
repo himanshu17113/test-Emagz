@@ -1,15 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/comment_tile/comment_tile.dart';
-
 import '../../../../../../constant/colors.dart';
 import '../../../../../../screens/auth/widgets/form_haeding_text.dart';
+import '../../../../../models/user_schema.dart';
 import 'glass.dart';
 
 class PostCommentsModalBottomSheet extends StatefulWidget {
@@ -41,11 +39,8 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
 
 class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSheet> {
   final commentsController = Get.put(CommentController());
-  final homePostController = Get.find<HomePostsController>();
-//  final socketController = Get.find<SocketController>();
-  //final getXStoryController = Get.find<GetXStoryController>();
-  final jwt = Get.find<JWTController>();
-  double mainHeight = 450;
+
+   double mainHeight = 450;
 
   @override
   void dispose() {
@@ -56,20 +51,13 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
 
   @override
   Widget build(BuildContext context) {
-    //bool keyboardVisible = MediaQuery.of(context).viewInsets.bottom != 0;
-    // debugPrint(MediaQuery.of(context).viewInsets.bottom);
-    // debugPrint(MediaQuery.of(context).size.height);
-
     return GlassmorphicContainer(
-        //   borderRadius: 33,
-        //  blur: 6,
         borderRadius: widget.isblurNeeded ? 33 : 0,
         blur: widget.isblurNeeded ? 6 : 0,
-        //  width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * .56,
-        // keyboardVisible ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.height * .7,
         child: Container(
-          decoration: const BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
+          decoration:
+              const BoxDecoration(color: Colors.black26, borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             children: [
@@ -81,24 +69,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                     width: 10,
                   ),
                   GestureDetector(
-                      onTap: () {
-                        // homePostController.likePost(widget.postId);
-                        // setState(() {
-                        //   if (widget.islike == true) {
-                        //     // widget.post!.likes!.removeLast();
-                        //     widget.likelength = widget.likelength! - 1;
-                        //     homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! - 1;
-                        //     homePostController.posts![widget.index!].isLike = false;
-                        //     widget.islike = false;
-                        //   } else {
-                        //     widget.likelength = widget.likelength! + 1;
-                        //     // widget.post!.likes!.add(widget.myUserId!);
-                        //     homePostController.posts![widget.index!].likeCount = homePostController.posts![widget.index!].likeCount! + 1;
-                        //     homePostController.posts![widget.index!].isLike = true;
-                        //     widget.islike = true;
-                        //   }
-                        // });
-                      },
+                      onTap: () {},
                       child: (widget.islike ?? true)
                           ? Image.asset(
                               "assets/png/liked_icon.png",
@@ -119,9 +90,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                     width: 20,
                   ),
                   InkWell(
-                    onTap: () {
-                      // updateName(context,);
-                    },
+                    onTap: () {},
                     child: Image.asset(
                       "assets/png/comment_icon.png",
                       width: 40,
@@ -157,46 +126,22 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                     const SizedBox(
                       width: 15,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       color: Colors.white,
                       headings: "Comments",
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                     ),
-                    // const Spacer(),
-                    // FormHeadingText(
-                    //   color: Colors.white,
-                    //   headings: "Latest",
-                    //   fontSize: 12,
-                    //   fontWeight: FontWeight.w600,
-                    // ),
-                    // const SizedBox(
-                    //   width: 5,
-                    // ),
-                    // const Icon(
-                    //   Icons.keyboard_arrow_down,
-                    //   color: Colors.white,
-                    // ),
                   ],
                 ),
               ),
               SizedBox(
-                  // height:
-                  //     //  keyboardVisible
-                  //     //     ? (MediaQuery.of(context).size.height - MediaQuery.of(context).viewInsets.bottom - 180)
-                  //     //     : MediaQuery.of(context).size.height * .52,
-                  //     MediaQuery.of(context).size.height * .7,
                   child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                // child: ListView(
-                //   physics: const ScrollPhysics(),
-                //   children: [
                 child: widget.comments.isNotEmpty
                     ? SizedBox(
-                        // width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * .35,
+                        height: MediaQuery.of(context).size.height * .3,
                         child: ListView.builder(
-                          //   shrinkWrap: true,
                           physics: const ScrollPhysics(),
                           itemCount: widget.comments.length,
                           itemBuilder: (context, index) {
@@ -213,11 +158,18 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
               Obx(() => commentsController.isCommentingOnPost.value
                   ? const SizedBox()
                   : Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      width: MediaQuery.of(context).size.width * .88,
                       height: 30,
-                      //   width: context.width,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(12),
+                          topRight: Radius.circular(12),
+                        ),
+                        color: Colors.white60,
+                      ),
+                      //decoration: const BoxDecoration(borderRadius: BorderRadiusDirectional.horizontal(start: Radius.elliptical(35), end: Radius.circular(35))),
                       alignment: Alignment.bottomCenter,
-                      color: Colors.white60,
+
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -251,20 +203,11 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   textAlignVertical: TextAlignVertical.center,
                   focusNode: commentsController.focusNode,
                   controller: commentsController.controller,
-                  // controller: textEditingController,
                   decoration: InputDecoration(
-                    // filled: true,
-                    // fillColor: Colors.white12,
                     contentPadding: const EdgeInsets.only(left: 10),
                     hintText: "Type your Comment",
                     hintStyle: const TextStyle(color: Colors.white),
                     border: InputBorder.none,
-                    // border: const OutlineInputBorder(
-                    //     borderRadius: BorderRadius.all(
-                    //       Radius.circular(8),
-                    //     ),
-                    //     borderSide: BorderSide(color: Colors.white, width: 2)),
-//suffixIconConstraints: BoxConstraints(),
                     suffixIcon: Container(
                       padding: const EdgeInsets.all(0),
                       width: 100,
@@ -272,109 +215,82 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                       decoration: const BoxDecoration(
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          gradient:
-                              LinearGradient(end: Alignment.bottomRight, begin: Alignment.topLeft, colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
+                          gradient: LinearGradient(
+                              end: Alignment.bottomRight, begin: Alignment.topLeft, colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
                       child: IconButton(
                           onPressed: () async {
                             if (!widget.isStory!) {
                               if (commentsController.isCommentingOnPost.value) {
-                                //  commentsController.isPosting.value
-                                //     ? debugPrint("sending comment")
-                                //     :
                                 var x = await commentsController.postComment(widget.postId, widget.postuID!);
                                 setState(() {
                                   widget.comments.add(x);
                                   widget.update!();
                                   commentsController.controller.clear();
                                 });
-                                // if (widget.postuID != null) {
-                                //   socketController.sendCommentNotification(widget.postuID!, true, null);
-                                // }
                               } else {
                                 if (commentsController.isPosting.value) {
                                   debugPrint("sending comment");
                                 } else {
                                   if (!commentsController.isCommentingOnReply.value) {
-                                    var x =
-                                        await commentsController.postReply(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
-                                    if (x != false) {
+                                    Comment x = await commentsController.postReply(
+                                        widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    debugPrint("rp------- ${x.sId}");
+                                    if (x.sId == null) {
                                       setState(() {
-                                        widget.comments[commentsController.commentindex.value]?.comments?.add(x
-                                            // Comment(
-                                            //   text: commentsController.controller.text,
-                                            //   userId: UserSchema(
-                                            //       //       username: ,
-                                            //       sId: commentsController.userId),
-                                            //   comments: [],
-                                            //   sId: commentsController.userId)
-                                            );
+                                        widget.comments[commentsController.commentindex.value]?.comments?.add(x);
                                         commentsController.controller.clear();
                                       });
-                                      //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
                                     }
                                   } else {
-                                    var x =
-                                        await commentsController.postReply(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
-                                    if (x != false) {
+                                    Comment x = await commentsController.postReply(
+                                        widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    log("rp------- ${x.sId}");
+                                    if (x.sId != null) {
+                                      debugPrint("rp ${x.sId}");
                                       setState(() {
-                                        widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments?.add(x
-                                            // Comment(
-                                            //   text: commentsController.controller.text,
-                                            //   userId: UserSchema(
-                                            //       //       username: ,
-                                            //       sId: commentsController.userId),
-                                            //   comments: [],
-                                            //   sId: commentsController.userId)
-                                            );
+                                        widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments?.add(x);
                                         commentsController.controller.clear();
                                       });
-                                      //    socketController.sendCommentNotification(homePostController.posts![widget.index!].user!.sId!, true, null);
                                     } else {
-                                      setState(() {
-                                        widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments?.add(Comment(
-                                            text: commentsController.controller.text,
-                                            userId: jwt.user?.value ??
-                                                UserSchema(
-                                                    //    username: ,
-                                                    sId: commentsController.userId),
-                                            comments: [],
-                                            sId: commentsController.userId));
-                                        commentsController.controller.clear();
-                                      });
+                                      // setState(() {
+                                      //   widget.comments[commentsController.commentindex.value]?.comments?[commentsController.replyindex.value].comments
+                                      //       ?.add(Comment(text: commentsController.controller.text, userId: jwt.user?.value ?? UserSchema(sId: commentsController.userId), comments: [], sId: commentsController.userId));
+                                      //   commentsController.controller.clear();
+                                      // });
                                     }
                                   }
                                 }
                               }
                             } else {
                               if (commentsController.isCommentingOnPost.value) {
-                                //  commentsController.isPosting.value
-                                //     ? debugPrint("sending comment")
-                                //     :
                                 String x = await commentsController.commentStory(widget.postId, widget.postuID!);
                                 setState(() {
                                   widget.comments.add(Comment(
                                       text: commentsController.controller.text,
-                                      userId: jwt.user?.value ??
+                                      userId: constuser ??
                                           UserSchema(
-                                              sId: commentsController.userId, ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value, username: jwt.user?.value.username),
+                                              sId: commentsController.userId,
+                                              ProfilePic: constuser?.ProfilePic ,
+                                              username: constuser?.username),
                                       comments: [],
                                       sId: x));
-                                  // if (widget.postuID != null) {
-                                  //   socketController.sendCommentNotification(widget.postuID!, false, null);
-                                  // }
+
                                   commentsController.controller.clear();
                                 });
                               } else {
                                 commentsController.isPosting.value
                                     ? debugPrint("sending comment")
-                                    : commentsController.replyStory(widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    : commentsController.replyStory(
+                                        widget.postId, commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
 
                                 setState(() {
                                   widget.comments[commentsController.commentindex.value]?.comments?.add(Comment(
                                       text: commentsController.controller.text,
-                                      userId: jwt.user?.value ??
+                                      userId: constuser ??
                                           UserSchema(
-                                              sId: commentsController.userId, ProfilePic: jwt.user?.value.ProfilePic ?? jwt.profilePic?.value, username: jwt.user?.value.username),
+                                              sId: commentsController.userId,
+                                              ProfilePic: constuser?.ProfilePic ,
+                                              username: constuser?.username),
                                       comments: [],
                                       sId: commentsController.userId));
                                   commentsController.controller.clear();

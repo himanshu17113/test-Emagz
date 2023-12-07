@@ -1,6 +1,8 @@
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -18,8 +20,7 @@ class PostSettingScreen extends StatefulWidget {
 }
 
 class _PostSettingScreenState extends State<PostSettingScreen> {
-  var jwtController= Get.put(JWTController());
-  UserSchema? user;
+   UserSchema? user;
   bool? youFollow ;
   bool? everyOne;
   bool? noone;
@@ -33,7 +34,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
 
   asyncInit() async {
 
-    user = await jwtController.getCurrentUserDetail();
+    user = await HiveDB.getCurrentUserDetail();
     youFollow= user!.post_priv!.yourFollower;
 
     everyOne= user!.post_priv!.everyone;
@@ -109,7 +110,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           const SizedBox(
                             height: 2,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 140,
                             child: Text(
                               "Manage your likes and view on your post",
@@ -186,7 +187,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                           const SizedBox(
                             height: 5,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                             // width: 140,
                             child: Text(

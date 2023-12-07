@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
@@ -12,7 +14,7 @@ import 'package:http/http.dart' as http;
 class CommentController extends GetxController {
 //  Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
   final socketController = Get.find<SocketController>();
-  final jwtController = Get.find<JWTController>();
+  //final jwtController = Get.find<JWTController>();
   @override
   onInit() async {
     await storedData();
@@ -23,8 +25,8 @@ class CommentController extends GetxController {
   String? token;
   String? userId;
   Future<void> storedData() async {
-    token = await jwtController.getAuthToken();
-    userId = await jwtController.getUserId();
+    token = await HiveDB.getAuthToken();
+    userId = await HiveDB.getUserID();
   }
 
   RxBool isPosting = RxBool(false);
@@ -50,7 +52,7 @@ class CommentController extends GetxController {
     focusNode.requestFocus();
     commentId.value = id;
     commentOwner.value = commentedBy;
-    replyindex= RxInt(index) ;
+    replyindex = RxInt(index);
     isCommentingOnReply.value = true;
     isCommentingOnPost.value = false;
   }
@@ -74,8 +76,8 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       Dio dio = Dio();
-      // var token = await jwtController.getAuthToken();
-      // var userId = await jwtController.getUserId();
+      // var token =  await HiveDB.getAuthToken();
+      // var userId = await HiveDB.getUserID();
       dio.options.headers["Authorization"] = token;
       var data = {"userId": userId, "text": comment};
       var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
@@ -108,8 +110,8 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       Dio dio = Dio();
-      // var token = await jwtController.getAuthToken();
-      // var userId = await jwtController.getUserId();
+      // var token =  await HiveDB.getAuthToken();
+      // var userId = await HiveDB.getUserID();
       dio.options.headers["Authorization"] = token;
 
       final resposne = await dio.get(
@@ -134,8 +136,8 @@ class CommentController extends GetxController {
   commentStory(String storyId, String postuID) async {
     var comment = controller.text;
     if (token == null) {
-      token = await jwtController.getAuthToken();
-      userId = await jwtController.getUserId();
+      token = await HiveDB.getAuthToken();
+      userId = await HiveDB.getUserID();
     }
 
     debugPrint("story : $storyId");
@@ -185,7 +187,7 @@ class CommentController extends GetxController {
     }
   }
 
-  Future<dynamic> postReply(String postId, String commentID, String? comment, String postuID) async {
+  Future<Comment> postReply(String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
@@ -202,19 +204,19 @@ class CommentController extends GetxController {
       dio.options.headers["Authorization"] = token;
       Map<String, String> data = {"text": comment ?? controller.text};
       var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
-      debugPrint(resposne.toString());
+      log(resposne.toString());
       isPosting.value = false;
       controller.clear();
-
+      //  debugPrint(resposne.data.toString());
       isPosting.value = false;
       final Comment commentx = Comment.fromJson(resposne.data["comment"]);
       socketController.sendCommentNotification(postuID, true, null, true);
-      //  update();
+      debugPrint(commentx.text);
       return commentx;
     } catch (e) {
       isPosting.value = false;
       //   update();
-      return false;
+      return Comment();
     }
   }
 }

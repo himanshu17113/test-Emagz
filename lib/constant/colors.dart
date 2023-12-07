@@ -74,7 +74,7 @@ Color lightgrayColor = const Color(0xffEFEFEF);
 Color lightgrayAcent = const Color(0xffECECEC);
 Color blueButtonColor = const Color(0xff3C83E6);
 Color blackButtonColor = const Color(0xff000000);
-Color signInHeading = const Color(0xff666666);
+const Color signInHeading =  Color(0xff666666);
 Color headingColor = const Color(0xff515151);
 Color lightBlack = const Color(0xff444444);
 

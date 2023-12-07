@@ -57,7 +57,7 @@ class _LiveScreenState extends State<LiveScreen> {
                         alignment: Alignment.center,
                         height: 35,
                         decoration: const BoxDecoration(color: Colors.black),
-                        child: FormHeadingText(
+                        child: const FormHeadingText(
                           headings: "Upload Cover Pic",
                           fontSize: 12,
                           color: Colors.white,
@@ -147,7 +147,7 @@ class _LiveScreenState extends State<LiveScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FormHeadingText(
+                                  const FormHeadingText(
                                     headings: "User name",
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -209,7 +209,7 @@ class _LiveScreenState extends State<LiveScreen> {
               color: const Color(0xff1B47C1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: FormHeadingText(
+            child: const FormHeadingText(
               headings: "Go Live",
               fontWeight: FontWeight.w600,
               color: Colors.white,

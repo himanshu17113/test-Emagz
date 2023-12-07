@@ -8,7 +8,6 @@ import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/modal_bottom_sheet.dart';
 
-import '../../controller/home/home_controller.dart';
 
 class CommentViewScreen extends StatefulWidget {
   Post post;
@@ -28,15 +27,14 @@ class CommentViewScreen extends StatefulWidget {
 }
 
 class _CommentViewScreenState extends State<CommentViewScreen> {
-  //var jwtController = Get.put(JWTController());
-
+ 
   double opacityLevel = 1.0;
 
   void _changeOpacity() {
     setState(() => opacityLevel = opacityLevel == 0 ? 1.0 : 0.0);
   }
 
-  final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
+//  final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
   var commentsController = Get.put(CommentController());
 
   @override

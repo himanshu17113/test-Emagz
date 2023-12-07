@@ -90,7 +90,7 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Term & Condition",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,

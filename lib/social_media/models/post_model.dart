@@ -1,3 +1,6 @@
+ 
+import 'user_schema.dart';
+
 class Post {
   //Privacy? privacy;
  // List<PollResults?>? pollResults;
@@ -179,129 +182,6 @@ class PostPrivacy {
   }
 }
 
-class UserSchema {
-  ComentPrivacy? cmnt_priv;
-  PostPrivacy? post_priv;
-  PostPrivacy? mess_priv;
-  PostPrivacy? live_priv;
-  PostPrivacy? ment_priv;
-  String? ProfilePic;
-  String? mobileNumber;
-  String? loginOtp;
-  String? personalTemplate;
-  String? sId;
-  String? username;
-  String? email;
-  String? dob;
-  String? accountType;
-  List<String?>? interestName;
-  int? followers;
-  int? followings;
-  String? hirable;
-  String? rating;
-  String? reviews;
-  String? poll;
-  String? jobcreated;
-  String? accountStatus;
-  List<String?>? search;
-  String? createdAt;
-  String? updatedAt;
-  // int? iV;
-  String? getstatedName;
-  String? displayName;
-
-  UserSchema(
-      {this.cmnt_priv,
-      this.post_priv,
-      this.ment_priv,
-      this.live_priv,
-      this.mess_priv,
-      this.mobileNumber,
-      this.loginOtp,
-      this.personalTemplate,
-      this.sId,
-      this.username,
-      this.email,
-      this.dob,
-      this.accountType,
-      this.interestName,
-      this.followers,
-      this.followings,
-      this.hirable,
-      this.rating,
-      this.reviews,
-      this.poll,
-      this.jobcreated,
-      this.accountStatus,
-      this.search,
-      this.createdAt,
-      this.updatedAt,
-      //  this.iV,
-      this.getstatedName,
-      this.ProfilePic,
-      this.displayName});
-
-  UserSchema.fromJson(Map<String, dynamic> json) {
-    post_priv = json['post_privacy'] == null ? null : PostPrivacy.fromJson(json['post_privacy']);
-    cmnt_priv = json['comment_privacy'] == null ? null : ComentPrivacy.fromJson(json['comment_privacy']);
-    live_priv = json['live_privacy'] == null ? null : PostPrivacy.fromJson(json['live_privacy']);
-    ment_priv = json['mention_privacy'] == null ? null : PostPrivacy.fromJson(json['mention_privacy']);
-    mess_priv = json['message_privacy'] == null ? null : PostPrivacy.fromJson(json['message_privacy']);
-
-    ProfilePic = json["ProfilePic"];
-    mobileNumber = json['mobile_number'];
-    loginOtp = json['login_otp'];
-    personalTemplate = json['personalTemplate'];
-    sId = json['_id'];
-    username = json['username'];
-    email = json['email'];
-    dob = json['dob'];
-    accountType = json['accountType'];
-    //   interestName = json['interestName'].cast<String>();
-    followers = json['Followers'];
-    followings = json['Followings'];
-    hirable = json['Hirable'];
-    rating = json['Rating'];
-    reviews = json['Reviews'];
-    poll = json['Poll'];
-    jobcreated = json['Jobcreated'];
-    accountStatus = json['AccountStatus'];
-    //  search = json['search'].cast<String>();
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    //  iV = json['__v'];
-    getstatedName = json['GetstatedName'];
-    displayName = json['displayName'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['mobile_number'] = mobileNumber;
-    data['login_otp'] = loginOtp;
-    data['personalTemplate'] = personalTemplate;
-    data['_id'] = sId;
-    data['username'] = username;
-    data['email'] = email;
-    data['dob'] = dob;
-    data['accountType'] = accountType;
-    data['interestName'] = interestName;
-    data['Followers'] = followers;
-    data['Followings'] = followings;
-    data['Hirable'] = hirable;
-    data['Rating'] = rating;
-    data['Reviews'] = reviews;
-    data['Poll'] = poll;
-    data['Jobcreated'] = jobcreated;
-    data['AccountStatus'] = accountStatus;
-    data['search'] = search;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    // data['__v'] = iV;
-    data['GetstatedName'] = getstatedName;
-    data['displayName'] = displayName;
-    return data;
-  }
-}
 
 // class Comment {
 //   String? userId;

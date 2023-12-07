@@ -13,8 +13,8 @@ class TextPostScreen extends StatefulWidget {
 }
 
 class _TextPostScreenState extends State<TextPostScreen> {
-  var storyController = Get.put(GetXStoryController());
-  var postController = Get.put(PostController());
+  final postController = Get.find<PostController>(tag: "PostController");
+  final storyController = Get.find<GetXStoryController>(tag: "GetXStoryController");
   @override
   Widget build(BuildContext context) {
     return Scaffold(

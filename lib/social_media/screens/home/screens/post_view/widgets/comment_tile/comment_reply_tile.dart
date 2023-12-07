@@ -30,8 +30,6 @@ class CommentReplyTile extends StatelessWidget {
       return 'yesterday';
     } else {
       return '${difference.inDays} days ago';
-      // final format = DateFormat('yyyy-MM-dd HH:mm');
-      // return format.format(dateTime);
     }
   }
 
@@ -55,15 +53,11 @@ class CommentReplyTile extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Expanded(
-                        //    flex: 10,
-                        //  child:
                         Container(
                           height: 40,
                           width: 2,
                           color: Colors.white30,
                         ),
-                        //    ),
                         Container(
                           height: 2,
                           color: Colors.white30,
@@ -141,16 +135,10 @@ class CommentReplyTile extends StatelessWidget {
                                       "${comment.userId?.username}",
                                       style: const TextStyle(color: Colors.white60, fontSize: 10.2),
                                     ),
-                                    // Row(
-                                    //   children: [
                                     Flexible(
-                                      // child: Padding(
-                                      //   padding: const EdgeInsets.only(right: 0),
                                       child: Text(
                                         comment.text ?? "",
                                         maxLines: max,
-                                        //     softWrap: true,
-                                        //overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           color: Colors.white70,
                                           fontSize: 14.8,
@@ -158,15 +146,10 @@ class CommentReplyTile extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    //     ),
-                                    //   const Spacer(),
-                                    //   ],
-                                    // ),
                                     Row(
                                       children: [
                                         Text(
                                           comment.timestamp == null ? "Now" : time(comment.timestamp!),
-                                          //  "${comment.timestamp}",
                                           style: const TextStyle(color: Color.fromARGB(160, 255, 255, 255), fontSize: 9),
                                         ),
                                         Padding(
@@ -183,9 +166,6 @@ class CommentReplyTile extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    // Expanded(
-                                    //   child:
-                                    //  ),
                                   ],
                                 ),
                               ),
@@ -220,7 +200,6 @@ class CommentReplyTile extends StatelessWidget {
                             return ReplyReplyTile(
                               last: comment.comments!.length == index + 1,
                               comment: comment.comments![index],
-                              //  index: index,
                             );
                           } else {
                             return const SizedBox();

@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/data.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
@@ -19,7 +21,7 @@ class SocketController extends GetxController {
   RxBool? isUserSender = false.obs;
   final chatController = Get.put(ConversationController());
 
-  final jwtController = Get.find<JWTController>();
+ // final jwtController = JWTController();
   String? token;
   // Rx<Message> liveMessage = Message().obs;
   RxList<Message> liveMessages = <Message>[].obs;
@@ -131,64 +133,54 @@ class SocketController extends GetxController {
   }
 
   initSocket() async {
-    userId = jwtController.userId ?? chatController.userId;
-    token = jwtController.token ?? chatController.token;
-    userId ??= await jwtController.getUserId();
-    token ??= await jwtController.getAuthToken();
+    userId = globUserId ?? chatController.userId;
+    token = globToken ?? chatController.token;
+    userId ??= await HiveDB.getUserID();
+    token ??= await HiveDB.getAuthToken();
   }
 
   void sendLikeNotification(String id, String name) {
     debugPrint("name : $name , userID : $userId , oid : $id");
-    Map<String, dynamic> data = {
-      "notification_from": userId!,
-      "notification_to": id,
-      "notification": {},
-      "title": "Like",
-      "message": "$name liked your post"
-    };
+    Map<String, dynamic> data = {"notification_from": userId!, "notification_to": id, "notification": {}, "title": "Like", "message": "$name liked your post"};
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(
-      String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost
-          ? "$name Share a post with you"
-          : "$name Shared a story with you",
+      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(
-      String id, bool ispost, String? shareLink, bool isReply) {
+  void sendCommentNotification(String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       //   "notification": {"link": shareLink},
       "title": "Comment",
-      "message": ispost
-          ? isReply
-              ? "${jwtController.user?.value.displayName} Replied on your post "
-              : "${jwtController.user?.value.displayName} Commented on your post "
-          : isReply
-              ? "${jwtController.user?.value.displayName} Replied on your Story "
-              : "${jwtController.user?.value.displayName} Commented on your Story ",
+      // "message": ispost
+      //     ? isReply
+      //         ? "${jwtController.user?.displayName} Replied on your post "
+      //         : "${jwtController.user?.displayName} Commented on your post "
+      //     : isReply
+      //         ? "${jwtController.user?.displayName} Replied on your Story "
+      //         : "${jwtController.user?.displayName} Commented on your Story ",
     };
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(String NotificationId) async {
+  Future<bool> removeSingleNotification(String notificationId) async {
     try {
       //  notifications.removeAt(index);
       Map<String, String> header = {
         'authorization': token!,
       };
 
-      String url = ApiEndpoint.removeSingleNotification(NotificationId);
+      String url = ApiEndpoint.removeSingleNotification(notificationId);
 
       debugPrint(url);
       http.Response response = await client.get(

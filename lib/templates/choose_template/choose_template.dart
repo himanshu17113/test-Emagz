@@ -1,7 +1,7 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,10 +31,9 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 3,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
           backgroundColor: Colors.white,
-          title: FormHeadingText(
+          title: const FormHeadingText(
             textAlign: TextAlign.center,
             headings: 'Do You want to Use this Persona?',
             fontWeight: FontWeight.bold,
@@ -45,10 +44,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             children: [
               Text(
                 "You can always change your persona Later",
-                style: TextStyle(
-                    color: accountGray,
-                    fontSize: 9,
-                    fontWeight: FontWeight.w200),
+                style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
               ),
               const SizedBox(
                 height: 30,
@@ -56,13 +52,11 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                      width: 200, child: customYesNoButton("Yes", 1, indexx)),
+                  SizedBox(width: 200, child: customYesNoButton("Yes", 1, indexx)),
                   const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                      width: 200, child: customYesNoButton("No", 2, indexx)),
+                  SizedBox(width: 200, child: customYesNoButton("No", 2, indexx)),
                 ],
               ),
             ],
@@ -71,9 +65,10 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    double width= MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -89,81 +84,69 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             //   ),
             // ),
             child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Image.asset(
+                  "assets/png/new_logo.png",
+                  width: 50,
+                  color: const Color(0xff1B47C1),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const FormHeadingText(
+                  headings: 'Choose Your Persona',
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                Text(
+                  "Please Choose Your Persona",
+                  style: TextStyle(color: accountGray, fontSize: 14, fontWeight: FontWeight.w200),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Expanded(child: customRadioButton("Personal", 1)),
                     const SizedBox(
-                      height: 50,
+                      width: 5,
                     ),
-                    Image.asset(
-                      "assets/png/new_logo.png",
-                      width: 50,
-                      color: const Color(0xff1B47C1),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    FormHeadingText(
-                      headings: 'Choose Your Persona',
-                      fontSize: 27,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    Text(
-                      "Please Choose Your Persona",
-                      style: TextStyle(
-                          color: accountGray,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200),
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(child: customRadioButton("Personal", 1)),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(child: customRadioButton("Business", 2)),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Obx(()
-                    {
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        physics: const ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: accountSetUpController.templates!.length,
-                        itemBuilder: (ctx,index){
-                          String url = accountSetUpController.templates![index].thumbnail.toString();
-                          String url2 = accountSetUpController.templates![index].id.toString();
-                          if (url == 'null' || url2 == 'null') {
-                          } else {
-                            return Persona(
-                                accountSetUpController.templates![index].id,
-                                accountSetUpController.templates![index].thumbnail,
-                                const Color.fromRGBO(255, 199, 1, 1.0),
-                                index + 1,width);
-                          }
-                          return null;
-                        },
-                      );
-                    }),
-
-
-                  ]),
+                    Expanded(child: customRadioButton("Business", 2)),
+                  ],
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Obx(() {
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: accountSetUpController.templates!.length,
+                    itemBuilder: (ctx, index) {
+                      String url = accountSetUpController.templates![index].thumbnail.toString();
+                      String url2 = accountSetUpController.templates![index].id.toString();
+                      if (url == 'null' || url2 == 'null') {
+                      } else {
+                        return Persona(accountSetUpController.templates![index].id, accountSetUpController.templates![index].thumbnail,
+                            const Color.fromRGBO(255, 199, 1, 1.0), index + 1, width);
+                      }
+                      return null;
+                    },
+                  );
+                }),
+              ]),
             )));
   }
 
-  Widget Persona(String? id, String? ImgPath,
-      Color BackGround, int ind,double width) {
+  Widget Persona(String? id, String? ImgPath, Color BackGround, int ind, double width) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
@@ -175,7 +158,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         child: Stack(children: [
           Container(
             height: 220,
-            width: width*0.9,
+            width: width * 0.9,
             decoration: BoxDecoration(
               color: BackGround,
               borderRadius: BorderRadius.circular(10),
@@ -187,14 +170,13 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 )
               : Positioned(
                   top: 60,
-                  left:width*0.1,
-                  right: width*0.1,
+                  left: width * 0.1,
+                  right: width * 0.1,
                   child: Container(
-                    width: width*0.7,
+                    width: width * 0.7,
                     height: 160.0,
                     decoration: const BoxDecoration(
-                      borderRadius:
-                          BorderRadius.all(Radius.circular(8.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
                       color: Colors.redAccent,
                     ),
                     child: CachedNetworkImage(
@@ -204,15 +186,14 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                   ),
                 ),
           Positioned(
-              left: width*0.7,
+              left: width * 0.7,
               top: 20,
               child: GestureDetector(
                 onTap: () async {
-                  var jwtController = Get.put(JWTController());
-                   var token = await jwtController.getAuthToken();
-                   var userId = await jwtController.getUserId();
+                   var token = await HiveDB.getAuthToken();
+                  var userId = await HiveDB.getUserID();
 
-                  Get.to(()=>WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId, templateId: id.toString()));
+                  Get.to(() => WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId, templateId: id.toString()));
                 },
                 child: Container(
                   height: 45,
@@ -247,42 +228,32 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index)
-                ? const Color.fromRGBO(1, 26, 251, 1.0)
-                : selectionButton,
+            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(
-              color: (value == index)
-                  ? whiteColor
-                  : blackButtonColor.withOpacity(.5),
-              fontSize: 18,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 18, fontWeight: FontWeight.w600),
         ),
       ),
     );
   }
 
-  Widget customYesNoButton(String text, int index, String?tmpInd) {
+  Widget customYesNoButton(String text, int index, String? tmpInd) {
     return InkWell(
-      onTap: () async{
+      onTap: () async {
         if (index == 1) {
-          await accountSetUpController
-              .userTemplate(tmpInd!);
-          if(widget.isReg==true) {
+          await accountSetUpController.userTemplate(tmpInd!);
+          if (widget.isReg == true) {
             CustomSnackbar.showSucess('Your persona was set');
-          } else
-            {
-              var jwtController = Get.put(JWTController());
-              var token = await jwtController.getAuthToken();
-              var userId = await jwtController.getUserId();
+          } else {
+             var token = await HiveDB.getAuthToken();
+            var userId = await HiveDB.getUserID();
 
-              Get.to(()=>WebViewPersona(token: token!, userId: userId!, personaUserId: userId));
-            }
+            Get.to(() => WebViewPersona(token: token!, userId: userId!, personaUserId: userId));
+          }
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
         } else {
           Navigator.pop(context);
@@ -293,25 +264,16 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index)
-                ? const Color.fromRGBO(1, 26, 251, 1.0)
-                : selectionButton,
+            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(
-              color: (value == index)
-                  ? whiteColor
-                  : blackButtonColor.withOpacity(.5),
-              fontSize: 12,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 12, fontWeight: FontWeight.w600),
         ),
       ),
     );
   }
-
-
 }

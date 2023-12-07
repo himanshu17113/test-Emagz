@@ -95,7 +95,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Deactivate Account",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,
@@ -103,24 +103,24 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 331,
                   child: FormHeadingText(
                       headings: "I like to deactivate account ",
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xff212121)),
+                      color: Color(0xff212121)),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 331,
                   child: FormHeadingText(
                       headings: "NOTE: If not reactivated for 3 months, Your account data and User Data will be deleted from our DataBase ",
                       fontSize: 8,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xff212121)),
+                      color: Color(0xff212121)),
                 ),
                 const SizedBox(
                   height: 20,
@@ -168,7 +168,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                MyCustomTextfiled(
+                const MyCustomTextfiled(
                   hint: "Select your reason",
                 ),
                 const SizedBox(
@@ -193,7 +193,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                MyCustomTextfiled(
+                const MyCustomTextfiled(
                   hint: "Select your message",
                 ),
                 const SizedBox(
@@ -212,7 +212,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                           color: const Color(0xff00000040).withOpacity(.25))
                     ],
                   ),
-                  child: FormHeadingText(
+                  child: const FormHeadingText(
                     headings: "Deactivate account",
                     fontWeight: FontWeight.w500,
                     color: Colors.white,

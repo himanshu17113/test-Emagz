@@ -94,7 +94,7 @@ class _OwnWebViewState extends State<OwnWebView> {
     return Container(
       height: 200,
       width: 90,
-      padding: EdgeInsets.symmetric(horizontal: 1),
+      padding: const EdgeInsets.symmetric(horizontal: 1),
       child: InAppWebView(
           onUpdateVisitedHistory: (_, Uri? uri, __) async{
             // uri containts newly loaded url

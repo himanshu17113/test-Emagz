@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
@@ -85,13 +86,12 @@ class StoryScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           GestureDetector(
-                            onTap:()async{
-                              var jwtController = Get.put(JWTController());
-                              var token = await jwtController.getAuthToken();
-                              var userIdd = await jwtController.getUserId();
+                            onTap: () async {
+                               var token = await HiveDB.getAuthToken();
+                              var userIdd = await HiveDB.getUserID();
 
-                              Get.to(()=>WebViewPersona(token: token!, userId: userIdd!, personaUserId: userId.sId!));
-                          },
+                              Get.to(() => WebViewPersona(token: token!, userId: userIdd!, personaUserId: userId.sId!));
+                            },
                             child: Text(
                               userId.username ?? "loading...",
                               style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
@@ -184,7 +184,7 @@ class StoryScreen extends StatelessWidget {
                                             return Padding(
                                               padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                                               child: PostCommentsModalBottomSheet(
-                                                    islike: stories[buttonClickedTimes.value].isLike,
+                                                islike: stories[buttonClickedTimes.value].isLike,
                                                 likelength: stories[buttonClickedTimes.value].likeCount,
                                                 comments: stories[buttonClickedTimes.value].comments!,
                                                 postId: stories[buttonClickedTimes.value].sId!,
@@ -228,7 +228,7 @@ class StoryScreen extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                          // Share.share("http://emagz.live/Story/");
+                                      // Share.share("http://emagz.live/Story/");
                                       showModalBottomSheet(
                                         backgroundColor: Colors.transparent,
                                         shape: const OutlineInputBorder(
@@ -255,12 +255,11 @@ class StoryScreen extends StatelessWidget {
               ],
             ))
         : Container(
-      color: Colors.white38,
-        child:
-            Center(child:
-              FormHeadingText(headings: 'No Story found for you\n Please upload',)
-        )
-    );
+            color: Colors.white38,
+            child: const Center(
+                child: FormHeadingText(
+              headings: 'No Story found for you\n Please upload',
+            )));
   }
 
   updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
@@ -356,13 +355,13 @@ class StoryScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            const Row(
                               children: [
-                                const Icon(
+                                Icon(
                                   Icons.arrow_back_sharp,
                                   color: Colors.white,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 15,
                                 ),
                                 FormHeadingText(
@@ -371,17 +370,17 @@ class StoryScreen extends StatelessWidget {
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                const Spacer(),
+                                Spacer(),
                                 FormHeadingText(
                                   color: Colors.white,
                                   headings: "Latest",
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 5,
                                 ),
-                                const Icon(
+                                Icon(
                                   Icons.keyboard_arrow_down,
                                   color: Colors.white,
                                 ),

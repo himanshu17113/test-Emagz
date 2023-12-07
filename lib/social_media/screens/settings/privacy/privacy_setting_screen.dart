@@ -77,7 +77,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 150,
                             child: Text(
                               "only people who follow can see ur post and message you ",
@@ -136,7 +136,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                               fontSize: 12,
                               fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 150,
                           child: Text(
                             "Change your password form here",

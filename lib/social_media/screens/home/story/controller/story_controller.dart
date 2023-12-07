@@ -5,12 +5,15 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+
+import '../../../../../constant/data.dart';
 
 class GetXStoryController extends GetxController {
   RxInt currentStoryIndex = RxInt(0);
@@ -23,7 +26,7 @@ class GetXStoryController extends GetxController {
   RxBool isUploading = RxBool(false);
   String? token;
   List<String> imagePaths = [];
-  final JWTController jwtController = Get.find<JWTController>();
+  //final JWTController jwtController = JWTController();
   @override
   void onInit() {
     getStories();
@@ -37,33 +40,25 @@ class GetXStoryController extends GetxController {
     debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
     debugPrint(ApiEndpoint.story);
 
-    if (jwtController.token == null ||
-        jwtController.token!.isEmpty ||
-        jwtController.userId == null) {
-      token = await jwtController.getAuthToken();
-      myId = await jwtController.getUserId();
+    if (globToken == null || globToken!.isEmpty || globUserId == null) {
+      token = await HiveDB.getAuthToken();
+      myId = await HiveDB.getUserID();
     }
-if ( token != null) {
-  
+    if (token != null) {
+      await getmyStories();
 
-    await getmyStories();
+      final headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
 
-    final headers = {
-      'Content-Type': 'application/json',
-      "Authorization": jwtController.token ?? token!
-    };
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+      var body = jsonDecode(response.body);
 
-    http.Response response =
-        await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
-    var body = jsonDecode(response.body);
+      body.forEach((e) {
+        debugPrint('story');
 
-    body.forEach((e) {
-      debugPrint('story');
+        var story = Story.fromJson(e);
 
-      var story = Story.fromJson(e);
-
-      stories?.add(story);
-    });
+        stories?.add(story);
+      });
     }
   }
 
@@ -72,23 +67,15 @@ if ( token != null) {
       debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣 id");
 
       debugPrint(ApiEndpoint.story);
-      if (jwtController.token == null ||
-          jwtController.token!.isEmpty ||
-          jwtController.userId == null) {
-        token = await jwtController.getAuthToken();
-        myId = await jwtController.getUserId();
+      if (globToken == null || globToken!.isEmpty || globUserId == null) {
+        token = await HiveDB.getAuthToken();
+        myId = await HiveDB.getUserID();
       }
       debugPrint("TOKEN : $token myId : $myId");
-      debugPrint(
-          "TOKEN : ${jwtController.token} userId : ${jwtController.userId}");
-      final headers = {
-        'Content-Type': 'application/json',
-        "Authorization": jwtController.token ?? token!
-      };
-      debugPrint(ApiEndpoint.Storybyid(jwtController.userId ?? myId!));
-      http.Response response = await http.get(
-          Uri.parse(ApiEndpoint.Storybyid(jwtController.userId ?? myId!)),
-          headers: headers);
+      debugPrint("TOKEN : $globToken userId : $globUserId");
+      final headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
+      debugPrint(ApiEndpoint.Storybyid(globUserId ?? myId!));
+      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(globUserId ?? myId!)), headers: headers);
       var body = jsonDecode(response.body);
 
       var story = Story.fromJson(body["data"]);
@@ -104,17 +91,11 @@ if ( token != null) {
 
   likeStory(String storyId) async {
     try {
-      var token = await jwtController.getAuthToken();
-      var userId = await jwtController.getUserId();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      var token = await HiveDB.getAuthToken();
+      var userId = await HiveDB.getUserID();
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
       Map body = {"userId": userId};
-      http.Response response = await http.post(
-          Uri.parse(ApiEndpoint.likeStroy(storyId)),
-          headers: headers,
-          body: jsonEncode(body));
+      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -125,15 +106,12 @@ if ( token != null) {
   }
 
   commentStory(String text, String storyId) async {
-    var token = await jwtController.getAuthToken();
-    var userId = await jwtController.getUserId();
+    var token = await HiveDB.getAuthToken();
+    var userId = await HiveDB.getUserID();
     debugPrint("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.commentStroy(storyId)),
-        headers: headers,
-        body: jsonEncode(body));
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
   }
 
@@ -155,16 +133,15 @@ if ( token != null) {
       storyUploadPercentage.value = 0;
       isUploading.value = true;
 
-      var token = await jwtController.getAuthToken();
-      var userId = await jwtController.getUserId();
+      var token = await HiveDB.getAuthToken();
+      var userId = await HiveDB.getUserID();
       Dio dio = Dio();
       dio.options.headers["Authorization"] = token;
 
       FormData data = FormData.fromMap({
         "userId": userId,
         "mediaType": "image",
-        "mediaUrl": List.generate(imagePaths.length,
-            (i) => MultipartFile.fromFileSync(imagePaths[i])),
+        "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
       });
       debugPrint(" b bn bv v   v v");
       var response = await dio.post(

@@ -14,7 +14,7 @@ class PersonalAccountScreen extends StatefulWidget {
 
 class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
 
-  var authController = Get.put(AuthController());
+  var authController =  AuthController() ;
 
   int value = 1;
   @override
@@ -175,8 +175,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                             //   color: (value == index) ? chipColor : Colors.black,
                             // ),
                             borderRadius: BorderRadius.circular(5)),
-                        child: Obx(
-                          () => (authController.isUserlogging.value) ? const CircularProgressIndicator(color: Colors.white,) :Text(
+                        child:  (authController.isUserlogging ) ? const CircularProgressIndicator(color: Colors.white,) :Text(
                             "Continue",
                             style: TextStyle(
                                 color: whiteColor,
@@ -185,7 +184,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                           ),
                         ),
                       ),
-                    ),
+                    
                   ],
                 ),
               ),

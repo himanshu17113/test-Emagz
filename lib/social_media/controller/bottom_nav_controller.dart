@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/social_media/screens/chat/chat_list_screen.dart';
-import 'package:emagz_vendor/social_media/screens/explore/explore_screen_page.dart';
 import 'package:emagz_vendor/social_media/screens/home_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/personal_page_setting.dart';
 import 'package:flutter/material.dart';

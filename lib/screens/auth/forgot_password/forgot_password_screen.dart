@@ -18,7 +18,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    var authController = Get.put(AuthController());
+    var authController =  AuthController() ;
 
     Size size = MediaQuery.of(context).size;
 
@@ -105,14 +105,13 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           height: 10,
                         ),
                         Center(
-                          child: Obx(
-                            ()=>(authController.isUserRegiserting.value) ? const CircularProgressIndicator():  MyGradientButton(
+                          child:  authController.isUserRegiserting  ? const CircularProgressIndicator():  MyGradientButton(
                               isEnabled: authController.forgotPasswordEmailController.value.text.isNotEmpty,
                               onTap: () async{
                                 await authController.sendForgotPasswordRequest();
                               },
                             ),
-                          ),
+                           
                         ),
                         const SizedBox(
                           height: 30,

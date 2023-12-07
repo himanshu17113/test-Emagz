@@ -13,7 +13,7 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  final authController = Get.put(AuthController());
+  final authController = AuthController();
   bool isPasswordSatisfied = false;
   int passwordSecurityLevel = 0;
   TextEditingController recheckController = TextEditingController();
@@ -56,8 +56,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 height: 10,
               ),
               FormHeadingText(
-                headings:
-                    "Please Change your password and protect your account",
+                headings: "Please Change your password and protect your account",
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
                 color: unselectedLabel,
@@ -78,8 +77,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 controller: authController.passWordController,
                 decoration: InputDecoration(
                   isDense: true,
-                  contentPadding:
-                      const EdgeInsets.only(left: 10, top: 12, bottom: 12),
+                  contentPadding: const EdgeInsets.only(left: 10, top: 12, bottom: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
@@ -103,115 +101,103 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                 ),
                 onChanged: (v) {
-                    debugPrint(v);
+                  debugPrint(v);
                   // authController.passwordText.value = v;
                   // setState(() {});
                   setState(() {});
-                  authController.isUpperText.value ?
-                      authController.isLowerText.value ?
-                        authController.isNumber.value ?
-                          authController.specialChar.value ?
-                            authController.length.value ?
-                                passwordSecurityLevel = 5 :
-                             passwordSecurityLevel = 4:
-                            passwordSecurityLevel = 3:
-                          passwordSecurityLevel = 2 :
-                    passwordSecurityLevel = 1 :
-                  passwordSecurityLevel = 0;
+                  authController.isUpperText
+                      ? authController.isLowerText
+                          ? authController.isNumber
+                              ? authController.specialChar
+                                  ? authController.length 
+                                      ? passwordSecurityLevel = 5
+                                      : passwordSecurityLevel = 4
+                                  : passwordSecurityLevel = 3
+                              : passwordSecurityLevel = 2
+                          : passwordSecurityLevel = 1
+                      : passwordSecurityLevel = 0;
                   authController.checkPassword(v);
                 },
               ),
               const SizedBox(
                 height: 5,
               ),
-
-                 Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 6,
-                        color: passwordSecurityLevel > 0
-                            ? Colors.blueGrey
-                            : const Color(0xffD9D9D9),
-                      ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 6,
+                      color: passwordSecurityLevel > 0 ? Colors.blueGrey : const Color(0xffD9D9D9),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 6,
-                        color: passwordSecurityLevel > 1
-                            ? Colors.lightGreen
-                            : const Color(0xffD9D9D9),
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 6,
+                      color: passwordSecurityLevel > 1 ? Colors.lightGreen : const Color(0xffD9D9D9),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 6,
-                        color: passwordSecurityLevel > 2
-                            ? Colors.yellow
-                            : const Color(0xffD9D9D9),
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 6,
+                      color: passwordSecurityLevel > 2 ? Colors.yellow : const Color(0xffD9D9D9),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 6,
-                        color: passwordSecurityLevel > 3
-                            ? Colors.orange
-                            : const Color(0xffD9D9D9),
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 6,
+                      color: passwordSecurityLevel > 3 ? Colors.orange : const Color(0xffD9D9D9),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 5),
-                        height: 6,
-                        color: passwordSecurityLevel > 4
-                            ? Colors.red
-                            : const Color(0xffD9D9D9),
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 6,
+                      color: passwordSecurityLevel > 4 ? Colors.red : const Color(0xffD9D9D9),
                     ),
-
-                  ],
-                ),
+                  ),
+                ],
+              ),
               const SizedBox(
                 height: 15,
               ),
               Obx(
                 () => WarningTextWidget(
-                  isChecked: authController.isUpperText.value ,
+                  isChecked: authController.isUpperText,
                   title: "Password must have one uppercase letter",
                 ),
               ),
               const SizedBox(
                 height: 5,
               ),
-               Obx(
-                 () =>  WarningTextWidget(
-                   isChecked: authController.isLowerText.value,
+              Obx(
+                () => WarningTextWidget(
+                  isChecked: authController.isLowerText,
                   title: "Password must have one lowercase letter",
+                ),
               ),
-               ),
               const SizedBox(
                 height: 5,
               ),
-               WarningTextWidget(
-                 isChecked: authController.isNumber.value,
+              WarningTextWidget(
+                isChecked: authController.isNumber,
                 title: "Password must contain at least one number",
               ),
               const SizedBox(
                 height: 5,
               ),
-               WarningTextWidget(
-                 isChecked: authController.specialChar.value,
+              WarningTextWidget(
+                isChecked: authController.specialChar,
                 title: "Password must contain one special character @\$",
               ),
               const SizedBox(
                 height: 5,
               ),
-               WarningTextWidget(
-                 isChecked: authController.specialChar.value,
+              WarningTextWidget(
+                isChecked: authController.specialChar,
                 title: "Password must be 8 Digits long",
               ),
               const SizedBox(
@@ -231,8 +217,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 // controller: authController.passWordController,
                 decoration: InputDecoration(
                   isDense: true,
-                  contentPadding:
-                      const EdgeInsets.only(left: 10, top: 12, bottom: 12),
+                  contentPadding: const EdgeInsets.only(left: 10, top: 12, bottom: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
@@ -256,7 +241,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                 ),
                 onChanged: (v) {
-                    debugPrint(v);
+                  debugPrint(v);
                   setState(() {});
                   // authController.passwordText.value = v;
                   // setState(() {});
@@ -274,12 +259,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 height: 30,
               ),
               MyGradientButton(
-                isEnabled: recheckController.text == authController.passWordController.text ,
+                isEnabled: recheckController.text == authController.passWordController.text,
                 onTap: () {
-                  if(recheckController.text == authController.passWordController.text){
+                  if (recheckController.text == authController.passWordController.text) {
                     authController.changePassword(authController.passWordController.text);
                   }
-
                 },
                 title: "Change Password",
               )
@@ -312,13 +296,9 @@ class WarningTextWidget extends StatelessWidget {
         Container(
           height: 15,
           width: 15,
-          decoration: BoxDecoration(
-            color: isChecked ? Colors.lightGreen : null,
-              border: Border.all(color: Colors.black, width: 1.5),
-              shape: BoxShape.circle),
-          child:  Icon(
-            isChecked ?
-            Icons.check : Icons.close,
+          decoration: BoxDecoration(color: isChecked ? Colors.lightGreen : null, border: Border.all(color: Colors.black, width: 1.5), shape: BoxShape.circle),
+          child: Icon(
+            isChecked ? Icons.check : Icons.close,
             color: Colors.black,
             size: 11,
           ),

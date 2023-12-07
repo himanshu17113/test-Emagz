@@ -102,7 +102,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                           alignment: Alignment.center,
                           height: 35,
                           decoration: const BoxDecoration(color: Colors.black),
-                          child: FormHeadingText(
+                          child: const FormHeadingText(
                             headings: "Edit Post",
                             fontSize: 12,
                             color: Colors.white,
@@ -140,7 +140,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         ),
                       ),
                       const Spacer(),
-                      FormHeadingText(headings: "Enable Poll"),
+                      const FormHeadingText(headings: "Enable Poll"),
                       const SizedBox(
                         width: 5,
                       ),
@@ -169,7 +169,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  FormHeadingText(headings: "Custom Poll"),
+                                  const FormHeadingText(headings: "Custom Poll"),
                                   const SizedBox(
                                     width: 5,
                                   ),
@@ -197,7 +197,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  FormHeadingText(headings: "Show Results to audience"),
+                                  const FormHeadingText(headings: "Show Results to audience"),
                                   const SizedBox(
                                     width: 5,
                                   ),
@@ -346,7 +346,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               const SizedBox(
                                 height: 2,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 140,
                                 child: Text(
                                   "Manage your likes and view on your post",
@@ -425,7 +425,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 30,
                                 child: Text(
                                   "",
@@ -456,7 +456,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Allow Tag from",
                         style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
                       ),
@@ -554,7 +554,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                           ],
                         ),
                       ))
-                  : FormHeadingText(
+                  : const FormHeadingText(
                       headings: "Upload",
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

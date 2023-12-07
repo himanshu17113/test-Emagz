@@ -1,4 +1,6 @@
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/two_step_verification_screen.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/widget/other_security_tile.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/widget/personal_information_tile.dart';
@@ -24,8 +26,7 @@ class SecurityScreen extends StatefulWidget {
 }
 
 class _SecurityScreenState extends State<SecurityScreen> {
-  var jwtController = Get.put(JWTController());
-  bool isTwoWayVerification = false;
+   bool isTwoWayVerification = false;
   bool isDeactivateAccount = false;
   final securityController= Get.put(SecurityController());
   UserSchema? user;
@@ -37,7 +38,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
   asyncInit() async {
 
-    user = await jwtController.getCurrentUserDetail();
+    user = await HiveDB.getCurrentUserDetail();
 
     setState(() {});
   }
@@ -119,7 +120,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Security",
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -127,7 +128,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Personal Information",
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -173,7 +174,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Other Security",
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -201,7 +202,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            FormHeadingText(
+                            const FormHeadingText(
                                 headings: "Two way Verification",
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -399,7 +400,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                             color: const Color(0xff00000040).withOpacity(.25))
                       ],
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "Update",
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -494,7 +495,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    MyCustomTextfiled(
+                    const MyCustomTextfiled(
                       hint: "Enter Address",
                     ),
                     const SizedBox(
@@ -532,7 +533,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              MyCustomTextfiled(
+                              const MyCustomTextfiled(
                                 hint: "City",
                               ),
                             ],
@@ -555,7 +556,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              MyCustomTextfiled(
+                              const MyCustomTextfiled(
                                 hint: "State",
                               ),
                             ],
@@ -582,7 +583,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              MyCustomTextfiled(
+                              const MyCustomTextfiled(
                                 hint: "District",
                               ),
                             ],
@@ -605,7 +606,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              MyCustomTextfiled(
+                              const MyCustomTextfiled(
                                 hint: "Pin Code",
                               ),
                             ],
@@ -638,7 +639,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 color: const Color(0xff00000040).withOpacity(.25))
                           ],
                         ),
-                        child: FormHeadingText(
+                        child: const FormHeadingText(
                           headings: "Update",
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -769,7 +770,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 color: const Color(0xff00000040).withOpacity(.25))
                           ],
                         ),
-                        child: FormHeadingText(
+                        child: const FormHeadingText(
                           headings: "Update",
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
@@ -899,7 +900,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                             color: const Color(0xff00000040).withOpacity(.25))
                       ],
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "Update",
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -1018,7 +1019,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                             color: const Color(0xff00000040).withOpacity(.25))
                       ],
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "Update",
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -1134,7 +1135,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                             color: const Color(0xff00000040).withOpacity(.25))
                       ],
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "Update",
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

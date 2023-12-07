@@ -17,7 +17,7 @@ class OtpVerificationScreen extends StatefulWidget {
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   bool isEnabled = false;
-  var authController = Get.put(AuthController());
+  var authController =  AuthController() ;
   TextEditingController controller = TextEditingController();
 
   @override
@@ -128,10 +128,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                           height: 10,
                         ),
                         Center(
-                          child: Obx(
-                            () => (authController.isUserRegiserting.value)
-                                ? const CircularProgressIndicator()
-                                : MyGradientButton(
+                          child: 
+                          // Obx(
+                          //   () => (authController.isUserRegiserting)
+                          //       ? const CircularProgressIndicator()
+                          //       : 
+                                MyGradientButton(
                                     isEnabled: isEnabled,
                                     onTap: () {
                                       isEnabled
@@ -140,7 +142,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                                           : null;
                                     },
                                   ),
-                          ),
+                         // ),
                         ),
                         const SizedBox(
                           height: 30,

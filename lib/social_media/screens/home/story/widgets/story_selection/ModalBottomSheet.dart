@@ -12,7 +12,9 @@ import 'package:image_picker/image_picker.dart';
 
 class StorySelectionBottomSheet extends StatelessWidget {
   StorySelectionBottomSheet({super.key});
-  var storyController = Get.put(GetXStoryController());
+  //var storyCoontroller = Get.put(PostController());
+  
+  var storyController = Get.put(GetXStoryController(), tag: "GetXStoryController");
   Future<Uint8List?> xFileToUint8List(XFile xFile) async {
     File file = File(xFile.path);
     if (await file.exists()) {
@@ -45,7 +47,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: const EdgeInsets.symmetric(horizontal: 5),
       height: Get.height * .85 ?? 500,
@@ -58,8 +60,8 @@ class StorySelectionBottomSheet extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 15),
             child: FormHeadingText(
               headings: "Update e-Magz",
               fontSize: 18,
@@ -80,10 +82,10 @@ class StorySelectionBottomSheet extends StatelessWidget {
                       color: const Color(0xffDFECFF),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: FormHeadingText(
+                    child: const FormHeadingText(
                       headings: "Text",
                       fontWeight: FontWeight.bold,
-                      color: const Color(0xff054BFF),
+                      color: Color(0xff054BFF),
                       fontSize: 14,
                     ),
                   ),
@@ -100,10 +102,10 @@ class StorySelectionBottomSheet extends StatelessWidget {
                     color: const Color(0xffDFECFF),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: FormHeadingText(
+                  child: const FormHeadingText(
                     headings: "Gallery",
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xff054BFF),
+                    color: Color(0xff054BFF),
                     fontSize: 14,
                   ),
                 ),
@@ -124,10 +126,10 @@ class StorySelectionBottomSheet extends StatelessWidget {
                     color: const Color(0xffDFECFF),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: FormHeadingText(
+                  child: const FormHeadingText(
                     headings: "Camera",
                     fontWeight: FontWeight.bold,
-                    color: const Color(0xff054BFF),
+                    color: Color(0xff054BFF),
                     fontSize: 14,
                   ),
                 ),

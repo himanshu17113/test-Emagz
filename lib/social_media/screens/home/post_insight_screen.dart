@@ -56,7 +56,7 @@ class PostInsightScreen extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FormHeadingText(
@@ -80,7 +80,7 @@ class PostInsightScreen extends StatelessWidget {
                       color: const Color(0xffDDE0FF).withOpacity(.4),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         FormHeadingText(
                           headings: "10 Days",
@@ -88,7 +88,7 @@ class PostInsightScreen extends StatelessWidget {
                           color: Colors.black,
                           fontSize: 12,
                         ),
-                        const Icon(Icons.keyboard_arrow_down)
+                        Icon(Icons.keyboard_arrow_down)
                       ],
                     ),
                   ),
@@ -145,7 +145,7 @@ class PostInsightScreen extends StatelessWidget {
                   color: const Color(0xffDDE0FF).withOpacity(.8),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: FormHeadingText(
+                child: const FormHeadingText(
                   headings: "View All",
                   fontWeight: FontWeight.bold,
                   color: Colors.black,

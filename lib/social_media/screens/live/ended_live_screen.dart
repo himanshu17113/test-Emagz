@@ -57,7 +57,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                         alignment: Alignment.center,
                         height: 35,
                         decoration: BoxDecoration(color: redAcent),
-                        child: FormHeadingText(
+                        child: const FormHeadingText(
                           headings: "Live as ended in 2Hrs",
                           fontSize: 12,
                           color: Colors.white,
@@ -147,7 +147,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  FormHeadingText(
+                                  const FormHeadingText(
                                     headings: "User name",
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,
@@ -177,7 +177,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
               color: const Color(0xff1B47C1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: FormHeadingText(
+            child: const FormHeadingText(
               headings: "Go Live Again",
               fontWeight: FontWeight.w600,
               color: Colors.white,

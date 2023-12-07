@@ -76,10 +76,10 @@ class UserBottomNavBar extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
-                              child: Row(
+                              child: const Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                         horizontal: 5),
                                     child: Icon(
                                       Icons.home_outlined,
@@ -144,10 +144,10 @@ class UserBottomNavBar extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
-                              child: Row(
+                              child: const Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                         horizontal: 5),
                                     child: Icon(
                                       Icons.shopping_cart,
@@ -212,10 +212,10 @@ class UserBottomNavBar extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 8),
                               height: 40,
-                              child: Row(
+                              child: const Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                         horizontal: 5),
                                     child: Icon(
                                       Icons.person_pin,

@@ -94,7 +94,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Two Way Verification",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,
@@ -197,7 +197,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                             color: const Color(0xff3A0DBB),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: FormHeadingText(
+                          child: const FormHeadingText(
                             headings: "Submit",
                             fontWeight: FontWeight.w600,
                             color: Colors.white,

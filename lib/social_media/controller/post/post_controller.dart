@@ -2,9 +2,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
-import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+ import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,9 +38,8 @@ class PostController extends GetxController {
   RxBool isPosting = RxBool(false);
   final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
 
- // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
-  final jwtController = Get.find<JWTController>();
-
+  // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
+ 
   Future setPost(image, PostType assetTyp) async {
     isSettingImage.value = true;
     if (assetTyp == PostType.text) {
@@ -78,23 +78,17 @@ class PostController extends GetxController {
 
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
-      dio.options.headers["Authorization"] = jwtController.token ?? await jwtController.getAuthToken();
-      debugPrint(jwtController.token);
-      debugPrint(jwtController.userId);
+      dio.options.headers["Content-Type"] = "application/json";
+      dio.options.headers["Authorization"] = globToken ?? await HiveDB.getAuthToken();
+      debugPrint(globToken);
+      debugPrint(globUserId);
 
       debugPrint(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $isCustomPoll");
       FormData reqData = FormData.fromMap({
-        "userId": jwtController.userId ?? jwtController.getUserId(),
+        "userId": globUserId ?? await HiveDB.getUserID(),
         "mediaType": "image",
-        // assetType.toString().split(".")[1].substring(0),
-        "mediaUrl":
-
-             List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
-
-        "Enabledpoll": true,
-        // enablePoll ? true : false,
-
-        //  "setTimer": enablePoll ? setTimer:"",
+        "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
+        "Enabledpoll": enablePoll,
         "caption": captionController.text,
 
         "ShowPollResults": true,
@@ -106,9 +100,8 @@ class PostController extends GetxController {
         // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
-        "customPollEnabled": true,
-        //isCustomPoll,
-        "customPollData": "[${button1Controller.text},${button2Controller.text}]"
+        "customPollEnabled": isCustomPoll,
+        "customPollData": '["${("${button1Controller.text}hbhb").toString()}", "${("${button2Controller.text}jghvbhu").toString()}"]'
       });
 
       var res = await dio.post(
@@ -118,7 +111,7 @@ class PostController extends GetxController {
           uploadPercentage.value = (count / total);
         },
       );
-      //debugPrint(reqData.toString());
+      debugPrint(res.statusMessage.toString());
       uploadPercentage.value = 0.0;
       print("status : ${res.statusCode}");
       CustomSnackbar.showSucess("Post  successful");
@@ -160,8 +153,8 @@ class PostController extends GetxController {
 
   //     Dio dio = Dio();
   //     debugPrint(privacyLikesAndViews.value);
-  //     var token = await jwtController.getAuthToken();
-  //     var userId = await jwtController.getUserId();
+  //     var token =  await HiveDB.getAuthToken();
+  //     var userId = await HiveDB.getUserID();
   //     dio.options.headers["Authorization"] = token;
   //     //todo : Remove The New File Making Process With Filtered File
   //     // final tempDir = await getTemporaryDirectory();
