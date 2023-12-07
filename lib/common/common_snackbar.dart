@@ -42,8 +42,9 @@ class CustomSnackbar {
   }
 }
 
-final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
 Widget customBackButton() {
+  final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
+
   return Platform.isIOS
       ? IconButton(
           onPressed: () {

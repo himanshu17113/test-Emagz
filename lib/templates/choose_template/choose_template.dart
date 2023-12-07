@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 //import 'package:get/get_core/src/get_main.dart';
 import 'dart:math' as math;
 import '../../constant/colors.dart';
-import '../../social_media/controller/auth/jwtcontroller.dart';
 import '../../social_media/screens/account/controllers/account_setup_controller.dart';
 
 class ChooseTemplate extends StatefulWidget {
@@ -23,7 +22,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
 
-  final ScrollController _scrollController = ScrollController();
+//  final ScrollController _scrollController = ScrollController();
   Future<void> _showMyDialog(String? indexx) async {
     return showDialog<void>(
       context: context,
@@ -40,26 +39,29 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             fontSize: 16,
             isItalic: FontStyle.italic,
           ),
-          content: Column(
-            children: [
-              Text(
-                "You can always change your persona Later",
-                style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(width: 200, child: customYesNoButton("Yes", 1, indexx)),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(width: 200, child: customYesNoButton("No", 2, indexx)),
-                ],
-              ),
-            ],
+          content: SizedBox(
+            height: Get.size.height * .25,
+            child: Column(
+              children: [
+                Text(
+                  "You can always change your persona Later",
+                  style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(width: 200, child: customYesNoButton("Yes", 1, indexx)),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(width: 200, child: customYesNoButton("No", 2, indexx)),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -70,7 +72,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Container(
+        body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             // width: double.infinity,
             // decoration: const BoxDecoration(
@@ -152,7 +154,6 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       child: GestureDetector(
         onTap: () {
           _showMyDialog(id);
-          print(id);
         }, //_launchUrl
 
         child: Stack(children: [
@@ -165,8 +166,8 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             ),
           ),
           ImgPath == null
-              ? Container(
-                  child: const Text('Loading...'),
+              ? const SizedBox(
+                  child: Text('Loading...'),
                 )
               : Positioned(
                   top: 60,
@@ -190,7 +191,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               top: 20,
               child: GestureDetector(
                 onTap: () async {
-                   var token = await HiveDB.getAuthToken();
+                  var token = await HiveDB.getAuthToken();
                   var userId = await HiveDB.getUserID();
 
                   Get.to(() => WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId, templateId: id.toString()));
@@ -249,7 +250,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
           if (widget.isReg == true) {
             CustomSnackbar.showSucess('Your persona was set');
           } else {
-             var token = await HiveDB.getAuthToken();
+            var token = await HiveDB.getAuthToken();
             var userId = await HiveDB.getUserID();
 
             Get.to(() => WebViewPersona(token: token!, userId: userId!, personaUserId: userId));

@@ -4,7 +4,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
@@ -25,7 +24,7 @@ import 'chat/controllers/socketController.dart';
 class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
 
-   // final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
+  // final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
   final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
   final socketController = Get.put(SocketController());
 
@@ -62,7 +61,7 @@ class SocialMediaHomePage extends StatelessWidget {
                       },
                       child: CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
-                          constuser?.ProfilePic.toString() ?? "" ,
+                          constuser?.ProfilePic.toString() ?? "",
                         ),
                         maxRadius: 15,
                       ),
@@ -99,8 +98,11 @@ class SocialMediaHomePage extends StatelessWidget {
               : null,
           body: RefreshIndicator(
             onRefresh: () {
-              homePostController.skip.value = -10;
+              homePostController.skip = -10;
               homePostController.posts?.clear();
+              homePostController.posts?.clear();
+              homePostController.endOfPost = false;
+
               storyController.stories?.clear();
               storyController.getStories();
               return homePostController.getPost();

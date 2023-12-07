@@ -5,7 +5,7 @@ import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
 import 'package:emagz_vendor/screens/support/support_screen.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/personal_page/widgets/setting_common_tile.dart';
 import 'package:emagz_vendor/social_media/screens/settings/privacy/privacy_setting_screen.dart';
@@ -14,6 +14,8 @@ import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../templates/choose_template/webview.dart';
@@ -27,7 +29,7 @@ class PersonalPageSetting extends StatefulWidget {
 }
 
 class _PersonalPageSettingState extends State<PersonalPageSetting> {
-   final SetupAccount accountSetupController = Get.put(SetupAccount());
+  final SetupAccount accountSetupController = Get.put(SetupAccount());
 
   final ImagePicker picker = ImagePicker();
   XFile? image;
@@ -38,8 +40,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
     //debugPrint("pp ${jwtController.user?.value.ProfilePic.toString()} ");
 
     if (constuser?.sId == null) {
-      final user =   HiveDB.getCurrentUserDetail();
-      debugPrint(user.toString());
+      HiveDB.getCurrentUserDetail();
+      setState(() {});
     }
   }
 
@@ -83,34 +85,41 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     children: [
                       Row(
                         children: [
-                          Stack(
-                            children: [
-                              Obx(() => CircleAvatar(
-                                    backgroundImage: CachedNetworkImageProvider(
-                                      constuser?.ProfilePic ??""  ,
-                                    ),
-                                    maxRadius: 45,
-                                  )),
-                              Positioned(
-                                  top: 70,
-                                  left: 60,
-                                  child: CircleAvatar(
-                                    radius: 10,
-                                    backgroundColor: whiteColor,
-                                    child: IconButton(
-                                      onPressed: () async {
-                                        image = await picker.pickImage(source: ImageSource.gallery);
-                                      constuser?.ProfilePic = await accountSetupController.uploadProfilePic(image);
-                                      },
-                                      icon: Icon(
-                                        Icons.camera_alt,
-                                        color: blackButtonColor,
-                                        size: 10,
+                          ValueListenableBuilder<Box>(
+                              valueListenable: Hive.box("secretes").listenable(),
+                              builder: (context, box, widget) {
+                                UserSchema user = box.get("user");
+                                return Stack(
+                                  children: [
+                                    CircleAvatar(
+                                      backgroundImage: CachedNetworkImageProvider(
+                                        user.ProfilePic ?? constuser?.ProfilePic ?? "",
                                       ),
+                                      maxRadius: 45,
                                     ),
-                                  ))
-                            ],
-                          ),
+                                    Positioned(
+                                        top: 70,
+                                        left: 60,
+                                        child: CircleAvatar(
+                                          radius: 10,
+                                          backgroundColor: whiteColor,
+                                          child: IconButton(
+                                            onPressed: () async {
+                                              image = await picker.pickImage(source: ImageSource.gallery);
+                                              user.ProfilePic = await accountSetupController.uploadProfilePic(image);
+                                                 
+                                                box.put('user', user);
+                                            },
+                                            icon: Icon(
+                                              Icons.camera_alt,
+                                              color: blackButtonColor,
+                                              size: 10,
+                                            ),
+                                          ),
+                                        ))
+                                  ],
+                                );
+                              }),
                           const SizedBox(
                             width: 25,
                           ),
@@ -119,7 +128,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                             children: [
                               Text(
                                 overflow: TextOverflow.ellipsis,
-                          constuser?.displayName ?? "loding..",
+                                constuser?.displayName ?? "loding..",
                                 // user != null
                                 //     ? user!.accountType == "professional"
                                 //         ? user!.username!
@@ -129,7 +138,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               ),
                               Text(
                                 overflow: TextOverflow.ellipsis,
-                           constuser?.username ?? "loding..",
+                                constuser?.username ?? "loding..",
                                 style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
                               ),
                             ],
@@ -180,7 +189,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                           var token = await HiveDB.getAuthToken();
+                          var token = await HiveDB.getAuthToken();
                           var userId = await HiveDB.getUserID();
 
                           Get.to(() => OwnWebView(
@@ -409,7 +418,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               InkWell(
                 onTap: () async {
                   //   Get.deleteAll(force: true);
-                  await HiveDB.setAuthData(null, null);
+                  await HiveDB.clearDB();
                   Get.off(() => const CommonAuthScreen());
                 },
                 child: Container(

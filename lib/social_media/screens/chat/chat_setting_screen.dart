@@ -14,8 +14,6 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 import '../../common/title_switch/title_and_switch_widget.dart';
-import '../../controller/auth/jwtcontroller.dart';
-import '../../models/post_model.dart';
  
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";

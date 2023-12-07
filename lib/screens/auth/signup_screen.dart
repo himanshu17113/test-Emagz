@@ -4,11 +4,11 @@ import 'package:crypto/crypto.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/social_media/screens/intrest/choose_intrest.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
@@ -25,7 +25,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final _firebaseAuth = FirebaseAuth.instance;
 
-  final authController = AuthController() ;
+  final authController = AuthController();
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
@@ -178,7 +178,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onTap: () async {
                     if (authController.userNameController.text.isEmpty) {
                       CustomSnackbar.show("Please enter user name ");
-                    } else if (authController.emailController.text.isEmpty || !authController.emailController.text.isEmail) {
+                    } else if (authController.emailController.text.isEmpty || !authController.emailController.text.contains("@")) {
                       CustomSnackbar.show("Please enter correct email ");
                     } else if (authController.dobController.text.isEmpty) {
                       CustomSnackbar.show("Please choose your dob");
@@ -189,7 +189,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     } else {
                       bool res = await authController.registerUser();
                       if (res) {
-                        authController.tabController!.index = 1;
+                        //  authController.tabController?.index = 1;
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ChooseIntrestScreen(),
+                            ));
+                        //  Get.to(() => const ChooseIntrestScreen(), transition: Transition.rightToLeftWithFade);
                       } else {}
                     }
                   },

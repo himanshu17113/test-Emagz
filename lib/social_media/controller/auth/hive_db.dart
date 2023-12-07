@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import '../../../constant/data.dart';
 import '../../models/user_schema.dart';
- 
+
 class HiveDB {
   // Box? hiveBox;
   static setAuthData(String? tokenx, String? id) async {
@@ -21,9 +21,11 @@ class HiveDB {
     } else {
       //  final hiveBox = await Hive.openBox("secretes");
       final hiveBox = Hive.box("secretes");
-      String? token = await hiveBox.get("token",
-          defaultValue:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ");
+      String? token = await hiveBox.get(
+        "token",
+        // defaultValue:
+        //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ"
+      );
 
       globToken = token;
       return token;
@@ -32,25 +34,34 @@ class HiveDB {
 
   static Future<String?> getUserID() async {
     // final hiveBox = await Hive.openBox("secretes");
-    final hiveBox = Hive.box("secretes");
-    final userId = await hiveBox.get("userId");
-    globUserId = userId;
-    return userId;
+    if (globUserId != null) {
+      return globUserId;
+    } else {
+      final hiveBox = Hive.box("secretes");
+      final userId = await hiveBox.get("userId");
+      globUserId = userId;
+      return userId;
+    }
   }
 
   static Future<UserSchema?> getCurrentUserDetail() async {
     //Box hiveBox = await Hive.openBox("secretes");
-    final hiveBox = Hive.box("secretes");
-    UserSchema? user = hiveBox.get("user");
-    if (user?.sId != null) {
-      constuser = user;
-      return user;
+    if (constuser?.sId != null) {
+      return constuser;
     } else {
-     return setCurrentUserDetail();
+      final hiveBox = Hive.box("secretes");
+      UserSchema? user = hiveBox.get("user");
+      if (user?.sId != null) {
+        constuser = user;
+        return user;
+      } else {
+        return setCurrentUserDetail();
+      }
     }
   }
 
   static Future<UserSchema?> setCurrentUserDetail() async {
+    debugPrint("Api hiiitiiiiiiiiiiiiiiiiiiiiiiiii");
     //Box hiveBox = await Hive.openBox("secretes");
     final hiveBox = Hive.box("secretes");
     Dio dio = Dio();
@@ -77,5 +88,20 @@ class HiveDB {
       return UserSchema();
     }
     return null;
+  }
+
+  static clearDB() {
+    final hiveBox = Hive.box("secretes");
+    globToken = null;
+    globUserId = null;
+    constuser = null;
+    hiveBox.clear();
+  }
+
+  static upateProfilePic(String pic) async {
+    final hiveBox = Hive.box("secretes");
+    UserSchema? user = hiveBox.get("user");
+    user?.ProfilePic = pic;
+  await hiveBox.put('user', user);
   }
 }

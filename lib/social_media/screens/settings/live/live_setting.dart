@@ -7,9 +7,7 @@ import 'package:get/get.dart';
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
-import '../../../controller/auth/jwtcontroller.dart';
 import '../../../controller/privacy/privacy_controller.dart';
-import '../../../models/post_model.dart';
 
 class LiveSettingScreen extends StatefulWidget {
   const LiveSettingScreen({Key? key}) : super(key: key);

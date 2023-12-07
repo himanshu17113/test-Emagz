@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/model/story_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;

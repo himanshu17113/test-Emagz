@@ -6,7 +6,7 @@ import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
- 
+
 import 'package:emagz_vendor/social_media/screens/account/business_account_confirmation.dart';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +16,9 @@ import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../templates/choose_template/template_model.dart';
- 
+
 class SetupAccount extends GetxController {
-   RxString? profilepic;
+  RxString? profilepic;
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
@@ -128,12 +128,13 @@ class SetupAccount extends GetxController {
     final res = await http.Response.fromStream(response);
     var data = jsonDecode(res.body);
     if (response.statusCode == 200) {
-      var hiveBox = Hive.box("secretes");
+      //var hiveBox = Hive.box("secretes");
       constuser = UserSchema.fromJson(data);
-      await hiveBox.put('user', constuser);
+      //  await hiveBox.put('user', constuser);
       debugPrint(data.toString());
       debugPrint(data['data']['ProfilePic'].toString());
-    //  await jwtController.setProfileImage(data['data']['ProfilePic']);
+      HiveDB.upateProfilePic(data['data']['ProfilePic']);
+      //  await jwtController.setProfileImage(data['data']['ProfilePic']);
       profilepic?.value = data['data']['ProfilePic'];
       return data['data']['ProfilePic'];
     } else {

@@ -2,7 +2,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class PersonalAccountScreen extends StatefulWidget {
   final String? suggestedName;

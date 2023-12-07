@@ -3,7 +3,6 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -13,12 +12,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
-
 import 'package:emagz_vendor/social_media/common/EditorScreen/colorfiltergenerater.dart';
 import 'package:emagz_vendor/social_media/common/EditorScreen/widgets/DragabbleTextEditor.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
-
 import '../../utils/photo_filter.dart';
 
 class EditorScreen extends StatefulWidget {

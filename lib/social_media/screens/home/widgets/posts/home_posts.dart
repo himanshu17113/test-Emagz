@@ -24,7 +24,7 @@ class HomePosts extends StatelessWidget {
             itemCount: homePostController.posts!.length + 2,
             itemBuilder: (context, index) {
               if (index == homePostController.posts!.length + 1) {
-                return const CupertinoActivityIndicator();
+                return homePostController.endOfPost ? const SizedBox() : const CupertinoActivityIndicator();
               } else if (index == 0) {
                 return StoryView(sid: myUserId ?? homePostController.userId ?? "");
               } else {

@@ -5,7 +5,7 @@ import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
- import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
+import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,7 +39,7 @@ class PostController extends GetxController {
   final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
 
   // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
- 
+
   Future setPost(image, PostType assetTyp) async {
     isSettingImage.value = true;
     if (assetTyp == PostType.text) {
@@ -117,7 +117,7 @@ class PostController extends GetxController {
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
 
-      homePostsController.skip.value = -10;
+      homePostsController.skip = -10;
 
       homePostsController.pageUpdate(0);
       homePostsController.posts?.clear();
@@ -206,7 +206,7 @@ class PostController extends GetxController {
   //     CustomSnackbar.showSucess("Post  successful");
   //     isPosting.value = false;
 
-  //     homePostsController.skip.value = -10;
+  //     homePostsController.skip = -10;
 
   //     //bottomNavController.pageUpdate(0);
   //     homePostsController.posts?.clear();

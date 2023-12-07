@@ -143,12 +143,12 @@ class AuthController {
         "uniqueName": "ghfhfhg"
       };
       debugPrint(ApiEndpoint.register);
-      debugPrint(body.toString());
+      //debugPrint(body.toString());
       http.Response response = await http.post(Uri.parse(ApiEndpoint.register), body: jsonEncode(body), headers: headers);
 
       debugPrint(response.body);
       Map data = jsonDecode(response.body);
-      debugPrint("code${response.statusCode.toString()}");
+      // debugPrint("code${response.statusCode.toString()}");
       if (response.statusCode == 200) {
         clearValue();
         CustomSnackbar.showSucess("User Registered Successfully");
@@ -159,7 +159,7 @@ class AuthController {
         globToken = token;
         globUserId = userId;
         HiveDB.setAuthData(token, userId);
-        Get.to(() => const ChooseIntrestScreen(), transition: Transition.rightToLeftWithFade);
+
         return true;
       } else if (response.statusCode == 401) {
         CustomSnackbar.show(data['error']);
@@ -244,10 +244,7 @@ class AuthController {
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
         await HiveDB.setAuthData(data["token"], data["data"]["_id"]);
-        await HiveDB.getCurrentUserDetail();
-        debugPrint(data["token"].toString());
-        // globToken = data["token"].toString();
-        // globUserId = data["data"]["_id"].toString();
+        await HiveDB.setCurrentUserDetail();
         // //   jwtController.isAuthorised.value = true;
 
         isUserlogging = false;
@@ -390,7 +387,7 @@ class AuthController {
       var headers = {'Content-Type': 'application/json', "Authorization": (globToken ?? await HiveDB.getAuthToken())!};
 
       Map body = {
-        "_id": (globToken ?? await HiveDB.getAuthToken())!,
+        "_id": (globUserId ?? await HiveDB.getUserID())!,
         "interestName": selectedChoices.toList(),
       };
       http.Response response = await http.post(Uri.parse(ApiEndpoint.chooseIntrest), body: jsonEncode(body), headers: headers);

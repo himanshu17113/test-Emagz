@@ -17,7 +17,6 @@ import '../../common/common_snackbar.dart';
 
 import 'widgets/my_custom_textfiled.dart';
 
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 
 import '../../social_media/common/bottom_nav/bottom_nav.dart';
@@ -38,12 +37,9 @@ class _SignInScreenState extends State<SignInScreen> {
       'https://www.googleapis.com/auth/contacts.readonly',
     ],
   );
-  final homePostController = Get.put(HomePostsController());
   final _firebaseAuth = FirebaseAuth.instance;
 
   final authController = AuthController();
-
-   final GetXStoryController storyController = Get.put(GetXStoryController());
 
   String sha256ofString(String input) {
     final bytes = utf8.encode(input);
@@ -116,19 +112,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         await HiveDB.getAuthToken();
                         await HiveDB.getUserID();
                       }
+                      final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
+                      final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
 
-                      homePostController.skip.value = -10;
+                      homePostController.skip = -10;
                       homePostController.posts?.clear();
                       storyController.stories?.clear();
                       await storyController.getStories();
                       await homePostController.getPost();
-                      // await storyController.getStories();
-                      // //  Get.offAll(() => Obx(() {
-                      // homePostController.skip.value = -10;
-                      // await homePostController.getPost();
 
                       if (homePostController.posts!.isNotEmpty) {
-                        //    Get.appUpdate();
                         Get.offAll(() => BottomNavBar());
                       }
                     } else {}

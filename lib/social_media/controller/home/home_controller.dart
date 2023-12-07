@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
-import 'package:emagz_vendor/social_media/controller/auth/jwtcontroller.dart';
+import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 
@@ -22,12 +23,13 @@ class HomePostsController extends GetxController {
   final socketController = Get.put(SocketController());
   String? token;
   String? userId;
+  bool endOfPost = false;
   // RxBool isVisible = RxBool(true);
   bool isVisible = true;
   int page = 0;
   List<Post>? posts = [];
 
-  RxInt skip = RxInt(-10);
+  int skip = -10;
   @override
   onInit() async {
     token = globToken;
@@ -63,7 +65,7 @@ class HomePostsController extends GetxController {
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading) {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading && !endOfPost) {
       await getPost();
     } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
   }
@@ -71,27 +73,24 @@ class HomePostsController extends GetxController {
   getPost() async {
     ispostloading = true;
 
-    skip.value = skip.value + 10;
+    skip = skip + 10;
 
     try {
       Dio dio = Dio();
-
-      dio.options.headers["Authorization"] = token  ;
-      debugPrint("lllll🧣🧣🧣🧣🧣🧣🧣🧣🧣lll");
-
-      final String endPoint = ApiEndpoint.posts(skip.value);
-      debugPrint("pppppppppppppppp🧣🧣🧣🧣🧣🧣🧣🧣🧣pppppppp");
-      print(endPoint);
+      dio.options.headers["Authorization"] = globToken ?? HiveDB.getAuthToken();
+      debugPrint(globToken);
+      final String endPoint = ApiEndpoint.posts(skip);
+      debugPrint(endPoint.toString());
       var resposne = await dio.get(endPoint);
-
+      int len = posts!.length;
       if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
             post = Post.fromJson(e);
           } catch (err) {
-            print('here');
-            print(err.toString());
+            debugPrint('here');
+            debugPrint(err.toString());
             ispostloading = false;
           }
 
@@ -99,6 +98,11 @@ class HomePostsController extends GetxController {
             posts!.add(post!);
           }
         });
+        debugPrint(posts?.length.toString());
+      
+        if (len + 10 != posts!.length) {
+          endOfPost = true;
+        }
         update();
         ispostloading = false;
       }
@@ -110,7 +114,7 @@ class HomePostsController extends GetxController {
   }
 
   Future<List<Post>> refreshResent() async {
-    skip.value = -10;
+    skip = -10;
     try {
       Dio dio = Dio();
 
