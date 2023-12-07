@@ -44,7 +44,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
             ),
             Container(
               height: 700,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
               ),
               child: Column(
@@ -57,7 +57,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                   const SizedBox(
                     height: 5,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 306,
                     child: Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum augue amet,",
@@ -71,7 +71,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                   Container(
                     height: 120,
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: templeteTwo,
                     ),
                     child: Column(
@@ -213,7 +213,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                       decoration: BoxDecoration(
                           border: Border.all(color: whiteColor, width: 7),
                           borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
-                          image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover)),
+                          image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover)),
                     ),
                   )
                 ],
@@ -222,7 +222,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
             const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               "Trending Product",
               textAlign: TextAlign.center,
               style: TextStyle(color: blackButtonColor, fontSize: 30, fontWeight: FontWeight.w600),
@@ -262,9 +262,9 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                           Container(
                             height: 40,
                             color: blackButtonColor.withOpacity(.6),
-                            child: Row(
+                            child: const Row(
                               children: [
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
                                 Column(
@@ -307,13 +307,13 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
                                     ),
                                   ],
                                 ),
-                                const Spacer(),
+                                Spacer(),
                                 Text(
                                   "\$25",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: whiteColor, fontSize: 10.5, fontWeight: FontWeight.w600),
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
                               ],

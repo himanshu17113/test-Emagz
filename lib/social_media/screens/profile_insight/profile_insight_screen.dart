@@ -52,7 +52,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Profile Insights",
                 style: TextStyle(
                     fontSize: 20,
@@ -62,7 +62,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
               const SizedBox(
                 height: 5,
               ),
-              Text(
+              const Text(
                 "Take a deep look at how your account and content are performing",
                 style: TextStyle(
                     fontSize: 12,
@@ -86,7 +86,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                             enabledBorder: InputBorder.none,
                             border: InputBorder.none),
                         focusColor: Colors.white,
-                        hint: Text(
+                        hint: const Text(
                           "Duration",
                           style: TextStyle(
                               fontSize: 12.5,
@@ -94,7 +94,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                               fontWeight: FontWeight.w600),
                         ),
                         isExpanded: true,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 12.5,
                             color: blackButtonColor,
                             fontWeight: FontWeight.w600),
@@ -142,7 +142,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                     ),
                     child: Stack(
                       children: [
-                        Positioned(
+                        const Positioned(
                           top: 15,
                           left: 20,
                           child: Column(

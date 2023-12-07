@@ -96,11 +96,11 @@ class _FollowerScreenState extends State<FollowerScreen> {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Column(
+                                const Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const FormHeadingText(
+                                    FormHeadingText(
                                       headings: "User name",
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,

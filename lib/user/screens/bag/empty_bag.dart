@@ -32,14 +32,14 @@ class EmptyBagScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "Please Fill Me",
             style: TextStyle(
                 color: blackButtonColor,
                 fontSize: 18,
                 fontWeight: FontWeight.w600),
           ),
-          Text(
+          const Text(
             "It looks like your have not shop anything \nyet",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -50,8 +50,8 @@ class EmptyBagScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -62,7 +62,7 @@ class EmptyBagScreen extends StatelessWidget {
                       fontSize: 12,
                       fontWeight: FontWeight.w600),
                 ),
-                const Text(
+                Text(
                   "View More",
                   style: TextStyle(
                       color: Color(0xff292929),

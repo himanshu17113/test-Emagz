@@ -9,14 +9,14 @@ class ViewProductHeading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 15, bottom: 10, right: 10),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children:  [
           Text(
             "Product",
             style: TextStyle(fontSize: 14,color: blackButtonColor, fontWeight: FontWeight.w500),
           ),
-          const SizedBox(
+          SizedBox(
             width: 20,
           ),
           Text(

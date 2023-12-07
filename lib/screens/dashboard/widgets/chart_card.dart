@@ -27,7 +27,7 @@ class ChartCard extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Positioned(
+              const Positioned(
                 top: 15,
                 left: 20,
                 child: Column(

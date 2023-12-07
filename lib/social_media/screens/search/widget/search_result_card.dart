@@ -36,7 +36,7 @@ class SearchResultCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -57,7 +57,7 @@ class SearchResultCard extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          Text(
+          const Text(
             "Follow",
             style: TextStyle(
                 color: purpleColor, fontSize: 12, fontWeight: FontWeight.w600),

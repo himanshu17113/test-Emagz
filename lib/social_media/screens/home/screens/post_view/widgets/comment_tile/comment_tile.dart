@@ -109,7 +109,7 @@ class PostCommentTile extends StatelessWidget {
                   padding: const EdgeInsets.all(3),
                   width: 20,
                   height: 20,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                     boxShadow: [

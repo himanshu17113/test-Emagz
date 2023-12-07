@@ -31,14 +31,14 @@ class EmptyBagGridView extends StatelessWidget {
               ),
               Text(
                 products[index].title.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                     color: blackButtonColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
               Text(
                 "₹ ${products[index].price.toString()}",
-                style: TextStyle(
+                style: const TextStyle(
                     color: blackButtonColor,
                     fontSize: 8,
                     fontWeight: FontWeight.w500),
@@ -60,7 +60,7 @@ class EmptyBagGridView extends StatelessWidget {
                     //   ],
                     // ),
                     borderRadius: BorderRadius.circular(5)),
-                child: Text(
+                child: const Text(
                   "Add to cart",
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -64,7 +64,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "Account",
                 style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
@@ -108,7 +108,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
                                               box.put('user', user);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.camera_alt,
                                               color: blackButtonColor,
                                               size: 10,
@@ -132,7 +132,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                 //         ? user!.username!
                                 //         : user?.displayName ?? 'loding..'
                                 //     : "laoding...",
-                                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
+                                style: const TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 overflow: TextOverflow.ellipsis,
@@ -150,7 +150,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         "Bio",
                         style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 11, fontWeight: FontWeight.w600),
                       ),
-                      Text(
+                      const Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
                         style: TextStyle(letterSpacing: .5, color: black, fontSize: 10, fontWeight: FontWeight.w400),
                       ),
@@ -160,7 +160,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Change to business account",
                             style: TextStyle(color: black, fontSize: 10, fontWeight: FontWeight.w600),
                           ),
@@ -170,11 +170,11 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 // borderRadius: BorderRadius.circular(10),
                                 color: chipColor,
                               ),
-                              child: Text(
+                              child: const Text(
                                 "Change Persona",
                                 style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                               ),
@@ -199,11 +199,11 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             // borderRadius: BorderRadius.circular(10),
                             color: chipColor,
                           ),
-                          child: Text(
+                          child: const Text(
                             "View/Edit your persona",
                             style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                           ),
@@ -214,12 +214,12 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Account",
                 style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 2),
-              Text(
+              const Text(
                 "Your friends and contacts will see when you’re active ",
                 style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
               ),
@@ -240,7 +240,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           activeUser = val;
                         });
                       }),
-                  Text(
+                  const Text(
                     "  Show my friends and contact when i’m active",
                     style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w400),
                   ),
@@ -249,7 +249,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Preferance",
                 style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
@@ -301,7 +301,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       const SizedBox(
                         width: 25,
                       ),
-                      Text(
+                      const Text(
                         "Enable my \nlocation",
                         style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
@@ -334,7 +334,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       const SizedBox(
                         width: 25,
                       ),
-                      Text(
+                      const Text(
                         "Play Sound When i get \nnotification",
                         style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
@@ -366,7 +366,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       const SizedBox(
                         width: 25,
                       ),
-                      Text(
+                      const Text(
                         "Enable desktop  \nnotification",
                         style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
@@ -391,7 +391,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Blocked Users",
                 style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
@@ -399,14 +399,14 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 height: 5,
               ),
 
-              Text(
+              const Text(
                 "Once you blocked someone they will no longer to see things that you post on your feed , tag you , invite you or start a conversation with you. However you can unblock them later if you want ",
                 style: TextStyle(color: blackButtonColor, fontSize: 12, letterSpacing: .6, fontWeight: FontWeight.w400),
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Manage blocked users",
                 style: TextStyle(color: chipColor, fontSize: 12, fontWeight: FontWeight.w600),
               ),
@@ -426,7 +426,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   width: double.infinity,
                   height: 54,
                   decoration: BoxDecoration(color: blackShaded, borderRadius: BorderRadius.circular(10)),
-                  child: Text(
+                  child: const Text(
                     "Log Out",
                     style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w600),
                   ),
@@ -438,7 +438,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 20),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Add another account",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600),

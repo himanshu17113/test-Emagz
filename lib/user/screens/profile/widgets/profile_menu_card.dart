@@ -28,7 +28,7 @@ class ProfileMenuCard extends StatelessWidget {
           Text(
             title,
             // "My Coupans",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10,
               // wordSpacing: 1,
               fontWeight: FontWeight.w600,

@@ -4,15 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 
 import 'package:emagz_vendor/social_media/models/post_model.dart';
-import 'package:emagz_vendor/social_media/screens/comment/commentController.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class ReplyReplyTile extends StatelessWidget {
-  final storyController = Get.find<CommentController>();
+class ReplyreplyTile extends StatelessWidget {
   final Comment comment;
   final bool last;
-  ReplyReplyTile({super.key, required this.comment, required this.last});
+  const ReplyreplyTile({super.key, required this.comment, required this.last});
+
   time(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);
@@ -32,10 +30,9 @@ class ReplyReplyTile extends StatelessWidget {
     }
   }
 
-  int max = 1;
-
   @override
   Widget build(BuildContext context) {
+    int max = 1;
     return Padding(
       padding: const EdgeInsets.only(left: 25),
       child: StatefulBuilder(

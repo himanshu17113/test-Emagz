@@ -26,7 +26,7 @@ class RatingCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -34,24 +34,24 @@ class RatingCard extends StatelessWidget {
                     "The Product ",
                     style: TextStyle(color: blackButtonColor, fontSize: 17, fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 3,
                   ),
                   Text(
                     "Qty 01",
                     style: TextStyle(color: blackButtonColor, fontSize: 8.5, fontWeight: FontWeight.w500),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 3,
                   ),
-                  const Text(
+                  Text(
                     "Deliver on  22 Juy 2021",
                     style: TextStyle(color: Color(0xff9A9A9A), fontSize: 8.5, fontWeight: FontWeight.w500),
                   ),
                 ],
               ),
               const Expanded(child: SizedBox()),
-              Column(
+              const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -59,7 +59,7 @@ class RatingCard extends StatelessWidget {
                     "Rate now ",
                     style: TextStyle(color: blackButtonColor, fontSize: 8, fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 3,
                   ),
                   Row(
@@ -70,7 +70,7 @@ class RatingCard extends StatelessWidget {
                         color: tempStarColor,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 3,
                       ),
                       Icon(
@@ -78,7 +78,7 @@ class RatingCard extends StatelessWidget {
                         color: tempStarColor,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 3,
                       ),
                       Icon(
@@ -86,7 +86,7 @@ class RatingCard extends StatelessWidget {
                         color: tempStarColor,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 3,
                       ),
                       Icon(
@@ -94,7 +94,7 @@ class RatingCard extends StatelessWidget {
                         color: tempStarColor,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 3,
                       ),
                       Icon(
@@ -102,7 +102,7 @@ class RatingCard extends StatelessWidget {
                         color: grayColor,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 5,
                       ),
                     ],
@@ -115,7 +115,7 @@ class RatingCard extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "Write Your Reviews",
             style: TextStyle(color: blackButtonColor, fontSize: 8, fontWeight: FontWeight.w600),
           ),

@@ -52,7 +52,7 @@ class _CommentSettingState extends State<CommentSetting> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
+              child: const Text(
                 "Comment Setting",
                 style: TextStyle(color: blackButtonColor, fontSize: 18, fontWeight: FontWeight.w600),
               ),
@@ -72,7 +72,7 @@ class _CommentSettingState extends State<CommentSetting> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Comments",
                     style: TextStyle(color: blackButtonColor, fontSize: 17, fontWeight: FontWeight.w500),
                   ),
@@ -88,21 +88,21 @@ class _CommentSettingState extends State<CommentSetting> {
                   ),
                   Row(
                     children: [
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Allow comments from", style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600)),
-                          const SizedBox(
+                          SizedBox(
                             height: 10,
                           ),
                           Text(
                             "Block comment from",
                             style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 2,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 140,
                             child: Text(
                               "Any new comment from people you block will not be visible to anyone but them",
@@ -124,7 +124,7 @@ class _CommentSettingState extends State<CommentSetting> {
                                     showSearch = false;
                                   });
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Everyone",
                                   style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                                 ),
@@ -148,7 +148,7 @@ class _CommentSettingState extends State<CommentSetting> {
                                   showSearch = !showSearch;
                                   setState(() {});
                                 },
-                                child: Text(
+                                child: const Text(
                                   "0 people",
                                   style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                                 ),
@@ -206,7 +206,7 @@ class _CommentSettingState extends State<CommentSetting> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
+                            const Text(
                               "Everyone",
                               style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                             ),
@@ -299,10 +299,10 @@ class _CommentSettingState extends State<CommentSetting> {
                         Container(
                           height: 45,
                           decoration: BoxDecoration(color: whiteAcent, borderRadius: BorderRadius.circular(10), border: Border.all(color: grayColor)),
-                          child: TextField(
+                          child: const TextField(
                             cursorColor: grayColor,
                             textAlign: TextAlign.start,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                                 hintText: "Search",
                                 hintStyle: TextStyle(color: Colors.black),
                                 contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),

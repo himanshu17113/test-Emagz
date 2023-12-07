@@ -144,7 +144,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                         currentaddress = val!;
                       });
                     }),
-                Text(
+                const Text(
                   "Set as current address",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -171,7 +171,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 width: size.width / 2.15,
                 height: 45,
                 alignment: Alignment.center,
-                child: Text("Back ",
+                child: const Text("Back ",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: blackButtonColor, fontSize: 15)),
               ),
@@ -187,7 +187,7 @@ class _ManageAddressScreenState extends State<ManageAddressScreen> {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(1)),
-                child: Text(
+                child: const Text(
                   "Add New Address",
                   style: TextStyle(color: whiteColor),
                 ),

@@ -14,7 +14,7 @@ class EmagzScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(colors: [darkPink, darkPinkAcent])),
       child: Scaffold(
         backgroundColor: Colors.transparent,

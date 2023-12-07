@@ -48,7 +48,12 @@ class _PrePostScreenState extends State<PrePostScreen> {
   bool everyOne = true;
   bool noOne = false;
   bool followAndFollower = false;
-
+ // CarouselController carouselController = CarouselController();
+// @override
+// void initState() {
+//   super.initState();
+//   carouselController.
+// }
   // final postController = Get.put(PostController(), tag: "PostController");
   final postController = Get.find<PostController>(tag: "PostController");
   @override
@@ -71,21 +76,29 @@ class _PrePostScreenState extends State<PrePostScreen> {
                   child: Column(
                     children: [
                       if (widget.images != null) ...[
-                        CarouselSlider(
-                          options: CarouselOptions(
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                          ),
-                          items: List.generate(
-                              widget.images!.length,
-                              (i) => SizedBox(
-                                    child: Image.memory(
-                                      widget.images![i],
-                                      height: 300,
-                                      filterQuality: FilterQuality.high,
-                                    ),
-                                  )).toList(),
-                        )
+                        widget.images!.length > 1
+                            ? CarouselSlider(
+                                disableGesture: widget.images!.length < 2,
+                            //    carouselController: carouselController,
+                                options: CarouselOptions(
+                                  autoPlay: widget.images!.length > 1,
+                                  enlargeCenterPage: true,
+                                ),
+                                items: List.generate(
+                                    widget.images!.length,
+                                    (i) => SizedBox(
+                                          child: Image.memory(
+                                            widget.images![i],
+                                            height: 300,
+                                            filterQuality: FilterQuality.high,
+                                          ),
+                                        )).toList(),
+                              )
+                            : Image.memory(
+                                widget.images![0],
+                                height: 200,
+                                filterQuality: FilterQuality.high,
+                              ),
                       ],
                       if (widget.image != null) ...[
                         SizedBox(
@@ -262,7 +275,8 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       const Spacer(),
                       InkWell(
                         onTap: () async {
-                          DateTime? pickedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
+                          DateTime? pickedDate =
+                              await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
                           TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
                           var time = pickedDate!.add(Duration(hours: pickedTime!.hour, minutes: pickedTime.minute));
                           var timeDifference = time.difference(DateTime.now());
@@ -312,131 +326,198 @@ class _PrePostScreenState extends State<PrePostScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(15),
-                  height: 155,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Post",
-                        style: TextStyle(color: blackButtonColor, fontSize: 15, fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                "Hide like & views control",
-                                style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              const SizedBox(
-                                width: 140,
-                                child: Text(
-                                  "Manage your likes and view on your post",
-                                  style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                Card(
+                  margin: const EdgeInsets.all(0),
+                  elevation: 0.2,
+
+                  // padding: const EdgeInsets.all(15),
+                  // // height: 155,
+                  // width: double.infinity,
+                  // decoration: BoxDecoration(
+                  //   color: whiteColor,
+                  //   borderRadius: BorderRadius.circular(5),
+                  // ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Post",
+                          style: TextStyle(color: blackButtonColor, fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      shape: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                      context: context,
+                                      builder: (context) {
+                                        return LikesAndViewsOptions(onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI.value = showValue;
+                                          postController.privacyLikesAndViews.value = value;
+                                        });
+                                      },
+                                    );
+                                  },
+                                  child: Obx(
+                                    () => Text(
+                                      postController.privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        shape: const OutlineInputBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-                                        context: context,
-                                        builder: (context) {
-                                          return LikesAndViewsOptions(onTap: (value, showValue) {
-                                            postController.privacyLikesAndViewsUI.value = showValue;
-                                            postController.privacyLikesAndViews.value = value;
-                                          });
-                                        },
-                                      );
-                                    },
-                                    child: Obx(
-                                      () => Text(
-                                        postController.privacyLikesAndViewsUI.value,
-                                        style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                const SizedBox(
+                                  width: 7,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 10,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                const Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Hide like & views control",
+                                      style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                    SizedBox(
+                                      width: 140,
+                                      child: Text(
+                                        "Manage your likes and view on your post",
+                                        style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      shape: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                      context: context,
+                                      builder: (context) {
+                                        return const FollowingList();
+                                      },
+                                    );
+                                  },
+                                  child: const Text(
+                                    "0 people",
+                                    style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                                   ),
-                                  const SizedBox(
-                                    width: 7,
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 10,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        shape: const OutlineInputBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-                                        context: context,
-                                        builder: (context) {
-                                          return const FollowingList();
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      "0 people",
-                                      style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 10,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      shape: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                      context: context,
+                                      builder: (context) {
+                                        return LikesAndViewsOptions(onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI.value = showValue;
+                                          postController.privacyLikesAndViews.value = value;
+                                        });
+                                      },
+                                    );
+                                  },
+                                  child: Obx(
+                                    () => Text(
+                                      postController.privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 10,
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const SizedBox(
-                                height: 30,
-                                child: Text(
-                                  "",
-                                  style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+                                const SizedBox(
+                                  width: 7,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 10,
+                                )
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Row(
+                              children: [
+                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      shape: const OutlineInputBorder(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                      context: context,
+                                      builder: (context) {
+                                        return LikesAndViewsOptions(onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI.value = showValue;
+                                          postController.privacyLikesAndViews.value = value;
+                                        });
+                                      },
+                                    );
+                                  },
+                                  child: Obx(
+                                    () => Text(
+                                      postController.privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 7,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 10,
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(

@@ -84,7 +84,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   ),
                   Text(
                     widget.likelength?.toString() ?? "0",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 20,
@@ -101,7 +101,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                   ),
                   Text(
                     "${widget.comments.length}",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 20,

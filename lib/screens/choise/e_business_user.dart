@@ -70,15 +70,15 @@ class EbussinessUser extends StatelessWidget {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  image: const DecorationImage(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
                       fit: BoxFit.fitWidth,
                       opacity: .02,
                       image: AssetImage(
                         "assets/png/Emagz-logo.png",
                       )),
                   color: blackButtonColor,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50),
                   ),
@@ -121,9 +121,9 @@ class EbussinessUser extends StatelessWidget {
                         width: size.width / 1.8,
                         height: 40,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: const Alignment(-0.4, .6),
-                              end: const Alignment(0.5, -5.5),
+                            gradient: const LinearGradient(
+                              begin: Alignment(-0.4, .6),
+                              end: Alignment(0.5, -5.5),
                               colors: [
                                 darkBlue,
                                 darkBlueAcent,
@@ -150,9 +150,9 @@ class EbussinessUser extends StatelessWidget {
                         width: size.width / 1.8,
                         height: 40,
                         decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: const Alignment(-0.4, .6),
-                              end: const Alignment(0.5, -5.5),
+                            gradient: const LinearGradient(
+                              begin: Alignment(-0.4, .6),
+                              end: Alignment(0.5, -5.5),
                               colors: [
                                 darkBlue,
                                 darkBlueAcent,

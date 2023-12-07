@@ -101,7 +101,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on_outlined,
                       color: blackButtonColor,
                     ),
@@ -240,7 +240,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Icon(
@@ -268,7 +268,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                         color: grayColor,
                                         size: 8,
                                       ),
-                                      const SizedBox(
+                                      SizedBox(
                                         width: 20,
                                       ),
                                     ],
@@ -276,11 +276,11 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  Text(
+                                  const Text(
                                     "Add Qty",
                                     style: TextStyle(color: blackButtonColor, fontSize: 10, height: 1.5, fontWeight: FontWeight.w400),
                                   ),
-                                  Row(
+                                  const Row(
                                     // crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
@@ -293,7 +293,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                             style:
                                                 TextStyle(color: blackButtonColor, fontSize: 15, height: 1.5, fontWeight: FontWeight.w300),
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 10,
                                           ),
                                           Text(
@@ -301,7 +301,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                             style:
                                                 TextStyle(color: blackButtonColor, fontSize: 12, height: 1.5, fontWeight: FontWeight.w400),
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 10,
                                           ),
                                           Text(
@@ -311,7 +311,7 @@ class _TemplateNineScreenState extends State<TemplateNineScreen> {
                                           ),
                                         ],
                                       ),
-                                      const Row(
+                                      Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [

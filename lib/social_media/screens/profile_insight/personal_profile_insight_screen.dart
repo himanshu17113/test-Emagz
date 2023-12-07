@@ -30,7 +30,7 @@ class _PersonalProfileInsightScreenState
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Profile Insights",
                 style: TextStyle(
                     fontSize: 20,
@@ -40,7 +40,7 @@ class _PersonalProfileInsightScreenState
               const SizedBox(
                 height: 5,
               ),
-              Text(
+              const Text(
                 "Take a deep look at how your account and content are performing",
                 style: TextStyle(
                     fontSize: 12,
@@ -54,7 +54,7 @@ class _PersonalProfileInsightScreenState
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   children: [
-                    Text(
+                    const Text(
                       "Profile Activity",
                       style: TextStyle(
                           fontSize: 12.5,
@@ -71,7 +71,7 @@ class _PersonalProfileInsightScreenState
                               enabledBorder: InputBorder.none,
                               border: InputBorder.none),
                           focusColor: Colors.white,
-                          hint: Text(
+                          hint: const Text(
                             "Duration",
                             style: TextStyle(
                                 fontSize: 12.5,
@@ -79,7 +79,7 @@ class _PersonalProfileInsightScreenState
                                 fontWeight: FontWeight.w600),
                           ),
                           isExpanded: true,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 12.5,
                               color: blackButtonColor,
                               fontWeight: FontWeight.w600),
@@ -129,7 +129,7 @@ class _PersonalProfileInsightScreenState
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
+                      child: const Text(
                         "Account Reached",
                         style: TextStyle(
                             color: whiteColor,
@@ -185,7 +185,7 @@ class _PersonalProfileInsightScreenState
                     Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 5, vertical: 10),
-                      child: Text(
+                      child: const Text(
                         "Account reached  - 32K",
                         style: TextStyle(
                             color: whiteColor,
@@ -195,7 +195,7 @@ class _PersonalProfileInsightScreenState
                     ),
                     Container(
                       margin: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
+                      child: const Text(
                         "Profile Visit  - 132K",
                         style: TextStyle(
                             color: whiteColor,
@@ -209,7 +209,7 @@ class _PersonalProfileInsightScreenState
               const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "Account Insights",
                 style: TextStyle(
                     fontSize: 20,
@@ -224,7 +224,7 @@ class _PersonalProfileInsightScreenState
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10), color: chipColor),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -252,7 +252,7 @@ class _PersonalProfileInsightScreenState
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10), color: whiteColor),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(

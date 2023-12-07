@@ -42,21 +42,21 @@ class _LiveFullScreenLandScapeModeState extends State<LiveFullScreenLandScapeMod
                   child: SizedBox(
                     height: 20,
                     width: size.width,
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 30,
                         ),
-                        const Icon(
+                        Icon(
                           Icons.arrow_back_sharp,
                           color: Colors.white,
                         ),
-                        const Spacer(),
+                        Spacer(),
                         CircleAvatar(
                           radius: 4,
                           backgroundColor: lightRed,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 10,
                         ),
                         FormHeadingText(
@@ -65,7 +65,7 @@ class _LiveFullScreenLandScapeModeState extends State<LiveFullScreenLandScapeMod
                           color: lightRed,
                           fontWeight: FontWeight.w600,
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 30,
                         ),
                       ],

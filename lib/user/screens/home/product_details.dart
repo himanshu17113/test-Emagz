@@ -45,7 +45,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(
+            const Text(
               "White Tank Top",
               style: TextStyle(
                   color: blackButtonColor,
@@ -56,7 +56,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Text(
+            const Text(
               "info",
               style: TextStyle(
                   fontSize: 14,
@@ -66,7 +66,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Text(
+            const Text(
               "Lorem ipsum dolor sit amet,consectetur adipiscing elit. Aliquam ac ut bibendum hac massa tristique iaculis turpis lacus. Ipsum.",
               textAlign: TextAlign.start,
               style: TextStyle(
@@ -77,7 +77,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Row(
+            const Row(
               children: [
                 Text(
                   "Seller ",
@@ -86,7 +86,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       color: blackButtonColor,
                       fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 5,
                 ),
                 Text(
@@ -101,7 +101,7 @@ class ProductDetailsScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -115,7 +115,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           color: blackButtonColor,
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Row(
@@ -129,7 +129,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             style: TextStyle(color: whiteColor),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 5,
                         ),
                         CircleAvatar(
@@ -144,7 +144,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 5,
                         ),
                         CircleAvatar(
@@ -159,7 +159,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 5,
                         ),
                         CircleAvatar(
@@ -178,7 +178,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
                 Column(
@@ -191,7 +191,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           color: blackButtonColor,
                           fontWeight: FontWeight.w600),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
                     Text(
@@ -203,7 +203,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 )
               ],
@@ -228,7 +228,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blackButtonColor,
                     borderRadius: BorderRadius.circular(5)),
-                child: Text("Add To Cart", style: TextStyle(color: whiteColor)),
+                child: const Text("Add To Cart", style: TextStyle(color: whiteColor)),
               ),
             ),
             InkWell(
@@ -242,7 +242,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(5)),
-                child: Text(
+                child: const Text(
                   "Buy Now",
                   style: TextStyle(color: whiteColor),
                 ),

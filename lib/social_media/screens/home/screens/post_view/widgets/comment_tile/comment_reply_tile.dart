@@ -197,7 +197,7 @@ class CommentReplyTile extends StatelessWidget {
                       Column(
                         children: List.generate(comment.comments!.length, (index) {
                           if (comment.comments!.isNotEmpty) {
-                            return ReplyReplyTile(
+                            return ReplyreplyTile(
                               last: comment.comments!.length == index + 1,
                               comment: comment.comments![index],
                             );

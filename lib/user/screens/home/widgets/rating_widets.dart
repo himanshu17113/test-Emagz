@@ -8,7 +8,7 @@ class RatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
@@ -19,7 +19,7 @@ class RatingWidget extends StatelessWidget {
               color: tempStarColor,
               size: 12,
             ),
-            const SizedBox(
+            SizedBox(
               width: 3,
             ),
             Icon(
@@ -27,7 +27,7 @@ class RatingWidget extends StatelessWidget {
               color: tempStarColor,
               size: 12,
             ),
-            const SizedBox(
+            SizedBox(
               width: 3,
             ),
             Icon(
@@ -35,7 +35,7 @@ class RatingWidget extends StatelessWidget {
               color: tempStarColor,
               size: 12,
             ),
-            const SizedBox(
+            SizedBox(
               width: 3,
             ),
             Icon(
@@ -43,7 +43,7 @@ class RatingWidget extends StatelessWidget {
               color: tempStarColor,
               size: 12,
             ),
-            const SizedBox(
+            SizedBox(
               width: 3,
             ),
             Icon(
@@ -51,7 +51,7 @@ class RatingWidget extends StatelessWidget {
               color: grayColor,
               size: 12,
             ),
-            const SizedBox(
+            SizedBox(
               width: 5,
             ),
             Text(
@@ -63,7 +63,7 @@ class RatingWidget extends StatelessWidget {
             )
           ],
         ),
-        const Icon(Icons.favorite_border_outlined)
+        Icon(Icons.favorite_border_outlined)
       ],
     );
   }

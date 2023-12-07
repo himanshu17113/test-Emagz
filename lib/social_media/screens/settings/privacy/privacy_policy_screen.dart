@@ -83,19 +83,19 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               ),
             ),
           ),
-          body: SingleChildScrollView(
+          body: const SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
-                const FormHeadingText(
+                FormHeadingText(
                   headings: "Privacy policy",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 SizedBox(

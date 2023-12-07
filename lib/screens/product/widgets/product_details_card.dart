@@ -33,7 +33,7 @@ class ProductDetailsCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 "Sony Headset",
                 style: TextStyle(
                   color: blackButtonColor,
@@ -43,7 +43,7 @@ class ProductDetailsCard extends StatelessWidget {
               ),
             ],
           ),
-          Text(
+          const Text(
             "250",
             style: TextStyle(
               color: blackButtonColor,
@@ -51,13 +51,13 @@ class ProductDetailsCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Row(
+          const Row(
             children: [
               CircleAvatar(
                 radius: 8,
                 backgroundColor: blackButtonColor,
               ),
-              const SizedBox(
+              SizedBox(
                 width: 5,
               ),
               Text(
@@ -70,7 +70,7 @@ class ProductDetailsCard extends StatelessWidget {
               ),
             ],
           ),
-          Text(
+          const Text(
             "₹ 599.00",
             style: TextStyle(
               color: blackButtonColor,

@@ -68,7 +68,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Set up your\nProfessional persona",
                       style: TextStyle(
                           color: blackButtonColor,
@@ -78,7 +78,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                     // const SizedBox(
                     //   height: 2,
                     // ),
-                    Text(
+                    const Text(
                       "Customise your profile",
                       style: TextStyle(
                           color: accountGray,
@@ -114,7 +114,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       "Business Name",
                       style: TextStyle(
                           color: lightBlack,
@@ -133,17 +133,17 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                         cursorColor: grayColor,
                         // keyboardType: TextInputType.n,
                         // autofocus: true,
-                        decoration: InputDecoration(
-                          hintStyle: const TextStyle(
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(
                               color: Color(
                                 0xff818181,
                               ),
                               fontWeight: FontWeight.bold,
                               fontSize: 9),
-                          fillColor: const Color(0xffF1F1F1),
+                          fillColor: Color(0xffF1F1F1),
                           hintText: "UXM",
                           filled: true,
-                          contentPadding: const EdgeInsets.only(left: 10),
+                          contentPadding: EdgeInsets.only(left: 10),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: lightgrayColor,
@@ -164,7 +164,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(
+                    const Text(
                       "Business Type",
                       style: TextStyle(
                           color: lightBlack,
@@ -183,17 +183,17 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                         cursorColor: grayColor,
                         // keyboardType: TextInputType.n,
                         // autofocus: true,
-                        decoration: InputDecoration(
-                          hintStyle: const TextStyle(
+                        decoration: const InputDecoration(
+                          hintStyle: TextStyle(
                               color: Color(
                                 0xff818181,
                               ),
                               fontWeight: FontWeight.bold,
                               fontSize: 9),
-                          fillColor: const Color(0xffF1F1F1),
+                          fillColor: Color(0xffF1F1F1),
                           hintText: "UXM",
                           filled: true,
-                          contentPadding: const EdgeInsets.only(left: 10),
+                          contentPadding: EdgeInsets.only(left: 10),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: lightgrayColor,
@@ -232,7 +232,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                             color: chipColor,
                             borderRadius: BorderRadius.circular(10)),
                         child: (accountSetupController.isUserRegiserting.value) ?
-                          const CircularProgressIndicator(color: Colors.white,):Text(
+                          const CircularProgressIndicator(color: Colors.white,):const Text(
                           "Choose Template ",
                           style: TextStyle(
                               color: whiteColor,

@@ -46,7 +46,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               const SizedBox(
                 height: 80,
               ),
-              FormHeadingText(
+              const FormHeadingText(
                 headings: "Change Password",
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
@@ -55,7 +55,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               const SizedBox(
                 height: 10,
               ),
-              FormHeadingText(
+              const FormHeadingText(
                 headings: "Please Change your password and protect your account",
                 fontSize: 10,
                 fontWeight: FontWeight.w500,
@@ -64,7 +64,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               const SizedBox(
                 height: 20,
               ),
-              FormHeadingText(
+              const FormHeadingText(
                 headings: "New Password",
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
@@ -203,7 +203,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
               const SizedBox(
                 height: 25,
               ),
-              FormHeadingText(
+              const FormHeadingText(
                 headings: "Confirm Password",
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

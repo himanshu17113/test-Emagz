@@ -41,7 +41,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
             Container(
               // margin: const EdgeInsets.only(top: 20),
               height: 400,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(mountainImage), fit: BoxFit.cover),
               ),
               child: Column(
@@ -74,7 +74,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
                       ),
                     ],
                   ),
-                  Text(
+                  const Text(
                     "Be adventures",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: whiteColor, fontWeight: FontWeight.w600, fontSize: 38),
@@ -113,7 +113,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 280,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(mountainImage), fit: BoxFit.cover),
               ),
             ),
@@ -263,7 +263,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
                                 textAlign: TextAlign.start,
                                 style: GoogleFonts.sahitya(color: whiteColor, fontWeight: FontWeight.w700, fontSize: 20),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.shopping_cart_outlined,
                                 color: whiteColor,
                                 size: 20,
@@ -308,17 +308,17 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
                   Container(
                     margin: const EdgeInsets.only(left: 30, right: 30),
                     height: 180,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: purpleColor,
-                        borderRadius: const BorderRadius.only(topRight: Radius.circular(50), bottomLeft: Radius.circular(50))),
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(50), bottomLeft: Radius.circular(50))),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     margin: EdgeInsets.symmetric(horizontal: Get.size.width / 5),
                     height: 150,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: whiteColor,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),

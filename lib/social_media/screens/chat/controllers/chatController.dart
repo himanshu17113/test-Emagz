@@ -1,5 +1,5 @@
+// ignore: file_names
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
@@ -153,13 +153,14 @@ class ConversationController extends GetxController {
     debugPrint("🧣🧣🧣🧣🧣 start2");
     Dio dio = Dio();
     dio.options.headers["Authorization"] = token;
-    print('${ApiEndpoint.requestList}/$id/accept');
+    debugPrint('${ApiEndpoint.requestList}/$id/accept');
     var response = await dio.post('${ApiEndpoint.requestList}/$id/accept');
     if (response.statusCode == 200) {
       req?.removeAt(index);
       var body = {"senderId": globUserId ?? userId, "receiverId": recieverId};
       var x = body;
       debugPrint(x.toString());
+      // ignore: prefer_typing_uninitialized_variables
       var respose;
       try {
         respose = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
@@ -218,7 +219,7 @@ class ConversationController extends GetxController {
       });
       return req;
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
     return null;
   }

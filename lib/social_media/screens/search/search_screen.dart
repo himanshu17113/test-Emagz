@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -95,7 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       decoration: BoxDecoration(
                           color: chipColor,
                           borderRadius: BorderRadius.circular(5)),
-                      child: Text(
+                      child: const Text(
                         "#",
                         style: TextStyle(fontSize: 18, color: whiteColor),
                       ),
@@ -103,7 +103,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(
                       width: 5,
                     ),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -149,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -170,7 +170,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ],
                     ),
                     const Spacer(),
-                    Text(
+                    const Text(
                       "Follow",
                       style: TextStyle(
                           color: purpleColor,
@@ -203,7 +203,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       decoration: BoxDecoration(
                           color: chipColor,
                           borderRadius: BorderRadius.circular(5)),
-                      child: Text(
+                      child: const Text(
                         "#",
                         style: TextStyle(fontSize: 18, color: whiteColor),
                       ),
@@ -211,7 +211,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     const SizedBox(
                       width: 5,
                     ),
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -237,10 +237,10 @@ class _SearchScreenState extends State<SearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                   ),
                   Text(
@@ -250,7 +250,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         fontSize: 12,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Spacer(),
+                  Spacer(),
                   Text(
                     "Clear",
                     style: TextStyle(
@@ -258,7 +258,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         fontSize: 12,
                         fontWeight: FontWeight.w400),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
                   ),
                 ],

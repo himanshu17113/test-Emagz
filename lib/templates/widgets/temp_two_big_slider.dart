@@ -35,7 +35,7 @@ class ProductBigSlider extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Icon(
@@ -63,7 +63,7 @@ class ProductBigSlider extends StatelessWidget {
                         color: grayColor,
                         size: 8,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                       ),
                     ],

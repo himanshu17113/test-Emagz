@@ -142,10 +142,10 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                   color: whiteColor.withOpacity(.2),
                   height: 4,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Icon(
@@ -168,7 +168,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                       color: grayColor,
                       size: 12,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 8,
                     ),
                     Text(
@@ -179,7 +179,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                 ),
                 Text(
                   dummyText,
-                  style: TextStyle(color: grayColor, fontSize: 10, height: 2, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: grayColor, fontSize: 10, height: 2, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 15,
@@ -187,7 +187,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -223,7 +223,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                     Container(
                       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                       decoration: BoxDecoration(border: Border.all(color: grayColor)),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Icon(
@@ -231,7 +231,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                             color: whiteColor,
                             size: 18,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -310,7 +310,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Icon(
@@ -338,7 +338,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                                   color: grayColor,
                                   size: 8,
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
                               ],
@@ -346,11 +346,11 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(
+                            const Text(
                               "Add Qty",
                               style: TextStyle(color: blackButtonColor, fontSize: 10, height: 1.5, fontWeight: FontWeight.w400),
                             ),
-                            Row(
+                            const Row(
                               // crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -362,14 +362,14 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                                       "-",
                                       style: TextStyle(color: blackButtonColor, fontSize: 15, height: 1.5, fontWeight: FontWeight.w300),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       "01",
                                       style: TextStyle(color: blackButtonColor, fontSize: 12, height: 1.5, fontWeight: FontWeight.w400),
                                     ),
-                                    const SizedBox(
+                                    SizedBox(
                                       width: 10,
                                     ),
                                     Text(
@@ -378,7 +378,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
                                     ),
                                   ],
                                 ),
-                                const Row(
+                                Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [

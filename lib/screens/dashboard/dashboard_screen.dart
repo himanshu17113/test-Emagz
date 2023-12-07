@@ -208,7 +208,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
               ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
-                child: Text(
+                child: const Text(
                   "Order Status",
                   style: TextStyle(
                       color: whiteColor,

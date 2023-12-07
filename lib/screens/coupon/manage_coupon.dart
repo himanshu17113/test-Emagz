@@ -40,7 +40,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                Text(
+                const Text(
                   "View Coupon",
                   style: TextStyle(
                       fontSize: 16.5,
@@ -79,14 +79,14 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Coupon Code",
                                     style: TextStyle(
                                         fontSize: 11,
                                         fontWeight: FontWeight.w600,
                                         color: whiteColor),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 112,
                                     child: Text(
                                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis a, magna ante id libero eleifend consectetur. Odio nibh fringilla sit varius ut orci libero. Posuere sed sit turpis ac congue viverra.",
@@ -98,7 +98,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                           color: whiteColor),
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     "Expire Date  02/05/21",
                                     style: TextStyle(
                                         fontSize: 4,
@@ -112,7 +112,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                     decoration: BoxDecoration(
                                         color: const Color(0xff3C83E6),
                                         borderRadius: BorderRadius.circular(2)),
-                                    child: Text(
+                                    child: const Text(
                                       "Apply Code",
                                       style: TextStyle(
                                           fontSize: 4,
@@ -124,7 +124,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                               ),
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             flex: 3,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -294,7 +294,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           decoration: BoxDecoration(
                               color: const Color(0xff4BB642),
                               borderRadius: BorderRadius.circular(50)),
-                          child: Text(
+                          child: const Text(
                             "Ongoing",
                             style: TextStyle(color: whiteColor),
                           ),
@@ -322,7 +322,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           decoration: BoxDecoration(
                               color: blackButtonColor,
                               borderRadius: BorderRadius.circular(10)),
-                          child: Text(
+                          child: const Text(
                             "Delete Coupon",
                             style: TextStyle(color: whiteColor),
                           ),
@@ -342,7 +342,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           decoration: BoxDecoration(
                               color: blueButtonColor,
                               borderRadius: BorderRadius.circular(10)),
-                          child: Text(
+                          child: const Text(
                             "Update Status",
                             style: TextStyle(color: whiteColor),
                           ),

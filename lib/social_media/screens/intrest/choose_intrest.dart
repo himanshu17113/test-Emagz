@@ -182,7 +182,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                     ? const CircularProgressIndicator(
                         color: Colors.white,
                       )
-                    : Text(
+                    : const Text(
                         "Next",
                         style: TextStyle(color: whiteColor, fontSize: 15),
                       ),

@@ -44,7 +44,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
             ),
             Container(
               height: 700,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
               ),
               child: Column(
@@ -77,7 +77,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
             Container(
               // margin: const EdgeInsets.symmetric(horizontal: 20),
               height: 230,
-              decoration: BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlFour), fit: BoxFit.cover)),
+              decoration: const BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlFour), fit: BoxFit.cover)),
             ),
             const SizedBox(
               height: 30,
@@ -123,10 +123,10 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                 style: GoogleFonts.italiana(color: blackButtonColor, fontSize: 36, fontWeight: FontWeight.w400),
               ),
             ),
-            TemplateFourproductCard(
+            const TemplateFourproductCard(
               imgUrl: shoeOne,
             ),
-            TemplateFourproductCard(
+            const TemplateFourproductCard(
               imgUrl: shoeTwo,
             ),
             const SizedBox(
@@ -195,9 +195,9 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                           Container(
                             height: 40,
                             color: blackButtonColor.withOpacity(.6),
-                            child: Row(
+                            child: const Row(
                               children: [
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
                                 Column(
@@ -240,13 +240,13 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                                     ),
                                   ],
                                 ),
-                                const Spacer(),
+                                Spacer(),
                                 Text(
                                   "\$25",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: whiteColor, fontSize: 10.5, fontWeight: FontWeight.w600),
                                 ),
-                                const SizedBox(
+                                SizedBox(
                                   width: 20,
                                 ),
                               ],

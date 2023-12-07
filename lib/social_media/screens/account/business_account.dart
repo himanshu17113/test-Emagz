@@ -48,7 +48,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Let’s Get Started",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -58,7 +58,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     "Customise your profile",
                     style: TextStyle(
                         color: accountGray,
@@ -68,7 +68,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
+                  const Text(
                     "Edit user name",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -84,17 +84,17 @@ class _BusinessAccountState extends State<BusinessAccount> {
                       cursorColor: grayColor,
                       // keyboardType: TextInputType.n,
                       // autofocus: true,
-                      decoration: InputDecoration(
-                        hintStyle: const TextStyle(
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(
                             color: Color(
                               0xff818181,
                             ),
                             fontWeight: FontWeight.bold,
                             fontSize: 9),
-                        fillColor: const Color(0xffF1F1F1),
+                        fillColor: Color(0xffF1F1F1),
                         hintText: "Nakul_kumar8",
                         filled: true,
-                        contentPadding: const EdgeInsets.only(left: 10),
+                        contentPadding: EdgeInsets.only(left: 10),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: lightgrayColor,
@@ -112,7 +112,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Select account type",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -144,7 +144,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                         //   color: (value == index) ? chipColor : Colors.black,
                         // ),
                         borderRadius: BorderRadius.circular(5)),
-                    child: Text(
+                    child: const Text(
                       "Continue",
                       style: TextStyle(
                           color: whiteColor,
@@ -157,7 +157,7 @@ class _BusinessAccountState extends State<BusinessAccount> {
                   ),
                   Container(
                     alignment: Alignment.center,
-                    child: Text(
+                    child: const Text(
                       "Go with default theme",
                       textAlign: TextAlign.center,
                       style: TextStyle(

@@ -29,7 +29,7 @@ class OrderListCard extends StatelessWidget {
               Text(
                 orderList.orderid,
                 // "5415asd518",
-                style: TextStyle(
+                style: const TextStyle(
                   color: blackButtonColor,
                   fontSize: 9,
                   fontWeight: FontWeight.w500,
@@ -40,7 +40,7 @@ class OrderListCard extends StatelessWidget {
           Text(
             orderList.productName,
             // "Sony Headset",
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,
@@ -52,12 +52,12 @@ class OrderListCard extends StatelessWidget {
             child: Text(
               "0${orderList.quantity}",
               // "01",
-              style: TextStyle(color: whiteColor, fontSize: 10),
+              style: const TextStyle(color: whiteColor, fontSize: 10),
             ),
           ),
           Text(
             "₹ ${orderList.totalAmount}",
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,
@@ -80,7 +80,7 @@ class OrderListCard extends StatelessWidget {
             child: Text(
               orderList.orderStatus,
               // "Dispatch",
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 8, fontWeight: FontWeight.w500, color: whiteColor),
             ),
           )

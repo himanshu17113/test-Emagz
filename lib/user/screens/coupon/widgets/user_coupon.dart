@@ -36,14 +36,14 @@ class UserCouponWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
+                    const Text(
                       "Coupon Code",
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                           color: whiteColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 112,
                       child: Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis a, magna ante id libero eleifend consectetur. Odio nibh fringilla sit varius ut orci libero. Posuere sed sit turpis ac congue viverra.",
@@ -55,7 +55,7 @@ class UserCouponWidget extends StatelessWidget {
                             color: whiteColor),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Expire Date  02/05/21",
                       style: TextStyle(
                           fontSize: 4,
@@ -69,7 +69,7 @@ class UserCouponWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: const Color(0xff3C83E6),
                           borderRadius: BorderRadius.circular(6)),
-                      child: Text(
+                      child: const Text(
                         "Apply Code",
                         style: TextStyle(
                             fontSize: 5.5,
@@ -81,7 +81,7 @@ class UserCouponWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 3,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

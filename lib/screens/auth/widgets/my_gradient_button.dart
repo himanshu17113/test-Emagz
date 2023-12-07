@@ -54,7 +54,7 @@ class MyGradientButton extends StatelessWidget {
           ),
           child: Text(
             title,
-            style: TextStyle(color: whiteColor, fontSize: 15),
+            style: const TextStyle(color: whiteColor, fontSize: 15),
           ),
         ),
       ),

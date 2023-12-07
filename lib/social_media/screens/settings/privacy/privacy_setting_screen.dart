@@ -41,7 +41,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               const SizedBox(
                 height: 15,
               ),
-              Text(
+              const Text(
                 "Privacy",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -66,7 +66,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                       const SizedBox(
                         width: 15,
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -77,7 +77,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 150,
                             child: Text(
                               "only people who follow can see ur post and message you ",
@@ -112,17 +112,17 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                 margin: const EdgeInsets.only(top: 10),
                 decoration: BoxDecoration(
                     color: whiteColor, borderRadius: BorderRadius.circular(15)),
-                child: Row(
+                child: const Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
-                    const Icon(
+                    Icon(
                       Icons.admin_panel_settings_outlined,
                       size: 20,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Column(
@@ -136,7 +136,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                               fontSize: 12,
                               fontWeight: FontWeight.w600),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 150,
                           child: Text(
                             "Change your password form here",
@@ -148,13 +148,13 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                         ),
                       ],
                     ),
-                    const Spacer(),
+                    Spacer(),
                     Icon(
                       Icons.arrow_forward_ios,
                       color: blackButtonColor,
                       size: 15,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 25,
                     ),
                   ],
@@ -163,7 +163,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 "Interactions",
                 style: TextStyle(
                     color: blackButtonColor,

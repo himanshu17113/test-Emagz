@@ -13,7 +13,7 @@ class OrderHeading extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(left: 10),
-            child: Text(
+            child: const Text(
               "Order ID",
               style: TextStyle(
                   fontSize: 14,
@@ -24,7 +24,7 @@ class OrderHeading extends StatelessWidget {
           // SizedBox(
           //   width: 20,
           // ),
-          Text(
+          const Text(
             "Name",
             style: TextStyle(
                 fontSize: 14,
@@ -33,7 +33,7 @@ class OrderHeading extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(left: 10),
-            child: Text(
+            child: const Text(
               "Qty",
               style: TextStyle(
                   fontSize: 14,
@@ -41,7 +41,7 @@ class OrderHeading extends StatelessWidget {
                   color: orderHeadingColor),
             ),
           ),
-          Text(
+          const Text(
             "Total",
             style: TextStyle(
                 fontSize: 14,
@@ -51,7 +51,7 @@ class OrderHeading extends StatelessWidget {
 
           Container(
             margin: const EdgeInsets.only(right: 20, left: 5),
-            child: Text(
+            child: const Text(
               "Status",
               style: TextStyle(
                   fontSize: 14,

@@ -51,14 +51,14 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Congratulations",
                     style: TextStyle(color: blackButtonColor, fontSize: 18, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
+                  const Text(
                     "your Professional persona is created successfully",
                     style: TextStyle(color: lightBlack, fontSize: 7, fontWeight: FontWeight.w600),
                   ),
@@ -72,7 +72,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                        child: Text(
+                        child: const Text(
                           "View Insights",
                           style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
@@ -81,7 +81,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                        child: Text(
+                        child: const Text(
                           "Analysis your post",
                           style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
@@ -99,7 +99,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                          child: Text(
+                          child: const Text(
                             "Personalized Professional persona",
                             style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
@@ -110,7 +110,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                          child: Text(
+                          child: const Text(
                             "Redirect to store",
                             style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
@@ -123,7 +123,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                   ),
                   Container(
                     alignment: Alignment.centerLeft,
-                    child: Text(
+                    child: const Text(
                       "View Audience Base",
                       textAlign: TextAlign.start,
                       style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
@@ -139,7 +139,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                         alignment: Alignment.center,
                         height: 40,
                         decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                        child: Text(
+                        child: const Text(
                           "Promote Posts",
                           style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                         ),
@@ -149,7 +149,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                           alignment: Alignment.center,
                           height: 40,
                           decoration: BoxDecoration(color: const Color(0xffFCFCFC), borderRadius: BorderRadius.circular(5)),
-                          child: Text(
+                          child: const Text(
                             "Upload product images",
                             style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
@@ -168,7 +168,7 @@ class BusinessAccountConfirmationScreen extends StatelessWidget {
                       alignment: Alignment.center,
                       height: 48,
                       decoration: BoxDecoration(color: chipColor, borderRadius: BorderRadius.circular(10)),
-                      child: Text(
+                      child: const Text(
                         "Get Started",
                         style: TextStyle(color: whiteColor, fontSize: 9, fontWeight: FontWeight.w600),
                       ),

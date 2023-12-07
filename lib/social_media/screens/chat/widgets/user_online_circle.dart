@@ -19,7 +19,7 @@ final  String? url;
           ) ,
           maxRadius: 25,
         ),
-        Positioned(
+        const Positioned(
             top: 36,
             right: 2,
             child: CircleAvatar(

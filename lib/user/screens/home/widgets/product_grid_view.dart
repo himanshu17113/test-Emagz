@@ -34,14 +34,14 @@ class ProductGridView extends StatelessWidget {
               ),
               Text(
                 products[index].title.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                     color: blackButtonColor,
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
               Text(
                 "₹ ${products[index].price.toString()}",
-                style: TextStyle(
+                style: const TextStyle(
                     color: blackButtonColor,
                     fontSize: 8,
                     fontWeight: FontWeight.w500),
@@ -53,16 +53,16 @@ class ProductGridView extends StatelessWidget {
                 // width: size.width / 1.8,
                 height: 30,
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: const Alignment(-0.5, .7),
-                      end: const Alignment(0.5, -5.5),
+                    gradient: const LinearGradient(
+                      begin: Alignment(-0.5, .7),
+                      end: Alignment(0.5, -5.5),
                       colors: [
                         darkBlue,
                         darkBlueAcent,
                       ],
                     ),
                     borderRadius: BorderRadius.circular(5)),
-                child: Text(
+                child: const Text(
                   "Add to cart",
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -12,7 +12,7 @@ class AddCouponHeadingText extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 1),
       child: Text(
         headings,
-        style: TextStyle(
+        style: const TextStyle(
             fontSize: 14, fontWeight: FontWeight.w400, color: blackButtonColor),
       ),
     );

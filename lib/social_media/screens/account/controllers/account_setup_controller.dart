@@ -8,7 +8,6 @@ import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 
 import 'package:emagz_vendor/social_media/screens/account/business_account_confirmation.dart';
-import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import "package:emagz_vendor/constant/api_string.dart";

@@ -89,7 +89,7 @@ class _TemplateThreeState extends State<TemplateThree> {
                           decoration: BoxDecoration(
                               border: Border.all(color: whiteColor, width: 7),
                               borderRadius: const BorderRadius.only(topLeft: Radius.circular(100), topRight: Radius.circular(100)),
-                              image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover)),
+                              image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover)),
                         ),
                       )
                     ],
@@ -118,12 +118,12 @@ class _TemplateThreeState extends State<TemplateThree> {
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 height: 350,
-                decoration: BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover)),
+                decoration: const BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover)),
               ),
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 height: 350,
-                decoration: BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover)),
+                decoration: const BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover)),
               ),
               const SizedBox(
                 height: 20,
@@ -167,18 +167,18 @@ class _TemplateThreeState extends State<TemplateThree> {
                     child: Column(
                       children: [
                         const Spacer(),
-                        Text(
+                        const Text(
                           "Product",
                           style: TextStyle(color: whiteColor, fontSize: 35, fontWeight: FontWeight.bold),
                         ),
-                        Text(
+                        const Text(
                           "\$25.00",
                           style: TextStyle(color: whiteColor, fontSize: 18, height: .9, fontWeight: FontWeight.bold),
                         ),
                         const Spacer(),
                         Container(
                           margin: const EdgeInsets.only(bottom: 15),
-                          child: Row(
+                          child: const Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
@@ -186,14 +186,14 @@ class _TemplateThreeState extends State<TemplateThree> {
                                 "Add to\ncart",
                                 style: TextStyle(color: whiteColor, fontSize: 10, height: .9, fontWeight: FontWeight.bold),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 2,
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.shopping_bag_outlined,
                                 color: Colors.white,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 10,
                               ),
                             ],

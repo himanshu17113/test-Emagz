@@ -27,7 +27,7 @@ class ApplicationSubmittedScreen extends StatelessWidget {
               ),
               Container(
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Application submitted\n sucessfully",
                   textAlign: TextAlign.center,
                   style: TextStyle(

@@ -9,7 +9,7 @@ class OrderListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: lightgrayColor, width: .7),
           bottom: BorderSide(color: lightgrayColor, width: .7),
@@ -26,7 +26,7 @@ class OrderListCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,7 +42,7 @@ class OrderListCard extends StatelessWidget {
                           fontSize: 9.5,
                           fontWeight: FontWeight.w600,
                           color: blackButtonColor)),
-                  const SizedBox(
+                  SizedBox(
                     width: 10,
                   ),
                   CircleAvatar(
@@ -58,7 +58,7 @@ class OrderListCard extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(
+              SizedBox(
                 height: 5,
               ),
               Text("₹ 499.00",
@@ -66,10 +66,10 @@ class OrderListCard extends StatelessWidget {
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
                       color: blackButtonColor)),
-              const SizedBox(
+              SizedBox(
                 height: 2,
               ),
-              const Text(
+              Text(
                 "Delivered on 22 Juy 2021",
                 style: TextStyle(
                   fontSize: 9.29,
@@ -87,8 +87,8 @@ class OrderListCard extends StatelessWidget {
                 width: 70,
                 alignment: Alignment.center,
                 // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                decoration: BoxDecoration(color: blueButtonColor),
-                child: Text(
+                decoration: const BoxDecoration(color: blueButtonColor),
+                child: const Text(
                   "Support",
                   style: TextStyle(
                     fontSize: 5.5,
@@ -101,7 +101,7 @@ class OrderListCard extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Text("Cancel Order",
+              const Text("Cancel Order",
                   style: TextStyle(
                       fontSize: 6.6,
                       fontWeight: FontWeight.w600,

@@ -155,13 +155,13 @@ class _OrderListScreenState extends State<OrderListScreen> {
                       Color(0xff2992E3),
                     ],
                   )
-                : LinearGradient(
+                : const LinearGradient(
                     colors: [blackButtonColor, blackButtonColor],
                   ),
             borderRadius: BorderRadius.circular(50)),
         child: Text(
           text,
-          style: TextStyle(color: whiteColor, fontSize: 12),
+          style: const TextStyle(color: whiteColor, fontSize: 12),
         ),
       ),
     );

@@ -20,8 +20,8 @@ class UserBottomNavBar extends StatelessWidget {
                 selectedItemColor: blackButtonColor,
                 unselectedItemColor: bottomBarIconColor,
                 type: BottomNavigationBarType.fixed,
-                selectedLabelStyle: TextStyle(fontSize: 8, color: blackButtonColor),
-                unselectedLabelStyle: TextStyle(fontSize: 8, color: grayColor),
+                selectedLabelStyle: const TextStyle(fontSize: 8, color: blackButtonColor),
+                unselectedLabelStyle: const TextStyle(fontSize: 8, color: grayColor),
                 backgroundColor: Colors.transparent,
                 currentIndex: value.page,
                 elevation: .0,
@@ -43,19 +43,19 @@ class UserBottomNavBar extends StatelessWidget {
                                   colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.home_outlined,
                                       color: whiteColor,
                                       size: 25,
                                     ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     width: 5,
                                   ),
                                   Text(
@@ -101,19 +101,19 @@ class UserBottomNavBar extends StatelessWidget {
                                   colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.shopping_cart,
                                       color: whiteColor,
                                       size: 25,
                                     ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     width: 5,
                                   ),
                                   Text(
@@ -159,19 +159,19 @@ class UserBottomNavBar extends StatelessWidget {
                                   colors: [Color(0xff0F0AA4), Color(0xff2992E3)],
                                 ),
                               ),
-                              child: Row(
+                              child: const Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    padding: EdgeInsets.symmetric(horizontal: 5),
                                     child: Icon(
                                       Icons.person_pin,
                                       color: whiteColor,
                                       size: 25,
                                     ),
                                   ),
-                                  const SizedBox(
+                                  SizedBox(
                                     width: 5,
                                   ),
                                   Text(

@@ -123,7 +123,7 @@ class _ProductScreenState extends State<ProductScreen> {
               alignment: Alignment.center,
               height: 45,
               decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
-              child: Text(
+              child: const Text(
                 "Manage Product",
                 style: TextStyle(color: whiteColor),
               ),
@@ -137,7 +137,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 alignment: Alignment.center,
                 height: 45,
                 decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Add Product",
                   style: TextStyle(color: whiteColor),
                 ),

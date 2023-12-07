@@ -35,12 +35,12 @@ class IncomeCard extends StatelessWidget {
           children: [
             Text(
               totalCount,
-              style: TextStyle(
+              style: const TextStyle(
                   color: whiteColor, fontSize: 14, fontWeight: FontWeight.w600),
             ),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                   color: whiteColor,
                   fontSize: 9.5,
                   fontWeight: FontWeight.w600),

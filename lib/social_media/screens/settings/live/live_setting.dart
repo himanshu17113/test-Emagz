@@ -49,7 +49,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
+              child: const Text(
                 "Live Setting",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -75,7 +75,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Allow Like And View from",
                     style: TextStyle(
                         color: toggleInactive,
@@ -88,7 +88,7 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Everyone",
                         style: TextStyle(
                             color: blackButtonColor,

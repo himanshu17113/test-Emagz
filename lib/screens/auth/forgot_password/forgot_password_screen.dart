@@ -64,7 +64,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings: "Forget Password",
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
@@ -73,7 +73,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings:
                               "Please enter your registered mobile number o0r email id to reset your password",
                           fontSize: 10,
@@ -83,7 +83,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings: "Email or Phone no ",
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -115,7 +115,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Center(
+                        const Center(
                           child: FormHeadingText(
                             headings: "Back To Sign In",
                             fontSize: 14,

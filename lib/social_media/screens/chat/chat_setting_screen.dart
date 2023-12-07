@@ -132,10 +132,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
+                          const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const FormHeadingText(
+                              FormHeadingText(
                                 headings: "Message Request",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -190,7 +190,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Control",
                         style: TextStyle(color: toggleInactive, fontSize: 11, fontWeight: FontWeight.w600),
                       ),
@@ -199,7 +199,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Allow Message from",
                             style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600),
                           ),
@@ -214,7 +214,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                                     showSearch=false;
                                   });
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Everyone",
                                   style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                                 ),
@@ -241,7 +241,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             children: [
                               GestureDetector(
 
-                                child: Text(
+                                child: const Text(
                                   "Block comment from",
                                   style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
                                 ),
@@ -265,16 +265,16 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             ],
                           ),
                           const Spacer(),
-                          Row(
+                          const Row(
                             children: [
                               Text(
                                 "0 people",
                                 style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 8,
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.arrow_forward_ios,
                                 size: 10,
                               )
@@ -306,7 +306,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
+                      const Text(
                         "Allow Message Request from",
                         style: TextStyle(
                             color: toggleInactive,
@@ -319,7 +319,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Everyone",
                             style: TextStyle(
                                 color: blackButtonColor,
@@ -393,7 +393,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Block Message from",
                         style: TextStyle(color: toggleInactive, fontSize: 8, fontWeight: FontWeight.w600),
                       ),
@@ -408,10 +408,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             ),
                             borderRadius: BorderRadius.circular(5)),
                         height: 28,
-                        child: TextField(
+                        child: const TextField(
                           cursorColor: Colors.black,
                           decoration: InputDecoration(
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.search,
                                 color: Colors.black,
                               ),

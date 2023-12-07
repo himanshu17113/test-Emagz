@@ -190,7 +190,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
               tittle: 'Color',
               isRequired: false,
             ),
-            Row(
+            const Row(
               children: [
                 CircleAvatar(
                   radius: 15,
@@ -201,7 +201,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     size: 12,
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 15,
                 ),
                 CircleAvatar(
@@ -294,7 +294,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   decoration: BoxDecoration(
                       color: blueButtonColor,
                       borderRadius: BorderRadius.circular(10)),
-                  child: Text(
+                  child: const Text(
                     "Add Product",
                     style: TextStyle(color: whiteColor),
                   ),

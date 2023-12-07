@@ -65,7 +65,7 @@ class _CommonAuthScreenState extends State<CommonAuthScreen> with SingleTickerPr
                             indicatorPadding: EdgeInsets.zero,
                             labelPadding: EdgeInsets.zero,
                             indicator: BoxDecoration(gradient: buttonGradient, borderRadius: BorderRadius.circular(90), color: blueColor),
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: blackButtonColor,
                                 fontWeight: FontWeight.w600,
                                 // color: AppColor.blackColor,

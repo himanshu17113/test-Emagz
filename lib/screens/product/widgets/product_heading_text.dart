@@ -14,12 +14,12 @@ class AddProductheadind extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: tittle,
-          style: TextStyle(
+          style: const TextStyle(
               color: headingColor, fontSize: 14, fontWeight: FontWeight.w400),
           children: [
             TextSpan(
               text: isRequired == true ? ' *' : "",
-              style: TextStyle(color: headingColor, fontSize: 15),
+              style: const TextStyle(color: headingColor, fontSize: 15),
             ),
           ],
         ),

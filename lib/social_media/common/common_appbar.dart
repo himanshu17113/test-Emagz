@@ -23,7 +23,7 @@ class SocialMediaSettingAppBar extends StatelessWidget implements PreferredSizeW
       centerTitle: false,
       title: Text(
         title,
-        style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
+        style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
       ),
       actions: [
         Row(

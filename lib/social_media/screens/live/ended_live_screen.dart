@@ -56,7 +56,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                       Container(
                         alignment: Alignment.center,
                         height: 35,
-                        decoration: BoxDecoration(color: redAcent),
+                        decoration: const BoxDecoration(color: redAcent),
                         child: const FormHeadingText(
                           headings: "Live as ended in 2Hrs",
                           fontSize: 12,
@@ -143,11 +143,11 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Column(
+                              const Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const FormHeadingText(
+                                  FormHeadingText(
                                     headings: "User name",
                                     fontSize: 14,
                                     fontWeight: FontWeight.w500,

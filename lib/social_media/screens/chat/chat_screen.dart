@@ -157,9 +157,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     children: [
                       Text(
                         "${widget.user?.username}",
-                        style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
+                        style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
                       ),
-                      Text(
+                      const Text(
                         "Online",
                         style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
                       ),

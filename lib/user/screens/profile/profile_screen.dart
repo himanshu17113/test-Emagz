@@ -53,7 +53,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Name",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -65,8 +65,8 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                         width: 170,
                         alignment: Alignment.center,
                         // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                        decoration: BoxDecoration(color: profileGray),
-                        child: Text(
+                        decoration: const BoxDecoration(color: profileGray),
+                        child: const Text(
                           "Maya Jonson",
                           style: TextStyle(
                             fontSize: 10,
@@ -91,7 +91,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Phone Number",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -106,8 +106,8 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                         width: 170,
                         alignment: Alignment.center,
                         // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                        decoration: BoxDecoration(color: profileGray),
-                        child: Text(
+                        decoration: const BoxDecoration(color: profileGray),
+                        child: const Text(
                           "201 202 021 2014",
                           style: TextStyle(
                             fontSize: 10,
@@ -122,7 +122,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "     Gender",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -142,7 +142,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   )
                 ],
               ),
-              Text(
+              const Text(
                 "E-mail ID",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -157,8 +157,8 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                 // width: 170,
                 alignment: Alignment.center,
                 // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                decoration: BoxDecoration(color: profileGray),
-                child: Text(
+                decoration: const BoxDecoration(color: profileGray),
+                child: const Text(
                   "Maya Jonsons @gmail.com",
                   style: TextStyle(
                     fontSize: 10,
@@ -183,7 +183,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   decoration: BoxDecoration(
                       color: blueButtonColor,
                       borderRadius: BorderRadius.circular(1)),
-                  child: Text(
+                  child: const Text(
                     "Update Profile",
                     style: TextStyle(color: whiteColor),
                   ),
@@ -341,7 +341,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
                   decoration: BoxDecoration(
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(1)),
-                  child: Text(
+                  child: const Text(
                     "Log Out",
                     style: TextStyle(color: whiteColor),
                   ),
@@ -384,7 +384,7 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
           ),
           Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
                 color: blackButtonColor,
                 fontSize: 9,
                 fontWeight: FontWeight.w600),

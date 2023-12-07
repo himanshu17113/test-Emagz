@@ -52,7 +52,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
+              child: const Text(
                 "Mentions Setting",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -78,7 +78,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Allow Like And View from",
                     style: TextStyle(
                         color: toggleInactive,
@@ -91,7 +91,7 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Everyone",
                         style: TextStyle(
                             color: blackButtonColor,

@@ -39,28 +39,28 @@ class AddPostScren extends StatelessWidget {
               maxLines: 3,
               cursorColor: grayColor,
 
-              decoration: InputDecoration(
-                hintStyle: const TextStyle(
+              decoration: const InputDecoration(
+                hintStyle: TextStyle(
                     color: Color(
                       0xff818181,
                     ),
                     fontWeight: FontWeight.bold,
                     fontSize: 9),
-                fillColor: const Color(0xffF6F6F6),
+                fillColor: Color(0xffF6F6F6),
                 hintText: "Type something",
                 filled: true,
-                contentPadding: const EdgeInsets.only(left: 10),
+                contentPadding: EdgeInsets.only(left: 10),
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: lightgrayColor,
                   ),
                 ),
-                focusedBorder: const OutlineInputBorder(
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xffF6F6F6),
                   ),
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xffF6F6F6),
                   ),
@@ -111,7 +111,7 @@ class AddPostScren extends StatelessWidget {
               alignment: Alignment.center,
               height: 35,
               decoration: BoxDecoration(color: chipColor, borderRadius: BorderRadius.circular(5)),
-              child: Text(
+              child: const Text(
                 "Create a post",
                 style: TextStyle(color: whiteColor, fontSize: 11, fontWeight: FontWeight.w600),
               ),
@@ -188,8 +188,8 @@ class AddPostScren extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
                 height: 50,
-                decoration: BoxDecoration(color: chipColor),
-                child: Text(
+                decoration: const BoxDecoration(color: chipColor),
+                child: const Text(
                   "Go Live",
                   style: TextStyle(color: whiteColor, fontSize: 15, fontWeight: FontWeight.w600),
                 ),

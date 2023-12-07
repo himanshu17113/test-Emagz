@@ -64,7 +64,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
                       indicatorPadding: EdgeInsets.zero,
                       labelPadding: EdgeInsets.zero,
                       indicator: BoxDecoration(borderRadius: BorderRadius.circular(90), color: const Color(0xff1943D8)),
-                      labelStyle: TextStyle(
+                      labelStyle: const TextStyle(
                           color: blackButtonColor,
                           fontWeight: FontWeight.w600,
                           // color: AppColor.blackColor,

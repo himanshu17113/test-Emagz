@@ -115,7 +115,7 @@ class PersonalProfile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blackButtonColor,
                     borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Customer View",
                   style: TextStyle(color: whiteColor),
                 ),
@@ -135,7 +135,7 @@ class PersonalProfile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Edit",
                   style: TextStyle(color: whiteColor),
                 ),

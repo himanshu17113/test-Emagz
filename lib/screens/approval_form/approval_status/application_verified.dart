@@ -27,7 +27,7 @@ class ApplicationVerifiedScreen extends StatelessWidget {
               ),
               Container(
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Verified\n sucessfully",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -41,7 +41,7 @@ class ApplicationVerifiedScreen extends StatelessWidget {
                 width: 230,
                 margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Your application is sucessfully \nverified. Thanks for choosing E-magz",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -58,7 +58,7 @@ class ApplicationVerifiedScreen extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: size.height / 12),
                   alignment: Alignment.center,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -71,7 +71,7 @@ class ApplicationVerifiedScreen extends StatelessWidget {
                             // height: 3.3,
                             fontWeight: FontWeight.w300),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                       ),
                       Icon(

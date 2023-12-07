@@ -40,7 +40,7 @@ class OrderScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: blueButtonColor,
                   borderRadius: BorderRadius.circular(1)),
-              child: Text(
+              child: const Text(
                 "Continue Shoping",
                 style: TextStyle(color: whiteColor),
               ),

@@ -14,7 +14,7 @@ class ManageAddressHeading extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 1),
       child: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
             color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w500),
       ),
     );

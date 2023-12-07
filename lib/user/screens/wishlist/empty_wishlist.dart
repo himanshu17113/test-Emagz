@@ -24,14 +24,14 @@ class EmptyWishListScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "Save Your Favorite Here",
             style: TextStyle(
                 color: blackButtonColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w600),
           ),
-          Text(
+          const Text(
             "We save all your wish safely for later",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -50,7 +50,7 @@ class EmptyWishListScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: blueButtonColor,
                   borderRadius: BorderRadius.circular(1)),
-              child: Text(
+              child: const Text(
                 "Continue Shoping",
                 style: TextStyle(color: whiteColor),
               ),

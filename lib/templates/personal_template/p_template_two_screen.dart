@@ -38,7 +38,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                       // height: 200,
                       height: 1100,
                       width: 200,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
                       ),
                     ),
@@ -53,7 +53,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                       // height: 200,
                       height: 1100,
                       width: 200,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
                       ),
                     ),
@@ -73,7 +73,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                             "25K",
                             style: GoogleFonts.poppins(color: whiteColor, fontSize: 100, height: .9, fontWeight: FontWeight.w800),
                           ),
-                          Text(
+                          const Text(
                             "Followers",
                             style: TextStyle(
                                 color: whiteColor,
@@ -231,7 +231,7 @@ class PTemplateTwoScreen extends StatelessWidget {
             child: Text(
               dummyText + dummyText + dummyText,
               textAlign: TextAlign.center,
-              style: TextStyle(letterSpacing: .2, color: whiteColor, fontSize: 10, fontWeight: FontWeight.w300),
+              style: const TextStyle(letterSpacing: .2, color: whiteColor, fontSize: 10, fontWeight: FontWeight.w300),
             ),
           ),
           const SizedBox(
@@ -257,7 +257,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -267,7 +267,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -276,7 +276,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
                     ),
                   ),
                 )
@@ -308,7 +308,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -318,7 +318,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -328,7 +328,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
                     ),
                   ),
                 )
@@ -340,7 +340,7 @@ class PTemplateTwoScreen extends StatelessWidget {
               top: 50,
             ),
             alignment: Alignment.center,
-            child: Text(
+            child: const Text(
               "Short Message",
               style: TextStyle(
                   color: whiteColor,
@@ -349,8 +349,8 @@ class PTemplateTwoScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Text(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisl bibendum quis donec laoreet sapien, magna eros, dui adipiscing. ",
               textAlign: TextAlign.center,

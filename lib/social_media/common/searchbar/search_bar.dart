@@ -13,13 +13,13 @@ class SearchWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: const Color(0xffF0F0F0),
           borderRadius: BorderRadius.circular(10)),
-      child: TextField(
+      child: const TextField(
         showCursor: false,
         decoration: InputDecoration(
             hintText: "Search",
             hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
-            contentPadding: const EdgeInsets.only(left: 10, top: 5),
-            prefixIcon: const Icon(
+            contentPadding: EdgeInsets.only(left: 10, top: 5),
+            prefixIcon: Icon(
               Icons.search,
               color: Colors.black,
               size: 20,

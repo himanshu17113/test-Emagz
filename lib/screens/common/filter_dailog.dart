@@ -39,13 +39,13 @@ class _FilterDailogState extends State<FilterDailog> {
                       Color(0xff2992E3),
                     ],
                   )
-                : LinearGradient(
+                : const LinearGradient(
                     colors: [blackButtonColor, blackButtonColor],
                   ),
             borderRadius: BorderRadius.circular(50)),
         child: Text(
           text,
-          style: TextStyle(color: whiteColor, fontSize: 12),
+          style: const TextStyle(color: whiteColor, fontSize: 12),
         ),
       ),
     );
@@ -55,9 +55,9 @@ class _FilterDailogState extends State<FilterDailog> {
 filterDalilog(BuildContext context) {
   String url =
       "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
-  TextStyle modelTextHeading = TextStyle(
+  TextStyle modelTextHeading = const TextStyle(
       color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
-  TextStyle modelTextbody = TextStyle(
+  TextStyle modelTextbody = const TextStyle(
       color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
@@ -91,7 +91,7 @@ filterDalilog(BuildContext context) {
                     decoration: BoxDecoration(
                         color: blackButtonColor,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Text(
+                    child: const Text(
                       "Back",
                       style: TextStyle(color: whiteColor),
                     ),
@@ -111,16 +111,16 @@ filterDalilog(BuildContext context) {
                     alignment: Alignment.center,
                     height: 50,
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          end: const Alignment(-0.6, .6),
-                          begin: const Alignment(0.5, -5.5),
+                        gradient: const LinearGradient(
+                          end: Alignment(-0.6, .6),
+                          begin: Alignment(0.5, -5.5),
                           colors: [
                             darkBlueAcent,
                             darkBlue,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(10)),
-                    child: Text(
+                    child: const Text(
                       "Update",
                       style: TextStyle(color: whiteColor),
                     ),

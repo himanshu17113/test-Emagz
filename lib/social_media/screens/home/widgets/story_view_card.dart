@@ -78,7 +78,7 @@ class StoryViewCard extends StatelessWidget {
             left: 20,
             child: Text(
               username == null ? "loading.." : username!.username!,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 6,
                   fontWeight: FontWeight.bold,
                   color: blackButtonColor),

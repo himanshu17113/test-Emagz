@@ -27,7 +27,7 @@ class CouponListCard extends StatelessWidget {
           Text(
             orderList.orderid,
             // "5415asd518",
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,
@@ -35,7 +35,7 @@ class CouponListCard extends StatelessWidget {
           ),
           Text(
             "₹ ${orderList.totalAmount}",
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,
@@ -47,7 +47,7 @@ class CouponListCard extends StatelessWidget {
             child: Text(
               "0${orderList.quantity}",
               // "01",
-              style: TextStyle(color: whiteColor, fontSize: 10),
+              style: const TextStyle(color: whiteColor, fontSize: 10),
             ),
           ),
           Container(
@@ -67,7 +67,7 @@ class CouponListCard extends StatelessWidget {
             child: Text(
               orderList.orderStatus,
               // "Dispatch",
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 8, fontWeight: FontWeight.w500, color: whiteColor),
             ),
           )

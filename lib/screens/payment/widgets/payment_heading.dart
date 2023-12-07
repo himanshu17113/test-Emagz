@@ -13,7 +13,7 @@ class PaymentHeading extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(left: 10),
-            child: Text(
+            child: const Text(
               "Trans. ID",
               style: TextStyle(
                   fontSize: 14,
@@ -26,7 +26,7 @@ class PaymentHeading extends StatelessWidget {
           // ),
           Container(
             margin: const EdgeInsets.only(right: 15),
-            child: Text(
+            child: const Text(
               "Name",
               style: TextStyle(
                   fontSize: 14,
@@ -34,7 +34,7 @@ class PaymentHeading extends StatelessWidget {
                   color: orderHeadingColor),
             ),
           ),
-          Text(
+          const Text(
             "Date",
             style: TextStyle(
                 fontSize: 14,
@@ -43,7 +43,7 @@ class PaymentHeading extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(right: 15, left: 8),
-            child: Text(
+            child: const Text(
               "Total",
               style: TextStyle(
                   fontSize: 14,

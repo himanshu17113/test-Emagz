@@ -53,7 +53,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 const SizedBox(
                   width: 30,
                 ),
-                Text(
+                const Text(
                   "Explore your \nWorld",
                   style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
                 ),

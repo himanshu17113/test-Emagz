@@ -29,7 +29,7 @@ class PaymentListCard extends StatelessWidget {
               Text(
                 paymentList.transectionId,
                 // "5415asd518",
-                style: TextStyle(
+                style: const TextStyle(
                   color: blackButtonColor,
                   fontSize: 9,
                   fontWeight: FontWeight.w500,
@@ -49,7 +49,7 @@ class PaymentListCard extends StatelessWidget {
           ),
           Text(
             paymentList.date,
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,
@@ -57,7 +57,7 @@ class PaymentListCard extends StatelessWidget {
           ),
           Text(
             "₹ ${paymentList.totalAmount}",
-            style: TextStyle(
+            style: const TextStyle(
               color: blackButtonColor,
               fontSize: 9,
               fontWeight: FontWeight.w500,

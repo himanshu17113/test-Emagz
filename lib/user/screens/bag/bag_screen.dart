@@ -28,8 +28,8 @@ class BagScreen extends StatelessWidget {
           const Expanded(child: SizedBox()),
           Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -134,7 +134,7 @@ class BagScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: blackButtonColor,
                             borderRadius: BorderRadius.circular(1)),
-                        child: Text("Save For Later",
+                        child: const Text("Save For Later",
                             style: TextStyle(color: whiteColor)),
                       ),
                     ),
@@ -150,7 +150,7 @@ class BagScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: blueButtonColor,
                             borderRadius: BorderRadius.circular(1)),
-                        child: Text(
+                        child: const Text(
                           "Order Now",
                           style: TextStyle(color: whiteColor),
                         ),
@@ -180,6 +180,6 @@ class BagScreen extends StatelessWidget {
     );
   }
 
-  TextStyle style = TextStyle(
+  TextStyle style = const TextStyle(
       fontSize: 12.5, fontWeight: FontWeight.w600, color: blackButtonColor);
 }

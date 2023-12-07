@@ -112,7 +112,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
               alignment: Alignment.center,
               height: 45,
               decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
-              child: Text(
+              child: const Text(
                 "Manage Product",
                 style: TextStyle(color: whiteColor),
               ),
@@ -126,7 +126,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 alignment: Alignment.center,
                 height: 45,
                 decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Add Product",
                   style: TextStyle(color: whiteColor),
                 ),
@@ -142,8 +142,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
 viewProductDialog(BuildContext context) {
   String url =
       "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
-  TextStyle modelTextHeading = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
-  TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextbody = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(side: const BorderSide(color: Colors.black, width: 4), borderRadius: BorderRadius.circular(10)),
@@ -207,7 +207,7 @@ viewProductDialog(BuildContext context) {
                   ),
                   Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundColor: blackButtonColor,
                         radius: 8,
                       ),
@@ -278,8 +278,8 @@ viewProductDialog(BuildContext context) {
 showAlertDailog(BuildContext context) {
   String url =
       "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
-  TextStyle modelTextHeading = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
-  TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextbody = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -300,7 +300,7 @@ showAlertDailog(BuildContext context) {
           const SizedBox(
             height: 5,
           ),
-          Divider(
+          const Divider(
             thickness: .3,
             color: unselectedLabel,
           ),
@@ -350,7 +350,7 @@ showAlertDailog(BuildContext context) {
               alignment: Alignment.center,
               height: 45,
               decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
-              child: Text(
+              child: const Text(
                 "Back",
                 style: TextStyle(color: whiteColor),
               ),
@@ -375,7 +375,7 @@ showAlertDailog(BuildContext context) {
 }
 
 QuickEditDailog(BuildContext context) { 
-  TextStyle modelTextHeading = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
  // TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
@@ -409,7 +409,7 @@ QuickEditDailog(BuildContext context) {
           const SizedBox(height: 10),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 3),
-            child: Text(
+            child: const Text(
               "Name",
               style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
             ),
@@ -423,7 +423,7 @@ QuickEditDailog(BuildContext context) {
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
+                      child: const Text(
                         "Price",
                         style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                       ),
@@ -439,7 +439,7 @@ QuickEditDailog(BuildContext context) {
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
+                      child: const Text(
                         "Select Size",
                         style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                       ),
@@ -458,7 +458,7 @@ QuickEditDailog(BuildContext context) {
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
+                      child: const Text(
                         "Stock",
                         style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                       ),
@@ -474,7 +474,7 @@ QuickEditDailog(BuildContext context) {
                   children: [
                     Container(
                       margin: const EdgeInsets.symmetric(vertical: 4),
-                      child: Text(
+                      child: const Text(
                         "Colour",
                         style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                       ),
@@ -500,7 +500,7 @@ QuickEditDailog(BuildContext context) {
                     alignment: Alignment.center,
                     height: 50,
                     decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
-                    child: Text(
+                    child: const Text(
                       "Back",
                       style: TextStyle(color: whiteColor),
                     ),
@@ -520,16 +520,16 @@ QuickEditDailog(BuildContext context) {
                     alignment: Alignment.center,
                     height: 50,
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          end: const Alignment(-0.6, .6),
-                          begin: const Alignment(0.5, -5.5),
+                        gradient: const LinearGradient(
+                          end: Alignment(-0.6, .6),
+                          begin: Alignment(0.5, -5.5),
                           colors: [
                             darkBlueAcent,
                             darkBlue,
                           ],
                         ),
                         borderRadius: BorderRadius.circular(10)),
-                    child: Text(
+                    child: const Text(
                       "Update",
                       style: TextStyle(color: whiteColor),
                     ),
@@ -594,7 +594,7 @@ class ModelTile extends StatelessWidget {
               ),
             ],
           ),
-          Divider(
+          const Divider(
             thickness: .3,
             color: unselectedLabel,
           ),

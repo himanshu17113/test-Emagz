@@ -159,7 +159,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Reason to deactivate",
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
@@ -174,7 +174,7 @@ class _DeactivateAccountScreenState extends State<DeactivateAccountScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                Row(
+                const Row(
                   children: [
                     FormHeadingText(
                       headings: "Message ",

@@ -28,7 +28,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
               Container(
                 width: 300,
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "Sorry We Couldn’t \nVerify You",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -42,7 +42,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
                 width: 220,
                 margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
-                child: Text(
+                child: const Text(
                   "We are sorry to inform you that we \ncouldn’t very your account. Better \nluck next time",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -59,7 +59,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
                 child: Container(
                   margin: EdgeInsets.only(top: size.height / 12),
                   alignment: Alignment.center,
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
@@ -72,7 +72,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
                             // height: 3.3,
                             fontWeight: FontWeight.w300),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                       ),
                       Icon(

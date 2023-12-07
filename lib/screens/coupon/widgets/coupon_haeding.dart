@@ -13,7 +13,7 @@ class CouponHeading extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(left: 10),
-            child: Text(
+            child: const Text(
               "Code",
               style: TextStyle(
                   fontSize: 14,
@@ -26,7 +26,7 @@ class CouponHeading extends StatelessWidget {
           // ),
           Container(
             margin: const EdgeInsets.only(left: 14),
-            child: Text(
+            child: const Text(
               "Value",
               style: TextStyle(
                   fontSize: 14,
@@ -34,7 +34,7 @@ class CouponHeading extends StatelessWidget {
                   color: orderHeadingColor),
             ),
           ),
-          Text(
+          const Text(
             "No. Users",
             style: TextStyle(
                 fontSize: 14,
@@ -43,7 +43,7 @@ class CouponHeading extends StatelessWidget {
           ),
           Container(
             margin: const EdgeInsets.only(right: 16, left: 8),
-            child: Text(
+            child: const Text(
               "Status",
               style: TextStyle(
                   fontSize: 14,

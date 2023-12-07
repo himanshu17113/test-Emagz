@@ -12,7 +12,7 @@ class DetailsText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(fontSize: 12, color: blackButtonColor),
+      style: const TextStyle(fontSize: 12, color: blackButtonColor),
     );
   }
 }

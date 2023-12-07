@@ -61,7 +61,7 @@ class HomeScren extends StatelessWidget {
                           ),
                           Text(
                             products[index].category.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: blackButtonColor,
                                 fontSize: 9,
                                 fontWeight: FontWeight.w600),
@@ -79,7 +79,7 @@ class HomeScren extends StatelessWidget {
               height: 72,
               child: Row(
                 children: [
-                  Column(
+                  const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -124,8 +124,8 @@ class HomeScren extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -136,7 +136,7 @@ class HomeScren extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Text(
+                  Text(
                     "View More",
                     style: TextStyle(
                         color: Color(0xff292929),
@@ -178,7 +178,7 @@ class HomeScren extends StatelessWidget {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            Text(
+                            const Text(
                               "Product",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -187,7 +187,7 @@ class HomeScren extends StatelessWidget {
                             ),
                             Text(
                               "₹ ${products[index].price.toString()}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: blackButtonColor,
                                   fontSize: 8,
                                   fontWeight: FontWeight.w500),
@@ -241,8 +241,8 @@ class HomeScren extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -253,7 +253,7 @@ class HomeScren extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Text(
+                  Text(
                     "View More",
                     style: TextStyle(
                         color: Color(0xff292929),
@@ -288,7 +288,7 @@ class HomeScren extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Text(
+                    const Text(
                       "Product",
                       style: TextStyle(
                           color: blackButtonColor,
@@ -297,7 +297,7 @@ class HomeScren extends StatelessWidget {
                     ),
                     Text(
                       "₹ ${products[index].price.toString()}",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: blackButtonColor,
                           fontSize: 8,
                           fontWeight: FontWeight.w500),

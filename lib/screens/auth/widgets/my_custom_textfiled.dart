@@ -62,7 +62,7 @@ class MyCustomTextfiled extends StatelessWidget {
                 color: Color(0xffF2F2F2),
               ),
             ),
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
               fontSize: 10,
               color: hintColor,
             )),

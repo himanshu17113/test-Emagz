@@ -61,7 +61,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             height: 650,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(image: CachedNetworkImageProvider(wallImage), fit: BoxFit.cover),
             ),
             child: Column(
@@ -124,7 +124,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
           ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 10),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
@@ -135,7 +135,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
                     ),
                     Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 45,
                         ),
                         Text(
@@ -159,7 +159,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
                     ),
                     Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 30,
                         ),
                         Text(
@@ -183,7 +183,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
                     ),
                     Row(
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 30,
                         ),
                         Text(
@@ -273,7 +273,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.location_on_outlined,
                       color: blackButtonColor,
                     ),
@@ -338,7 +338,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
                   onTap: () {
                     controllerTwo.nextPage(duration: const Duration(seconds: 1), curve: Curves.linear);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_forward_ios,
                     color: blackButtonColor,
                     size: 15,

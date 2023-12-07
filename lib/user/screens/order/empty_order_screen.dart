@@ -20,14 +20,14 @@ class EmptyOrderScreen extends StatelessWidget {
             "assets/png/empty_order.png",
             height: 115,
           ),
-          Text(
+          const Text(
             "Nothing To Be Shown",
             style: TextStyle(
                 color: blackButtonColor,
                 fontSize: 20,
                 fontWeight: FontWeight.w600),
           ),
-          Text(
+          const Text(
             "Let’s get some order for you so you can check me later",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -46,7 +46,7 @@ class EmptyOrderScreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: blueButtonColor,
                   borderRadius: BorderRadius.circular(1)),
-              child: Text(
+              child: const Text(
                 "Continue Shoping",
                 style: TextStyle(color: whiteColor),
               ),

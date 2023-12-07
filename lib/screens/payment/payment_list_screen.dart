@@ -34,8 +34,7 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
+     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -141,13 +140,13 @@ class _PaymentListScreenState extends State<PaymentListScreen> {
                       Color(0xff2992E3),
                     ],
                   )
-                : LinearGradient(
+                : const LinearGradient(
                     colors: [blackButtonColor, blackButtonColor],
                   ),
             borderRadius: BorderRadius.circular(50)),
         child: Text(
           text,
-          style: TextStyle(color: whiteColor, fontSize: 12),
+          style: const TextStyle(color: whiteColor, fontSize: 12),
         ),
       ),
     );

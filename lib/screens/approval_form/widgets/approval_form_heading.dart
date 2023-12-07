@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class ApprovalFormHeading extends StatelessWidget {
   final String tittle;
-  bool? isRequired;
-  ApprovalFormHeading({Key? key, required this.tittle, this.isRequired = true})
+ final bool? isRequired;
+ const ApprovalFormHeading({Key? key, required this.tittle, this.isRequired = true})
       : super(key: key);
 
   @override

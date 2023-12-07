@@ -102,7 +102,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 231,
                   child: FormHeadingText(
                     headings:
@@ -130,7 +130,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      FormHeadingText(
+                      const FormHeadingText(
                         headings: "Verification",
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
@@ -139,7 +139,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 277,
                         child: FormHeadingText(
                           headings:
@@ -152,7 +152,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      FormHeadingText(
+                      const FormHeadingText(
                         headings: "OTP",
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -208,7 +208,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                       const SizedBox(
                         height: 30,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           FormHeadingText(

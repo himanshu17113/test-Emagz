@@ -11,7 +11,7 @@ class BagItemcard extends StatelessWidget {
     var quanity;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(color: lightgrayColor, width: .7),
           bottom: BorderSide(color: lightgrayColor, width: .7),
@@ -29,7 +29,7 @@ class BagItemcard extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            SizedBox(
+            const SizedBox(
               height: 60,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class BagItemcard extends StatelessWidget {
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: blackButtonColor)),
-                  const SizedBox(
+                  SizedBox(
                     height: 5,
                   ),
                   Text("₹ 499.00",
@@ -60,7 +60,7 @@ class BagItemcard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("Qty",
+                  const Text("Qty",
                       style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w600,
@@ -79,7 +79,7 @@ class BagItemcard extends StatelessWidget {
             const SizedBox(
               width: 40,
             ),
-            Expanded(
+            const Expanded(
               child: Icon(
                 Icons.close,
                 size: 15,

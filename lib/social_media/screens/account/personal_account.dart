@@ -64,7 +64,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Let’s Get Started",
                       style: TextStyle(
                           color: blackButtonColor,
@@ -74,7 +74,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     // const SizedBox(
                     //   height: 2,
                     // ),
-                    Text(
+                    const Text(
                       "Customise your profile",
                       style: TextStyle(
                           color: accountGray,
@@ -84,7 +84,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Text(
+                    const Text(
                       "User Name",
                       style: TextStyle(
                           color: lightBlack,
@@ -118,15 +118,15 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                           hintText: widget.suggestedName ?? "new user-name",
                           filled: true,
                           contentPadding: const EdgeInsets.only(left: 10),
-                          border: OutlineInputBorder(
+                          border: const OutlineInputBorder(
                             borderSide: BorderSide(
                               color: lightgrayColor,
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: lightgrayColor),
                           ),
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: lightgrayColor),
                           ),
                         ),
@@ -135,7 +135,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text(
+                    const Text(
                       "Select account type",
                       style: TextStyle(
                           color: lightBlack,
@@ -174,7 +174,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                             //   color: (value == index) ? chipColor : Colors.black,
                             // ),
                             borderRadius: BorderRadius.circular(5)),
-                        child:  (authController.isUserlogging ) ? const CircularProgressIndicator(color: Colors.white,) :Text(
+                        child:  (authController.isUserlogging ) ? const CircularProgressIndicator(color: Colors.white,) :const Text(
                             "Continue",
                             style: TextStyle(
                                 color: whiteColor,

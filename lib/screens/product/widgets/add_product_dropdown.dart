@@ -49,7 +49,7 @@ class AddProductDropDown extends StatelessWidget {
                 value: val.toString(),
                 child: Text(
                   "$val ",
-                  style: TextStyle(
+                  style: const TextStyle(
                       // fontSize: 14.sp,
                       // color: value == "pending" ? cancledColor : blackButtonColor,
                       color: cancledColor),

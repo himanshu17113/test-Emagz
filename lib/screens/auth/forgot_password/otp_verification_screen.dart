@@ -67,7 +67,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings: "Verification",
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
@@ -76,7 +76,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings:
                               "Please enter the OTP sent to your registered mobile number 0r email id naku******amail.com or +91 09*****654",
                           fontSize: 10,
@@ -86,7 +86,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        FormHeadingText(
+                        const FormHeadingText(
                           headings: "OTP",
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -146,7 +146,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FormHeadingText(

@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
@@ -56,21 +55,21 @@ class PersonalProfileSetup extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Set up your Persona",
                     style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w500),
                   ),
                   // const SizedBox(
                   //   height: 2,
                   // ),
-                  Text(
+                  const Text(
                     "Customise your profile",
                     style: TextStyle(color: accountGray, fontSize: 7, fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(
+                  const Text(
                     "Display Name",
                     style: TextStyle(color: lightBlack, fontSize: 14, fontWeight: FontWeight.w500),
                   ),
@@ -87,17 +86,17 @@ class PersonalProfileSetup extends StatelessWidget {
                       controller: accountSetUpController.displayNameController,
                       // keyboardType: TextInputType.n,
                       // autofocus: true,
-                      decoration: InputDecoration(
-                        hintStyle: const TextStyle(
+                      decoration: const InputDecoration(
+                        hintStyle: TextStyle(
                             color: Color(
                               0xff818181,
                             ),
                             fontWeight: FontWeight.bold,
                             fontSize: 9),
-                        fillColor: const Color(0xffF1F1F1),
+                        fillColor: Color(0xffF1F1F1),
                         hintText: "",
                         filled: true,
-                        contentPadding: const EdgeInsets.only(left: 10),
+                        contentPadding: EdgeInsets.only(left: 10),
                         border: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: lightgrayColor,
@@ -135,7 +134,7 @@ class PersonalProfileSetup extends StatelessWidget {
                             ? const CircularProgressIndicator(
                                 color: Colors.white,
                               )
-                            : Text(
+                            : const Text(
                                 "Choose Template",
                                 style: TextStyle(color: whiteColor, fontSize: 9, fontWeight: FontWeight.w600),
                               ),

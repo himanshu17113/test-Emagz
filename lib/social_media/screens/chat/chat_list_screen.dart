@@ -163,11 +163,11 @@ class _ChatListScreenState extends State<ChatListScreen> {
                               });
                             },
                             showCursor: false,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Search",
                                 hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
-                                contentPadding: const EdgeInsets.only(left: 10, top: 5),
-                                prefixIcon: const Icon(
+                                contentPadding: EdgeInsets.only(left: 10, top: 5),
+                                prefixIcon: Icon(
                                   Icons.search,
                                   color: Colors.black,
                                   size: 20,
@@ -204,7 +204,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 18),
-                    child: Text(
+                    child: const Text(
                       "Online",
                       style: TextStyle(color: blackButtonColor, fontSize: 15.5, fontWeight: FontWeight.w600),
                     ),

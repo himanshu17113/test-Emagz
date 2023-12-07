@@ -38,7 +38,7 @@ class WishListScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Text(
+                  const Text(
                     "Product",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -47,7 +47,7 @@ class WishListScreen extends StatelessWidget {
                   ),
                   Text(
                     "₹ ${products[index].price.toString()}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: blackButtonColor,
                         fontSize: 8,
                         fontWeight: FontWeight.w500),
@@ -75,7 +75,7 @@ class WishListScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blackButtonColor,
                     borderRadius: BorderRadius.circular(1)),
-                child: Text("Manage ", style: TextStyle(color: whiteColor)),
+                child: const Text("Manage ", style: TextStyle(color: whiteColor)),
               ),
             ),
             InkWell(
@@ -89,7 +89,7 @@ class WishListScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(1)),
-                child: Text(
+                child: const Text(
                   "Order Now",
                   style: TextStyle(color: whiteColor),
                 ),

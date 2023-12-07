@@ -26,13 +26,13 @@ class BagDropDown extends StatelessWidget {
           ),
           focusColor: Colors.transparent,
           // dropdownColor: AppColor.red,
-          hint: Text("01",
+          hint: const Text("01",
               style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                   color: blackButtonColor)),
           isExpanded: true,
-          icon: Align(
+          icon: const Align(
               alignment: Alignment.centerRight,
               child: Icon(
                 Icons.keyboard_arrow_down,
@@ -43,7 +43,7 @@ class BagDropDown extends StatelessWidget {
             return DropdownMenuItem<String>(
               value: val.toString(),
               child: Text("$val ",
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                       color: blackButtonColor)),

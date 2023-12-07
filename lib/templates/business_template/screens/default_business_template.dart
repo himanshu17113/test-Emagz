@@ -19,7 +19,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
+            gradient: const LinearGradient(
               colors: [
                 Colors.pinkAccent,
                 chipColor,
@@ -42,7 +42,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(20),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 colors: [
                   Colors.pinkAccent,
                   chipColor,
@@ -111,7 +111,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),
-                                      child: Text(
+                                      child: const Text(
                                         "LO\nGO",
                                         style: TextStyle(
                                             color: whiteColor, height: 1),
@@ -259,7 +259,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return Container(
                             margin: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Icon(
+                            child: const Icon(
                               Icons.newspaper_rounded,
                               color: whiteAcent,
                               size: 32,
@@ -363,7 +363,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -372,7 +372,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                             color: whiteColor,
                             size: 30,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 15,
                           ),
                           Icon(
@@ -380,7 +380,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                             color: whiteColor,
                             size: 30,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 15,
                           ),
                           Icon(
@@ -388,7 +388,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                             color: whiteColor,
                             size: 30,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 15,
                           ),
                           Icon(
@@ -524,7 +524,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.arrow_forward_ios,
                                 color: blackButtonColor,
                               )

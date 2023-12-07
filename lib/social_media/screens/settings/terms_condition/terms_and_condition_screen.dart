@@ -83,19 +83,19 @@ class _TermsAndConditionScreenState extends State<TermsAndConditionScreen> {
               ),
             ),
           ),
-          body: SingleChildScrollView(
+          body: const SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 30,
                 ),
-                const FormHeadingText(
+                FormHeadingText(
                   headings: "Term & Condition",
                   fontSize: 19,
                   fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 SizedBox(

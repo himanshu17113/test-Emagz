@@ -145,7 +145,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(5)),
-                child: Text(
+                child: const Text(
                   "Add New Coupon",
                   style: TextStyle(color: whiteColor, fontSize: 12),
                 ),

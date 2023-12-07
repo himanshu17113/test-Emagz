@@ -59,7 +59,7 @@ class SliderCard extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Row(
+                const Row(
                   children: [
                     Icon(
                       Icons.star,

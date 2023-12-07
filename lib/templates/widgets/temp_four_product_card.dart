@@ -42,7 +42,7 @@ class TemplateFourproductCard extends StatelessWidget {
                             fontSize: 20,
                             fontWeight: FontWeight.w600),
                       ),
-                      Row(
+                      const Row(
                         children: [
                           Icon(
                             Icons.star,
@@ -102,7 +102,7 @@ class TemplateFourproductCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
+              const Row(
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -118,7 +118,7 @@ class TemplateFourproductCard extends StatelessWidget {
                             height: 1.5,
                             fontWeight: FontWeight.w300),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -129,7 +129,7 @@ class TemplateFourproductCard extends StatelessWidget {
                             height: 1.5,
                             fontWeight: FontWeight.w600),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 10,
                       ),
                       Text(
@@ -146,14 +146,14 @@ class TemplateFourproductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const SizedBox(
+                      SizedBox(
                         width: 2,
                       ),
-                      const Icon(
+                      Icon(
                         Icons.shopping_bag_outlined,
                         color: Colors.black,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 2,
                       ),
                       Text(
@@ -164,7 +164,7 @@ class TemplateFourproductCard extends StatelessWidget {
                             height: 1,
                             fontWeight: FontWeight.bold),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 10,
                       ),
                     ],

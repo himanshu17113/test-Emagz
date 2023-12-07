@@ -26,8 +26,8 @@ class _SupportScreenState extends State<SupportScreen>{
               mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0),
                     child: Text('Recent',
                       style:  TextStyle(
                       color:  textSetting,
@@ -48,7 +48,7 @@ class _SupportScreenState extends State<SupportScreen>{
                           tileColor: Colors.white,
                           isThreeLine: true,
 
-                          subtitle: Column(
+                          subtitle: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
 
                             children: [
@@ -58,10 +58,10 @@ class _SupportScreenState extends State<SupportScreen>{
                                     fontSize: 10,
                                     fontWeight: FontWeight.w500),
                               ),
-                              const Divider(),
+                              Divider(),
                             ],
                           ),
-                          trailing: Text('Closed',
+                          trailing: const Text('Closed',
                             style: TextStyle(
                                 color:  textSetting,
                                 fontSize: 10,
@@ -71,7 +71,7 @@ class _SupportScreenState extends State<SupportScreen>{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Ticket No#${supportController.supports![index].ticketNumber??"12345"}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color:  textSetting,
                                       fontSize: 10,
                                       fontWeight: FontWeight.w500),
@@ -85,9 +85,9 @@ class _SupportScreenState extends State<SupportScreen>{
                     );
                   }),
 
-                  Padding(
+                  const Padding(
 
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: EdgeInsets.only(left: 16.0),
                     child: Text('History',
                       style:  TextStyle(
                           color:  textSetting,

@@ -74,7 +74,7 @@ class _CommonSliderState extends State<CommonSlider> {
                       duration: const Duration(seconds: 1),
                       curve: Curves.linear);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: whiteColor,
                   size: 15,
@@ -86,7 +86,7 @@ class _CommonSliderState extends State<CommonSlider> {
                       duration: const Duration(seconds: 1),
                       curve: Curves.linear);
                 },
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_forward_ios,
                   color: whiteColor,
                   size: 15,

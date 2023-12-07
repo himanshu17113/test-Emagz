@@ -149,9 +149,9 @@ class _PostCardState extends State<PostCard> {
                     children: [
                       Text(
                         "${post?.user!.username.toString()}",
-                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
+                        style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
                       ),
-                      Text("@${post?.user!.getstatedName.toString()}", style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
+                      Text("@${post?.user!.getstatedName.toString()}", style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
                     ],
                   ),
                 )
@@ -300,7 +300,7 @@ class _PostCardState extends State<PostCard> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            FormHeadingText(
+                            const FormHeadingText(
                               headings: "Choose\nyour poll",
                               color: whiteColor,
                               fontSize: 24,
@@ -352,7 +352,7 @@ class _PostCardState extends State<PostCard> {
                               width: width * .7,
                               child: Column(
                                 children: [
-                                  FormHeadingText(
+                                  const FormHeadingText(
                                     textAlign: TextAlign.center,
                                     headings: "Poll\nResult",
                                     color: whiteColor,
@@ -406,7 +406,7 @@ class _PostCardState extends State<PostCard> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                FormHeadingText(
+                                const FormHeadingText(
                                   headings: "Choose\nyour poll",
                                   color: whiteColor,
                                   fontSize: 24,
@@ -512,7 +512,7 @@ class _PostCardState extends State<PostCard> {
                       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                         SizedBox(
                           width: Get.size.width / 2,
-                          child: Text("${post!.caption}", style: TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                          child: Text("${post!.caption}", style: const TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
                         ),
                         //    const Expanded(child: SizedBox()),
                         GestureDetector(
@@ -546,7 +546,7 @@ class _PostCardState extends State<PostCard> {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Text(
                             "${homePostController.posts?[widget.index!].likeCount}",
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                            style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                           ),
                         ),
 
@@ -559,7 +559,7 @@ class _PostCardState extends State<PostCard> {
                         ),
                         Text(
                           "${post!.comments?.length}",
-                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                         ),
                         const SizedBox(
                           width: 5,

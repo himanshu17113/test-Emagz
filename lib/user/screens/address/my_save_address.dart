@@ -53,7 +53,7 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
                 decoration: BoxDecoration(
                     color: blackButtonColor,
                     borderRadius: BorderRadius.circular(1)),
-                child: Text("Manage Address ",
+                child: const Text("Manage Address ",
                     style: TextStyle(color: whiteColor)),
               ),
             ),
@@ -68,7 +68,7 @@ class _MySaveAddressScreenState extends State<MySaveAddressScreen> {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(1)),
-                child: Text(
+                child: const Text(
                   "Add New Address",
                   style: TextStyle(color: whiteColor),
                 ),

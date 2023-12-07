@@ -105,7 +105,7 @@ class PostView extends StatelessWidget {
                   ),
                   Text(
                     "${post.likeCount}",
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 30,
@@ -147,7 +147,7 @@ class PostView extends StatelessWidget {
                   ),
                   Text(
                     "${post.comments?.length.toString()}",
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                    style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                   ),
                   const SizedBox(
                     width: 30,

@@ -72,7 +72,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
                     child: Column(mainAxisAlignment: MainAxisAlignment.end, crossAxisAlignment: CrossAxisAlignment.start, children: [
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                        child: Text(widget.post.caption ?? "bvcfb", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: whiteColor)),
+                        child: Text(widget.post.caption ?? "bvcfb", style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: whiteColor)),
                       ),
                       if (widget.post.comments != null) ...[
                         PostCommentsModalBottomSheet(

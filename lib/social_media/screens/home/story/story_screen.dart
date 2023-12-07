@@ -93,10 +93,10 @@ class StoryScreen extends StatelessWidget {
                             },
                             child: Text(
                               userId.username ?? "loading...",
-                              style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
+                              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
                             ),
                           ),
-                          Text(userId.sId ?? "loading...", style: TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
+                          Text(userId.sId ?? "loading...", style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
                         ],
                       )
                     ],
@@ -165,7 +165,7 @@ class StoryScreen extends StatelessWidget {
                                       ? const Text('Valid')
                                       : Text(
                                           stories[buttonClickedTimes.value].likes!.length.toString(),
-                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                         ),
                                   InkWell(
                                     onTap: () async {
@@ -218,7 +218,7 @@ class StoryScreen extends StatelessWidget {
                                           stories[buttonClickedTimes.value].comments!.length.toString(),
                                           style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
                                         )
-                                      : Text(
+                                      : const Text(
                                           'VAlid',
                                           style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                         ),
@@ -319,7 +319,7 @@ class StoryScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Text(
+                                const Text(
                                   "0",
                                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
@@ -340,7 +340,7 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "${comments.length}",
-                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
+                                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
                                 const SizedBox(
                                   width: 20,

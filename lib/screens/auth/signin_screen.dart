@@ -60,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(
               height: size.height * .05,
             ),
-            FormHeadingText(
+            const FormHeadingText(
               fontWeight: FontWeight.w500,
               color: blackButtonColor,
               headings: "E-mail",
@@ -71,7 +71,7 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(
               height: size.height * .01,
             ),
-            FormHeadingText(
+            const FormHeadingText(
               fontWeight: FontWeight.w500,
               color: blackButtonColor,
               headings: "Password",
@@ -139,7 +139,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ? const CircularProgressIndicator(
                           color: Colors.white,
                         )
-                      : Text(
+                      : const Text(
                           "Sign In",
                           style: TextStyle(color: whiteColor, fontSize: 15),
                         ),
@@ -152,7 +152,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(vertical: 1),
-              child: Text(
+              child: const Text(
                 "Continue With",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: blackButtonColor),
               ),
@@ -171,19 +171,19 @@ class _SignInScreenState extends State<SignInScreen> {
                       debugPrint('kovid');
                       _handleSignIn();
                     },
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       radius: 15,
                       backgroundColor: whiteColor,
-                      backgroundImage: const CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
+                      backgroundImage: CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
                     ),
                   ),
                   const SizedBox(
                     width: 40,
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundColor: whiteColor,
                     radius: 15,
-                    backgroundImage: const CachedNetworkImageProvider(
+                    backgroundImage: CachedNetworkImageProvider(
                         "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
                   ),
                 ],

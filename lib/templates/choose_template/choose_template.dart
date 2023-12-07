@@ -43,7 +43,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             height: Get.size.height * .25,
             child: Column(
               children: [
-                Text(
+                const Text(
                   "You can always change your persona Later",
                   style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
                 ),
@@ -106,7 +106,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 const SizedBox(
                   height: 7,
                 ),
-                Text(
+                const Text(
                   "Please Choose Your Persona",
                   style: TextStyle(color: accountGray, fontSize: 14, fontWeight: FontWeight.w200),
                 ),

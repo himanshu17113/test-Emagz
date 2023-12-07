@@ -139,7 +139,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
             ),
             Container(
               height: 250,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(houseImage), fit: BoxFit.cover),
               ),
               child: Padding(
@@ -194,7 +194,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     height: 280,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover),
                     ),
                   ),
@@ -265,7 +265,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.playfairDisplay(color: whiteColor, fontSize: 15, fontWeight: FontWeight.w600),
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Icon(
                                       Icons.star,
@@ -294,7 +294,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
                                     ),
                                   ],
                                 ),
-                                Text(
+                                const Text(
                                   "\$250.00",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w400),
@@ -302,7 +302,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
                               ],
                             ),
                             const Spacer(),
-                            Icon(
+                            const Icon(
                               Icons.shopping_bag_outlined,
                               color: whiteColor,
                               size: 20,
@@ -358,7 +358,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
             Container(
               alignment: Alignment.center,
               height: 250,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(image: CachedNetworkImageProvider(speakerImage), fit: BoxFit.cover),
               ),
               child: Padding(

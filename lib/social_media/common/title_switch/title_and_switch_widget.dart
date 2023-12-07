@@ -35,7 +35,7 @@ class _TitleAndSwitchWidgetState extends State<TitleAndSwitchWidget> {
             children: [
               Text(
                 widget.title,
-                style: TextStyle(
+                style: const TextStyle(
                     color: blackButtonColor,
                     fontSize: 10,
                     fontWeight: FontWeight.w600),
@@ -43,7 +43,7 @@ class _TitleAndSwitchWidgetState extends State<TitleAndSwitchWidget> {
               Text(
                 // "53 people",
                 widget.subTitle,
-                style: TextStyle(
+                style: const TextStyle(
                     color: toggleInactive,
                     fontSize: 8,
                     fontWeight: FontWeight.w600),

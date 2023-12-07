@@ -101,7 +101,7 @@ class _UserChatState extends State<UserChat> {
                       )
                     : Text(
                         "${widget.userData?.username}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
@@ -110,7 +110,7 @@ class _UserChatState extends State<UserChat> {
                   height: 3,
                 ),
                 widget.resentMessage == null
-                    ? Text(
+                    ? const Text(
                         "loading",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -119,7 +119,7 @@ class _UserChatState extends State<UserChat> {
                       )
                     : Text(
                         widget.resentMessage?.text ?? "last text",
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
                             fontWeight: FontWeight.w600),
@@ -133,7 +133,7 @@ class _UserChatState extends State<UserChat> {
                     height: 20,
                     width: 20,
                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: chipColor,
                       shape: BoxShape.circle,
                       // borderRadius: BorderRadius.circular(5),

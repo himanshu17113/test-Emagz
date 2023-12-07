@@ -198,11 +198,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         onTap: () {
                           Get.to(() => const TwoStepVerificationScreen());
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const FormHeadingText(
+                            FormHeadingText(
                                 headings: "Two way Verification",
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -270,7 +270,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                         onTap: () {
                           Get.to(() => const DeactivateAccountScreen());
                         },
-                        child: Column(
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -339,7 +339,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Update Date of Birth",
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
@@ -348,7 +348,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 315,
                   child: FormHeadingText(
                     headings:
@@ -361,7 +361,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "DOB*",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -465,7 +465,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       headings: "Update Address",
                       fontSize: 26,
                       fontWeight: FontWeight.w500,
@@ -474,7 +474,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 315,
                       child: FormHeadingText(
                         headings: "Please fill the form to update your address",
@@ -486,7 +486,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       headings: "Address line 1",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -501,7 +501,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       headings: "Address line 2",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -517,7 +517,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Expanded(
                           flex: 4,
@@ -530,16 +530,16 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: lightBlack,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
-                              const MyCustomTextfiled(
+                              MyCustomTextfiled(
                                 hint: "City",
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 10,
                         ),
                         Expanded(
@@ -553,10 +553,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: lightBlack,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
-                              const MyCustomTextfiled(
+                              MyCustomTextfiled(
                                 hint: "State",
                               ),
                             ],
@@ -567,7 +567,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Expanded(
                           flex: 6,
@@ -580,16 +580,16 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: lightBlack,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
-                              const MyCustomTextfiled(
+                              MyCustomTextfiled(
                                 hint: "District",
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           width: 10,
                         ),
                         Expanded(
@@ -603,10 +603,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                                 fontWeight: FontWeight.w500,
                                 color: lightBlack,
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 height: 10,
                               ),
-                              const MyCustomTextfiled(
+                              MyCustomTextfiled(
                                 hint: "Pin Code",
                               ),
                             ],
@@ -710,7 +710,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       headings: "Update Name",
                       fontSize: 26,
                       fontWeight: FontWeight.w500,
@@ -719,7 +719,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 315,
                       child: FormHeadingText(
                         headings:
@@ -732,7 +732,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    FormHeadingText(
+                    const FormHeadingText(
                       headings: "Enter your name",
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
@@ -827,7 +827,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Verification",
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
@@ -836,7 +836,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 315,
                   child: FormHeadingText(
                     headings:
@@ -849,7 +849,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "OTP",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -911,7 +911,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FormHeadingText(
@@ -960,7 +960,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Update Mobile No",
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
@@ -969,7 +969,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 315,
                   child: FormHeadingText(
                     headings:
@@ -982,7 +982,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "New Mobile Number",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
@@ -1075,7 +1075,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "Update Email",
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
@@ -1084,7 +1084,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 315,
                   child: FormHeadingText(
                     headings:
@@ -1097,7 +1097,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                FormHeadingText(
+                const FormHeadingText(
                   headings: "New Email",
                   fontSize: 14,
                   fontWeight: FontWeight.w500,

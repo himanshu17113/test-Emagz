@@ -130,7 +130,7 @@ class _MessageViewState extends State<MessageView> {
                                               .format(DateTime.now())
                                           : DateFormat.jm().format(
                                               DateTime.parse(data.createdAt!)),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 7,
                                           fontWeight: FontWeight.w700,
                                           color: lightBlack),

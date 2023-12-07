@@ -52,7 +52,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
+              child: const Text(
                 "Post Setting",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -75,7 +75,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Post",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -87,7 +87,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   ),
                   Row(
                     children: [
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text("Likes & View",
@@ -95,7 +95,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                                   color: blackButtonColor,
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600)),
-                          const SizedBox(
+                          SizedBox(
                             height: 15,
                           ),
                           Text(
@@ -105,10 +105,10 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 2,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 140,
                             child: Text(
                               "Manage your likes and view on your post",
@@ -135,7 +135,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                                     showBox22=false;
                                   });
                                 },
-                                child: Text(
+                                child: const Text(
                                   "Everyone",
                                   style: TextStyle(
                                       color: purpleColor,
@@ -165,7 +165,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
 
                                   });
                                 },
-                                child: Text(
+                                child: const Text(
                                   "0 people",
                                   style: TextStyle(
                                       color: purpleColor,
@@ -223,7 +223,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Allow Like And View from",
                     style: TextStyle(
                         color: toggleInactive,
@@ -236,7 +236,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Everyone",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -318,7 +318,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(
+                  const Text(
                     "Allow Post Sharing from",
                     style: TextStyle(
                         color: toggleInactive,
@@ -331,7 +331,7 @@ class _PostSettingScreenState extends State<PostSettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Everyone",
                         style: TextStyle(
                             color: blackButtonColor,

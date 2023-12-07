@@ -17,8 +17,8 @@ class OrderDetailsScreen extends StatelessWidget {
           onTap: () {
             Get.back();
           },
-          child: Padding(
-            padding: const EdgeInsets.only(left: 40),
+          child: const Padding(
+            padding: EdgeInsets.only(left: 40),
             child: Icon(
               Icons.arrow_back_ios,
               color: blackButtonColor,
@@ -29,7 +29,7 @@ class OrderDetailsScreen extends StatelessWidget {
         elevation: 0.0,
         centerTitle: false,
         backgroundColor: Colors.transparent,
-        title: Text(
+        title: const Text(
           "  Order Details",
           style: TextStyle(fontSize: 18, color: blackButtonColor),
         ),
@@ -95,7 +95,7 @@ class OrderDetailsScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(
                     top: 10, left: 15, right: 15, bottom: 8),
-                child: Text(
+                child: const Text(
                   "Shipment Details",
                   style: TextStyle(fontSize: 16, color: blackButtonColor),
                 ),
@@ -110,7 +110,7 @@ class OrderDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
+                    const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -118,12 +118,12 @@ class OrderDetailsScreen extends StatelessWidget {
                           style:
                               TextStyle(fontSize: 18, color: blackButtonColor),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 4,
                         ),
                         Row(
                           children: [
-                            const Text(
+                            Text(
                               "Delivered Estimated :",
                               style:
                                   TextStyle(fontSize: 10, color: signInHeading),
@@ -143,7 +143,7 @@ class OrderDetailsScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: signInHeading, width: .3)),
-                      child: Text(
+                      child: const Text(
                         "View Product",
                         style: TextStyle(fontSize: 10, color: blackButtonColor),
                       ),
@@ -173,7 +173,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 129,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,10 +183,10 @@ class OrderDetailsScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 18, color: blackButtonColor),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 10,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 83,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,10 +204,10 @@ class OrderDetailsScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 10,
                           ),
-                          const Text(
+                          Text(
                             "Sold by: MAVfashion ",
                             style:
                                 TextStyle(fontSize: 11, color: signInHeading),
@@ -233,7 +233,7 @@ class OrderDetailsScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(
                     top: 10, left: 15, right: 15, bottom: 8),
-                child: Text(
+                child: const Text(
                   "Payment Information",
                   style: TextStyle(fontSize: 16, color: blackButtonColor),
                 ),
@@ -246,7 +246,7 @@ class OrderDetailsScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(
                     top: 15, left: 25, right: 10, bottom: 8),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -256,14 +256,14 @@ class OrderDetailsScreen extends StatelessWidget {
                           color: blackButtonColor,
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
-                    const Text(
+                    Text(
                       "Visa ending in 0024",
                       style: TextStyle(fontSize: 12, color: signInHeading),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 15,
                     ),
                     Text(
@@ -273,14 +273,14 @@ class OrderDetailsScreen extends StatelessWidget {
                           color: blackButtonColor,
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
-                    const Text(
+                    Text(
                       "2118 Thornridge Cir. Syracuse, Connecticut 35624",
                       style: TextStyle(fontSize: 14, color: signInHeading),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 15,
                     ),
                     Text(
@@ -290,14 +290,14 @@ class OrderDetailsScreen extends StatelessWidget {
                           color: blackButtonColor,
                           fontWeight: FontWeight.w500),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 5,
                     ),
-                    const Text(
+                    Text(
                       "2118 Thornridge Cir. Syracuse, Connecticut 35624",
                       style: TextStyle(fontSize: 14, color: signInHeading),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       height: 10,
                     ),
                   ],
@@ -311,7 +311,7 @@ class OrderDetailsScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 margin: const EdgeInsets.only(
                     top: 10, left: 15, right: 15, bottom: 10),
-                child: Text(
+                child: const Text(
                   "Order Summary",
                   style: TextStyle(fontSize: 16, color: blackButtonColor),
                 ),
@@ -395,7 +395,7 @@ class OrderDetailsScreen extends StatelessWidget {
         height: 50,
         alignment: Alignment.center,
         color: inVoiceBlue,
-        child: Text(
+        child: const Text(
           "Download Invoice",
           style: TextStyle(fontSize: 14, color: whiteColor),
         ),

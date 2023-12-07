@@ -84,7 +84,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Order ID",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -103,7 +103,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Name",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -126,7 +126,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Customer Name",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -146,7 +146,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Order Date",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -166,7 +166,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Qty",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -189,7 +189,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Colour",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -209,7 +209,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "GST",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -229,7 +229,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                         children: [
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 4),
-                            child: Text(
+                            child: const Text(
                               "Price",
                               style: TextStyle(
                                   color: blackButtonColor,
@@ -246,7 +246,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
+                const Text(
                   "Delivery Address",
                   style: TextStyle(
                       color: blackButtonColor,
@@ -259,7 +259,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                Text(
+                const Text(
                   "Delivery Address",
                   style: TextStyle(
                       color: blackButtonColor,
@@ -295,7 +295,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 decoration: BoxDecoration(
                     color: blackButtonColor,
                     borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Manage Order",
                   style: TextStyle(color: whiteColor),
                 ),
@@ -312,7 +312,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 decoration: BoxDecoration(
                     color: blueButtonColor,
                     borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Edit Order",
                   style: TextStyle(color: whiteColor),
                 ),

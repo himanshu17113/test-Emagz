@@ -20,7 +20,7 @@ class MyAddressCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 "Home",
                 style: TextStyle(color: blackButtonColor, fontWeight: FontWeight.w600, fontSize: 15),
               ),
@@ -48,7 +48,7 @@ class MyAddressCard extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In habitant semper tristique metus hac. Consectetur tellus gravida gravida tellus risus mattis. Vivamus vitae, erat eget et, non ullamcorper. A sed orci vestibulum non sit id. Est arcu, varius enim elit lectus est. Vel in quis urna venenatis, metus, sit posuere augue feugiat.",
             style: TextStyle(color: blackButtonColor, fontWeight: FontWeight.w500, fontSize: 8.5),
           )

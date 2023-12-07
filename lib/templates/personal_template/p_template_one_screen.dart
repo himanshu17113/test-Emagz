@@ -115,7 +115,7 @@ class PTemplateOneScreen extends StatelessWidget {
                           "15K",
                           style: GoogleFonts.poppins(color: whiteColor, fontSize: 45, height: .9, fontWeight: FontWeight.w600),
                         ),
-                        Text(
+                        const Text(
                           "Followers",
                           style: TextStyle(color: whiteColor, fontSize: 10, height: .7, letterSpacing: 1.5, fontWeight: FontWeight.w400),
                         ),

@@ -36,7 +36,7 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
+              child: const Text(
                 "Story Setting",
                 style: TextStyle(
                     color: blackButtonColor,
@@ -59,7 +59,7 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Story",
                     style: TextStyle(
                         color: blackButtonColor,
@@ -82,7 +82,7 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Everyone",
                         style: TextStyle(
                             color: blackButtonColor,
@@ -125,7 +125,7 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
+                  const Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -135,12 +135,12 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                             fontSize: 12,
                             fontWeight: FontWeight.w600),
                       ),
-                      const Spacer(),
-                      const Icon(
+                      Spacer(),
+                      Icon(
                         Icons.arrow_forward_ios,
                         size: 12,
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 15,
                       ),
                     ],

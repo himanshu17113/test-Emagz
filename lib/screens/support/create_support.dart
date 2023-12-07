@@ -40,12 +40,12 @@ class _CreateSupportState extends State<CreateSupport> {
                   });
                 },
                 showCursor: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "Email",
                     hintStyle: TextStyle(
                         fontSize: 13, color: textSetting),
                     contentPadding:
-                    const EdgeInsets.only(left: 35, top: 5),
+                    EdgeInsets.only(left: 35, top: 5),
                     border: InputBorder.none),
               ),
             ),
@@ -65,12 +65,12 @@ class _CreateSupportState extends State<CreateSupport> {
                   });
                 },
                 showCursor: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "Select Reason",
                     hintStyle: TextStyle(
                         fontSize: 13, color: textSetting),
                     contentPadding:
-                    const EdgeInsets.only(left: 35, top: 5),
+                    EdgeInsets.only(left: 35, top: 5),
                     border: InputBorder.none),
               ),
             ),
@@ -89,12 +89,12 @@ class _CreateSupportState extends State<CreateSupport> {
                   });
                 },
                 showCursor: false,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: "Message",
                     hintStyle: TextStyle(
                         fontSize: 13, color: textSetting),
                     contentPadding:
-                    const EdgeInsets.only(left: 35, top: 5),
+                    EdgeInsets.only(left: 35, top: 5),
                     border: InputBorder.none),
               ),
             ),

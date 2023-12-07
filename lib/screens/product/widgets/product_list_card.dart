@@ -33,7 +33,7 @@ class ProductListCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text(
+              const Text(
                 "Sony Headset",
                 style: TextStyle(
                   color: blackButtonColor,
@@ -43,7 +43,7 @@ class ProductListCard extends StatelessWidget {
               ),
             ],
           ),
-          Text(
+          const Text(
             "250 Pc",
             style: TextStyle(
               color: blackButtonColor,
@@ -51,7 +51,7 @@ class ProductListCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Text(
+          const Text(
             "18 %",
             style: TextStyle(
               color: blackButtonColor,
@@ -59,7 +59,7 @@ class ProductListCard extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
           ),
-          Text(
+          const Text(
             "Exclude",
             style: TextStyle(
               color: blackButtonColor,

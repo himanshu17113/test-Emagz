@@ -38,7 +38,7 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                Text(
+                const Text(
                   "Add New",
                   style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600, color: orderHeadingColor),
                 ),
@@ -168,7 +168,7 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 alignment: Alignment.center,
                 height: 45,
                 decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Back",
                   style: TextStyle(color: whiteColor),
                 ),
@@ -183,7 +183,7 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 alignment: Alignment.center,
                 height: 45,
                 decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
-                child: Text(
+                child: const Text(
                   "Add New Coupon",
                   style: TextStyle(color: whiteColor),
                 ),

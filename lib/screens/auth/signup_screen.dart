@@ -212,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ? const CircularProgressIndicator(
                             color: Colors.white,
                           )
-                        : Text(
+                        : const Text(
                             "Sign Up",
                             style: TextStyle(color: whiteColor, fontSize: 15),
                           ),
@@ -224,7 +224,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.symmetric(vertical: 1),
-              child: Text(
+              child: const Text(
                 "Continue With",
                 style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: unselectedLabel),
               ),
@@ -244,10 +244,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onTap: () async {
                         _handleSignIn();
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: whiteColor,
                         radius: 15,
-                        backgroundImage: const CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
+                        backgroundImage: CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
                       ),
                     ),
                     const SizedBox(
@@ -257,10 +257,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onTap: () async {
                         await _handleFacebookSignIn();
                       },
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundColor: whiteColor,
                         radius: 15,
-                        backgroundImage: const CachedNetworkImageProvider(
+                        backgroundImage: CachedNetworkImageProvider(
                             "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
                       ),
                     ),
@@ -296,7 +296,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 nonce: nonce,
                               );
 
-                              print(appleCredential.authorizationCode);
+                              debugPrint(appleCredential.authorizationCode.toString());
 
                               // Create an `OAuthCredential` from the credential returned by Apple.
                               final oauthCredential = OAuthProvider("apple.com").credential(
@@ -320,11 +320,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 authController.appleRegister('testeremail@gmail.com', '1234', '', 'testeruser');
                               }
                               final firebaseUser = authResult.user;
-                              print(displayName);
-                              print(firebaseUser?.displayName);
+                              debugPrint(displayName.toString());
+                              debugPrint(firebaseUser?.displayName.toString());
                               debugPrint(firebaseUser.toString());
                             } catch (exception) {
-                              print(exception);
+                              debugPrint(exception.toString());
                             }
                           }),
                     )

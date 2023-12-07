@@ -53,9 +53,9 @@ class _TemplateOneState extends State<TemplateOne> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: whiteColor,
-            image: const DecorationImage(
+            image: DecorationImage(
                 image: AssetImage(
               "assets/png/S.png",
             ))),
@@ -253,7 +253,7 @@ class _TemplateOneState extends State<TemplateOne> {
                               duration: const Duration(seconds: 1),
                               curve: Curves.linear);
                         },
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward_ios,
                           color: blackButtonColor,
                           size: 15,
