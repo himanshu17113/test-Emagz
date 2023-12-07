@@ -35,7 +35,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const commonTopBar(
+              const CommonTopBar(
                 title: 'Product',
               ),
               const SearchContainer(),
@@ -276,8 +276,8 @@ viewProductDialog(BuildContext context) {
 }
 
 showAlertDailog(BuildContext context) {
-  String url =
-      "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
+  // String url =
+  //     "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
   TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
   TextStyle modelTextbody = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
@@ -374,9 +374,9 @@ showAlertDailog(BuildContext context) {
   );
 }
 
-QuickEditDailog(BuildContext context) { 
+QuickEditDailog(BuildContext context) {
   TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
- // TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
+  // TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -560,9 +560,9 @@ class ModelTile extends StatelessWidget {
   final String title;
   final IconData icons;
   final TextStyle modelTextbody;
-  Color? color;
+  final Color? color;
 
-  ModelTile({
+  const ModelTile({
     Key? key,
     required this.modelTextbody,
     required this.title,

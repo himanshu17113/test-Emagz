@@ -42,7 +42,7 @@ class HomePagePopupWidget extends StatelessWidget {
         message = 'Image saved to disk';
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       message = 'An error occurred while saving the image';
     }
 
@@ -62,7 +62,7 @@ class HomePagePopupWidget extends StatelessWidget {
           Share.share("http://emagz.live/Post/${post?.sId}");
         } else if (title == 'Download') {
           Get.back();
-          print(post?.mediaUrl);
+          debugPrint(post?.mediaUrl?.toString());
           _saveImage(post!.mediaUrl![0]!, context);
         } else {
           Get.back();

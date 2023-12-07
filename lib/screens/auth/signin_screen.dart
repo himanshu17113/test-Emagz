@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
+// ignore: depend_on_referenced_packages
 import 'package:crypto/crypto.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
@@ -218,7 +218,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 nonce: nonce,
                               );
 
-                              print(appleCredential.authorizationCode);
+                              debugPrint(appleCredential.authorizationCode.toString());
 
                               // Create an `OAuthCredential` from the credential returned by Apple.
                               final oauthCredential = OAuthProvider("apple.com").credential(
@@ -243,11 +243,11 @@ class _SignInScreenState extends State<SignInScreen> {
                               }
 
                               final firebaseUser = authResult.user;
-                              print(displayName);
-                              print(firebaseUser?.displayName);
+                              debugPrint(displayName);
+                              debugPrint(firebaseUser?.displayName);
                               debugPrint(firebaseUser.toString());
                             } catch (exception) {
-                              print(exception);
+                              debugPrint(exception.toString());
                             }
                           }),
                     )

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class AddProductDropDown extends StatelessWidget {
   final List listData;
-      String? value;
-  AddProductDropDown({Key? key, required this.listData, this.value})
+       String? value;
+    AddProductDropDown({Key? key, required this.listData, this.value})
       : super(key: key);
 
   @override

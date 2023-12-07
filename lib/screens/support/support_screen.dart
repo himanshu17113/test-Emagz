@@ -20,8 +20,7 @@ class _SupportScreenState extends State<SupportScreen>{
       return Scaffold(
         backgroundColor: socialBack,
         appBar: const SocialMediaSettingAppBar(title: 'Support',),
-        body: Container(
-          child: SingleChildScrollView(
+        body:  SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +118,7 @@ class _SupportScreenState extends State<SupportScreen>{
                 ],
             ),
           ),
-        ),
+      
         bottomNavigationBar: SizedBox(
           width: w,
           height: 76,

@@ -113,7 +113,7 @@ class PostController extends GetxController {
       );
       debugPrint(res.statusMessage.toString());
       uploadPercentage.value = 0.0;
-      print("status : ${res.statusCode}");
+      debugPrint("status : ${res.statusCode}");
       CustomSnackbar.showSucess("Post  successful");
       isPosting.value = false;
 

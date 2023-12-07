@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 const SEPIA_MATRIX = [
   0.39,
   0.769,

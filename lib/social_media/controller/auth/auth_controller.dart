@@ -48,7 +48,7 @@ class AuthController {
 
       Map body = {"email": email, "password": password, "username": fullName, "dob": imgUrl};
       debugPrint(body.toString());
-      print('Apple sign in Started');
+      debugPrint('Apple sign in Started');
       http.Response response = await http.post(
         Uri.parse(ApiEndpoint.register),
         headers: header,
@@ -58,8 +58,7 @@ class AuthController {
       debugPrint(response.body);
 
       var data = json.decode(response.body);
-      print(response.statusCode);
-      if (response.statusCode == 200) {
+       if (response.statusCode == 200) {
         isUserRegiserting = false;
         var token = data["token"];
         var userId = data["userId"];

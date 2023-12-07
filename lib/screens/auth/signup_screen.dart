@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+// ignore: depend_on_referenced_packages
 import 'package:crypto/crypto.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
@@ -39,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     debugPrint(googleUser?.email);
     if (googleUser != null) {
       // Get the authentication token
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      //final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       authController.appleRegister(googleUser.email, googleUser.id, googleUser.photoUrl.toString(), googleUser.displayName.toString());
     }
   }
@@ -309,7 +310,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               final authResult = await _firebaseAuth.signInWithCredential(oauthCredential);
 
                               final displayName = '${appleCredential.givenName} ${appleCredential.familyName}';
-                              final userEmail = '${appleCredential.email}';
+                             // final userEmail = '${appleCredential.email}';
                               final photoUrl = '${appleCredential.identityToken}';
                               if (appleCredential.email != null &&
                                   appleCredential.givenName != null &&

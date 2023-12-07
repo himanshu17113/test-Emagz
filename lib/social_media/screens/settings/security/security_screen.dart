@@ -8,12 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import '../../../../constant/colors.dart';
 import '../../../../screens/auth/widgets/my_custom_textfiled.dart';
-import '../../../controller/auth/jwtcontroller.dart';
-import '../../../controller/security/security_controller.dart';
-import '../../../models/post_model.dart';
+ import '../../../controller/security/security_controller.dart';
 import '../../account/deactivate_account_screen.dart';
 import '../privacy/privacy_policy_screen.dart';
 import '../terms_condition/terms_and_condition_screen.dart';

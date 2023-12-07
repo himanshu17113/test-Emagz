@@ -35,14 +35,14 @@ class SocketController extends GetxController {
       socket.emit("notificationHistory", userId);
 
       socket.on("notificationHistory_$userId", (payload) {
-        print(jsonEncode(payload));
+        debugPrint(jsonEncode(payload).toString());
         for (var payloadx in payload) {
           notifications.add(NotificationModel.fromMap(payloadx));
           debugPrint(notifications[0].message.toString());
         }
       });
       socket.on("notifications_$userId", (payload) {
-        print(jsonEncode(payload));
+        debugPrint(jsonEncode(payload).toString());
 
         notifications.insert(0, NotificationModel.fromMap(payload));
         debugPrint(notifications[0].message.toString());
@@ -66,7 +66,7 @@ class SocketController extends GetxController {
 
     socket.on("chatHistory", (payload) {
       debugPrint("Getting Chat History");
-      print(payload.toString());
+      debugPrint(payload.toString());
       for (var payloadx in payload) {
         // print(payloadx);
         liveMessages.add(Message.fromJson(payloadx));

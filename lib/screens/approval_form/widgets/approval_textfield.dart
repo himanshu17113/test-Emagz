@@ -2,13 +2,13 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class ApprovalTextField extends StatelessWidget {
-  TextEditingController? controller;
-  TextInputType? inputType;
-  String? hint;
-  int? maxLines;
-  Widget? sufixIcon;
+ final TextEditingController? controller;
+ final TextInputType? inputType;
+ final String? hint;
+final  int? maxLines;
+final  Widget? sufixIcon;
 
-  ApprovalTextField({
+  const ApprovalTextField({
     Key? key,
     this.hint,
     this.inputType,

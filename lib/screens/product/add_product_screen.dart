@@ -32,7 +32,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
             const SizedBox(
               height: 15,
             ),
-            const commonTopBar(title: 'Product',),
+            const CommonTopBar(
+              title: 'Product',
+            ),
             const SearchContainer(),
             const Text(
               "Add New Product",
@@ -53,8 +55,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       child: const Text(
                         "Upload \nPicture",
-                        style:
-                            TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                       )),
                 ),
                 Expanded(
@@ -69,8 +70,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       child: const Text(
                         "Upload \nPicture",
-                        style:
-                            TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                       )),
                 ),
                 Expanded(
@@ -85,8 +85,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     child: const Text(
                       "Upload \nPicture",
-                      style:
-                          TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
@@ -274,9 +273,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: size.width / 2.15,
                   alignment: Alignment.center,
                   height: 45,
-                  decoration: BoxDecoration(
-                      color: grayColor,
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: grayColor, borderRadius: BorderRadius.circular(10)),
                   child: Text(
                     "Back",
                     style: TextStyle(color: blackButtonColor.withOpacity(.5)),
@@ -291,9 +288,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: size.width / 2.15,
                   alignment: Alignment.center,
                   height: 45,
-                  decoration: BoxDecoration(
-                      color: blueButtonColor,
-                      borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
                   child: const Text(
                     "Add Product",
                     style: TextStyle(color: whiteColor),
@@ -307,5 +302,3 @@ class _AddProductScreenState extends State<AddProductScreen> {
     );
   }
 }
-
-

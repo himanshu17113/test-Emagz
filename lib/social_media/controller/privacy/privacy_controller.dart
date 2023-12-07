@@ -24,7 +24,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Comment Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -47,7 +47,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Post Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -70,7 +70,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Mention Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -90,7 +90,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Story Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -113,7 +113,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Live Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -136,7 +136,7 @@ class PrivacyController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Message Privacy Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }

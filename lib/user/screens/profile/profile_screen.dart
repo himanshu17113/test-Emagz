@@ -20,7 +20,7 @@ class ProfileScreenUser extends StatefulWidget {
 }
 
 class _ProfileScreenUserState extends State<ProfileScreenUser> {
-  var _selectedGender;
+  var selectedGender;
 
   @override
   Widget build(BuildContext context) {
@@ -375,10 +375,10 @@ class _ProfileScreenUserState extends State<ProfileScreenUser> {
             child: Radio(
                 activeColor: blackButtonColor,
                 value: value,
-                groupValue: _selectedGender,
+                groupValue: selectedGender,
                 onChanged: (value) {
                   setState(() {
-                    _selectedGender = value;
+                    selectedGender = value;
                   });
                 }),
           ),

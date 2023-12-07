@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class commonTopBar extends StatelessWidget {
+class CommonTopBar extends StatelessWidget {
   final String title;
-  const commonTopBar({
+  const CommonTopBar({
     required this.title,
     Key? key,
   }) : super(key: key);

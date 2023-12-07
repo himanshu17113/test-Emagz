@@ -17,7 +17,7 @@ class ManageCouponScreen extends StatefulWidget {
 }
 
 class _ManageCouponScreenState extends State<ManageCouponScreen> {
-  int _selectedColor = 0;
+  int selectedColor = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const commonTopBar(
+                const CommonTopBar(
                   title: 'Coupon',
                 ),
                 const SearchContainer(),
@@ -42,10 +42,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                 ),
                 const Text(
                   "View Coupon",
-                  style: TextStyle(
-                      fontSize: 16.5,
-                      fontWeight: FontWeight.w600,
-                      color: orderHeadingColor),
+                  style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600, color: orderHeadingColor),
                 ),
                 const SizedBox(
                   height: 15,
@@ -55,13 +52,10 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                     clipper: UserCoupon(bottom: 34, holeRadius: 28),
                     child: Container(
                       // margin: EdgeInsets.only(left: 20),
-                      padding: const EdgeInsets.only(
-                          top: 5, bottom: 5, left: 20, right: 20),
+                      padding: const EdgeInsets.only(top: 5, bottom: 5, left: 20, right: 20),
                       height: 90,
                       width: 205,
-                      decoration: BoxDecoration(
-                          color: const Color(0xff2C199E),
-                          borderRadius: BorderRadius.circular(20)),
+                      decoration: BoxDecoration(color: const Color(0xff2C199E), borderRadius: BorderRadius.circular(20)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,19 +66,14 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           Expanded(
                             flex: 6,
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 2),
+                              padding: const EdgeInsets.symmetric(horizontal: 2),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   const Text(
                                     "Coupon Code",
-                                    style: TextStyle(
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.w600,
-                                        color: whiteColor),
+                                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                   ),
                                   const SizedBox(
                                     width: 112,
@@ -92,32 +81,21 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis a, magna ante id libero eleifend consectetur. Odio nibh fringilla sit varius ut orci libero. Posuere sed sit turpis ac congue viverra.",
                                       maxLines: 5,
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                          fontSize: 3,
-                                          fontWeight: FontWeight.w500,
-                                          color: whiteColor),
+                                      style: TextStyle(fontSize: 3, fontWeight: FontWeight.w500, color: whiteColor),
                                     ),
                                   ),
                                   const Text(
                                     "Expire Date  02/05/21",
-                                    style: TextStyle(
-                                        fontSize: 4,
-                                        fontWeight: FontWeight.w500,
-                                        color: whiteColor),
+                                    style: TextStyle(fontSize: 4, fontWeight: FontWeight.w500, color: whiteColor),
                                   ),
                                   Container(
                                     alignment: Alignment.center,
                                     height: 15,
                                     width: 85,
-                                    decoration: BoxDecoration(
-                                        color: const Color(0xff3C83E6),
-                                        borderRadius: BorderRadius.circular(2)),
+                                    decoration: BoxDecoration(color: const Color(0xff3C83E6), borderRadius: BorderRadius.circular(2)),
                                     child: const Text(
                                       "Apply Code",
-                                      style: TextStyle(
-                                          fontSize: 4,
-                                          fontWeight: FontWeight.w600,
-                                          color: whiteColor),
+                                      style: TextStyle(fontSize: 4, fontWeight: FontWeight.w600, color: whiteColor),
                                     ),
                                   )
                                 ],
@@ -141,17 +119,11 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                                   children: [
                                     Text(
                                       " 25%",
-                                      style: TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.w600,
-                                          color: whiteColor),
+                                      style: TextStyle(fontSize: 19, fontWeight: FontWeight.w600, color: whiteColor),
                                     ),
                                     Text(
                                       "   Off",
-                                      style: TextStyle(
-                                          fontSize: 9,
-                                          fontWeight: FontWeight.w600,
-                                          color: whiteColor),
+                                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
                                     ),
                                   ],
                                 ),
@@ -168,27 +140,27 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Coupon Code",
                           ),
                           AddCouponTextfiled()
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Coupon Value",
                           ),
                           AddCouponTextfiled()
@@ -200,32 +172,32 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                 const AddCouponHeadingText(
                   headings: "Select Category",
                 ),
-                AddCouponTextfiled(),
+                const AddCouponTextfiled(),
                 const AddCouponHeadingText(
                   headings: "Select Sub Category",
                 ),
-                AddCouponTextfiled(),
-                Row(
+                const AddCouponTextfiled(),
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Discount Type",
                           ),
                           AddCouponTextfiled()
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Max User",
                           ),
                           AddCouponTextfiled()
@@ -234,13 +206,13 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                     ),
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Starts From",
                           ),
                           AddCouponTextfiled(
@@ -249,14 +221,14 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Ends On",
                           ),
                           AddCouponTextfiled(
@@ -291,9 +263,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           width: 150,
                           alignment: Alignment.center,
                           height: 40,
-                          decoration: BoxDecoration(
-                              color: const Color(0xff4BB642),
-                              borderRadius: BorderRadius.circular(50)),
+                          decoration: BoxDecoration(color: const Color(0xff4BB642), borderRadius: BorderRadius.circular(50)),
                           child: const Text(
                             "Ongoing",
                             style: TextStyle(color: whiteColor),
@@ -319,9 +289,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           width: size.width / 2.21,
                           alignment: Alignment.center,
                           height: 45,
-                          decoration: BoxDecoration(
-                              color: blackButtonColor,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
                           child: const Text(
                             "Delete Coupon",
                             style: TextStyle(color: whiteColor),
@@ -339,9 +307,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                           width: size.width / 2.21,
                           alignment: Alignment.center,
                           height: 45,
-                          decoration: BoxDecoration(
-                              color: blueButtonColor,
-                              borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
                           child: const Text(
                             "Update Status",
                             style: TextStyle(color: whiteColor),
@@ -365,10 +331,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
                     child: const Text(
                       "Back",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
@@ -403,7 +366,7 @@ class _ManageCouponScreenState extends State<ManageCouponScreen> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                _selectedColor = index;
+                selectedColor = index;
                 //debugPrint(_selectedColor);
               });
             },

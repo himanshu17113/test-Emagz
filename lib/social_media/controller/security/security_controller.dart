@@ -25,7 +25,7 @@ class SecurityController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Name Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -46,7 +46,7 @@ class SecurityController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User DOB Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -67,7 +67,7 @@ class SecurityController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Email Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }
@@ -88,7 +88,7 @@ class SecurityController extends GetxController {
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Mobile Updated");
     } else {
-      print(data.toString());
+      debugPrint(data.toString());
       CustomSnackbar.show(data.toString());
     }
   }

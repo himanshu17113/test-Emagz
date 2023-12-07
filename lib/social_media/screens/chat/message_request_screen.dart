@@ -175,7 +175,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                     shrinkWrap: true,
                     itemCount: convController.req!.length,
                     itemBuilder: (ctx, index) {
-                      bool x = false;
+                  //    bool x = false;
                       if (convController.req![index] == null ||
                           convController.req![index]!.sender == null) {
                         return const SizedBox();

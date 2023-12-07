@@ -17,7 +17,6 @@ class ConversationController extends GetxController {
   //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
 
- 
   RxList<Requests?>? req = <Requests>[].obs;
   String? token;
   String? userId;
@@ -95,7 +94,8 @@ class ConversationController extends GetxController {
       Dio dio = Dio();
       dio.options.headers["Authorization"] = globToken ?? token;
       var body = {"conversationId": conversationId, "sender": globUserId ?? userId, "text": text};
-      var response = await dio.post(ApiEndpoint.postMessage, data: body);
+      //var response = 
+      await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -204,7 +204,7 @@ class ConversationController extends GetxController {
   }
 
   Future<List<Requests?>?> getAllRequests(String filter) async {
-    print('😛');
+ 
     req?.clear();
     try {
       var token = await HiveDB.getAuthToken();
@@ -212,7 +212,7 @@ class ConversationController extends GetxController {
       var headers = {'Content-Type': 'application/json', "Authorization": token!};
       http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=$filter'), headers: headers);
       var body = jsonDecode(response.body);
-      print(body);
+      debugPrint(body.toString());
       body.forEach((e) {
         var temp = Requests.fromJson(e);
         req?.add(temp);

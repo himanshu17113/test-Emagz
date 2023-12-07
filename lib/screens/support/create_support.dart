@@ -22,8 +22,7 @@ class _CreateSupportState extends State<CreateSupport> {
     return Scaffold(
       backgroundColor: socialBack,
       appBar: const SocialMediaSettingAppBar(title: 'Support',),
-      body: Container(
-        child: Column(
+      body:   Column(
           children: [
             const SizedBox(height: 30,),
             Container(
@@ -127,7 +126,7 @@ class _CreateSupportState extends State<CreateSupport> {
             )
           ],
         ),
-      ),
+     
     );
   }
 }

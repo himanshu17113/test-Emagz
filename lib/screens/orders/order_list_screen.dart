@@ -50,7 +50,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const commonTopBar(
+              const CommonTopBar(
                 title: 'Order',
               ),
               const SearchContainer(),
@@ -72,32 +72,26 @@ class _OrderListScreenState extends State<OrderListScreen> {
                 children: [
                   const Text(
                     "Order List",
-                    style:
-                        TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
                   ),
                   InkWell(
                     onTap: () {
                       filterDalilog(context);
                     },
                     child: Container(
-                      decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                                color: blackButtonColor.withOpacity(.2),
-                                // spreadRadius: 2,
-                                blurRadius: 10)
-                          ]),
+                      decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(20), boxShadow: [
+                        BoxShadow(
+                            color: blackButtonColor.withOpacity(.2),
+                            // spreadRadius: 2,
+                            blurRadius: 10)
+                      ]),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 18, vertical: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 2),
                         child: Row(
                           children: [
                             const Text(
                               "Filter",
-                              style: TextStyle(
-                                  fontSize: 11, fontWeight: FontWeight.w600),
+                              style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
                             ),
                             const SizedBox(
                               width: 5,

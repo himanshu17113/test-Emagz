@@ -262,8 +262,7 @@ class StoryScreen extends StatelessWidget {
   }
 
   updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
-    print('ndn');
-    TextEditingController textEditingController = TextEditingController();
+     TextEditingController textEditingController = TextEditingController();
     return showDialog(
       barrierColor: const Color(0xff252525).withOpacity(.4),
       context: context,

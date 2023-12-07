@@ -51,12 +51,10 @@ class UserChatsWithSearch extends StatelessWidget {
   final String senderName;
   UserChatsWithSearch({super.key, required this.userId, required this.senderName});
 
-  ScrollController scrollController = ScrollController();
-
+  final ScrollController scrollController = ScrollController();
+  final chatController = Get.put(ConversationController());
   @override
   Widget build(BuildContext context) {
-    final chatController = Get.put(ConversationController());
-
     return FutureBuilder<List<Conversation>>(
       future: chatController.getChatList(),
       builder: (context, snapshot) {

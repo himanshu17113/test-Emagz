@@ -31,7 +31,7 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const commonTopBar(
+                const CommonTopBar(
                   title: 'Coupon',
                 ),
                 const SearchContainer(),
@@ -45,27 +45,27 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Coupon Code",
                           ),
                           AddCouponTextfiled()
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Coupon Value",
                           ),
                           AddCouponTextfiled()
@@ -77,32 +77,32 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                 const AddCouponHeadingText(
                   headings: "Select Category",
                 ),
-                AddCouponTextfiled(),
+                const AddCouponTextfiled(),
                 const AddCouponHeadingText(
                   headings: "Select Sub Category",
                 ),
-                AddCouponTextfiled(),
-                Row(
+                const AddCouponTextfiled(),
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Discount Type",
                           ),
                           AddCouponTextfiled()
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Max User",
                           ),
                           AddCouponTextfiled()
@@ -111,13 +111,13 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                     ),
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Starts From",
                           ),
                           AddCouponTextfiled(
@@ -126,14 +126,14 @@ class _AddCouponScreenState extends State<AddCouponScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const AddCouponHeadingText(
+                          AddCouponHeadingText(
                             headings: "Ends On",
                           ),
                           AddCouponTextfiled(

@@ -52,10 +52,7 @@ class ApprovalFormScreen extends StatelessWidget {
                         ),
                         const Text(
                           "eMarket",
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -73,10 +70,7 @@ class ApprovalFormScreen extends StatelessWidget {
                   child: Text(
                     "Approval Form",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 21,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: Colors.white, fontSize: 21, fontWeight: FontWeight.w600),
                   ),
                 ),
                 const SizedBox(
@@ -85,10 +79,7 @@ class ApprovalFormScreen extends StatelessWidget {
                 const Text(
                   "Basic Details",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
+                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(
                   height: 20,
@@ -96,28 +87,28 @@ class ApprovalFormScreen extends StatelessWidget {
                 const ApprovalFormHeading(
                   tittle: "Name",
                 ),
-                ApprovalTextField(),
-                Row(
+                const ApprovalTextField(),
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "E-mail",
                           ),
                           ApprovalTextField(),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "Phone No.",
                           ),
                           ApprovalTextField(),
@@ -129,30 +120,30 @@ class ApprovalFormScreen extends StatelessWidget {
                 const ApprovalFormHeading(
                   tittle: "Address",
                 ),
-                ApprovalTextField(
+                const ApprovalTextField(
                   maxLines: 2,
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "City",
                           ),
                           ApprovalTextField(),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "State",
                           ),
                           ApprovalTextField(),
@@ -161,27 +152,27 @@ class ApprovalFormScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "Country",
                           ),
                           ApprovalTextField(),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "Pincode",
                           ),
                           ApprovalTextField(),
@@ -196,10 +187,7 @@ class ApprovalFormScreen extends StatelessWidget {
                 const Text(
                   "Business Details",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
+                  style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(
                   height: 20,
@@ -207,28 +195,28 @@ class ApprovalFormScreen extends StatelessWidget {
                 const ApprovalFormHeading(
                   tittle: "Business Name",
                 ),
-                ApprovalTextField(),
-                Row(
+                const ApprovalTextField(),
+                const Row(
                   children: [
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "PAN Number",
                           ),
                           ApprovalTextField(),
                         ],
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 10,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "Business Type",
                           ),
                           ApprovalTextField(),
@@ -240,7 +228,7 @@ class ApprovalFormScreen extends StatelessWidget {
                 const ApprovalFormHeading(
                   tittle: "Business Address",
                 ),
-                ApprovalTextField(
+                const ApprovalTextField(
                   maxLines: 2,
                 ),
                 Row(
@@ -265,11 +253,11 @@ class ApprovalFormScreen extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const ApprovalFormHeading(
+                          ApprovalFormHeading(
                             tittle: "GSTIN Number",
                             isRequired: false,
                           ),
@@ -282,7 +270,7 @@ class ApprovalFormScreen extends StatelessWidget {
                 const ApprovalFormHeading(
                   tittle: "Pincode",
                 ),
-                SizedBox(width: size.width / 2.2, child: ApprovalTextField()),
+                SizedBox(width: size.width / 2.2, child: const ApprovalTextField()),
                 const SizedBox(
                   height: 15,
                 ),
@@ -379,8 +367,7 @@ class ApprovalFormScreen extends StatelessWidget {
                         // Get.to(() => const ZoomDrawerScreen());
                         Get.to(() => const ApplicationSubmittedScreen());
                       },
-                      style:
-                          ElevatedButton.styleFrom(backgroundColor: blackButtonColor),
+                      style: ElevatedButton.styleFrom(backgroundColor: blackButtonColor),
                       child: const Text("Apply"),
                     ),
                   ),
@@ -391,10 +378,7 @@ class ApprovalFormScreen extends StatelessWidget {
                   child: const Text(
                     "By clicking on apply you agree to our Terms of Use and Privacy Policy",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontWeight: FontWeight.w500),
+                    style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w500),
                   ),
                 ),
               ],

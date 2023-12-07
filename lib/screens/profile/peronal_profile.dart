@@ -12,8 +12,8 @@ class PersonalProfile extends StatelessWidget {
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        children: [
-          const SizedBox(
+        children: const [
+          SizedBox(
             height: 20,
           ),
           Row(
@@ -22,21 +22,21 @@ class PersonalProfile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddCouponHeadingText(
+                    AddCouponHeadingText(
                       headings: "Name",
                     ),
                     AddCouponTextfiled()
                   ],
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 15,
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddCouponHeadingText(
+                    AddCouponHeadingText(
                       headings: "Phone No",
                     ),
                     AddCouponTextfiled(
@@ -47,11 +47,11 @@ class PersonalProfile extends StatelessWidget {
               ),
             ],
           ),
-          const AddCouponHeadingText(
+          AddCouponHeadingText(
             headings: "E-mail",
           ),
           AddCouponTextfiled(),
-          const AddCouponHeadingText(
+          AddCouponHeadingText(
             headings: "Address",
           ),
           AddCouponTextfiled(
@@ -63,21 +63,21 @@ class PersonalProfile extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddCouponHeadingText(
+                    AddCouponHeadingText(
                       headings: "City",
                     ),
                     AddCouponTextfiled()
                   ],
                 ),
               ),
-              const SizedBox(
+              SizedBox(
                 width: 15,
               ),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const AddCouponHeadingText(
+                    AddCouponHeadingText(
                       headings: "State",
                     ),
                     AddCouponTextfiled(
@@ -88,7 +88,7 @@ class PersonalProfile extends StatelessWidget {
               ),
             ],
           ),
-          const AddCouponHeadingText(
+          AddCouponHeadingText(
             headings: "Pin Code",
           ),
           AddCouponTextfiled(
@@ -112,9 +112,7 @@ class PersonalProfile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 2.21,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blackButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Customer View",
                   style: TextStyle(color: whiteColor),
@@ -132,9 +130,7 @@ class PersonalProfile extends StatelessWidget {
                 width: MediaQuery.of(context).size.width / 2.21,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Edit",
                   style: TextStyle(color: whiteColor),

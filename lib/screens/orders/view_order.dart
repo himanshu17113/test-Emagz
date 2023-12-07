@@ -28,7 +28,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                const commonTopBar(
+                const CommonTopBar(
                   title: 'Order',
                 ),
                 const SearchContainer(),
@@ -86,10 +86,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Order ID",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -105,10 +102,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Name",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -128,10 +122,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Customer Name",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -148,10 +139,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Order Date",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -168,10 +156,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Qty",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -191,10 +176,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Colour",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -211,10 +193,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "GST",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -231,10 +210,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                             margin: const EdgeInsets.symmetric(vertical: 4),
                             child: const Text(
                               "Price",
-                              style: TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w500),
+                              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                             ),
                           ),
                           AddProductTextField(),
@@ -248,10 +224,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 ),
                 const Text(
                   "Delivery Address",
-                  style: TextStyle(
-                      color: blackButtonColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500),
+                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                 ),
                 AddProductTextField(
                   maxLines: 5,
@@ -261,10 +234,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 ),
                 const Text(
                   "Delivery Address",
-                  style: TextStyle(
-                      color: blackButtonColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w500),
+                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
                 ),
                 Container(
                     width: 150,
@@ -292,9 +262,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blackButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Manage Order",
                   style: TextStyle(color: whiteColor),
@@ -309,9 +277,7 @@ class _ViewOrderScreenState extends State<ViewOrderScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Edit Order",
                   style: TextStyle(color: whiteColor),

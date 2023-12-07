@@ -42,7 +42,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const commonTopBar(
+              const CommonTopBar(
                 title: 'Coupon',
               ),
               const SearchContainer(),
@@ -62,9 +62,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 5,
                     itemBuilder: (context, index) {
-                      return Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          child: const MyCustomCuppon());
+                      return Container(margin: const EdgeInsets.only(right: 10), child: const MyCustomCuppon());
                     }),
               ),
               const SizedBox(
@@ -75,28 +73,22 @@ class _CouponListScreenState extends State<CouponListScreen> {
                 children: [
                   const Text(
                     "Coupon List",
-                    style:
-                        TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
                   ),
                   Container(
-                    decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                              color: blackButtonColor.withOpacity(.2),
-                              // spreadRadius: 2,
-                              blurRadius: 10)
-                        ]),
+                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(20), boxShadow: [
+                      BoxShadow(
+                          color: blackButtonColor.withOpacity(.2),
+                          // spreadRadius: 2,
+                          blurRadius: 10)
+                    ]),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 18, vertical: 2),
+                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 2),
                       child: Row(
                         children: [
                           const Text(
                             "Filter",
-                            style: TextStyle(
-                                fontSize: 11, fontWeight: FontWeight.w600),
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600),
                           ),
                           const SizedBox(
                             width: 5,
@@ -142,9 +134,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
                 width: size.width / 2.4,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(
-                    color: blueButtonColor,
-                    borderRadius: BorderRadius.circular(5)),
+                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(5)),
                 child: const Text(
                   "Add New Coupon",
                   style: TextStyle(color: whiteColor, fontSize: 12),

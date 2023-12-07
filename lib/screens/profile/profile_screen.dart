@@ -35,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
             const SizedBox(
               height: 15,
             ),
-            const commonTopBar(
+            const CommonTopBar(
               title: 'My Account',
             ),
             const SizedBox(

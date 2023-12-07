@@ -38,7 +38,7 @@ class _ProductScreenState extends State<ProductScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const commonTopBar(
+              const CommonTopBar(
                 title: 'Product',
               ),
               const SearchContainer(),
