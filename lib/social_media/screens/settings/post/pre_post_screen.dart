@@ -9,6 +9,7 @@ import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/FollowingList.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/LikesAndViewsOptions.dart';
+import 'package:hashtagable/widgets/hashtag_text_field.dart';
 import '../../../../constant/colors.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../home/widgets/home_screen_appbar.dart';
@@ -48,7 +49,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
   bool everyOne = true;
   bool noOne = false;
   bool followAndFollower = false;
- // CarouselController carouselController = CarouselController();
+  // CarouselController carouselController = CarouselController();
 // @override
 // void initState() {
 //   super.initState();
@@ -62,6 +63,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
     return SafeArea(
       top: false,
       child: Scaffold(
+        backgroundColor: const Color.fromRGBO(231, 233, 254, 1),
         appBar: const SocialHomeScreenAppBar(
           isColor: false,
         ),
@@ -79,7 +81,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         widget.images!.length > 1
                             ? CarouselSlider(
                                 disableGesture: widget.images!.length < 2,
-                            //    carouselController: carouselController,
+                                //    carouselController: carouselController,
                                 options: CarouselOptions(
                                   autoPlay: widget.images!.length > 1,
                                   enlargeCenterPage: true,
@@ -141,12 +143,16 @@ class _PrePostScreenState extends State<PrePostScreen> {
                               margin: const EdgeInsets.only(right: 10),
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: selectedOption == index ? lightSkyAcent : null,
+                                color: selectedOption == index
+                                    ? lightSkyAcent
+                                    : null,
                                 border: Border.all(color: lightSkyAcent),
                               ),
                               child: FormHeadingText(
                                 headings: chooseOption[index],
-                                color: selectedOption != index ? lightSkyAcent : Colors.white,
+                                color: selectedOption != index
+                                    ? lightSkyAcent
+                                    : Colors.white,
                               ),
                             ),
                           ),
@@ -180,37 +186,50 @@ class _PrePostScreenState extends State<PrePostScreen> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const FormHeadingText(headings: "Custom Poll"),
+                                  const FormHeadingText(
+                                      headings: "Custom Poll"),
                                   const SizedBox(
                                     width: 5,
                                   ),
-                                  FlutterSwitch(
-                                    padding: 0,
-                                    height: 21,
-                                    width: 45,
-                                    activeColor: lightSkyAcent.withOpacity(.8),
-                                    activeToggleColor: const Color(0xff2E5EE2),
-                                    onToggle: (bool value) {
-                                      setState(() {
-                                        isCustomPoll = value;
-                                      });
-                                      if (value == true) {
-                                        Get.to(() => CustomPollSelectScreen(images: widget.images, postType: widget.postType));
-                                      }
-                                    },
-                                    value: isCustomPoll,
-                                  )
+                                  StatefulBuilder(
+                                      builder: (BuildContext context,
+                                              setState) =>
+                                          FlutterSwitch(
+                                            padding: 0,
+                                            height: 21,
+                                            width: 45,
+                                            activeColor:
+                                                lightSkyAcent.withOpacity(.8),
+                                            activeToggleColor:
+                                                const Color(0xff2E5EE2),
+                                            onToggle: (bool value) {
+                                              setState(() {
+                                                isCustomPoll = value;
+                                              });
+                                              if (value == true) {
+                                                Get.to(() =>
+                                                    CustomPollSelectScreen(
+                                                        images: widget.images,
+                                                        postType:
+                                                            widget.postType));
+                                              }
+                                            },
+                                            value: isCustomPoll,
+                                          ))
                                 ],
                               ),
                               const SizedBox(
                                 height: 10,
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const FormHeadingText(headings: "Show Results to audience"),
+                                  const FormHeadingText(
+                                      headings: "Show Results to audience"),
                                   const SizedBox(
                                     width: 5,
                                   ),
@@ -238,7 +257,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       : const SizedBox(),
                   Text(
                     "Set Timer".toUpperCase(),
-                    style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(
                     height: 20,
@@ -261,11 +283,17 @@ class _PrePostScreenState extends State<PrePostScreen> {
                             child: Container(
                               margin: const EdgeInsets.only(right: 12),
                               padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(color: selectedTimer == index ? lightSkyAcent : null, shape: BoxShape.circle),
+                              decoration: BoxDecoration(
+                                  color: selectedTimer == index
+                                      ? lightSkyAcent
+                                      : null,
+                                  shape: BoxShape.circle),
                               child: Center(
                                 child: FormHeadingText(
                                   headings: "${timerOptionList[index]}D",
-                                  color: selectedTimer != index ? Colors.black : Colors.white,
+                                  color: selectedTimer != index
+                                      ? Colors.black
+                                      : Colors.white,
                                 ),
                               ),
                             ),
@@ -275,10 +303,16 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       const Spacer(),
                       InkWell(
                         onTap: () async {
-                          DateTime? pickedDate =
-                              await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2060));
-                          TimeOfDay? pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-                          var time = pickedDate!.add(Duration(hours: pickedTime!.hour, minutes: pickedTime.minute));
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2060));
+                          TimeOfDay? pickedTime = await showTimePicker(
+                              context: context, initialTime: TimeOfDay.now());
+                          var time = pickedDate!.add(Duration(
+                              hours: pickedTime!.hour,
+                              minutes: pickedTime.minute));
                           var timeDifference = time.difference(DateTime.now());
                           debugPrint(timeDifference.inDays.toString());
                           timerOptionList.add("${timeDifference.inDays}D");
@@ -287,41 +321,55 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         },
                         child: Text(
                           "Set Custom".toUpperCase(),
-                          style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                          style: GoogleFonts.inter(
+                              fontSize: 10,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
                 ],
-                Text(
-                  "Describe your feeling".toUpperCase(),
-                  style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 25,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: const Color(0xff28282836).withOpacity(.21), width: 1.5),
-                  ),
-                  child: TextField(
-                    maxLength: 32,
-                    controller: postController.captionController,
-                    maxLines: 2,
-                    decoration: const InputDecoration(isDense: true, border: InputBorder.none, contentPadding: EdgeInsets.all(0)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    "Describe your feeling".toUpperCase(),
+                    style: GoogleFonts.inter(
+                        fontSize: 10,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                HashTagTextField(
+                  controller: postController.captionController,
+                  decorateAtSign: true,
+                  maxLines: 4,
+                  maxLength: 64,
+                  decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 8),
+                      focusedBorder: OutlineInputBorder(),
+                      border: OutlineInputBorder()),
+                  // decorateAtSign: true,
+                  decoratedStyle: TextStyle(
+                      fontSize: 15.5,
+                      background: Paint()
+                        ..color = const Color.fromRGBO(219, 222, 255, 1),
+
+                      ///  backgroundColor: const Color.fromRGBO(219, 222, 255, 1),
+                      color: Colors.black),
+
+                  basicStyle: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
                 ),
                 Text(
                   "Post Settings".toUpperCase(),
-                  style: GoogleFonts.inter(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w500),
+                  style: GoogleFonts.inter(
+                      fontSize: 10,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(
                   height: 20,
@@ -344,7 +392,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       children: [
                         const Text(
                           "Post",
-                          style: TextStyle(color: blackButtonColor, fontSize: 15, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: blackButtonColor,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 15,
@@ -354,27 +405,40 @@ class _PrePostScreenState extends State<PrePostScreen> {
                           children: [
                             Row(
                               children: [
-                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Text("Likes & View",
+                                    style: TextStyle(
+                                        color: blackButtonColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600)),
                                 const Spacer(),
                                 InkWell(
                                   onTap: () {
                                     showModalBottomSheet(
                                       isScrollControlled: true,
                                       shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
                                       context: context,
                                       builder: (context) {
-                                        return LikesAndViewsOptions(onTap: (value, showValue) {
-                                          postController.privacyLikesAndViewsUI.value = showValue;
-                                          postController.privacyLikesAndViews.value = value;
+                                        return LikesAndViewsOptions(
+                                            onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI
+                                              .value = showValue;
+                                          postController.privacyLikesAndViews
+                                              .value = value;
                                         });
                                       },
                                     );
                                   },
                                   child: Obx(
                                     () => Text(
-                                      postController.privacyLikesAndViewsUI.value,
-                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                      postController
+                                          .privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(
+                                          color: purpleColor,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -397,7 +461,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   children: [
                                     Text(
                                       "Hide like & views control",
-                                      style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                      style: TextStyle(
+                                          color: blackButtonColor,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                     SizedBox(
                                       height: 2,
@@ -406,7 +473,11 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                       width: 140,
                                       child: Text(
                                         "Manage your likes and view on your post",
-                                        style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                                        style: TextStyle(
+                                            letterSpacing: .3,
+                                            color: signInHeading,
+                                            fontSize: 9,
+                                            fontWeight: FontWeight.w500),
                                       ),
                                     ),
                                   ],
@@ -417,7 +488,9 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                     showModalBottomSheet(
                                       isScrollControlled: true,
                                       shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
                                       context: context,
                                       builder: (context) {
                                         return const FollowingList();
@@ -426,7 +499,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                                   },
                                   child: const Text(
                                     "0 people",
-                                    style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                        color: purpleColor,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
                                 const SizedBox(
@@ -443,27 +519,40 @@ class _PrePostScreenState extends State<PrePostScreen> {
                             ),
                             Row(
                               children: [
-                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Text("Allow comments from",
+                                    style: TextStyle(
+                                        color: blackButtonColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600)),
                                 const Spacer(),
                                 InkWell(
                                   onTap: () {
                                     showModalBottomSheet(
                                       isScrollControlled: true,
                                       shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
                                       context: context,
                                       builder: (context) {
-                                        return LikesAndViewsOptions(onTap: (value, showValue) {
-                                          postController.privacyLikesAndViewsUI.value = showValue;
-                                          postController.privacyLikesAndViews.value = value;
+                                        return LikesAndViewsOptions(
+                                            onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI
+                                              .value = showValue;
+                                          postController.privacyLikesAndViews
+                                              .value = value;
                                         });
                                       },
                                     );
                                   },
                                   child: Obx(
                                     () => Text(
-                                      postController.privacyLikesAndViewsUI.value,
-                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                      postController
+                                          .privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(
+                                          color: purpleColor,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -481,27 +570,40 @@ class _PrePostScreenState extends State<PrePostScreen> {
                             ),
                             Row(
                               children: [
-                                const Text("Likes & View", style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600)),
+                                const Text("Post Sharing",
+                                    style: TextStyle(
+                                        color: blackButtonColor,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600)),
                                 const Spacer(),
                                 InkWell(
                                   onTap: () {
                                     showModalBottomSheet(
                                       isScrollControlled: true,
                                       shape: const OutlineInputBorder(
-                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20))),
                                       context: context,
                                       builder: (context) {
-                                        return LikesAndViewsOptions(onTap: (value, showValue) {
-                                          postController.privacyLikesAndViewsUI.value = showValue;
-                                          postController.privacyLikesAndViews.value = value;
+                                        return LikesAndViewsOptions(
+                                            onTap: (value, showValue) {
+                                          postController.privacyLikesAndViewsUI
+                                              .value = showValue;
+                                          postController.privacyLikesAndViews
+                                              .value = value;
                                         });
                                       },
                                     );
                                   },
                                   child: Obx(
                                     () => Text(
-                                      postController.privacyLikesAndViewsUI.value,
-                                      style: const TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                      postController
+                                          .privacyLikesAndViewsUI.value,
+                                      style: const TextStyle(
+                                          color: purpleColor,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
                                 ),
@@ -539,7 +641,10 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       ),
                       const Text(
                         "Allow Tag from",
-                        style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: signInHeading,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400),
                       ),
                       const SizedBox(
                         height: 10,
@@ -627,10 +732,13 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            CircularProgressIndicator(value: postController.uploadPercentage.value, color: Colors.white),
+                            CircularProgressIndicator(
+                                value: postController.uploadPercentage.value,
+                                color: Colors.white),
                             Text(
                               "${(postController.uploadPercentage.value * 100).toInt().toString()}%",
-                              style: const TextStyle(color: Colors.white, fontSize: 10),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
                             )
                           ],
                         ),

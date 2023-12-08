@@ -14,14 +14,14 @@ import 'package:path_provider/path_provider.dart';
 import '../home/home_controller.dart';
 
 class PostController extends GetxController {
-  TextEditingController captionController = TextEditingController();
+  final TextEditingController captionController = TextEditingController();
 
-  TextEditingController button1Controller = TextEditingController();
+  final TextEditingController button1Controller = TextEditingController();
 
-  TextEditingController button2Controller = TextEditingController();
+  final TextEditingController button2Controller = TextEditingController();
 
-  TextEditingController button3Controller = TextEditingController();
-  TextEditingController button4Controller = TextEditingController();
+  // TextEditingController button3Controller = TextEditingController();
+  // TextEditingController button4Controller = TextEditingController();
 
   RxDouble uploadPercentage = RxDouble(0);
   RxString privacyLikesAndViews = RxString("hideFromEveryone");
@@ -36,7 +36,8 @@ class PostController extends GetxController {
 
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-  final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
+  final homePostsController =
+      Get.find<HomePostsController>(tag: 'HomePostsController');
 
   // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
 
@@ -59,7 +60,8 @@ class PostController extends GetxController {
     imagePaths.clear();
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg')
+          .create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -71,7 +73,8 @@ class PostController extends GetxController {
   //   images.add(imagePath);
   // }
 
-  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer, bool? isCustomPoll, List<Uint8List> images) async {
+  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
+      bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
     try {
       await addPost(images);
@@ -79,7 +82,8 @@ class PostController extends GetxController {
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
       dio.options.headers["Content-Type"] = "application/json";
-      dio.options.headers["Authorization"] = globToken ?? await HiveDB.getAuthToken();
+      dio.options.headers["Authorization"] =
+          globToken ?? await HiveDB.getAuthToken();
       debugPrint(globToken);
       debugPrint(globUserId);
 
@@ -87,7 +91,8 @@ class PostController extends GetxController {
       FormData reqData = FormData.fromMap({
         "userId": globUserId ?? await HiveDB.getUserID(),
         "mediaType": "image",
-        "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
+        "mediaUrl": List.generate(imagePaths.length,
+            (i) => MultipartFile.fromFileSync(imagePaths[i])),
         "Enabledpoll": enablePoll,
         "caption": captionController.text,
 
@@ -101,7 +106,8 @@ class PostController extends GetxController {
         "tags": "[]",
         "tagPeople": "[]",
         "customPollEnabled": isCustomPoll,
-        "customPollData": '["${("${button1Controller.text}hbhb").toString()}", "${("${button2Controller.text}jghvbhu").toString()}"]'
+        "customPollData":
+            '["${(button1Controller.text).toString()}", "${(button2Controller.text).toString()}"]'
       });
 
       var res = await dio.post(
@@ -112,17 +118,22 @@ class PostController extends GetxController {
         },
       );
       debugPrint(res.statusMessage.toString());
-      uploadPercentage.value = 0.0;
-      debugPrint("status : ${res.statusCode}");
-      CustomSnackbar.showSucess("Post  successful");
-      isPosting.value = false;
-
-      homePostsController.skip = -10;
-
-      homePostsController.pageUpdate(0);
-      homePostsController.posts?.clear();
-      homePostsController.getPost();
-      Get.offAll(() => BottomNavBar());
+      if (res.statusCode == 200) {
+        uploadPercentage.value = 0.0;
+        debugPrint("status : ${res.statusCode}");
+        CustomSnackbar.showSucess("Post  successful");
+        isPosting.value = false;
+        homePostsController.skip = -10;
+        homePostsController.pageUpdate(0);
+        homePostsController.posts?.clear();
+        homePostsController.getPost();
+        button1Controller.clear();
+        button2Controller.clear();
+        captionController.clear();
+        Get.offAll(() => BottomNavBar());
+      } else {
+        CustomSnackbar.show("Something went wrong :(");
+      }
     } catch (e) {
       //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;

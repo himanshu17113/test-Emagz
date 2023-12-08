@@ -26,26 +26,28 @@ class HomePostsController extends GetxController {
   bool isVisible = true;
   int page = 0;
   List<Post>? posts = [];
-
   int skip = -10;
   @override
   onInit() async {
     token = globToken;
     userId = globUserId;
     if (token != null) {
+      dioheader();
       await getPost();
       if (posts!.length < 2) {
         getPost();
       }
     }
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
         if (isVisible) {
           isVisible = false;
           update();
         }
       }
-      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
         if (!isVisible) {
           isVisible = true;
           update();
@@ -57,15 +59,21 @@ class HomePostsController extends GetxController {
     super.onInit();
   }
 
+  Dio dio = Dio();
+  dioheader() => dio.options.headers["Authorization"] = token;
   void pageUpdate(int i) {
     page = i;
     update();
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading && !endOfPost) {
+    if (scrollController.position.pixels >=
+            scrollController.position.maxScrollExtent &&
+        !ispostloading &&
+        !endOfPost) {
       await getPost();
-    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels ==
+        scrollController.position.minScrollExtent - 50) {}
   }
 
   getPost() async {
@@ -74,14 +82,14 @@ class HomePostsController extends GetxController {
     skip = skip + 10;
 
     try {
-      Dio dio = Dio();
       dio.options.headers["Authorization"] = globToken ?? HiveDB.getAuthToken();
       debugPrint(globToken);
       final String endPoint = ApiEndpoint.posts(skip);
       debugPrint(endPoint.toString());
       var resposne = await dio.get(endPoint);
       int len = posts!.length;
-      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null &&
+          resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
@@ -97,7 +105,7 @@ class HomePostsController extends GetxController {
           }
         });
         debugPrint(posts?.length.toString());
-      
+
         if (len + 10 != posts!.length) {
           endOfPost = true;
         }
@@ -114,8 +122,6 @@ class HomePostsController extends GetxController {
   Future<List<Post>> refreshResent() async {
     skip = -10;
     try {
-      Dio dio = Dio();
-
       dio.options.headers["Authorization"] = token;
 
       var endPoint = ApiEndpoint.posts(0);
@@ -143,11 +149,10 @@ class HomePostsController extends GetxController {
 
   Future<bool> likePost(String postId, bool islike, String uid) async {
     if (islike) {
-      socketController.sendLikeNotification(uid, constuser?.username ?? constuser?.displayName ?? "");
+      socketController.sendLikeNotification(
+          uid, constuser?.username ?? constuser?.displayName ?? "");
     }
     try {
-      Dio dio = Dio();
-
       dio.options.headers["authorization"] = token;
       var data = {
         "userId": userId,
@@ -163,7 +168,6 @@ class HomePostsController extends GetxController {
 
   Future<Poll?> postPoll(String postId, String vote) async {
     try {
-      Dio dio = Dio();
       debugPrint(ApiEndpoint.doPoll(postId));
       var data = {"vote": vote, "userId": userId};
       dio.options.headers["Authorization"] = token;
@@ -176,19 +180,51 @@ class HomePostsController extends GetxController {
       return null;
     }
   }
+   Future<Map<String, String>?> postCustomPoll(String postId, String vote) async {
+    try {
+      debugPrint(ApiEndpoint.doPoll(postId));
+      var data = {"vote": vote, "userId": userId};
+      dio.options.headers["Authorization"] = token;
+      var response = await dio.post(ApiEndpoint.doPoll(postId), data: data);
+      debugPrint(response.data.toString());
+
+      return customPolldetail(postId);
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
 
   Future<Poll?> Polldetail(String postId) async {
     try {
-      Dio dio = Dio();
-
       dio.options.headers["Authorization"] = token;
       var response = await dio.get(
         ApiEndpoint.pollResults(postId),
       );
 
-      Poll poll = Poll.fromMap(jsonDecode(jsonEncode(response.data)));
+      Poll poll = Poll.fromMap(response.data);
 
       return poll;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
+  }
+
+  Future<Map<String, String>?> customPolldetail(String postId) async {
+    try {
+      var response = await dio.get(
+        ApiEndpoint.pollResults(postId),
+      );
+
+      Poll poll = Poll.fromMap(response.data);
+      Map<String, String> map = {"isVoted": (poll.isVoted ?? false) ? "True" : "False"};
+      poll.postx?.customPollData?.forEach((element) {
+        debugPrint(response.data["pollCalculation"][element]);
+        map.addIf(response.data["pollCalculation"][element] != null, element,
+            response.data["pollCalculation"][element]);
+      });
+      return map;
     } catch (e) {
       debugPrint(e.toString());
       return null;

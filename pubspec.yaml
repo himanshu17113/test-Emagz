@@ -82,6 +82,8 @@ dependencies:
   permission_handler: ^11.0.0
   hive_flutter: ^1.1.0
   textfield_tags: ^2.0.2
+  detectable_text_field: ^2.1.0
+  hashtagable: ^2.3.0+1
   
 dev_dependencies:
   flutter_test:
