@@ -21,8 +21,10 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomePostsController>(
+      id: "bottom_Nav",
       tag: "HomePostsController",
       autoRemove: false,
+      assignId: true,
       init: HomePostsController(),
       builder: (homePostController) {
         return Stack(

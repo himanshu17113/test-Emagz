@@ -57,7 +57,7 @@ class CommonTopBar extends StatelessWidget {
               child: SvgPicture.asset(
                 "assets/svg/Account.svg",
                 width: 45,
-                color: blackButtonColor,
+              ///  color: blackButtonColor,
               ),
             ),
           ],

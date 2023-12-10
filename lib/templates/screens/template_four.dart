@@ -68,7 +68,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  FavouriteAndLocateWidget(
+                  const FavouriteAndLocateWidget(
                     isWhite: true,
                   ),
                 ],

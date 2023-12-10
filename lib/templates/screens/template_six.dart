@@ -125,7 +125,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
                 style: GoogleFonts.poppins(color: blackButtonColor, fontSize: 12, height: 1.5, fontWeight: FontWeight.w300),
               ),
             ),
-            FavouriteAndLocateWidget(),
+            const FavouriteAndLocateWidget(),
             Row(
               children: [
                 const Padding(

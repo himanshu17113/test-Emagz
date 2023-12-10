@@ -1,15 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
-import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
-import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
@@ -19,97 +15,32 @@ import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 
 import 'package:path_provider/path_provider.dart';
 
+import '../common/appbar/home.dart';
 import '../models/post_model.dart';
-import 'chat/controllers/socketController.dart';
 
 class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
-
-  // final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
-  final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
-  final socketController = Get.put(SocketController());
-
+  final GetXStoryController storyController = Get.put(GetXStoryController(),
+      tag: "GetXStoryController", permanent: true);
+  final HomePostsController homePostController = HomePostsController();
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomePostsController>(
-      tag: "HomePostsController",
-      autoRemove: false,
-      init: HomePostsController(),
-      builder: (homePostController) => Scaffold(
-        backgroundColor: socialBack,
-        appBar: homePostController.isVisible
-            ? AppBar(
-                systemOverlayStyle: const SystemUiOverlayStyle(  systemNavigationBarColor: socialBack),
-                backgroundColor: socialBack,
-                leading: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(
-                    "assets/png/new_logo.png",
-                    color: const Color(0xff1B47C1),
-                    height: 38,
-                    width: 36,
-                  ),
-                ),
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => OwnWebView(
-                            token: globToken!,
-                            userId: globUserId!,
-                            personaUserId: globUserId!,
-                            templateId: 'w',
-                          ));
-                    },
-                    child: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                        constuser?.ProfilePic.toString() ?? "",
-                      ),
-                      maxRadius: 15,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Center(
-                      child: GestureDetector(
-                        onTap: () => Get.to(() => NotificationScreen()),
-                        child: Stack(alignment: Alignment.topRight, children: [
-                          Image.asset(
-                            "assets/png/notification_bell.png",
-                            height: 28,
-                            width: 28,
-                          ),
-                          if (socketController.notifications.isNotEmpty)
-                            Positioned(
-                              top: 0,
-                              right: 0,
-                              child: CircleAvatar(
-                                  radius: 8,
-                                  backgroundColor: Colors.red,
-                                  child: Text(
-                                    socketController.notifications.length.toString(),
-                                    style: const TextStyle(fontSize: 12),
-                                  )),
-                            )
-                        ]),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            : null,
-        body: RefreshIndicator(
-          onRefresh: () {
-            homePostController.skip = -10;
-            homePostController.posts?.clear();
-            homePostController.posts?.clear();
-            homePostController.endOfPost = false;
+    debugPrint("main Screen build");
+    return Scaffold(
+      backgroundColor: socialBack,
+      appBar: const HomeAppBar(),
+      body: RefreshIndicator(
+        onRefresh: () {
+          homePostController.skip = -10;
+          homePostController.posts?.clear();
+          homePostController.posts?.clear();
+          homePostController.endOfPost = false;
 
-            storyController.stories?.clear();
-            storyController.getStories();
-            return homePostController.getPost();
-          },
-          child: HomePosts(myUserId: globUserId ?? homePostController.userId),
-        ),
+          storyController.stories?.clear();
+          storyController.getStories();
+          return homePostController.getPost();
+        },
+        child: HomePosts(myUserId: globUserId ?? homePostController.userId),
       ),
     );
   }

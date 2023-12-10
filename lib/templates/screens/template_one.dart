@@ -119,7 +119,7 @@ class _TemplateOneState extends State<TemplateOne> {
                         fontWeight: FontWeight.w400),
                   ),
                 ),
-                 FavouriteAndLocateWidget(),
+                 const FavouriteAndLocateWidget(),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(

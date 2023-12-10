@@ -81,14 +81,14 @@ class PostView extends StatelessWidget {
 
                         //    post.likes!.remove(myId);
                         setInnerState(() {});
-                        homePostController.likePost(post.sId!, false, post.user?.sId ?? "");
+                        homePostController.likePost(post.sId!,index, false, post.user?.sId ?? "");
                       } else {
                         homePostController.posts![index].isLike = true;
                         homePostController.posts![index].likeCount = homePostController.posts![index].likeCount! + 1;
 
                         //    post.likes!.add(myId);
                         setInnerState(() {});
-                        homePostController.likePost(post.sId!, true, post.user?.sId ?? "");
+                        homePostController.likePost(post.sId!,index, true, post.user?.sId ?? "");
                       }
                       update();
                     },

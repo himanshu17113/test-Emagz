@@ -1,14 +1,14 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/user/controller/bottom_nav_controller.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../controller/bottom_nav_controller.dart';
 
 class UserBottomNavBar extends StatelessWidget {
   const UserBottomNavBar({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<UserNavController>(
-      autoRemove: false,
+    return GetBuilder<UserNavController>(      autoRemove: false,
       init: UserNavController(),
       builder: (value) {
         return Scaffold(

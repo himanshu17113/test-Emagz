@@ -50,7 +50,7 @@ class PostController extends GetxController {
     }
     assetType = assetTyp;
     isSettingImage.value = false;
-    //update();
+   
   }
 
   // void addPost(Uint8List image) {

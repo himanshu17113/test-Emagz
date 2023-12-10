@@ -217,7 +217,7 @@ class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
                 style: GoogleFonts.poppins(color: whiteColor, fontSize: 12, height: 1.1, fontWeight: FontWeight.w300),
               ),
             ),
-            FavouriteAndLocateWidget(
+            const FavouriteAndLocateWidget(
               isWhite: true,
             ),
             const SizedBox(

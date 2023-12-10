@@ -1002,8 +1002,9 @@ class _HashTagTextFieldState extends State<HashTagTextField>
       return effectiveDecoration.copyWith(counter: counter);
     }
 
-    if (widget.maxLength == null)
+    if (widget.maxLength == null) {
       return effectiveDecoration; // No counter widget
+    }
 
     String counterText = '$currentLength';
     String semanticCounterText = '';
@@ -1022,7 +1023,7 @@ class _HashTagTextFieldState extends State<HashTagTextField>
       return effectiveDecoration.copyWith(
         errorText: effectiveDecoration.errorText ?? '',
         counterStyle: effectiveDecoration.errorStyle ??
-            themeData.textTheme.caption!.copyWith(color: themeData.errorColor),
+            themeData.textTheme.bodySmall!.copyWith(color: themeData.colorScheme.error),
         counterText: counterText,
         semanticCounterText: semanticCounterText,
       );
@@ -1123,13 +1124,15 @@ class _HashTagTextFieldState extends State<HashTagTextField>
   bool _shouldShowSelectionHandles(SelectionChangedCause? cause) {
     // When the text field is activated by something that doesn't trigger the
     // selection overlay, we shouldn't show the handles either.
-    if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar)
+    if (!_selectionGestureDetectorBuilder.shouldShowSelectionToolbar) {
       return false;
+    }
 
     if (cause == SelectionChangedCause.keyboard) return false;
 
-    if (widget.readOnly && _effectiveController.selection.isCollapsed)
+    if (widget.readOnly && _effectiveController.selection.isCollapsed) {
       return false;
+    }
 
     if (!_isEnabled) return false;
 
@@ -1195,7 +1198,7 @@ class _HashTagTextFieldState extends State<HashTagTextField>
     final ThemeData theme = Theme.of(context);
     final TextSelectionThemeData selectionTheme =
         TextSelectionTheme.of(context);
-    final TextStyle style = theme.textTheme.subtitle1!.merge(widget.basicStyle);
+    final TextStyle style = theme.textTheme.titleMedium!.merge(widget.basicStyle);
     final Brightness keyboardAppearance =
         widget.keyboardAppearance ?? theme.brightness;
     final TextEditingController controller = _effectiveController;
@@ -1399,10 +1402,11 @@ class _HashTagTextFieldState extends State<HashTagTextField>
               onTap: widget.readOnly
                   ? null
                   : () {
-                      if (!_effectiveController.selection.isValid)
+                      if (!_effectiveController.selection.isValid) {
                         _effectiveController.selection =
                             TextSelection.collapsed(
                                 offset: _effectiveController.text.length);
+                      }
                       _requestKeyboard();
                     },
               child: child,
