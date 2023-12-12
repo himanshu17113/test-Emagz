@@ -22,7 +22,8 @@ class StoryScreen extends StatelessWidget {
 
   final StoryController controller = StoryController();
 
-  final storyController = Get.put(GetXStoryController());
+  final storyController =
+      Get.find<GetXStoryController>(tag: "GetXStoryController");
 
   ValueNotifier<int> buttonClickedTimes = ValueNotifier(0);
 

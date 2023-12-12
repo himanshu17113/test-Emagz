@@ -84,6 +84,7 @@ dependencies:
   textfield_tags: ^2.0.2
   detectable_text_field: ^2.1.0
   hashtagable: ^2.3.0+1
+  fluttertagger: ^1.0.0+6
   
 dev_dependencies:
   flutter_test:

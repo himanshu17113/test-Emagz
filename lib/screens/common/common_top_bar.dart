@@ -1,4 +1,3 @@
-import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -44,7 +43,7 @@ class CommonTopBar extends StatelessWidget {
             SvgPicture.asset(
               "assets/svg/Notify.svg",
               width: 45,
-              color: blackButtonColor,
+        //      color: blackButtonColor,
             ),
 
             // const SizedBox(

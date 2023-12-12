@@ -23,7 +23,8 @@ class MyHttpOverrides extends HttpOverrides {
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
-
+  //debugRepaintRainbowEnabled = true;
+  //WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
    Hive.registerAdapter(UserSchemaAdapter());

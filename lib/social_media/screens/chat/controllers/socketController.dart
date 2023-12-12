@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/constant/data.dart';
-import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
-import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -16,42 +14,40 @@ class SocketController extends GetxController {
     'transports': ['websocket'],
   });
   static Client client = http.Client();
-  String? userId;
+  static String? userId = globUserId;
   RxBool? isUserSender = false.obs;
-  final chatController = Get.put(ConversationController());
-
-  // final jwtController = JWTController();
-  String? token;
-  // Rx<Message> liveMessage = Message().obs;
-  RxList<Message> liveMessages = <Message>[].obs;
-  RxList<NotificationModel> notifications = <NotificationModel>[].obs;
+  static String? token = globToken;
+  List<Message> liveMessages = <Message>[];
+  List<NotificationModel> notifications = <NotificationModel>[];
   RxList<String> timeStamps = <String>[].obs;
   RxString? conversationId;
 
   void getNotification() {
     socket.connect();
-
     socket.onConnect((_) {
-      socket.emit("notificationHistory", userId);
-
-      socket.on("notificationHistory_$userId", (payload) {
+      socket.emit("notificationHistory", globUserId);
+      socket.on("notificationHistory_$globUserId", (payload) {
         debugPrint(jsonEncode(payload).toString());
         for (var payloadx in payload) {
           notifications.add(NotificationModel.fromMap(payloadx));
-          debugPrint(notifications[0].message.toString());
         }
+        update(["dot"]);
       });
-      socket.on("notifications_$userId", (payload) {
+      update(["dot"]);
+      socket.on("notifications_$globUserId", (payload) {
         debugPrint(jsonEncode(payload).toString());
 
         notifications.insert(0, NotificationModel.fromMap(payload));
         debugPrint(notifications[0].message.toString());
+        update(["dot"]);
       });
+      update(["dot"]);
     });
   }
 
   void disconnectToServer(String room) {
     socket.emit("leaveRoom", room);
+    update(["dot"]);
     socket.clearListeners();
   }
 
@@ -131,31 +127,41 @@ class SocketController extends GetxController {
     }
   }
 
-  initSocket() async {
-    userId = globUserId ?? chatController.userId;
-    token = globToken ?? chatController.token;
-    userId ??= await HiveDB.getUserID();
-    token ??= await HiveDB.getAuthToken();
-  }
+  // initSocket() async {
+  //   userId = globUserId;
+  //   token = globToken;
+  //   userId ??= await HiveDB.getUserID();
+  //   token ??= await HiveDB.getAuthToken();
+  // }
 
   void sendLikeNotification(String id, String name) {
     debugPrint("name : $name , userID : $userId , oid : $id");
-    Map<String, dynamic> data = {"notification_from": userId!, "notification_to": id, "notification": {}, "title": "Like", "message": "$name liked your post"};
+    Map<String, dynamic> data = {
+      "notification_from": userId!,
+      "notification_to": id,
+      "notification": {},
+      "title": "Like",
+      "message": "$name liked your post"
+    };
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(
+      String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
+      "message": ispost
+          ? "$name Share a post with you"
+          : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(String id, bool ispost, String? shareLink, bool isReply) {
+  void sendCommentNotification(
+      String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
@@ -172,8 +178,11 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(String notificationId) async {
+  Future<bool> removeSingleNotification(
+      String notificationId, int index) async {
     try {
+      notifications.removeAt(index);
+      update(["dot"]);
       //  notifications.removeAt(index);
       Map<String, String> header = {
         'authorization': token!,
@@ -194,7 +203,8 @@ class SocketController extends GetxController {
       debugPrint(response.statusCode.toString());
 
       if (response.statusCode == 200) {
-        //   notifications.removeWhere((element) => element.id == NotificationId);
+        //  notifications.removeWhere((element) => element.id == notificationId);
+        // update(["dot"]);
         return true;
       } else {
         return false;
@@ -226,6 +236,7 @@ class SocketController extends GetxController {
       debugPrint(response.statusCode.toString());
 
       if (response.statusCode == 200) {
+        update(["dot"]);
         notifications.clear();
         return true;
       } else {
@@ -239,7 +250,7 @@ class SocketController extends GetxController {
 
   @override
   void onInit() {
-    initSocket();
+    //initSocket();
     getNotification();
     super.onInit();
   }

@@ -340,9 +340,16 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
+               
                 HashTagTextField(
+                  textAlign: TextAlign.start,
                   controller: postController.captionController,
-                  decorateAtSign: true,
+                  //   decorateAtSign: true,
+                  onChanged: (value) {
+                    // if (value.) {
+
+                    // }
+                  },
                   maxLines: 4,
                   maxLength: 64,
                   decoration: const InputDecoration(
@@ -352,9 +359,13 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       border: OutlineInputBorder()),
                   // decorateAtSign: true,
                   decoratedStyle: TextStyle(
+                      wordSpacing: 10,
                       fontSize: 15.5,
                       background: Paint()
-                        ..color = const Color.fromRGBO(219, 222, 255, 1),
+                        ..strokeWidth = 7.0
+                        ..color = const Color.fromRGBO(219, 222, 255, 1)
+                   ..style = PaintingStyle.stroke
+        ..strokeJoin = StrokeJoin.round,
 
                       ///  backgroundColor: const Color.fromRGBO(219, 222, 255, 1),
                       color: Colors.black),

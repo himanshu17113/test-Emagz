@@ -7,8 +7,9 @@ import '../../story/story_view.dart';
 import 'home_pop_up.dart';
 
 class HomePosts extends StatelessWidget {
-  final String? myUserId;
-  const HomePosts({Key? key, this.myUserId}) : super(key: key);
+  const HomePosts({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +33,7 @@ class HomePosts extends StatelessWidget {
                     ? const SizedBox()
                     : const CupertinoActivityIndicator();
               } else if (index == 0) {
-                return StoryView(
-                    sid: myUserId ?? homePostController.userId ?? "");
+                return const StoryView();
               } else {
                 if (homePostController.posts!.isNotEmpty) {
                   if (homePostController

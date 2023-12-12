@@ -13,18 +13,12 @@ class StoryViewCard extends StatelessWidget {
   final UserId? username;
   final String url;
 
-  // UserSchema? user;
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       height: 68,
       width: 72,
-      // decoration: const BoxDecoration(
-      //   image: DecorationImage(
-      //       image: AssetImage("assets/png/story_border.png"),
-      //       fit: BoxFit.cover),
-      //  ),
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -43,36 +37,20 @@ class StoryViewCard extends StatelessWidget {
             ),
           ),
           Positioned(
-            // : 20,
-            // top: 15,
-            // left: 15,
-            child: RotationTransition(
-              turns: const AlwaysStoppedAnimation(224 / 360),
-              child: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-
-                      border: Border.all(width: 0,color: Colors.transparent),
-                      borderRadius: BorderRadius.circular(10), //<-- SEE HERE
-                    color: Colors.grey,
-                    image: DecorationImage(
+              child: RotationTransition(
+            turns: const AlwaysStoppedAnimation(224 / 360),
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 0, color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey,
+                  image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: CachedNetworkImageProvider(url)
-                    )
-
-                    //    border: Border.all(color: whiteColor, width: 1),
-                    //borderRadius: BorderRadius.circular(100),
-
-
-
-                ),
-
-
-                  ),
-            )
-
+                      image: CachedNetworkImageProvider(url))),
             ),
+          )),
           Positioned(
             top: 66,
             left: 20,
@@ -90,7 +68,6 @@ class StoryViewCard extends StatelessWidget {
   }
 }
 
-/// Clip widget in parallelogram shape
 class ParallelogramClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

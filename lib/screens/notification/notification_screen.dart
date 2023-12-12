@@ -7,17 +7,12 @@ import 'package:get/get.dart';
 import '../../social_media/screens/chat/controllers/socketController.dart';
 
 class NotificationScreen extends StatelessWidget {
-  NotificationScreen({Key? key}) : super(key: key);
-  final socketController = Get.find<SocketController>();
+  const NotificationScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: const Color.fromRGBO(231, 231, 254, 1),
       appBar: AppBar(
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(gradient: myGradient),
-        // ),
         actions: [
           IconButton(
             onPressed: () {
@@ -36,112 +31,115 @@ class NotificationScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         title: const Text(
           "Notification",
-          style: TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
+          style: TextStyle(
+              fontSize: 18, color: Colors.black, fontWeight: FontWeight.w800),
         ),
         elevation: 0.0,
       ),
-      body: Obx(() => ListView.builder(
-            itemCount: socketController.notifications.length,
-            itemBuilder: (context, index) {
-              final NotificationModel notificationModel = socketController.notifications[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Slidable(
-                  key: UniqueKey(),
-                  // startActionPane: ActionPane(
-                  //   motion: const ScrollMotion(),
-                  //   children: [
-                  //     Container(
-                  //       margin: const EdgeInsets.only(top: 3),
-                  //       alignment: Alignment.center,
-                  //       height: 100,
-                  //       width: 180,
-                  //       color: const Color(0xff298B27),
-                  //       child: const Text(
-                  //         'Mute notification about this topic',
-                  //         style: TextStyle(
-                  //           fontSize: 9,
-                  //           color: Colors.white,
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
-                  endActionPane: ActionPane(
-                      dragDismissible: true,
-                      dismissible: DismissiblePane(onDismissed: () {
-                        socketController.notifications.removeAt(index);
-                        socketController.removeSingleNotification(notificationModel.id!);
-                      }),
-                      extentRatio: 1 / 2.2,
-                      motion: const ScrollMotion(),
-                      children: [
-                        // Container(
-                        //   margin: const EdgeInsets.symmetric(vertical: 5),
-                        //   alignment: Alignment.center,
-                        //   //  height: 90,
-                        //   //  width: 180,
-                        //   color: const Color(0xffFE5151),
-                        //   child: const Text(
-                        //     "     Remove Notification     ",
-                        //     style: TextStyle(
-                        //       fontSize: 12,
-                        //       color: Colors.white,
-                        //     ),
-                        //   ),
-                        // )
-                        SlidableAction(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          onPressed: (context) {
-                            socketController.notifications.removeAt(index);
-                            socketController.removeSingleNotification(notificationModel.id!);
-                          },
-                          backgroundColor: const Color(0xFFFE4A49),
-                          foregroundColor: Colors.white,
-                          icon: Icons.delete,
-                          label: '     Remove Notification     ',
-                        ),
-                      ]),
-                  child: ListTile(
-                    tileColor: Colors.white,
-                    leading: CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(notificationModel.notificationFrom!.profilePic!),
-                      // child: CachedNetworkImage(
-                      //   imageUrl: notificationModel.notificationFrom!.profilePic!,
-                      //   placeholder: (context, url) => const CircularProgressIndicator(),
-                      //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                      // ),
-                    ),
-
-                    //const SizedBox(),
-                    title: Text(notificationModel.title ?? ""),
-                    subtitle: Text(notificationModel.message ?? ""),
+      body: GetBuilder<SocketController>(
+        tag: "notify",
+        id: "dot",
+      //  assignId: true,
+        init: SocketController(),
+        initState: (_) {},
+        builder: (socketController) => ListView.builder(
+          itemCount: socketController.notifications.length,
+          itemBuilder: (context, index) {
+            final NotificationModel notificationModel =
+                socketController.notifications[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2),
+              child: Slidable(
+                key: UniqueKey(),
+                endActionPane: ActionPane(
+                    dragDismissible: true,
+                    dismissible: DismissiblePane(onDismissed: () {
+                      socketController
+                          .removeSingleNotification(notificationModel.id!,index);
+                    //  socketController.notifications.removeAt(index);
+                    }),
+                    extentRatio: 1 / 2.2,
+                    motion: const ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        onPressed: (context) {
+                          socketController
+                              .removeSingleNotification(notificationModel.id!, index);
+                        //  socketController.notifications.removeAt(index);
+                        },
+                        backgroundColor: const Color(0xFFFE4A49),
+                        foregroundColor: Colors.white,
+                        icon: Icons.delete,
+                        label: '     Remove Notification     ',
+                      ),
+                    ]),
+                child: ListTile(
+                  tileColor: Colors.white,
+                  leading: CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                        notificationModel.notificationFrom!.profilePic!),
                   ),
+                  title: Text(notificationModel.title ?? ""),
+                  subtitle: Text(notificationModel.message ?? ""),
                 ),
-              );
-            },
-            //  separatorBuilder: (context, index) => const Divider(),
-          )),
-      bottomNavigationBar: InkWell(
-        onTap: () => socketController.clearAllNotification(),
-        child: Container(
-          alignment: Alignment.center,
-          height: 50,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(color: Colors.grey, offset: Offset(0, -1), blurRadius: 5, spreadRadius: 1),
-            ],
-          ),
-          child: const Text(
-            "Clear Notifiction",
-            style: TextStyle(
-              fontSize: 10,
-              color: Colors.lightBlue,
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
+      bottomNavigationBar: GetBuilder<SocketController>(
+          init: SocketController(),
+          tag: "notify",
+          id: "dot",
+          builder: (socketController) => socketController
+                  .notifications.isNotEmpty
+              ? InkWell(
+                  onTap: () => socketController.clearAllNotification(),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, -1),
+                            blurRadius: 5,
+                            spreadRadius: 1),
+                      ],
+                    ),
+                    child: const Text(
+                      "Clear Notifiction",
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.lightBlue,
+                      ),
+                    ),
+                  ),
+                )
+              : const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "No messages...yet!",
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Reach out and start a chat. Great Things might happen",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colors.black54,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    )
+                  ],
+                )),
     );
   }
 }

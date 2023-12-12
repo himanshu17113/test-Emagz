@@ -130,7 +130,7 @@ class PostController extends GetxController {
         button1Controller.clear();
         button2Controller.clear();
         captionController.clear();
-        Get.offAll(() => BottomNavBar());
+      //  Get.offAll(() => BottomNavBar());
       } else {
         CustomSnackbar.show("Something went wrong :(");
       }

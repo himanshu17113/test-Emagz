@@ -8,7 +8,7 @@ class BagItemcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var quanity;
+    String? quanity;
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 12),
       decoration: const BoxDecoration(

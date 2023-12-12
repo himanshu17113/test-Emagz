@@ -54,7 +54,7 @@ class UserTopBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SvgPicture.asset(
                   "assets/svg/MagnifyingGlass.svg",
                   width: 25,
-                  color: blackButtonColor,
+             //     color: blackButtonColor,
                 ),
               ),
               InkWell(

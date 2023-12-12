@@ -16,14 +16,15 @@ import 'package:http/http.dart' as http;
 class ConversationController extends GetxController {
   //Rx<Map<String, Conversation>>? conversations;
 //  RxList<Message>? messages;
-
+  final Dio dio = Dio();
   RxList<Requests?>? req = <Requests>[].obs;
-  String? token;
-  String? userId;
+  static String? token = globToken;
+  static String? userId = userId;
   @override
   onInit() async {
     token = globToken;
     userId = globUserId;
+    dio.options.headers["Authorization"] = globToken;
     getAllRequests('new');
     if (token == null || userId == null) {
       await storedData();
@@ -42,9 +43,8 @@ class ConversationController extends GetxController {
       if (token == null || userId == null) {
         await storedData();
       }
-      Dio dio = Dio();
-      dio.options.headers["Authorization"] = globToken ?? token;
-      debugPrint(ApiEndpoint.getMessages(conversationId));
+
+       debugPrint(ApiEndpoint.getMessages(conversationId));
       var response = await dio.get(ApiEndpoint.getMessages(conversationId));
       debugPrint(response.data);
       List<Message>? messages = [];
@@ -63,11 +63,10 @@ class ConversationController extends GetxController {
     try {
       if (token == null || userId == null) {
         await storedData();
-      }
-      Dio dio = Dio();
-      dio.options.headers["Authorization"] = globToken ?? token;
+      } 
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
-      var response = await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
+      var response =
+          await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
       debugPrint("Chat list");
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
@@ -90,11 +89,13 @@ class ConversationController extends GetxController {
   }
 
   Future postChat(String text, String conversationId) async {
-    try {
-      Dio dio = Dio();
-      dio.options.headers["Authorization"] = globToken ?? token;
-      var body = {"conversationId": conversationId, "sender": globUserId ?? userId, "text": text};
-      //var response = 
+    try { 
+      var body = {
+        "conversationId": conversationId,
+        "sender": globUserId ?? userId,
+        "text": text
+      };
+      //var response =
       await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
       debugPrint(e.toString());
@@ -103,9 +104,7 @@ class ConversationController extends GetxController {
 
   Future<String> conversationId(String receiverId) async {
     try {
-      debugPrint("🧣🧣🧣🧣🧣 start");
-      Dio dio = Dio();
-      dio.options.headers["Authorization"] = globToken ?? token;
+      debugPrint("🧣🧣🧣🧣🧣 start"); 
       debugPrint(ApiEndpoint.getConID(globUserId ?? userId!, receiverId));
       var response = await dio.get(
         ApiEndpoint.getConID(globUserId ?? userId!, receiverId),
@@ -135,9 +134,7 @@ class ConversationController extends GetxController {
 
   Future<String> startConversationId(String receiverId) async {
     try {
-      debugPrint("🧣🧣🧣🧣🧣 start2");
-      Dio dio = Dio();
-      dio.options.headers["Authorization"] = globToken ?? token;
+      debugPrint("🧣🧣🧣🧣🧣 start2"); 
       var body = {"senderId": globUserId ?? userId, "receiverId": receiverId};
       var response = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
       //  debugPrint(response.data["_id"].toString());
@@ -150,9 +147,7 @@ class ConversationController extends GetxController {
   }
 
   Future<bool> acceptreq(String id, int index, String recieverId) async {
-    debugPrint("🧣🧣🧣🧣🧣 start2");
-    Dio dio = Dio();
-    dio.options.headers["Authorization"] = token;
+    debugPrint("🧣🧣🧣🧣🧣 start2"); 
     debugPrint('${ApiEndpoint.requestList}/$id/accept');
     var response = await dio.post('${ApiEndpoint.requestList}/$id/accept');
     if (response.statusCode == 200) {
@@ -189,9 +184,7 @@ class ConversationController extends GetxController {
     return false;
   }
 
-  Future<bool> rejectreq(String id, int index) async {
-    Dio dio = Dio();
-    dio.options.headers["Authorization"] = token;
+  Future<bool> rejectreq(String id, int index) async { 
     var response = await dio.delete('${ApiEndpoint.removeRequest}/$id');
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess('Reuqest ');
@@ -204,13 +197,16 @@ class ConversationController extends GetxController {
   }
 
   Future<List<Requests?>?> getAllRequests(String filter) async {
- 
     req?.clear();
-    try {
-      var token = await HiveDB.getAuthToken();
+    try { 
       debugPrint('${ApiEndpoint.requestList}?filter=$filter');
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
-      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=$filter'), headers: headers);
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
+      http.Response response = await http.get(
+          Uri.parse('${ApiEndpoint.requestList}?filter=$filter'),
+          headers: headers);
       var body = jsonDecode(response.body);
       debugPrint(body.toString());
       body.forEach((e) {

@@ -11,7 +11,10 @@ import 'package:get/get.dart';
 class HomePostsController extends GetxController {
   final ScrollController scrollController = ScrollController();
   bool ispostloading = false;
-  final socketController = Get.put(SocketController());
+  final socketController = Get.put(
+    SocketController(),
+    tag: "notify", 
+  );
   String? token;
   String? userId;
   bool endOfPost = false;
@@ -26,9 +29,9 @@ class HomePostsController extends GetxController {
     if (token != null) {
       dioheader();
       await getPost();
-      if (posts!.length < 2) {
-        getPost();
-      }
+      // if (posts!.length < 2) {
+      //   getPost();
+      // }
     }
     scrollController.addListener(() {
       if (scrollController.position.userScrollDirection ==
@@ -46,6 +49,7 @@ class HomePostsController extends GetxController {
         }
       }
       loadMoreData();
+      // update([  "appbar"]);
     });
 
     super.onInit();
@@ -185,7 +189,7 @@ class HomePostsController extends GetxController {
       var data = {"vote": vote, "userId": userId};
       var response = await dio.post(ApiEndpoint.doPoll(postId), data: data);
       debugPrint(response.data.toString());
- 
+
       return customPolldetail(postId);
     } catch (e) {
       debugPrint(e.toString());
@@ -223,7 +227,7 @@ class HomePostsController extends GetxController {
         map.addIf(response.data["pollCalculation"][element] != null, element,
             response.data["pollCalculation"][element]);
       });
-     
+
       return map;
     } catch (e) {
       debugPrint(e.toString());

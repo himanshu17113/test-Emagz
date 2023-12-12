@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/post_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
@@ -11,22 +12,20 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class CommentController extends GetxController {
-//  Rx<List<Comment>> instantComments = Rx<List<Comment>>([]);
   final socketController = Get.find<SocketController>();
-  //final jwtController = Get.find<JWTController>();
-  @override
+ final Dio dio = Dio();
+   @override
   onInit() async {
-    await storedData();
-
+        dio.options.headers["Authorization"] = globToken ?? token;
     super.onInit();
   }
 
-  String? token;
-  String? userId;
-  Future<void> storedData() async {
-    token = await HiveDB.getAuthToken();
-    userId = await HiveDB.getUserID();
-  }
+  String? token = globToken;
+  String? userId = globUserId;
+  // Future<void> storedData() async {
+  //   token = await HiveDB.getAuthToken();
+  //   userId = await HiveDB.getUserID();
+  // }
 
   RxBool isPosting = RxBool(false);
   TextEditingController controller = TextEditingController();
@@ -74,10 +73,7 @@ class CommentController extends GetxController {
     }
     isPosting.value = true;
     try {
-      Dio dio = Dio();
-      // var token =  await HiveDB.getAuthToken();
-      // var userId = await HiveDB.getUserID();
-      dio.options.headers["Authorization"] = token;
+    
       var data = {"userId": userId, "text": comment};
       var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
@@ -108,10 +104,7 @@ class CommentController extends GetxController {
     }
     isPosting.value = true;
     try {
-      Dio dio = Dio();
-      // var token =  await HiveDB.getAuthToken();
-      // var userId = await HiveDB.getUserID();
-      dio.options.headers["Authorization"] = token;
+     
 
       final resposne = await dio.get(
         ApiEndpoint.getcomment(postId),
@@ -168,10 +161,7 @@ class CommentController extends GetxController {
     //   }
     isPosting.value = true;
     try {
-      Dio dio = Dio();
-
-      debugPrint(token);
-      dio.options.headers["Authorization"] = token;
+    
       var data = {"text": comment ?? controller.text};
       var resposne = await dio.post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
@@ -197,10 +187,7 @@ class CommentController extends GetxController {
     //   }
     isPosting.value = true;
     try {
-      Dio dio = Dio();
-
-      debugPrint(token);
-      dio.options.headers["Authorization"] = token;
+  
       Map<String, String> data = {"text": comment ?? controller.text};
       var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
       log(resposne.toString());

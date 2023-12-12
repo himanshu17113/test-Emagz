@@ -217,11 +217,12 @@ class PostCard extends StatelessWidget {
                                     color:
                                         const Color.fromARGB(255, 17, 17, 16),
                                   ),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.45,
                                   width:
                                       MediaQuery.of(context).size.width * 0.75,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.75,
                                   child: Column(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const Padding(
                                           padding: EdgeInsets.all(15.0),

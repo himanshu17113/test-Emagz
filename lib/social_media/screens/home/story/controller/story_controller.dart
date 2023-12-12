@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
@@ -11,12 +10,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-
 import '../../../../../constant/data.dart';
 
 class GetXStoryController extends GetxController {
   RxInt currentStoryIndex = RxInt(0);
-  RxList<Story>? stories = <Story>[].obs;
+  List<Story>? stories = <Story>[];
   List<Uint8List> images = [];
   RxBool imagesNotEmpty = RxBool(false);
   List<Stories> mystory = [];
@@ -25,7 +23,7 @@ class GetXStoryController extends GetxController {
   RxBool isUploading = RxBool(false);
   String? token;
   List<String> imagePaths = [];
-   @override
+  @override
   void onInit() {
     getStories();
 
@@ -35,21 +33,24 @@ class GetXStoryController extends GetxController {
   getStories() async {
     stories?.clear();
 
-    debugPrint("🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣🧣   getStories");
     debugPrint(ApiEndpoint.story);
 
-    if (globToken == null || globToken!.isEmpty || globUserId == null) {
+    if (globToken == null || globUserId == null) {
       token = await HiveDB.getAuthToken();
       myId = await HiveDB.getUserID();
     }
-    if (token != null) {
+    if (globToken != null) {
       await getmyStories();
 
-      final headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
+      final headers = {
+        'Content-Type': 'application/json',
+        "Authorization": globToken ?? token!
+      };
 
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
+      http.Response response =
+          await http.get(Uri.parse(ApiEndpoint.story), headers: headers);
       var body = jsonDecode(response.body);
-
+      debugPrint(body.toString());
       body.forEach((e) {
         debugPrint('story');
 
@@ -57,6 +58,7 @@ class GetXStoryController extends GetxController {
 
         stories?.add(story);
       });
+      update(["storylist"]);
     }
   }
 
@@ -69,13 +71,17 @@ class GetXStoryController extends GetxController {
         token = await HiveDB.getAuthToken();
         myId = await HiveDB.getUserID();
       }
-      debugPrint("TOKEN : $token myId : $myId");
-      debugPrint("TOKEN : $globToken userId : $globUserId");
-      final headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
+     
+      final headers = {
+        'Content-Type': 'application/json',
+        "Authorization": globToken ?? token!
+      };
       debugPrint(ApiEndpoint.Storybyid(globUserId ?? myId!));
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.Storybyid(globUserId ?? myId!)), headers: headers);
+      http.Response response = await http.get(
+          Uri.parse(ApiEndpoint.Storybyid(globUserId ?? myId!)),
+          headers: headers);
       var body = jsonDecode(response.body);
-
+      debugPrint("sto ${body.toString()}");
       var story = Story.fromJson(body["data"]);
       stories?.add(story);
 
@@ -91,9 +97,15 @@ class GetXStoryController extends GetxController {
     try {
       var token = await HiveDB.getAuthToken();
       var userId = await HiveDB.getUserID();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
       Map body = {"userId": userId};
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.likeStroy(storyId)), headers: headers, body: jsonEncode(body));
+      http.Response response = await http.post(
+          Uri.parse(ApiEndpoint.likeStroy(storyId)),
+          headers: headers,
+          body: jsonEncode(body));
       if (response.statusCode != 200) {
         CustomSnackbar.show("can't like the story");
       }
@@ -109,7 +121,10 @@ class GetXStoryController extends GetxController {
     debugPrint("story : $storyId");
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"userId": userId, "text": text};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.commentStroy(storyId)),
+        headers: headers,
+        body: jsonEncode(body));
     debugPrint(response.body);
   }
 
@@ -139,7 +154,8 @@ class GetXStoryController extends GetxController {
       FormData data = FormData.fromMap({
         "userId": userId,
         "mediaType": "image",
-        "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
+        "mediaUrl": List.generate(imagePaths.length,
+            (i) => MultipartFile.fromFileSync(imagePaths[i])),
       });
       debugPrint(" b bn bv v   v v");
       var response = await dio.post(

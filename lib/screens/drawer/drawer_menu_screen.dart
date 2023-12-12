@@ -103,7 +103,7 @@ class _DrawerMenuScreenState extends State<DrawerMenuScreen> {
                     "assets/svg/Pay.svg",
                     width: 45,
                     height: 50,
-                    color: grayColor,
+               //     color: grayColor,
                   ),
                 ),
               ],

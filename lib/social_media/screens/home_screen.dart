@@ -22,7 +22,8 @@ class SocialMediaHomePage extends StatelessWidget {
   SocialMediaHomePage({Key? key}) : super(key: key);
   final GetXStoryController storyController = Get.put(GetXStoryController(),
       tag: "GetXStoryController", permanent: true);
-  final HomePostsController homePostController = HomePostsController();
+  final HomePostsController homePostController = Get.put(HomePostsController(),
+      tag: "HomePostsController", permanent: true);
   @override
   Widget build(BuildContext context) {
     debugPrint("main Screen build");
@@ -30,17 +31,19 @@ class SocialMediaHomePage extends StatelessWidget {
       backgroundColor: socialBack,
       appBar: const HomeAppBar(),
       body: RefreshIndicator(
-        onRefresh: () {
+        onRefresh: () async {
           homePostController.skip = -10;
-          homePostController.posts?.clear();
-          homePostController.posts?.clear();
-          homePostController.endOfPost = false;
+          debugPrint(homePostController.posts!.length.toString());
+          homePostController.posts!.clear();
+          debugPrint(homePostController.posts!.length.toString());
 
+          homePostController.endOfPost = false;
+          debugPrint("refresh");
           storyController.stories?.clear();
-          storyController.getStories();
-          return homePostController.getPost();
+          await storyController.getStories();
+          await homePostController.getPost();
         },
-        child: HomePosts(myUserId: globUserId ?? homePostController.userId),
+        child: const HomePosts(),
       ),
     );
   }
