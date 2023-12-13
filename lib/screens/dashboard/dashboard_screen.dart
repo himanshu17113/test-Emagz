@@ -30,7 +30,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
 
   @override
   Widget build(BuildContext context) {
-   // Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -98,7 +98,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() =>   NotificationScreen());
+                          Get.to(() => const NotificationScreen());
                         },
                         child: SvgPicture.asset(
                           "assets/svg/Notify.svg",
@@ -145,7 +145,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IncomeCard(

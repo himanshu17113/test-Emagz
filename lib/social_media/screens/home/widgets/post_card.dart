@@ -17,24 +17,14 @@ import 'package:emagz_vendor/templates/choose_template/webview.dart';
 
 class PostCard extends StatelessWidget {
   final Post? post;
-
   final bool isBorder;
-  // final bool? isLiked;
-  //final String? myUserId;
-  //final String? userImg;
   final int? index;
   PostCard({
     Key? key,
     this.post,
     this.isBorder = true,
-    // this.isLiked,
-    //  this.myUserId,
-    //   this.userImg,
     this.index,
-    required this.url,
   }) : super(key: key);
-
-  final String url;
 
   Map<String, String>? map;
 
@@ -46,19 +36,17 @@ class PostCard extends StatelessWidget {
 
   Poll? poll;
 
-  List chooseOption = ["A. Yes", "B. No"];
+  final List chooseOption = ["A. Yes", "B. No"];
 
   int selectedOption = -1;
 
   final homePostController =
       Get.find<HomePostsController>(tag: 'HomePostsController');
   ValueNotifier valueNotifier = ValueNotifier<bool>(false);
-  // @override
   _update() {
     valueNotifier.value = !valueNotifier.value;
   }
 
-// final homePostControlle =
   @override
   Widget build(BuildContext context) {
     debugPrint("post card");
@@ -93,7 +81,7 @@ class PostCard extends StatelessWidget {
                 width: width,
                 fit: BoxFit.fitWidth,
                 alignment: Alignment.center,
-                imageUrl: url,
+                imageUrl: post!.mediaUrl![0]!,
                 placeholder: (context, url) => const Center(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 100),

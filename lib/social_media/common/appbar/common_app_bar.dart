@@ -18,7 +18,6 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: const EdgeInsets.only(top: 40, right: 10, left: 10),
       child: Row(
@@ -46,10 +45,13 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Row(
                   children: [
                     customBackButton(),
-                    const SizedBox(width: 3,),
+                    const SizedBox(
+                      width: 3,
+                    ),
                     Text(
                       title,
-                      style: const TextStyle(fontSize: 19, fontWeight: FontWeight.w600),
+                      style: const TextStyle(
+                          fontSize: 19, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -60,7 +62,7 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Get.to(() =>   NotificationScreen());
+                  Get.to(() => const NotificationScreen());
                 },
                 child: Image.asset(
                   "assets/png/notification_bell.png",
@@ -79,7 +81,10 @@ class SocialMediaAppBar extends StatelessWidget implements PreferredSizeWidget {
                     height: 30,
                     width: 30,
                     decoration: BoxDecoration(
-                        image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover), borderRadius: BorderRadius.circular(5)),
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(url),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(5)),
                   )),
               const SizedBox(
                 width: 5,

@@ -22,7 +22,9 @@ class PTemplateTwoScreen extends StatelessWidget {
           Container(
             height: 800,
             decoration: BoxDecoration(
-              image: DecorationImage(image: CachedNetworkImageProvider(templateFiveImage[3]), fit: BoxFit.cover),
+              image: DecorationImage(
+                  image: CachedNetworkImageProvider(templateFiveImage[3]),
+                  fit: BoxFit.cover),
             ),
             child: Stack(
               children: [
@@ -39,7 +41,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                       height: 1100,
                       width: 200,
                       decoration: const BoxDecoration(
-                        image: DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(imageUrlOne),
+                            fit: BoxFit.cover),
                       ),
                     ),
                   ),
@@ -54,7 +58,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                       height: 1100,
                       width: 200,
                       decoration: const BoxDecoration(
-                        image: DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                        image: DecorationImage(
+                            image: CachedNetworkImageProvider(imageUrlTwo),
+                            fit: BoxFit.cover),
                       ),
                     ),
                   ),
@@ -71,7 +77,11 @@ class PTemplateTwoScreen extends StatelessWidget {
                         children: [
                           Text(
                             "25K",
-                            style: GoogleFonts.poppins(color: whiteColor, fontSize: 100, height: .9, fontWeight: FontWeight.w800),
+                            style: GoogleFonts.poppins(
+                                color: whiteColor,
+                                fontSize: 100,
+                                height: .9,
+                                fontWeight: FontWeight.w800),
                           ),
                           const Text(
                             "Followers",
@@ -111,7 +121,8 @@ class PTemplateTwoScreen extends StatelessWidget {
                     child: Text(
                       "Johanson",
                       // style: GoogleFonts.alexBrush(
-                      style: GoogleFonts.cedarvilleCursive(color: cancledColor, letterSpacing: 1, fontSize: 38),
+                      style: GoogleFonts.cedarvilleCursive(
+                          color: cancledColor, letterSpacing: 1, fontSize: 38),
                     ),
                   ),
                 ),
@@ -139,7 +150,10 @@ class PTemplateTwoScreen extends StatelessWidget {
                       child: Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisl bibendum quis donec laoreet sapien, magna eros, dui adipiscing. ",
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.roboto(color: whiteColor, fontSize: 14, fontWeight: FontWeight.w300),
+                        style: GoogleFonts.roboto(
+                            color: whiteColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300),
                       ),
                     ),
                     const SizedBox(
@@ -153,12 +167,18 @@ class PTemplateTwoScreen extends StatelessWidget {
                           Text(
                             'Follow',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(color: whiteColor, fontSize: 15, fontWeight: FontWeight.w600),
+                            style: GoogleFonts.roboto(
+                                color: whiteColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
                           ),
                           Text(
                             'Message',
                             textAlign: TextAlign.center,
-                            style: GoogleFonts.roboto(color: whiteColor, fontSize: 16, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.roboto(
+                                color: whiteColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -192,7 +212,8 @@ class PTemplateTwoScreen extends StatelessWidget {
                         height: 300,
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(templateFiveImage[2]),
+                            image: CachedNetworkImageProvider(
+                                templateFiveImage[2]),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -231,7 +252,11 @@ class PTemplateTwoScreen extends StatelessWidget {
             child: Text(
               dummyText + dummyText + dummyText,
               textAlign: TextAlign.center,
-              style: const TextStyle(letterSpacing: .2, color: whiteColor, fontSize: 10, fontWeight: FontWeight.w300),
+              style: const TextStyle(
+                  letterSpacing: .2,
+                  color: whiteColor,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w300),
             ),
           ),
           const SizedBox(
@@ -240,7 +265,8 @@ class PTemplateTwoScreen extends StatelessWidget {
           Center(
             child: Text(
               "About Me ",
-              style: GoogleFonts.aguafinaScript(color: whiteColor, letterSpacing: 1, fontSize: 28),
+              style: GoogleFonts.aguafinaScript(
+                  color: whiteColor, letterSpacing: 1, fontSize: 28),
             ),
           ),
           const SizedBox(
@@ -257,7 +283,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlOne), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlOne),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -267,7 +295,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlThree), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlThree),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -276,7 +306,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 400,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlTwo),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 )
@@ -297,7 +329,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                   fontWeight: FontWeight.w800),
             ),
           ),
-          PostCard(url: templateFiveImage[2]),
+          PostCard(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
@@ -308,7 +340,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlTwo),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -318,7 +352,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlTwo),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ),
@@ -328,7 +364,9 @@ class PTemplateTwoScreen extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: const DecorationImage(image: CachedNetworkImageProvider(imageUrlTwo), fit: BoxFit.cover),
+                      image: const DecorationImage(
+                          image: CachedNetworkImageProvider(imageUrlTwo),
+                          fit: BoxFit.cover),
                     ),
                   ),
                 )
@@ -354,7 +392,8 @@ class PTemplateTwoScreen extends StatelessWidget {
             child: Text(
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisl bibendum quis donec laoreet sapien, magna eros, dui adipiscing. ",
               textAlign: TextAlign.center,
-              style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w300),
+              style: TextStyle(
+                  color: whiteColor, fontSize: 12, fontWeight: FontWeight.w300),
             ),
           ),
           const SizedBox(
@@ -363,7 +402,8 @@ class PTemplateTwoScreen extends StatelessWidget {
           Center(
             child: Text(
               "Thank You",
-              style: GoogleFonts.aguafinaScript(color: whiteColor, letterSpacing: 1, fontSize: 28),
+              style: GoogleFonts.aguafinaScript(
+                  color: whiteColor, letterSpacing: 1, fontSize: 28),
             ),
           ),
           const SizedBox(

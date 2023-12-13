@@ -1,5 +1,4 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/story_screen.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/my_story/my_story.dart';

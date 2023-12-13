@@ -45,7 +45,7 @@ class _MessageRequestScreenState extends State<MessageRequestScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() =>   NotificationScreen());
+                          Get.to(() =>   const NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",

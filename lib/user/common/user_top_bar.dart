@@ -59,7 +59,7 @@ class UserTopBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => NotificationScreen());
+                  Get.to(() => const NotificationScreen());
                 },
                 child: SvgPicture.asset(
                   "assets/svg/Notify.svg",

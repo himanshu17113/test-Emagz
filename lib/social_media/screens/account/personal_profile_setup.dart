@@ -116,7 +116,7 @@ class PersonalProfileSetup extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                      Get.to(() => ChooseTemplate(isReg: true));
+                      Get.to(() => const ChooseTemplate(isReg: true));
                       //accountSetUpController.setUpPersonalAccount();
                       // Get.to(() => BusinessProfileSetupScreen());
                     },

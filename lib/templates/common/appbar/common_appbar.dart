@@ -51,7 +51,7 @@ class TempleteAppBar extends StatelessWidget {
               SvgPicture.asset(
                 "assets/svg/notifytemp.svg",
                 width: 25,
-                color: isBlack == true ? blackButtonColor : whiteColor,
+              //  color: isBlack == true ? blackButtonColor : whiteColor,
               ),
               const SizedBox(
                 width: 10,

@@ -5,16 +5,16 @@ import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
- 
+
 import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.dart';
- 
+
 import 'package:flutter/material.dart';
- 
+
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
 import '../../common/title_switch/title_and_switch_widget.dart';
- 
+
 String url =
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2lybHN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
 
@@ -28,11 +28,11 @@ class ChatSettingScreen extends StatefulWidget {
 class _ChatSettingScreenState extends State<ChatSettingScreen> {
   String selectedValue = "Latest Request";
   int? selectedIndex;
-  bool showBox=false;
-  bool showSearch=false;
-  var chatController= Get.put(ConversationController());
+  bool showBox = false;
+  bool showSearch = false;
+  var chatController = Get.put(ConversationController());
   UserSchema? user;
-  bool? youFollow ;
+  bool? youFollow;
   bool? everyOne;
   bool? noone;
   @override
@@ -42,16 +42,16 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
   }
 
   asyncInit() async {
+    // user = await jwtController.getCurrentUserDetail();
+    youFollow = user!.mess_priv!.yourFollower;
 
-   // user = await jwtController.getCurrentUserDetail();
-    youFollow= user!.mess_priv!.yourFollower;
-
-    everyOne= user!.mess_priv!.everyone;
-    noone=user!.mess_priv!.noOne;
+    everyOne = user!.mess_priv!.everyone;
+    noone = user!.mess_priv!.noOne;
 
     setState(() {});
   }
-  final privacyController= Get.put(PrivacyController());
+
+  final privacyController = Get.put(PrivacyController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -68,7 +68,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       children: [
                         Text(
                           "Chat Setting",
-                          style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                          style: TextStyle(
+                              fontSize: 21, fontWeight: FontWeight.w600),
                         ),
                       ],
                     ),
@@ -77,7 +78,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(() =>   NotificationScreen());
+                          Get.to(() => const NotificationScreen());
                         },
                         child: Image.asset(
                           "assets/png/notification_bell.png",
@@ -96,7 +97,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.cover),
+                                image: DecorationImage(
+                                    image: CachedNetworkImageProvider(url),
+                                    fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(5)),
                           )),
                       const SizedBox(
@@ -121,7 +124,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                     Get.to(() => const MessageRequestScreen());
                   },
                   child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 18, vertical: 12),
                       decoration: BoxDecoration(
                         color: chatContainer,
                         borderRadius: BorderRadius.circular(10),
@@ -150,7 +154,9 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             alignment: Alignment.center,
                             width: 32,
                             height: 32,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xff3A0DBB)),
+                            decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff3A0DBB)),
                             child: FormHeadingText(
                               headings: "${chatController.req!.length}",
                               color: whiteColor,
@@ -190,7 +196,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       ),
                       const Text(
                         "Control",
-                        style: TextStyle(color: toggleInactive, fontSize: 11, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: toggleInactive,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: 20,
@@ -199,22 +208,27 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                         children: [
                           const Text(
                             "Allow Message from",
-                            style: TextStyle(color: blackButtonColor, fontSize: 10, fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                color: blackButtonColor,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w600),
                           ),
                           const Spacer(),
                           Row(
                             children: [
                               GestureDetector(
-                                onTap:()
-                                {
+                                onTap: () {
                                   setState(() {
-                                    showBox=!showBox;
-                                    showSearch=false;
+                                    showBox = !showBox;
+                                    showSearch = false;
                                   });
                                 },
                                 child: const Text(
                                   "Everyone",
-                                  style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: purpleColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
                               const SizedBox(
@@ -238,15 +252,16 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               GestureDetector(
-
                                 child: const Text(
                                   "Block comment from",
-                                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                  style: TextStyle(
+                                      color: blackButtonColor,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600),
                                 ),
-                                onTap: ()
-                                {
+                                onTap: () {
                                   setState(() {
-                                    showSearch=!showSearch;
+                                    showSearch = !showSearch;
                                   });
                                 },
                               ),
@@ -257,7 +272,11 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                                 width: 140,
                                 child: Text(
                                   "Any message from people you block will not be visible to anyone but them",
-                                  style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 7, fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                      letterSpacing: .3,
+                                      color: signInHeading,
+                                      fontSize: 7,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ],
@@ -267,7 +286,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                             children: [
                               Text(
                                 "0 people",
-                                style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: purpleColor,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600),
                               ),
                               SizedBox(
                                 width: 8,
@@ -332,12 +354,13 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                               width: 40,
                               inactiveColor: lightgrayColor,
                               inactiveToggleColor: toggleInactive,
-                              value: everyOne?? true,
+                              value: everyOne ?? true,
                               onToggle: (val) {
                                 setState(() {
                                   everyOne = val;
                                 });
-                                privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
+                                privacyController.privacyMessageControl(
+                                    everyOne!, youFollow!, noone!);
                               }),
                         ],
                       ),
@@ -347,16 +370,14 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "People you follow",
                         subTitle: "53 People",
-                        isActive: youFollow??false,
-                        onToggle: (val)
-                        {
+                        isActive: youFollow ?? false,
+                        onToggle: (val) {
                           setState(() {
                             youFollow = val;
                           });
-                          privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
-
+                          privacyController.privacyMessageControl(
+                              everyOne!, youFollow!, noone!);
                         },
-
                       ),
                       const SizedBox(
                         height: 8,
@@ -364,14 +385,13 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       TitleAndSwitchWidget(
                         title: "No One Except Specific Profiles",
                         subTitle: "",
-                        isActive: noone??false,
-                        onToggle: (val)
-                        {
+                        isActive: noone ?? false,
+                        onToggle: (val) {
                           setState(() {
                             noone = val;
                           });
-                          privacyController.privacyMessageControl(everyOne!, youFollow!, noone!);
-
+                          privacyController.privacyMessageControl(
+                              everyOne!, youFollow!, noone!);
                         },
                       ),
                     ],
@@ -393,7 +413,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                     children: [
                       const Text(
                         "Block Message from",
-                        style: TextStyle(color: toggleInactive, fontSize: 8, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            color: toggleInactive,
+                            fontSize: 8,
+                            fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(
                         height: 10,
@@ -415,7 +438,8 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                               ),
                               isDense: true,
                               hintText: "Search",
-                              hintStyle: TextStyle(fontSize: 9, color: lightBlack),
+                              hintStyle:
+                                  TextStyle(fontSize: 9, color: lightBlack),
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.zero),
                         ),

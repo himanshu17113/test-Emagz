@@ -53,7 +53,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(50),
             child: Container(
-              margin: const EdgeInsets.only(top: 10, right: 30, left: 30, bottom: 10),
+              margin: const EdgeInsets.only(
+                  top: 10, right: 30, left: 30, bottom: 10),
               child: Row(
                 children: [
                   const Text(
@@ -63,7 +64,7 @@ class _ChatListScreenState extends State<ChatListScreen> {
                   const Spacer(),
                   InkWell(
                     onTap: () {
-                      Get.to(() => NotificationScreen());
+                      Get.to(() => const NotificationScreen());
                     },
                     child: Image.asset(
                       "assets/png/notification_bell.png",
@@ -138,7 +139,9 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             child: Container(
                           // margin: EdgeInsets.symmetric(),
                           height: 42,
-                          decoration: BoxDecoration(color: const Color(0xffF0F0F0), borderRadius: BorderRadius.circular(10)),
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF0F0F0),
+                              borderRadius: BorderRadius.circular(10)),
                           child: TextField(
                             controller: queryControl,
                             onSubmitted: (value) {
@@ -157,8 +160,10 @@ class _ChatListScreenState extends State<ChatListScreen> {
                             showCursor: false,
                             decoration: const InputDecoration(
                                 hintText: "Search",
-                                hintStyle: TextStyle(fontSize: 13, color: blackButtonColor),
-                                contentPadding: EdgeInsets.only(left: 10, top: 5),
+                                hintStyle: TextStyle(
+                                    fontSize: 13, color: blackButtonColor),
+                                contentPadding:
+                                    EdgeInsets.only(left: 10, top: 5),
                                 prefixIcon: Icon(
                                   Icons.search,
                                   color: Colors.black,
@@ -198,14 +203,18 @@ class _ChatListScreenState extends State<ChatListScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 18),
                     child: const Text(
                       "Online",
-                      style: TextStyle(color: blackButtonColor, fontSize: 15.5, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                          color: blackButtonColor,
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
                     child: const Row(
                       children: [
                         UserOnlineCircle(),
@@ -251,7 +260,8 @@ class _ChatListScreenState extends State<ChatListScreen> {
                           : (myFuture == null)
                               ? const CircularProgressIndicator()
                               : RefreshIndicator(
-                                  onRefresh: () => myFuture = chatController.getChatList(),
+                                  onRefresh: () =>
+                                      myFuture = chatController.getChatList(),
                                   child: UserChats(
                                     data: myFuture!,
                                   ),

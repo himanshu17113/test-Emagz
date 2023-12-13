@@ -11,14 +11,12 @@ class WebViewPersona extends StatefulWidget {
   String token;
   String userId;
   String personaUserId;
-  WebViewPersona(
-      {Key? key,
-      required this.token,
-      required this.userId,
-      required this.personaUserId,
-
-  })
-      : super(key: key);
+  WebViewPersona({
+    Key? key,
+    required this.token,
+    required this.userId,
+    required this.personaUserId,
+  }) : super(key: key);
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -34,10 +32,8 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ..setNavigationDelegate(NavigationDelegate(
         onPageStarted: (url) {},
         onProgress: (progress) {},
-        onPageFinished: (url) {
-        },
+        onPageFinished: (url) {},
         onNavigationRequest: (NavigationRequest request) async {
-
           if (request.url.startsWith('http://www.emagz.live/Chat/')) {
             int index = int.parse(
                 request.url.replaceAll("http://www.emagz.live/Chat/", ""));
@@ -68,18 +64,18 @@ class _WebViewPersonaState extends State<WebViewPersona> {
   }
 }
 
-
-
 class OwnWebView extends StatefulWidget {
   String token;
   String userId;
   String personaUserId;
   String templateId;
-  OwnWebView({Key? key,
-  required this.token,
-  required this.userId,
-  required this.personaUserId,
-  required this.templateId}) : super(key: key);
+  OwnWebView(
+      {Key? key,
+      required this.token,
+      required this.userId,
+      required this.personaUserId,
+      required this.templateId})
+      : super(key: key);
 
   @override
   State<OwnWebView> createState() => _OwnWebViewState();
@@ -89,47 +85,43 @@ class _OwnWebViewState extends State<OwnWebView> {
   final chatController = Get.find<ConversationController>();
   @override
   Widget build(BuildContext context) {
- //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     return Container(
       height: 200,
       width: 90,
       padding: const EdgeInsets.symmetric(horizontal: 1),
       child: InAppWebView(
-          onUpdateVisitedHistory: (_, Uri? uri, __) async{
+          onUpdateVisitedHistory: (_, Uri? uri, __) async {
             // uri containts newly loaded url
             debugPrint(uri.toString());
             if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
-              int len= uri!.path.length;
+              int len = uri!.path.length;
 
-              int index=int.parse(uri.path[len-1]);
+              int index = int.parse(uri.path[len - 1]);
               debugPrint(index.toString());
-              final List<Conversation> list = await chatController.getChatList();
-              Get.off(()=>ChatScreen(
-                user: list[index].userData,
-                conversationId: list[index].data!.id!,
-                //  messages: messages,
-              ));
-
-
+              final List<Conversation> list =
+                  await chatController.getChatList();
+              Get.off(() => ChatScreen(
+                    user: list[index].userData,
+                    conversationId: list[index].data!.id!,
+                    //  messages: messages,
+                  ));
             }
 
-            if (uri.toString().startsWith('http://www.emagz.live/ChoseTemplate')) {
-
-              Get.off(() => ChooseTemplate(
-                isReg:false,
-              ));
-
+            if (uri
+                .toString()
+                .startsWith('http://www.emagz.live/ChoseTemplate')) {
+              Get.off(() => const ChooseTemplate(
+                    isReg: false,
+                  ));
             }
-
-
           },
-          initialUrlRequest:
-          URLRequest(url: Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))
-      ),
+          initialUrlRequest: URLRequest(
+              url: Uri.parse(
+                  'http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))),
     );
   }
 }
-
 
 class WebViewOnlyView extends StatefulWidget {
   String token;
@@ -138,10 +130,10 @@ class WebViewOnlyView extends StatefulWidget {
   String templateId;
   WebViewOnlyView(
       {Key? key,
-        required this.token,
-        required this.userId,
-        required this.personaUserId,
-        required this.templateId})
+      required this.token,
+      required this.userId,
+      required this.personaUserId,
+      required this.templateId})
       : super(key: key);
 
   @override
@@ -159,7 +151,8 @@ class _WebViewOnlyViewState extends State<WebViewOnlyView> {
         onPageStarted: (url) {},
         onProgress: (progress) {},
         onPageFinished: (url) {
-          debugPrint('http://persona.emagz.live/${widget.userId}/${widget.token}');
+          debugPrint(
+              'http://persona.emagz.live/${widget.userId}/${widget.token}');
         },
       ))
       ..loadRequest(

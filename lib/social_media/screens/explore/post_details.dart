@@ -22,7 +22,7 @@ class ExplorePostDetails extends StatelessWidget {
             height: Get.size.height / 2,
             child: PostCard(
               isBorder: false,
-              url: imageList.first,
+            ///  url: imageList.first,
             ),
           ),
           const SizedBox(

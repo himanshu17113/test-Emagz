@@ -9,9 +9,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../constant/data.dart';
- import '../temp_attech_screen.dart';
+import '../temp_attech_screen.dart';
 
-class SocialHomeScreenAppBar extends StatefulWidget implements PreferredSizeWidget {
+class SocialHomeScreenAppBar extends StatefulWidget
+    implements PreferredSizeWidget {
   final String title;
   @override
   final Size preferredSize;
@@ -34,7 +35,8 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 2), (Timer t) => flipWidget());
+    timer =
+        Timer.periodic(const Duration(seconds: 2), (Timer t) => flipWidget());
   }
 
   flipWidget() {
@@ -72,7 +74,7 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
           const Spacer(),
           InkWell(
             onTap: () {
-              Get.to(() => NotificationScreen());
+              Get.to(() => const NotificationScreen());
             },
             child: Image.asset(
               "assets/png/notification_bell.png",
@@ -104,7 +106,10 @@ class _SocialHomeScreenAppBarState extends State<SocialHomeScreenAppBar> {
                       ),
                       child: SvgPicture.asset("assets/svg/Ebusiness-Icon.svg"),
                     )),
-                back: CircleAvatar(radius: 30, backgroundImage: CachedNetworkImageProvider(globProfilePic ?? "")),
+                back: CircleAvatar(
+                    radius: 30,
+                    backgroundImage:
+                        CachedNetworkImageProvider(globProfilePic ?? "")),
               ),
             ),
           ),

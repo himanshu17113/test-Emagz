@@ -104,11 +104,7 @@ class HomePosts extends StatelessWidget {
                                   index: index - 1,
                                   post: homePostController.posts?[index - 1],
                                   //    myUserId: myUserId,
-                                  url: homePostController.posts![index - 1]
-                                          .mediaUrl!.isNotEmpty
-                                      ? homePostController
-                                          .posts![index - 1].mediaUrl![0]!
-                                      : "",
+                                
                                   // userImg: homePostController.posts?[index - 1].user?.ProfilePic ?? "",
                                 ));
                     }
