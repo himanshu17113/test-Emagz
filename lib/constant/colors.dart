@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
-LinearGradient myGradient = const LinearGradient(
+const LinearGradient myGradient = LinearGradient(
     // end: Alignment.topRight,
     // begin: Alignment.bottomLeft,
     begin: Alignment(-0.8, 1.4),
@@ -11,20 +11,29 @@ LinearGradient myGradient = const LinearGradient(
       // Color(0xff0F0AA4),
       Color(0xff2992E3),
     ]);
-LinearGradient redGradient = const LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
-  Color(0xffCC0022),
-  Color(0xffFF8DB6),
-]);
-LinearGradient orangeGradient = const LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
-  Color(0xffFFBE4E),
-  Color(0xffE35B00),
-]);
-LinearGradient greenGradient = const LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
-  Color(0xff46F2DB),
-  Color(0xff00A498),
-]);
+const LinearGradient redGradient = LinearGradient(
+    end: Alignment.topRight,
+    begin: Alignment.bottomLeft,
+    colors: [
+      Color(0xffCC0022),
+      Color(0xffFF8DB6),
+    ]);
+const LinearGradient orangeGradient = LinearGradient(
+    end: Alignment.topRight,
+    begin: Alignment.bottomLeft,
+    colors: [
+      Color(0xffFFBE4E),
+      Color(0xffE35B00),
+    ]);
+const LinearGradient greenGradient = LinearGradient(
+    end: Alignment.topRight,
+    begin: Alignment.bottomLeft,
+    colors: [
+      Color(0xff46F2DB),
+      Color(0xff00A498),
+    ]);
 
-LinearGradient authGradient = const LinearGradient(
+const LinearGradient authGradient = LinearGradient(
   begin: Alignment.centerLeft,
   end: Alignment.topRight,
   colors: [
@@ -34,15 +43,23 @@ LinearGradient authGradient = const LinearGradient(
   stops: [-0.082, 0.9257],
   transform: GradientRotation(7843 * (math.pi / 6000)),
 );
-LinearGradient pinkGradient = const LinearGradient(end: Alignment.topLeft, begin: Alignment.bottomRight, colors: [
-  darkPink,
-  darkPinkAcent,
-]);
+LinearGradient pinkGradient = const LinearGradient(
+    end: Alignment.topLeft,
+    begin: Alignment.bottomRight,
+    colors: [
+      darkPink,
+      darkPinkAcent,
+    ]);
 
-LinearGradient buttonGradient = const LinearGradient(
+const LinearGradient buttonGradient = LinearGradient(
   begin: Alignment(-0.8, 1.4),
   end: Alignment(0.8, -1.4),
-  colors: [Color(0xFF020AFF), Color(0xFF23A3FF), Color(0xFF2489D2), Color(0xFF020EFF)],
+  colors: [
+    Color(0xFF020AFF),
+    Color(0xFF23A3FF),
+    Color(0xFF2489D2),
+    Color(0xFF020EFF)
+  ],
   stops: [-0.082, 0.4, 0.6848, 0.9257],
   transform: GradientRotation(
     7843 * (math.pi / 10000),
@@ -97,7 +114,7 @@ const Color profileGray = Color(0xffF3F3F3);
 
 // Social Media
 
-const Color socialBack = Color(0xffE7E9FE);
+  const  Color socialBack = Color(0xffE7E9FE);
 const Color chipColor = Color(0xff3A0DBB);
 const Color purpleColor = Color(0xff3A0DBB);
 const Color chatOnlineDot = Color(0xff1E6B17);

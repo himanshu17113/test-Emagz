@@ -96,7 +96,7 @@ class _CouponListScreenState extends State<CouponListScreen> {
                           SvgPicture.asset(
                             "assets/svg/Filter.svg",
                             width: 28,
-                            color: blackButtonColor,
+                        //    color: blackButtonColor,
                           ),
                         ],
                       ),

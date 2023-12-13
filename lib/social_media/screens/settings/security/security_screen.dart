@@ -989,6 +989,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                   height: 20,
                 ),
                 MyCustomTextfiled(
+                  inputType: TextInputType.phone,
                   hint: "+91 000 000 0000",
                   controller: mobile,
                 ),

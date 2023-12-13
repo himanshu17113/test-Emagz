@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/constant/data.dart';
-import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/cupertino.dart';

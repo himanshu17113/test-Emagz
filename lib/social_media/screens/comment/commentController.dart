@@ -12,11 +12,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class CommentController extends GetxController {
-  final socketController = Get.find<SocketController>();
- final Dio dio = Dio();
-   @override
+  final socketController = Get.find<SocketController>(tag: "notify");
+  final Dio dio = Dio();
+  @override
   onInit() async {
-        dio.options.headers["Authorization"] = globToken ?? token;
+    dio.options.headers["Authorization"] = globToken ?? token;
     super.onInit();
   }
 
@@ -73,9 +73,9 @@ class CommentController extends GetxController {
     }
     isPosting.value = true;
     try {
-    
       var data = {"userId": userId, "text": comment};
-      var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      var resposne =
+          await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
       // print(resposne);
@@ -104,8 +104,6 @@ class CommentController extends GetxController {
     }
     isPosting.value = true;
     try {
-     
-
       final resposne = await dio.get(
         ApiEndpoint.getcomment(postId),
       );
@@ -113,7 +111,8 @@ class CommentController extends GetxController {
       isPosting.value = false;
       controller.clear();
       if (resposne.statusCode == 200) {
-        List<Comment?> x = List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
+        List<Comment?> x =
+            List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
         return x;
       }
 
@@ -133,10 +132,16 @@ class CommentController extends GetxController {
     }
 
     debugPrint("story : $storyId");
-    final headers = {'Content-Type': 'application/json', "Authorization": token!};
+    final headers = {
+      'Content-Type': 'application/json',
+      "Authorization": token!
+    };
     debugPrint(ApiEndpoint.commentPost(storyId));
     Map body = {"userId": userId, "text": comment};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.commentStroy(storyId)),
+        headers: headers,
+        body: jsonEncode(body));
     debugPrint(response.body);
     List<dynamic> list = jsonDecode(response.body)["stories"]["Comments"];
 
@@ -150,7 +155,8 @@ class CommentController extends GetxController {
     return list.last["_id"];
   }
 
-  replyStory(String postId, String commentID, String? comment, String postuID) async {
+  replyStory(
+      String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyStory(postId, commentID, userId!));
@@ -161,9 +167,9 @@ class CommentController extends GetxController {
     //   }
     isPosting.value = true;
     try {
-    
       var data = {"text": comment ?? controller.text};
-      var resposne = await dio.post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
+      var resposne = await dio
+          .post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
@@ -176,7 +182,8 @@ class CommentController extends GetxController {
     }
   }
 
-  Future<Comment> postReply(String postId, String commentID, String? comment, String postuID) async {
+  Future<Comment> postReply(
+      String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
@@ -187,9 +194,9 @@ class CommentController extends GetxController {
     //   }
     isPosting.value = true;
     try {
-  
       Map<String, String> data = {"text": comment ?? controller.text};
-      var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
+      var resposne = await dio
+          .post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
       log(resposne.toString());
       isPosting.value = false;
       controller.clear();

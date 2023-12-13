@@ -166,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             MyCustomTextfiled(
-              inputType: TextInputType.phone,
+          //    inputType: TextInputType.,
               controller: authController.passwordController,
             ),
             SizedBox(

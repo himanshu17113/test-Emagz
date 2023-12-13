@@ -50,7 +50,7 @@ class StorySelectionBottomSheet extends StatelessWidget {
      return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       margin: const EdgeInsets.symmetric(horizontal: 5),
-      height: Get.height * .85 ?? 500,
+      height: Get.height * .85  ,
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(

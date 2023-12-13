@@ -45,7 +45,7 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                 child: Image.asset(
                   "assets/png/new_logo.png",
                   width: 100,
-                  color: Colors.white.withOpacity(.8),
+                  color: Colors.white70,
                 ),
               ),
               const Spacer(),

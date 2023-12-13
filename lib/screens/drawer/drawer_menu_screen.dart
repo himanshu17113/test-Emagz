@@ -70,7 +70,7 @@ class _DrawerMenuScreenState extends State<DrawerMenuScreen> {
                     "assets/svg/Product.svg",
                     width: 45,
                     height: 50,
-                    color: grayColor,
+              //      color: grayColor,
                   ),
                 ),
                 InkWell(
@@ -81,7 +81,7 @@ class _DrawerMenuScreenState extends State<DrawerMenuScreen> {
                     "assets/svg/Packege.svg",
                     width: 45,
                     height: 50,
-                    color: grayColor,
+              //      color: grayColor,
                   ),
                 ),
                 InkWell(
@@ -92,7 +92,7 @@ class _DrawerMenuScreenState extends State<DrawerMenuScreen> {
                     "assets/svg/Coupan.svg",
                     width: 45,
                     height: 50,
-                    color: grayColor,
+                //    color: grayColor,
                   ),
                 ),
                 InkWell(

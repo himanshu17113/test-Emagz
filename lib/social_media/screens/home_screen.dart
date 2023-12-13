@@ -1,6 +1,5 @@
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
