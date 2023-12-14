@@ -13,6 +13,7 @@ class SocketController extends GetxController {
   IO.Socket socket = IO.io(ApiEndpoint.socketUrl, <String, dynamic>{
     'transports': ['websocket'],
   });
+  String? prevRoom;
   static Client client = http.Client();
   static String? userId = globUserId;
   RxBool? isUserSender = false.obs;
@@ -51,53 +52,76 @@ class SocketController extends GetxController {
     socket.clearListeners();
   }
 
+  iamActive() {
+    socket.emit("joinLoginRoom", {"userId": globUserId!});
+    //socket.emit(globUserId!);
+  }
+
+  getActiveUsers() {
+    socket.on("userOnline", (payload) => {debugPrint("tagged ${payload.toString()}")});
+  }
+
   void connectToServer(String room) {
-    debugPrint("Connect to Server");
-//    socket.connect();
-    socket.emit("joinRoom", room);
-    // socket.onConnect((_) {
-    //   debugPrint("socket is connected to the room $room");
-    //   socket.emit("joinRoom", room);
-    // });
-
-    socket.on("chatHistory", (payload) {
-      debugPrint("Getting Chat History");
-      debugPrint(payload.toString());
-      for (var payloadx in payload) {
-        // print(payloadx);
-        liveMessages.add(Message.fromJson(payloadx));
+    if (prevRoom != null && prevRoom == room) {
+      debugPrint("do nothhing");
+    } else {
+      if (prevRoom != null && prevRoom != room) {
+        disconnectToServer(prevRoom!);
+        liveMessages.clear();
       }
-    });
 
-    socket.onDisconnect((_) => debugPrint('disconnect'));
-    socket.on(
-        'receive_message_$room',
-        (message) => {
-              liveMessages.add(Message(
-                sId: message['_id'],
-                conversationId: message['conversationId'],
-                sender: message['sender'],
-                text: message['text'],
-                createdAt: message['createdAt'],
-              ))
-            });
-    socket.on('message_$room', (message) {
-      // liveMessage.value = Message(
-      //   sId: message['_id'],
-      //   conversationId: message['conversationId'],
-      //   sender: message['sender'],
-      //   text: message['text'],
-      //   createdAt: message['createdAt'],
-      // );
+      prevRoom = room;
 
-      liveMessages.add(Message(
-        sId: message['_id'],
-        conversationId: message['conversationId'],
-        sender: message['sender'],
-        text: message['text'],
-        createdAt: message['createdAt'],
-      ));
-    });
+      debugPrint("Connect to Server");
+//    socket.connect();
+      socket.emit("joinRoom", room);
+      // socket.onConnect((_) {
+      //   debugPrint("socket is connected to the room $room");
+      //   socket.emit("joinRoom", room);
+      // });
+
+      socket.on("chatHistory", (payload) {
+        debugPrint("Getting Chat History");
+        debugPrint(payload.toString());
+        for (var payloadx in payload) {
+          // print(payloadx);
+          liveMessages.add(Message.fromJson(payloadx));
+        }
+        update(["message"]);
+      });
+
+      socket.onDisconnect((_) => debugPrint('disconnect'));
+      socket.on(
+          'receive_message_$room',
+          (message) => {
+                liveMessages.add(Message(
+                  sId: message['_id'],
+                  conversationId: message['conversationId'],
+                  sender: message['sender'],
+                  text: message['text'],
+                  createdAt: message['createdAt'],
+                )),
+                update(["message"])
+              });
+      socket.on('message_$room', (message) {
+        // liveMessage.value = Message(
+        //   sId: message['_id'],
+        //   conversationId: message['conversationId'],
+        //   sender: message['sender'],
+        //   text: message['text'],
+        //   createdAt: message['createdAt'],
+        // );
+
+        liveMessages.add(Message(
+          sId: message['_id'],
+          conversationId: message['conversationId'],
+          sender: message['sender'],
+          text: message['text'],
+          createdAt: message['createdAt'],
+        ));
+        update(["message"]);
+      });
+    }
   }
 
   void sendMessage(String message, String room, String id) async {
@@ -251,6 +275,8 @@ class SocketController extends GetxController {
   @override
   void onInit() {
     //initSocket();
+    getActiveUsers();
+    iamActive();
     getNotification();
     super.onInit();
   }

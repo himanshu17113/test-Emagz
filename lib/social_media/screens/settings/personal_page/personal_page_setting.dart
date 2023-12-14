@@ -218,14 +218,10 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          var token = await HiveDB.getAuthToken();
-                          var userId = await HiveDB.getUserID();
+                      
 
                           Get.to(() => OwnWebView(
-                                token: token!,
-                                userId: userId!,
-                                personaUserId: userId,
-                                templateId: 'w',
+                          
                               ));
                         },
                         child: Container(

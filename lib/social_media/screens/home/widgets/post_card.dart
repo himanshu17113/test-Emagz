@@ -139,10 +139,7 @@ class PostCard extends StatelessWidget {
                         temp = '64e8f2c3b9b30c1ed4b28bb6';
                       }
                       Get.to(() => OwnWebView(
-                            token: globToken!,
-                            userId: globUserId!,
-                            personaUserId: post!.user!.sId!,
-                            templateId: ' ',
+                             
                           ));
                     }
                   },

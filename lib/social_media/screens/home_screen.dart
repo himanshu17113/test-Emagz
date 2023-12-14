@@ -25,6 +25,7 @@ class SocialMediaHomePage extends StatelessWidget {
       tag: "HomePostsController", permanent: true);
   @override
   Widget build(BuildContext context) {
+  
     debugPrint("main Screen build");
     return Scaffold(
       backgroundColor: socialBack,
@@ -36,7 +37,7 @@ class SocialMediaHomePage extends StatelessWidget {
           homePostController.posts!.clear();
           debugPrint(homePostController.posts!.length.toString());
           homePostController.endOfPost = false;
-           storyController.stories?.clear();
+          storyController.stories?.clear();
           await storyController.getStories();
           await homePostController.getPost();
         },

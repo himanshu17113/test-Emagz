@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import '../../social_media/screens/chat/models/chat_model.dart';
+import '../../constant/data.dart';
 
 class WebViewPersona extends StatefulWidget {
-  String token;
-  String userId;
-  String personaUserId;
-  WebViewPersona({
+  final String token;
+  final String userId;
+  final String personaUserId;
+  const WebViewPersona({
     Key? key,
     required this.token,
     required this.userId,
@@ -34,13 +34,12 @@ class _WebViewPersonaState extends State<WebViewPersona> {
         onProgress: (progress) {},
         onPageFinished: (url) {},
         onNavigationRequest: (NavigationRequest request) async {
-          if (request.url.startsWith('http://www.emagz.live/Chat/')) {
-            int index = int.parse(
-                request.url.replaceAll("http://www.emagz.live/Chat/", ""));
-            final List<Conversation> list = await chatController.getChatList();
+          if (request.url.startsWith('https://www.emagz.live/Chat/')) {
+            int index = int.parse(request.url.replaceAll("https://www.emagz.live/Chat/", ""));
+            await chatController.getChatList();
             Get.to(() => ChatScreen(
-                  user: list[index].userData,
-                  conversationId: list[index].data!.id!,
+                  user: chatController.chatList[index].userData,
+                  conversationId: chatController.chatList[index].data!.id!,
                   //  messages: messages,
                 ));
             return NavigationDecision.prevent;
@@ -51,8 +50,7 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ..loadRequest(
         //Uri.parse('http://persona.emagz.live/64e8f2c3b9b30c1ed4b28bb6/64d33c54b6a7b2fb0be633dc/64d33c54b6a7b2fb0be633dc/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzM2M1NGI2YTdiMmZiMGJlNjMzZGMiLCJpYXQiOjE2OTM0MDA2NTB9.PgFHtbYq9V9gT3mvmSQ6S61tG-BYAEDfHtt5LLODBOY'),
 
-        Uri.parse(
-            'http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'),
+        Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'),
       );
 
     super.initState();
@@ -64,62 +62,53 @@ class _WebViewPersonaState extends State<WebViewPersona> {
   }
 }
 
-class OwnWebView extends StatefulWidget {
-  String token;
-  String userId;
-  String personaUserId;
-  String templateId;
-  OwnWebView(
-      {Key? key,
-      required this.token,
-      required this.userId,
-      required this.personaUserId,
-      required this.templateId})
-      : super(key: key);
+class OwnWebView extends StatelessWidget {
+  // String templateId;
+  const OwnWebView({
+    Key? key,
 
-  @override
-  State<OwnWebView> createState() => _OwnWebViewState();
-}
+    // required this.templateId
+  }) : super(key: key);
 
-class _OwnWebViewState extends State<OwnWebView> {
-  final chatController = Get.find<ConversationController>();
   @override
   Widget build(BuildContext context) {
+    //   String tempId = chatController.tempID!;
     //   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return Container(
-      height: 200,
-      width: 90,
-      padding: const EdgeInsets.symmetric(horizontal: 1),
-      child: InAppWebView(
-          onUpdateVisitedHistory: (_, Uri? uri, __) async {
-            // uri containts newly loaded url
-            debugPrint(uri.toString());
-            if (uri.toString().startsWith('http://www.emagz.live/Chat')) {
-              int len = uri!.path.length;
+    return GetBuilder<ConversationController>(
+        init: ConversationController(),
+        id: "rotate",
+        initState: (_) {},
+        builder: (chatController) => RotatedBox(
+              quarterTurns: chatController.isRotate ? 1 : 0,
+              child: InAppWebView(
+                  onUpdateVisitedHistory: (_, Uri? uri, __) async {
+                    if (uri.toString().endsWith("desktop")) {
+                      chatController.rotate();
+                    }
 
-              int index = int.parse(uri.path[len - 1]);
-              debugPrint(index.toString());
-              final List<Conversation> list =
-                  await chatController.getChatList();
-              Get.off(() => ChatScreen(
-                    user: list[index].userData,
-                    conversationId: list[index].data!.id!,
-                    //  messages: messages,
-                  ));
-            }
+                    debugPrint(uri.toString());
+                    if (uri.toString().startsWith('https://www.emagz.live/Chat')) {
+                      int len = uri!.path.length;
 
-            if (uri
-                .toString()
-                .startsWith('http://www.emagz.live/ChoseTemplate')) {
-              Get.off(() => const ChooseTemplate(
-                    isReg: false,
-                  ));
-            }
-          },
-          initialUrlRequest: URLRequest(
-              url: Uri.parse(
-                  'http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'))),
-    );
+                      int index = int.parse(uri.path[len - 1]);
+                      debugPrint(index.toString());
+
+                      await chatController.getChatList();
+                      Get.off(() => ChatScreen(
+                            user: chatController.chatList[index].userData,
+                            conversationId: chatController.chatList[index].data!.id!,
+                            //  messages: messages,
+                          ));
+                    }
+
+                    if (uri.toString().startsWith('https://www.emagz.live/ChoseTemplate')) {
+                      Get.off(() => const ChooseTemplate(
+                            isReg: false,
+                          ));
+                    }
+                  },
+                  initialUrlRequest: URLRequest(url: Uri.parse('https://persona.emagz.live/$globUserId/$globUserId/$globToken'))),
+            )); //first user you want to see
   }
 }
 
@@ -128,13 +117,7 @@ class WebViewOnlyView extends StatefulWidget {
   String userId;
   String personaUserId;
   String templateId;
-  WebViewOnlyView(
-      {Key? key,
-      required this.token,
-      required this.userId,
-      required this.personaUserId,
-      required this.templateId})
-      : super(key: key);
+  WebViewOnlyView({Key? key, required this.token, required this.userId, required this.personaUserId, required this.templateId}) : super(key: key);
 
   @override
   State<WebViewOnlyView> createState() => _WebViewOnlyViewState();
@@ -151,15 +134,13 @@ class _WebViewOnlyViewState extends State<WebViewOnlyView> {
         onPageStarted: (url) {},
         onProgress: (progress) {},
         onPageFinished: (url) {
-          debugPrint(
-              'http://persona.emagz.live/${widget.userId}/${widget.token}');
+          debugPrint('http://persona.emagz.live/${widget.userId}/${widget.token}');
         },
       ))
       ..loadRequest(
         //Uri.parse('http://persona.emagz.live/64e8f2c3b9b30c1ed4b28bb6/64d33c54b6a7b2fb0be633dc/64d33c54b6a7b2fb0be633dc/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzM2M1NGI2YTdiMmZiMGJlNjMzZGMiLCJpYXQiOjE2OTM0MDA2NTB9.PgFHtbYq9V9gT3mvmSQ6S61tG-BYAEDfHtt5LLODBOY'),
 
-        Uri.parse(
-            'http://persona.emagz.live/${widget.templateId}/${widget.token}'),
+        Uri.parse('http://persona.emagz.live/${widget.templateId}/${widget.token}'),
       );
 
     super.initState();

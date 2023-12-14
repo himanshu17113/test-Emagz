@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
@@ -54,12 +53,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: GestureDetector(
                     onTap: () {
-                      Get.to(() => OwnWebView(
-                            token: globToken!,
-                            userId: globUserId!,
-                            personaUserId: globUserId!,
-                            templateId: 'w',
-                          ));
+                      Get.to(() => const OwnWebView());
                     },
                     child: CircleAvatar(
                       backgroundImage: CachedNetworkImageProvider(
@@ -75,7 +69,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     init: SocketController(),
                     tag: "notify",
                     id: "dot",
-                  //  assignId: true,
+                    //  assignId: true,
                     //     initState: (_) {},
                     builder: (socketController) =>
                         Stack(alignment: Alignment.topRight, children: [

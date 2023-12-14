@@ -13,10 +13,14 @@ import '../models/reuqest_model.dart';
 import 'package:http/http.dart' as http;
 
 class ConversationController extends GetxController {
+  String? tempID;
+  bool isRotate = false;
   final Dio dio = Dio();
   RxList<Requests?>? req = <Requests>[].obs;
   static String? token = globToken;
   static String? userId = userId;
+
+  List<Conversation> chatList = [];
   @override
   onInit() async {
     token = globToken;
@@ -26,13 +30,29 @@ class ConversationController extends GetxController {
     if (token == null || userId == null) {
       await storedData();
     }
-
+    getChatList();
+    userTemplate();
     super.onInit();
   }
 
   Future<void> storedData() async {
     token = await HiveDB.getAuthToken();
     userId = await HiveDB.getUserID();
+  }
+
+  rotate() {
+    isRotate = !isRotate;
+    update(["rotate"]);
+  }
+
+  userTemplate() async {
+    var headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
+    http.Response response = await http.get(
+      Uri.parse("${ApiEndpoint.userTemplate}/$globUserId"),
+      headers: headers,
+    );
+    //   debugPrint(" helo ${jsonDecode(response.body)[0]['templateId']}");
+    tempID = jsonDecode(response.body)[0]['templateId'];
   }
 
   Future<List<Message>> getMessages(String conversationId) async {
@@ -56,14 +76,14 @@ class ConversationController extends GetxController {
     }
   }
 
-  Future<List<Conversation>> getChatList() async {
+  //Future<List<Conversation>>
+  Future<void> getChatList() async {
     try {
       if (token == null || userId == null) {
         await storedData();
       }
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
-      var response =
-          await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
+      var response = await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
       debugPrint("Chat list");
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
@@ -73,19 +93,13 @@ class ConversationController extends GetxController {
         conversationsx.add(conversation);
       });
 
-      return conversationsx;
-    } catch (e) {
-      return [];
-    }
+      chatList = conversationsx;
+    } catch (e) {debugPrint(e.toString());}
   }
 
   Future postChat(String text, String conversationId) async {
     try {
-      var body = {
-        "conversationId": conversationId,
-        "sender": globUserId ?? userId,
-        "text": text
-      };
+      var body = {"conversationId": conversationId, "sender": globUserId ?? userId, "text": text};
 
       await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
@@ -145,6 +159,7 @@ class ConversationController extends GetxController {
       var x = body;
       debugPrint(x.toString());
 
+      // ignore: prefer_typing_uninitialized_variables
       var respose;
       try {
         respose = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
@@ -185,20 +200,15 @@ class ConversationController extends GetxController {
     req?.clear();
     try {
       debugPrint('${ApiEndpoint.requestList}?filter=$filter');
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
-      http.Response response = await http.get(
-          Uri.parse('${ApiEndpoint.requestList}?filter=$filter'),
-          headers: headers);
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=$filter'), headers: headers);
       var body = jsonDecode(response.body);
-     Requests? temp ;
+      Requests? temp;
       body.forEach((e) {
-    temp   = Requests.fromJson(e);
+        temp = Requests.fromJson(e);
         req?.add(temp);
-          debugPrint("jl ${temp!.sender?.username .toString()}");
-            debugPrint("jl reci ${temp!.reciever?.username.toString()}");
+        debugPrint("__ sender ${temp!.sender?.username.toString()}");
+        debugPrint("__ reciver ${temp!.reciever?.username.toString()}");
       });
       return req;
     } catch (e) {

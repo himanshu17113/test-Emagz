@@ -81,7 +81,7 @@ class GetXStoryController extends GetxController {
           Uri.parse(ApiEndpoint.Storybyid(globUserId ?? myId!)),
           headers: headers);
       var body = jsonDecode(response.body);
-      debugPrint("sto ${body.toString()}");
+   //   debugPrint("sto ${body.toString()}");
       var story = Story.fromJson(body["data"]);
       stories?.add(story);
 
