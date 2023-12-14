@@ -16,7 +16,9 @@ import 'social_media/models/user_schema.dart';
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -27,7 +29,7 @@ Future main() async {
   //WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
-   Hive.registerAdapter(UserSchemaAdapter());
+  Hive.registerAdapter(UserSchemaAdapter());
   await Permission.camera.request();
   await Hive.openBox("secretes");
   globToken = await HiveDB.getAuthToken();

@@ -22,6 +22,7 @@ class UserChats extends StatelessWidget {
       future: data,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
+          debugPrint("future builder created 😡😡😡😡😡😡");
           return const Center(child: CircularProgressIndicator());
         } else {
           debugPrint("😡${snapshot.data?.length} ");

@@ -10,7 +10,7 @@ class HiveDB {
   static setAuthData(String? tokenx, String? id) async {
     globToken = tokenx;
     globUserId = id;
-    final hiveBox = await Hive.openBox("secretes");
+      final hiveBox = await Hive.openBox("secretes");
     await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
   }
@@ -64,7 +64,7 @@ class HiveDB {
     debugPrint("Api hiiitiiiiiiiiiiiiiiiiiiiiiiiii");
     //Box hiveBox = await Hive.openBox("secretes");
     final hiveBox = Hive.box("secretes");
-    Dio dio = Dio();
+  final  Dio dio = Dio();
     dio.options.headers["Authorization"] = globToken ?? getAuthToken();
     if (globUserId == null) {
       await getUserID();

@@ -2,8 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddProductDropDown extends StatelessWidget {
-  final List listData;
-       String? value;
+  final List listData;   String? value;
     AddProductDropDown({Key? key, required this.listData, this.value})
       : super(key: key);
 

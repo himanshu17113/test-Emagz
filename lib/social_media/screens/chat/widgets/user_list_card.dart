@@ -8,13 +8,13 @@ import 'package:get/get.dart';
 import '../../../models/user_schema.dart';
 import '../models/chat_model.dart';
 
-class UserChat extends StatefulWidget {
+class UserChat extends StatelessWidget {
   final bool? isMessage;
   final UserData? userData;
   final String senderId;
   final String conversationId;
   final ResentMessage? resentMessage;
-  const UserChat({
+    UserChat({
     Key? key,
     required this.senderId,
     required this.conversationId,
@@ -23,26 +23,14 @@ class UserChat extends StatefulWidget {
     this.resentMessage,
   }) : super(key: key);
 
-  @override
-  State<UserChat> createState() => _UserChatState();
-}
-
-class _UserChatState extends State<UserChat> {
-//  final jwtController = Get.find<JWTController>();
-  //final chatController = Get.find<ConversationController>();
    UserSchema? sender;
 
 //   @override
-//   void initState() {
-//     super.initState();
-//  //   getInitUser();
-//   }
-
   Future getInitUser() async {
     // debugPrint("id in list item : ${widget.senderId}");
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-     sender = await HiveDB.getUserDetail(widget.senderId);
-      setState(() {});
+     sender = await HiveDB.getUserDetail(senderId);
+   //   setState(() {});
     });
     //setState(() {});
   }
@@ -52,7 +40,7 @@ class _UserChatState extends State<UserChat> {
     return InkWell(
       onTap: () async {
         // if (sender == null) {
-        if (widget.userData == null) {
+        if (userData == null) {
           Get.snackbar(
             "Loading",
             "Please wait",
@@ -62,11 +50,12 @@ class _UserChatState extends State<UserChat> {
           //  messages = await chatController.getMessages(widget.conversationId);
           Get.to(
               () => ChatScreen(
-                    user: widget.userData,
-                    conversationId: widget.conversationId,
+                    user: userData,
+                    conversationId: conversationId,
                     //  messages: messages,
                   ),
-              duration: const Duration(seconds: 0));
+           //   duration: const Duration(seconds: 0)
+              );
         }
       },
       child: Container(
@@ -85,7 +74,7 @@ class _UserChatState extends State<UserChat> {
             const SizedBox(
               width: 10,
             ),
-            UserOnlineCircle(url: widget.userData!.profilePic),
+            UserOnlineCircle(url: userData!.profilePic),
             const SizedBox(
               width: 15,
             ),
@@ -93,7 +82,7 @@ class _UserChatState extends State<UserChat> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                widget.userData == null
+                userData == null
                     ? Text(
                         "loading",
                         style: TextStyle(
@@ -102,7 +91,7 @@ class _UserChatState extends State<UserChat> {
                             fontWeight: FontWeight.w400),
                       )
                     : Text(
-                        "${widget.userData?.username}",
+                        "${userData?.username}",
                         style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
@@ -111,7 +100,7 @@ class _UserChatState extends State<UserChat> {
                 const SizedBox(
                   height: 3,
                 ),
-                widget.resentMessage == null
+                resentMessage == null
                     ? const Text(
                         "loading",
                         style: TextStyle(
@@ -120,7 +109,7 @@ class _UserChatState extends State<UserChat> {
                             fontWeight: FontWeight.w600),
                       )
                     : Text(
-                        widget.resentMessage?.text ?? "last text",
+                        resentMessage?.text ?? "last text",
                         style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
@@ -129,7 +118,7 @@ class _UserChatState extends State<UserChat> {
               ],
             ),
             const Spacer(),
-            widget.isMessage == true
+            isMessage == true
                 ? Container(
                     alignment: Alignment.center,
                     height: 20,

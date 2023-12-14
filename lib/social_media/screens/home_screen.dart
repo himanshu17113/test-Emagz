@@ -35,10 +35,8 @@ class SocialMediaHomePage extends StatelessWidget {
           debugPrint(homePostController.posts!.length.toString());
           homePostController.posts!.clear();
           debugPrint(homePostController.posts!.length.toString());
-
           homePostController.endOfPost = false;
-          debugPrint("refresh");
-          storyController.stories?.clear();
+           storyController.stories?.clear();
           await storyController.getStories();
           await homePostController.getPost();
         },

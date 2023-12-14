@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
@@ -14,8 +13,6 @@ import '../models/reuqest_model.dart';
 import 'package:http/http.dart' as http;
 
 class ConversationController extends GetxController {
-  //Rx<Map<String, Conversation>>? conversations;
-//  RxList<Message>? messages;
   final Dio dio = Dio();
   RxList<Requests?>? req = <Requests>[].obs;
   static String? token = globToken;
@@ -44,7 +41,7 @@ class ConversationController extends GetxController {
         await storedData();
       }
 
-       debugPrint(ApiEndpoint.getMessages(conversationId));
+      debugPrint(ApiEndpoint.getMessages(conversationId));
       var response = await dio.get(ApiEndpoint.getMessages(conversationId));
       debugPrint(response.data);
       List<Message>? messages = [];
@@ -63,7 +60,7 @@ class ConversationController extends GetxController {
     try {
       if (token == null || userId == null) {
         await storedData();
-      } 
+      }
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
       var response =
           await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
@@ -71,31 +68,25 @@ class ConversationController extends GetxController {
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
       response.data.forEach((e) {
-        // debugPrint(jsonEncode(e));
-        //   conversations ??= Rx<Map<String, Conversation>>({});
         final conversation = Conversation.fromJson(e);
-        //debugPrint("🧣🧣🧣🧣🧣m ${conversation.data?.members}");
+
         conversationsx.add(conversation);
-        //     conversations?.value.addAll({conversation.data!.id!: conversation});
-        //     debugPrint("🧣🧣🧣🧣🧣v  ${conversations?.value.toString()}");
       });
 
-      //  debugPrint("🧣🧣🧣🧣🧣jkkkkkkkk  ${conversations?.value.values.toString()}");
       return conversationsx;
-      //  return conversations!.value.values.toList().reversed.toList();
     } catch (e) {
       return [];
     }
   }
 
   Future postChat(String text, String conversationId) async {
-    try { 
+    try {
       var body = {
         "conversationId": conversationId,
         "sender": globUserId ?? userId,
         "text": text
       };
-      //var response =
+
       await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
       debugPrint(e.toString());
@@ -104,19 +95,19 @@ class ConversationController extends GetxController {
 
   Future<String> conversationId(String receiverId) async {
     try {
-      debugPrint("🧣🧣🧣🧣🧣 start"); 
+      debugPrint("🧣🧣🧣🧣🧣 start");
       debugPrint(ApiEndpoint.getConID(globUserId ?? userId!, receiverId));
       var response = await dio.get(
         ApiEndpoint.getConID(globUserId ?? userId!, receiverId),
       );
-      //   debugPrint("🧣🧣🧣🧣🧣 hit");
+
       debugPrint(response.data);
-      // debugPrint("🧣🧣🧣🧣🧣 get");
+
       debugPrint(response.statusCode.toString());
       if (response.statusCode == 200 && response.data != null) {
         debugPrint(response.data);
         debugPrint(response.data["_id"]);
-        //  final conversation = Conversation.fromJson(response.data);
+
         return response.data["_id"];
       } else {
         debugPrint("🧣🧣🧣🧣🧣 else");
@@ -134,20 +125,18 @@ class ConversationController extends GetxController {
 
   Future<String> startConversationId(String receiverId) async {
     try {
-      debugPrint("🧣🧣🧣🧣🧣 start2"); 
+      debugPrint("🧣🧣🧣🧣🧣 start2");
       var body = {"senderId": globUserId ?? userId, "receiverId": receiverId};
       var response = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
-      //  debugPrint(response.data["_id"].toString());
-      //   final conversation = Conversation.fromJson(response.data);
+
       return response.data["_id"];
     } catch (e) {
-      //  debugPrint(e.toString());
       return "";
     }
   }
 
   Future<bool> acceptreq(String id, int index, String recieverId) async {
-    debugPrint("🧣🧣🧣🧣🧣 start2"); 
+    debugPrint("🧣🧣🧣🧣🧣 start2");
     debugPrint('${ApiEndpoint.requestList}/$id/accept');
     var response = await dio.post('${ApiEndpoint.requestList}/$id/accept');
     if (response.statusCode == 200) {
@@ -155,15 +144,11 @@ class ConversationController extends GetxController {
       var body = {"senderId": globUserId ?? userId, "receiverId": recieverId};
       var x = body;
       debugPrint(x.toString());
-      // ignore: prefer_typing_uninitialized_variables
+
       var respose;
       try {
         respose = await dio.post(ApiEndpoint.strikeFirstCon, data: body);
         debugPrint(respose.toString());
-        // if(respose.statusCode==200)
-        //   {
-        //     getChatList();
-        //   }
       } catch (e) {
         if (respose == null) {
           CustomSnackbar.show('You have already chat with this person');
@@ -184,7 +169,7 @@ class ConversationController extends GetxController {
     return false;
   }
 
-  Future<bool> rejectreq(String id, int index) async { 
+  Future<bool> rejectreq(String id, int index) async {
     var response = await dio.delete('${ApiEndpoint.removeRequest}/$id');
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess('Reuqest ');
@@ -198,7 +183,7 @@ class ConversationController extends GetxController {
 
   Future<List<Requests?>?> getAllRequests(String filter) async {
     req?.clear();
-    try { 
+    try {
       debugPrint('${ApiEndpoint.requestList}?filter=$filter');
       var headers = {
         'Content-Type': 'application/json',
@@ -208,10 +193,12 @@ class ConversationController extends GetxController {
           Uri.parse('${ApiEndpoint.requestList}?filter=$filter'),
           headers: headers);
       var body = jsonDecode(response.body);
-      debugPrint(body.toString());
+     Requests? temp ;
       body.forEach((e) {
-        var temp = Requests.fromJson(e);
+    temp   = Requests.fromJson(e);
         req?.add(temp);
+          debugPrint("jl ${temp!.sender?.username .toString()}");
+            debugPrint("jl reci ${temp!.reciever?.username.toString()}");
       });
       return req;
     } catch (e) {
