@@ -112,19 +112,19 @@ class _SignInScreenState extends State<SignInScreen> {
                         await HiveDB.getAuthToken();
                         await HiveDB.getUserID();
                       }
-                      final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
-                      final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
+                      // final homePostController = Get.put(HomePostsController(), tag: "HomePostsController", permanent: true);
+                      // final GetXStoryController storyController = Get.put(GetXStoryController(), tag: "GetXStoryController", permanent: true);
 
-                      homePostController.skip = -10;
-                      homePostController.posts?.clear();
-                      storyController.stories?.clear();
-                      await storyController.getStories();
-                      await homePostController.getPost();
+                      // homePostController.skip = -10;
+                      // homePostController.posts?.clear();
+                      // storyController.stories?.clear();
+                      // await storyController.getStories();
+                      // await homePostController.getPost();
 
-                      if (homePostController.posts!.isNotEmpty) {
-                        Get.offAll(() => BottomNavBar());
-                      }
-                    } else {}
+                      // if (homePostController.posts!.isNotEmpty) {
+                      Get.offAll(() => BottomNavBar());
+                      // }
+                    }
                   }
                 },
                 child: Container(
@@ -183,8 +183,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   const CircleAvatar(
                     backgroundColor: whiteColor,
                     radius: 15,
-                    backgroundImage: CachedNetworkImageProvider(
-                        "https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
+                    backgroundImage:
+                        CachedNetworkImageProvider("https://www.edigitalagency.com.au/wp-content/uploads/Facebook-logo-blue-circle-large-transparent-png.png"),
                   ),
                 ],
               ),

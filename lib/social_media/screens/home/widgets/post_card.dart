@@ -40,8 +40,7 @@ class PostCard extends StatelessWidget {
 
   int selectedOption = -1;
 
-  final homePostController =
-      Get.find<HomePostsController>(tag: 'HomePostsController');
+  final homePostController = Get.find<HomePostsController>(tag: 'HomePostsController');
   ValueNotifier valueNotifier = ValueNotifier<bool>(false);
   _update() {
     valueNotifier.value = !valueNotifier.value;
@@ -57,12 +56,7 @@ class PostCard extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(20),
-          border: isBorder == true
-              ? Border.all(
-                  color: const Color(0xff46F2DB),
-                  width: 2.2,
-                  style: BorderStyle.solid)
-              : null),
+          border: isBorder == true ? Border.all(color: const Color(0xff46F2DB), width: 2.2, style: BorderStyle.solid) : null),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Stack(fit: StackFit.loose, children: [
@@ -104,8 +98,7 @@ class PostCard extends StatelessWidget {
               post: post!,
               // videoUrl: videoUrl,
               videoUrl: post!.mediaUrl![0]!,
-              aspectRatio: (Get.size.height / 2.62) /
-                  (MediaQuery.of(context).size.width - 10),
+              aspectRatio: (Get.size.height / 2.62) / (MediaQuery.of(context).size.width - 10),
             )
           ],
           Positioned(
@@ -117,47 +110,37 @@ class PostCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 16,
                   backgroundImage: post!.mediaType == "video"
-                      ? const CachedNetworkImageProvider(
-                          "https://picsum.photos/500/500?random=851")
+                      ? const CachedNetworkImageProvider("https://picsum.photos/500/500?random=851")
                       : CachedNetworkImageProvider(post!.user!.ProfilePic!),
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 GestureDetector(
-                  onTap: () async {
-                    //     final tok = globToken ??  await HiveDB.getAuthToken();
+                  onTap: () {
+                    // //     final tok = globToken ??  await HiveDB.getAuthToken();
 
-                    String? temp = post!.user!.personalTemplate;
-                    if (temp == null) {
-                      Get.snackbar('No persona Choosen by this user',
-                          'Hi No persona here');
-                    } else {
-                      if (temp.isEmpty || temp[0] == 'T') {
-                        Get.snackbar('This is a Old account ',
-                            'Persona wont work properly');
-                        temp = '64e8f2c3b9b30c1ed4b28bb6';
-                      }
-                      Get.to(() => OwnWebView(
-                             
-                          ));
-                    }
+                    // String? temp = post!.user!.personalTemplate;
+                    // if (temp == null) {
+                    //   Get.snackbar('No persona Choosen by this user', 'Hi No persona here');
+                    // } else {
+                    //   if (temp.isEmpty || temp[0] == 'T') {
+                    //     Get.snackbar('This is a Old account ', 'Persona wont work properly');
+                    //     temp = '64e8f2c3b9b30c1ed4b28bb6';
+                    //   }
+                    Get.to(() => WebViewPersona(
+                          personaUserId: post!.user!.sId,
+                        ));
+                    //  }
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "${post?.user!.username.toString()}",
-                        style: const TextStyle(
-                            fontSize: 9,
-                            fontWeight: FontWeight.w600,
-                            color: whiteColor),
+                        style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor),
                       ),
-                      Text("@${post?.user!.getstatedName.toString()}",
-                          style: const TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.w600,
-                              color: whiteColor)),
+                      Text("@${post?.user!.getstatedName.toString()}", style: const TextStyle(fontSize: 9, fontWeight: FontWeight.w600, color: whiteColor)),
                     ],
                   ),
                 )
@@ -192,20 +175,14 @@ class PostCard extends StatelessWidget {
                               StateSetter setState,
                             ) {
                               return Theme(
-                                data: ThemeData(
-                                    unselectedWidgetColor: Colors.grey,
-                                    primaryColor: Colors.amber,
-                                    textTheme: Typography.whiteCupertino),
+                                data: ThemeData(unselectedWidgetColor: Colors.grey, primaryColor: Colors.amber, textTheme: Typography.whiteCupertino),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color:
-                                        const Color.fromARGB(255, 17, 17, 16),
+                                    color: const Color.fromARGB(255, 17, 17, 16),
                                   ),
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.45,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.75,
+                                  //      height: MediaQuery.of(context).size.height * 0.5,
+                                  width: MediaQuery.of(context).size.width * 0.75,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -268,7 +245,7 @@ class PostCard extends StatelessWidget {
                                           });
                                         },
                                       ),
-                                      const Spacer(),
+                                      //  const Spacer(),
                                       ButtonBar(
                                         children: <Widget>[
                                           TextButton(
@@ -306,8 +283,7 @@ class PostCard extends StatelessWidget {
               builder: (context, value, child) {
                 debugPrint("rebuild");
                 return StatefulBuilder(
-                    builder: (BuildContext context, upperSetState) =>
-                        Positioned(
+                    builder: (BuildContext context, upperSetState) => Positioned(
                           bottom: 0,
                           left: 0,
                           right: 0,
@@ -315,14 +291,10 @@ class PostCard extends StatelessWidget {
                             children: [
                               if (isShowPoll) ...[
                                 (post!.customPollEnabled!)
-                                    ? !(map?["isVoted"] == "True"
-                                            ? true
-                                            : false)
+                                    ? !(map?["isVoted"] == "True" ? true : false)
                                         ? Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               const FormHeadingText(
                                                 headings: "Choose\nyour poll",
@@ -334,68 +306,37 @@ class PostCard extends StatelessWidget {
                                                 height: 10,
                                               ),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: List.generate(
                                                   post!.customPollData!.length,
                                                   (index) => Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 10),
+                                                    padding: const EdgeInsets.only(right: 10),
                                                     child: StatefulBuilder(
-                                                        builder: (BuildContext
-                                                                    context,
-                                                                setState) =>
-                                                            InkWell(
+                                                        builder: (BuildContext context, setState) => InkWell(
                                                               onTap: () async {
                                                                 // if (index == selectedOption) {
                                                                 //   selectedOption = -1;
                                                                 //   setState(() {});
                                                                 //   return;
                                                                 // }
-                                                                selectedOption =
-                                                                    index;
-                                                                map = await homePostController
-                                                                    .postCustomPoll(
-                                                                        post!
-                                                                            .sId!,
-                                                                        post!.customPollData![
-                                                                            index]);
+                                                                selectedOption = index;
+                                                                map = await homePostController.postCustomPoll(post!.sId!, post!.customPollData![index]);
                                                                 //  map?["isVoted"] = "True";
                                                                 //map[]
                                                                 setState(() {});
                                                               },
                                                               child: Container(
-                                                                alignment:
-                                                                    Alignment
-                                                                        .center,
+                                                                alignment: Alignment.center,
                                                                 height: 52,
                                                                 width: 100,
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(
-                                                                        10),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: selectedOption ==
-                                                                          index
-                                                                      ? whiteColor
-                                                                      : null,
-                                                                  border: Border
-                                                                      .all(
-                                                                          color:
-                                                                              whiteColor),
+                                                                padding: const EdgeInsets.all(10),
+                                                                decoration: BoxDecoration(
+                                                                  color: selectedOption == index ? whiteColor : null,
+                                                                  border: Border.all(color: whiteColor),
                                                                 ),
-                                                                child:
-                                                                    FormHeadingText(
-                                                                  headings: post!
-                                                                          .customPollData![
-                                                                      index],
-                                                                  color: selectedOption !=
-                                                                          index
-                                                                      ? whiteColor
-                                                                      : Colors
-                                                                          .black,
+                                                                child: FormHeadingText(
+                                                                  headings: post!.customPollData![index],
+                                                                  color: selectedOption != index ? whiteColor : Colors.black,
                                                                 ),
                                                               ),
                                                             )),
@@ -417,58 +358,27 @@ class PostCard extends StatelessWidget {
                                                 ),
                                                 Column(
                                                     children: List.generate(
-                                                  post!.customPollData
-                                                          ?.length ??
-                                                      map!.length - 1,
+                                                  post!.customPollData?.length ?? map!.length - 1,
                                                   growable: true,
                                                   (index) => Column(
                                                     children: [
                                                       Align(
-                                                        alignment: Alignment
-                                                            .centerLeft,
+                                                        alignment: Alignment.centerLeft,
                                                         child: Text(
                                                           "${post!.customPollData![index]} ${map![post!.customPollData![index]]}",
-                                                          style: const TextStyle(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700),
+                                                          style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
                                                         ),
                                                       ),
                                                       Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(
-                                                                top: 10,
-                                                                bottom: 20),
+                                                        padding: const EdgeInsets.only(top: 10, bottom: 20),
                                                         child: SizedBox(
                                                           width: width * .7,
-                                                          child:
-                                                              LinearProgressIndicator(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15),
+                                                          child: LinearProgressIndicator(
+                                                            borderRadius: BorderRadius.circular(15),
                                                             minHeight: 10,
-                                                            value: poll
-                                                                    ?.pollCalculation
-                                                                    ?.yesPercentage ??
-                                                                (100 -
-                                                                    (poll?.pollCalculation
-                                                                            ?.noPercentage ??
-                                                                        50)),
-                                                            color: const Color
-                                                                .fromRGBO(76,
-                                                                101, 168, 0.9),
-                                                            backgroundColor:
-                                                                const Color
-                                                                    .fromRGBO(
-                                                                    217,
-                                                                    217,
-                                                                    217,
-                                                                    0.8),
+                                                            value: poll?.pollCalculation?.yesPercentage ?? (100 - (poll?.pollCalculation?.noPercentage ?? 50)),
+                                                            color: const Color.fromRGBO(76, 101, 168, 0.9),
+                                                            backgroundColor: const Color.fromRGBO(217, 217, 217, 0.8),
                                                           ),
                                                         ),
                                                       ),
@@ -491,94 +401,42 @@ class PostCard extends StatelessWidget {
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                                 Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
+                                                  alignment: Alignment.centerLeft,
                                                   child: Text(
                                                     "Yes ${poll?.pollCalculation?.yesPercentage ?? (100 - (poll?.pollCalculation?.noPercentage ?? 50))}",
-                                                    style: const TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w700),
+                                                    style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 10, bottom: 20),
+                                                  padding: const EdgeInsets.only(top: 10, bottom: 20),
                                                   child: SizedBox(
                                                     width: width * .7,
-                                                    child:
-                                                        LinearProgressIndicator(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                                    child: LinearProgressIndicator(
+                                                      borderRadius: BorderRadius.circular(15),
                                                       minHeight: 10,
-                                                      value: poll
-                                                              ?.pollCalculation
-                                                              ?.yesPercentage ??
-                                                          (100 -
-                                                              (poll?.pollCalculation
-                                                                      ?.noPercentage ??
-                                                                  50)),
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              76,
-                                                              101,
-                                                              168,
-                                                              0.9),
-                                                      backgroundColor:
-                                                          const Color.fromRGBO(
-                                                              217,
-                                                              217,
-                                                              217,
-                                                              0.8),
+                                                      value: poll?.pollCalculation?.yesPercentage ?? (100 - (poll?.pollCalculation?.noPercentage ?? 50)),
+                                                      color: const Color.fromRGBO(76, 101, 168, 0.9),
+                                                      backgroundColor: const Color.fromRGBO(217, 217, 217, 0.8),
                                                     ),
                                                   ),
                                                 ),
                                                 Align(
-                                                  alignment:
-                                                      Alignment.centerLeft,
+                                                  alignment: Alignment.centerLeft,
                                                   child: Text(
                                                     "No ${poll?.pollCalculation?.noPercentage ?? (100 - (poll?.pollCalculation?.yesPercentage ?? 50))}",
-                                                    style: const TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.w700),
+                                                    style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5, bottom: 10),
+                                                  padding: const EdgeInsets.only(top: 5, bottom: 10),
                                                   child: SizedBox(
                                                     width: width * .7,
-                                                    child:
-                                                        LinearProgressIndicator(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                                    child: LinearProgressIndicator(
+                                                      borderRadius: BorderRadius.circular(15),
                                                       minHeight: 10,
-                                                      value: poll
-                                                              ?.pollCalculation
-                                                              ?.noPercentage ??
-                                                          (100 -
-                                                              (poll?.pollCalculation
-                                                                      ?.yesPercentage ??
-                                                                  50)),
-                                                      color:
-                                                          const Color.fromRGBO(
-                                                              76,
-                                                              101,
-                                                              168,
-                                                              0.9),
-                                                      backgroundColor:
-                                                          const Color.fromRGBO(
-                                                              217,
-                                                              217,
-                                                              217,
-                                                              0.8),
+                                                      value: poll?.pollCalculation?.noPercentage ?? (100 - (poll?.pollCalculation?.yesPercentage ?? 50)),
+                                                      color: const Color.fromRGBO(76, 101, 168, 0.9),
+                                                      backgroundColor: const Color.fromRGBO(217, 217, 217, 0.8),
                                                     ),
                                                   ),
                                                 )
@@ -586,10 +444,8 @@ class PostCard extends StatelessWidget {
                                             ),
                                           )
                                         : Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               const FormHeadingText(
                                                 headings: "Choose\nyour poll",
@@ -601,67 +457,36 @@ class PostCard extends StatelessWidget {
                                                 height: 10,
                                               ),
                                               Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: List.generate(
                                                   chooseOption.length,
                                                   (index) => Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              right: 10),
+                                                      padding: const EdgeInsets.only(right: 10),
                                                       child: StatefulBuilder(
-                                                        builder: (BuildContext
-                                                                    context,
-                                                                setState) =>
-                                                            InkWell(
+                                                        builder: (BuildContext context, setState) => InkWell(
                                                           onTap: () async {
-                                                            if (index ==
-                                                                selectedOption) {
-                                                              selectedOption =
-                                                                  -1;
+                                                            if (index == selectedOption) {
+                                                              selectedOption = -1;
                                                               setState(() {});
                                                               return;
                                                             }
-                                                            selectedOption =
-                                                                index;
-                                                            poll = await homePostController
-                                                                .postPoll(
-                                                                    post!.sId!,
-                                                                    (index == 0
-                                                                        ? "yes"
-                                                                        : "no"));
+                                                            selectedOption = index;
+                                                            poll = await homePostController.postPoll(post!.sId!, (index == 0 ? "yes" : "no"));
 
                                                             setState(() {});
                                                           },
                                                           child: Container(
-                                                            alignment: Alignment
-                                                                .center,
+                                                            alignment: Alignment.center,
                                                             height: 52,
                                                             width: 100,
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color:
-                                                                  selectedOption ==
-                                                                          index
-                                                                      ? whiteColor
-                                                                      : null,
-                                                              border: Border.all(
-                                                                  color:
-                                                                      whiteColor),
+                                                            padding: const EdgeInsets.all(10),
+                                                            decoration: BoxDecoration(
+                                                              color: selectedOption == index ? whiteColor : null,
+                                                              border: Border.all(color: whiteColor),
                                                             ),
-                                                            child:
-                                                                FormHeadingText(
-                                                              headings:
-                                                                  chooseOption[
-                                                                      index],
-                                                              color: selectedOption !=
-                                                                      index
-                                                                  ? whiteColor
-                                                                  : Colors
-                                                                      .black,
+                                                            child: FormHeadingText(
+                                                              headings: chooseOption[index],
+                                                              color: selectedOption != index ? whiteColor : Colors.black,
                                                             ),
                                                           ),
                                                         ),
@@ -677,15 +502,12 @@ class PostCard extends StatelessWidget {
                                   child: InkWell(
                                     onTap: () async {
                                       if (post!.customPollEnabled!) {
-                                        map = await homePostController
-                                            .customPolldetail(post!.sId!);
+                                        map = await homePostController.customPolldetail(post!.sId!);
                                         upperSetState(() {
                                           isShowPoll = !isShowPoll;
                                         });
                                       } else {
-                                        poll =
-                                            await homePostController.Polldetail(
-                                                post!.sId!);
+                                        poll = await homePostController.Polldetail(post!.sId!);
                                         upperSetState(() {
                                           isShowPoll = !isShowPoll;
                                           isvoted = poll?.isVoted ?? false;
@@ -693,8 +515,7 @@ class PostCard extends StatelessWidget {
                                       }
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 15, bottom: 15),
+                                      padding: const EdgeInsets.only(right: 15, bottom: 15),
                                       child: Image.asset(
                                         "assets/png/poll_icon.png",
                                         width: 25,
@@ -717,114 +538,82 @@ class PostCard extends StatelessWidget {
                                     height: 40,
                                     decoration: BoxDecoration(
                                       border: Border.all(
-                                        color: const Color(0xFFffffff)
-                                            .withOpacity(.2),
+                                        color: const Color(0xFFffffff).withOpacity(.2),
                                       ),
-                                      gradient: LinearGradient(
-                                          begin: Alignment.bottomLeft,
-                                          end: Alignment.topRight,
-                                          colors: [
-                                            const Color(0xFFffffff)
-                                                .withOpacity(0.20),
-                                            const Color(0xFFFFFFFF)
-                                                .withOpacity(0.25),
-                                          ],
-                                          stops: const [
-                                            2,
-                                            0.1,
-                                          ]),
+                                      gradient: LinearGradient(begin: Alignment.bottomLeft, end: Alignment.topRight, colors: [
+                                        const Color(0xFFffffff).withOpacity(0.20),
+                                        const Color(0xFFFFFFFF).withOpacity(0.25),
+                                      ], stops: const [
+                                        2,
+                                        0.1,
+                                      ]),
                                       borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(20),
                                         bottomRight: Radius.circular(20),
                                       ),
                                     ),
-                                    child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          SizedBox(
-                                            width: width / 2,
-                                            child: Text("${post!.caption}",
-                                                style: const TextStyle(
-                                                    fontSize: 7,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: whiteColor)),
-                                          ),
-                                          GestureDetector(
-                                              onTap: () {
-                                                if (post!.isLike!) {
-                                                  upperSetState(() {
-                                                    post!.likeCount =
-                                                        post!.likeCount! - 1;
-                                                    post!.isLike = false;
-                                                  });
-                                                  homePostController.likePost(
-                                                      post!.sId!,
-                                                      index!,
-                                                      false,
-                                                      post?.user?.sId ?? "");
-                                                } else {
-                                                  upperSetState(() {
-                                                    post!.likeCount =
-                                                        post!.likeCount! + 1;
-                                                    post!.isLike = true;
-                                                  });
-                                                  homePostController.likePost(
-                                                      post!.sId!,
-                                                      index!,
-                                                      true,
-                                                      post?.user?.sId ?? "");
-                                                }
-                                              },
-                                              child: (post!.isLike ?? false)
-                                                  ? Image.asset(
-                                                      "assets/png/liked_icon.png",
-                                                      width: 26,
-                                                    )
-                                                  : Image.asset(
-                                                      "assets/png/unlike_icon.png",
-                                                      width: 22,
-                                                    )),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 6),
-                                            child: Text(
-                                              post!.likeCount.toString(),
-                                              //    "${homePostController.posts?[widget.index!].likeCount}",
-                                              style: const TextStyle(
-                                                  fontSize: 11,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: whiteColor),
-                                            ),
-                                          ),
-                                          Image.asset(
-                                            "assets/png/comment_icon.png",
-                                            width: 22,
-                                          ),
-                                          const SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            "${post!.comments?.length}",
-                                            style: const TextStyle(
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.w600,
-                                                color: whiteColor),
-                                          ),
-                                          const SizedBox(
-                                            width: 5,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              Share.share(
-                                                  "http://emagz.live/Post/${post?.sId}");
-                                            },
-                                            child: Image.asset(
-                                              "assets/png/share_icon.png",
-                                              width: 26,
-                                            ),
-                                          ),
-                                        ])),
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                                      SizedBox(
+                                        width: width / 2,
+                                        child: Text("${post!.caption}", style: const TextStyle(fontSize: 7, fontWeight: FontWeight.w400, color: whiteColor)),
+                                      ),
+                                      GestureDetector(
+                                          onTap: () {
+                                            if (post!.isLike!) {
+                                              upperSetState(() {
+                                                post!.likeCount = post!.likeCount! - 1;
+                                                post!.isLike = false;
+                                              });
+                                              homePostController.likePost(post!.sId!, index!, false, post?.user?.sId ?? "");
+                                            } else {
+                                              upperSetState(() {
+                                                post!.likeCount = post!.likeCount! + 1;
+                                                post!.isLike = true;
+                                              });
+                                              homePostController.likePost(post!.sId!, index!, true, post?.user?.sId ?? "");
+                                            }
+                                          },
+                                          child: (post!.isLike ?? false)
+                                              ? Image.asset(
+                                                  "assets/png/liked_icon.png",
+                                                  width: 26,
+                                                )
+                                              : Image.asset(
+                                                  "assets/png/unlike_icon.png",
+                                                  width: 22,
+                                                )),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                                        child: Text(
+                                          post!.likeCount.toString(),
+                                          //    "${homePostController.posts?[widget.index!].likeCount}",
+                                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        "assets/png/comment_icon.png",
+                                        width: 22,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        "${post!.comments?.length}",
+                                        style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Share.share("http://emagz.live/Post/${post?.sId}");
+                                        },
+                                        child: Image.asset(
+                                          "assets/png/share_icon.png",
+                                          width: 26,
+                                        ),
+                                      ),
+                                    ])),
                               ),
                             ],
                           ),

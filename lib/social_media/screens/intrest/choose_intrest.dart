@@ -81,7 +81,11 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                       children: [
                         InkWell(
                           onLongPress: () {
-                            Get.to(() =>   BottomNavBar());
+                             Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => BottomNavBar()),
+                            );
+                        
                           },
                           onTap: () {
                             setState(() {

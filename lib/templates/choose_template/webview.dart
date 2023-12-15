@@ -8,14 +8,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 import '../../constant/data.dart';
 
 class WebViewPersona extends StatefulWidget {
-  final String token;
-  final String userId;
-  final String personaUserId;
+  final String? personaUserId;
   const WebViewPersona({
     Key? key,
-    required this.token,
-    required this.userId,
-    required this.personaUserId,
+    this.personaUserId,
   }) : super(key: key);
 
   @override
@@ -24,7 +20,7 @@ class WebViewPersona extends StatefulWidget {
 
 class _WebViewPersonaState extends State<WebViewPersona> {
   late final WebViewController controller;
-  final chatController = Get.find<ConversationController>();
+  final chatController = Get.put(ConversationController());
   @override
   void initState() {
     controller = WebViewController()
@@ -49,8 +45,7 @@ class _WebViewPersonaState extends State<WebViewPersona> {
       ))
       ..loadRequest(
         //Uri.parse('http://persona.emagz.live/64e8f2c3b9b30c1ed4b28bb6/64d33c54b6a7b2fb0be633dc/64d33c54b6a7b2fb0be633dc/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQzM2M1NGI2YTdiMmZiMGJlNjMzZGMiLCJpYXQiOjE2OTM0MDA2NTB9.PgFHtbYq9V9gT3mvmSQ6S61tG-BYAEDfHtt5LLODBOY'),
-
-        Uri.parse('http://persona.emagz.live/${widget.personaUserId}/${widget.userId}/${widget.token}'),
+        Uri.parse('http://persona.emagz.live/${widget.personaUserId ?? globUserId}/$globUserId/$globToken'),
       );
 
     super.initState();

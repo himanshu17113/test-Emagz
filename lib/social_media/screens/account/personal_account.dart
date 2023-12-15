@@ -1,19 +1,17 @@
-
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 class PersonalAccountScreen extends StatefulWidget {
   final String? suggestedName;
-  const PersonalAccountScreen({Key? key,this.suggestedName}) : super(key: key);
+  const PersonalAccountScreen({Key? key, this.suggestedName}) : super(key: key);
 
   @override
   State<PersonalAccountScreen> createState() => _PersonalAccountScreenState();
 }
 
 class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
-
-  var authController =  AuthController() ;
+  var authController = AuthController();
 
   int value = 1;
   @override
@@ -47,8 +45,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
 
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 30),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
                 height: 360,
                 width: size.width,
                 decoration: BoxDecoration(boxShadow: [
@@ -66,68 +63,61 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                   children: [
                     const Text(
                       "Let’s Get Started",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w500),
                     ),
                     // const SizedBox(
                     //   height: 2,
                     // ),
                     const Text(
                       "Customise your profile",
-                      style: TextStyle(
-                          color: accountGray,
-                          fontSize: 7,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: accountGray, fontSize: 7, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     const Text(
                       "User Name",
-                      style: TextStyle(
-                          color: lightBlack,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: lightBlack, fontSize: 14, fontWeight: FontWeight.w500),
                     ),
                     // SizedBox(
                     //     height: 45,
                     //     child: AddCouponTextfiled(
                     //       hint: "Nakul_kumar8",
                     //     )),
-                    Container(
-                      margin: const EdgeInsets.symmetric(vertical: 5),
-                      height: 35,
-                      child: TextFormField(
-                        // controller: controller,
-                        // maxLines: maxLines,
-                        cursorColor: grayColor,
-                        // keyboardType: TextInputType.n,
-                        // autofocus: true,
-                        enabled: widget.suggestedName == null,
-                        decoration: InputDecoration(
-                          hintStyle: const TextStyle(
-                              color: Color(
-                                0xff818181,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 5),
+                      child: SizedBox(
+                        height: 35,
+                        child: TextFormField(
+                          // controller: controller,
+                          // maxLines: maxLines,
+                          cursorColor: grayColor,
+                          // keyboardType: TextInputType.n,
+                          // autofocus: true,
+                          enabled: widget.suggestedName == null,
+                          decoration: InputDecoration(
+                            hintStyle: const TextStyle(
+                                color: Color(
+                                  0xff818181,
+                                ),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9),
+                            fillColor: const Color(0xffF1F1F1),
+                            counterText: "",
+                            hintText: widget.suggestedName ?? "new user-name",
+                            filled: true,
+                            contentPadding: const EdgeInsets.only(left: 10),
+                            border: const OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: lightgrayColor,
                               ),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 9),
-                          fillColor: const Color(0xffF1F1F1),
-                          counterText: "",
-                          hintText: widget.suggestedName ?? "new user-name",
-                          filled: true,
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          border: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: lightgrayColor,
                             ),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: lightgrayColor),
-                          ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(color: lightgrayColor),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: lightgrayColor),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide: BorderSide(color: lightgrayColor),
+                            ),
                           ),
                         ),
                       ),
@@ -137,10 +127,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     ),
                     const Text(
                       "Select account type",
-                      style: TextStyle(
-                          color: lightBlack,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500),
+                      style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                     ),
                     const SizedBox(
                       height: 15,
@@ -148,13 +135,11 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
-                            child: customRadioButton("Personal Account", 1)),
+                        Expanded(child: customRadioButton("Personal Account", 1)),
                         const SizedBox(
                           width: 5,
                         ),
-                        Expanded(
-                            child: customRadioButton("Business Account", 2)),
+                        Expanded(child: customRadioButton("Business Account", 2)),
                       ],
                     ),
                     const SizedBox(
@@ -174,16 +159,16 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
                             //   color: (value == index) ? chipColor : Colors.black,
                             // ),
                             borderRadius: BorderRadius.circular(5)),
-                        child:  (authController.isUserlogging ) ? const CircularProgressIndicator(color: Colors.white,) :const Text(
-                            "Continue",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
+                        child: (authController.isUserlogging)
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text(
+                                "Continue",
+                                style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w500),
+                              ),
                       ),
-                    
+                    ),
                   ],
                 ),
               ),
@@ -217,12 +202,7 @@ class _PersonalAccountScreenState extends State<PersonalAccountScreen> {
             borderRadius: BorderRadius.circular(5)),
         child: Text(
           text,
-          style: TextStyle(
-              color: (value == index)
-                  ? whiteColor
-                  : blackButtonColor.withOpacity(.5),
-              fontSize: 9,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 9, fontWeight: FontWeight.w600),
         ),
       ),
     );

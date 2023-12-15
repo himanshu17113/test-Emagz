@@ -52,14 +52,11 @@ class SocketController extends GetxController {
     socket.clearListeners();
   }
 
-  iamActive() {
-    socket.emit("joinLoginRoom", {"userId": globUserId!});
-    //socket.emit(globUserId!);
-  }
+  void iAmActive() => socket.emit("joinLoginRoom", {"userId": globUserId!});
 
-  getActiveUsers() {
-    socket.on("userOnline", (payload) => {debugPrint("tagged ${payload.toString()}")});
-  }
+  void iamOffline() => socket.emit("joinLoginRoom", {"userId": ""});
+
+  void getActiveUsers() => socket.on("userOnline", (payload) => {debugPrint("tagged ${payload.toString()}")});
 
   void connectToServer(String room) {
     if (prevRoom != null && prevRoom == room) {
@@ -160,32 +157,22 @@ class SocketController extends GetxController {
 
   void sendLikeNotification(String id, String name) {
     debugPrint("name : $name , userID : $userId , oid : $id");
-    Map<String, dynamic> data = {
-      "notification_from": userId!,
-      "notification_to": id,
-      "notification": {},
-      "title": "Like",
-      "message": "$name liked your post"
-    };
+    Map<String, dynamic> data = {"notification_from": userId!, "notification_to": id, "notification": {}, "title": "Like", "message": "$name liked your post"};
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(
-      String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost
-          ? "$name Share a post with you"
-          : "$name Shared a story with you",
+      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(
-      String id, bool ispost, String? shareLink, bool isReply) {
+  void sendCommentNotification(String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
@@ -202,8 +189,7 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(
-      String notificationId, int index) async {
+  Future<bool> removeSingleNotification(String notificationId, int index) async {
     try {
       notifications.removeAt(index);
       update(["dot"]);
@@ -274,9 +260,8 @@ class SocketController extends GetxController {
 
   @override
   void onInit() {
-    //initSocket();
     getActiveUsers();
-    iamActive();
+
     getNotification();
     super.onInit();
   }

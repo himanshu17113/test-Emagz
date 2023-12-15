@@ -49,7 +49,7 @@ class UserSchema {
   String? hirable;
 
   @HiveField(18)
-  String? rating;
+  int? rating;
 
   @HiveField(19)
   String? reviews;

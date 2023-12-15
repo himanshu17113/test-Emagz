@@ -30,8 +30,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
       builder: (BuildContext context) {
         return AlertDialog(
           elevation: 3,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
           backgroundColor: Colors.white,
           title: const FormHeadingText(
             textAlign: TextAlign.center,
@@ -46,10 +45,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
               children: [
                 const Text(
                   "You can always change your persona Later",
-                  style: TextStyle(
-                      color: accountGray,
-                      fontSize: 9,
-                      fontWeight: FontWeight.w200),
+                  style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w200),
                 ),
                 const SizedBox(
                   height: 30,
@@ -57,13 +53,11 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                        width: 200, child: customYesNoButton("Yes", 1, indexx)),
+                    SizedBox(width: 200, child: customYesNoButton("Yes", 1, indexx)),
                     const SizedBox(
                       height: 10,
                     ),
-                    SizedBox(
-                        width: 200, child: customYesNoButton("No", 2, indexx)),
+                    SizedBox(width: 200, child: customYesNoButton("No", 2, indexx)),
                   ],
                 ),
               ],
@@ -92,84 +86,69 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             //   ),
             // ),
             child: SingleChildScrollView(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Image.asset(
+                  "assets/png/new_logo.png",
+                  width: 50,
+                  color: const Color(0xff1B47C1),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                const FormHeadingText(
+                  headings: 'Choose Your Persona',
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                const Text(
+                  "Please Choose Your Persona",
+                  style: TextStyle(color: accountGray, fontSize: 14, fontWeight: FontWeight.w200),
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Expanded(child: customRadioButton("Personal", 1)),
                     const SizedBox(
-                      height: 50,
+                      width: 5,
                     ),
-                    Image.asset(
-                      "assets/png/new_logo.png",
-                      width: 50,
-                      color: const Color(0xff1B47C1),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const FormHeadingText(
-                      headings: 'Choose Your Persona',
-                      fontSize: 27,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    const SizedBox(
-                      height: 7,
-                    ),
-                    const Text(
-                      "Please Choose Your Persona",
-                      style: TextStyle(
-                          color: accountGray,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200),
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(child: customRadioButton("Personal", 1)),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(child: customRadioButton("Business", 2)),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
-                    Obx(() {
-                      return ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        physics: const ScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: accountSetUpController.templates!.length,
-                        itemBuilder: (ctx, index) {
-                          String url = accountSetUpController
-                              .templates![index].thumbnail
-                              .toString();
-                          String url2 = accountSetUpController
-                              .templates![index].id
-                              .toString();
-                          if (url == 'null' || url2 == 'null') {
-                          } else {
-                            return Persona(
-                                accountSetUpController.templates![index].id,
-                                accountSetUpController
-                                    .templates![index].thumbnail,
-                                const Color.fromRGBO(255, 199, 1, 1.0),
-                                index + 1,
-                                width);
-                          }
-                          return null;
-                        },
-                      );
-                    }),
-                  ]),
+                    Expanded(child: customRadioButton("Business", 2)),
+                  ],
+                ),
+                const SizedBox(
+                  height: 28,
+                ),
+                Obx(() {
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: accountSetUpController.templates!.length,
+                    itemBuilder: (ctx, index) {
+                      String url = accountSetUpController.templates![index].thumbnail.toString();
+                      String url2 = accountSetUpController.templates![index].id.toString();
+                      if (url == 'null' || url2 == 'null') {
+                      } else {
+                        return Persona(accountSetUpController.templates![index].id, accountSetUpController.templates![index].thumbnail,
+                            const Color.fromRGBO(255, 199, 1, 1.0), index + 1, width);
+                      }
+                      return null;
+                    },
+                  );
+                }),
+              ]),
             )));
   }
 
-  Widget Persona(
-      String? id, String? ImgPath, Color BackGround, int ind, double width) {
+  Widget Persona(String? id, String? ImgPath, Color BackGround, int ind, double width) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
@@ -215,11 +194,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                   var token = await HiveDB.getAuthToken();
                   var userId = await HiveDB.getUserID();
 
-                  Get.to(() => WebViewOnlyView(
-                      token: token!,
-                      userId: userId!,
-                      personaUserId: userId,
-                      templateId: id.toString()));
+                  Get.to(() => WebViewOnlyView(token: token!, userId: userId!, personaUserId: userId, templateId: id.toString()));
                 },
                 child: Container(
                   height: 45,
@@ -254,21 +229,14 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index)
-                ? const Color.fromRGBO(1, 26, 251, 1.0)
-                : selectionButton,
+            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(
-              color: (value == index)
-                  ? whiteColor
-                  : blackButtonColor.withOpacity(.5),
-              fontSize: 18,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 18, fontWeight: FontWeight.w600),
         ),
       ),
     );
@@ -282,11 +250,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
           if (widget.isReg == true) {
             CustomSnackbar.showSucess('Your persona was set');
           } else {
-            var token = await HiveDB.getAuthToken();
-            var userId = await HiveDB.getUserID();
-
-            Get.to(() => WebViewPersona(
-                token: token!, userId: userId!, personaUserId: userId));
+            Get.to(() => const WebViewPersona());
           }
           //Get.to(() => WebViewPersona(index: tmpInd.toString()));
         } else {
@@ -298,21 +262,14 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
         alignment: Alignment.center,
         height: 45,
         decoration: BoxDecoration(
-            color: (value == index)
-                ? const Color.fromRGBO(1, 26, 251, 1.0)
-                : selectionButton,
+            color: (value == index) ? const Color.fromRGBO(1, 26, 251, 1.0) : selectionButton,
             // border: Border.all(
             //   color: (value == index) ? chipColor : Colors.black,
             // ),
             borderRadius: BorderRadius.circular(10)),
         child: Text(
           text,
-          style: TextStyle(
-              color: (value == index)
-                  ? whiteColor
-                  : blackButtonColor.withOpacity(.5),
-              fontSize: 12,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: (value == index) ? whiteColor : blackButtonColor.withOpacity(.5), fontSize: 12, fontWeight: FontWeight.w600),
         ),
       ),
     );

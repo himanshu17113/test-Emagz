@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+ 
 class SocialMediaSettingAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   @override
@@ -32,7 +31,7 @@ class SocialMediaSettingAppBar extends StatelessWidget implements PreferredSizeW
               scale: .7,
               child: InkWell(
                 onTap: () {
-                  Get.back();
+                  Navigator.pop(context);
                 },
                 child: Container(
                   alignment: Alignment.center,

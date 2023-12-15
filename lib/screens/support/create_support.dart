@@ -5,128 +5,104 @@ import 'package:get/get.dart';
 
 import '../../constant/colors.dart';
 import '../../social_media/common/common_appbar.dart';
-class CreateSupport extends StatefulWidget {
+
+class CreateSupport extends StatelessWidget {
   const CreateSupport({Key? key}) : super(key: key);
 
   @override
-  State<CreateSupport> createState() => _CreateSupportState();
-}
-
-class _CreateSupportState extends State<CreateSupport> {
-  TextEditingController emailControl = TextEditingController();
-  TextEditingController reasonControl = TextEditingController();
-  TextEditingController msgControl = TextEditingController();
-  var supportController= Get.put(SupportController());
-  @override
   Widget build(BuildContext context) {
+    String email = "";
+    String reason = "";
+    String message = "";
+
+    final supportController = Get.put(SupportController());
     return Scaffold(
       backgroundColor: socialBack,
-      appBar: const SocialMediaSettingAppBar(title: 'Support',),
-      body:   Column(
+      appBar: const SocialMediaSettingAppBar(
+        title: 'Support',
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+        child: Column(
           children: [
-            const SizedBox(height: 30,),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 62,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFFFFFF),
-                  borderRadius: BorderRadius.circular(100)),
+            TextField(
+              onChanged: ((value) => email = value),
+              showCursor: true,
+              decoration: InputDecoration(
+                  fillColor: const Color(0xffFFFFFF),
+                  filled: true,
+                  hintText: "Email",
+                  hintStyle: const TextStyle(fontSize: 13, color: textSetting),
+                  contentPadding: const EdgeInsets.only(left: 35, top: 15, bottom: 15),
+                  border: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                      borderRadius: BorderRadius.circular(33))),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30),
               child: TextField(
-                controller: emailControl,
-                onSubmitted: (value) {
-                  setState(() {
-
-                  });
-                },
-                showCursor: false,
-                decoration: const InputDecoration(
-                    hintText: "Email",
-                    hintStyle: TextStyle(
-                        fontSize: 13, color: textSetting),
-                    contentPadding:
-                    EdgeInsets.only(left: 35, top: 5),
-                    border: InputBorder.none),
+                //   cursorColor: Colors.grey,
+                onChanged: ((value) => reason = value),
+                showCursor: true,
+                decoration: InputDecoration(
+                    fillColor: const Color(0xffFFFFFF),
+                    filled: true,
+                    hintText: "Reason",
+                    hintStyle: const TextStyle(fontSize: 13, color: textSetting),
+                    contentPadding: const EdgeInsets.only(left: 35, top: 15, bottom: 15),
+                    border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                        borderRadius: BorderRadius.circular(33))),
               ),
             ),
-            const SizedBox(height: 30,),
-
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 62,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFFFFFF),
-                  borderRadius: BorderRadius.circular(100)),
-              child: TextField(
-                controller: reasonControl,
-                onSubmitted: (value) {
-                  setState(() {
-
-                  });
-                },
-                showCursor: false,
-                decoration: const InputDecoration(
-                    hintText: "Select Reason",
-                    hintStyle: TextStyle(
-                        fontSize: 13, color: textSetting),
-                    contentPadding:
-                    EdgeInsets.only(left: 35, top: 5),
-                    border: InputBorder.none),
-              ),
+            TextField(
+              //   cursorColor: Colors.grey,
+              onChanged: ((value) => message = value),
+              showCursor: true,
+              maxLines: 6,
+              decoration: InputDecoration(
+                  fillColor: const Color(0xffFFFFFF),
+                  filled: true,
+                  hintText: "Message",
+                  hintStyle: const TextStyle(fontSize: 13, color: textSetting),
+                  contentPadding: const EdgeInsets.only(left: 35, top: 15, bottom: 15, right: 15),
+                  border: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                      borderRadius: BorderRadius.circular(33))),
             ),
-            const SizedBox(height: 30,),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              height: 250,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFFFFFF),
-                  borderRadius: BorderRadius.circular(20)),
-              child: TextField(
-                controller: msgControl,
-                onSubmitted: (value) {
-                  setState(() {
-
-                  });
-                },
-                showCursor: false,
-                decoration: const InputDecoration(
-                    hintText: "Message",
-                    hintStyle: TextStyle(
-                        fontSize: 13, color: textSetting),
-                    contentPadding:
-                    EdgeInsets.only(left: 35, top: 5),
-                    border: InputBorder.none),
-              ),
+            const SizedBox(
+              height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ElevatedButton(
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: chipColor),
-                    onPressed: () async
-                    {
-                      if(emailControl.text==' ' || msgControl.text==' ' || reasonControl.text==' ')
-                        {
-                          CustomSnackbar.show('Please enter all the fields');
-                        }
-                      else{
-                        supportController.postSupport(emailControl.text, msgControl.text, reasonControl.text);
+                  onPressed: () async {
+                    if (email.isEmpty || reason.isEmpty || message.isEmpty || !email.isEmail) {
+                      CustomSnackbar.show('Please enter all the fields');
+                    } else {
+                      supportController.postSupport(email, message, reason);
 
-                        setState(() {
-                          emailControl.clear();
-                          msgControl.clear();
-                          reasonControl.clear();
-                        });
-                      }
-
-                    },
-                    child: const Text('Submit')
-                ),
-                const SizedBox(width: 30,)
-              ],
-            )
+                      email = "";
+                      message = "";
+                      reason = "";
+                      
+                    }
+                  },
+                  child: const Text('  Submit  ')),
+            ),
           ],
         ),
-     
+      ),
     );
   }
 }

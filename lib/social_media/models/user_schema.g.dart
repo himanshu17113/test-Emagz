@@ -29,7 +29,7 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
       followers: fields[15] as int?,
       followings: fields[16] as int?,
       hirable: fields[17] as String?,
-      rating: fields[18] as String?,
+      rating: fields[18] as int?,
       reviews: fields[19] as String?,
       poll: fields[20] as String?,
       jobcreated: fields[21] as String?,
@@ -99,9 +99,5 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
   int get hashCode => typeId.hashCode;
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is UserSchemaAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
+  bool operator ==(Object other) => identical(this, other) || other is UserSchemaAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
 }

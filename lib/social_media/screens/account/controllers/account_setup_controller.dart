@@ -45,7 +45,7 @@ class SetupAccount extends GetxController {
     var id = await HiveDB.getUserID();
     Dio dio = Dio();
     dio.options.headers["Authorization"] = token!;
-   // var headers = {'Content-Type': 'application/json', "": token};
+    // var headers = {'Content-Type': 'application/json', "": token};
     FormData body = FormData.fromMap({
       "_id": id,
       //todo implement multipart file upload when backend is ready
@@ -92,8 +92,8 @@ class SetupAccount extends GetxController {
       // debugPrint(data.toString());
       isUserRegiserting.value = false;
       //lead to main page
+      Get.offAll(() => BottomNavBar(), transition: Transition.rightToLeftWithFade);
 
-      Get.to(() => BottomNavBar(), transition: Transition.rightToLeftWithFade);
       return true;
     } else if (response.statusCode == 401) {
       CustomSnackbar.show(data['error']);
@@ -173,7 +173,7 @@ class SetupAccount extends GetxController {
       headers: headers,
       body: jsonEncode(body),
     );
-   // Map data = jsonDecode(response.body);
+    // Map data = jsonDecode(response.body);
     if (response.statusCode == 200) {
       //CustomSnackbar.showSucess('Your persona is set');
       Get.back();

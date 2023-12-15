@@ -87,10 +87,9 @@ class StoryScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                               var token = await HiveDB.getAuthToken();
-                              var userIdd = await HiveDB.getUserID();
+ 
 
-                              Get.to(() => WebViewPersona(token: token!, userId: userIdd!, personaUserId: userId.sId!));
+                              Get.to(() => WebViewPersona(  personaUserId: userId.sId!));
                             },
                             child: Text(
                               userId.username ?? "loading...",

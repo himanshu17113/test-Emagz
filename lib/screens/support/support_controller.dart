@@ -7,9 +7,8 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../../constant/api_string.dart';
 import '../../social_media/controller/auth/hive_db.dart';
- 
+
 class SupportController extends GetxController {
- 
   RxList<SupportMsg>? supports = <SupportMsg>[].obs;
   @override
   onInit() async {
@@ -20,8 +19,8 @@ class SupportController extends GetxController {
   Future<List<SupportMsg?>?> getAllSupport() async {
     if (supports != null) supports!.clear();
 
-    var token = (globToken ?? await HiveDB.getAuthToken());
-    var headers = {'Content-Type': 'application/json', "Authorization": token!};
+    String token = (globToken ?? await HiveDB.getAuthToken())!;
+    var headers = {'Content-Type': 'application/json', "Authorization": token};
 
     http.Response response = await http.get(Uri.parse(ApiEndpoint.getAllSupport), headers: headers);
     var body = jsonDecode(response.body);
@@ -34,12 +33,13 @@ class SupportController extends GetxController {
   }
 
   void postSupport(String email, String msg, String reason) async {
-    var token = await HiveDB.getAuthToken();
+    String? token = await HiveDB.getAuthToken();
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     var body = {"email": email, "reason": reason, "message": msg};
 
     http.Response response = await http.post(Uri.parse(ApiEndpoint.createSupport), headers: headers, body: jsonEncode(body));
     if (response.statusCode == 200 || response.statusCode == 201) {
+      print(response.body.toString());
       CustomSnackbar.showSucess('Your request has been accepted');
     } else {
       CustomSnackbar.show('Your request was not posted . Error');

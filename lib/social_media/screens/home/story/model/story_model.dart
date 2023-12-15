@@ -49,7 +49,7 @@ class UserId {
   int? followers;
   int? followings;
   String? hirable;
-  String? rating;
+  int? rating;
   String? reviews;
   String? poll;
   String? jobcreated;
@@ -57,7 +57,7 @@ class UserId {
   // List<Null>? search;
   String? createdAt;
   String? updatedAt;
-  int? iV;
+  // int? iV;
   String? getstatedName;
   String? businessLogo;
   String? businessName;
@@ -97,7 +97,7 @@ class UserId {
       //   this.search,
       this.createdAt,
       this.updatedAt,
-      this.iV,
+      //   this.iV,
       this.getstatedName,
       this.businessLogo,
       this.businessName,
@@ -109,27 +109,13 @@ class UserId {
       this.personalTemplate});
 
   UserId.fromJson(Map<String, dynamic> json) {
-    ratingCount = json['Rating_count'] != null
-        ? RatingCount.fromJson(json['Rating_count'])
-        : null;
-    commentPrivacy = json['comment_privacy'] != null
-        ? CommentPrivacy.fromJson(json['comment_privacy'])
-        : null;
-    postPrivacy = json['post_privacy'] != null
-        ? PostPrivacy.fromJson(json['post_privacy'])
-        : null;
-    mentionPrivacy = json['mention_privacy'] != null
-        ? PostPrivacy.fromJson(json['mention_privacy'])
-        : null;
-    messagePrivacy = json['message_privacy'] != null
-        ? PostPrivacy.fromJson(json['message_privacy'])
-        : null;
-    livePrivacy = json['live_privacy'] != null
-        ? PostPrivacy.fromJson(json['live_privacy'])
-        : null;
-    storyPrivacy = json['story_privacy'] != null
-        ? StoryPrivacy.fromJson(json['story_privacy'])
-        : null;
+    ratingCount = json['Rating_count'] != null ? RatingCount.fromJson(json['Rating_count']) : null;
+    commentPrivacy = json['comment_privacy'] != null ? CommentPrivacy.fromJson(json['comment_privacy']) : null;
+    postPrivacy = json['post_privacy'] != null ? PostPrivacy.fromJson(json['post_privacy']) : null;
+    mentionPrivacy = json['mention_privacy'] != null ? PostPrivacy.fromJson(json['mention_privacy']) : null;
+    messagePrivacy = json['message_privacy'] != null ? PostPrivacy.fromJson(json['message_privacy']) : null;
+    livePrivacy = json['live_privacy'] != null ? PostPrivacy.fromJson(json['live_privacy']) : null;
+    storyPrivacy = json['story_privacy'] != null ? StoryPrivacy.fromJson(json['story_privacy']) : null;
     loginOtp = json['login_otp'];
     isActive = json['is_active'];
     isPrivate = json['is_private'];
@@ -156,7 +142,7 @@ class UserId {
     // }
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
-    iV = json['__v'];
+//    iV = json['__v'];
     getstatedName = json['GetstatedName'];
     businessLogo = json['businessLogo'];
     businessName = json['businessName'];
@@ -242,8 +228,7 @@ class RatingCount {
   int? rating4;
   int? rating5;
 
-  RatingCount(
-      {this.rating1, this.rating2, this.rating3, this.rating4, this.rating5});
+  RatingCount({this.rating1, this.rating2, this.rating3, this.rating4, this.rating5});
 
   RatingCount.fromJson(Map<String, dynamic> json) {
     rating1 = json['Rating_1'];
@@ -270,8 +255,7 @@ class CommentPrivacy {
   bool? follow;
   bool? followAndFollowers;
 
-  CommentPrivacy(
-      {this.everyone, this.followers, this.follow, this.followAndFollowers});
+  CommentPrivacy({this.everyone, this.followers, this.follow, this.followAndFollowers});
 
   CommentPrivacy.fromJson(Map<String, dynamic> json) {
     everyone = json['everyone'];
