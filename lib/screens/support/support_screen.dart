@@ -6,15 +6,25 @@ import 'package:get/get.dart';
 
 import '../../social_media/common/common_appbar.dart';
 
-class SupportScreen extends StatefulWidget {
+class SupportScreen extends StatelessWidget {
   const SupportScreen({Key? key}) : super(key: key);
+  static time(DateTime dateTime) {
+    DateTime now = DateTime.now();
+    Duration difference = now.difference(dateTime);
 
-  @override
-  State<SupportScreen> createState() => _SupportScreenState();
-}
+    if (difference.inSeconds < 60) {
+      return 'now';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} minutes ago';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} hours ago';
+    } else if (difference.inDays == 1) {
+      return 'yesterday';
+    } else {
+      return '${difference.inDays} days ago';
+    }
+  }
 
-class _SupportScreenState extends State<SupportScreen> {
-  var supportController = Get.put(SupportController());
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -35,47 +45,46 @@ class _SupportScreenState extends State<SupportScreen> {
                 style: TextStyle(color: textSetting, fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
-            Obx(() {
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                physics: const ScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: supportController.supports!.length,
-                itemBuilder: (ctx, index) {
-                  return ListTile(
-                    tileColor: Colors.white,
-                    isThreeLine: true,
-                    subtitle: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '12 sept 2022',
+            GetBuilder<SupportController>(
+              id: "support",
+              init: SupportController(),
+              builder: (supportController) => ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: const ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: supportController.tickets.length,
+                  itemBuilder: (ctx, index) => ListTile(
+                        tileColor: Colors.white,
+                        isThreeLine: true,
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              supportController.tickets[index].createdAt.toString(),
+                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                        trailing: const Text(
+                          'Closed',
                           style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
                         ),
-                        Divider(),
-                      ],
-                    ),
-                    trailing: const Text(
-                      'Closed',
-                      style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Ticket No#${supportController.supports![index].ticketNumber ?? "12345"}',
-                          style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ticket No#${supportController.tickets[index].ticketNumber ?? "12345"}',
+                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(supportController.tickets[index].ticketTitle!),
+                          ],
                         ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(supportController.supports![index].message!),
-                      ],
-                    ),
-                  );
-                },
-              );
-            }),
+                      )),
+            ),
             const Padding(
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
@@ -83,22 +92,46 @@ class _SupportScreenState extends State<SupportScreen> {
                 style: TextStyle(color: textSetting, fontSize: 14, fontWeight: FontWeight.w500),
               ),
             ),
-            Obx(() {
-              return ListView.builder(
-                scrollDirection: Axis.vertical,
-                physics: const ScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: supportController.supports!.length,
-                itemBuilder: (ctx, index) {
-                  //print(supportController.supports![index].message);
-                  return ListTile(
-                    leading: Text(supportController.supports![index].ticketNumber ?? '12345'),
-                    trailing: const Text('Closed'),
-                    title: Text(supportController.supports![index].message ?? 'Hello'),
-                  );
-                },
-              );
-            }),
+            GetBuilder<SupportController>(
+              id: "support",
+              init: SupportController(),
+              builder: (supportController) => ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: const ScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: supportController.ticketsClosed.length,
+                  itemBuilder: (ctx, index) => ListTile(
+                        tileColor: Colors.white,
+                        isThreeLine: true,
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              supportController.ticketsClosed[index].createdAt.toString(),
+                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                        trailing: const Text(
+                          'Closed',
+                          style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                        ),
+                        title: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Ticket No#${supportController.ticketsClosed[index].ticketNumber ?? "12345"}',
+                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Text(supportController.ticketsClosed[index].ticketTitle!),
+                          ],
+                        ),
+                      )),
+            ),
           ],
         ),
       ),

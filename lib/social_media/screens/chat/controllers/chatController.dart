@@ -94,7 +94,11 @@ class ConversationController extends GetxController {
       });
 
       chatList = conversationsx;
-    } catch (e) {debugPrint(e.toString());}
+
+      update(['ChatList']);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future postChat(String text, String conversationId) async {

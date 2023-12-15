@@ -18,6 +18,7 @@ class UserChats extends StatelessWidget {
   Widget build(BuildContext context) => GetBuilder<ConversationController>(
         init: ConversationController(),
         initState: (_) {},
+        id: 'ChatList',
         builder: (chatController) => ListView.builder(
           shrinkWrap: true,
           itemCount: chatController.chatList.length,

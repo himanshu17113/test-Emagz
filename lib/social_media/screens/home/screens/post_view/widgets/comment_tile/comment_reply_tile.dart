@@ -16,7 +16,7 @@ class CommentReplyTile extends StatelessWidget {
   final int index;
   final int commentindex;
   CommentReplyTile({super.key, required this.comment, required this.last, required this.index, required this.commentindex});
-  time(DateTime dateTime) {
+ static time(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);
 
