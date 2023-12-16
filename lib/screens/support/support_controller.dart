@@ -21,6 +21,18 @@ class SupportController extends GetxController {
     super.onInit();
   }
 
+  createTicket(String ticketTitle) async {
+    final String token = (globToken ?? await HiveDB.getAuthToken())!;
+    final headers = {'Content-Type': 'application/json', "Authorization": token};
+    final Map body = {"ticketTitle": ticketTitle};
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.createTicket), headers: headers, body: jsonEncode(body));
+    if (response.statusCode == 200) {
+      getAllTicketbyID();
+      return true;
+    }
+    return false;
+  }
+
   void getAllSupportbyID() async {
     if (supports != null) supports!.clear();
     String token = (globToken ?? await HiveDB.getAuthToken())!;

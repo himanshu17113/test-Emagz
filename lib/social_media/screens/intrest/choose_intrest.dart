@@ -2,7 +2,6 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../controller/auth/auth_controller.dart';
 
 class ChooseIntrestScreen extends StatefulWidget {

@@ -1,8 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/drawer/drawer_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
+ 
 class ApplicationNotVerifiedScreen extends StatelessWidget {
   const ApplicationNotVerifiedScreen({Key? key}) : super(key: key);
 
@@ -31,11 +29,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
                 child: const Text(
                   "Sorry We Couldn’t \nVerify You",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      decoration: TextDecoration.none,
-                      color: cancledColor,
-                      fontSize: 26,
-                      fontWeight: FontWeight.w500),
+                  style: TextStyle(decoration: TextDecoration.none, color: cancledColor, fontSize: 26, fontWeight: FontWeight.w500),
                 ),
               ),
               Container(
@@ -54,7 +48,7 @@ class ApplicationNotVerifiedScreen extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Get.to(() => const ZoomDrawerScreen());
+                  //  Get.to(() => const ZoomDrawerScreen());
                 },
                 child: Container(
                   margin: EdgeInsets.only(top: size.height / 12),

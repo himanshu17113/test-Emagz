@@ -2,7 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+//import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
 import 'widgets/chart_card.dart';
 import 'widgets/income_card.dart';
@@ -62,7 +62,7 @@ class _DashBordScreenState extends State<DashBordScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            ZoomDrawer.of(context)!.toggle();
+                      //      ZoomDrawer.of(context)!.toggle();
                           },
                           child: Image.asset(
                             "assets/png/menu.png",

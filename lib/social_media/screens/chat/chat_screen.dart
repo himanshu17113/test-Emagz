@@ -25,7 +25,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    socketController.connectToServer(conversationId);
+  socketController.connectToServer(conversationId);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(

@@ -5,15 +5,12 @@ import 'package:emagz_vendor/social_media/controller/home/home_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/widgets/posts/home_posts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
-
-import 'package:flutter_file_dialog/flutter_file_dialog.dart';
-
 import 'package:path_provider/path_provider.dart';
-
 import '../common/appbar/home.dart';
 import '../models/post_model.dart';
 

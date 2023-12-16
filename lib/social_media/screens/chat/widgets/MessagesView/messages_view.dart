@@ -26,7 +26,8 @@ class MessageView extends StatelessWidget {
       tag: "notify",
       id: "message",
       init: SocketController(),
-      initState:(socketController)=>    socketController.controller?.connectToServer (room!),
+      // initState:(socketController)=>    socketController.initState()
+      // .controller?.connectToServer (room!),
       //  dispose: (state) =>    socketController.disconnectToServer(room!)
 
       builder: (socketController) => ListView.builder(

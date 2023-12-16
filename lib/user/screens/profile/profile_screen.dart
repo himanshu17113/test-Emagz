@@ -20,7 +20,7 @@ class ProfileScreenUser extends StatefulWidget {
 }
 
 class _ProfileScreenUserState extends State<ProfileScreenUser> {
-  var selectedGender;
+  dynamic selectedGender;
 
   @override
   Widget build(BuildContext context) {

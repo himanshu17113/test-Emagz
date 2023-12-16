@@ -14,14 +14,9 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
-
 import 'widgets/my_custom_textfiled.dart';
-
-import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
-
 import '../../social_media/common/bottom_nav/bottom_nav.dart';
-import '../../social_media/controller/home/home_controller.dart';
-import 'forgot_password/forgot_password_screen.dart';
+ import 'forgot_password/forgot_password_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);

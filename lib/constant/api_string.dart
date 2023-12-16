@@ -99,6 +99,6 @@ class ApiEndpoint {
   static String getSupportById = "$baseUrl/support/getById";
   static String createSupport = "$baseUrl/support/create";
   static String updateUserDetails = "$baseUrl/auth/update-user-details";
-    static String createTicket = "$baseUrl/ticket/create/";
+    static String createTicket = "$baseUrl/ticket/create";
      static String getTicketbyUserId(String userId)  => "$baseUrl/ticket/get/$userId";
 } 

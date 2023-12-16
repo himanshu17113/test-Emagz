@@ -1,6 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/screens/support/create_support.dart';
 import 'package:emagz_vendor/screens/support/support_controller.dart';
+import 'package:emagz_vendor/screens/support/supportchat.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,11 +24,25 @@ class SupportScreen extends StatelessWidget {
       return '${difference.inDays} days ago';
     }
   }
+//  void _showOrHide( ) {
+
+//       _bottomSheetController = _scaffoldKey.currentState.showBottomSheet(
+//         (_) => Container(
+//           // height: MediaQuery.of(context).size.height / 4,
+//           // width: MediaQuery.of(context).size.width,
+//           child: Text('This is a BottomSheet'),
+//         ),
+//         backgroundColor: Colors.white,
+//       );
+
+//   }
 
   @override
   Widget build(BuildContext context) {
+    String tick = '';
     Size s = MediaQuery.of(context).size;
     return Scaffold(
+      // key: _scaffoldKey,
       backgroundColor: socialBack,
       appBar: const SocialMediaSettingAppBar(
         title: 'Support',
@@ -48,26 +62,34 @@ class SupportScreen extends StatelessWidget {
             GetBuilder<SupportController>(
               id: "support",
               init: SupportController(),
-              builder: (supportController) => ListView.builder(
+              builder: (supportController) => ListView.separated(
                   scrollDirection: Axis.vertical,
                   physics: const ScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: supportController.tickets.length,
+                  separatorBuilder: (context, index) => const Divider(),
                   itemBuilder: (ctx, index) => ListTile(
+                        // leading: const SizedBox(
+                        //   width: 0,
+                        // ),
+                        contentPadding: const EdgeInsets.only(top: 2, left: 5, right: 4),
+                        minVerticalPadding: 0,
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SupportChat(
+                                userId: supportController.tickets[index].userId!,
+                                conversationId: supportController.tickets[index].id!,
+                              ),
+                            )),
                         tileColor: Colors.white,
                         isThreeLine: true,
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              supportController.tickets[index].createdAt.toString(),
-                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
-                            ),
-                            const Divider(),
-                          ],
+                        subtitle: Text(
+                          supportController.tickets[index].createdAt.toString(),
+                          style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
                         ),
                         trailing: const Text(
-                          'Closed',
+                          'Open',
                           style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
                         ),
                         title: Column(
@@ -95,23 +117,21 @@ class SupportScreen extends StatelessWidget {
             GetBuilder<SupportController>(
               id: "support",
               init: SupportController(),
-              builder: (supportController) => ListView.builder(
+              builder: (supportController) => ListView.separated(
                   scrollDirection: Axis.vertical,
                   physics: const ScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: supportController.ticketsClosed.length,
+                  separatorBuilder: (context, index) => const Padding(
+                        padding: EdgeInsets.all(18.0),
+                        child: Divider(),
+                      ),
                   itemBuilder: (ctx, index) => ListTile(
                         tileColor: Colors.white,
                         isThreeLine: true,
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              supportController.ticketsClosed[index].createdAt.toString(),
-                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
-                            ),
-                            const Divider(),
-                          ],
+                        subtitle: Text(
+                          supportController.ticketsClosed[index].createdAt.toString(),
+                          style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
                         ),
                         trailing: const Text(
                           'Closed',
@@ -141,7 +161,50 @@ class SupportScreen extends StatelessWidget {
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: chipColor),
             onPressed: () {
-              Get.to(() => const CreateSupport());
+              showModalBottomSheet(
+                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+                context: context,
+                builder: (contexts) => Container(
+                    decoration: const BoxDecoration(
+                        color: Color(0xf0E7E9FE), borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(10))),
+                    padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
+                    height: s.height * .6,
+                    width: s.width,
+                    child: Column(children: [
+                      TextField(
+                        onChanged: ((value) => tick = value),
+                        showCursor: true,
+                        decoration: InputDecoration(
+                            fillColor: const Color(0xffFFFFFF),
+                            filled: true,
+                            hintText: "What is the issue you are facing?",
+                            hintStyle: const TextStyle(fontSize: 13, color: textSetting),
+                            contentPadding: const EdgeInsets.only(left: 35, top: 15, bottom: 15),
+                            border: OutlineInputBorder(
+                                borderSide: const BorderSide(
+                                  width: 0,
+                                  style: BorderStyle.none,
+                                ),
+                                borderRadius: BorderRadius.circular(33))),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: GetBuilder<SupportController>(
+                            init: SupportController(),
+                            initState: (_) {},
+                            builder: (supportController) => ElevatedButton(
+                                onPressed: () async {
+                                  bool done = await supportController.createTicket(tick);
+                                  if (done) {
+                                    Navigator.pop(contexts);
+                                  }
+                                },
+                                child: const Text("Submit"))),
+                      )
+                    ])),
+              );
+
+              //    Get.to(() => const CreateSupport());
             },
             child: const Text('Raise Ticket')),
       ),
