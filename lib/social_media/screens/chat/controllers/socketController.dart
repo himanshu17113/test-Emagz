@@ -13,6 +13,8 @@ class SocketController extends GetxController {
   IO.Socket socket = IO.io(ApiEndpoint.socketUrl, <String, dynamic>{
     'transports': ['websocket'],
   });
+  final FocusNode focusNode = FocusNode();
+
   String? prevRoom;
   static Client client = http.Client();
   static String? userId = globUserId;
@@ -21,8 +23,8 @@ class SocketController extends GetxController {
   List<Message> liveMessages = <Message>[];
   List<NotificationModel> notifications = <NotificationModel>[];
   RxList<String> timeStamps = <String>[].obs;
-  RxString? conversationId;
-
+  String? conversationId;
+  RxBool showEmojiBoard = RxBool(false);
   void getNotification() {
     socket.connect();
     socket.onConnect((_) {
@@ -50,6 +52,19 @@ class SocketController extends GetxController {
     socket.emit("leaveRoom", room);
     update(["dot"]);
     socket.clearListeners();
+  }
+
+  void emoji() {
+    showEmojiBoard.value = !showEmojiBoard.value;
+
+    if (showEmojiBoard.value) {
+      focusNode.unfocus();
+      focusNode.canRequestFocus = true;
+    } else {
+       focusNode.unfocus();
+      focusNode.canRequestFocus = true;
+      //   focusNode.requestFocus();
+    }
   }
 
   void iAmActive() => socket.emit("joinLoginRoom", {"userId": globUserId!});
@@ -261,7 +276,11 @@ class SocketController extends GetxController {
   @override
   void onInit() {
     getActiveUsers();
-
+    focusNode.addListener(() {
+      if (focusNode.hasFocus) {
+        showEmojiBoard.value = false;
+      }
+    });
     getNotification();
     super.onInit();
   }

@@ -6,6 +6,7 @@ import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/MessagesView/messages_view.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'chat_list_screen.dart';
@@ -25,7 +26,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  socketController.connectToServer(conversationId);
+    socketController.connectToServer(conversationId);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -245,6 +246,7 @@ class ChatScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: TextField(
+                focusNode: socketController.focusNode,
                 cursorColor: grayColor,
                 controller: inputTextController,
                 maxLines: 10,
@@ -253,20 +255,23 @@ class ChatScreen extends StatelessWidget {
                     fillColor: const Color(0xffE8E7E7),
                     filled: true,
                     prefixIconConstraints: const BoxConstraints.tightFor(width: 50),
-                    prefixIcon: const Row(
+                    prefixIcon: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 2,
                         ),
-                        Icon(
-                          Icons.emoji_emotions_outlined,
-                          size: 22,
-                          color: Color(
-                            0xff909090,
+                        GestureDetector(
+                          onTap: () => socketController.emoji(),
+                          child: const Icon(
+                            Icons.emoji_emotions_outlined,
+                            size: 22,
+                            color: Color(
+                              0xff909090,
+                            ),
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.attach_file,
                           size: 20,
                           color: Color(
@@ -310,9 +315,32 @@ class ChatScreen extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
             ),
+            Obx(() => SizedBox(
+                  child:  socketController.showEmojiBoard.value ? emojiPicker() : null,
+                ))
           ],
         ),
       ),
     );
   }
+
+  Widget emojiPicker() {
+    return SizedBox(
+      height: 250,
+      child: EmojiPicker(
+        textEditingController: inputTextController,
+        //  onEmojiSelected: (emoji, category) {
+        //   setState(() {
+        //     _textEditingController.text += emoji.emoji;
+        //   });
+        // },
+      ),
+    );
+  }
+
+  // void _toggleEmojiKeyboard() {
+  //   setState(() {
+  //     _showEmojiPicker = !_showEmojiPicker;
+  //   });
+  // }
 }

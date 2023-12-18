@@ -37,17 +37,10 @@ class BottomNavBar extends StatelessWidget {
             Align(
               alignment: Alignment.bottomCenter,
               child: AnimatedContainer(
-                  height: homePostController.isVisible
-                      ? kBottomNavigationBarHeight + 5
-                      : 0,
+                  height: homePostController.isVisible ? kBottomNavigationBarHeight + 5 : 0,
                   duration: const Duration(milliseconds: 200),
-                  margin: EdgeInsets.only(
-                      bottom: homePostController.isVisible ? 20 : 0,
-                      left: 20,
-                      right: 20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.black12),
+                  margin: EdgeInsets.only(bottom: homePostController.isVisible ? 20 : 0, left: 20, right: 20),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(15), color: Colors.black12),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: BackdropFilter(
@@ -57,10 +50,8 @@ class BottomNavBar extends StatelessWidget {
                         unselectedItemColor: whiteColor,
                         showSelectedLabels: true,
                         type: BottomNavigationBarType.fixed,
-                        selectedLabelStyle: const TextStyle(
-                            fontSize: 7, color: blackButtonColor),
-                        unselectedLabelStyle:
-                            const TextStyle(fontSize: 7, color: grayColor),
+                        selectedLabelStyle: const TextStyle(fontSize: 7, color: blackButtonColor),
+                        unselectedLabelStyle: const TextStyle(fontSize: 7, color: grayColor),
                         backgroundColor: Colors.transparent,
                         currentIndex: homePostController.page,
                         elevation: 0.0,

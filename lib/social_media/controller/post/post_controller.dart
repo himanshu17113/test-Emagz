@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/constant/data.dart';
+import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/pre_post_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,8 +36,7 @@ class PostController extends GetxController {
 
   // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
-  final homePostsController =
-      Get.find<HomePostsController>(tag: 'HomePostsController');
+  final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
 
   // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
 
@@ -49,7 +49,6 @@ class PostController extends GetxController {
     }
     assetType = assetTyp;
     isSettingImage.value = false;
-   
   }
 
   // void addPost(Uint8List image) {
@@ -59,8 +58,7 @@ class PostController extends GetxController {
     imagePaths.clear();
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg')
-          .create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -72,8 +70,7 @@ class PostController extends GetxController {
   //   images.add(imagePath);
   // }
 
-  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer,
-      bool? isCustomPoll, List<Uint8List> images) async {
+  Future makePost(bool enablePoll, String tagPrivacy, int? setTimer, bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
     try {
       await addPost(images);
@@ -81,8 +78,7 @@ class PostController extends GetxController {
       Dio dio = Dio();
       debugPrint(privacyLikesAndViews.value);
       dio.options.headers["Content-Type"] = "application/json";
-      dio.options.headers["Authorization"] =
-          globToken ?? await HiveDB.getAuthToken();
+      dio.options.headers["Authorization"] = globToken ?? await HiveDB.getAuthToken();
       debugPrint(globToken);
       debugPrint(globUserId);
 
@@ -90,8 +86,7 @@ class PostController extends GetxController {
       FormData reqData = FormData.fromMap({
         "userId": globUserId ?? await HiveDB.getUserID(),
         "mediaType": "image",
-        "mediaUrl": List.generate(imagePaths.length,
-            (i) => MultipartFile.fromFileSync(imagePaths[i])),
+        "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
         "Enabledpoll": enablePoll,
         "caption": captionController.text,
 
@@ -105,8 +100,7 @@ class PostController extends GetxController {
         "tags": "[]",
         "tagPeople": "[]",
         "customPollEnabled": isCustomPoll,
-        "customPollData":
-            '["${(button1Controller.text).toString()}", "${(button2Controller.text).toString()}"]'
+        "customPollData": '["${(button1Controller.text).toString()}", "${(button2Controller.text).toString()}"]'
       });
 
       var res = await dio.post(
@@ -123,13 +117,14 @@ class PostController extends GetxController {
         CustomSnackbar.showSucess("Post  successful");
         isPosting.value = false;
         homePostsController.skip = -10;
-        homePostsController.pageUpdate(0);
+
         homePostsController.posts?.clear();
         homePostsController.getPost();
         button1Controller.clear();
         button2Controller.clear();
         captionController.clear();
-      //  Get.offAll(() => BottomNavBar());
+        homePostsController.pageUpdate(0);
+         Get.offAll(() => BottomNavBar());
       } else {
         CustomSnackbar.show("Something went wrong :(");
       }
