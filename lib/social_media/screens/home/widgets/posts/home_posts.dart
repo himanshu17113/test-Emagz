@@ -16,7 +16,7 @@ class HomePosts extends StatelessWidget {
     debugPrint("HomePosts Screen build");
     return GetBuilder<HomePostsController>(
         id: "HomePosts",
-      //  assignId: true,
+        //  assignId: true,
         tag: "HomePostsController",
         init: HomePostsController(),
         autoRemove: false,
@@ -84,15 +84,10 @@ class HomePosts extends StatelessWidget {
                                   );
                                 });
                           },
-                          child: homePostController.posts?[index - 1] == null
-                              ? const SizedBox.shrink()
-                              : PostCard(
-                                  index: index - 1,
-                                  post: homePostController.posts?[index - 1],
-                                  //    myUserId: myUserId,
-
-                                  // userImg: homePostController.posts?[index - 1].user?.ProfilePic ?? "",
-                                ));
+                          child: PostCard(
+                            index: index - 1,
+                            post: homePostController.posts?[index - 1],
+                          ));
                     }
                   } else {
                     return const SizedBox();

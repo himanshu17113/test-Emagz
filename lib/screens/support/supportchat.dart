@@ -1,11 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
-import 'package:emagz_vendor/constant/data.dart';
-import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/socketController.dart';
 import 'package:emagz_vendor/social_media/screens/chat/widgets/MessagesView/messages_view.dart';
-import 'package:emagz_vendor/templates/choose_template/webview.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../social_media/common/common_appbar.dart';

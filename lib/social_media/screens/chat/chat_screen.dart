@@ -26,7 +26,7 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    socketController.connectToServer(conversationId);
+     socketController.connectToServer(conversationId);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -118,7 +118,7 @@ class ChatScreen extends StatelessWidget {
                         style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
                       ),
                       const Text(
-                        "Online",
+                        "Onlin",
                         style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -316,7 +316,7 @@ class ChatScreen extends StatelessWidget {
               ),
             ),
             Obx(() => SizedBox(
-                  child:  socketController.showEmojiBoard.value ? emojiPicker() : null,
+                  child: socketController.showEmojiBoard.value ? emojiPicker() : null,
                 ))
           ],
         ),
@@ -337,10 +337,5 @@ class ChatScreen extends StatelessWidget {
       ),
     );
   }
-
-  // void _toggleEmojiKeyboard() {
-  //   setState(() {
-  //     _showEmojiPicker = !_showEmojiPicker;
-  //   });
-  // }
+ 
 }

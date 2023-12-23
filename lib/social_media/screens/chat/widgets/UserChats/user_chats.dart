@@ -11,9 +11,6 @@ class UserChats extends StatelessWidget {
   const UserChats({
     Key? key,
   }) : super(key: key);
-
-  // final ScrollController scrollController = ScrollController();
-  //final chatController = Get.find<ConversationController>();
   @override
   Widget build(BuildContext context) => GetBuilder<ConversationController>(
         init: ConversationController(),
@@ -27,10 +24,10 @@ class UserChats extends StatelessWidget {
           itemBuilder: (context, index) {
             final Conversation conversation = chatController.chatList[index];
             return UserChat(
-              userData: chatController.chatList[index].userData,
+              userData: conversation.userData,
               resentMessage: conversation.resentMessage,
               conversationId: conversation.data!.id!,
-              senderId: conversation.data!.members?.singleWhere((element) => element != globUserId) ?? "",
+             // senderId: conversation.data!.members?.singleWhere((element) => element != globUserId) ?? "",
             );
           },
         ),

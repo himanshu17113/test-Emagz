@@ -20,9 +20,6 @@ class PostController extends GetxController {
 
   final TextEditingController button2Controller = TextEditingController();
 
-  // TextEditingController button3Controller = TextEditingController();
-  // TextEditingController button4Controller = TextEditingController();
-
   RxDouble uploadPercentage = RxDouble(0);
   RxString privacyLikesAndViews = RxString("hideFromEveryone");
   RxString privacyLikesAndViewsUI = RxString("Everyone");
@@ -34,11 +31,8 @@ class PostController extends GetxController {
   RxBool isSettingImage = false.obs;
   RxString likeAndView = "Everyone".obs;
 
-  // RxBool enabledPoll = false.obs;
   RxBool isPosting = RxBool(false);
   final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
-
-  // final HomePostsController homePostsController = Get.put(HomePostsController(), tag: "HomePostsController");
 
   Future setPost(image, PostType assetTyp) async {
     isSettingImage.value = true;
@@ -51,24 +45,16 @@ class PostController extends GetxController {
     isSettingImage.value = false;
   }
 
-  // void addPost(Uint8List image) {
-  //   imagePaths.add(image);
-  // }
   Future<void> addPost(List<Uint8List> imagex) async {
     imagePaths.clear();
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
+      File imageFile = await File('${tempDir.path}/image$i.jpg').create();
       await imageFile.writeAsBytes(imagex[i]);
-      // File imageFile = File.fromRawPath(
-      //     imageBytes); // this creates a File object from the Uint8List
-      imagePaths.add(imageFile.path); // this adds the File object to the List
+
+      imagePaths.add(imageFile.path);
     }
   }
-
-  // uploadPost(String imagePath) {
-  //   images.add(imagePath);
-  // }
 
   Future makePost(bool enablePoll, String tagPrivacy, int? setTimer, bool? isCustomPoll, List<Uint8List> images) async {
     isPosting.value = true;
@@ -89,14 +75,11 @@ class PostController extends GetxController {
         "mediaUrl": List.generate(imagePaths.length, (i) => MultipartFile.fromFileSync(imagePaths[i])),
         "Enabledpoll": enablePoll,
         "caption": captionController.text,
-
         "ShowPollResults": true,
-
         "privacy": '{"everyone": true, "followers": false, "no_one": false}',
         "post_hide": "[]",
         "tag_privacy": '{"everyone":true,"followers":false,"no_one":false}',
         "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
-        // DateTime(2024, 9, 7, 17, 30),
         "tags": "[]",
         "tagPeople": "[]",
         "customPollEnabled": isCustomPoll,
@@ -124,105 +107,15 @@ class PostController extends GetxController {
         button2Controller.clear();
         captionController.clear();
         homePostsController.pageUpdate(0);
-         Get.offAll(() => BottomNavBar());
+        Get.offAll(() => BottomNavBar());
       } else {
         CustomSnackbar.show("Something went wrong :(");
       }
     } catch (e) {
-      //debugPrint(reqData.toString());
       uploadPercentage.value = 0.0;
       isPosting.value = false;
       Get.snackbar("Cant Post", "Some Internal Error");
       debugPrint("posting video error $e");
     }
   }
-
-  // Future makePost(
-  //   bool enablePoll,
-  //   String tagPrivacy,
-  //   int? setTimer,
-  // ) async {
-  //   isPosting.value = true;
-
-  //   try {
-  //     // if(setTimer == "-1"){
-  //     //   CustomSnackbar.show("please setTimer");
-  //     //   isPosting.value = false;
-  //     //   return;
-  //     // }
-  //     // if(captionController.text == ""){
-  //     //   CustomSnackbar.show("please fill captions");
-  //     //   isPosting.value = false;
-  //     //   return;
-  //     // }
-
-  //     Dio dio = Dio();
-  //     debugPrint(privacyLikesAndViews.value);
-  //     var token =  await HiveDB.getAuthToken();
-  //     var userId = await HiveDB.getUserID();
-  //     dio.options.headers["Authorization"] = token;
-  //     //todo : Remove The New File Making Process With Filtered File
-  //     // final tempDir = await getTemporaryDirectory();
-  //     // File file = await File('${tempDir.path}/image.png').create();
-  //     // if (assetType != PostType.text) {
-  //     //   Uint8List imageInUnit8List = imagePath!;
-
-  //     //   file.writeAsBytesSync(imageInUnit8List);
-  //     // }
-  //     // debugPrint(
-  //     //   file.path.toString(),
-  //     // );
-
-  //     FormData reqData = FormData.fromMap({
-  //       "userId": userId,
-  //       "mediaType": "image",
-  //       // assetType.toString().split(".")[1].substring(0),
-  //       "mediaUrl": MultipartFile.fromFileSync(imagePaths[0]
-  //           // assetType == PostType.text ? textPost! : file.path.toString(),
-  //           ),
-
-  //       "Enabledpoll": enablePoll ? true : false,
-
-  //       //  "setTimer": enablePoll ? setTimer:"",
-  //       "caption": captionController.text,
-
-  //       "ShowPollResults": true,
-
-  //       "privacy": '{"everyone": false, "followers": true, "no_one": false}',
-  //       "post_hide": "[]",
-  //       "tag_privacy":
-  //           '{"everyone": false, "followers": true, "no_one": false}',
-  //       "pollDuration": DateTime.now().add(Duration(days: setTimer ?? 1)),
-  //       // DateTime(2024, 9, 7, 17, 30),
-  //       "tags": "[]",
-  //       "tagPeople": "[]"
-  //     });
-
-  //     await dio.post(
-  //       ApiEndpoint.makePost,
-  //       data: reqData,
-  //       onSendProgress: (count, total) {
-  //         uploadPercentage.value = (count / total);
-  //       },
-  //     );
-  //     //debugPrint(reqData.toString());
-  //     uploadPercentage.value = 0.0;
-
-  //     CustomSnackbar.showSucess("Post  successful");
-  //     isPosting.value = false;
-
-  //     homePostsController.skip = -10;
-
-  //     //bottomNavController.pageUpdate(0);
-  //     homePostsController.posts?.clear();
-  //     homePostsController.getPost();
-  //     Get.offAll(() => BottomNavBar());
-  //   } catch (e) {
-  //     //debugPrint(reqData.toString());
-  //     uploadPercentage.value = 0.0;
-  //     isPosting.value = false;
-  //     Get.snackbar("Cant Post", "Some Internal Error");
-  //     debugPrint("posting video error $e");
-  //   }
-  // }
 }

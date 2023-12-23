@@ -14,7 +14,7 @@ class SocketController extends GetxController {
     'transports': ['websocket'],
   });
   final FocusNode focusNode = FocusNode();
-
+  List<String> onLineUserIds = [];
   String? prevRoom;
   static Client client = http.Client();
   static String? userId = globUserId;
@@ -61,7 +61,7 @@ class SocketController extends GetxController {
       focusNode.unfocus();
       focusNode.canRequestFocus = true;
     } else {
-       focusNode.unfocus();
+      focusNode.unfocus();
       focusNode.canRequestFocus = true;
       //   focusNode.requestFocus();
     }
@@ -69,9 +69,14 @@ class SocketController extends GetxController {
 
   void iAmActive() => socket.emit("joinLoginRoom", {"userId": globUserId!});
 
-  void iamOffline() => socket.emit("joinLoginRoom", {"userId": ""});
+  void iamOffline() => socket.emit("joinLoginRoom", {"userId": globUserId, "activeStatus": false});
 
-  void getActiveUsers() => socket.on("userOnline", (payload) => {debugPrint("tagged ${payload.toString()}")});
+  void getActiveUsers() => socket.on(
+      "userOnline",
+      (payload) =>
+          payload.forEach((element) {
+            onLineUserIds.add(element['userId']);
+          }));
 
   void connectToServer(String room) {
     if (prevRoom != null && prevRoom == room) {
@@ -275,6 +280,7 @@ class SocketController extends GetxController {
 
   @override
   void onInit() {
+    iAmActive();
     getActiveUsers();
     focusNode.addListener(() {
       if (focusNode.hasFocus) {

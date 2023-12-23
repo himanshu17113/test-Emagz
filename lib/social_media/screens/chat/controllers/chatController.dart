@@ -14,11 +14,14 @@ import 'package:http/http.dart' as http;
 
 class ConversationController extends GetxController {
   String? tempID;
+  bool notfound = false;
   bool isRotate = false;
+  bool isSearch = false;
   final Dio dio = Dio();
   RxList<Requests?>? req = <Requests>[].obs;
   static String? token = globToken;
   static String? userId = userId;
+  List<Conversation> searChatList = [];
 
   List<Conversation> chatList = [];
   @override
@@ -219,5 +222,21 @@ class ConversationController extends GetxController {
       debugPrint(e.toString());
     }
     return null;
+  }
+
+  void search(String search) {
+    if (search.isEmpty) {
+      isSearch = false;
+      update(['searchList']);
+    } else {
+      isSearch = true;
+      searChatList = chatList.where((element) => element.userData!.username!.toLowerCase().contains(search.toLowerCase())).toList();
+      if (searChatList.isEmpty) {
+        notfound = true;
+      } else {
+        notfound = false;
+      }
+      update(['searchList']);
+    }
   }
 }

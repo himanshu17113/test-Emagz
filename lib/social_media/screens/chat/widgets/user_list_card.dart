@@ -1,46 +1,31 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../controllers/socketController.dart';
 import '../models/chat_model.dart';
 
 class UserChat extends StatelessWidget {
   final bool? isMessage;
   final UserData? userData;
-  final String senderId;
+  // final String senderId;
   final String conversationId;
   final ResentMessage? resentMessage;
   const UserChat({
     Key? key,
-    required this.senderId,
+    //  required this.senderId,
     required this.conversationId,
     this.userData,
     this.isMessage = false,
     this.resentMessage,
   }) : super(key: key);
 
-  //UserSchema? sender;
-
-// //   @override
-//   Future getInitUser() async {
-//     // debugPrint("id in list item : ${widget.senderId}");
-//     WidgetsBinding.instance.addPostFrameCallback((_) async {
-//       sender = await HiveDB.getUserDetail(senderId);
-//       //   setState(() {});
-//     });
-//     //setState(() {});
-//   }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        // if (sender == null) {
         if (userData == null) {
-          // ScaffoldMessenger.
-          // CustomSnackbar.show(" Loading, Please wait");
         } else {
-          //   List<Message>? messages = [];
-          //  messages = await chatController.getMessages(widget.conversationId);
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -72,17 +57,23 @@ class UserChat extends StatelessWidget {
                       'https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661?b=1&k=20&m=1307615661&s=170667a&w=0&h=Zp9_27RVS_UdlIm2k8sa8PuutX9K3HTs8xdK0UfKmYk='),
                   maxRadius: 25,
                 ),
-                const Positioned(
-                    top: 36,
-                    right: 2,
-                    child: CircleAvatar(
-                      radius: 7,
-                      backgroundColor: whiteColor,
-                      child: CircleAvatar(
-                        radius: 6,
-                        backgroundColor: chatOnlineDot,
-                      ),
-                    ))
+                GetBuilder<SocketController>(
+                  init: SocketController(),
+                  //   initState: (_) {},
+                  builder: (s) => s.onLineUserIds.contains(userData!.id)
+                      ? const Positioned(
+                          top: 36,
+                          right: 2,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor: whiteColor,
+                            child: CircleAvatar(
+                              radius: 6,
+                              backgroundColor: chatOnlineDot,
+                            ),
+                          ))
+                      : const SizedBox.shrink(),
+                )
               ],
             ),
             const SizedBox(width: 10),
@@ -93,17 +84,11 @@ class UserChat extends StatelessWidget {
                 userData == null
                     ? Text(
                         "loading",
-                        style: TextStyle(
-                            color: Colors.black.withOpacity(0.25),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.black.withOpacity(0.25), fontSize: 12, fontWeight: FontWeight.w400),
                       )
                     : Text(
                         "${userData?.username}",
-                        style: const TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
+                        style: const TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
                       ),
                 const SizedBox(
                   height: 3,
@@ -111,17 +96,11 @@ class UserChat extends StatelessWidget {
                 resentMessage == null
                     ? const Text(
                         "loading",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       )
                     : Text(
                         resentMessage?.text ?? "last text",
-                        style: const TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
+                        style: const TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                       ),
               ],
             ),
@@ -137,10 +116,7 @@ class UserChat extends StatelessWidget {
                   )
                 : const Text(
                     "",
-                    style: TextStyle(
-                        color: Color(0xffA1A1A1),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600),
+                    style: TextStyle(color: Color(0xffA1A1A1), fontSize: 10, fontWeight: FontWeight.w600),
                   ),
             const SizedBox(
               width: 30,
