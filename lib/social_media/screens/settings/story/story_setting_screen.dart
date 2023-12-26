@@ -1,3 +1,5 @@
+import 'package:emagz_vendor/constant/data.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -15,47 +17,55 @@ class StorySettingScreen extends StatefulWidget {
 }
 
 class _StorySettingScreenState extends State<StorySettingScreen> {
-  bool closeFriends = false;
+  late String active;
+  bool showBox = false;
+  bool showSearch = false;
+  @override
+  void initState() {
+    super.initState();
+    asyncInit();
+  }
 
-  bool everyOne = true;
+  // late final CommentPrivacy commentPrivacy;
+  asyncInit() async {
+    final StoryPrivacy storyPrivacy = constuser!.storyPrivacy!;
 
-  bool yourFollower = false;
+    if (storyPrivacy.everyone ?? false) {
+      active = "Everyone";
+    } else if (storyPrivacy.closeFriend ?? false) {
+      active = "closeFriend";
+    } else if (storyPrivacy.noOne ?? false) {
+      active = "noOne";
+    } else {
+      active = "specific";
+    }
+    //user = await HiveDB.getCurrentUserDetail();
+  }
 
-  bool followAndFollower = false;
-
-  final privacyController= Get.put(PrivacyController());
+  final privacyController = Get.put(PrivacyController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: socialBack,
       appBar: const SocialMediaSettingAppBar(title: "Setting"),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: const Text(
-                "Story Setting",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600),
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            child: Text(
+              "Story Setting",
+              style: TextStyle(
+                  color: blackButtonColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
+          ),
+          Card(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Padding(
               padding: const EdgeInsets.all(15),
-              height: 190,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,51 +89,68 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Everyone",
-                        style: TextStyle(
-                            color: blackButtonColor,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      FlutterSwitch(
-                          activeColor: whiteAcent,
-                          toggleColor: blueColor,
-                          padding: 1,
-                          height: 20,
-                          width: 50,
-                          inactiveColor: lightgrayColor,
-                          inactiveToggleColor: toggleInactive,
-                          value: everyOne,
-                          onToggle: (val) {
-                              setState(() {
-                                everyOne=val;
-                              });
-                              privacyController.privacyStoryControl(everyOne, closeFriends);
-                          }
-                          ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
+                  TitleAndSwitchWidget(
+                    title: "Everyone",
+                    isActive: "Everyone" == active,
+                    onToggle: (val) {
+                      if (val) {
+                        setState(() {
+                          active = "Everyone";
+                        });
+                        privacyController
+                            .privacyStoryControl(true, false, false, false, []);
+                      }
+                      //else {
+                      //   setState(() {
+                      //     active = "Followers >";
+                      //   });
+                      //   privacyController.privacyCommentControl(
+                      //       false, true, false, false);
+                      // }
+                    },
                   ),
                   TitleAndSwitchWidget(
                     title: "Close Friends",
-                    subTitle: "53 People",
-                    isActive: closeFriends,
-                    onToggle: (val)
-                    {
-                      setState(() {
-                        closeFriends=val;
-                      });
-                      privacyController.privacyStoryControl(everyOne, closeFriends);
+                    subTitle: constuser!.followers == 0
+                        ? null
+                        : "${constuser!.followers} People",
+                    isActive: active == "closeFriend",
+                    onToggle: (val) {
+                      if (val) {
+                        setState(() {
+                          active = "closeFriend";
+                        });
+                        privacyController
+                            .privacyStoryControl(false, true, false, false, []);
+                      }
+                      // else {
+                      //   setState(() {
+                      //     active = "No one >";
+                      //   });
+                      //   privacyController.privacyCommentControl(
+                      //       false, false, false, false);
+                      // }
                     },
                   ),
-                  const SizedBox(
-                    height: 10,
+                  TitleAndSwitchWidget(
+                    title: "No one",
+                    isActive: active == "noOne",
+                    onToggle: (val) {
+                      if (val) {
+                        setState(() {
+                          active = "noOne";
+                        });
+                        privacyController
+                            .privacyStoryControl(false, false, false, true, []);
+                      }
+                      //  else {
+                      //   setState(() {
+                      //     active = "Followers >";
+                      //   });
+                      //   privacyController.privacyCommentControl(
+                      //       false, true, false, false);
+                      // }
+                    },
                   ),
                   const Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,8 +175,8 @@ class _StorySettingScreenState extends State<StorySettingScreen> {
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

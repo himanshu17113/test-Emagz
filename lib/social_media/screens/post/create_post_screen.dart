@@ -278,7 +278,7 @@ class _GridGalleryState extends State<GridGallery> {
         RxBool isSelected = RxBool(false);
         temp.add(
           FutureBuilder(
-            future: asset.thumbnailDataWithSize(const ThumbnailSize(720, 1080), quality: 80),
+            future: asset.thumbnailDataWithSize(const ThumbnailSize(720, 1080), quality: 65),
             builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return Stack(

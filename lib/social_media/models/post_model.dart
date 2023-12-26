@@ -4,19 +4,19 @@ class Post {
   //Privacy? privacy;
   List<PollResults?>? pollResults;
   int? likeCount;
-  String? sId;
-  UserSchema? user;
-  String? mediaType;
-  List<String?>? mediaUrl;
-  bool? enabledpoll;
+  final String? sId;
+  final UserSchema? user;
+  final String? mediaType;
+  final List<String?>? mediaUrl;
+  final bool? enabledpoll;
   bool? showPollResults;
   int? setTimer;
-  String? caption;
+  final String? caption;
   //String? tagPrivacy;
-  List<String?>? reacted;
+  final List<String?>? reacted;
   List<String?>? likes;
-  List<String?>? shares;
-  dynamic pollDuration;
+  final List<String?>? shares;
+  final dynamic pollDuration;
   List<Comment?>? comments;
 
   List<String>? customPollData;
@@ -178,73 +178,38 @@ class PollResults {
       };
 }
 
-class ComentPrivacy {
-  bool? everyone;
-  bool? youFollow;
-  bool? yourFollowers;
-  bool? followAndFollowers;
-  ComentPrivacy(
-      {this.everyone,
-      this.youFollow,
-      this.yourFollowers,
-      this.followAndFollowers});
-  ComentPrivacy.fromJson(Map<String, dynamic> json) {
-    everyone = json['everyone'];
-    youFollow = json['follow'];
-    yourFollowers = json['followers'];
-    followAndFollowers = json['follow_and_followers'];
-  }
-}
-
-class PostPrivacy {
-  bool? everyone;
-  bool? yourFollower;
-  bool? noOne;
-
-  PostPrivacy({this.everyone, this.yourFollower, this.noOne});
-
-  PostPrivacy.fromJson(Map<String, dynamic> json) {
-    everyone = json['everyone'];
-    yourFollower = json['followers'];
-    noOne = json['no_one'];
-  }
-}
-
-// class Comment {
-//   String? userId;
-//   String? text;
-//   String? sId;
-//   List<Comment?>? comments;
-
-//   Comment({this.userId, this.text, this.sId, this.comments});
-
-//   Comment.fromJson(Map<String, dynamic> json) {
-//     userId = json['userId'];
-//     text = json['text'];
-//     sId = json['_id'];
-
-//     // if (json['Comments'] != null) {
-//     //   comments = <Comment>[];
-//     //   json['Comments'].forEach((v) {
-//     //     comments?.add(Comment.fromJson(v));
-//     //   });
-//     // }
-//     // else{
-//     //    comments = <Comment>[];
-//     // }
+// class ComentPrivacy {
+//   bool? everyone;
+//   bool? youFollow;
+//   bool? yourFollowers;
+//   bool? followAndFollowers;
+//   ComentPrivacy(
+//       {this.everyone,
+//       this.youFollow,
+//       this.yourFollowers,
+//       this.followAndFollowers});
+//   ComentPrivacy.fromJson(Map<String, dynamic> json) {
+//     everyone = json['everyone'];
+//     youFollow = json['follow'];
+//     yourFollowers = json['followers'];
+//     followAndFollowers = json['follow_and_followers'];
 //   }
-
-//   // Map<String, dynamic> toJson() {
-//   //   final Map<String, dynamic> data = Map<String, dynamic>();
-//   //   data['userId'] = this.userId;
-//   //   data['text'] = this.text;
-//   //   data['_id'] = this.sId;
-//   //   if (this.comments != null) {
-//   //     data['Comments'] = this.comments!.map((v) => v.toJson()).toList();
-//   //   }
-//   //   return data;
-//   // }
 // }
+
+// class PostPrivacy {
+//   bool? everyone;
+//   bool? yourFollower;
+//   bool? noOne;
+
+//   PostPrivacy({this.everyone, this.yourFollower, this.noOne});
+
+//   PostPrivacy.fromJson(Map<String, dynamic> json) {
+//     everyone = json['everyone'];
+//     yourFollower = json['followers'];
+//     noOne = json['no_one'];
+//   }
+// }
+
 class Comment {
   UserSchema? userId;
   String? text;

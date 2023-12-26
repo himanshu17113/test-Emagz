@@ -67,7 +67,7 @@ class _TemplateOneState extends State<TemplateOne> {
           body: SafeArea(
             child: ListView(
               children: [
-                TempleteAppBar(
+                const TempleteAppBar(
         title: "",
         // isBlack: false,
       ),

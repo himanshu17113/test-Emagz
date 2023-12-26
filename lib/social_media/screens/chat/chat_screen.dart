@@ -81,7 +81,7 @@ class ChatScreen extends StatelessWidget {
                       },
                       child: CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
-                          constuser?.ProfilePic.toString() ?? "",
+                          constuser?.profilePic.toString() ?? "",
                         ),
                         maxRadius: 15,
                       ),

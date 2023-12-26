@@ -42,11 +42,19 @@ class AuthController {
   int? selectedChoiseIndex;
   Set<int> selectedChoices = {};
   Set<String> selectedInterest = {};
-  appleRegister(String email, String password, String imgUrl, String fullName) async {
+  appleRegister(
+      String email, String password, String imgUrl, String fullName) async {
     try {
-      Map<String, String> header = {'Content-type': 'application/json; charset=utf-8'};
+      Map<String, String> header = {
+        'Content-type': 'application/json; charset=utf-8'
+      };
 
-      Map body = {"email": email, "password": password, "username": fullName, "dob": imgUrl};
+      Map body = {
+        "email": email,
+        "password": password,
+        "username": fullName,
+        "dob": imgUrl
+      };
       debugPrint(body.toString());
       debugPrint('Apple sign in Started');
       http.Response response = await http.post(
@@ -58,7 +66,7 @@ class AuthController {
       debugPrint(response.body);
 
       var data = json.decode(response.body);
-       if (response.statusCode == 200) {
+      if (response.statusCode == 200) {
         isUserRegiserting = false;
         var token = data["token"];
         var userId = data["userId"];
@@ -143,7 +151,8 @@ class AuthController {
       };
       debugPrint(ApiEndpoint.register);
       //debugPrint(body.toString());
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.register), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(Uri.parse(ApiEndpoint.register),
+          body: jsonEncode(body), headers: headers);
 
       debugPrint(response.body);
       Map data = jsonDecode(response.body);
@@ -158,7 +167,7 @@ class AuthController {
         globToken = token;
         globUserId = userId;
         HiveDB.setAuthData(token, userId);
-       
+
         return true;
       } else if (response.statusCode == 401) {
         CustomSnackbar.show(data['error']);
@@ -190,7 +199,8 @@ class AuthController {
       };
       var headers = {'Content-Type': 'application/json'};
 
-      var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
+      var response = await http.post(Uri.parse(ApiEndpoint.login),
+          body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
 
       debugPrint(data["data"]["_id"]);
@@ -235,7 +245,8 @@ class AuthController {
       };
       var headers = {'Content-Type': 'application/json'};
 
-      var response = await http.post(Uri.parse(ApiEndpoint.login), body: jsonEncode(body), headers: headers);
+      var response = await http.post(Uri.parse(ApiEndpoint.login),
+          body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
 
       debugPrint(data["data"]["_id"]);
@@ -262,7 +273,7 @@ class AuthController {
         return false;
       }
     } catch (e) {
-      CustomSnackbar.show(e.toString());
+      debugPrint(e.toString());
       isUserlogging = false;
       return false;
     }
@@ -277,7 +288,11 @@ class AuthController {
   }
 
   Future<void> pickDate(BuildContext context) async {
-    DateTime? pickedDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1950), lastDate: DateTime.now());
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1950),
+        lastDate: DateTime.now());
     if (pickedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       dobController.text = formattedDate;
@@ -293,13 +308,21 @@ class AuthController {
   postUserProfileType(int value) async {
     isUserlogging = true;
     try {
-      var headers = {'Content-Type': 'application/json', "Authorization": (globToken ?? await HiveDB.getAuthToken())!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": (globToken ?? await HiveDB.getAuthToken())!
+      };
       var accountTypes = ["Error", "personal", "professional"];
       Map body = {"accountType": accountTypes[value]};
-      http.Response response =
-          await http.put(Uri.parse(ApiEndpoint.accountType((globUserId ?? await HiveDB.getUserID())!)), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.put(
+          Uri.parse(ApiEndpoint.accountType(
+              (globUserId ?? await HiveDB.getUserID())!)),
+          body: jsonEncode(body),
+          headers: headers);
       if (response.statusCode == 200) {
-        (value == 1) ? Get.to(() => const PersonalProfileSetup()) : Get.to(() => const BusinessProfileSetupScreen());
+        (value == 1)
+            ? Get.to(() => const PersonalProfileSetup())
+            : Get.to(() => const BusinessProfileSetupScreen());
       }
       isUserlogging = false;
     } catch (e) {
@@ -316,7 +339,8 @@ class AuthController {
     }
     var headers = {'Content-Type': 'application/json'};
     Map body = {"email": email};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.sendOtp), body: jsonEncode(body), headers: headers);
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.sendOtp),
+        body: jsonEncode(body), headers: headers);
     debugPrint(response.body);
     var responseData = jsonDecode(response.body);
 
@@ -344,7 +368,8 @@ class AuthController {
     var headers = {'Content-Type': 'application/json'};
     Map body = {"email": email, "otp": typedOtp};
     // debugPrint(body);
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.verifyOtp), body: jsonEncode(body), headers: headers);
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.verifyOtp),
+        body: jsonEncode(body), headers: headers);
     var responseData = jsonDecode(response.body);
     if (response.statusCode == 200) {
       isUserRegiserting = false;
@@ -365,8 +390,14 @@ class AuthController {
   changePassword(String newPassword) async {
     isUserRegiserting = true;
     var headers = {'Content-Type': 'application/json'};
-    Map body = {"email": forgotPasswordEmailController.text, "password": newPassword};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.changePassword), body: jsonEncode(body), headers: headers);
+    Map body = {
+      "email": forgotPasswordEmailController.text,
+      "password": newPassword
+    };
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.changePassword),
+        body: jsonEncode(body),
+        headers: headers);
     //  var responseBody = jsonDecode(response.body);
     if (response.statusCode == 200) {
       isUserRegiserting = false;
@@ -383,20 +414,30 @@ class AuthController {
     try {
       isUserlogging = true;
 
-      var headers = {'Content-Type': 'application/json', "Authorization": (globToken ?? await HiveDB.getAuthToken())!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": (globToken ?? await HiveDB.getAuthToken())!
+      };
 
       Map body = {
         "_id": (globUserId ?? await HiveDB.getUserID())!,
         "interestName": selectedChoices.toList(),
       };
-      http.Response response = await http.post(Uri.parse(ApiEndpoint.chooseIntrest), body: jsonEncode(body), headers: headers);
+      http.Response response = await http.post(
+          Uri.parse(ApiEndpoint.chooseIntrest),
+          body: jsonEncode(body),
+          headers: headers);
       debugPrint(response.body);
       if (response.statusCode == 200) {
-        http.Response uniqueNameResponse = await http.get(Uri.parse(ApiEndpoint.uniqueName((globUserId ?? await HiveDB.getUserID())!)), headers: headers);
+        http.Response uniqueNameResponse = await http.get(
+            Uri.parse(ApiEndpoint.uniqueName(
+                (globUserId ?? await HiveDB.getUserID())!)),
+            headers: headers);
         var uniqRes = jsonDecode(uniqueNameResponse.body);
         suggestedName = uniqRes["GetstatedName"];
         isUserlogging = false;
-        Get.to(PersonalAccountScreen(suggestedName: suggestedName), transition: Transition.rightToLeft);
+        Get.to(PersonalAccountScreen(suggestedName: suggestedName),
+            transition: Transition.rightToLeft);
       } else {
         isUserlogging = false;
         CustomSnackbar.show("Cant Proceed Further");

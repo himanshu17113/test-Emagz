@@ -17,7 +17,17 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserSchema(
+      address: fields[31] as Address?,
+      commentPrivacy: fields[32] as CommentPrivacy?,
+      postPrivacy: fields[33] as Privacy?,
+      mentionPrivacy: fields[34] as Privacy?,
+      messagePrivacy: fields[35] as Privacy?,
+      livePrivacy: fields[36] as Privacy?,
+      storyPrivacy: fields[37] as StoryPrivacy?,
+      password: fields[38] as String?,
       mobileNumber: fields[6] as String?,
+      isActive: fields[39] as bool?,
+      isPrivate: fields[40] as String?,
       loginOtp: fields[7] as String?,
       personalTemplate: fields[8] as String?,
       sId: fields[9] as String?,
@@ -38,17 +48,25 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
       createdAt: fields[24] as String?,
       updatedAt: fields[25] as String?,
       getstatedName: fields[26] as String?,
-      ProfilePic: fields[5] as String?,
+      profilePic: fields[5] as String?,
       displayName: fields[27] as String?,
+      enableLocation: fields[28] as bool?,
+      notificationSound: fields[29] as bool?,
+      desktopNotification: fields[30] as bool?,
+      blockUsers: (fields[41] as List?)?.cast<String>(),
+      socialType: fields[42] as String?,
+      bio: fields[43] as String?,
+      followersData: (fields[45] as List?)?.cast<String>(),
+      followingData: (fields[44] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, UserSchema obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(41)
       ..writeByte(5)
-      ..write(obj.ProfilePic)
+      ..write(obj.profilePic)
       ..writeByte(6)
       ..write(obj.mobileNumber)
       ..writeByte(7)
@@ -92,12 +110,233 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
       ..writeByte(26)
       ..write(obj.getstatedName)
       ..writeByte(27)
-      ..write(obj.displayName);
+      ..write(obj.displayName)
+      ..writeByte(28)
+      ..write(obj.enableLocation)
+      ..writeByte(29)
+      ..write(obj.notificationSound)
+      ..writeByte(30)
+      ..write(obj.desktopNotification)
+      ..writeByte(31)
+      ..write(obj.address)
+      ..writeByte(32)
+      ..write(obj.commentPrivacy)
+      ..writeByte(33)
+      ..write(obj.postPrivacy)
+      ..writeByte(34)
+      ..write(obj.mentionPrivacy)
+      ..writeByte(35)
+      ..write(obj.messagePrivacy)
+      ..writeByte(36)
+      ..write(obj.livePrivacy)
+      ..writeByte(37)
+      ..write(obj.storyPrivacy)
+      ..writeByte(38)
+      ..write(obj.password)
+      ..writeByte(39)
+      ..write(obj.isActive)
+      ..writeByte(40)
+      ..write(obj.isPrivate)
+      ..writeByte(41)
+      ..write(obj.blockUsers)
+      ..writeByte(42)
+      ..write(obj.socialType)
+      ..writeByte(43)
+      ..write(obj.bio)
+      ..writeByte(44)
+      ..write(obj.followingData)
+      ..writeByte(45)
+      ..write(obj.followersData);
   }
 
   @override
   int get hashCode => typeId.hashCode;
 
   @override
-  bool operator ==(Object other) => identical(this, other) || other is UserSchemaAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserSchemaAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class AddressAdapter extends TypeAdapter<Address> {
+  @override
+  final int typeId = 1;
+
+  @override
+  Address read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Address(
+      addressLine1: fields[0] as String?,
+      addressLine2: fields[1] as String?,
+      city: fields[2] as String?,
+      district: fields[3] as String?,
+      pinCode: fields[4] as String?,
+      state: fields[5] as String?,
+      latitude: fields[6] as String?,
+      longitude: fields[7] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Address obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.addressLine1)
+      ..writeByte(1)
+      ..write(obj.addressLine2)
+      ..writeByte(2)
+      ..write(obj.city)
+      ..writeByte(3)
+      ..write(obj.district)
+      ..writeByte(4)
+      ..write(obj.pinCode)
+      ..writeByte(5)
+      ..write(obj.state)
+      ..writeByte(6)
+      ..write(obj.latitude)
+      ..writeByte(7)
+      ..write(obj.longitude);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AddressAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CommentPrivacyAdapter extends TypeAdapter<CommentPrivacy> {
+  @override
+  final int typeId = 2;
+
+  @override
+  CommentPrivacy read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CommentPrivacy(
+      everyone: fields[0] as bool?,
+      followers: fields[1] as bool?,
+      follow: fields[2] as bool?,
+      followAndFollowers: fields[3] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CommentPrivacy obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.everyone)
+      ..writeByte(1)
+      ..write(obj.followers)
+      ..writeByte(2)
+      ..write(obj.follow)
+      ..writeByte(3)
+      ..write(obj.followAndFollowers);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CommentPrivacyAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class PrivacyAdapter extends TypeAdapter<Privacy> {
+  @override
+  final int typeId = 3;
+
+  @override
+  Privacy read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Privacy(
+      everyone: fields[0] as bool?,
+      followers: fields[1] as bool?,
+      noOne: fields[2] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Privacy obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.everyone)
+      ..writeByte(1)
+      ..write(obj.followers)
+      ..writeByte(2)
+      ..write(obj.noOne);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PrivacyAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class StoryPrivacyAdapter extends TypeAdapter<StoryPrivacy> {
+  @override
+  final int typeId = 5;
+
+  @override
+  StoryPrivacy read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return StoryPrivacy(
+      everyone: fields[0] as bool?,
+      closeFriend: fields[1] as bool?,
+      specific: fields[2] as bool?,
+      noOne: fields[3] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, StoryPrivacy obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.everyone)
+      ..writeByte(1)
+      ..write(obj.closeFriend)
+      ..writeByte(2)
+      ..write(obj.specific)
+      ..writeByte(3)
+      ..write(obj.noOne);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is StoryPrivacyAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

@@ -1,3 +1,4 @@
+import 'package:emagz_vendor/screens/auth/widgets/dob.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
@@ -10,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../constant/colors.dart';
 import '../../../../screens/auth/widgets/my_custom_textfiled.dart';
- import '../../../controller/security/security_controller.dart';
+import '../../../controller/security/security_controller.dart';
 import '../../account/deactivate_account_screen.dart';
 import '../privacy/privacy_policy_screen.dart';
 import '../terms_condition/terms_and_condition_screen.dart';
@@ -23,9 +24,9 @@ class SecurityScreen extends StatefulWidget {
 }
 
 class _SecurityScreenState extends State<SecurityScreen> {
-   bool isTwoWayVerification = false;
+  bool isTwoWayVerification = false;
   bool isDeactivateAccount = false;
-  final securityController= Get.put(SecurityController());
+  final securityController = Get.put(SecurityController());
   UserSchema? user;
   @override
   void initState() {
@@ -34,7 +35,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   asyncInit() async {
-
     user = await HiveDB.getCurrentUserDetail();
 
     setState(() {});
@@ -42,290 +42,278 @@ class _SecurityScreenState extends State<SecurityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
-          color: Color(0xffE7E9FE),
+    return Scaffold(
+      //   resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xffE7E9FE),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80),
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 40,
+            left: 20,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Row(
+                  children: [
+                    // const SizedBox(
+                    //   width: 20,
+                    // ),
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                        // ZoomDrawer.of(context)!.toggle();
+                      },
+                      child: Image.asset(
+                        "assets/png/new_logo.png",
+                        color: const Color(0xff1B47C1),
+                        height: 38,
+                        width: 36,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                alignment: Alignment.center,
+                height: 38,
+                width: 38,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: purpleColor,
+                ),
+                child: IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    size: 25,
+                    weight: .5,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
         ),
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: Colors.transparent,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(80),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: FormHeadingText(
+                headings: "Security",
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const FormHeadingText(
+              headings: "Personal Information",
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            PersonalInformationTile(
+              heading: "Name",
+              body: user != null ? user!.username! : "Loading...",
+              onTap: () {
+                updateName(context);
+              },
+            ),
+            PersonalInformationTile(
+              heading: "Date Of Birth",
+              body: user != null ? user!.dob! : "Loading..",
+              onTap: () {
+                updateDob(context);
+              },
+            ),
+            PersonalInformationTile(
+              heading: "Email",
+              body: user != null ? user!.email! : "Loading..",
+              onTap: () {
+                updateEmail(context);
+              },
+            ),
+            PersonalInformationTile(
+              heading: "Mobile Number",
+              body: user != null ? user!.mobileNumber! : "+91 009009090",
+              onTap: () {
+                updateMobileNo(context);
+              },
+            ),
+            PersonalInformationTile(
+              heading: "Address",
+              body: "Lorem ipsum dolor sit amet",
+              onTap: () {
+                updateAddress(context);
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const FormHeadingText(
+              headings: "Other Security",
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(
+                  left: 17, right: 25, top: 10, bottom: 14),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Row(
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => const TwoStepVerificationScreen());
+                    },
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // const SizedBox(
-                        //   width: 20,
-                        // ),
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                            // ZoomDrawer.of(context)!.toggle();
-                          },
-                          child: Image.asset(
-                            "assets/png/new_logo.png",
-                            color: const Color(0xff1B47C1),
-                            height: 38,
-                            width: 36,
+                        FormHeadingText(
+                            headings: "Two way Verification",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black),
+                        SizedBox(
+                          width: 150,
+                          child: FormHeadingText(
+                            headings:
+                                "Secure your account even more with Two-Way-Verification",
+                            fontSize: 8,
+                            color: toggleInactive,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 12,
                         ),
                       ],
                     ),
                   ),
-                  Container(
-                    alignment: Alignment.center,
-                    height: 38,
+                  const Spacer(),
+                  FlutterSwitch(
+                    toggleSize: 10,
+                    height: 18,
                     width: 38,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: purpleColor,
-                    ),
-
-                      child: IconButton(
-                        onPressed: ()
-                        {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          size: 25,
-                          weight: .5,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  const SizedBox(
-                    width: 20,
-                  ),
+                    activeColor: lightSkyAcent.withOpacity(.8),
+                    activeToggleColor: const Color(0xff2E5EE2),
+                    inactiveColor: const Color(0xffD1D5FF),
+                    onToggle: (bool value) {
+                      setState(() {
+                        isTwoWayVerification = value;
+                      });
+                    },
+                    value: isTwoWayVerification,
+                  )
                 ],
               ),
             ),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 30,
-                ),
-                const FormHeadingText(
-                  headings: "Security",
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                const FormHeadingText(
-                  headings: "Personal Information",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                PersonalInformationTile(
-                  heading: "Name",
-                  body: user!=null? user!.username!:"Loading...",
-                  onTap: () {
-                    updateName(context);
-                  },
-                ),
-                PersonalInformationTile(
-                  heading: "Date Of Birth",
-                  body: user!=null? user!.dob!:"Loading..",
-                  onTap: () {
-                    updateDob(context);
-                  },
-                ),
-                PersonalInformationTile(
-                  heading: "Email",
-                  body: user!=null? user!.email!:"Loading..",
-                  onTap: () {
-                    updateEmail(context);
-                  },
-                ),
-                PersonalInformationTile(
-                  heading: "Mobile Number",
-                  body: user!=null? user!.mobileNumber!:"+91 009009090",
-                  onTap: () {
-                    updateMobileNo(context);
-                  },
-                ),
-                PersonalInformationTile(
-                  heading: "Address",
-                  body: "Lorem ipsum dolor sit amet",
-                  onTap: () {
-                    updateAddress(context);
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const FormHeadingText(
-                  headings: "Other Security",
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.only(
-                      left: 17, right: 25, top: 10, bottom: 14),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const TwoStepVerificationScreen());
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FormHeadingText(
-                                headings: "Two way Verification",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                            SizedBox(
-                              width: 150,
-                              child: FormHeadingText(
-                                headings:
-                                    "Secure your account even more with Two-Way-Verification",
-                                fontSize: 8,
-                                color: toggleInactive,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      FlutterSwitch(
-                        toggleSize: 10,
-                        height: 18,
-                        width: 38,
-                        activeColor: lightSkyAcent.withOpacity(.8),
-                        activeToggleColor: const Color(0xff2E5EE2),
-                        inactiveColor: const Color(0xffD1D5FF),
-                        onToggle: (bool value) {
-                          setState(() {
-                            isTwoWayVerification = value;
-                          });
-                        },
-                        value: isTwoWayVerification,
-                      )
-                    ],
-                  ),
-                ),
-                OtherSecurityTile(
-                  onTap: () {
-                    Get.to(() => const PrivacyPolicyScreen());
-                  },
-                ),
-                OtherSecurityTile(
-                  onTap: () {
-                    Get.to(() => const TermsAndConditionScreen());
-                  },
-                  heading: "Term’s of use",
-                  body: "Learn about our terms and condition",
-                ),
-                OtherSecurityTile(
-                  onTap: () {},
-                  heading: "Help & Support",
-                  body: "Need help connect with our support team",
-                ),
-                Container(
-                  margin: const EdgeInsets.only(bottom: 10),
-                  padding: const EdgeInsets.only(
-                      left: 17, right: 25, top: 10, bottom: 14),
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: const Color(0xffFF3232),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(() => const DeactivateAccountScreen());
-                        },
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FormHeadingText(
-                                headings: "Deactive Account",
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                                color: whiteColor),
-                            SizedBox(
-                              width: 100,
-                              child: FormHeadingText(
-                                headings: "I like to deactivate account ",
-                                fontSize: 8,
-                                color: whiteColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      FlutterSwitch(
-                        toggleSize: 10,
-                        height: 18,
-                        width: 38,
-                        activeColor: lightSkyAcent.withOpacity(.8),
-                        activeToggleColor: const Color(0xff2E5EE2),
-                        inactiveColor: const Color(0xffFF7C7C),
-                        onToggle: (bool value) {
-                          setState(() {
-                            isDeactivateAccount = value;
-                          });
-                        },
-                        value: isDeactivateAccount,
-                      )
-                    ],
-                  ),
-                ),
-              ],
+            OtherSecurityTile(
+              onTap: () {
+                Get.to(() => const PrivacyPolicyScreen());
+              },
             ),
-          ),
+            OtherSecurityTile(
+              onTap: () {
+                Get.to(() => const TermsAndConditionScreen());
+              },
+              heading: "Term’s of use",
+              body: "Learn about our terms and condition",
+            ),
+            OtherSecurityTile(
+              onTap: () {},
+              heading: "Help & Support",
+              body: "Need help connect with our support team",
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(
+                  left: 17, right: 25, top: 10, bottom: 14),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: const Color(0xffFF3232),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => const DeactivateAccountScreen());
+                    },
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FormHeadingText(
+                            headings: "Deactive Account",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: whiteColor),
+                        SizedBox(
+                          width: 100,
+                          child: FormHeadingText(
+                            headings: "I like to deactivate account ",
+                            fontSize: 8,
+                            color: whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Spacer(),
+                  FlutterSwitch(
+                    toggleSize: 10,
+                    height: 18,
+                    width: 38,
+                    activeColor: lightSkyAcent.withOpacity(.8),
+                    activeToggleColor: const Color(0xff2E5EE2),
+                    inactiveColor: const Color(0xffFF7C7C),
+                    onToggle: (bool value) {
+                      setState(() {
+                        isDeactivateAccount = value;
+                      });
+                    },
+                    value: isDeactivateAccount,
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   updateDob(BuildContext context) {
-    TextEditingController dob= TextEditingController();
+    TextEditingController dob = TextEditingController();
     return showModalBottomSheet(
-        isScrollControlled: true,
         elevation: 0.0,
         barrierColor: const Color(0xff252525).withOpacity(.4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         context: context,
         builder: (ctx) {
           return Container(
-            height: 400,
             width: double.infinity,
-            padding: const EdgeInsets.all(23),
+            padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               color: Colors.white,
@@ -333,9 +321,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
                 const FormHeadingText(
                   headings: "Update Date of Birth",
                   fontSize: 26,
@@ -355,34 +340,29 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     color: unselectedLabel,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  child: FormHeadingText(
+                    headings: "DOB*",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: lightBlack,
+                  ),
                 ),
-                const FormHeadingText(
-                  headings: "DOB*",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: lightBlack,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                MyCustomTextfiled(
-                  hint: "12 - June - 1997",
+                RDOBInputField(
+                  label: "dob",
                   controller: dob,
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: ()async
-                  {
+                  onTap: () async {
                     await securityController.updateDOB(dob.text);
                     setState(() {
-                      user!.dob=dob.text;
+                      user!.dob = dob.text;
                     });
                     Navigator.pop(context);
-
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -431,7 +411,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateAddress(BuildContext context) {
-    TextEditingController address= TextEditingController();
+    TextEditingController address = TextEditingController();
     return showDialog(
         barrierColor: const Color(0xff252525).withOpacity(.4),
         context: context,
@@ -615,12 +595,9 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       height: 20,
                     ),
                     GestureDetector(
-                      onTap: ()async
-                      {
+                      onTap: () async {
                         await securityController.updateAddress(address.text);
-                        setState(() {
-
-                        });
+                        setState(() {});
                         Navigator.pop(context);
                       },
                       child: Container(
@@ -671,9 +648,8 @@ class _SecurityScreenState extends State<SecurityScreen> {
         });
   }
 
-  updateName(BuildContext context) async{
-    TextEditingController name= TextEditingController();
-
+  updateName(BuildContext context) async {
+    TextEditingController name = TextEditingController();
 
     // TextEditingController MobileNumber= TextEditingController();
     // TextEditingController address= TextEditingController();
@@ -746,11 +722,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       height: 20,
                     ),
                     GestureDetector(
-                      onTap: () async
-                      {
+                      onTap: () async {
                         await securityController.updateName(name.text);
                         setState(() {
-                          user!.username=name.text;
+                          user!.username = name.text;
                         });
                         Navigator.pop(context);
                       },
@@ -780,8 +755,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () async{
-
+                        onTap: () async {
                           Navigator.pop(context);
                         },
                         child: FormHeadingText(
@@ -802,7 +776,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   otpVerificationModal(BuildContext context) {
-    TextEditingController email= TextEditingController();
+    TextEditingController email = TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -877,11 +851,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: ()async
-                  {
+                  onTap: () async {
                     await securityController.updateEmail(email.text);
                     setState(() {
-                      user!.email=email.text;
+                      user!.email = email.text;
                     });
                   },
                   child: Container(
@@ -935,7 +908,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateMobileNo(BuildContext context) {
-    TextEditingController mobile= TextEditingController();
+    TextEditingController mobile = TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
         elevation: 0.0,
@@ -944,9 +917,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
         context: context,
         builder: (ctx) {
           return Container(
-            height: 400,
+            height: MediaQuery.of(context).size.height * .45 +
+                MediaQuery.of(context).viewInsets.bottom,
             width: double.infinity,
-            padding: const EdgeInsets.all(23),
+            padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               color: Colors.white,
@@ -976,17 +950,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     color: unselectedLabel,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const FormHeadingText(
-                  headings: "New Mobile Number",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: lightBlack,
-                ),
-                const SizedBox(
-                  height: 20,
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: FormHeadingText(
+                    headings: "New Mobile Number",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: lightBlack,
+                  ),
                 ),
                 MyCustomTextfiled(
                   inputType: TextInputType.phone,
@@ -997,10 +968,10 @@ class _SecurityScreenState extends State<SecurityScreen> {
                   height: 20,
                 ),
                 GestureDetector(
-                  onTap: ()async{
+                  onTap: () async {
                     await securityController.updateMobile(mobile.text);
                     setState(() {
-                      user!.mobileNumber=mobile.text;
+                      user!.mobileNumber = mobile.text;
                     });
                     Navigator.pop(context);
                   },
@@ -1051,18 +1022,24 @@ class _SecurityScreenState extends State<SecurityScreen> {
   }
 
   updateEmail(BuildContext context) {
-    TextEditingController email= TextEditingController();
+    TextEditingController email = TextEditingController();
     return showModalBottomSheet(
         isScrollControlled: true,
-        elevation: 0.0,
+        elevation: 1,
         barrierColor: const Color(0xff252525).withOpacity(.4),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         context: context,
         builder: (ctx) {
           return Container(
-            height: 400,
+            height: MediaQuery.of(context).size.height * .45 +
+                MediaQuery.of(context).viewInsets.bottom,
             width: double.infinity,
-            padding: const EdgeInsets.all(23),
+            padding: EdgeInsets.fromLTRB(
+              20,
+              25,
+              20,
+              MediaQuery.of(context).viewInsets.bottom,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               color: Colors.white,
@@ -1070,9 +1047,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
                 const FormHeadingText(
                   headings: "Update Email",
                   fontSize: 26,
@@ -1092,17 +1066,14 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     color: unselectedLabel,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const FormHeadingText(
-                  headings: "New Email",
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: lightBlack,
-                ),
-                const SizedBox(
-                  height: 20,
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: FormHeadingText(
+                    headings: "New Email",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: lightBlack,
+                  ),
                 ),
                 MyCustomTextfiled(
                   hint: "Enter your email id",
@@ -1116,7 +1087,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     securityController.updateEmail(email.text);
                     Navigator.pop(context);
                     setState(() {
-                      user!.email=email.text;
+                      user!.email = email.text;
                     });
                     //otpVerificationModal(context);
                   },
@@ -1141,24 +1112,21 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: FormHeadingText(
-                      headings: "Back",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: lightBlack.withOpacity(.45),
+                Padding(
+                  padding: const EdgeInsets.only(top: 30, bottom: 10),
+                  child: Center(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: FormHeadingText(
+                        headings: "Back",
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: lightBlack.withOpacity(.45),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
               ],
             ),

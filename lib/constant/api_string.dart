@@ -2,15 +2,6 @@ class ApiEndpoint {
   // static String ip = " 192.168.43.77";
   static String ip = "192.168.43.100";
 
-  // static String baseUrl = "http://$ip:3000/api";
-
-  // open dev address
-
-  // static String baseUrl =
-  //     "http://ec2-15-206-157-157.ap-south-1.compute.amazonaws.com:3000/api";
-
-  // static String baseUrl = "http://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
-  //static String baseUrl = "https://ec2-13-233-123-161.ap-south-1.compute.amazonaws.com:3000/api";
   static String baseUrl = "https://emagz.live/api";
 
   static String socketUrl = "https://emagz.live/socket_connection";
@@ -99,6 +90,10 @@ class ApiEndpoint {
   static String getSupportById = "$baseUrl/support/getById";
   static String createSupport = "$baseUrl/support/create";
   static String updateUserDetails = "$baseUrl/auth/update-user-details";
-    static String createTicket = "$baseUrl/ticket/create";
-     static String getTicketbyUserId(String userId)  => "$baseUrl/ticket/get/$userId";
-} 
+  static String createTicket = "$baseUrl/ticket/create";
+  static String getTicketbyUserId(String userId) =>
+      "$baseUrl/ticket/get/$userId";
+
+  static String makeAccountPrivate(bool makePrivate) =>
+      "$baseUrl/auth/make-account-private?status=${makePrivate ? "Yes" : "No"}";
+}

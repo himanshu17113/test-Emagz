@@ -5,9 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TempleteAppBar extends StatelessWidget {
   final String title;
   final Size preferredSize;
-  bool isBlack;
-  Color? backGround;
-  TempleteAppBar({
+  final bool isBlack;
+  final Color? backGround;
+  const TempleteAppBar({
     required this.title,
     this.isBlack = true,
     this.backGround = Colors.black,
@@ -51,7 +51,7 @@ class TempleteAppBar extends StatelessWidget {
               SvgPicture.asset(
                 "assets/svg/notifytemp.svg",
                 width: 25,
-              //  color: isBlack == true ? blackButtonColor : whiteColor,
+                //  color: isBlack == true ? blackButtonColor : whiteColor,
               ),
               const SizedBox(
                 width: 10,

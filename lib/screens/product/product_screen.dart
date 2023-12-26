@@ -88,7 +88,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           SvgPicture.asset(
                             "assets/svg/Filter.svg",
                             width: 28,
-                            color: blackButtonColor,
+                            //color: blackButtonColor,
                           ),
                         ],
                       ),

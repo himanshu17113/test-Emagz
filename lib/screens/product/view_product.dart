@@ -50,7 +50,10 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   children: [
                     const Text(
                       "Product",
-                      style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          color: Color(0xff141414),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1.65,
@@ -61,21 +64,30 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             margin: const EdgeInsets.only(right: 12),
                             child: const Text(
                               "Stock",
-                              style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Color(0xff141414),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Container(
                             margin: const EdgeInsets.only(right: 20),
                             child: const Text(
                               "Color",
-                              style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Color(0xff141414),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                           Container(
                             margin: const EdgeInsets.only(left: 10),
                             child: const Text(
                               "Total",
-                              style: TextStyle(color: Color(0xff141414), fontSize: 14, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: Color(0xff141414),
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
@@ -111,7 +123,9 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
               width: size.width / 2.15,
               alignment: Alignment.center,
               height: 45,
-              decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: blackButtonColor,
+                  borderRadius: BorderRadius.circular(10)),
               child: const Text(
                 "Manage Product",
                 style: TextStyle(color: whiteColor),
@@ -125,7 +139,9 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 width: size.width / 2.15,
                 alignment: Alignment.center,
                 height: 45,
-                decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(
+                    color: blueButtonColor,
+                    borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Add Product",
                   style: TextStyle(color: whiteColor),
@@ -142,11 +158,15 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
 viewProductDialog(BuildContext context) {
   String url =
       "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
-  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
-  TextStyle modelTextbody = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle modelTextHeading = const TextStyle(
+      color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextbody = const TextStyle(
+      color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
-    shape: RoundedRectangleBorder(side: const BorderSide(color: Colors.black, width: 4), borderRadius: BorderRadius.circular(10)),
+    shape: RoundedRectangleBorder(
+        side: const BorderSide(color: Colors.black, width: 4),
+        borderRadius: BorderRadius.circular(10)),
     content: SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height / 4,
@@ -278,8 +298,10 @@ viewProductDialog(BuildContext context) {
 showAlertDailog(BuildContext context) {
   // String url =
   //     "https://images.unsplash.com/photo-1602734846297-9299fc2d4703?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fGRvbGx8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
-  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
-  TextStyle modelTextbody = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
+  TextStyle modelTextHeading = const TextStyle(
+      color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextbody = const TextStyle(
+      color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -295,7 +317,8 @@ showAlertDailog(BuildContext context) {
           ),
           Text(
             "Edit Product Option",
-            style: modelTextHeading.copyWith(fontSize: 21, fontWeight: FontWeight.w600),
+            style: modelTextHeading.copyWith(
+                fontSize: 21, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 5,
@@ -332,7 +355,10 @@ showAlertDailog(BuildContext context) {
               Get.back();
               Get.to(() => const AddProductScreen());
             },
-            child: ModelTile(modelTextbody: modelTextbody, title: "Edit Product", icons: Icons.edit_outlined),
+            child: ModelTile(
+                modelTextbody: modelTextbody,
+                title: "Edit Product",
+                icons: Icons.edit_outlined),
           ),
           ModelTile(
             modelTextbody: modelTextbody,
@@ -349,7 +375,9 @@ showAlertDailog(BuildContext context) {
               width: MediaQuery.of(context).size.width / 1.5,
               alignment: Alignment.center,
               height: 45,
-              decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(
+                  color: blackButtonColor,
+                  borderRadius: BorderRadius.circular(10)),
               child: const Text(
                 "Back",
                 style: TextStyle(color: whiteColor),
@@ -375,7 +403,8 @@ showAlertDailog(BuildContext context) {
 }
 
 QuickEditDailog(BuildContext context) {
-  TextStyle modelTextHeading = const TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
+  TextStyle modelTextHeading = const TextStyle(
+      color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w600);
   // TextStyle modelTextbody = TextStyle(color: blackButtonColor, fontSize: 14, fontWeight: FontWeight.w400);
 
   AlertDialog alert = AlertDialog(
@@ -389,7 +418,8 @@ QuickEditDailog(BuildContext context) {
         children: [
           Text(
             "Quick",
-            style: modelTextHeading.copyWith(fontSize: 21, fontWeight: FontWeight.w600),
+            style: modelTextHeading.copyWith(
+                fontSize: 21, fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 5,
@@ -411,10 +441,13 @@ QuickEditDailog(BuildContext context) {
             margin: const EdgeInsets.symmetric(vertical: 3),
             child: const Text(
               "Name",
-              style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                  color: blackButtonColor,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500),
             ),
           ),
-          AddProductTextField(),
+          const AddProductTextField(),
           Row(
             children: [
               Expanded(
@@ -425,10 +458,13 @@ QuickEditDailog(BuildContext context) {
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: const Text(
                         "Price",
-                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                    AddProductTextField(),
+                    const AddProductTextField(),
                   ],
                 ),
               ),
@@ -441,10 +477,13 @@ QuickEditDailog(BuildContext context) {
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: const Text(
                         "Select Size",
-                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                    AddProductTextField(),
+                    const AddProductTextField(),
                   ],
                 ),
               )
@@ -460,10 +499,13 @@ QuickEditDailog(BuildContext context) {
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: const Text(
                         "Stock",
-                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                    AddProductTextField(),
+                    const AddProductTextField(),
                   ],
                 ),
               ),
@@ -476,10 +518,13 @@ QuickEditDailog(BuildContext context) {
                       margin: const EdgeInsets.symmetric(vertical: 4),
                       child: const Text(
                         "Colour",
-                        style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
-                    AddProductTextField(),
+                    const AddProductTextField(),
                   ],
                 ),
               )
@@ -499,7 +544,9 @@ QuickEditDailog(BuildContext context) {
                     margin: const EdgeInsets.only(top: 10),
                     alignment: Alignment.center,
                     height: 50,
-                    decoration: BoxDecoration(color: blackButtonColor, borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(
+                        color: blackButtonColor,
+                        borderRadius: BorderRadius.circular(10)),
                     child: const Text(
                       "Back",
                       style: TextStyle(color: whiteColor),

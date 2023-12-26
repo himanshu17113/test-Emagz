@@ -32,10 +32,10 @@ class _MentionSettingScreenState extends State<MentionSettingScreen> {
   asyncInit() async {
 
     user = await HiveDB.getCurrentUserDetail();
-    youFollow= user!.ment_priv!.yourFollower;
+    // youFollow= user!.ment_priv!.yourFollower;
 
-    everyOne= user!.ment_priv!.everyone;
-    noone=user!.ment_priv!.noOne;
+    // everyOne= user!.ment_priv!.everyone;
+    // noone=user!.ment_priv!.noOne;
 
     setState(() {});
   }

@@ -35,7 +35,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
         body: ListView(
           shrinkWrap: true,
           children: [
-            TempleteAppBar(
+            const TempleteAppBar(
               title: "",
               // isBlack: false,
             ),

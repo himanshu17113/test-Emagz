@@ -2,12 +2,12 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddProductTextField extends StatelessWidget {
-  TextEditingController? controller;
-  TextInputType? inputType;
-  String? hint;
-  int? maxLines;
+  final TextEditingController? controller;
+  final TextInputType? inputType;
+  final String? hint;
+  final int? maxLines;
 
-  AddProductTextField({
+  const AddProductTextField({
     Key? key,
     this.hint,
     this.inputType,

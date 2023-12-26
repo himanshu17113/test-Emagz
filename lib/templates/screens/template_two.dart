@@ -35,7 +35,7 @@ class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
         body: ListView(
           shrinkWrap: true,
           children: [
-            TempleteAppBar(
+            const TempleteAppBar(
               title: "",
               isBlack: false,
             ),

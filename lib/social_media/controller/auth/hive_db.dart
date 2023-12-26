@@ -10,7 +10,7 @@ class HiveDB {
   static setAuthData(String? tokenx, String? id) async {
     globToken = tokenx;
     globUserId = id;
-      final hiveBox = await Hive.openBox("secretes");
+    final hiveBox = await Hive.openBox("secretes");
     await hiveBox.put("token", tokenx);
     await hiveBox.put("userId", id);
   }
@@ -64,7 +64,7 @@ class HiveDB {
     debugPrint("Api hiiitiiiiiiiiiiiiiiiiiiiiiiiii");
     //Box hiveBox = await Hive.openBox("secretes");
     final hiveBox = Hive.box("secretes");
-  final  Dio dio = Dio();
+    final Dio dio = Dio();
     dio.options.headers["Authorization"] = globToken ?? getAuthToken();
     if (globUserId == null) {
       await getUserID();
@@ -75,11 +75,15 @@ class HiveDB {
       // debugPrint(response.data);
       if (response.statusCode == 200) {
         final user = UserSchema.fromJson(response.data);
-        await hiveBox.put('user', user);
+        try {
+          await hiveBox.put('user', user);
+        } on Exception catch (e) {
+          debugPrint(e.toString());
+        }
         constuser = user;
-        if (user.ProfilePic != null) {
-          //     profilePic.value = user!.ProfilePic!;
-          globProfilePic = user.ProfilePic!;
+        if (user.profilePic != null) {
+          //     profilePic.value = user!.profilePic!;
+          globProfilePic = user.profilePic!;
         }
 
         return user;
@@ -88,6 +92,34 @@ class HiveDB {
       return UserSchema();
     }
     return null;
+  }
+
+  static Future<UserSchema?> togglePrivate(bool isPrivate) async {
+    debugPrint("Api hit togglePrivate");
+    final Dio dio = Dio();
+    dio.options.headers["Authorization"] = globToken ?? getAuthToken();
+    if (globUserId == null) {
+      await getUserID();
+    }
+    if (globUserId != null) {
+      var response = await dio.get(ApiEndpoint.makeAccountPrivate(isPrivate));
+      debugPrint(ApiEndpoint.makeAccountPrivate(isPrivate));
+      if (response.statusCode == 200) {
+        final user = UserSchema.fromJson(response.data["data"]);
+        constuser = user;
+        return user;
+      }
+    } else {
+      return UserSchema();
+    }
+    return null;
+  }
+
+  static putUserDetail(UserSchema user) async {
+    final hiveBox = Hive.box("secretes");
+
+    await hiveBox.put('user', user);
+    constuser = user;
   }
 
   static clearDB() {
@@ -101,7 +133,7 @@ class HiveDB {
   static upateProfilePic(String pic) async {
     final hiveBox = Hive.box("secretes");
     UserSchema? user = hiveBox.get("user");
-    user?.ProfilePic = pic;
+    user?.profilePic = pic;
     await hiveBox.put('user', user);
   }
 

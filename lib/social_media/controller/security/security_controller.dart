@@ -1,27 +1,28 @@
 import 'dart:convert';
 
 import 'package:emagz_vendor/constant/api_string.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
+import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../common/common_snackbar.dart';
- 
+
 class SecurityController extends GetxController {
-   updateName(String name) async {
-    var token = await HiveDB.getAuthToken();
-    var userId = await HiveDB.getUserID();
-    var headers = {'Content-Type': 'application/json', 'Authorization': token!};
-    Map bodymain = {"username": name};
+  updateName(String name) async {
+    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final Map bodymain = {"username": name};
 
-    debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'), body: jsonEncode(bodymain), headers: headers);
-    Map data = jsonDecode(response.body);
-    debugPrint("code${response.statusCode.toString()}");
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    final Map data = jsonDecode(response.body);
 
+    debugPrint("code${response.statusCode.toString()}");
+    final user = UserSchema.fromJson(data["user"]);
+    HiveDB.putUserDetail(user);
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Name Updated");
     } else {
@@ -31,18 +32,16 @@ class SecurityController extends GetxController {
   }
 
   updateDOB(String dob) async {
-    var token = await HiveDB.getAuthToken();
-    var userId = await HiveDB.getUserID();
-    var headers = {'Content-Type': 'application/json', 'Authorization': token!};
-    Map bodymain = {"dob": dob};
+    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final Map bodymain = {"dob": dob};
 
-    debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'), body: jsonEncode(bodymain), headers: headers);
-    Map data = jsonDecode(response.body);
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
-
+    final user = UserSchema.fromJson(data["user"]);
+    HiveDB.putUserDetail(user);
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User DOB Updated");
     } else {
@@ -52,18 +51,16 @@ class SecurityController extends GetxController {
   }
 
   updateEmail(String email) async {
-    var token = await HiveDB.getAuthToken();
-    var userId = await HiveDB.getUserID();
-    var headers = {'Content-Type': 'application/json', 'Authorization': token!};
-    Map bodymain = {"email": email};
+    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final Map bodymain = {"email": email};
 
-    debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'), body: jsonEncode(bodymain), headers: headers);
-    Map data = jsonDecode(response.body);
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
-
+    final user = UserSchema.fromJson(data["user"]);
+    HiveDB.putUserDetail(user);
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Email Updated");
     } else {
@@ -73,18 +70,17 @@ class SecurityController extends GetxController {
   }
 
   updateMobile(String mobile) async {
-    var token = await HiveDB.getAuthToken();
-    var userId = await HiveDB.getUserID();
-    var headers = {'Content-Type': 'application/json', 'Authorization': token!};
-    Map bodymain = {"mobile_number": mobile};
+    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
 
-    debugPrint(ApiEndpoint.updateUserDetails);
-    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$userId');
+    final Map bodymain = {"mobile_number": mobile};
+
+    debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$userId'), body: jsonEncode(bodymain), headers: headers);
-    Map data = jsonDecode(response.body);
+    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
-
+    final user = UserSchema.fromJson(data["user"]);
+    HiveDB.putUserDetail(user);
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Mobile Updated");
     } else {

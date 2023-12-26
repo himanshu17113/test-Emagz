@@ -17,7 +17,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../templates/choose_template/template_model.dart';
 
 class SetupAccount extends GetxController {
-  RxString? profilepic;
+  RxString? profilePic;
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController displayNameController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
@@ -30,7 +30,7 @@ class SetupAccount extends GetxController {
   @override
   onInit() async {
     getAllTempltes();
-    profilepic?.value = constuser?.ProfilePic ?? "";
+    profilePic?.value = constuser?.profilePic ?? "";
     super.onInit();
   }
 
@@ -54,7 +54,8 @@ class SetupAccount extends GetxController {
       "businessType": businessTypeController.text,
       "personalTemplate": "https://example.com/personal-template.html"
     });
-    var response = await dio.post(ApiEndpoint.setupProfessionalAccount, data: body);
+    var response =
+        await dio.post(ApiEndpoint.setupProfessionalAccount, data: body);
 
     var data = response.data;
     if (response.statusCode == 200) {
@@ -82,8 +83,15 @@ class SetupAccount extends GetxController {
     var token = await HiveDB.getAuthToken();
     var id = await HiveDB.getUserID();
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
-    Map body = {"_id": id, "displayName": displayNameController.text, "personalTemplate": ""};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.setupPeronalAccount), body: jsonEncode(body), headers: headers);
+    Map body = {
+      "_id": id,
+      "displayName": displayNameController.text,
+      "personalTemplate": ""
+    };
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.setupPeronalAccount),
+        body: jsonEncode(body),
+        headers: headers);
 
     final data = jsonDecode(response.body);
 
@@ -92,7 +100,8 @@ class SetupAccount extends GetxController {
       // debugPrint(data.toString());
       isUserRegiserting.value = false;
       //lead to main page
-      Get.offAll(() => BottomNavBar(), transition: Transition.rightToLeftWithFade);
+      Get.offAll(() => BottomNavBar(),
+          transition: Transition.rightToLeftWithFade);
 
       return true;
     } else if (response.statusCode == 401) {
@@ -113,12 +122,13 @@ class SetupAccount extends GetxController {
   Future<String> uploadProfilePic(XFile? image) async {
     Map<String, String> header = {'Content-type': 'multipart/form-data'};
     Map<String, String> header2 = {"Authorization": globToken!};
-    var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
+    var request = http.MultipartRequest('POST',
+        Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
     request.headers.addAll(header);
     request.headers.addAll(header2);
     if (image?.path != null) {
       request.files.add(await http.MultipartFile.fromPath(
-        'ProfilePic',
+        'profilePic',
         image!.path,
         filename: image.name,
       ));
@@ -133,11 +143,11 @@ class SetupAccount extends GetxController {
       constuser = UserSchema.fromJson(data);
       //  await hiveBox.put('user', constuser);
       debugPrint(data.toString());
-      debugPrint(data['data']['ProfilePic'].toString());
-      HiveDB.upateProfilePic(data['data']['ProfilePic']);
-      //  await jwtController.setProfileImage(data['data']['ProfilePic']);
-      profilepic?.value = data['data']['ProfilePic'];
-      return data['data']['ProfilePic'];
+      debugPrint(data['data']['profilePic'].toString());
+      HiveDB.upateProfilePic(data['data']['profilePic']);
+      //  await jwtController.setProfileImage(data['data']['profilePic']);
+      profilePic?.value = data['data']['profilePic'];
+      return data['data']['profilePic'];
     } else {
       return 'https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661?b=1&k=20&m=1307615661&s=170667a&w=0&h=Zp9_27RVS_UdlIm2k8sa8PuutX9K3HTs8xdK0UfKmYk=';
     }
@@ -147,9 +157,13 @@ class SetupAccount extends GetxController {
     if (templates != null) templates!.clear();
     try {
       var token = await HiveDB.getAuthToken();
-      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
 
-      http.Response response = await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
+      http.Response response =
+          await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
       var body = jsonDecode(response.body);
       debugPrint(body.toString());
       body.forEach((e) {
@@ -166,7 +180,11 @@ class SetupAccount extends GetxController {
   userTemplate(String? templateId) async {
     var userId = await HiveDB.getUserID();
     var token = await HiveDB.getAuthToken();
-    Map body = {"userId": userId, "templateId": templateId, "finalTemplateData": {}};
+    Map body = {
+      "userId": userId,
+      "templateId": templateId,
+      "finalTemplateData": {}
+    };
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     http.Response response = await http.post(
       Uri.parse(ApiEndpoint.userTemplate),

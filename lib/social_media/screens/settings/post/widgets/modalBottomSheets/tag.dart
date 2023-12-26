@@ -341,8 +341,7 @@ class HashTagTextField extends StatefulWidget {
     this.textAlignVertical,
     this.textDirection,
     this.readOnly = false,
-    ToolbarOptions? toolbarOptions,
-    this.showCursor,
+     this.showCursor,
     this.autofocus = false,
     this.obscuringCharacter = '•',
     this.obscureText = false,
@@ -415,18 +414,7 @@ class HashTagTextField extends StatefulWidget {
             'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.'),
         keyboardType = keyboardType ??
             (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        toolbarOptions = toolbarOptions ??
-            (obscureText
-                ? const ToolbarOptions(
-                    selectAll: true,
-                    paste: true,
-                  )
-                : const ToolbarOptions(
-                    copy: true,
-                    cut: true,
-                    selectAll: true,
-                    paste: true,
-                  )),
+        
         super(key: key);
 
   final ValueChanged<String>? onDetectionTyped;
@@ -562,8 +550,7 @@ class HashTagTextField extends StatefulWidget {
   /// If not set, select all and paste will default to be enabled. Copy and cut
   /// will be disabled if [obscureText] is true. If [readOnly] is true,
   /// paste and cut will be disabled regardless.
-  final ToolbarOptions toolbarOptions;
-
+ 
   /// {@macro flutter.widgets.editableText.showCursor}
   final bool? showCursor;
 
@@ -1288,8 +1275,7 @@ class _HashTagTextFieldState extends State<HashTagTextField>
           onDetectionTyped: widget.onDetectionTyped,
           decorateAtSign: widget.decorateAtSign,
           readOnly: widget.readOnly || !_isEnabled,
-          toolbarOptions: widget.toolbarOptions,
-          showCursor: widget.showCursor,
+           showCursor: widget.showCursor,
           showSelectionHandles: _showSelectionHandles,
           controller: controller,
           focusNode: focusNode,

@@ -137,7 +137,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                       String url2 = accountSetUpController.templates![index].id.toString();
                       if (url == 'null' || url2 == 'null') {
                       } else {
-                        return Persona(accountSetUpController.templates![index].id, accountSetUpController.templates![index].thumbnail,
+                        return persona(accountSetUpController.templates![index].id, accountSetUpController.templates![index].thumbnail,
                             const Color.fromRGBO(255, 199, 1, 1.0), index + 1, width);
                       }
                       return null;
@@ -148,7 +148,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             )));
   }
 
-  Widget Persona(String? id, String? ImgPath, Color BackGround, int ind, double width) {
+  Widget persona(String? id, String? imgPath, Color backGround, int ind, double width) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0, left: 1, right: 1, top: 1),
       child: GestureDetector(
@@ -161,11 +161,11 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
             height: 220,
             width: width * 0.9,
             decoration: BoxDecoration(
-              color: BackGround,
+              color: backGround,
               borderRadius: BorderRadius.circular(10),
             ),
           ),
-          ImgPath == null
+          imgPath == null
               ? const SizedBox(
                   child: Text('Loading...'),
                 )
@@ -181,7 +181,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                       color: Colors.redAccent,
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: ImgPath,
+                      imageUrl: imgPath,
                       fit: BoxFit.cover,
                     ),
                   ),

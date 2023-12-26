@@ -39,7 +39,7 @@ class SupportController extends GetxController {
     var headers = {'Content-Type': 'application/json', "Authorization": token};
 
     http.Response response = await http.get(Uri.parse("${ApiEndpoint.getSupportById}/$globUserId"), headers: headers);
-    print(response.body.toString());
+  //  (response.body.toString());
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       body = body['data'];
@@ -57,8 +57,7 @@ class SupportController extends GetxController {
     var headers = {'Content-Type': 'application/json', "Authorization": token};
 
     http.Response response = await http.get(Uri.parse(ApiEndpoint.getTicketbyUserId(globUserId!)), headers: headers);
-    print(response.body.toString());
-    if (response.statusCode == 200) {
+     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       body = body['data'];
       Ticket? temp;

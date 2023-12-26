@@ -23,7 +23,7 @@ class HomePosts extends StatelessWidget {
         builder: (homePostController) {
           debugPrint("HomePosts --- GetBuilder");
           return ListView.builder(
-            cacheExtent: 1000,
+         //   cacheExtent: 1000,
             padding: const EdgeInsets.only(bottom: 80.0),
             controller: homePostController.scrollController,
             itemCount: homePostController.posts!.length + 2,

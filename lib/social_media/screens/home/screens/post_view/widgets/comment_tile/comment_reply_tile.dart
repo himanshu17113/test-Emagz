@@ -120,7 +120,7 @@ class CommentReplyTile extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
                                   child: CircleAvatar(
                                     radius: 18,
-                                    backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic ?? templateFiveImage[2]),
+                                    backgroundImage: CachedNetworkImageProvider(comment.userId!.profilePic ?? templateFiveImage[2]),
                                   ),
                                 ),
                               ),

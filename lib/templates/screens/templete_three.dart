@@ -40,7 +40,7 @@ class _TemplateThreeState extends State<TemplateThree> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              TempleteAppBar(
+              const TempleteAppBar(
                 title: "",
                 // isBlack: false,
               ),

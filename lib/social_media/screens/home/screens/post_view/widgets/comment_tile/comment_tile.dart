@@ -39,7 +39,7 @@ class PostCommentTile extends StatelessWidget {
             // ),
             child: Row(
               children: [
-                (comment.userId?.ProfilePic == null)
+                (comment.userId?.profilePic == null)
                     ? Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: CircleAvatar(
@@ -51,7 +51,7 @@ class PostCommentTile extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundImage: CachedNetworkImageProvider(comment.userId!.ProfilePic!),
+                          backgroundImage: CachedNetworkImageProvider(comment.userId!.profilePic!),
                         ),
                       ),
                 Column(

@@ -1,10 +1,12 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class BagDropDown extends StatelessWidget {
   final List listData;
-  String? value;
-  BagDropDown({Key? key, required this.listData, this.value}) : super(key: key);
+    String? value;
+    BagDropDown({Key? key, required this.listData, this.value})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

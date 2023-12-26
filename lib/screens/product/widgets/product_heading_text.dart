@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 
 class AddProductheadind extends StatelessWidget {
   final String tittle;
-  bool? isRequired;
-  AddProductheadind({Key? key, required this.tittle, this.isRequired = true})
+  final bool? isRequired;
+  const AddProductheadind(
+      {Key? key, required this.tittle, this.isRequired = true})
       : super(key: key);
 
   @override

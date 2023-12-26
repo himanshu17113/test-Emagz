@@ -270,7 +270,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                       userId: constuser ??
                                           UserSchema(
                                               sId: commentsController.userId,
-                                              ProfilePic: constuser?.ProfilePic ,
+                                              profilePic: constuser?.profilePic ,
                                               username: constuser?.username),
                                       comments: [],
                                       sId: x));
@@ -289,7 +289,7 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                       userId: constuser ??
                                           UserSchema(
                                               sId: commentsController.userId,
-                                              ProfilePic: constuser?.ProfilePic ,
+                                              profilePic: constuser?.profilePic ,
                                               username: constuser?.username),
                                       comments: [],
                                       sId: commentsController.userId));

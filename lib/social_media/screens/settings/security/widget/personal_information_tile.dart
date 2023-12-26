@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../screens/auth/widgets/form_haeding_text.dart';
 
 class PersonalInformationTile extends StatelessWidget {
-  final String heading;
+  final  String heading;
   final String body;
   final Function onTap;
   const PersonalInformationTile({
@@ -19,9 +18,8 @@ class PersonalInformationTile extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.only(left: 17, right: 25, top: 10, bottom: 14),
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      // width: double.infinity,
+      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,

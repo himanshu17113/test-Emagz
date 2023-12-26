@@ -38,7 +38,7 @@ class _TemplateTenScreenState extends State<TemplateTenScreen> {
       body: ListView(
         // padding: const EdgeInsets.symmetric(horizontal: 20),
         children: [
-          TempleteAppBar(
+          const TempleteAppBar(
             title: "",
             isBlack: false,
           ),

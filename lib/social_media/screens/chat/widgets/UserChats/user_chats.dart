@@ -1,6 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:emagz_vendor/constant/data.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';

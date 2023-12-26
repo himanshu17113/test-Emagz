@@ -43,10 +43,10 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
 
   asyncInit() async {
     // user = await jwtController.getCurrentUserDetail();
-    youFollow = user!.mess_priv!.yourFollower;
+    // youFollow = user!.mess_priv!.yourFollower;
 
-    everyOne = user!.mess_priv!.everyone;
-    noone = user!.mess_priv!.noOne;
+    // everyOne = user!.mess_priv!.everyone;
+    // noone = user!.mess_priv!.noOne;
 
     setState(() {});
   }

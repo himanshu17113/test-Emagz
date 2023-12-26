@@ -34,7 +34,7 @@ class _TemplateSixScreenState extends State<TemplateSixScreen> {
         body: ListView(
           shrinkWrap: true,
           children: [
-            TempleteAppBar(
+            const TempleteAppBar(
               title: "",
               isBlack: false,
             ),

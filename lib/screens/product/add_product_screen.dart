@@ -55,7 +55,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       child: const Text(
                         "Upload \nPicture",
-                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                        style:
+                            TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                       )),
                 ),
                 Expanded(
@@ -70,7 +71,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       ),
                       child: const Text(
                         "Upload \nPicture",
-                        style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                        style:
+                            TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                       )),
                 ),
                 Expanded(
@@ -85,24 +87,25 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                     child: const Text(
                       "Upload \nPicture",
-                      style: TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 9, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ),
               ],
             ),
-            AddProductheadind(
+            const AddProductheadind(
               tittle: 'Product Name',
             ),
-            AddProductTextField(),
-            AddProductheadind(
+            const AddProductTextField(),
+            const AddProductheadind(
               tittle: 'Select Categories',
             ),
             AddProductDropDown(
               listData: category,
               value: selectedcategory,
             ),
-            AddProductheadind(
+            const AddProductheadind(
               tittle: 'Select Sub - Categories',
             ),
             AddProductDropDown(
@@ -119,7 +122,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AddProductheadind(
+                      const AddProductheadind(
                         tittle: 'Size',
                         isRequired: false,
                       ),
@@ -133,7 +136,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 const SizedBox(
                   width: 10,
                 ),
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -150,7 +153,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             const SizedBox(
               height: 10,
             ),
-            Row(
+            const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
@@ -165,7 +168,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -185,7 +188,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             const SizedBox(
               height: 10,
             ),
-            AddProductheadind(
+            const AddProductheadind(
               tittle: 'Color',
               isRequired: false,
             ),
@@ -215,7 +218,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
+                const Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -234,7 +237,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AddProductheadind(
+                      const AddProductheadind(
                         tittle: 'GST Type',
                         isRequired: false,
                       ),
@@ -250,11 +253,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
             const SizedBox(
               height: 10,
             ),
-            AddProductheadind(
+            const AddProductheadind(
               tittle: 'Description',
               isRequired: false,
             ),
-            AddProductTextField(
+            const AddProductTextField(
               maxLines: 5,
             ),
           ],
@@ -273,7 +276,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: size.width / 2.15,
                   alignment: Alignment.center,
                   height: 45,
-                  decoration: BoxDecoration(color: grayColor, borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(
+                      color: grayColor,
+                      borderRadius: BorderRadius.circular(10)),
                   child: Text(
                     "Back",
                     style: TextStyle(color: blackButtonColor.withOpacity(.5)),
@@ -288,7 +293,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   width: size.width / 2.15,
                   alignment: Alignment.center,
                   height: 45,
-                  decoration: BoxDecoration(color: blueButtonColor, borderRadius: BorderRadius.circular(10)),
+                  decoration: BoxDecoration(
+                      color: blueButtonColor,
+                      borderRadius: BorderRadius.circular(10)),
                   child: const Text(
                     "Add Product",
                     style: TextStyle(color: whiteColor),

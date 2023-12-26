@@ -30,12 +30,19 @@ Future main() async {
   final appDocumentDir = await getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
   Hive.registerAdapter(UserSchemaAdapter());
+  Hive.registerAdapter(CommentPrivacyAdapter());
+  Hive.registerAdapter(AddressAdapter());
+  Hive.registerAdapter(StoryPrivacyAdapter());
+
+  Hive.registerAdapter(
+    PrivacyAdapter(),
+  );
   await Permission.camera.request();
   await Hive.openBox("secretes");
   globToken = await HiveDB.getAuthToken();
   globUserId = await HiveDB.getUserID();
   if (globUserId != null) {
-    constuser = await HiveDB.getCurrentUserDetail();
+    constuser = await HiveDB.getCurrentUserDetail(); 
   }
   await Firebase.initializeApp(
     name: 'EmagzIos',

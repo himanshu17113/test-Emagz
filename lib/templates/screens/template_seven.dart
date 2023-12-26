@@ -54,7 +54,7 @@ class _TemplateSevenScreenState extends State<TemplateSevenScreen> {
       extendBodyBehindAppBar: true,
       body: ListView(
         children: [
-          TempleteAppBar(
+          const TempleteAppBar(
             title: "",
             isBlack: false,
           ),

@@ -1,13 +1,14 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
- import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
+import 'package:emagz_vendor/social_media/controller/privacy/privacy_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
 
+import '../../../../constant/data.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
- import '../../../models/user_schema.dart';
+import '../../../models/user_schema.dart';
 
 class CommentSetting extends StatefulWidget {
   const CommentSetting({Key? key}) : super(key: key);
@@ -17,11 +18,8 @@ class CommentSetting extends StatefulWidget {
 }
 
 class _CommentSettingState extends State<CommentSetting> {
-  UserSchema? user;
-  bool? youFollow;
-  bool? everyOne;
-  bool? yourFollower;
-  bool? followAndFollower;
+//UserSchema? user;
+  late String active;
   bool showBox = false;
   bool showSearch = false;
   @override
@@ -30,14 +28,22 @@ class _CommentSettingState extends State<CommentSetting> {
     asyncInit();
   }
 
+  // late final CommentPrivacy commentPrivacy;
   asyncInit() async {
-    user = await HiveDB.getCurrentUserDetail();
-    youFollow = user!.cmnt_priv!.youFollow;
-    yourFollower = user!.cmnt_priv!.yourFollowers;
-    everyOne = user!.cmnt_priv!.everyone;
-    followAndFollower = user!.cmnt_priv!.followAndFollowers;
+    final CommentPrivacy commentPrivacy = constuser!.commentPrivacy!;
 
-    setState(() {});
+    if (commentPrivacy.everyone ?? false) {
+      active = "Everyone >";
+    } else if (commentPrivacy.followers ?? false) {
+      active = "Followers >";
+    }
+    // else if (commentPrivacy. ?? false) {
+    //   active = "Followers >";
+    // }
+    else {
+      active = "No one >";
+    }
+    //user = await HiveDB.getCurrentUserDetail();
   }
 
   final privacyController = Get.put(PrivacyController());
@@ -46,279 +52,274 @@ class _CommentSettingState extends State<CommentSetting> {
     return Scaffold(
       backgroundColor: socialBack,
       appBar: const SocialMediaSettingAppBar(title: "Setting"),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: const Text(
-                "Comment Setting",
-                style: TextStyle(color: blackButtonColor, fontSize: 18, fontWeight: FontWeight.w600),
-              ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Text(
+              "Comment Setting",
+              style: TextStyle(
+                  color: blackButtonColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
-              padding: const EdgeInsets.all(15),
-              height: 185,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
+          ),
+          Card(
+            color: whiteColor,
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
                     "Comments",
-                    style: TextStyle(color: blackButtonColor, fontSize: 17, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        color: blackButtonColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    "Control",
-                    style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 10,
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 10, top: 15),
+                    child: Text(
+                      "Control",
+                      style: TextStyle(
+                          color: signInHeading,
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Allow comments from",
+                          style: TextStyle(
+                              color: blackButtonColor,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600)),
+                      GestureDetector(
+                        onTap: () {
+                          showBox = !showBox;
+                          setState(() {
+                            showSearch = false;
+                          });
+                        },
+                        child: Text(
+                          active,
+                          style: const TextStyle(
+                              color: purpleColor,
+                              fontSize: 11,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Allow comments from", style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Text(
                             "Block comment from",
-                            style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                color: blackButtonColor,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600),
                           ),
                           SizedBox(
                             height: 2,
                           ),
                           SizedBox(
-                            width: 140,
+                            width: 200,
                             child: Text(
                               "Any new comment from people you block will not be visible to anyone but them",
-                              style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  letterSpacing: .3,
+                                  color: signInHeading,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
                         ],
                       ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  showBox = !showBox;
-                                  setState(() {
-                                    showSearch = false;
-                                  });
-                                },
-                                child: const Text(
-                                  "Everyone",
-                                  style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 7,
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 10,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  showSearch = !showSearch;
-                                  setState(() {});
-                                },
-                                child: const Text(
-                                  "0 people",
-                                  style: TextStyle(color: purpleColor, fontSize: 11, fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 10,
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          const SizedBox(
-                            height: 30,
-                            // width: 140,
-                            child: Text(
-                              "",
-                              style: TextStyle(letterSpacing: .3, color: signInHeading, fontSize: 9, fontWeight: FontWeight.w500),
+                          GestureDetector(
+                            onTap: () {
+                              showSearch = !showSearch;
+                              setState(() {});
+                            },
+                            child: const Text(
+                              "0 people",
+                              style: TextStyle(
+                                  color: purpleColor,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 10,
+                          )
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            showBox
-                ? Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    padding: const EdgeInsets.all(15),
-                    height: 210,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Allow comments from",
-                          style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Everyone",
-                              style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
-                            ),
-                            FlutterSwitch(
-                                activeColor: whiteAcent,
-                                toggleColor: blueColor,
-                                padding: 1,
-                                height: 20,
-                                width: 50,
-                                inactiveColor: lightgrayColor,
-                                inactiveToggleColor: toggleInactive,
-                                value: everyOne ?? true,
-                                onToggle: (val) {
-                                  setState(() {
-                                    everyOne = val;
-                                  });
-                                  privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
-                                }),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        TitleAndSwitchWidget(
-                          title: "People you follow",
-                          subTitle: "53 People",
-                          isActive: youFollow ?? true,
-                          onToggle: (val) {
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          showBox
+              ? Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.all(15),
+
+                  ///  height: 210,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Allow comments from",
+                        style: TextStyle(
+                            //   color: signInHeading,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TitleAndSwitchWidget(
+                        title: "Everyone",
+                        isActive: "Everyone >" == active,
+                        onToggle: (val) {
+                          if (val) {
                             setState(() {
-                              youFollow = val;
+                              active = "Everyone >";
                             });
-                            privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        TitleAndSwitchWidget(
-                          title: "Your followers",
-                          subTitle: "53 People",
-                          isActive: yourFollower ?? false,
-                          onToggle: (val) {
+                            privacyController.privacyCommentControl(
+                                true, false, false, false);
+                          } else {
                             setState(() {
-                              yourFollower = val;
+                              active = "Followers >";
                             });
-                            privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
-                          },
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        TitleAndSwitchWidget(
-                          title: "People you follow and your followers",
-                          subTitle: "550 People",
-                          isActive: followAndFollower ?? true,
-                          onToggle: (val) {
+                            privacyController.privacyCommentControl(
+                                false, true, false, false);
+                          }
+                        },
+                      ),
+                      TitleAndSwitchWidget(
+                        title: "Your followers",
+                        subTitle: constuser!.followers == 0
+                            ? null
+                            : "${constuser!.followers} People",
+                        isActive: active == "Followers >",
+                        onToggle: (val) {
+                          if (val) {
                             setState(() {
-                              followAndFollower = val;
+                              active = "Followers >";
                             });
-                            privacyController.privacyCommentControl(everyOne!, yourFollower!, youFollow!, followAndFollower!);
-                          },
-                        )
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
-            const SizedBox(
-              height: 20,
-            ),
-            showSearch
-                ? Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                    padding: const EdgeInsets.all(15),
-                    height: 120,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Block comments from",
-                          style: TextStyle(color: signInHeading, fontSize: 11, fontWeight: FontWeight.w400),
+                            privacyController.privacyCommentControl(
+                                false, true, false, false);
+                          } else {
+                            setState(() {
+                              active = "No one >";
+                            });
+                            privacyController.privacyCommentControl(
+                                false, false, false, false);
+                          }
+                        },
+                      ),
+                      TitleAndSwitchWidget(
+                        title: "No one",
+                        isActive: active == "No one >",
+                        onToggle: (val) {
+                          if (val) {
+                            setState(() {
+                              active = "No one >";
+                            });
+                            privacyController.privacyCommentControl(
+                                false, false, false, false);
+                          } else {
+                            setState(() {
+                              active = "Followers >";
+                            });
+                            privacyController.privacyCommentControl(
+                                false, true, false, false);
+                          }
+                        },
+                      )
+                    ],
+                  ),
+                )
+              : const SizedBox(),
+          const SizedBox(
+            height: 20,
+          ),
+          showSearch
+              ? Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.all(15),
+                  height: 120,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Block comments from",
+                        style: TextStyle(
+                            color: signInHeading,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                            color: whiteAcent,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: grayColor)),
+                        child: const TextField(
+                          cursorColor: grayColor,
+                          textAlign: TextAlign.start,
+                          decoration: InputDecoration(
+                              hintText: "Search",
+                              hintStyle: TextStyle(color: Colors.black),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 7),
+                              border: InputBorder.none,
+                              prefixIcon: Icon(
+                                Icons.search,
+                                color: Colors.black,
+                              )),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(color: whiteAcent, borderRadius: BorderRadius.circular(10), border: Border.all(color: grayColor)),
-                          child: const TextField(
-                            cursorColor: grayColor,
-                            textAlign: TextAlign.start,
-                            decoration: InputDecoration(
-                                hintText: "Search",
-                                hintStyle: TextStyle(color: Colors.black),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                                border: InputBorder.none,
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.black,
-                                )),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
-          ],
-        ),
+                      )
+                    ],
+                  ),
+                )
+              : const SizedBox(),
+        ],
       ),
     );
   }

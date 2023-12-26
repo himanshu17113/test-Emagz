@@ -30,10 +30,10 @@ class _LiveSettingScreenState extends State<LiveSettingScreen> {
   asyncInit() async {
 
     user = await HiveDB.getCurrentUserDetail();
-    youFollow= user!.live_priv!.yourFollower;
+    // youFollow= user!.live_priv!.yourFollower;
 
-    everyOne= user!.live_priv!.everyone;
-    noone=user!.live_priv!.noOne;
+    // everyOne= user!.live_priv!.everyone;
+    // noone=user!.live_priv!.noOne;
 
     setState(() {});
   }

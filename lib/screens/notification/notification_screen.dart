@@ -39,7 +39,7 @@ class NotificationScreen extends StatelessWidget {
       body: GetBuilder<SocketController>(
         tag: "notify",
         id: "dot",
-      //  assignId: true,
+        //  assignId: true,
         init: SocketController(),
         initState: (_) {},
         builder: (socketController) => ListView.builder(
@@ -54,9 +54,9 @@ class NotificationScreen extends StatelessWidget {
                 endActionPane: ActionPane(
                     dragDismissible: true,
                     dismissible: DismissiblePane(onDismissed: () {
-                      socketController
-                          .removeSingleNotification(notificationModel.id!,index);
-                    //  socketController.notifications.removeAt(index);
+                      socketController.removeSingleNotification(
+                          notificationModel.id!, index);
+                      //  socketController.notifications.removeAt(index);
                     }),
                     extentRatio: 1 / 2.2,
                     motion: const ScrollMotion(),
@@ -64,9 +64,9 @@ class NotificationScreen extends StatelessWidget {
                       SlidableAction(
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         onPressed: (context) {
-                          socketController
-                              .removeSingleNotification(notificationModel.id!, index);
-                        //  socketController.notifications.removeAt(index);
+                          socketController.removeSingleNotification(
+                              notificationModel.id!, index);
+                          //  socketController.notifications.removeAt(index);
                         },
                         backgroundColor: const Color(0xFFFE4A49),
                         foregroundColor: Colors.white,

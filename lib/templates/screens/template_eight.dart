@@ -44,7 +44,9 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
         margin: const EdgeInsets.symmetric(horizontal: 2),
         width: 13,
         height: 13,
-        decoration: BoxDecoration(color: currentIndex == index ? Colors.black : grayColor, shape: BoxShape.circle),
+        decoration: BoxDecoration(
+            color: currentIndex == index ? Colors.black : grayColor,
+            shape: BoxShape.circle),
       );
     });
   }
@@ -60,7 +62,7 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
       body: ListView(
         // padding: const EdgeInsets.symmetric(horizontal: 20),
         children: [
-          TempleteAppBar(
+          const TempleteAppBar(
             title: "",
             // isBlack: false,
           ),
@@ -70,7 +72,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
           Text(
             "Esther Howard",
             textAlign: TextAlign.center,
-            style: GoogleFonts.aBeeZee(color: templeteEightHeading, fontSize: 28, fontWeight: FontWeight.w700),
+            style: GoogleFonts.aBeeZee(
+                color: templeteEightHeading,
+                fontSize: 28,
+                fontWeight: FontWeight.w700),
           ),
           const SizedBox(
             height: 30,
@@ -80,7 +85,11 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
             child: Text(
               dummyText,
               textAlign: TextAlign.center,
-              style: GoogleFonts.aBeeZee(color: templeteEightHeading, fontSize: 13, height: 1.4, fontWeight: FontWeight.w300),
+              style: GoogleFonts.aBeeZee(
+                  color: templeteEightHeading,
+                  fontSize: 13,
+                  height: 1.4,
+                  fontWeight: FontWeight.w300),
             ),
           ),
           const SizedBox(
@@ -94,7 +103,8 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
               Container(
                 height: 60,
                 alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
                     // color: blackButtonColor,
                     border: Border.all(color: templeteEightHeading)),
@@ -109,7 +119,8 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
               ),
               Container(
                 height: 60,
-                decoration: BoxDecoration(border: Border.all(color: blackButtonColor)),
+                decoration:
+                    BoxDecoration(border: Border.all(color: blackButtonColor)),
                 margin: const EdgeInsets.symmetric(
                   horizontal: 20,
                 ),
@@ -148,7 +159,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                   ),
                   height: 220,
                   decoration: BoxDecoration(
-                      image: DecorationImage(image: CachedNetworkImageProvider(products[0].image.toString()), fit: BoxFit.cover)),
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              products[0].image.toString()),
+                          fit: BoxFit.cover)),
                 ),
               ),
               const SizedBox(
@@ -161,7 +175,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                   ),
                   height: 220,
                   decoration: BoxDecoration(
-                      image: DecorationImage(image: CachedNetworkImageProvider(products[1].image.toString()), fit: BoxFit.cover)),
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              products[1].image.toString()),
+                          fit: BoxFit.cover)),
                 ),
               )
             ],
@@ -169,8 +186,11 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
           Container(
             height: 150,
             margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            decoration:
-                BoxDecoration(image: DecorationImage(image: CachedNetworkImageProvider(products[3].image.toString()), fit: BoxFit.cover)),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                        products[3].image.toString()),
+                    fit: BoxFit.cover)),
           ),
           const SizedBox(
             height: 25,
@@ -178,7 +198,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
           Text(
             "What we sell",
             textAlign: TextAlign.center,
-            style: GoogleFonts.aBeeZee(color: blackButtonColor, fontSize: 30, fontWeight: FontWeight.w600),
+            style: GoogleFonts.aBeeZee(
+                color: blackButtonColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 20,
@@ -188,7 +211,11 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
             child: Text(
               dummyText,
               textAlign: TextAlign.center,
-              style: GoogleFonts.aBeeZee(color: blackButtonColor, fontSize: 14, height: 1.5, fontWeight: FontWeight.w300),
+              style: GoogleFonts.aBeeZee(
+                  color: blackButtonColor,
+                  fontSize: 14,
+                  height: 1.5,
+                  fontWeight: FontWeight.w300),
             ),
           ),
           const SizedBox(
@@ -200,7 +227,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
           Text(
             "Our Products",
             textAlign: TextAlign.center,
-            style: GoogleFonts.aBeeZee(color: blackButtonColor, fontSize: 30, fontWeight: FontWeight.w600),
+            style: GoogleFonts.aBeeZee(
+                color: blackButtonColor,
+                fontSize: 30,
+                fontWeight: FontWeight.w600),
           ),
           const SizedBox(
             height: 30,
@@ -212,7 +242,9 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
               ),
               InkWell(
                 onTap: () {
-                  controller.previousPage(duration: const Duration(seconds: 1), curve: Curves.linear);
+                  controller.previousPage(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.linear);
                 },
                 child: const Icon(
                   Icons.arrow_back_ios,
@@ -241,7 +273,8 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                             child: Container(
                               height: 180,
                               width: 200,
-                              padding: const EdgeInsets.only(top: 8, right: 15, left: 15),
+                              padding: const EdgeInsets.only(
+                                  top: 8, right: 15, left: 15),
                               decoration: BoxDecoration(
                                 color: lightgrayColor,
                                 border: Border.all(width: 5, color: whiteColor),
@@ -263,7 +296,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                                   Text(
                                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ipsum augue amet, mi tellus proin ornare quam fermentum neque. Risus amet, commodo eget viverra ornare magna. Non dictumst purus felis ridiculus mi scelerisque mauris nisl, dui.",
                                     style: GoogleFonts.inter(
-                                        color: const Color(0xff424242), fontSize: 7, height: 1.5, fontWeight: FontWeight.w400),
+                                        color: const Color(0xff424242),
+                                        fontSize: 7,
+                                        height: 1.5,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -306,11 +342,16 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                                   ),
                                   const Text(
                                     "Add Qty",
-                                    style: TextStyle(color: blackButtonColor, fontSize: 10, height: 1.5, fontWeight: FontWeight.w400),
+                                    style: TextStyle(
+                                        color: blackButtonColor,
+                                        fontSize: 10,
+                                        height: 1.5,
+                                        fontWeight: FontWeight.w400),
                                   ),
                                   const Row(
                                     // crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         // mainAxisAlignment: MainAxisAlignment.center,
@@ -318,30 +359,41 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                                         children: [
                                           Text(
                                             "-",
-                                            style:
-                                                TextStyle(color: blackButtonColor, fontSize: 15, height: 1.5, fontWeight: FontWeight.w300),
+                                            style: TextStyle(
+                                                color: blackButtonColor,
+                                                fontSize: 15,
+                                                height: 1.5,
+                                                fontWeight: FontWeight.w300),
                                           ),
                                           SizedBox(
                                             width: 10,
                                           ),
                                           Text(
                                             "01",
-                                            style:
-                                                TextStyle(color: blackButtonColor, fontSize: 12, height: 1.5, fontWeight: FontWeight.w400),
+                                            style: TextStyle(
+                                                color: blackButtonColor,
+                                                fontSize: 12,
+                                                height: 1.5,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                           SizedBox(
                                             width: 10,
                                           ),
                                           Text(
                                             "+",
-                                            style:
-                                                TextStyle(color: blackButtonColor, fontSize: 15, height: 1.5, fontWeight: FontWeight.w300),
+                                            style: TextStyle(
+                                                color: blackButtonColor,
+                                                fontSize: 15,
+                                                height: 1.5,
+                                                fontWeight: FontWeight.w300),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
                                           SizedBox(
                                             width: 2,
@@ -364,7 +416,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
                         ],
                       );
                     },
-                    options: CarouselOptions(height: 380, viewportFraction: .6, enlargeCenterPage: true)),
+                    options: CarouselOptions(
+                        height: 380,
+                        viewportFraction: .6,
+                        enlargeCenterPage: true)),
               ),
               const SizedBox(
                 width: 3,
@@ -374,7 +429,9 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
               ),
               InkWell(
                 onTap: () {
-                  controller.nextPage(duration: const Duration(seconds: 1), curve: Curves.linear);
+                  controller.nextPage(
+                      duration: const Duration(seconds: 1),
+                      curve: Curves.linear);
                 },
                 child: const Icon(
                   Icons.arrow_forward_ios,
@@ -395,7 +452,10 @@ class _TemplateEightScreenState extends State<TemplateEightScreen> {
             child: Text(
               dummyText + dummyText,
               textAlign: TextAlign.center,
-              style: GoogleFonts.aBeeZee(color: blackButtonColor, fontSize: 13, fontWeight: FontWeight.w500),
+              style: GoogleFonts.aBeeZee(
+                  color: blackButtonColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500),
             ),
           ),
         ],
