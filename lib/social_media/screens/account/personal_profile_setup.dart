@@ -1,16 +1,17 @@
-import 'package:emagz_vendor/common/common_snackbar.dart';
-import 'package:emagz_vendor/constant/colors.dart';
+ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PersonalProfileSetup extends StatelessWidget {
-  const PersonalProfileSetup({Key? key}) : super(key: key);
-
+ final String username;
+  const PersonalProfileSetup({Key? key, required this.username}) : super(key: key);
+  static const TextStyle s =
+      TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w500);
   @override
   Widget build(BuildContext context) {
-    var accountSetUpController = Get.put(SetupAccount());
+    final accountSetUpController = Get.put(SetupAccount());
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -39,7 +40,7 @@ class PersonalProfileSetup extends StatelessWidget {
 
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30),
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
               // height: 260,
               width: size.width,
               decoration: BoxDecoration(boxShadow: [
@@ -56,71 +57,63 @@ class PersonalProfileSetup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Set up your Persona",
-                    style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w500),
+                    "Congratulations",
+                    style: TextStyle(
+                        color: blackButtonColor,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500),
                   ),
                   // const SizedBox(
                   //   height: 2,
                   // ),
-                  const Text(
-                    "Customise your profile",
-                    style: TextStyle(color: accountGray, fontSize: 7, fontWeight: FontWeight.w600),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Text(
-                    "Display Name",
-                    style: TextStyle(color: lightBlack, fontSize: 14, fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    height: 40,
-                    child: TextFormField(
-                      // controller: controller,
-                      // maxLines: maxLines,
-                      cursorColor: grayColor,
-                      controller: accountSetUpController.displayNameController,
-                      // keyboardType: TextInputType.n,
-                      // autofocus: true,
-                      decoration: const InputDecoration(
-                        hintStyle: TextStyle(
-                            color: Color(
-                              0xff818181,
-                            ),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 9),
-                        fillColor: Color(0xffF1F1F1),
-                        hintText: "",
-                        filled: true,
-                        contentPadding: EdgeInsets.only(left: 10),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: lightgrayColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: lightgrayColor),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: lightgrayColor),
-                        ),
-                      ),
+
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      "Set up your Persona",
+                      style: TextStyle(
+                          color: accountGray,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("View Insights", style: s),
+                      Text("personaView", style: s),
+                      Text("Audience Base", style: s),
+                    ],
                   ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Spacer(),
+                      Text(" Analyses your post", style: s),
+                      Spacer(),
+                      Text("PersonalizedProfessional", style: s),
+                    ],
+                  ),
+
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text("Redirect to store", style: s),
+                      Text("Upload product images", style: s),
+                    ],
+                  ),
+
                   InkWell(
                     onTap: () {
-                      Get.to(() => const ChooseTemplate(isReg: true));
+                      Get.to(() =>   ChooseTemplate(
+                            isReg: true,
+                            username: username,
+                          ));
                       //accountSetUpController.setUpPersonalAccount();
                       // Get.to(() => BusinessProfileSetupScreen());
                     },
                     child: Container(
+                      margin: const EdgeInsets.only(top: 10),
                       alignment: Alignment.center,
                       height: 48,
                       decoration: BoxDecoration(
@@ -136,20 +129,11 @@ class PersonalProfileSetup extends StatelessWidget {
                               )
                             : const Text(
                                 "Choose Template",
-                                style: TextStyle(color: whiteColor, fontSize: 9, fontWeight: FontWeight.w600),
+                                style: TextStyle(
+                                    color: whiteColor,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w600),
                               ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Center(
-                    child: InkWell(
-                      onTap: () =>accountSetUpController.displayNameController.text.isEmpty ? CustomSnackbar.show("Please Enter the display name"):accountSetUpController.setUpPersonalAccount() ,
-                      child: const Text(
-                        "Skip For Now",
-                        style: TextStyle(color: Color(0xff7C7C7C), fontSize: 14, fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),

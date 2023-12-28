@@ -39,7 +39,7 @@ class UserSchemaAdapter extends TypeAdapter<UserSchema> {
       followers: fields[15] as int?,
       followings: fields[16] as int?,
       hirable: fields[17] as String?,
-      rating: fields[18] as int?,
+      rating: fields[18] as double?,
       reviews: fields[19] as String?,
       poll: fields[20] as String?,
       jobcreated: fields[21] as String?,

@@ -83,7 +83,7 @@ class _LiveScreenState extends State<LiveScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
-                          color: const Color(0xff28282836).withOpacity(.21),
+                          color: const Color(0xff282836).withOpacity(.21),
                           width: 1.5),
                     ),
                     child: const TextField(

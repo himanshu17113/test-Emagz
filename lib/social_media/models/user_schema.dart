@@ -43,7 +43,7 @@ class UserSchema {
   final String? hirable;
 
   @HiveField(18)
-  final int? rating;
+  final double? rating;
 
   @HiveField(19)
   final String? reviews;
@@ -204,7 +204,7 @@ class UserSchema {
         followers: json["Followers"],
         followings: json["Followings"],
         hirable: json["Hirable"],
-        rating: json["Rating"],
+        rating: json["Rating"].toDouble(),
         reviews: json["Reviews"],
         poll: json["Poll"],
         jobcreated: json["Jobcreated"],

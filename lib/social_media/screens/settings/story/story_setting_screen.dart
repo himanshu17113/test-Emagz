@@ -1,9 +1,7 @@
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
-
 import '../../../../constant/colors.dart';
 import '../../../common/common_appbar.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';

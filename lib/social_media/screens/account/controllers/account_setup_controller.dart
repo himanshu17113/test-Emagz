@@ -18,8 +18,6 @@ import '../../../../templates/choose_template/template_model.dart';
 
 class SetupAccount extends GetxController {
   RxString? profilePic;
-  final TextEditingController userNameController = TextEditingController();
-  final TextEditingController displayNameController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
   final TextEditingController businessTypeController = TextEditingController();
 
@@ -77,17 +75,13 @@ class SetupAccount extends GetxController {
     }
   }
 
-  setUpPersonalAccount() async {
+  setUpPersonalAccount(String userName) async {
     isUserRegiserting.value = true;
 
     var token = await HiveDB.getAuthToken();
     var id = await HiveDB.getUserID();
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
-    Map body = {
-      "_id": id,
-      "displayName": displayNameController.text,
-      "personalTemplate": ""
-    };
+    Map body = {"_id": id, "displayName": userName, "personalTemplate": ""};
     http.Response response = await http.post(
         Uri.parse(ApiEndpoint.setupPeronalAccount),
         body: jsonEncode(body),
@@ -177,7 +171,7 @@ class SetupAccount extends GetxController {
     return null;
   }
 
-  userTemplate(String? templateId) async {
+  userTemplate(String? templateId, String? username) async {
     var userId = await HiveDB.getUserID();
     var token = await HiveDB.getAuthToken();
     Map body = {
@@ -193,8 +187,12 @@ class SetupAccount extends GetxController {
     );
     // Map data = jsonDecode(response.body);
     if (response.statusCode == 200) {
+      if (username != null) {
+        setUpPersonalAccount(username);
+      } else {
+        Get.back();
+      }
       //CustomSnackbar.showSucess('Your persona is set');
-      Get.back();
     } else {
       debugPrint('expected error');
       Get.back();

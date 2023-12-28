@@ -1,7 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/common/common_appbar.dart';
-import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';

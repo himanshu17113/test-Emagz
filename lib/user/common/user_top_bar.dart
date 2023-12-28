@@ -1,4 +1,3 @@
-import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -64,7 +63,7 @@ class UserTopBar extends StatelessWidget implements PreferredSizeWidget {
                 child: SvgPicture.asset(
                   "assets/svg/Notify.svg",
                   width: 40,
-                  color: blackButtonColor,
+              //    color: blackButtonColor,
                 ),
               ),
             ],

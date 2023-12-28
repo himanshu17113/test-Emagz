@@ -21,7 +21,7 @@ class AuthController {
   bool isUserlogging = false;
   String suggestedName = "";
   RxString Otp = RxString("");
-
+  String username = "";
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
@@ -305,7 +305,8 @@ class AuthController {
     selectedChoices.add(index);
   }
 
-  postUserProfileType(int value) async {
+  postUserProfileType(int value, String userName) async {
+    username = userName;
     isUserlogging = true;
     try {
       var headers = {
@@ -321,7 +322,9 @@ class AuthController {
           headers: headers);
       if (response.statusCode == 200) {
         (value == 1)
-            ? Get.to(() => const PersonalProfileSetup())
+            ? Get.to(() => PersonalProfileSetup(
+                  username: username,
+                ))
             : Get.to(() => const BusinessProfileSetupScreen());
       }
       isUserlogging = false;
@@ -436,7 +439,7 @@ class AuthController {
         var uniqRes = jsonDecode(uniqueNameResponse.body);
         suggestedName = uniqRes["GetstatedName"];
         isUserlogging = false;
-        Get.to(PersonalAccountScreen(suggestedName: suggestedName),
+        Get.to(() => PersonalAccountScreen(suggestedName: suggestedName),
             transition: Transition.rightToLeft);
       } else {
         isUserlogging = false;
