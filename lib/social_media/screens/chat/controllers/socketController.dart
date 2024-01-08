@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:emagz_vendor/constant/data.dart';
+import 'package:emagz_vendor/social_media/screens/chat/models/chat_model.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class SocketController extends GetxController {
     'transports': ['websocket'],
   });
   final FocusNode focusNode = FocusNode();
-  List<String> onLineUserIds = [];
+  List<String?> onLineUserIds = [];
   String? prevRoom;
   static Client client = http.Client();
   static String? userId = globUserId;
@@ -25,6 +26,9 @@ class SocketController extends GetxController {
   RxList<String> timeStamps = <String>[].obs;
   String? conversationId;
   RxBool showEmojiBoard = RxBool(false);
+  static Map<String, String> header = {
+    'authorization': token!,
+  };
   void getNotification() {
     socket.connect();
     socket.onConnect((_) {
@@ -69,14 +73,18 @@ class SocketController extends GetxController {
 
   void iAmActive() => socket.emit("joinLoginRoom", {"userId": globUserId!});
 
-  void iamOffline() => socket.emit("joinLoginRoom", {"userId": globUserId, "activeStatus": false});
+  void iamOffline() => socket
+      .emit("joinLoginRoom", {"userId": globUserId, "activeStatus": false});
 
-  void getActiveUsers() => socket.on(
-      "userOnline",
-      (payload) =>
-          payload.forEach((element) {
-            onLineUserIds.add(element['userId']);
-          }));
+  void getActiveUsers() => socket.on("userOnline", (payload) {
+        onLineUserIds.clear();
+
+        payload.forEach((element) {
+          debugPrint(element.toString());
+          onLineUserIds.addIf(element['userId'] != null, element['userId']);
+        });
+        update(['active']);
+      });
 
   void connectToServer(String room) {
     if (prevRoom != null && prevRoom == room) {
@@ -177,22 +185,32 @@ class SocketController extends GetxController {
 
   void sendLikeNotification(String id, String name) {
     debugPrint("name : $name , userID : $userId , oid : $id");
-    Map<String, dynamic> data = {"notification_from": userId!, "notification_to": id, "notification": {}, "title": "Like", "message": "$name liked your post"};
+    Map<String, dynamic> data = {
+      "notification_from": userId!,
+      "notification_to": id,
+      "notification": {},
+      "title": "Like",
+      "message": "$name liked your post"
+    };
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(
+      String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
+      "message": ispost
+          ? "$name Share a post with you"
+          : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(String id, bool ispost, String? shareLink, bool isReply) {
+  void sendCommentNotification(
+      String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
@@ -209,14 +227,12 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(String notificationId, int index) async {
+  Future<bool> removeSingleNotification(
+      String notificationId, int index) async {
     try {
       notifications.removeAt(index);
       update(["dot"]);
       //  notifications.removeAt(index);
-      Map<String, String> header = {
-        'authorization': token!,
-      };
 
       String url = ApiEndpoint.removeSingleNotification(notificationId);
 
@@ -247,10 +263,6 @@ class SocketController extends GetxController {
 
   Future<bool> clearAllNotification() async {
     try {
-      Map<String, String> header = {
-        'authorization': token!,
-      };
-
       String url = ApiEndpoint.clearAllNotification(userId!);
 
       debugPrint(url);
@@ -275,6 +287,30 @@ class SocketController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
       return false;
+    }
+  }
+
+  Future<void> getChatList() async {
+    try {
+      print('getChatList');
+      debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
+      var response = await client.get(
+          Uri.parse(ApiEndpoint.getConversation(globUserId ?? userId!)),
+          headers: header);
+      debugPrint("Chat list");
+      debugPrint("🧣🧣🧣🧣🧣 start");
+      List<Conversation> conversationsx = [];
+      jsonDecode(response.body).forEach((e) {
+        final conversation = Conversation.fromJson(e);
+
+        conversationsx.add(conversation);
+      });
+
+      // chatList = conversationsx;
+
+      update(['ChatList']);
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 

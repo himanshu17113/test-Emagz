@@ -9,11 +9,12 @@ class PersonalAccountScreen extends StatelessWidget {
   PersonalAccountScreen({Key? key, this.suggestedName}) : super(key: key);
 
   final authController = AuthController();
-  int value = 1;
+ 
   final TextEditingController? controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+     int value = 1;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -46,8 +47,6 @@ class PersonalAccountScreen extends StatelessWidget {
               flex: 4,
             ),
             Container(
-              // padding: EdgeInsets.only(
-              //     bottom: MediaQuery.of(context).viewInsets.bottom),
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
@@ -66,10 +65,8 @@ class PersonalAccountScreen extends StatelessWidget {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   child: Container(
-                    //     margin: const EdgeInsets.all(10),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 25, vertical: 40),
-                    //height: 360,
                     width: size.width * .9,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -86,9 +83,6 @@ class PersonalAccountScreen extends StatelessWidget {
                               fontWeight: FontWeight.lerp(
                                   FontWeight.w500, FontWeight.w600, 0.35)),
                         ),
-                        // const SizedBox(
-                        //   height: 2,
-                        // ),
                         const Text(
                           "Customise your profile",
                           style: TextStyle(
@@ -106,62 +100,23 @@ class PersonalAccountScreen extends StatelessWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                         ),
-                        // SizedBox(
-                        //     height: 45,
-                        //     child: AddCouponTextfiled(
-                        //       hint: "Nakul_kumar8",
-                        //     )),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: TextFormField(
-                            scrollPadding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            style: const TextStyle(
-                                color: Color(
-                                  0xff707070,
-                                ),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12),
-                            controller: controller,
-                            // maxLines: maxLines,
-                            cursorColor: grayColor,
-                            // keyboardType: TextInputType.n,
-                            // autofocus: true,
-                            //enabled: widget.suggestedName == null,
-                            decoration: InputDecoration(
-                              hintStyle: const TextStyle(
+                        ColoredBox(
+                          color: const Color(0xffF1F1F1),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: SizedBox(
+                              width: double.maxFinite,
+                              child: Text(
+                                suggestedName ?? "",
+                                style: const TextStyle(
                                   color: Color(
                                     0xff818181,
                                   ),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12),
-                              fillColor: const Color(0xffF1F1F1),
-                              counterText: "",
-                              hintText: suggestedName ?? "new user-name",
-                              filled: true,
-                              contentPadding: const EdgeInsets.only(left: 10),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                                borderSide: const BorderSide(
-                                  color: lightgrayColor,
-                                ),
-                              ),
-                              disabledBorder: InputBorder.none,
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: const BorderSide(
-                                    color: Color(0xf1EFEFEF),
-                                  )),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: const BorderSide(
-                                  color: Color(0xf1EFEFEF),
                                 ),
                               ),
                             ),
                           ),
                         ),
-
                         const Padding(
                           padding: EdgeInsets.only(top: 10, bottom: 15),
                           child: Text(
@@ -172,7 +127,6 @@ class PersonalAccountScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
-
                         StatefulBuilder(
                             builder: (BuildContext context, setState) => Row(
                                   mainAxisAlignment:
@@ -187,15 +141,9 @@ class PersonalAccountScreen extends StatelessWidget {
                                       },
                                       child: Card(
                                         elevation: 2,
-                                        // padding: const EdgeInsets.symmetric(horizontal: 10),
-
                                         color: (value == 1)
                                             ? chipColor
                                             : selectionButton,
-                                        // border: Border.all(
-                                        //   color: (value == index) ? chipColor : Colors.black,
-                                        // ),
-
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -225,15 +173,9 @@ class PersonalAccountScreen extends StatelessWidget {
                                       },
                                       child: Card(
                                         elevation: 2,
-                                        // padding: const EdgeInsets.symmetric(horizontal: 10),
-
                                         color: (value == 2)
                                             ? chipColor
                                             : selectionButton,
-                                        // border: Border.all(
-                                        //   color: (value == index) ? chipColor : Colors.black,
-                                        // ),
-
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 10),
@@ -259,17 +201,14 @@ class PersonalAccountScreen extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             authController.postUserProfileType(
-                                value, controller!.text);
-                            // Get.to(() => PersonalProfileSetup());
+                              value,
+                            );
                           },
                           child: Container(
                             alignment: Alignment.center,
                             height: 48,
                             decoration: BoxDecoration(
                                 color: chipColor,
-                                // border: Border.all(
-                                //   color: (value == index) ? chipColor : Colors.black,
-                                // ),
                                 borderRadius: BorderRadius.circular(5)),
                             child: (authController.isUserlogging)
                                 ? const CircularProgressIndicator(

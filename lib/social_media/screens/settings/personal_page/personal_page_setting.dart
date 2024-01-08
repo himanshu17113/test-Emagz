@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/common_auth_screen.dart';
+import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/screens/auth/widgets/my_custom_textfiled.dart';
 import 'package:emagz_vendor/screens/support/support_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
@@ -165,7 +167,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           children: [
                             Text(
                               overflow: TextOverflow.ellipsis,
-                              constuser?.displayName ?? "loding..",
+                              constuser?.username ?? "loding..",
                               // user != null
                               //     ? user!.accountType == "professional"
                               //         ? user!.username!
@@ -173,12 +175,12 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               //     : "laoding...",
                               style: const TextStyle(
                                   color: blackButtonColor,
-                                  fontSize: 20,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w600),
                             ),
                             Text(
                               overflow: TextOverflow.ellipsis,
-                              constuser?.username ?? "loding..",
+                              constuser?.displayName ?? "loding..",
                               style: TextStyle(
                                   color: bottomBarIconColor.withOpacity(.8),
                                   fontSize: 10,
@@ -191,20 +193,48 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     const SizedBox(
                       height: 12,
                     ),
-                    Text(
-                      "Bio",
-                      style: TextStyle(
-                          color: bottomBarIconColor.withOpacity(.8),
-                          fontSize: 11,
-                          fontWeight: FontWeight.w600),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Bio",
+                          style: TextStyle(
+                              color: bottomBarIconColor.withOpacity(.8),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        GestureDetector(
+                          onTap: () => updateBio(context),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 6, horizontal: 10),
+                            decoration: const BoxDecoration(
+                              // borderRadius: BorderRadius.circular(10),
+                              color: chipColor,
+                            ),
+                            child: const Text(
+                              "Change Bio",
+                              style: TextStyle(
+                                  color: whiteColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                    const Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
-                      style: TextStyle(
-                          letterSpacing: .5,
-                          color: black,
-                          fontSize: 10,
-                          fontWeight: FontWeight.w400),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        constuser?.bio ??
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
+                        style: const TextStyle(
+                            letterSpacing: .5,
+                            color: black,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -220,7 +250,9 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.to(() => const ChooseTemplate(isReg: false,));
+                              Get.to(() => const ChooseTemplate(
+                                    isReg: false,
+                                  ));
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
@@ -548,5 +580,116 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
         ),
       ),
     );
+  }
+
+  updateBio(BuildContext context) {
+    TextEditingController bioControllaer = TextEditingController();
+    return showModalBottomSheet(
+        isScrollControlled: true,
+        elevation: 0.0,
+        barrierColor: const Color(0xff252525).withOpacity(.4),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        context: context,
+        builder: (ctx) {
+          return Container(
+            height: MediaQuery.of(context).size.height * .45 +
+                MediaQuery.of(context).viewInsets.bottom,
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.white,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                const FormHeadingText(
+                  headings: "Update Mobile No",
+                  fontSize: 26,
+                  fontWeight: FontWeight.w500,
+                  color: lightBlack,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const FormHeadingText(
+                  headings:
+                      "Please enter your new mobile number which you want to update and use",
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                  color: unselectedLabel,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  child: FormHeadingText(
+                    headings: "New Mobile Number",
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: lightBlack,
+                  ),
+                ),
+                MyCustomTextfiled(
+                  inputType: TextInputType.phone,
+                  hint: "your bio",
+                  controller: bioControllaer,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    await accountSetupController.updateBio(bioControllaer.text);
+                    setState(() {
+                      constuser!.bio = bioControllaer.text;
+                    });
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 51,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff3A0DBB),
+                      borderRadius: BorderRadius.circular(8),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 4.07),
+                            blurRadius: 20,
+                            color: const Color(0xff000040).withOpacity(.25))
+                      ],
+                    ),
+                    child: const FormHeadingText(
+                      headings: "Update",
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: FormHeadingText(
+                      headings: "Back",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: lightBlack.withOpacity(.45),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

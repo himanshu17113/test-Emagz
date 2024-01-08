@@ -23,23 +23,33 @@ class SupportController extends GetxController {
 
   createTicket(String ticketTitle) async {
     final String token = (globToken ?? await HiveDB.getAuthToken())!;
-    final headers = {'Content-Type': 'application/json', "Authorization": token};
+    final headers = {
+      'Content-Type': 'application/json',
+      "Authorization": token
+    };
     final Map body = {"ticketTitle": ticketTitle};
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.createTicket), headers: headers, body: jsonEncode(body));
-    if (response.statusCode == 200) {
-      getAllTicketbyID();
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.createTicket),
+        headers: headers,
+        body: jsonEncode(body));
+
+    if (response.statusCode == 201) {
+      await getAllTicketbyID();
+      Get.back();
       return true;
     }
     return false;
   }
 
-  void getAllSupportbyID() async {
+  Future<void> getAllSupportbyID() async {
     if (supports != null) supports!.clear();
     String token = (globToken ?? await HiveDB.getAuthToken())!;
     var headers = {'Content-Type': 'application/json', "Authorization": token};
 
-    http.Response response = await http.get(Uri.parse("${ApiEndpoint.getSupportById}/$globUserId"), headers: headers);
-  //  (response.body.toString());
+    http.Response response = await http.get(
+        Uri.parse("${ApiEndpoint.getSupportById}/$globUserId"),
+        headers: headers);
+    //  (response.body.toString());
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       body = body['data'];
@@ -51,19 +61,24 @@ class SupportController extends GetxController {
     }
   }
 
-  void getAllTicketbyID() async {
-    if (tickets.isNotEmpty) tickets.clear();
+  Future getAllTicketbyID() async {
     String token = (globToken ?? await HiveDB.getAuthToken())!;
     var headers = {'Content-Type': 'application/json', "Authorization": token};
 
-    http.Response response = await http.get(Uri.parse(ApiEndpoint.getTicketbyUserId(globUserId!)), headers: headers);
-     if (response.statusCode == 200) {
+    http.Response response = await http.get(
+        Uri.parse(ApiEndpoint.getTicketbyUserId(globUserId!)),
+        headers: headers);
+    if (response.statusCode == 200) {
+      if (tickets.isNotEmpty) tickets.clear();
+
       var body = jsonDecode(response.body);
       body = body['data'];
       Ticket? temp;
       body.forEach((e) {
         temp = Ticket.fromMap(e);
-        temp!.ticketStaus! ? tickets.add(temp!) : ticketsClosed.addNonNull(temp!);
+        temp!.ticketStaus!
+            ? tickets.add(temp!)
+            : ticketsClosed.addNonNull(temp!);
       });
       update(["support"]);
     }
@@ -75,7 +90,8 @@ class SupportController extends GetxController {
     String token = (globToken ?? await HiveDB.getAuthToken())!;
     var headers = {'Content-Type': 'application/json', "Authorization": token};
 
-    http.Response response = await http.get(Uri.parse(ApiEndpoint.getAllSupport), headers: headers);
+    http.Response response =
+        await http.get(Uri.parse(ApiEndpoint.getAllSupport), headers: headers);
     var body = jsonDecode(response.body);
     body = body['data'];
     body.forEach((e) {
@@ -90,10 +106,12 @@ class SupportController extends GetxController {
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     var body = {"email": email, "reason": reason, "message": msg};
 
-    http.Response response = await http.post(Uri.parse(ApiEndpoint.createSupport), headers: headers, body: jsonEncode(body));
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.createSupport),
+        headers: headers,
+        body: jsonEncode(body));
     if (response.statusCode == 200 || response.statusCode == 201) {
       getAllSupportbyID();
-      print(response.body.toString());
       CustomSnackbar.showSucess('Your request has been accepted');
     } else {
       CustomSnackbar.show('Your request was not posted . Error');

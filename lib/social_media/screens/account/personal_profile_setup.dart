@@ -1,14 +1,15 @@
- import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PersonalProfileSetup extends StatelessWidget {
- final String username;
-  const PersonalProfileSetup({Key? key, required this.username}) : super(key: key);
+  const PersonalProfileSetup({
+    Key? key,
+  }) : super(key: key);
   static const TextStyle s =
-      TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w500);
+      TextStyle(color: accountGray, fontSize: 12, fontWeight: FontWeight.w600);
   @override
   Widget build(BuildContext context) {
     final accountSetUpController = Get.put(SetupAccount());
@@ -37,11 +38,9 @@ class PersonalProfileSetup extends StatelessWidget {
               ),
             ),
             const Spacer(),
-
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 30),
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
-              // height: 260,
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 30),
               width: size.width,
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
@@ -57,20 +56,16 @@ class PersonalProfileSetup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Congratulations",
+                    "  Congratulations",
                     style: TextStyle(
                         color: blackButtonColor,
                         fontSize: 22,
                         fontWeight: FontWeight.w500),
                   ),
-                  // const SizedBox(
-                  //   height: 2,
-                  // ),
-
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: Text(
-                      "Set up your Persona",
+                      "   Set up your Persona",
                       style: TextStyle(
                           color: accountGray,
                           fontSize: 12,
@@ -78,23 +73,25 @@ class PersonalProfileSetup extends StatelessWidget {
                     ),
                   ),
                   const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("View Insights", style: s),
                       Text("personaView", style: s),
                       Text("Audience Base", style: s),
                     ],
                   ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Spacer(),
-                      Text(" Analyses your post", style: s),
-                      Spacer(),
-                      Text("PersonalizedProfessional", style: s),
-                    ],
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Spacer(),
+                        Text(" Analyses your post", style: s),
+                        Spacer(),
+                        Text("PersonalizedProfessional", style: s),
+                      ],
+                    ),
                   ),
-
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -102,25 +99,19 @@ class PersonalProfileSetup extends StatelessWidget {
                       Text("Upload product images", style: s),
                     ],
                   ),
-
                   InkWell(
                     onTap: () {
-                      Get.to(() =>   ChooseTemplate(
+                      Get.to(() => const ChooseTemplate(
                             isReg: true,
-                            username: username,
                           ));
-                      //accountSetUpController.setUpPersonalAccount();
-                      // Get.to(() => BusinessProfileSetupScreen());
                     },
                     child: Container(
-                      margin: const EdgeInsets.only(top: 10),
+                      margin:
+                          const EdgeInsets.only(top: 10, left: 10, right: 10),
                       alignment: Alignment.center,
                       height: 48,
                       decoration: BoxDecoration(
                           color: chipColor,
-                          // border: Border.all(
-                          //   color: (value == index) ? chipColor : Colors.black,
-                          // ),
                           borderRadius: BorderRadius.circular(5)),
                       child: Obx(
                         () => (accountSetUpController.isUserRegiserting.value)
@@ -141,7 +132,6 @@ class PersonalProfileSetup extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            // Spacer(),
           ],
         ),
       ),

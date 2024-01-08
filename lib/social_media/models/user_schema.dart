@@ -106,7 +106,7 @@ class UserSchema {
   final String? password;
 
   @HiveField(39)
-  final bool? isActive;
+    bool? isActive;
 
   @HiveField(40)
   String? isPrivate;
@@ -118,7 +118,7 @@ class UserSchema {
   final String? socialType;
 
   @HiveField(43)
-  final String? bio;
+    String? bio;
 
   @HiveField(44)
   List<String>? followingData;
@@ -200,11 +200,11 @@ class UserSchema {
         isActive: json["is_active"],
         isPrivate: json["is_private"],
         accountType: json["accountType"],
-        interestName: List<String>.from(json["interestName"].map((x) => x)),
+        // interestName: List<String>.from(json["interestName"].map((x) => x)),
         followers: json["Followers"],
         followings: json["Followings"],
         hirable: json["Hirable"],
-        rating: json["Rating"].toDouble(),
+        rating: json["Rating"] == null ? null : json["Rating"].toDouble(),
         reviews: json["Reviews"],
         poll: json["Poll"],
         jobcreated: json["Jobcreated"],

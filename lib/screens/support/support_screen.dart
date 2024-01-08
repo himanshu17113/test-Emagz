@@ -56,11 +56,15 @@ class SupportScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
                 'Recent',
-                style: TextStyle(color: textSetting, fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: textSetting,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               ),
             ),
             GetBuilder<SupportController>(
               id: "support",
+              assignId: true,
               init: SupportController(),
               builder: (supportController) => ListView.separated(
                   scrollDirection: Axis.vertical,
@@ -72,32 +76,44 @@ class SupportScreen extends StatelessWidget {
                         // leading: const SizedBox(
                         //   width: 0,
                         // ),
-                        contentPadding: const EdgeInsets.only(top: 2, left: 5, right: 4),
+                        contentPadding:
+                            const EdgeInsets.only(top: 2, left: 5, right: 4),
                         minVerticalPadding: 0,
                         onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => SupportChat(
-                                userId: supportController.tickets[index].userId!,
-                                conversationId: supportController.tickets[index].id!,
+                                userId:
+                                    supportController.tickets[index].userId!,
+                                conversationId:
+                                    supportController.tickets[index].id!,
                               ),
                             )),
                         tileColor: Colors.white,
                         isThreeLine: true,
                         subtitle: Text(
                           supportController.tickets[index].createdAt.toString(),
-                          style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                          style: const TextStyle(
+                              color: textSetting,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         trailing: const Text(
                           'Open',
-                          style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: textSetting,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Ticket No#${supportController.tickets[index].ticketNumber ?? "12345"}',
-                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                              style: const TextStyle(
+                                  color: textSetting,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500),
                             ),
                             const SizedBox(
                               height: 4,
@@ -111,11 +127,15 @@ class SupportScreen extends StatelessWidget {
               padding: EdgeInsets.only(left: 16.0),
               child: Text(
                 'History',
-                style: TextStyle(color: textSetting, fontSize: 14, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: textSetting,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500),
               ),
             ),
             GetBuilder<SupportController>(
               id: "support",
+              assignId: true,
               init: SupportController(),
               builder: (supportController) => ListView.separated(
                   scrollDirection: Axis.vertical,
@@ -130,24 +150,35 @@ class SupportScreen extends StatelessWidget {
                         tileColor: Colors.white,
                         isThreeLine: true,
                         subtitle: Text(
-                          supportController.ticketsClosed[index].createdAt.toString(),
-                          style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                          supportController.ticketsClosed[index].createdAt
+                              .toString(),
+                          style: const TextStyle(
+                              color: textSetting,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         trailing: const Text(
                           'Closed',
-                          style: TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: textSetting,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500),
                         ),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Ticket No#${supportController.ticketsClosed[index].ticketNumber ?? "12345"}',
-                              style: const TextStyle(color: textSetting, fontSize: 10, fontWeight: FontWeight.w500),
+                              style: const TextStyle(
+                                  color: textSetting,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500),
                             ),
                             const SizedBox(
                               height: 4,
                             ),
-                            Text(supportController.ticketsClosed[index].ticketTitle!),
+                            Text(supportController
+                                .ticketsClosed[index].ticketTitle!),
                           ],
                         ),
                       )),
@@ -162,11 +193,17 @@ class SupportScreen extends StatelessWidget {
             style: ElevatedButton.styleFrom(backgroundColor: chipColor),
             onPressed: () {
               showModalBottomSheet(
-                shape: const RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15))),
                 context: context,
                 builder: (contexts) => Container(
                     decoration: const BoxDecoration(
-                        color: Color(0xf0E7E9FE), borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(10))),
+                        color: Color(0xf0E7E9FE),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(10))),
                     padding: const EdgeInsets.fromLTRB(30, 30, 30, 0),
                     height: s.height * .6,
                     width: s.width,
@@ -178,8 +215,10 @@ class SupportScreen extends StatelessWidget {
                             fillColor: const Color(0xffFFFFFF),
                             filled: true,
                             hintText: "What is the issue you are facing?",
-                            hintStyle: const TextStyle(fontSize: 13, color: textSetting),
-                            contentPadding: const EdgeInsets.only(left: 35, top: 15, bottom: 15),
+                            hintStyle: const TextStyle(
+                                fontSize: 13, color: textSetting),
+                            contentPadding: const EdgeInsets.only(
+                                left: 35, top: 15, bottom: 15),
                             border: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                   width: 0,
@@ -194,10 +233,9 @@ class SupportScreen extends StatelessWidget {
                             initState: (_) {},
                             builder: (supportController) => ElevatedButton(
                                 onPressed: () async {
-                                  bool done = await supportController.createTicket(tick);
-                                  if (done) {
-                                    Navigator.pop(contexts);
-                                  }
+                                 await supportController
+                                      .createTicket(tick);
+                                
                                 },
                                 child: const Text("Submit"))),
                       )

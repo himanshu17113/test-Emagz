@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/chat/models/notification_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -78,7 +79,8 @@ class NotificationScreen extends StatelessWidget {
                   tileColor: Colors.white,
                   leading: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
-                        notificationModel.notificationFrom!.profilePic!),
+                        notificationModel.notificationFrom?.profilePic ??
+                            imageUrlOne),
                   ),
                   title: Text(notificationModel.title ?? ""),
                   subtitle: Text(notificationModel.message ?? ""),

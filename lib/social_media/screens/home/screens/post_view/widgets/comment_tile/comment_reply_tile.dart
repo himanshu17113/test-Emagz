@@ -15,8 +15,13 @@ class CommentReplyTile extends StatelessWidget {
   final bool last;
   final int index;
   final int commentindex;
-  CommentReplyTile({super.key, required this.comment, required this.last, required this.index, required this.commentindex});
- static time(DateTime dateTime) {
+  CommentReplyTile(
+      {super.key,
+      required this.comment,
+      required this.last,
+      required this.index,
+      required this.commentindex});
+  static time(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);
 
@@ -92,9 +97,11 @@ class CommentReplyTile extends StatelessWidget {
                             clipBehavior: Clip.hardEdge,
                             borderRadius: BorderRadius.circular(22),
                             child: BackdropFilter(
-                              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20 * 2),
+                              filter:
+                                  ImageFilter.blur(sigmaX: 20, sigmaY: 20 * 2),
                               child: Container(
-                                padding: const EdgeInsets.symmetric(vertical: 0),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 0),
                                 margin: const EdgeInsets.symmetric(vertical: 0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(33),
@@ -115,25 +122,31 @@ class CommentReplyTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 0, vertical: 3),
                                   child: CircleAvatar(
                                     radius: 18,
-                                    backgroundImage: CachedNetworkImageProvider(comment.userId!.profilePic ?? templateFiveImage[2]),
+                                    backgroundImage: CachedNetworkImageProvider(
+                                        comment.userId!.profilePic ??
+                                            templateFiveImage[2]),
                                   ),
                                 ),
                               ),
                               Expanded(
-                                flex: 8,
+                                flex: 12,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                       "${comment.userId?.username}",
-                                      style: const TextStyle(color: Colors.white60, fontSize: 10.2),
+                                      style: const TextStyle(
+                                          color: Colors.white60,
+                                          fontSize: 10.2),
                                     ),
                                     Flexible(
                                       child: Text(
@@ -149,19 +162,35 @@ class CommentReplyTile extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          comment.timestamp == null ? "Now" : time(comment.timestamp!),
-                                          style: const TextStyle(color: Color.fromARGB(160, 255, 255, 255), fontSize: 9),
+                                          comment.timestamp == null
+                                              ? "Now"
+                                              : time(comment.timestamp!),
+                                          style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  160, 255, 255, 255),
+                                              fontSize: 9),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
                                           child: GestureDetector(
                                               onTap: () {
-                                                storyController.commentindex.value = commentindex;
-                                                storyController.setReplyId(comment.sId!, comment.userId?.username ?? "jjk", index);
+                                                storyController.commentindex
+                                                    .value = commentindex;
+                                                storyController.setReplyId(
+                                                    comment.sId!,
+                                                    comment.userId?.username ??
+                                                        "jjk",
+                                                    index);
                                               },
                                               child: const Text(
                                                 "Reply",
-                                                style: TextStyle(fontSize: 11.5, color: Colors.white70, letterSpacing: 0.32, fontWeight: FontWeight.w500),
+                                                style: TextStyle(
+                                                    fontSize: 11.5,
+                                                    color: Colors.white70,
+                                                    letterSpacing: 0.32,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                               )),
                                         ),
                                       ],
@@ -170,10 +199,13 @@ class CommentReplyTile extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
+                                flex: 2,
                                 child: IconButton(
-                                  alignment: Alignment.topLeft,
-                                  icon: const Icon(
-                                    Icons.keyboard_arrow_down,
+                                  alignment: Alignment.bottomLeft,
+                                  icon: Icon(
+                                    max == 1
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_up,
                                     size: 20,
                                   ),
                                   onPressed: () {
@@ -195,7 +227,8 @@ class CommentReplyTile extends StatelessWidget {
                     ),
                     if (comment.comments != null) ...[
                       Column(
-                        children: List.generate(comment.comments!.length, (index) {
+                        children:
+                            List.generate(comment.comments!.length, (index) {
                           if (comment.comments!.isNotEmpty) {
                             return ReplyreplyTile(
                               last: comment.comments!.length == index + 1,

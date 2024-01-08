@@ -12,12 +12,18 @@ import '../../../common/common_snackbar.dart';
 
 class SecurityController extends GetxController {
   updateName(String name) async {
-    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': globToken!
+    };
     final Map bodymain = {"username": name};
 
     debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    http.Response response = await http.put(
+        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+        body: jsonEncode(bodymain),
+        headers: headers);
     final Map data = jsonDecode(response.body);
 
     debugPrint("code${response.statusCode.toString()}");
@@ -32,12 +38,18 @@ class SecurityController extends GetxController {
   }
 
   updateDOB(String dob) async {
-    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': globToken!
+    };
     final Map bodymain = {"dob": dob};
 
     debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    http.Response response = await http.put(
+        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+        body: jsonEncode(bodymain),
+        headers: headers);
     final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["user"]);
@@ -50,13 +62,21 @@ class SecurityController extends GetxController {
     }
   }
 
+
+
   updateEmail(String email) async {
-    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': globToken!
+    };
     final Map bodymain = {"email": email};
 
     debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    http.Response response = await http.put(
+        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+        body: jsonEncode(bodymain),
+        headers: headers);
     final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["user"]);
@@ -70,13 +90,19 @@ class SecurityController extends GetxController {
   }
 
   updateMobile(String mobile) async {
-    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': globToken!
+    };
 
     final Map bodymain = {"mobile_number": mobile};
 
     debugPrint('${ApiEndpoint.updateUserDetails}?userId=$globUserId');
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'), body: jsonEncode(bodymain), headers: headers);
+    http.Response response = await http.put(
+        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+        body: jsonEncode(bodymain),
+        headers: headers);
     final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["user"]);

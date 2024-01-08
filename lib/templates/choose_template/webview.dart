@@ -2,6 +2,7 @@ import 'package:emagz_vendor/social_media/screens/chat/chat_screen.dart';
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -55,7 +56,10 @@ class _WebViewPersonaState extends State<WebViewPersona> {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: controller);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // status bar color
+    ));
+    return SafeArea(child: WebViewWidget(controller: controller));
   }
 }
 
@@ -165,13 +169,18 @@ class _WebViewOnlyViewState extends State<WebViewOnlyView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 1,
-          child: WebViewWidget(controller: controller),
-        ),
-      ],
-    );
+    return SafeArea(
+        child:
+            // Row(
+            //   children: [
+            //     AspectRatio(
+            //       aspectRatio: 9 / 19.5,
+            //       child: Expanded(child:
+            WebViewWidget(controller: controller)
+        //),
+        //     ),
+        //   ],
+        // ),
+        );
   }
 }

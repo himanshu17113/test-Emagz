@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:emagz_vendor/social_media/screens/chat/controllers/chatController.dart';
@@ -15,7 +15,6 @@ class UserChats extends StatelessWidget {
         initState: (_) {},
         id: 'ChatList',
         builder: (chatController) => ListView.builder(
-          shrinkWrap: true,
           itemCount: chatController.chatList.length,
           physics: const ScrollPhysics(),
           //        controller: scrollController,
@@ -25,7 +24,7 @@ class UserChats extends StatelessWidget {
               userData: conversation.userData,
               resentMessage: conversation.resentMessage,
               conversationId: conversation.data!.id!,
-             // senderId: conversation.data!.members?.singleWhere((element) => element != globUserId) ?? "",
+              // senderId: conversation.data!.members?.singleWhere((element) => element != globUserId) ?? "",
             );
           },
         ),

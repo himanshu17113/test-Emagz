@@ -114,12 +114,12 @@ const Color profileGray = Color(0xffF3F3F3);
 
 // Social Media
 
-  const  Color socialBack = Color(0xffE7E9FE);
+const Color socialBack = Color(0xffE7E9FE);
 const Color chipColor = Color(0xff3A0DBB);
 const Color purpleColor = Color(0xff3A0DBB);
 const Color chatOnlineDot = Color(0xff1E6B17);
 const Color bottomBarIconColor = Color(0xff959292);
-const Color chatContainer = Color(0xffEEEEEE);
+const Color chatContainer = Color(0xffAFB6FD);
 const Color accountGray = Color(0xff646464);
 const Color selectionButton = Color(0xffEBEBEB);
 const Color orderDetailBorder = Color(0xffE9E9E9);

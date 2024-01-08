@@ -12,8 +12,7 @@ import '../../social_media/screens/account/controllers/account_setup_controller.
 
 class ChooseTemplate extends StatefulWidget {
   final bool isReg;
-  final String? username;
-  const ChooseTemplate({Key? key, required this.isReg,   this.username}) : super(key: key);
+   const ChooseTemplate({Key? key, required this.isReg,  }) : super(key: key);
 
   @override
   State<ChooseTemplate> createState() => _ChooseTemplateState();
@@ -279,7 +278,7 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
     return InkWell(
       onTap: () async {
         if (index == 1) {
-          await accountSetUpController.userTemplate(tmpInd!,widget.username);
+          await accountSetUpController.userTemplate(tmpInd!);
           if (widget.isReg == true) {
             CustomSnackbar.showSucess('Your persona was set');
           } else {

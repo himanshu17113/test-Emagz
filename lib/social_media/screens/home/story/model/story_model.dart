@@ -358,7 +358,7 @@ class Stories {
     if (json['Comments'] != null) {
       comments = <Comment>[];
       json['Comments'].forEach((v) {
-        comments!.add(Comment.fromJson(v));
+        comments?.add(Comment.fromJson(v));
       });
     }
     createdAt = json['createdAt'];

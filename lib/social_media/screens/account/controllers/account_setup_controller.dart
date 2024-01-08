@@ -171,7 +171,9 @@ class SetupAccount extends GetxController {
     return null;
   }
 
-  userTemplate(String? templateId, String? username) async {
+  userTemplate(
+    String? templateId,
+  ) async {
     var userId = await HiveDB.getUserID();
     var token = await HiveDB.getAuthToken();
     Map body = {
@@ -187,15 +189,39 @@ class SetupAccount extends GetxController {
     );
     // Map data = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      if (username != null) {
-        setUpPersonalAccount(username);
-      } else {
-        Get.back();
-      }
-      //CustomSnackbar.showSucess('Your persona is set');
+      constuser = await HiveDB.getCurrentUserDetail();
+      // debugPrint(data.toString());
+      isUserRegiserting.value = false;
+      //lead to main page
+      Get.offAll(() => BottomNavBar(),
+          transition: Transition.rightToLeftWithFade);
     } else {
-      debugPrint('expected error');
       Get.back();
+    }
+    //CustomSnackbar.showSucess('Your persona is set');
+  }
+
+  updateBio(String bio) async {
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': globToken!
+    };
+    final Map bodymain = {"bio": bio};
+
+    debugPrint('${ApiEndpoint.updateUserbio}?userId=$globUserId');
+    debugPrint(bodymain.toString());
+    http.Response response = await http.put(
+        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+        body: jsonEncode(bodymain),
+        headers: headers);
+    final Map data = jsonDecode(response.body);
+    debugPrint("code${response.statusCode.toString()}");
+    HiveDB.setCurrentUserDetail();
+    if (response.statusCode == 200) {
+      CustomSnackbar.showSucess("User DOB Updated");
+    } else {
+      debugPrint(data.toString());
+      CustomSnackbar.show(data.toString());
     }
   }
 }

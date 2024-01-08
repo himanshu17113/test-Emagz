@@ -118,7 +118,7 @@ class ChatScreen extends StatelessWidget {
                         style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
                       ),
                       const Text(
-                        "Onlin",
+                        "Online",
                         style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
                       ),
                     ],
@@ -310,7 +310,8 @@ class ChatScreen extends StatelessWidget {
                           width: 0,
                           style: BorderStyle.none,
                         ),
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.circular(15))
+                        ),
                 textAlignVertical: TextAlignVertical.top,
                 textAlign: TextAlign.start,
               ),

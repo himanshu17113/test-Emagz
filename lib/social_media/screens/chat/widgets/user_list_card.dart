@@ -24,8 +24,7 @@ class UserChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (userData == null) {
-        } else {
+        if (userData != null) {
           Navigator.push(
               context,
               MaterialPageRoute(
@@ -59,8 +58,10 @@ class UserChat extends StatelessWidget {
                 ),
                 GetBuilder<SocketController>(
                   init: SocketController(),
+                  tag: "notify",
+   id: 'active',
                   //   initState: (_) {},
-                  builder: (s) => s.onLineUserIds.contains(userData!.id)
+                  builder: (s) => s.onLineUserIds.contains(userData?.id)
                       ? const Positioned(
                           top: 36,
                           right: 2,
@@ -84,23 +85,35 @@ class UserChat extends StatelessWidget {
                 userData == null
                     ? Text(
                         "loading",
-                        style: TextStyle(color: Colors.black.withOpacity(0.25), fontSize: 12, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.25),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       )
                     : Text(
                         "${userData?.username}",
-                        style: const TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
+                        style: const TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       ),
                 const SizedBox(
                   height: 3,
                 ),
                 resentMessage == null
                     ? const Text(
-                        "loading",
-                        style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
+                        " ",
+                        style: TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
                       )
                     : Text(
                         resentMessage?.text ?? "last text",
-                        style: const TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                            color: blackButtonColor,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
                       ),
               ],
             ),
@@ -116,7 +129,10 @@ class UserChat extends StatelessWidget {
                   )
                 : const Text(
                     "",
-                    style: TextStyle(color: Color(0xffA1A1A1), fontSize: 10, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: Color(0xffA1A1A1),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600),
                   ),
             const SizedBox(
               width: 30,

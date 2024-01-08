@@ -21,7 +21,6 @@ class AuthController {
   bool isUserlogging = false;
   String suggestedName = "";
   RxString Otp = RxString("");
-  String username = "";
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
@@ -147,7 +146,7 @@ class AuthController {
         "email": emailController.text,
         "dob": dobController.text,
         "password": passwordController.text,
-        "uniqueName": "ghfhfhg"
+        "uniqueName": ""
       };
       debugPrint(ApiEndpoint.register);
       //debugPrint(body.toString());
@@ -249,7 +248,7 @@ class AuthController {
           body: jsonEncode(body), headers: headers);
       var data = jsonDecode(response.body);
 
-      debugPrint(data["data"]["_id"]);
+      //  debugPrint(data["data"]["_id"]);
       if (response.statusCode == 200) {
         clearValue();
         CustomSnackbar.showSucess("User Loggedin Successfully");
@@ -305,8 +304,7 @@ class AuthController {
     selectedChoices.add(index);
   }
 
-  postUserProfileType(int value, String userName) async {
-    username = userName;
+  postUserProfileType(int value) async {
     isUserlogging = true;
     try {
       var headers = {
@@ -322,9 +320,7 @@ class AuthController {
           headers: headers);
       if (response.statusCode == 200) {
         (value == 1)
-            ? Get.to(() => PersonalProfileSetup(
-                  username: username,
-                ))
+            ? Get.to(() => const PersonalProfileSetup())
             : Get.to(() => const BusinessProfileSetupScreen());
       }
       isUserlogging = false;
@@ -438,6 +434,15 @@ class AuthController {
             headers: headers);
         var uniqRes = jsonDecode(uniqueNameResponse.body);
         suggestedName = uniqRes["GetstatedName"];
+        Map body = {
+          "_id": globUserId,
+          "displayName": suggestedName,
+          "personalTemplate": ""
+        };
+        http.Response response = await http.post(
+            Uri.parse(ApiEndpoint.setupPeronalAccount),
+            body: jsonEncode(body),
+            headers: headers);
         isUserlogging = false;
         Get.to(() => PersonalAccountScreen(suggestedName: suggestedName),
             transition: Transition.rightToLeft);
