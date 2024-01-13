@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CommentReplyTile extends StatelessWidget {
-  final storyController = Get.find<CommentController>();
   final Comment comment;
   final bool last;
   final int index;
@@ -22,8 +21,8 @@ class CommentReplyTile extends StatelessWidget {
       required this.index,
       required this.commentindex});
   static time(DateTime dateTime) {
-    DateTime now = DateTime.now();
-    Duration difference = now.difference(dateTime);
+ final   DateTime now = DateTime.now();
+final    Duration difference = now.difference(dateTime);
 
     if (difference.inSeconds < 60) {
       return 'now';
@@ -37,11 +36,12 @@ class CommentReplyTile extends StatelessWidget {
       return '${difference.inDays} days ago';
     }
   }
+  final storyController = Get.find<CommentController>();
 
-  int max = 1;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  int max = 1;
+
     return Padding(
       padding: const EdgeInsets.only(left: 25),
       child: StatefulBuilder(

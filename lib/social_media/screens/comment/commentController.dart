@@ -13,15 +13,15 @@ import 'package:http/http.dart' as http;
 
 class CommentController extends GetxController {
   final socketController = Get.find<SocketController>(tag: "notify");
-  final Dio dio = Dio();
+  static final Dio dio = Dio();
   @override
   onInit() async {
     dio.options.headers["Authorization"] = globToken ?? token;
     super.onInit();
   }
 
-  String? token = globToken;
-  String? userId = globUserId;
+   String? token = globToken;
+     String? userId = globUserId;
   // Future<void> storedData() async {
   //   token = await HiveDB.getAuthToken();
   //   userId = await HiveDB.getUserID();
@@ -93,6 +93,35 @@ class CommentController extends GetxController {
       isPosting.value = false;
       //   update();
       return "";
+    }
+  }
+
+    Future<bool> likeComment(String postId, String commentID) async {
+    try {
+      final data = {
+        "userId": userId,
+        "postId": postId,
+        "commentId": commentID,
+      };
+      final resposne =
+          await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      debugPrint(ApiEndpoint.commentPost(postId));
+      debugPrint(data.toString());
+      // print(resposne);
+      if (resposne.statusCode == 200) {
+        //   List<dynamic> list = resposne.data["post"]["Comments"];
+
+        // isPosting.value = false;
+        // socketController.sendCommentNotification(postuID, true, null, false);
+
+        //   final Comment commentx = Comment.fromJson(list.last);
+        update(['commentlike']);
+        return true;
+      }
+      return false;
+    } catch (e) {
+      //   update();
+      return false;
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
@@ -12,7 +13,12 @@ import '../../social_media/screens/account/controllers/account_setup_controller.
 
 class ChooseTemplate extends StatefulWidget {
   final bool isReg;
-   const ChooseTemplate({Key? key, required this.isReg,  }) : super(key: key);
+  final bool? isUser;
+  const ChooseTemplate({
+    Key? key,
+    this.isUser,
+    required this.isReg,
+  }) : super(key: key);
 
   @override
   State<ChooseTemplate> createState() => _ChooseTemplateState();
@@ -21,6 +27,18 @@ class ChooseTemplate extends StatefulWidget {
 class _ChooseTemplateState extends State<ChooseTemplate> {
   int value = 1;
   var accountSetUpController = Get.put(SetupAccount());
+
+  @override
+  void initState() {
+    super.initState();
+    widget.isUser != null
+        ? widget.isUser!
+            ? accountSetUpController.getAllTempltes()
+            : accountSetUpController.getAllTempltesforBusiness()
+        : constuser?.accountType == "personal"
+            ? accountSetUpController.getAllTempltes()
+            : accountSetUpController.getAllTempltesforBusiness();
+  }
 
 //  final ScrollController _scrollController = ScrollController();
   Future<void> _showMyDialog(String? indexx) async {
@@ -124,19 +142,19 @@ class _ChooseTemplateState extends State<ChooseTemplate> {
                     const SizedBox(
                       height: 28,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(child: customRadioButton("Personal", 1)),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Expanded(child: customRadioButton("Business", 2)),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 28,
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     Expanded(child: customRadioButton("Personal", 1)),
+                    //     const SizedBox(
+                    //       width: 5,
+                    //     ),
+                    //     Expanded(child: customRadioButton("Business", 2)),
+                    //   ],
+                    // ),
+                    // const SizedBox(
+                    //   height: 28,
+                    // ),
                     Obx(() {
                       return ListView.builder(
                         scrollDirection: Axis.vertical,

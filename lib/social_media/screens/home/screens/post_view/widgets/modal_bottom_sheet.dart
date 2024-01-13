@@ -158,6 +158,7 @@ class _PostCommentsModalBottomSheetState
                           return PostCommentTile(
                             comment: widget.comments[index]!,
                             index: index,
+                            postId: widget.postId,
                           );
                         },
                       ),

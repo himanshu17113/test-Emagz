@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/social_media/screens/account/controllers/account_setup_controller.dart';
+import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -10,17 +11,18 @@ class BusinessProfileSetupScreen extends StatefulWidget {
   const BusinessProfileSetupScreen({Key? key}) : super(key: key);
 
   @override
-  State<BusinessProfileSetupScreen> createState() => _BusinessProfileSetupScreenState();
+  State<BusinessProfileSetupScreen> createState() =>
+      _BusinessProfileSetupScreenState();
 }
 
-class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen> {
+class _BusinessProfileSetupScreenState
+    extends State<BusinessProfileSetupScreen> {
   final ImagePicker picker = ImagePicker();
 
   XFile? image;
 
   @override
   Widget build(BuildContext context) {
-
     var accountSetupController = Get.put(SetupAccount());
 
     Size size = MediaQuery.of(context).size;
@@ -90,25 +92,27 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                     ),
                     Center(
                       child: InkWell(
-                        onTap: () async{
-                          image = await picker.pickImage(source: ImageSource.gallery);
-                          setState(() {
-                          });
-                          },
-                        child: (image == null) ? const CircleAvatar(
-                          radius: 45,
-                          backgroundColor: Color(0xffF0F0F0),
-                          child: Text(
-                            "Upload Logo",
-                            style: TextStyle(
-                                color: Color(0xffD0D0D0),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ) : CircleAvatar(
-                          radius: 45,
-                          backgroundImage: FileImage(File(image!.path)),
-                        ) ,
+                        onTap: () async {
+                          image = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {});
+                        },
+                        child: (image == null)
+                            ? const CircleAvatar(
+                                radius: 45,
+                                backgroundColor: Color(0xffF0F0F0),
+                                child: Text(
+                                  "Upload Logo",
+                                  style: TextStyle(
+                                      color: Color(0xffD0D0D0),
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 45,
+                                backgroundImage: FileImage(File(image!.path)),
+                              ),
                       ),
                     ),
                     const SizedBox(
@@ -128,7 +132,8 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 35,
                       child: TextFormField(
-                        controller: accountSetupController.businessNameController,
+                        controller:
+                            accountSetupController.businessNameController,
                         // maxLines: maxLines,
                         cursorColor: grayColor,
                         // keyboardType: TextInputType.n,
@@ -178,7 +183,8 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                       margin: const EdgeInsets.symmetric(vertical: 5),
                       height: 35,
                       child: TextFormField(
-                        controller: accountSetupController.businessTypeController,
+                        controller:
+                            accountSetupController.businessTypeController,
                         // maxLines: maxLines,
                         cursorColor: grayColor,
                         // keyboardType: TextInputType.n,
@@ -213,15 +219,15 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                     ),
                     InkWell(
                       onTap: () {
-                        if(image == null){
+                        if (image == null) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Please Select logo image")));
+                              const SnackBar(
+                                  content: Text("Please Select logo image")));
                           // Get.("Error", "");
-                        }else {
+                        } else {
                           accountSetupController
                               .setUpProfessionalAccount(image!);
-                          setState(() {
-                          });
+                         
                         }
                         // Get.to(() => BusinessAccountConfirmationScreen());
                       },
@@ -231,14 +237,17 @@ class _BusinessProfileSetupScreenState extends State<BusinessProfileSetupScreen>
                         decoration: BoxDecoration(
                             color: chipColor,
                             borderRadius: BorderRadius.circular(10)),
-                        child: (accountSetupController.isUserRegiserting.value) ?
-                          const CircularProgressIndicator(color: Colors.white,):const Text(
-                          "Choose Template ",
-                          style: TextStyle(
-                              color: whiteColor,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500),
-                        ),
+                        child: (accountSetupController.isUserRegiserting.value)
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text(
+                                "Choose Template ",
+                                style: TextStyle(
+                                    color: whiteColor,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500),
+                              ),
                       ),
                     ),
                     const SizedBox(

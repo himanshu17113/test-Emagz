@@ -8,8 +8,8 @@ class PersonalProfileSetup extends StatelessWidget {
   const PersonalProfileSetup({
     Key? key,
   }) : super(key: key);
-  static const TextStyle s =
-      TextStyle(color: accountGray, fontSize: 12, fontWeight: FontWeight.w600);
+  static const TextStyle s = TextStyle(
+      color: accountGray, fontSize: 12.2, fontWeight: FontWeight.w500);
   @override
   Widget build(BuildContext context) {
     final accountSetUpController = Get.put(SetupAccount());
@@ -103,6 +103,7 @@ class PersonalProfileSetup extends StatelessWidget {
                     onTap: () {
                       Get.to(() => const ChooseTemplate(
                             isReg: true,
+                            isUser: true,
                           ));
                     },
                     child: Container(

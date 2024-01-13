@@ -23,19 +23,27 @@ class HomePosts extends StatelessWidget {
         builder: (homePostController) {
           debugPrint("HomePosts --- GetBuilder");
           return ListView.builder(
-         //   cacheExtent: 1000,
+            //   cacheExtent: 1000,
             padding: const EdgeInsets.only(bottom: 80.0),
             controller: homePostController.scrollController,
             itemCount: homePostController.posts!.length + 2,
             itemBuilder: (context, index) {
               if (index == homePostController.posts!.length + 1) {
-                return homePostController.endOfPost ? const SizedBox() : const CupertinoActivityIndicator();
+                return homePostController.endOfPost
+                    ? const SizedBox()
+                    : const CupertinoActivityIndicator();
               } else if (index == 0) {
                 return const StoryView();
               } else {
                 if (homePostController.posts!.isNotEmpty) {
-                  if (homePostController.posts![index - 1].mediaUrl!.isNotEmpty && homePostController.posts?[index - 1].mediaUrl?[0] != null) {
-                    if (homePostController.posts![index - 1].mediaUrl![0]!.endsWith(".svg") || homePostController.posts?[index - 1].mediaUrl?[0] == null) {
+                  if (homePostController
+                          .posts![index - 1].mediaUrl!.isNotEmpty &&
+                      homePostController.posts?[index - 1].mediaUrl?[0] !=
+                          null) {
+                    if (homePostController.posts![index - 1].mediaUrl![0]!
+                            .endsWith(".svg") ||
+                        homePostController.posts?[index - 1].mediaUrl?[0] ==
+                            null) {
                       return const SizedBox();
                     } else {
                       return GestureDetector(
@@ -56,27 +64,37 @@ class HomePosts extends StatelessWidget {
                                     alignment: Alignment.center,
                                     backgroundColor: Colors.transparent,
                                     content: SizedBox(
-                                      height: 250,
+                                      height: 300,
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
                                         children: [
                                           HomePagePopupWidget(
-                                            isBorder: false,
                                             title: "View Post",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "View Stats",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Download",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
                                           ),
                                           HomePagePopupWidget(
                                             title: "Share",
-                                            post: homePostController.posts![index - 1],
+                                            post: homePostController
+                                                .posts![index - 1],
+                                          ),
+                                          HomePagePopupWidget(
+                                            title: "Report",
+                                            post: homePostController
+                                                .posts![index - 1],
                                           )
                                         ],
                                       ),
