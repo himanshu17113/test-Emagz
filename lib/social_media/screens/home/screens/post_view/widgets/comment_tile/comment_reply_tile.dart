@@ -45,6 +45,7 @@ class CommentReplyTile extends StatelessWidget {
       return '${difference.inDays} days ago';
     }
   }
+  final storyController = Get.find<CommentController>();
 
   final commentController = Get.find<CommentController>();
 
