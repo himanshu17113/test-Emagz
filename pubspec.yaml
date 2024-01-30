@@ -79,7 +79,9 @@ dependencies:
   hashtagable: ^2.3.0+1
   fluttertagger: ^1.0.0+6
   emoji_picker_flutter: ^1.6.3
-  
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

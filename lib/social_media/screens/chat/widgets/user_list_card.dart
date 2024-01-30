@@ -59,7 +59,7 @@ class UserChat extends StatelessWidget {
                 GetBuilder<SocketController>(
                   init: SocketController(),
                   tag: "notify",
-   id: 'active',
+                  id: 'active',
                   //   initState: (_) {},
                   builder: (s) => s.onLineUserIds.contains(userData?.id)
                       ? const Positioned(
@@ -92,6 +92,7 @@ class UserChat extends StatelessWidget {
                       )
                     : Text(
                         "${userData?.username}",
+                        maxLines: 1,
                         style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,
@@ -110,6 +111,7 @@ class UserChat extends StatelessWidget {
                       )
                     : Text(
                         resentMessage?.text ?? "last text",
+                        maxLines: 1,
                         style: const TextStyle(
                             color: blackButtonColor,
                             fontSize: 12,

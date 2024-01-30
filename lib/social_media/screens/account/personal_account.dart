@@ -9,12 +9,12 @@ class PersonalAccountScreen extends StatelessWidget {
   PersonalAccountScreen({Key? key, this.suggestedName}) : super(key: key);
 
   final authController = AuthController();
- 
+
   final TextEditingController? controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-     int value = 1;
+    int value = 1;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -37,9 +37,7 @@ class PersonalAccountScreen extends StatelessWidget {
             Center(
               child: Image.asset(
                 "assets/png/new_logo.png",
-                width: MediaQuery.of(context).viewInsets.bottom == 0
-                    ? size.height * .2
-                    : size.height * .12,
+                width: MediaQuery.of(context).viewInsets.bottom == 0 ? size.height * .2 : size.height * .12,
                 color: Colors.white.withOpacity(.8),
               ),
             ),
@@ -65,12 +63,10 @@ class PersonalAccountScreen extends StatelessWidget {
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 40),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 40),
                     width: size.width * .9,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.white.withOpacity(0.94)),
+                        borderRadius: BorderRadius.circular(10), color: const Color.fromARGB(239, 255, 255, 255)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -80,25 +76,18 @@ class PersonalAccountScreen extends StatelessWidget {
                               color: blackButtonColor,
                               fontSize: 22,
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.lerp(
-                                  FontWeight.w500, FontWeight.w600, 0.35)),
+                              fontWeight: FontWeight.lerp(FontWeight.w500, FontWeight.w600, 0.35)),
                         ),
                         const Text(
                           "Customise your profile",
-                          style: TextStyle(
-                              color: accountGray,
-                              fontSize: 9,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: accountGray, fontSize: 9, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 15,
                         ),
                         const Text(
                           "User Name",
-                          style: TextStyle(
-                              color: lightBlack,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
+                          style: TextStyle(color: lightBlack, fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         ColoredBox(
                           color: const Color(0xffF1F1F1),
@@ -121,16 +110,12 @@ class PersonalAccountScreen extends StatelessWidget {
                           padding: EdgeInsets.only(top: 10, bottom: 15),
                           child: Text(
                             "Select account type",
-                            style: TextStyle(
-                                color: lightBlack,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500),
+                            style: TextStyle(color: lightBlack, fontSize: 12, fontWeight: FontWeight.w500),
                           ),
                         ),
                         StatefulBuilder(
                             builder: (BuildContext context, setState) => Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Expanded(
                                         child: InkWell(
@@ -141,20 +126,14 @@ class PersonalAccountScreen extends StatelessWidget {
                                       },
                                       child: Card(
                                         elevation: 2,
-                                        color: (value == 1)
-                                            ? chipColor
-                                            : selectionButton,
+                                        color: (value == 1) ? chipColor : selectionButton,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
+                                          padding: const EdgeInsets.symmetric(vertical: 10),
                                           child: Text(
                                             "Personal Account",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                color: (value == 1)
-                                                    ? whiteColor
-                                                    : blackButtonColor
-                                                        .withOpacity(.5),
+                                                color: (value == 1) ? whiteColor : blackButtonColor.withOpacity(.5),
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -173,20 +152,14 @@ class PersonalAccountScreen extends StatelessWidget {
                                       },
                                       child: Card(
                                         elevation: 2,
-                                        color: (value == 2)
-                                            ? chipColor
-                                            : selectionButton,
+                                        color: (value == 2) ? chipColor : selectionButton,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
+                                          padding: const EdgeInsets.symmetric(vertical: 10),
                                           child: Text(
                                             "Business Account",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                color: (value == 2)
-                                                    ? whiteColor
-                                                    : blackButtonColor
-                                                        .withOpacity(.5),
+                                                color: (value == 2) ? whiteColor : blackButtonColor.withOpacity(.5),
                                                 fontSize: 9,
                                                 fontWeight: FontWeight.w600),
                                           ),
@@ -207,19 +180,14 @@ class PersonalAccountScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             height: 48,
-                            decoration: BoxDecoration(
-                                color: chipColor,
-                                borderRadius: BorderRadius.circular(5)),
+                            decoration: BoxDecoration(color: chipColor, borderRadius: BorderRadius.circular(5)),
                             child: (authController.isUserlogging)
                                 ? const CircularProgressIndicator(
                                     color: Colors.white,
                                   )
                                 : const Text(
                                     "Continue",
-                                    style: TextStyle(
-                                        color: whiteColor,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500),
+                                    style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w500),
                                   ),
                           ),
                         ),

@@ -340,7 +340,6 @@ class _PrePostScreenState extends State<PrePostScreen> {
                         fontWeight: FontWeight.w500),
                   ),
                 ),
-               
                 HashTagTextField(
                   textAlign: TextAlign.start,
                   controller: postController.captionController,
@@ -364,8 +363,8 @@ class _PrePostScreenState extends State<PrePostScreen> {
                       background: Paint()
                         ..strokeWidth = 7.0
                         ..color = const Color.fromRGBO(219, 222, 255, 1)
-                   ..style = PaintingStyle.stroke
-        ..strokeJoin = StrokeJoin.round,
+                        ..style = PaintingStyle.stroke
+                        ..strokeJoin = StrokeJoin.round,
 
                       ///  backgroundColor: const Color.fromRGBO(219, 222, 255, 1),
                       color: Colors.black),
@@ -638,7 +637,7 @@ class _PrePostScreenState extends State<PrePostScreen> {
                 ),
                 Container(
                   padding: const EdgeInsets.all(15),
-                  height: 190,
+                  //     height: 190,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: whiteColor,

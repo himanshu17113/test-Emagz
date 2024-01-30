@@ -33,7 +33,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   //String? fileExtension;
   bool isPoll = false;
   RxBool ispoll = RxBool(false);
-  Future<Uint8List?> xFileToUint8List(XFile xFile) async {
+   xFileToUint8List(XFile xFile) async {
     File file = File(xFile.path);
     if (await file.exists()) {
       List<int> imageBytes = await file.readAsBytes();
@@ -43,7 +43,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
   }
 
-  Future _capturePhoto() async {
+    _capturePhoto() async {
     final picker = ImagePicker();
     final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
 

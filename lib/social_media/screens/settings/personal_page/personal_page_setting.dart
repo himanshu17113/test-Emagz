@@ -607,7 +607,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   height: 10,
                 ),
                 const FormHeadingText(
-                  headings: "Update Mobile No",
+                  headings: "Update Your",
                   fontSize: 26,
                   fontWeight: FontWeight.w500,
                   color: lightBlack,
@@ -616,8 +616,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                   height: 5,
                 ),
                 const FormHeadingText(
-                  headings:
-                      "Please enter your new mobile number which you want to update and use",
+                  headings: "Please enter your Bio",
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
                   color: unselectedLabel,
@@ -625,14 +624,13 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 20),
                   child: FormHeadingText(
-                    headings: "New Mobile Number",
+                    headings: "New Bio",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: lightBlack,
                   ),
                 ),
                 MyCustomTextfiled(
-                  inputType: TextInputType.phone,
                   hint: "your bio",
                   controller: bioControllaer,
                 ),
@@ -641,10 +639,11 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    await accountSetupController.updateBio(bioControllaer.text);
                     setState(() {
                       constuser!.bio = bioControllaer.text;
                     });
+                    await accountSetupController.updateBio(bioControllaer.text);
+
                     Navigator.pop(context);
                   },
                   child: Container(

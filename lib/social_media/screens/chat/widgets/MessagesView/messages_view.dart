@@ -21,25 +21,21 @@ class MessageView extends StatelessWidget {
       id: "message",
       init: SocketController(),
       builder: (socketController) => ListView.builder(
+            controller: socketController.controller,
             itemCount: socketController.liveMessages.length,
             padding: const EdgeInsets.only(top: 10, bottom: 10),
             physics: const BouncingScrollPhysics(),
             itemBuilder: (context, index) {
-               final  Message data = socketController.liveMessages[index];
+              final Message data = socketController.liveMessages[index];
               final bool iscurrent = data.sender == globUserId;
               bool isDayNeeded = true;
-              Object dayName = data.createdAt != null
-                  ? DateFormat('MMM d, yyyy')
-                      .format(DateTime.parse(data.createdAt!))
-                  : DateTime.now().day;
+              Object dayName =
+                  data.createdAt != null ? DateFormat('MMM d, yyyy').format(DateTime.parse(data.createdAt!)) : DateTime.now().day;
               if (index >= 1) {
-                DateTime previous = DateTime.parse(
-                    socketController.liveMessages[index - 1].createdAt ??
-                        DateTime.now().toString());
+                DateTime previous =
+                    DateTime.parse(socketController.liveMessages[index - 1].createdAt ?? DateTime.now().toString());
 
-                DateTime currentMsg = DateTime.parse(
-                    socketController.liveMessages[index].createdAt ??
-                        DateTime.now().toString());
+                DateTime currentMsg = DateTime.parse(socketController.liveMessages[index].createdAt ?? DateTime.now().toString());
 
                 if (DateUtils.isSameDay(previous, currentMsg)) {
                   isDayNeeded = false;
@@ -53,9 +49,7 @@ class MessageView extends StatelessWidget {
               }
 
               return Column(
-                crossAxisAlignment: iscurrent
-                    ? CrossAxisAlignment.end
-                    : CrossAxisAlignment.start,
+                crossAxisAlignment: iscurrent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                 children: [
                   if (isDayNeeded) ...[
                     Center(
@@ -63,33 +57,25 @@ class MessageView extends StatelessWidget {
                     )
                   ],
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 14, right: 14, top: 10, bottom: 10),
+                    padding: const EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 10),
                     child: Container(
                       width: 175,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.only(
                             topRight: const Radius.circular(10),
-                            bottomLeft: !iscurrent
-                                ? Radius.zero
-                                : const Radius.circular(10),
-                            bottomRight: iscurrent
-                                ? Radius.zero
-                                : const Radius.circular(10),
+                            bottomLeft: !iscurrent ? Radius.zero : const Radius.circular(10),
+                            bottomRight: iscurrent ? Radius.zero : const Radius.circular(10),
                             topLeft: const Radius.circular(10),
                           ),
                           color: iscurrent ? chipColor : chatContainer),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 8),
+                      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             data.text ?? "loading text",
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                                color: iscurrent ? whiteAcent : chipColor),
+                            style:
+                                TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: iscurrent ? whiteAcent : chipColor),
                           ),
                           const SizedBox(
                             height: 10,
@@ -97,12 +83,9 @@ class MessageView extends StatelessWidget {
                           Text(
                             data.createdAt == null
                                 ? DateFormat.jm().format(DateTime.now())
-                                : DateFormat.jm()
-                                    .format(DateTime.parse(data.createdAt!)),
-                            style: TextStyle(
-                                fontSize: 7,
-                                fontWeight: FontWeight.w700,
-                                color: iscurrent ? whiteAcent : lightBlack),
+                                : DateFormat.jm().format(DateTime.parse(data.createdAt!)),
+                            style:
+                                TextStyle(fontSize: 7, fontWeight: FontWeight.w700, color: iscurrent ? whiteAcent : lightBlack),
                           ),
                         ],
                       ),

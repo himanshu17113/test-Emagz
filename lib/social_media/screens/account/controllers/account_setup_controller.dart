@@ -8,6 +8,7 @@ import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 
 import 'package:emagz_vendor/social_media/screens/account/business_account_confirmation.dart';
+import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import "package:emagz_vendor/constant/api_string.dart";
@@ -23,11 +24,12 @@ class SetupAccount extends GetxController {
 
   RxBool isUserRegiserting = RxBool(false);
   RxList<Template>? templates = <Template>[].obs;
+  // List<Template>? templatesB = <Template>[];
+  // List<Template>? templatesA = <Template>[];
   // setBusinessLogo
 
   @override
   onInit() async {
-    getAllTempltes();
     profilePic?.value = constuser?.profilePic ?? "";
     super.onInit();
   }
@@ -58,7 +60,10 @@ class SetupAccount extends GetxController {
     var data = response.data;
     if (response.statusCode == 200) {
       isUserRegiserting.value = false;
-      Get.to(() => const BusinessAccountConfirmationScreen());
+      Get.to(() => const ChooseTemplate(
+            isReg: true,
+            isUser: false,
+          ));
       return true;
     } else if (response.statusCode == 401) {
       CustomSnackbar.show(data['error']);
@@ -148,7 +153,7 @@ class SetupAccount extends GetxController {
   }
 
   Future<List<Template?>?> getAllTempltes() async {
-    if (templates != null) templates!.clear();
+    templates?.clear();
     try {
       var token = await HiveDB.getAuthToken();
       var headers = {
@@ -156,15 +161,44 @@ class SetupAccount extends GetxController {
         "Authorization": token!
       };
 
-      http.Response response =
-          await http.get(Uri.parse(ApiEndpoint.template), headers: headers);
+      http.Response response = await http.get(
+          Uri.parse('${ApiEndpoint.template}?type=Individual'),
+          headers: headers);
       var body = jsonDecode(response.body);
       debugPrint(body.toString());
       body.forEach((e) {
         var temp = Template.fromJson(e);
         templates?.add(temp);
       });
+      // templates!.value = templatesA!;
+
       return templates;
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
+
+  Future<List<Template?>?> getAllTempltesforBusiness() async {
+    try {
+      templates?.clear();
+      var token = await HiveDB.getAuthToken();
+      var headers = {
+        'Content-Type': 'application/json',
+        "Authorization": token!
+      };
+
+      http.Response response = await http.get(
+          Uri.parse('${ApiEndpoint.template}?type=Business'),
+          headers: headers);
+      var body = jsonDecode(response.body);
+      debugPrint(body.toString());
+      body.forEach((e) {
+        var temp = Template.fromJson(e);
+        templates?.add(temp);
+      });
+      //   templates!.value = templatesB!;
+      //  return templatesB;
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -208,20 +242,20 @@ class SetupAccount extends GetxController {
     };
     final Map bodymain = {"bio": bio};
 
-    debugPrint('${ApiEndpoint.updateUserbio}?userId=$globUserId');
+    debugPrint(ApiEndpoint.updateUserbio);
     debugPrint(bodymain.toString());
-    http.Response response = await http.put(
-        Uri.parse('${ApiEndpoint.updateUserDetails}?userId=$globUserId'),
+    http.Response response = await http.post(
+        Uri.parse(ApiEndpoint.updateUserbio),
         body: jsonEncode(bodymain),
         headers: headers);
-    final Map data = jsonDecode(response.body);
+    // final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
     HiveDB.setCurrentUserDetail();
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User DOB Updated");
     } else {
-      debugPrint(data.toString());
-      CustomSnackbar.show(data.toString());
+      // debugPrint(data.toString());
+      //  CustomSnackbar.show(data.toString());
     }
   }
 }

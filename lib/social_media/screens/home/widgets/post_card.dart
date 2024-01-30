@@ -1,5 +1,3 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/model/poll_model.dart';
@@ -28,7 +26,6 @@ class PostCard extends StatelessWidget {
 
   Map<String, String>? map;
 
-  reportcharacter? _character = reportcharacter.Spam;
 
   bool isShowPoll = false;
 
@@ -177,124 +174,6 @@ class PostCard extends StatelessWidget {
                     style: const TextStyle(color: Colors.white),
                   ),
                 ],
-                IconButton(
-                  onPressed: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                            backgroundColor: Colors.transparent,
-                            iconColor: Colors.amberAccent,
-                            content: StatefulBuilder(builder: (
-                              BuildContext context,
-                              StateSetter setState,
-                            ) {
-                              return Theme(
-                                data: ThemeData(
-                                    unselectedWidgetColor: Colors.grey,
-                                    primaryColor: Colors.amber,
-                                    textTheme: Typography.whiteCupertino),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color:
-                                        const Color.fromARGB(255, 17, 17, 16),
-                                  ),
-                                  //      height: MediaQuery.of(context).size.height * 0.5,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.75,
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      const Padding(
-                                          padding: EdgeInsets.all(15.0),
-                                          child: Text('Report Post',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 19,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                              textAlign: TextAlign.center)),
-                                      RadioListTile<reportcharacter>(
-                                        title: const Text('Spam'),
-                                        value: reportcharacter.Spam,
-                                        groupValue: _character,
-                                        onChanged: (reportcharacter? value) {
-                                          setState(() {
-                                            _character = value;
-                                          });
-                                        },
-                                      ),
-                                      RadioListTile<reportcharacter>(
-                                        title: const Text('Misinformation'),
-                                        value: reportcharacter.Misinformation,
-                                        groupValue: _character,
-                                        onChanged: (reportcharacter? value) {
-                                          setState(() {
-                                            _character = value;
-                                          });
-                                        },
-                                      ),
-                                      RadioListTile<reportcharacter>(
-                                        title: const Text('Harmful'),
-                                        value: reportcharacter.Harmful,
-                                        groupValue: _character,
-                                        onChanged: (reportcharacter? value) {
-                                          setState(() {
-                                            _character = value;
-                                          });
-                                        },
-                                      ),
-                                      RadioListTile<reportcharacter>(
-                                        title: const Text('Misleading'),
-                                        value: reportcharacter.Misleading,
-                                        groupValue: _character,
-                                        onChanged: (reportcharacter? value) {
-                                          setState(() {
-                                            _character = value;
-                                          });
-                                        },
-                                      ),
-                                      RadioListTile<reportcharacter>(
-                                        title: const Text('Hateful'),
-                                        value: reportcharacter.Hateful,
-                                        groupValue: _character,
-                                        onChanged: (reportcharacter? value) {
-                                          setState(() {
-                                            _character = value;
-                                          });
-                                        },
-                                      ),
-                                      //  const Spacer(),
-                                      ButtonBar(
-                                        children: <Widget>[
-                                          TextButton(
-                                            child: const Text('Ok'),
-                                            onPressed: () async {
-                                              Navigator.of(context).pop();
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: const Text('Cancel'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }));
-                      },
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.info,
-                    color: Colors.white38,
-                  ),
-                ),
               ],
             ),
           ),

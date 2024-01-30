@@ -10,7 +10,7 @@ class Post {
   final List<String?>? mediaUrl;
   final bool? enabledpoll;
   bool? showPollResults;
-  int? setTimer;
+ final int? setTimer;
   final String? caption;
   //String? tagPrivacy;
   final List<String?>? reacted;
@@ -20,7 +20,7 @@ class Post {
   List<Comment?>? comments;
 
   List<String>? customPollData;
-  bool? customPollEnabled;
+ final bool? customPollEnabled;
 
 //   DateTime? createdAt;
 //   DateTime? updatedAt;
@@ -211,16 +211,19 @@ class PollResults {
 // }
 
 class Comment {
-  UserSchema? userId;
-  String? text;
-  String? sId;
+ final UserSchema? userId;
+ final String? text;
+ final String? sId;
   List<Comment>? comments;
-  DateTime? timestamp;
+
+  List<String?>? likes;
+final  DateTime? timestamp;
 
   Comment({
     this.userId,
     this.text,
     this.sId,
+    this.likes,
     this.comments,
     this.timestamp,
   });
@@ -230,6 +233,9 @@ class Comment {
             json["userId"] == null ? null : UserSchema.fromJson(json["userId"]),
         text: json["text"],
         sId: json["_id"],
+                likes: json["likes"] == null
+            ? []
+            : List<String?>.from(json["likes"].map((x) => x)),
         comments: json["Comments"] == null
             ? []
             : List<Comment>.from(

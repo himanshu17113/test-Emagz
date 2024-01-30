@@ -1,3 +1,4 @@
+import 'package:emagz_vendor/social_media/screens/home/widgets/post_card.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import 'dart:io';
@@ -53,6 +54,8 @@ class HomePagePopupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    reportcharacter? character = reportcharacter.Spam;
+
     return GestureDetector(
       onTap: () {
         if (title == 'View Post') {
@@ -64,6 +67,115 @@ class HomePagePopupWidget extends StatelessWidget {
           Get.back();
           debugPrint(post?.mediaUrl?.toString());
           _saveImage(post!.mediaUrl![0]!, context);
+        } else if (title == "Report") {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                  backgroundColor: Colors.transparent,
+                  iconColor: Colors.amberAccent,
+                  content: StatefulBuilder(builder: (
+                    BuildContext context,
+                    StateSetter setState,
+                  ) {
+                    return Theme(
+                      data: ThemeData(
+                          unselectedWidgetColor: Colors.grey,
+                          primaryColor: Colors.amber,
+                          textTheme: Typography.whiteCupertino),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: const Color.fromARGB(255, 17, 17, 16),
+                        ),
+                        //      height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.width * 0.75,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Padding(
+                                padding: EdgeInsets.all(15.0),
+                                child: Text('Report Post',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                    textAlign: TextAlign.center)),
+                            RadioListTile<reportcharacter>(
+                              title: const Text('Spam'),
+                              value: reportcharacter.Spam,
+                              groupValue: character,
+                              onChanged: (reportcharacter? value) {
+                                setState(() {
+                                  character = value;
+                                });
+                              },
+                            ),
+                            RadioListTile<reportcharacter>(
+                              title: const Text('Misinformation'),
+                              value: reportcharacter.Misinformation,
+                              groupValue: character,
+                              onChanged: (reportcharacter? value) {
+                                setState(() {
+                                  character = value;
+                                });
+                              },
+                            ),
+                            RadioListTile<reportcharacter>(
+                              title: const Text('Harmful'),
+                              value: reportcharacter.Harmful,
+                              groupValue: character,
+                              onChanged: (reportcharacter? value) {
+                                setState(() {
+                                  character = value;
+                                });
+                              },
+                            ),
+                            RadioListTile<reportcharacter>(
+                              title: const Text('Misleading'),
+                              value: reportcharacter.Misleading,
+                              groupValue: character,
+                              onChanged: (reportcharacter? value) {
+                                setState(() {
+                                  character = value;
+                                });
+                              },
+                            ),
+                            RadioListTile<reportcharacter>(
+                              title: const Text('Hateful'),
+                              value: reportcharacter.Hateful,
+                              groupValue: character,
+                              onChanged: (reportcharacter? value) {
+                                setState(() {
+                                  character = value;
+                                });
+                              },
+                            ),
+                            //  const Spacer(),
+                            ButtonBar(
+                              children: <Widget>[
+                                TextButton(
+                                  child: const Text('Ok'),
+                                  onPressed: () async {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }));
+            },
+          );
         } else {
           Get.back();
           CustomSnackbar.show("No Stats for this post ");

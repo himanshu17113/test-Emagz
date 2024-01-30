@@ -127,7 +127,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 18, vertical: 12),
                       decoration: BoxDecoration(
-                        color: chatContainer,
+                        color: const Color(0xFFEEEEEE),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Row(
@@ -185,7 +185,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   padding: const EdgeInsets.all(18),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: chatContainer,
+                    color: const Color(0xFFEEEEEE),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(
@@ -317,7 +317,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   // height: 175,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: whiteColor,
+                    color: const Color(0xFFEEEEEE),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Column(
@@ -405,7 +405,7 @@ class _ChatSettingScreenState extends State<ChatSettingScreen> {
                   padding: const EdgeInsets.all(18),
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: chatContainer,
+                    color: const Color(0xFFEEEEEE),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Column(

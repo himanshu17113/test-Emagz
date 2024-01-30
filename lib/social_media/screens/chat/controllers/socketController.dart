@@ -17,6 +17,7 @@ class SocketController extends GetxController {
   final FocusNode focusNode = FocusNode();
   List<String?> onLineUserIds = [];
   String? prevRoom;
+  ScrollController controller = ScrollController();
   static Client client = http.Client();
   static String? userId = globUserId;
   RxBool? isUserSender = false.obs;
@@ -67,14 +68,12 @@ class SocketController extends GetxController {
     } else {
       focusNode.unfocus();
       focusNode.canRequestFocus = true;
-      //   focusNode.requestFocus();
     }
   }
 
   void iAmActive() => socket.emit("joinLoginRoom", {"userId": globUserId!});
 
-  void iamOffline() => socket
-      .emit("joinLoginRoom", {"userId": globUserId, "activeStatus": false});
+  void iamOffline() => socket.emit("joinLoginRoom", {"userId": globUserId, "activeStatus": false});
 
   void getActiveUsers() => socket.on("userOnline", (payload) {
         onLineUserIds.clear();
@@ -98,18 +97,13 @@ class SocketController extends GetxController {
       prevRoom = room;
 
       debugPrint("Connect to Server");
-//    socket.connect();
+
       socket.emit("joinRoom", room);
-      // socket.onConnect((_) {
-      //   debugPrint("socket is connected to the room $room");
-      //   socket.emit("joinRoom", room);
-      // });
 
       socket.on("chatHistory", (payload) {
         debugPrint("Getting Chat History");
         debugPrint(payload.toString());
         for (var payloadx in payload) {
-          // print(payloadx);
           liveMessages.add(Message.fromJson(payloadx));
         }
         update(["message"]);
@@ -129,14 +123,6 @@ class SocketController extends GetxController {
                 update(["message"])
               });
       socket.on('message_$room', (message) {
-        // liveMessage.value = Message(
-        //   sId: message['_id'],
-        //   conversationId: message['conversationId'],
-        //   sender: message['sender'],
-        //   text: message['text'],
-        //   createdAt: message['createdAt'],
-        // );
-
         liveMessages.add(Message(
           sId: message['_id'],
           conversationId: message['conversationId'],
@@ -151,37 +137,16 @@ class SocketController extends GetxController {
 
   void sendMessage(String message, String room, String id) async {
     if (message.isNotEmpty) {
-      //    await chatController.postChat(message, room);'
       Map<String, dynamic> data = {
         "room": room,
         "sender": userId,
         "message": message,
       };
       socket.emit("chatMessage", data);
+      controller.jumpTo(controller.position.maxScrollExtent + 100);
       isUserSender = (userId == id).obs;
-      //  DateTime curr = DateTime.now();
-      //  String formattedTime = DateFormat.jm().format(curr); //05:00Pm
-      // liveMessages.add(Message(
-      //     conversationId: room,
-      //     sender: id,
-      //     text: message,
-      //     createdAt: curr.toString() //formattedTime
-      //     ));
-      // liveMessage.value = Message(
-      //     conversationId: room,
-      //     sender: id,
-      //     text: message,
-      //     createdAt: curr.toString() //formattedtime
-      //     );
     }
   }
-
-  // initSocket() async {
-  //   userId = globUserId;
-  //   token = globToken;
-  //   userId ??= await HiveDB.getUserID();
-  //   token ??= await HiveDB.getAuthToken();
-  // }
 
   void sendLikeNotification(String id, String name) {
     debugPrint("name : $name , userID : $userId , oid : $id");
@@ -195,26 +160,21 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  void sendShareNotification(
-      String id, String name, bool ispost, String shareLink) {
+  void sendShareNotification(String id, String name, bool ispost, String shareLink) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
       "notification": {"link": shareLink},
       "title": ispost ? "post Shared " : "story Shared ",
-      "message": ispost
-          ? "$name Share a post with you"
-          : "$name Shared a story with you",
+      "message": ispost ? "$name Share a post with you" : "$name Shared a story with you",
     };
     socket.emit("notification", data);
   }
 
-  void sendCommentNotification(
-      String id, bool ispost, String? shareLink, bool isReply) {
+  void sendCommentNotification(String id, bool ispost, String? shareLink, bool isReply) {
     Map<String, dynamic> data = {
       "notification_from": userId!,
       "notification_to": id,
-      //   "notification": {"link": shareLink},
       "title": "Comment",
       "message": ispost
           ? isReply
@@ -227,12 +187,10 @@ class SocketController extends GetxController {
     socket.emit("notification", data);
   }
 
-  Future<bool> removeSingleNotification(
-      String notificationId, int index) async {
+  Future<bool> removeSingleNotification(String notificationId, int index) async {
     try {
       notifications.removeAt(index);
       update(["dot"]);
-      //  notifications.removeAt(index);
 
       String url = ApiEndpoint.removeSingleNotification(notificationId);
 
@@ -249,8 +207,6 @@ class SocketController extends GetxController {
       debugPrint(response.statusCode.toString());
 
       if (response.statusCode == 200) {
-        //  notifications.removeWhere((element) => element.id == notificationId);
-        // update(["dot"]);
         return true;
       } else {
         return false;
@@ -294,9 +250,7 @@ class SocketController extends GetxController {
     try {
       print('getChatList');
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
-      var response = await client.get(
-          Uri.parse(ApiEndpoint.getConversation(globUserId ?? userId!)),
-          headers: header);
+      var response = await client.get(Uri.parse(ApiEndpoint.getConversation(globUserId ?? userId!)), headers: header);
       debugPrint("Chat list");
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
@@ -305,8 +259,6 @@ class SocketController extends GetxController {
 
         conversationsx.add(conversation);
       });
-
-      // chatList = conversationsx;
 
       update(['ChatList']);
     } catch (e) {
