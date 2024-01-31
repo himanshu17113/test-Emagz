@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
-import 'package:emagz_vendor/social_media/screens/ad/ad.dart';
-import 'package:firebase_core/firebase_core.dart';
+ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,14 +10,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'firebase_options.dart';
+import 'screens/auth/common_auth_screen.dart';
 import 'social_media/models/user_schema.dart';
 
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
   }
 }
 
@@ -33,16 +31,16 @@ main() async {
   Hive.registerAdapter(CommentPrivacyAdapter());
   Hive.registerAdapter(AddressAdapter());
   Hive.registerAdapter(StoryPrivacyAdapter());
-
   Hive.registerAdapter(
     PrivacyAdapter(),
   );
   await Permission.camera.request();
   await Hive.openBox("secretes");
-  globToken = await HiveDB.getAuthToken();
-  globUserId = await HiveDB.getUserID();
+  await HiveDB.getAuthToken();
+  await HiveDB.getUserID();
   if (globUserId != null) {
-    constuser = await HiveDB.getCurrentUserDetail();
+    await HiveDB.getCurrentUserDetail();
+   await HiveDB.getlistUser();
   }
   await Firebase.initializeApp(
     name: 'EmagzIos',
@@ -66,6 +64,6 @@ class MyApp extends StatelessWidget {
           cardColor: Colors.white,
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),
-        home: globUserId != null ? BottomNavBar() : const DashBoardScreen());
+        home: globUserId != null ? BottomNavBar() : const CommonAuthScreen());
   }
 }
