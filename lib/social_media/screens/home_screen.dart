@@ -22,8 +22,7 @@ class SocialMediaHomePage extends StatelessWidget {
       tag: "HomePostsController", permanent: true);
   @override
   Widget build(BuildContext context) {
-  
-    debugPrint("main Screen build");
+   
     return Scaffold(
       backgroundColor: socialBack,
       appBar: const HomeAppBar(),

@@ -3,8 +3,7 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/chatControlle
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:get/get.dart';
+ import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../constant/data.dart';
 

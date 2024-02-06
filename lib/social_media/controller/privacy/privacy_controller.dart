@@ -34,7 +34,7 @@ class PrivacyController extends GetxController {
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["data"]);
 
-    HiveDB.putUserDetail(user);
+    HiveDB.putUserDetail(user, jsonEncode(response.body));
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Comment Privacy Updated");
     } else {
@@ -60,7 +60,7 @@ class PrivacyController extends GetxController {
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["data"]);
 
-    HiveDB.putUserDetail(user);
+    HiveDB.putUserDetail(user, jsonEncode(response.body));
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Post Privacy Updated");
     } else {
@@ -88,7 +88,7 @@ class PrivacyController extends GetxController {
     debugPrint("code${response.statusCode.toString()}");
     final user = UserSchema.fromJson(data["data"]);
 
-    HiveDB.putUserDetail(user);
+    HiveDB.putUserDetail(user, jsonEncode(response.body));
     if (response.statusCode == 200) {
       CustomSnackbar.showSucess("User Mention Privacy Updated");
     } else {

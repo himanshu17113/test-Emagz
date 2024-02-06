@@ -90,7 +90,7 @@ class HomePostsController extends GetxController {
           try {
             post = Post.fromJson(e);
           } catch (err) {
-            debugPrint('here');
+            debugPrint('get post error in home controller');
             debugPrint(err.toString());
             ispostloading = false;
           }

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/constant/api_string.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import '../../../constant/data.dart';
 import '../../models/user_schema.dart';
@@ -21,7 +24,7 @@ class HiveDB {
     } else {
       //  final hiveBox = await Hive.openBox("secretes");
       final hiveBox = Hive.box("secretes");
-      String? token = await hiveBox.get(
+      final String? token = await hiveBox.get(
         "token",
         // defaultValue:
         //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGMyMzBmMGZiNGRhNjZmNDBlZDdkNzEiLCJpYXQiOjE2OTA0NDgxMTJ9.EJ8G32sWR2ZqHg7LJ-IHppNGPVwU3-wn5lN5uFo6DvQ"
@@ -44,13 +47,21 @@ class HiveDB {
     }
   }
 
+  static getlistUser() {
+    final hiveBox = Hive.box("secretes");
+    listUser = hiveBox.get('listUser', defaultValue: []);
+   final data = hiveBox.get("idtoken", defaultValue: {});
+      idtoken = jsonDecode(data);
+    print(idtoken.toString());
+  }
+
   static Future<UserSchema?> getCurrentUserDetail() async {
     //Box hiveBox = await Hive.openBox("secretes");
     if (constuser?.sId != null) {
       return constuser;
     } else {
       final hiveBox = Hive.box("secretes");
-      UserSchema? user = hiveBox.get("user");
+      final UserSchema? user = hiveBox.get("user");
       if (user?.sId != null) {
         constuser = user;
         return user;
@@ -60,7 +71,7 @@ class HiveDB {
     }
   }
 
-  static Future<UserSchema?> setCurrentUserDetail() async {
+  static Future<UserSchema?> setCurrentUserDetail({bool addinList = false}) async {
     debugPrint("Api hiiitiiiiiiiiiiiiiiiiiiiiiiiii");
     //Box hiveBox = await Hive.openBox("secretes");
     final hiveBox = Hive.box("secretes");
@@ -81,6 +92,34 @@ class HiveDB {
           debugPrint(e.toString());
         }
         constuser = user;
+        await getlistUser();
+        if (listUser!.isEmpty) {
+          if (addinList) {
+            debugPrint("adddingg");
+            idtoken.assign(globUserId!, globToken!);
+
+            listUser?.add(jsonEncode(response.data));
+            print(listUser.toString());
+          }
+        } else {
+          for (int i = 0; i < listUser!.length; i++) {
+            if (jsonDecode(listUser![i]!)['_id'] == user.sId) {
+              listUser![i] = jsonEncode(response.data);
+            } else {
+              if (addinList) {
+                debugPrint("adddingg");
+                idtoken.addIf(globToken != null, globUserId!, globToken!);
+                listUser?.add(jsonEncode(response.data));
+              }
+            }
+          }
+        }
+        try {
+          await hiveBox.put('listUser', listUser);
+          await hiveBox.put('idtoken', jsonEncode(idtoken));
+        } on Exception catch (e) {
+          print(e);
+        }
         if (user.profilePic != null) {
           //     profilePic.value = user!.profilePic!;
           globProfilePic = user.profilePic!;
@@ -115,11 +154,29 @@ class HiveDB {
     return null;
   }
 
-  static putUserDetail(UserSchema user) async {
+  static putUserDetail(UserSchema user, String formatin) async {
     final hiveBox = Hive.box("secretes");
 
     await hiveBox.put('user', user);
     constuser = user;
+    // if (listUser!.isEmpty) {
+    //   // if (addinList) {
+    //   debugPrint("adddingg");
+    //   listUser?.add(jsonEncode(formatin));
+    //   // }
+    // } else {
+    //   for (var element in listUser!) {
+    //     if (jsonDecode(element!)['_id'] == user.sId) {
+    //       element = jsonEncode(formatin);
+    //     } else {
+    //       //    if (addinList) {
+    //       debugPrint("adddingg");
+    //       listUser?.add(jsonEncode(formatin));
+    //       //
+    //     }
+    //     await hiveBox.put('listUser', listUser);
+    //   }
+    // }
   }
 
   static clearDB() {
@@ -128,6 +185,14 @@ class HiveDB {
     globUserId = null;
     constuser = null;
     hiveBox.clear();
+  }
+
+  static switchAcc(UserSchema user, String token) {
+    globToken = token;
+    globUserId = user.sId;
+    constuser = user;
+    setAuthData(token, user.sId);
+    setCurrentUserDetail();
   }
 
   static upateProfilePic(String pic) async {
@@ -141,7 +206,7 @@ class HiveDB {
     debugPrint("Api hit getUserDetail");
     //Box hiveBox = await Hive.openBox("secretes");
     // final hiveBox = Hive.box("secretes");
-    Dio dio = Dio();
+    final Dio dio = Dio();
     dio.options.headers["Authorization"] = globToken ?? getAuthToken();
     if (globUserId == null) {
       await getUserID();

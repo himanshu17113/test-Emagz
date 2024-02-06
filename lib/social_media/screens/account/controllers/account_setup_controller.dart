@@ -54,8 +54,7 @@ class SetupAccount extends GetxController {
       "businessType": businessTypeController.text,
       "personalTemplate": "https://example.com/personal-template.html"
     });
-    var response =
-        await dio.post(ApiEndpoint.setupProfessionalAccount, data: body);
+    var response = await dio.post(ApiEndpoint.setupProfessionalAccount, data: body);
 
     var data = response.data;
     if (response.statusCode == 200) {
@@ -87,10 +86,8 @@ class SetupAccount extends GetxController {
     var id = await HiveDB.getUserID();
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     Map body = {"_id": id, "displayName": userName, "personalTemplate": ""};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.setupPeronalAccount),
-        body: jsonEncode(body),
-        headers: headers);
+    http.Response response =
+        await http.post(Uri.parse(ApiEndpoint.setupPeronalAccount), body: jsonEncode(body), headers: headers);
 
     final data = jsonDecode(response.body);
 
@@ -99,8 +96,7 @@ class SetupAccount extends GetxController {
       // debugPrint(data.toString());
       isUserRegiserting.value = false;
       //lead to main page
-      Get.offAll(() => BottomNavBar(),
-          transition: Transition.rightToLeftWithFade);
+      Get.offAll(() => BottomNavBar(), transition: Transition.rightToLeftWithFade);
 
       return true;
     } else if (response.statusCode == 401) {
@@ -121,8 +117,7 @@ class SetupAccount extends GetxController {
   Future<String> uploadProfilePic(XFile? image) async {
     Map<String, String> header = {'Content-type': 'multipart/form-data'};
     Map<String, String> header2 = {"Authorization": globToken!};
-    var request = http.MultipartRequest('POST',
-        Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
+    var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
     request.headers.addAll(header);
     request.headers.addAll(header2);
     if (image?.path != null) {
@@ -156,14 +151,9 @@ class SetupAccount extends GetxController {
     templates?.clear();
     try {
       var token = await HiveDB.getAuthToken();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
 
-      http.Response response = await http.get(
-          Uri.parse('${ApiEndpoint.template}?type=Individual'),
-          headers: headers);
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.template}?type=Individual'), headers: headers);
       var body = jsonDecode(response.body);
       debugPrint(body.toString());
       body.forEach((e) {
@@ -183,14 +173,9 @@ class SetupAccount extends GetxController {
     try {
       templates?.clear();
       var token = await HiveDB.getAuthToken();
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
 
-      http.Response response = await http.get(
-          Uri.parse('${ApiEndpoint.template}?type=Business'),
-          headers: headers);
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.template}?type=Business'), headers: headers);
       var body = jsonDecode(response.body);
       debugPrint(body.toString());
       body.forEach((e) {
@@ -210,11 +195,7 @@ class SetupAccount extends GetxController {
   ) async {
     var userId = await HiveDB.getUserID();
     var token = await HiveDB.getAuthToken();
-    Map body = {
-      "userId": userId,
-      "templateId": templateId,
-      "finalTemplateData": {}
-    };
+    Map body = {"userId": userId, "templateId": templateId, "finalTemplateData": {}};
     var headers = {'Content-Type': 'application/json', "Authorization": token!};
     http.Response response = await http.post(
       Uri.parse(ApiEndpoint.userTemplate),
@@ -223,12 +204,11 @@ class SetupAccount extends GetxController {
     );
     // Map data = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      constuser = await HiveDB.getCurrentUserDetail();
+      constuser = await HiveDB.setCurrentUserDetail(addinList: true);
       // debugPrint(data.toString());
       isUserRegiserting.value = false;
       //lead to main page
-      Get.offAll(() => BottomNavBar(),
-          transition: Transition.rightToLeftWithFade);
+      Get.offAll(() => BottomNavBar(), transition: Transition.rightToLeftWithFade);
     } else {
       Get.back();
     }
@@ -236,18 +216,12 @@ class SetupAccount extends GetxController {
   }
 
   updateBio(String bio) async {
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': globToken!
-    };
+    final headers = {'Content-Type': 'application/json', 'Authorization': globToken!};
     final Map bodymain = {"bio": bio};
 
     debugPrint(ApiEndpoint.updateUserbio);
     debugPrint(bodymain.toString());
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.updateUserbio),
-        body: jsonEncode(bodymain),
-        headers: headers);
+    http.Response response = await http.post(Uri.parse(ApiEndpoint.updateUserbio), body: jsonEncode(bodymain), headers: headers);
     // final Map data = jsonDecode(response.body);
     debugPrint("code${response.statusCode.toString()}");
     HiveDB.setCurrentUserDetail();

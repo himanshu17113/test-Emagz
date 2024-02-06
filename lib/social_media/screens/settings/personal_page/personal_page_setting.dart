@@ -1,3 +1,5 @@
+
+import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart';
@@ -60,16 +62,12 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
         centerTitle: false,
         title: const Text(
           "Setting",
-          style: TextStyle(
-              color: blackButtonColor,
-              fontSize: 22,
-              fontWeight: FontWeight.w600),
+          style: TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
         ),
         actions: [
           InkWell(
             onTap: () {
-              final HomePostsController homePostsController =
-                  Get.find(tag: "HomePostsController");
+              final HomePostsController homePostsController = Get.find(tag: "HomePostsController");
               homePostsController.pageUpdate(0);
             },
             child: Container(
@@ -99,17 +97,13 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               padding: EdgeInsets.symmetric(vertical: 10),
               child: Text(
                 "Account",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
 
             Container(
                 margin: const EdgeInsets.only(bottom: 10),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                 decoration: BoxDecoration(
                   color: whiteAcent,
                   borderRadius: BorderRadius.circular(15),
@@ -127,9 +121,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                 children: [
                                   CircleAvatar(
                                     backgroundImage: CachedNetworkImageProvider(
-                                      user.profilePic ??
-                                          constuser?.profilePic ??
-                                          "",
+                                      user.profilePic ?? constuser?.profilePic ?? "",
                                     ),
                                     maxRadius: 45,
                                   ),
@@ -141,11 +133,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                         backgroundColor: whiteColor,
                                         child: IconButton(
                                           onPressed: () async {
-                                            image = await picker.pickImage(
-                                                source: ImageSource.gallery);
-                                            user.profilePic =
-                                                await accountSetupController
-                                                    .uploadProfilePic(image);
+                                            image = await picker.pickImage(source: ImageSource.gallery);
+                                            user.profilePic = await accountSetupController.uploadProfilePic(image);
 
                                             box.put('user', user);
                                           },
@@ -173,18 +162,13 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                               //         ? user!.username!
                               //         : user?.displayName ?? 'loding..'
                               //     : "laoding...",
-                              style: const TextStyle(
-                                  color: blackButtonColor,
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600),
+                              style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w600),
                             ),
                             Text(
                               overflow: TextOverflow.ellipsis,
                               constuser?.displayName ?? "loding..",
-                              style: TextStyle(
-                                  color: bottomBarIconColor.withOpacity(.8),
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600),
+                              style:
+                                  TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -199,26 +183,19 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       children: [
                         Text(
                           "Bio",
-                          style: TextStyle(
-                              color: bottomBarIconColor.withOpacity(.8),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 14, fontWeight: FontWeight.w600),
                         ),
                         GestureDetector(
                           onTap: () => updateBio(context),
                           child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 6, horizontal: 10),
+                            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
                             decoration: const BoxDecoration(
                               // borderRadius: BorderRadius.circular(10),
                               color: chipColor,
                             ),
                             child: const Text(
                               "Change Bio",
-                              style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w400),
+                              style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                             ),
                           ),
                         )
@@ -229,11 +206,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       child: Text(
                         constuser?.bio ??
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque volutpat faucibus mattis lacus, dignissim. Sollicitudin eget ut enim, quis. Hendrerit.",
-                        style: const TextStyle(
-                            letterSpacing: .5,
-                            color: black,
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400),
+                        style: const TextStyle(letterSpacing: .5, color: black, fontSize: 10, fontWeight: FontWeight.w400),
                       ),
                     ),
                     Padding(
@@ -243,10 +216,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                         children: [
                           const Text(
                             "Change to business account",
-                            style: TextStyle(
-                                color: black,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w600),
+                            style: TextStyle(color: black, fontSize: 10, fontWeight: FontWeight.w600),
                           ),
                           GestureDetector(
                             onTap: () {
@@ -255,18 +225,14 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                                   ));
                             },
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                               decoration: const BoxDecoration(
                                 // borderRadius: BorderRadius.circular(10),
                                 color: chipColor,
                               ),
                               child: const Text(
                                 "Change Persona",
-                                style: TextStyle(
-                                    color: whiteColor,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w400),
+                                style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                               ),
                             ),
                           )
@@ -280,14 +246,10 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       child: const Card(
                         color: chipColor,
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                           child: Text(
                             "View/Edit your persona",
-                            style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w400),
+                            style: TextStyle(color: whiteColor, fontSize: 10, fontWeight: FontWeight.w400),
                           ),
                         ),
                       ),
@@ -297,20 +259,14 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
             const Text(
               "Account",
-              style: TextStyle(
-                  color: blackButtonColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
             ),
 
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 4),
               child: Text(
                 "Your friends and contacts will see when you’re active ",
-                style: TextStyle(
-                    color: blackButtonColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+                style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w400),
               ),
             ),
 
@@ -339,10 +295,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     }),
                 const Text(
                   "  Show my friends and contact when i’m active",
-                  style: TextStyle(
-                      color: blackButtonColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w400),
+                  style: TextStyle(color: blackButtonColor, fontSize: 11, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
@@ -351,51 +304,35 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
             ),
             const Text(
               "Preferance",
-              style: TextStyle(
-                  color: blackButtonColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
             ),
             // const SizedBox(height: 10),
 
             PreferenceTile(
                 title: "Persona Insights  ",
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const ProfileInsightScreen()))),
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfileInsightScreen()))),
 
             PreferenceTile(
                 title: "Privacy",
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const PrivacyScreen()))),
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const PrivacyScreen()))),
 
             PreferenceTile(
                 title: "Security",
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const SecurityScreen()))),
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SecurityScreen()))),
 
             PreferenceTile(
                 title: "Support",
                 textDesc: 'We are here to Help',
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            const SupportScreen()))),
+                onTap: () =>
+                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SupportScreen()))),
 
             Container(
               height: 64,
               margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  color: whiteColor, borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
               child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -404,10 +341,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     ),
                     const Text(
                       "Enable my \nlocation",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                     const Spacer(),
                     FlutterSwitch(
@@ -431,8 +365,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
             Container(
               height: 64,
               margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  color: whiteColor, borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
               child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -441,10 +374,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     ),
                     const Text(
                       "Play Sound When i get \nnotification",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                     const Spacer(),
                     FlutterSwitch(
@@ -467,8 +397,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
             Container(
               height: 64,
               margin: const EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                  color: whiteColor, borderRadius: BorderRadius.circular(15)),
+              decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(15)),
               child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -477,10 +406,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     ),
                     const Text(
                       "Enable desktop  \nnotification",
-                      style: TextStyle(
-                          color: blackButtonColor,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600),
+                      style: TextStyle(color: blackButtonColor, fontSize: 12, fontWeight: FontWeight.w600),
                     ),
                     const Spacer(),
                     FlutterSwitch(
@@ -505,10 +431,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
             ),
             const Text(
               "Blocked Users",
-              style: TextStyle(
-                  color: blackButtonColor,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
+              style: TextStyle(color: blackButtonColor, fontSize: 20, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               height: 5,
@@ -516,27 +439,21 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
             const Text(
               "Once you blocked someone they will no longer to see things that you post on your feed , tag you , invite you or start a conversation with you. However you can unblock them later if you want ",
-              style: TextStyle(
-                  color: blackButtonColor,
-                  fontSize: 12,
-                  letterSpacing: .6,
-                  fontWeight: FontWeight.w400),
+              style: TextStyle(color: blackButtonColor, fontSize: 12, letterSpacing: .6, fontWeight: FontWeight.w400),
             ),
             const SizedBox(
               height: 10,
             ),
             const Text(
               "Manage blocked users",
-              style: TextStyle(
-                  color: chipColor, fontSize: 12, fontWeight: FontWeight.w600),
+              style: TextStyle(color: chipColor, fontSize: 12, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               height: 30,
             ),
             InkWell(
               onTap: () async {
-                final homePostsController =
-                    Get.find<HomePostsController>(tag: 'HomePostsController');
+                final homePostsController = Get.find<HomePostsController>(tag: 'HomePostsController');
                 homePostsController.page = 0;
                 //   Get.deleteAll(force: true);
                 await HiveDB.clearDB();
@@ -546,41 +463,95 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 height: 54,
-                decoration: BoxDecoration(
-                    color: blackShaded,
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: blackShaded, borderRadius: BorderRadius.circular(10)),
                 child: const Text(
                   "Log Out",
-                  style: TextStyle(
-                      color: whiteColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                  style: TextStyle(color: whiteColor, fontSize: 12, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 30,
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              alignment: Alignment.center,
-              child: const Text(
-                "Add another account",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: blackShaded,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600),
+
+            GestureDetector(
+              onTap: () => addAccount(context),
+              child: const Center(
+                child: Text("Add another account",
+                    textAlign: TextAlign.center, style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600)),
               ),
             ),
+
             const SizedBox(
-              height: 30,
+              height: 120,
             ),
           ],
         ),
       ),
     );
   }
+
+  addAccount(BuildContext context) => showModalBottomSheet(
+      isScrollControlled: true,
+      elevation: 0.0,
+      barrierColor: const Color(0xff252525).withOpacity(.4),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      context: context,
+      builder: (ctx) {
+        List<UserSchema> list = List<UserSchema>.from(listUser!.map((e) => UserSchema.fromJson(jsonDecode(e!))));
+        print(listUser.toString());
+        return StatefulBuilder(
+          builder: (BuildContext context, state) => Container(
+            height: MediaQuery.of(context).size.height * .45 + MediaQuery.of(context).viewInsets.bottom,
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: list.length,
+                      itemBuilder: (context, index) => ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: CachedNetworkImageProvider(list[index].profilePic ?? imageUrlOne),
+                            ),
+                            title: Text(list[index].username ?? "kllkl"),
+                            subtitle: Text(list[index].displayName ?? "kllkl"),
+                            trailing: Radio(
+                              groupValue: constuser!.sId!,
+                              value: list[index].sId!,
+                              onChanged: (value) =>
+                                  state(() => setState(() => HiveDB.switchAcc(list[index], idtoken[list[index].sId!]!))),
+                            ),
+                          )
+                      // RadioListTile(value: value, groupValue: groupValue, onChanged: onChanged)
+                      ),
+                ),
+                GestureDetector(
+                  onTap: () => Get.off(() => const CommonAuthScreen()),
+                  child: Container(
+                    width: double.maxFinite,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: chipColor,
+                    ),
+                    child: const Text(
+                      "Add New Account",
+                      style: TextStyle(color: whiteColor, fontSize: 16, fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      });
 
   updateBio(BuildContext context) {
     TextEditingController bioControllaer = TextEditingController();
@@ -592,8 +563,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
         context: context,
         builder: (ctx) {
           return Container(
-            height: MediaQuery.of(context).size.height * .45 +
-                MediaQuery.of(context).viewInsets.bottom,
+            height: MediaQuery.of(context).size.height * .45 + MediaQuery.of(context).viewInsets.bottom,
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
             decoration: BoxDecoration(
@@ -653,10 +623,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 4.07),
-                            blurRadius: 20,
-                            color: const Color(0xff000040).withOpacity(.25))
+                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                       ],
                     ),
                     child: const FormHeadingText(
