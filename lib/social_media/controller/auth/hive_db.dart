@@ -50,8 +50,10 @@ class HiveDB {
   static getlistUser() {
     final hiveBox = Hive.box("secretes");
     listUser = hiveBox.get('listUser', defaultValue: []);
-   final data = hiveBox.get("idtoken", defaultValue: {});
+    final data = hiveBox.get("idtoken", defaultValue: '');
+    if (data != '') {
       idtoken = jsonDecode(data);
+    }
     print(idtoken.toString());
   }
 
@@ -102,17 +104,19 @@ class HiveDB {
             print(listUser.toString());
           }
         } else {
+          bool contain = false;
           for (int i = 0; i < listUser!.length; i++) {
             if (jsonDecode(listUser![i]!)['_id'] == user.sId) {
+              contain = true;
               listUser![i] = jsonEncode(response.data);
-            } else {
+            } 
+          }if(contain) {
               if (addinList) {
-                debugPrint("adddingg");
+                debugPrint("adddi");
                 idtoken.addIf(globToken != null, globUserId!, globToken!);
                 listUser?.add(jsonEncode(response.data));
               }
             }
-          }
         }
         try {
           await hiveBox.put('listUser', listUser);
