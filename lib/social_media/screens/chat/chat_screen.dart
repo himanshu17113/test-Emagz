@@ -49,8 +49,7 @@ class ChatScreen extends StatelessWidget {
                   children: [
                     const Text(
                       "Chat",
-                      style:
-                          TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
+                      style: TextStyle(fontSize: 21, fontWeight: FontWeight.w600),
                     ),
                     const Spacer(),
                     GestureDetector(
@@ -59,8 +58,7 @@ class ChatScreen extends StatelessWidget {
                         init: SocketController(),
                         tag: "notify",
                         id: "dot",
-                        builder: (socketController) =>
-                            Stack(alignment: Alignment.topRight, children: [
+                        builder: (socketController) => Stack(alignment: Alignment.topRight, children: [
                           Image.asset(
                             "assets/png/notification_bell.png",
                             height: 28,
@@ -74,8 +72,7 @@ class ChatScreen extends StatelessWidget {
                                     radius: 8,
                                     backgroundColor: Colors.red,
                                     child: Text(
-                                      socketController.notifications.length
-                                          .toString(),
+                                      socketController.notifications.length.toString(),
                                       style: const TextStyle(fontSize: 12),
                                     ))
                                 : const SizedBox.shrink(),
@@ -115,8 +112,7 @@ class ChatScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: CircleAvatar(
-                        backgroundImage:
-                            CachedNetworkImageProvider(user?.profilePic ?? url),
+                        backgroundImage: CachedNetworkImageProvider(user?.profilePic ?? url),
                         maxRadius: 20,
                       ),
                     ),
@@ -126,18 +122,31 @@ class ChatScreen extends StatelessWidget {
                       children: [
                         Text(
                           "${user?.username}",
-                          style: const TextStyle(
-                              color: blackButtonColor,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w400),
+                          style: const TextStyle(color: blackButtonColor, fontSize: 22, fontWeight: FontWeight.w400),
                         ),
-                        const Text(
-                          "Online",
-                          style: TextStyle(
-                              color: chatOnlineDot,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600),
-                        ),
+                        GetBuilder<SocketController>(
+                          init: SocketController(),
+                          tag: "notify",
+                          id: 'active',
+                          //   initState: (_) {},
+                          builder: (s) => s.onLineUserIds.contains(user?.id)
+                              ? const Positioned(
+                                  top: 36,
+                                  right: 2,
+                                  child: Text(
+                                    "Online",
+                                    style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                              : const Positioned(
+                                  top: 36,
+                                  right: 2,
+                                  child: Text(
+                                    "Offline",
+                                    style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                        )
                       ],
                     ),
                     const Spacer(),
@@ -150,64 +159,40 @@ class ChatScreen extends StatelessWidget {
                       child: const Icon(Icons.more_vert),
                       itemBuilder: (BuildContext bc) {
                         return [
-                          const PopupMenuItem(
-                            child: null,
-                          ),
                           PopupMenuItem(
                             value: '/hello',
                             child: ClipRRect(
                               child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 10.0, sigmaY: 10.0),
+                                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                                   child: Container(
                                       padding: const EdgeInsets.only(left: 15),
                                       alignment: Alignment.centerLeft,
                                       width: 120.0,
                                       height: 42.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade200
-                                              .withOpacity(0.5)),
+                                      decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
                                       child: Text('Report User',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: const Color(
-                                                      0xff323232))))),
+                                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                              fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
                             ),
                           ),
                           PopupMenuItem(
                             value: '/hello',
                             child: ClipRRect(
                               child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                      sigmaX: 10.0, sigmaY: 10.0),
+                                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                                   child: Container(
                                       padding: const EdgeInsets.only(left: 15),
                                       alignment: Alignment.centerLeft,
                                       width: 120.0,
                                       height: 42.0,
-                                      decoration: BoxDecoration(
-                                          color: Colors.grey.shade200
-                                              .withOpacity(0.5)),
+                                      decoration: BoxDecoration(color: Colors.grey.shade200.withOpacity(0.5)),
                                       child: Text('Block User',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: const Color(
-                                                      0xff323232))))),
+                                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                              fontSize: 12, fontWeight: FontWeight.w400, color: const Color(0xff323232))))),
                             ),
                           ),
                         ];
                       },
-                    ),
-                    const SizedBox(
-                      width: 10,
                     ),
                   ],
                 ),
@@ -285,8 +270,7 @@ class ChatScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       fillColor: const Color(0xffE8E7E7),
                       filled: true,
-                      prefixIconConstraints:
-                          const BoxConstraints.tightFor(width: 50),
+                      prefixIconConstraints: const BoxConstraints.tightFor(width: 50),
                       prefixIcon: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -316,10 +300,7 @@ class ChatScreen extends StatelessWidget {
                         onTap: () {
                           if (inputTextController.text.isNotEmpty) {
                             final receiverId = user!.id;
-                            socketController.sendMessage(
-                                inputTextController.text,
-                                conversationId,
-                                receiverId!);
+                            socketController.sendMessage(inputTextController.text, conversationId, receiverId!);
 
                             inputTextController.clear();
                           }
@@ -332,16 +313,14 @@ class ChatScreen extends StatelessWidget {
                               width: 12,
                             )),
                       ),
-                      suffixIconConstraints:
-                          const BoxConstraints.tightFor(width: 45),
+                      suffixIconConstraints: const BoxConstraints.tightFor(width: 45),
                       isDense: true,
                       hintText: "Type something ",
                       hintStyle: const TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w400,
                       ),
-                      contentPadding:
-                          const EdgeInsets.only(left: 2, top: 12, bottom: 12),
+                      contentPadding: const EdgeInsets.only(left: 2, top: 12, bottom: 12),
                       border: OutlineInputBorder(
                           borderSide: const BorderSide(
                             width: 0,
@@ -353,9 +332,7 @@ class ChatScreen extends StatelessWidget {
                 ),
               ),
               Obx(() => SizedBox(
-                    child: socketController.showEmojiBoard.value
-                        ? emojiPicker()
-                        : null,
+                    child: socketController.showEmojiBoard.value ? emojiPicker() : null,
                   ))
             ],
           ),
