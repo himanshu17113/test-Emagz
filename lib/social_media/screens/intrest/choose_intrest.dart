@@ -12,13 +12,13 @@ class ChooseIntrestScreen extends StatefulWidget {
 }
 
 class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
-  final authController =  AuthController() ;
+  final authController = AuthController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -69,22 +69,19 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
             Expanded(
               child: GridView.builder(
                   shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: 6,
+                  padding: const EdgeInsets.only(bottom: 80),
+                  itemCount: intrestImage.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2),
+                      crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
                   itemBuilder: (context, index) {
                     return Stack(
                       children: [
                         InkWell(
                           onLongPress: () {
-                             Navigator.pushReplacement(
+                            Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) => BottomNavBar()),
                             );
-                        
                           },
                           onTap: () {
                             setState(() {
@@ -95,38 +92,35 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                               }
                             });
                           },
-                          child: SizedBox(
-                            height: 240,
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 8),
+                            height: 230,
+                            decoration: BoxDecoration(
+                              gradient: authController.isSelectedInterest(index)
+                                  ? const LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomCenter,
+                                      colors: [Color(0xFF23A3FF), Color(0xFF23A3FF), Color(0xFF2489D2), Color(0xFF020EFF)],
+                                    )
+                                  : null,
+                              // color: Colors.blue,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
                             child: Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              height: 230,
+                              margin: const EdgeInsets.all(2),
                               decoration: BoxDecoration(
-                                gradient:
-                                    authController.isSelectedInterest(index)
-                                        ? const LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Color(0xFF23A3FF),
-                                              Color(0xFF23A3FF),
-                                              Color(0xFF2489D2),
-                                              Color(0xFF020EFF)
-                                            ],
-                                          )
-                                        : null,
-                                // color: Colors.blue,
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(19),
+                                image: DecorationImage(image: NetworkImage(intrestImage[index]), fit: BoxFit.cover),
                               ),
-                              child: Container(
-                                margin: const EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(19),
-                                  image: DecorationImage(
-                                      image: NetworkImage(intrestList[index]),
-                                      fit: BoxFit.cover),
+                              height: 190,
+                              width: double.infinity,
+                              alignment: Alignment.bottomLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.all(15),
+                                child: Text(
+                                  intrestName[index],
+                                  style: const TextStyle(color: Colors.white),
                                 ),
-                                height: 190,
-                                width: double.infinity,
                               ),
                             ),
                           ),
@@ -181,7 +175,7 @@ class _ChooseIntrestScreenState extends State<ChooseIntrestScreen> {
                   gradient: buttonGradient,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: authController.isUserRegiserting 
+                child: authController.isUserRegiserting
                     ? const CircularProgressIndicator(
                         color: Colors.white,
                       )

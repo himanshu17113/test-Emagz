@@ -22,7 +22,7 @@ class CommentReplyTile extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundImage:
-            NetworkImage(templateFiveImage[2]),
+            NetworkImage(uselessUrl),
           ),
           const SizedBox(
             width: 10,

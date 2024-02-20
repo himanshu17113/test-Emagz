@@ -21,7 +21,7 @@ class PTemplateOneScreen extends StatelessWidget {
             height: 650,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: CachedNetworkImageProvider(templateFiveImage[2]),
+                image: CachedNetworkImageProvider(uselessUrl),
                 fit: BoxFit.cover,
                 colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
               ),
@@ -88,7 +88,7 @@ class PTemplateOneScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.yellow),
                     image: DecorationImage(
-                      image: CachedNetworkImageProvider(templateFiveImage[2]),
+                      image: CachedNetworkImageProvider(uselessUrl),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -117,7 +117,8 @@ class PTemplateOneScreen extends StatelessWidget {
                         ),
                         const Text(
                           "Followers",
-                          style: TextStyle(color: whiteColor, fontSize: 10, height: .7, letterSpacing: 1.5, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              color: whiteColor, fontSize: 10, height: .7, letterSpacing: 1.5, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -163,7 +164,7 @@ class PTemplateOneScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.yellow),
                               image: DecorationImage(
-                                image: CachedNetworkImageProvider(templateFiveImage[2]),
+                                image: CachedNetworkImageProvider(uselessUrl),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -189,7 +190,7 @@ class PTemplateOneScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.yellow),
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(templateFiveImage[2]),
+                            image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -227,7 +228,7 @@ class PTemplateOneScreen extends StatelessWidget {
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(templateFiveImage[3]),
+                            image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -244,7 +245,7 @@ class PTemplateOneScreen extends StatelessWidget {
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(templateFiveImage[1]),
+                            image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -261,7 +262,7 @@ class PTemplateOneScreen extends StatelessWidget {
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider(templateFiveImage[2]),
+                            image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -286,7 +287,7 @@ class PTemplateOneScreen extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: 30,
-                                backgroundImage: CachedNetworkImageProvider(templateFiveImage[index]),
+                                backgroundImage: CachedNetworkImageProvider(uselessUrl),
                               ),
                               const SizedBox(
                                 width: 12,

@@ -48,7 +48,7 @@ class PostCommentTile extends StatelessWidget {
                         child: CircleAvatar(
                           radius: 24,
                           backgroundImage:
-                              CachedNetworkImageProvider(templateFiveImage[0]),
+                              CachedNetworkImageProvider(uselessUrl),
                         ),
                       )
                     : Padding(

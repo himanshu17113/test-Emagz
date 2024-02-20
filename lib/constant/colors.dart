@@ -11,27 +11,18 @@ const LinearGradient myGradient = LinearGradient(
       // Color(0xff0F0AA4),
       Color(0xff2992E3),
     ]);
-const LinearGradient redGradient = LinearGradient(
-    end: Alignment.topRight,
-    begin: Alignment.bottomLeft,
-    colors: [
-      Color(0xffCC0022),
-      Color(0xffFF8DB6),
-    ]);
-const LinearGradient orangeGradient = LinearGradient(
-    end: Alignment.topRight,
-    begin: Alignment.bottomLeft,
-    colors: [
-      Color(0xffFFBE4E),
-      Color(0xffE35B00),
-    ]);
-const LinearGradient greenGradient = LinearGradient(
-    end: Alignment.topRight,
-    begin: Alignment.bottomLeft,
-    colors: [
-      Color(0xff46F2DB),
-      Color(0xff00A498),
-    ]);
+const LinearGradient redGradient = LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
+  Color(0xffCC0022),
+  Color(0xffFF8DB6),
+]);
+const LinearGradient orangeGradient = LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
+  Color(0xffFFBE4E),
+  Color(0xffE35B00),
+]);
+const LinearGradient greenGradient = LinearGradient(end: Alignment.topRight, begin: Alignment.bottomLeft, colors: [
+  Color(0xff46F2DB),
+  Color(0xff00A498),
+]);
 
 const LinearGradient authGradient = LinearGradient(
   begin: Alignment.centerLeft,
@@ -43,23 +34,15 @@ const LinearGradient authGradient = LinearGradient(
   stops: [-0.082, 0.9257],
   transform: GradientRotation(7843 * (math.pi / 6000)),
 );
-LinearGradient pinkGradient = const LinearGradient(
-    end: Alignment.topLeft,
-    begin: Alignment.bottomRight,
-    colors: [
-      darkPink,
-      darkPinkAcent,
-    ]);
+LinearGradient pinkGradient = const LinearGradient(end: Alignment.topLeft, begin: Alignment.bottomRight, colors: [
+  darkPink,
+  darkPinkAcent,
+]);
 
 const LinearGradient buttonGradient = LinearGradient(
   begin: Alignment(-0.8, 1.4),
   end: Alignment(0.8, -1.4),
-  colors: [
-    Color(0xFF020AFF),
-    Color(0xFF23A3FF),
-    Color(0xFF2489D2),
-    Color(0xFF020EFF)
-  ],
+  colors: [Color(0xFF020AFF), Color(0xFF23A3FF), Color(0xFF2489D2), Color(0xFF020EFF)],
   stops: [-0.082, 0.4, 0.6848, 0.9257],
   transform: GradientRotation(
     7843 * (math.pi / 10000),
@@ -135,7 +118,8 @@ const Color lightSkyAcent = Color(0xff909AFF);
 const Color templeteTwo = Color(0xffFFEAEA);
 const Color templeteFiveDivider = Color(0xffF9F9F9);
 const Color templeteEightHeading = Color(0xff626262);
-
+const uselessUrl =
+    'https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c2hvZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60';
 const String imageUrlOne =
     "https://images.unsplash.com/photo-1600600423621-70c9f4416ae9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80";
 const String imageUrlTwo =
@@ -157,12 +141,29 @@ const String mountainImage =
 const String wallImage =
     "https://images.unsplash.com/photo-1511406361295-0a1ff814c0ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZGFyayUyMHdhbGwlMjBiYWNrZ3JvdW5kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
 
-const List templateFiveImage = [
-  'https://images.unsplash.com/photo-1588731234159-8b9963143fca?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bWFuc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-  'https://images.unsplash.com/photo-1542847970-584270eb111b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fG1hbnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-  'https://images.unsplash.com/photo-1503185912284-5271ff81b9a8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-  'https://images.unsplash.com/photo-1464863979621-258859e62245?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fGdpcmxzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
+const List<String> intrestImage = [
+  'https://emagz.live/static/media/I1.81b050eb978fb2c3b1c4.png',
+  'https://emagz.live/static/media/I2.2decce8059f45c7d49b1.png',
+  'https://emagz.live/static/media/I3.ca3de1452521aa45739e.png',
+  'https://emagz.live/static/media/I4.0b44fe48eef584f077d6.png',
+  'https://emagz.live/static/media/I5.b3f9bdb958b09fdb6192.png',
+  'https://emagz.live/static/media/I6.7692e6e2121bdf33c664.png',
+  'https://emagz.live/static/media/I7.0e4b72604d072ae34d49.png',
+  'https://emagz.live/static/media/I8.4c4343124e7cb96f0b6a.png'
 ];
+const List<String> intrestName = [
+  "Sports",
+  "Health",
+  "Fitness",
+  "Dance",
+  "Food",
+  "Cars",
+  "Clothing",
+  "Fashion",
+  "Space",
+  "Bikes"
+];
+
 const List foodImage = [
   'https://images.unsplash.com/photo-1613564834361-9436948817d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fHBpenphfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
   'https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHBpenphfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
@@ -236,4 +237,4 @@ const List foodImage = [
   'https://images.unsplash.com/photo-1593504049359-74330189a345?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGl6emF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
 ];
 
-List intrestList = templateFiveImage + foodImage;
+//List intrestList = templateFiveImage + foodImage;

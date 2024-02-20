@@ -56,9 +56,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                   Container(
                     height: 600,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(templateFiveImage[0]),
-                          fit: BoxFit.cover),
+                      image: DecorationImage(image: NetworkImage(uselessUrl), fit: BoxFit.cover),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
@@ -74,8 +72,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           child: ClipRRect(
                             child: BackdropFilter(
-                              filter:
-                                  ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
                               // blendMode: BlendMode.b,
                               child: Container(
                                 // margin: const EdgeInsets.symmetric(vertical: 10),
@@ -94,16 +91,13 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                       height: 40,
                                       width: 40,
                                       decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.white, width: .5),
+                                        border: Border.all(color: Colors.white, width: .5),
                                         gradient: LinearGradient(
                                           begin: Alignment.bottomLeft,
                                           end: Alignment.topRight,
                                           colors: [
-                                            const Color(0xFFffffff)
-                                                .withOpacity(0.30),
-                                            const Color(0xFFFFFFFF)
-                                                .withOpacity(0.3),
+                                            const Color(0xFFffffff).withOpacity(0.30),
+                                            const Color(0xFFFFFFFF).withOpacity(0.3),
                                           ],
                                           stops: const [
                                             2,
@@ -113,8 +107,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                       ),
                                       child: const Text(
                                         "LO\nGO",
-                                        style: TextStyle(
-                                            color: whiteColor, height: 1),
+                                        style: TextStyle(color: whiteColor, height: 1),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -123,51 +116,38 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                     ),
                                     Text(
                                       "Welcome to Abc",
-                                      style: GoogleFonts.bellefair(
-                                          color: whiteColor,
-                                          fontSize: 31,
-                                          fontWeight: FontWeight.w400),
+                                      style: GoogleFonts.bellefair(color: whiteColor, fontSize: 31, fontWeight: FontWeight.w400),
                                     ),
                                     const SizedBox(
                                       height: 15,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
                                       child: Text(
                                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nisl bibendum quis donec laoreet sapien, magna eros, dui adipiscing. ",
                                         textAlign: TextAlign.center,
-                                        style: GoogleFonts.roboto(
-                                            color: whiteColor,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w300),
+                                        style: GoogleFonts.roboto(color: whiteColor, fontSize: 14, fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 15,
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20),
+                                      padding: const EdgeInsets.symmetric(horizontal: 20),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           Text(
                                             'Subscribe',
                                             textAlign: TextAlign.center,
-                                            style: GoogleFonts.roboto(
-                                                color: whiteColor,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w600),
+                                            style:
+                                                GoogleFonts.roboto(color: whiteColor, fontSize: 15, fontWeight: FontWeight.w600),
                                           ),
                                           Text(
                                             'Message',
                                             textAlign: TextAlign.center,
-                                            style: GoogleFonts.roboto(
-                                                color: whiteColor,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
+                                            style:
+                                                GoogleFonts.roboto(color: whiteColor, fontSize: 16, fontWeight: FontWeight.bold),
                                           ),
                                         ],
                                       ),
@@ -185,8 +165,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                           alignment: Alignment.bottomCenter,
                           child: ClipRRect(
                             child: BackdropFilter(
-                              filter:
-                                  ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
+                              filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 2.0),
                               // blendMode: BlendMode.b,
                               child: SingleChildScrollView(
                                 scrollDirection: Axis.horizontal,
@@ -207,9 +186,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                           width: 160,
                                           decoration: const BoxDecoration(
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/png/aboutButton.png"),
-                                                fit: BoxFit.cover),
+                                                image: AssetImage("assets/png/aboutButton.png"), fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
@@ -220,9 +197,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                           width: 160,
                                           decoration: const BoxDecoration(
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/png/oroductButton.png"),
-                                                fit: BoxFit.cover),
+                                                image: AssetImage("assets/png/oroductButton.png"), fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
@@ -233,9 +208,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                           width: 150,
                                           decoration: const BoxDecoration(
                                             image: DecorationImage(
-                                                image: AssetImage(
-                                                    "assets/png/postButton.png"),
-                                                fit: BoxFit.cover),
+                                                image: AssetImage("assets/png/postButton.png"), fit: BoxFit.cover),
                                           ),
                                         ),
                                       ),
@@ -271,7 +244,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       image: NetworkImage(
-                        templateFiveImage[1],
+                        uselessUrl,
                       ),
                       fit: BoxFit.cover,
                     )),
@@ -288,22 +261,14 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                       ),
                       Text(
                         "About us",
-                        style: GoogleFonts.bellefair(
-                            fontSize: 35,
-                            fontWeight: FontWeight.w400,
-                            color: whiteColor),
+                        style: GoogleFonts.bellefair(fontSize: 35, fontWeight: FontWeight.w400, color: whiteColor),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 15),
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                         child: Text(
                           dummyText + dummyText,
                           textAlign: TextAlign.justify,
-                          style: GoogleFonts.roboto(
-                              color: whiteColor,
-                              fontSize: 12,
-                              height: 1.5,
-                              letterSpacing: .4),
+                          style: GoogleFonts.roboto(color: whiteColor, fontSize: 12, height: 1.5, letterSpacing: .4),
                         ),
                       ),
                       const SizedBox(
@@ -316,17 +281,11 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                             children: [
                               Text(
                                 "650k",
-                                style: GoogleFonts.roboto(
-                                    color: whiteColor,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.w600),
+                                style: GoogleFonts.roboto(color: whiteColor, fontSize: 35, fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 "Followers",
-                                style: GoogleFonts.roboto(
-                                    color: whiteColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500),
+                                style: GoogleFonts.roboto(color: whiteColor, fontSize: 17, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
@@ -334,17 +293,11 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                             children: [
                               Text(
                                 "5000",
-                                style: GoogleFonts.roboto(
-                                    color: whiteColor,
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.w600),
+                                style: GoogleFonts.roboto(color: whiteColor, fontSize: 35, fontWeight: FontWeight.w600),
                               ),
                               Text(
                                 "Post",
-                                style: GoogleFonts.roboto(
-                                    color: whiteColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500),
+                                style: GoogleFonts.roboto(color: whiteColor, fontSize: 17, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
@@ -355,10 +308,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                       ),
                       Text(
                         "Reach us",
-                        style: GoogleFonts.bellefair(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: whiteColor),
+                        style: GoogleFonts.bellefair(fontSize: 18, fontWeight: FontWeight.w400, color: whiteColor),
                       ),
                       const SizedBox(
                         height: 20,
@@ -426,9 +376,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                         width: 160,
                                         decoration: const BoxDecoration(
                                           image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/png/oroductButton.png"),
-                                              fit: BoxFit.cover),
+                                              image: AssetImage("assets/png/oroductButton.png"), fit: BoxFit.cover),
                                         ),
                                       ),
                                     ),
@@ -438,10 +386,8 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                       child: Container(
                                         width: 150,
                                         decoration: const BoxDecoration(
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/png/postButton.png"),
-                                              fit: BoxFit.cover),
+                                          image:
+                                              DecorationImage(image: AssetImage("assets/png/postButton.png"), fit: BoxFit.cover),
                                         ),
                                       ),
                                     ),
@@ -461,25 +407,18 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Product",
-                              style: GoogleFonts.bellefair(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w400,
-                                  color: whiteColor),
+                              style: GoogleFonts.bellefair(fontSize: 30, fontWeight: FontWeight.w400, color: whiteColor),
                             ),
                             const Spacer(),
                             Text(
                               "view all",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400,
-                                  color: whiteColor),
+                              style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w400, color: whiteColor),
                             ),
                           ],
                         ),
                       ),
                       ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
+                        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: products.length,
@@ -493,9 +432,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                     image: DecorationImage(
-                                        image: NetworkImage(
-                                            products[index].image.toString()),
-                                        fit: BoxFit.cover)),
+                                        image: NetworkImage(products[index].image.toString()), fit: BoxFit.cover)),
                               ),
                               const SizedBox(
                                 width: 12,
@@ -506,20 +443,14 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                                   children: [
                                     Text(
                                       "Product ",
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: whiteColor),
+                                      style: GoogleFonts.poppins(fontSize: 18, fontWeight: FontWeight.w600, color: whiteColor),
                                     ),
                                     const SizedBox(
                                       height: 8,
                                     ),
                                     Text(
                                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                                      style: GoogleFonts.roboto(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
-                                          color: grayColor),
+                                      style: GoogleFonts.roboto(fontSize: 12, fontWeight: FontWeight.w400, color: grayColor),
                                     ),
                                   ],
                                 ),
@@ -542,9 +473,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         height: 150,
                         width: 165,
                         decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/png/postButton.png"),
-                              fit: BoxFit.cover),
+                          image: DecorationImage(image: AssetImage("assets/png/postButton.png"), fit: BoxFit.cover),
                         ),
                       ),
                     ),
@@ -556,10 +485,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         const Spacer(),
                         Text(
                           "View All",
-                          style: GoogleFonts.bellefair(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                              color: whiteColor),
+                          style: GoogleFonts.bellefair(fontSize: 15, fontWeight: FontWeight.w400, color: whiteColor),
                         ),
                       ],
                     ),
@@ -574,7 +500,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         height: Get.size.height / 2.7,
                         child: PostCard(
                           isBorder: false,
-                         ),
+                        ),
                       );
                     },
                   ),

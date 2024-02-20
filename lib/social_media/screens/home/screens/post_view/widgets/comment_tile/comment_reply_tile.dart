@@ -137,7 +137,7 @@ class CommentReplyTile extends StatelessWidget {
                                   child: CircleAvatar(
                                     radius: 18,
                                     backgroundImage:
-                                        CachedNetworkImageProvider(comment.userId!.profilePic ?? templateFiveImage[2]),
+                                        CachedNetworkImageProvider(comment.userId!.profilePic ?? uselessUrl),
                                   ),
                                 ),
                               ),

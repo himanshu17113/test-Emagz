@@ -50,7 +50,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                         height: 170,
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(templateFiveImage[2]),
+                                image: NetworkImage(uselessUrl),
                                 fit: BoxFit.cover)),
                       ),
                       Container(
@@ -138,7 +138,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                               CircleAvatar(
                                 radius: 24,
                                 backgroundImage:
-                                    NetworkImage(templateFiveImage[1]),
+                                    NetworkImage(uselessUrl),
                               ),
                               const SizedBox(
                                 width: 10,
