@@ -8,6 +8,7 @@ import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/screens/intrest/choose_intrest.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,6 +27,13 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _firebaseAuth = FirebaseAuth.instance;
+  final List<Text> constraints = [
+    const Text('Minimum length: 8 characters'),
+    const Text('Contains at least one uppercase letter'),
+    const Text('Contains at least one lowercase letter'),
+    const Text('Contains at least one number'),
+    const Text('Contains at least one special character'),
+  ];
 
   final authController = AuthController();
 
@@ -152,11 +160,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
             SizedBox(
               height: size.height * .01,
             ),
-            const Text(
-              "password",
-              style: TextStyle(
-                color: signInHeading,
-              ),
+            Row(
+              children: [
+                const Text(
+                  "password",
+                  style: TextStyle(
+                    color: signInHeading,
+                  ),
+                ),
+                IconButton(
+                    onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Password Constraints'),
+                            content: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: constraints,
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        ),
+                    icon: const Icon(
+                      Icons.info_outline_rounded,
+                      color: Colors.lightBlueAccent,
+                      size: 18,
+                    )),
+              ],
             ),
             PassTextfiled(
               inputType: TextInputType.visiblePassword,
