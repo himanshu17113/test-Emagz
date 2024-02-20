@@ -41,20 +41,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (googleUser != null) {
       // Get the authentication token
       //final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-      authController.appleRegister(googleUser.email, googleUser.id,
-          googleUser.photoUrl.toString(), googleUser.displayName.toString());
+      authController.appleRegister(
+          googleUser.email, googleUser.id, googleUser.photoUrl.toString(), googleUser.displayName.toString());
     }
   }
 
   Future<void> _handleFacebookSignIn() async {
     final LoginResult login = await FacebookAuth.instance.login();
-    final OAuthCredential facebookauthCredential =
-        FacebookAuthProvider.credential(login.accessToken!.token);
-    final UserCredential userCred =
-        await _firebaseAuth.signInWithCredential(facebookauthCredential);
+    final OAuthCredential facebookauthCredential = FacebookAuthProvider.credential(login.accessToken!.token);
+    final UserCredential userCred = await _firebaseAuth.signInWithCredential(facebookauthCredential);
     if (userCred.user!.photoURL != null && userCred.user!.displayName != null) {
-      authController.appleRegister(userCred.user!.email!, userCred.user!.uid,
-          userCred.user!.photoURL!, userCred.user!.displayName!);
+      authController.appleRegister(
+          userCred.user!.email!, userCred.user!.uid, userCred.user!.photoURL!, userCred.user!.displayName!);
     }
   }
 
@@ -125,14 +123,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Padding(
               padding: const EdgeInsets.all(4),
               child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xffF2F2F2),
-                    borderRadius: BorderRadius.circular(10)),
+                decoration: BoxDecoration(color: const Color(0xffF2F2F2), borderRadius: BorderRadius.circular(10)),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     style: const TextStyle(
-                      backgroundColor: Color(
-                          0xffF2F2F2), // Set the dropdown's background color here
+                      backgroundColor: Color(0xffF2F2F2), // Set the dropdown's background color here
                     ),
                     value: _selectedGender,
                     onChanged: (String? newValue) {
@@ -140,8 +135,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         _selectedGender = newValue!;
                       });
                     },
-                    items:
-                        _genders.map<DropdownMenuItem<String>>((String gender) {
+                    items: _genders.map<DropdownMenuItem<String>>((String gender) {
                       return DropdownMenuItem<String>(
                         value: gender,
                         child: FormHeadingText(
@@ -150,8 +144,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       );
                     }).toList(),
-                    hint: const Text(
-                        'Select Gender'), // Hint text for the dropdown
+                    hint: const Text('Select Gender'), // Hint text for the dropdown
                   ),
                 ),
               ),
@@ -165,8 +158,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: signInHeading,
               ),
             ),
-            MyCustomTextfiled(
-              //    inputType: TextInputType.,
+            PassTextfiled(
+              inputType: TextInputType.visiblePassword,
               controller: authController.passwordController,
             ),
             SizedBox(
@@ -178,7 +171,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 color: signInHeading,
               ),
             ),
-            MyCustomTextfiled(
+            PassTextfiled(
+              inputType: TextInputType.visiblePassword,
               controller: authController.confirmPasswordController,
             ),
             SizedBox(
@@ -199,18 +193,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         authController.passwordController.text.length < 6) {
                       CustomSnackbar.show(
                           "Please enter at least 8 digit password! password must contain special charecter,numberic value ");
-                    } else if (authController.passwordController.text !=
-                        authController.confirmPasswordController.text) {
-                      CustomSnackbar.show(
-                          "Password and confirm passsword shuld be same");
-                    } else if (!authController.passwordController.text
-                            .contains(RegExp(r'[A-Z]')) ||
-                        !authController.passwordController.text
-                            .contains(RegExp(r'[a-z]')) ||
-                        !authController.passwordController.text
-                            .contains(RegExp(r'[0-9]'))) {
-                      CustomSnackbar.show(
-                          "Password must contain uppercase, lowercase, and numbers");
+                    } else if (authController.passwordController.text != authController.confirmPasswordController.text) {
+                      CustomSnackbar.show("Password and confirm passsword shuld be same");
+                    } else if (!authController.passwordController.text.contains(RegExp(r'[A-Z]')) ||
+                        !authController.passwordController.text.contains(RegExp(r'[a-z]')) ||
+                        !authController.passwordController.text.contains(RegExp(r'[0-9]'))) {
+                      CustomSnackbar.show("Password must contain uppercase, lowercase, and numbers");
                     } else {
                       bool res = await authController.registerUser();
                       if (res) {
@@ -250,10 +238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               margin: const EdgeInsets.symmetric(vertical: 1),
               child: const Text(
                 "Continue With",
-                style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w400,
-                    color: unselectedLabel),
+                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w400, color: unselectedLabel),
               ),
             ),
             SizedBox(
@@ -274,8 +259,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: const CircleAvatar(
                         backgroundColor: whiteColor,
                         radius: 15,
-                        backgroundImage: CachedNetworkImageProvider(
-                            "https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
+                        backgroundImage: CachedNetworkImageProvider("https://cdn-icons-png.flaticon.com/512/2991/2991148.png"),
                       ),
                     ),
                     const SizedBox(
@@ -316,8 +300,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                             try {
                               // Request credential for the currently signed in Apple account.
-                              final appleCredential =
-                                  await SignInWithApple.getAppleIDCredential(
+                              final appleCredential = await SignInWithApple.getAppleIDCredential(
                                 scopes: [
                                   AppleIDAuthorizationScopes.email,
                                   AppleIDAuthorizationScopes.fullName,
@@ -325,41 +308,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 nonce: nonce,
                               );
 
-                              debugPrint(
-                                  appleCredential.authorizationCode.toString());
+                              debugPrint(appleCredential.authorizationCode.toString());
 
                               // Create an `OAuthCredential` from the credential returned by Apple.
-                              final oauthCredential =
-                                  OAuthProvider("apple.com").credential(
+                              final oauthCredential = OAuthProvider("apple.com").credential(
                                 idToken: appleCredential.identityToken,
                                 rawNonce: rawNonce,
                               );
 
                               // Sign in the user with Firebase. If the nonce we generated earlier does
                               // not match the nonce in `appleCredential.identityToken`, sign in will fail.
-                              final authResult = await _firebaseAuth
-                                  .signInWithCredential(oauthCredential);
+                              final authResult = await _firebaseAuth.signInWithCredential(oauthCredential);
 
-                              final displayName =
-                                  '${appleCredential.givenName} ${appleCredential.familyName}';
+                              final displayName = '${appleCredential.givenName} ${appleCredential.familyName}';
                               // final userEmail = '${appleCredential.email}';
-                              final photoUrl =
-                                  '${appleCredential.identityToken}';
+                              final photoUrl = '${appleCredential.identityToken}';
                               if (appleCredential.email != null &&
                                   appleCredential.givenName != null &&
                                   appleCredential.familyName != null &&
                                   appleCredential.identityToken != null) {
                                 authController.appleRegister(
-                                    appleCredential.email!,
-                                    appleCredential.identityToken!,
-                                    photoUrl,
-                                    displayName);
+                                    appleCredential.email!, appleCredential.identityToken!, photoUrl, displayName);
                               } else {
-                                authController.appleRegister(
-                                    'testeremail@gmail.com',
-                                    '1234',
-                                    '',
-                                    'testeruser');
+                                authController.appleRegister('testeremail@gmail.com', '1234', '', 'testeruser');
                               }
                               final firebaseUser = authResult.user;
                               debugPrint(displayName.toString());
