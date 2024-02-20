@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../screens/auth/widgets/form_haeding_text.dart';
 
 class PersonalInformationTile extends StatelessWidget {
-  final  String heading;
+  final String heading;
   final String body;
   final Function onTap;
   const PersonalInformationTile({
@@ -24,31 +24,37 @@ class PersonalInformationTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FormHeadingText(
-                headings: heading,
-                fontSize: 10,
-                color: const Color(0xff959595),
-              ),
-              FormHeadingText(
-                headings: body,
-                fontSize: 12,
-                color: Colors.black,
-              ),
-            ],
+          Expanded(
+            flex: 6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FormHeadingText(
+                  headings: heading,
+                  fontSize: 10,
+                  color: const Color(0xff959595),
+                ),
+                FormHeadingText(
+                  headings: body,
+                  fontSize: 12,
+                  color: Colors.black,
+                ),
+              ],
+            ),
           ),
           const Spacer(),
-          InkWell(
-            onTap: () {
-              onTap();
-            },
-            child: const FormHeadingText(
-              headings: "Update",
-              fontSize: 10,
-              color: Color(0xff1B47C1),
+          Expanded(
+            flex: 1,
+            child: InkWell(
+              onTap: () {
+                onTap();
+              },
+              child: const FormHeadingText(
+                headings: "Update",
+                fontSize: 10,
+                color: Color(0xff1B47C1),
+              ),
             ),
           ),
         ],

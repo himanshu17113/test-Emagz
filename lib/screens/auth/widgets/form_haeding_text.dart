@@ -22,9 +22,9 @@ class FormHeadingText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       headings,
+   
       textAlign: textAlign,
       style: TextStyle(
-
           // height: .25,
           fontStyle: isItalic ?? FontStyle.normal,
           fontSize: fontSize,

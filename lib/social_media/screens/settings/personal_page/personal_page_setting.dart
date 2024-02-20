@@ -499,7 +499,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
       context: context,
       builder: (ctx) {
         List<UserSchema> list = List<UserSchema>.from(listUser!.map((e) => UserSchema.fromJson(jsonDecode(e!))));
-        print(listUser.toString());
+        // print(listUser.toString());
         return StatefulBuilder(
           builder: (BuildContext context, state) => Container(
             height: MediaQuery.of(context).size.height * .45 + MediaQuery.of(context).viewInsets.bottom,

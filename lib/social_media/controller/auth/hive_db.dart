@@ -109,14 +109,15 @@ class HiveDB {
             if (jsonDecode(listUser![i]!)['_id'] == user.sId) {
               contain = true;
               listUser![i] = jsonEncode(response.data);
-            } 
-          }if(contain) {
-              if (addinList) {
-                debugPrint("adddi");
-                idtoken.addIf(globToken != null, globUserId!, globToken!);
-                listUser?.add(jsonEncode(response.data));
-              }
             }
+          }
+          if (!contain) {
+            if (addinList) {
+              debugPrint("adddi");
+              idtoken.addIf(globToken != null, globUserId!, globToken!);
+              listUser?.add(jsonEncode(response.data));
+            }
+          }
         }
         try {
           await hiveBox.put('listUser', listUser);

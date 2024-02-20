@@ -130,23 +130,15 @@ class ChatScreen extends StatelessWidget {
                           id: 'active',
                           //   initState: (_) {},
                           builder: (s) => s.onLineUserIds.contains(user?.id)
-                              ? const Positioned(
-                                  top: 36,
-                                  right: 2,
-                                  child: Text(
-                                    "Online",
-                                    style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
-                                  ),
+                              ? const Text(
+                                  "Online",
+                                  style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
                                 )
-                              : const Positioned(
-                                  top: 36,
-                                  right: 2,
-                                  child: Text(
-                                    "Offline",
-                                    style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
-                                  ),
+                              : const Text(
+                                  "Offline",
+                                  style: TextStyle(color: chatOnlineDot, fontSize: 10, fontWeight: FontWeight.w600),
                                 ),
-                        )
+                        ),
                       ],
                     ),
                     const Spacer(),

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
- import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -40,7 +40,7 @@ main() async {
   await HiveDB.getUserID();
   if (globUserId != null) {
     await HiveDB.getCurrentUserDetail();
-   await HiveDB.getlistUser();
+    await HiveDB.getlistUser();
   }
   await Firebase.initializeApp(
     name: 'EmagzIos',
@@ -67,4 +67,3 @@ class MyApp extends StatelessWidget {
         home: globUserId != null ? BottomNavBar() : const CommonAuthScreen());
   }
 }
- 
