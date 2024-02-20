@@ -43,7 +43,8 @@ class _EditorScreenState extends State<EditorScreen> {
     List<String> path = [];
     for (var i = 0; i < imagex.length; i++) {
       final tempDir = await getTemporaryDirectory();
-      File imageFile = await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
+      File imageFile =
+          await File('${tempDir.path}/image$i.jpg').create(); // this is the File object with the desired path and extension
       await imageFile.writeAsBytes(imagex[i]);
       // File imageFile = File.fromRawPath(
       //     imageBytes); // this creates a File object from the Uint8List
@@ -163,7 +164,9 @@ class _EditorScreenState extends State<EditorScreen> {
     _pageController.jumpToPage(0);
     localImages.clear();
     for (int i = 0; i < nIm; i++) {
-      await _pageController.animateToPage(i, duration: const Duration(milliseconds: 100), curve: Curves.easeInOut).then((value) async => await captureScreenshot(i));
+      await _pageController
+          .animateToPage(i, duration: const Duration(milliseconds: 100), curve: Curves.easeInOut)
+          .then((value) async => await captureScreenshot(i));
     }
   }
 
@@ -220,53 +223,56 @@ class _EditorScreenState extends State<EditorScreen> {
               )
             : null,
         actions: [
-          IconButton(
-            onPressed: () async {
-              showDialog(
-                useSafeArea: true,
-                barrierDismissible: false,
-                context: context,
-                builder: (context) {
-                  return const Center(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 50.0),
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.amberAccent,
-                        strokeWidth: 2,
-                        color: Colors.white,
+          Visibility(
+            visible: !crop.contains(true),
+            child: IconButton(
+              onPressed: () async {
+                showDialog(
+                  useSafeArea: true,
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 50.0),
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.amberAccent,
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              );
-              await convertWidgetToImage();
-              // .then((value) async {
-              //   if (widget.isStory!) {
-              //     //    await addPost(localImages);
-              //     // storyController.postStory("images", imagePaths);
-              //   } else {
-              //     //Navigator.of(context, rootNavigator: true).pop();
-              //     Get.to(() => PrePostScreen(postType: PostType.gallery, images: localImages));
-              //   }
-              // });
-              if (widget.isStory!) {
-                // var paths = await addPost(localImages);
-                debugPrint("posting story");
-                bool x = await storyController.postStory("images", localImages);
-                if (x) {
-                  Get.close(2);
+                    );
+                  },
+                );
+                await convertWidgetToImage();
+                // .then((value) async {
+                //   if (widget.isStory!) {
+                //     //    await addPost(localImages);
+                //     // storyController.postStory("images", imagePaths);
+                //   } else {
+                //     //Navigator.of(context, rootNavigator: true).pop();
+                //     Get.to(() => PrePostScreen(postType: PostType.gallery, images: localImages));
+                //   }
+                // });
+                if (widget.isStory!) {
+                  // var paths = await addPost(localImages);
+                  debugPrint("posting story");
+                  bool x = await storyController.postStory("images", localImages);
+                  if (x) {
+                    Get.close(2);
+                  }
+                } else {
+                  Navigator.of(context, rootNavigator: true).pop();
+                  Get.to(() => PrePostScreen(postType: PostType.gallery, images: localImages));
                 }
-              } else {
-                Navigator.of(context, rootNavigator: true).pop();
-                Get.to(() => PrePostScreen(postType: PostType.gallery, images: localImages));
-              }
 
-              debugPrint("edited image length ${localImages.length}");
-            },
-            icon: SvgPicture.asset(
-              "assets/png/nextforward.svg",
-              height: 32,
-              width: 32,
+                debugPrint("edited image length ${localImages.length}");
+              },
+              icon: SvgPicture.asset(
+                "assets/png/nextforward.svg",
+                height: 32,
+                width: 32,
+              ),
             ),
           )
         ],
@@ -328,7 +334,9 @@ class _EditorScreenState extends State<EditorScreen> {
                                             hue: hue[itemIndex] - 1,
                                             brightness: brightness[itemIndex] - 1,
                                             saturation: saturation[itemIndex] - 1,
-                                            child: ColorFiltered(colorFilter: ColorFilter.matrix(filters[filter[itemIndex]]), child: Image.memory(widget.image[itemIndex]!))),
+                                            child: ColorFiltered(
+                                                colorFilter: ColorFilter.matrix(filters[filter[itemIndex]]),
+                                                child: Image.memory(widget.image[itemIndex]!))),
                                       ),
                               ),
                             ),
@@ -713,7 +721,9 @@ class _EditorScreenState extends State<EditorScreen> {
                               width: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                border: filter[itemindex] != index ? null : Border.all(color: const Color.fromRGBO(53, 222, 217, 1), width: 2),
+                                border: filter[itemindex] != index
+                                    ? null
+                                    : Border.all(color: const Color.fromRGBO(53, 222, 217, 1), width: 2),
                                 gradient: LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
@@ -722,7 +732,10 @@ class _EditorScreenState extends State<EditorScreen> {
                                     Colors.purple.shade100,
                                   ],
                                 ),
-                                image: DecorationImage(colorFilter: ColorFilter.matrix(filters[index]), image: MemoryImage(widget.image[itemindex]!), fit: BoxFit.cover),
+                                image: DecorationImage(
+                                    colorFilter: ColorFilter.matrix(filters[index]),
+                                    image: MemoryImage(widget.image[itemindex]!),
+                                    fit: BoxFit.cover),
                               ),
                             ),
                           ),
