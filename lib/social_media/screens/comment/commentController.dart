@@ -20,8 +20,8 @@ class CommentController extends GetxController {
     super.onInit();
   }
 
-   String? token = globToken;
-     String? userId = globUserId;
+  String? token = globToken;
+  String? userId = globUserId;
   // Future<void> storedData() async {
   //   token = await HiveDB.getAuthToken();
   //   userId = await HiveDB.getUserID();
@@ -36,6 +36,7 @@ class CommentController extends GetxController {
   RxInt commentindex = RxInt(0);
   RxInt replyindex = RxInt(0);
   RxString commentId = RxString("");
+  String replyCommentId = '';
 //  RxBool isSending = RxBool(false);
   setCommentId(String id, String commentedBy, int index) {
     commentId.value = id;
@@ -46,8 +47,9 @@ class CommentController extends GetxController {
     focusNode.requestFocus();
   }
 
-  setReplyId(String id, String commentedBy, int index) {
+  setReplyId(String id, String commentedBy, int index, String replyCommentI) {
     focusNode.requestFocus();
+    replyCommentId = replyCommentI;
     commentId.value = id;
     commentOwner.value = commentedBy;
     replyindex = RxInt(index);
@@ -74,8 +76,7 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       var data = {"userId": userId, "text": comment};
-      var resposne =
-          await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      var resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
       // print(resposne);
@@ -96,15 +97,14 @@ class CommentController extends GetxController {
     }
   }
 
-    Future<bool> likeComment(String postId, String commentID) async {
+  Future<bool> likeComment(String postId, String commentID) async {
     try {
       final data = {
         "userId": userId,
         "postId": postId,
         "commentId": commentID,
       };
-      final resposne =
-          await dio.post(ApiEndpoint.commentPost(postId), data: data);
+      final resposne = await dio.post(ApiEndpoint.commentPost(postId), data: data);
       debugPrint(ApiEndpoint.commentPost(postId));
       debugPrint(data.toString());
       // print(resposne);
@@ -140,8 +140,7 @@ class CommentController extends GetxController {
       isPosting.value = false;
       controller.clear();
       if (resposne.statusCode == 200) {
-        List<Comment?> x =
-            List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
+        List<Comment?> x = List<Comment?>.from(resposne.data.map((x) => Comment.fromJson(x)));
         return x;
       }
 
@@ -161,16 +160,11 @@ class CommentController extends GetxController {
     }
 
     debugPrint("story : $storyId");
-    final headers = {
-      'Content-Type': 'application/json',
-      "Authorization": token!
-    };
+    final headers = {'Content-Type': 'application/json', "Authorization": token!};
     debugPrint(ApiEndpoint.commentPost(storyId));
     Map body = {"userId": userId, "text": comment};
-    http.Response response = await http.post(
-        Uri.parse(ApiEndpoint.commentStroy(storyId)),
-        headers: headers,
-        body: jsonEncode(body));
+    http.Response response =
+        await http.post(Uri.parse(ApiEndpoint.commentStroy(storyId)), headers: headers, body: jsonEncode(body));
     debugPrint(response.body);
     List<dynamic> list = jsonDecode(response.body)["stories"]["Comments"];
 
@@ -184,8 +178,7 @@ class CommentController extends GetxController {
     return list.last["_id"];
   }
 
-  replyStory(
-      String postId, String commentID, String? comment, String postuID) async {
+  replyStory(String postId, String commentID, String? comment, String postuID) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
     debugPrint(ApiEndpoint.replyStory(postId, commentID, userId!));
@@ -197,8 +190,7 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       var data = {"text": comment ?? controller.text};
-      var resposne = await dio
-          .post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
+      var resposne = await dio.post(ApiEndpoint.replyStory(postId, commentID, userId!), data: data);
       debugPrint(resposne.toString());
       isPosting.value = false;
       controller.clear();
@@ -212,10 +204,14 @@ class CommentController extends GetxController {
   }
 
   Future<Comment> postReply(
-      String postId, String commentID, String? comment, String postuID) async {
+    String postId,
+    String commentID,
+    String? comment,
+    String postuID,
+  ) async {
     debugPrint("👾👾👾👾👾👾👾👾");
 
-    debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!));
+    debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!, replyCommentId));
     //  // var comment = controller.text;
     //   if (comment == "") {
     //     Get.snackbar("Invalid Comment", "Cant post Empty Comment");
@@ -224,8 +220,7 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       Map<String, String> data = {"text": comment ?? controller.text};
-      var resposne = await dio
-          .post(ApiEndpoint.replyPost(postId, commentID, userId!), data: data);
+      var resposne = await dio.post(ApiEndpoint.replyPost(postId, replyCommentId, userId!, commentID), data: data);
       log(resposne.toString());
       isPosting.value = false;
       controller.clear();

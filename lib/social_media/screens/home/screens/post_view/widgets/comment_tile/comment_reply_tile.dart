@@ -45,6 +45,7 @@ class CommentReplyTile extends StatelessWidget {
       return '${difference.inDays} days ago';
     }
   }
+
   final storyController = Get.find<CommentController>();
 
   final commentController = Get.find<CommentController>();
@@ -136,8 +137,7 @@ class CommentReplyTile extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 3),
                                   child: CircleAvatar(
                                     radius: 18,
-                                    backgroundImage:
-                                        CachedNetworkImageProvider(comment.userId!.profilePic ?? uselessUrl),
+                                    backgroundImage: CachedNetworkImageProvider(comment.userId?.profilePic ?? uselessUrl),
                                   ),
                                 ),
                               ),
@@ -188,7 +188,7 @@ class CommentReplyTile extends StatelessWidget {
                                               onTap: () {
                                                 commentController.commentindex.value = commentindex;
                                                 commentController.setReplyId(
-                                                    comment.sId!, comment.userId?.username ?? "jjk", index);
+                                                    comment.sId!, comment.userId?.username ?? "jjk", index, commentuID!);
                                               },
                                               child: const Text(
                                                 "Reply",

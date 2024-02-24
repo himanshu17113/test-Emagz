@@ -30,9 +30,7 @@ class StoryViewCard extends StatelessWidget {
               alignment: Alignment.centerRight,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: AssetImage("assets/png/story_border.png"),
-                    fit: BoxFit.contain),
+                image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.contain),
               ),
             ),
           ),
@@ -46,9 +44,7 @@ class StoryViewCard extends StatelessWidget {
                   border: Border.all(width: 0, color: Colors.transparent),
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.grey,
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: CachedNetworkImageProvider(url))),
+                  image: DecorationImage(fit: BoxFit.fill, image: CachedNetworkImageProvider(url))),
             ),
           )),
           Positioned(
@@ -56,10 +52,7 @@ class StoryViewCard extends StatelessWidget {
             left: 20,
             child: Text(
               username == null ? "loading.." : username!.username!,
-              style: const TextStyle(
-                  fontSize: 6,
-                  fontWeight: FontWeight.bold,
-                  color: blackButtonColor),
+              style: const TextStyle(fontSize: 6, fontWeight: FontWeight.bold, color: blackButtonColor),
             ),
           ),
         ],

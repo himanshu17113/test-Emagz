@@ -50,8 +50,10 @@ class ApiEndpoint {
   static String getcomment(String postId) =>
       "$baseUrl/post/$postId/getcomments";
 
-  static String replyPost(String postId, String commentId, String userId) =>
-      "$baseUrl/post/comment-on-comment?postId=$postId&commentId=$commentId&userId=$userId";
+  static String replyPost(String postId, String commentId, String userId,
+    String replyCommentId,
+  ) =>
+      "$baseUrl/post/comment-on-comment?postId=$postId&commentId=$commentId&userId=$userId&replyCommentId=$replyCommentId";
   static String replyStory(String postId, String commentId, String userId) =>
       "$baseUrl/story/comment?storyId=$postId&commentId=$commentId&userId=$userId";
   static String doPoll(String postId) => "$baseUrl/post/$postId/Poll";

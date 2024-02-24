@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
+import 'package:emagz_vendor/constant/data.dart';
 import 'package:emagz_vendor/social_media/screens/home/screens/post_view/widgets/glass.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/controller/story_controller.dart';
 import 'package:emagz_vendor/social_media/screens/home/story/widgets/comment_tile/comment_tile.dart';
@@ -21,8 +22,7 @@ class StoryScreen extends StatelessWidget {
 
   final StoryController controller = StoryController();
 
-  final storyController =
-      Get.find<GetXStoryController>(tag: "GetXStoryController");
+  final storyController = Get.find<GetXStoryController>(tag: "GetXStoryController");
 
   ValueNotifier<int> buttonClickedTimes = ValueNotifier(0);
 
@@ -30,12 +30,8 @@ class StoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     List<StoryItem> storyItems = List.generate(stories.length, (index) {
       return stories[index].mediaType == "video"
-          ? StoryItem.pageVideo(stories[index].mediaUrl!,
-              key: Key(index.toString()), controller: controller)
-          : StoryItem.pageImage(
-              key: Key(index.toString()),
-              url: stories[index].mediaUrl ?? "",
-              controller: controller);
+          ? StoryItem.pageVideo(stories[index].mediaUrl!, key: Key(index.toString()), controller: controller)
+          : StoryItem.pageImage(key: Key(index.toString()), url: stories[index].mediaUrl ?? "", controller: controller);
     });
     //   StoryItem.pageImage(
     //       url: foodImage[0], controller: controller, imageFit: BoxFit.cover),
@@ -59,9 +55,8 @@ class StoryScreen extends StatelessWidget {
                         //  buttonClickedTimes = s.view.
                         // set();
 
-                        buttonClickedTimes.value = int.parse(s.view.key
-                            .toString()
-                            .substring(3, s.view.key.toString().length - 3));
+                        buttonClickedTimes.value =
+                            int.parse(s.view.key.toString().substring(3, s.view.key.toString().length - 3));
                       },
                       onComplete: () {
                         //    setState(() {});
@@ -82,8 +77,7 @@ class StoryScreen extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 16,
-                        backgroundImage:
-                            CachedNetworkImageProvider(userId.profilePic ?? ""),
+                        backgroundImage: CachedNetworkImageProvider(userId.profilePic ?? ""),
                       ),
                       const SizedBox(
                         width: 5,
@@ -93,22 +87,15 @@ class StoryScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              Get.to(() =>
-                                  WebViewPersona(personaUserId: userId.sId!));
+                              Get.to(() => WebViewPersona(personaUserId: userId.sId!));
                             },
                             child: Text(
                               userId.username ?? "loading...",
-                              style: const TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w600,
-                                  color: whiteColor),
+                              style: const TextStyle(fontSize: 10, fontWeight: FontWeight.w600, color: whiteColor),
                             ),
                           ),
                           Text(userId.sId ?? "loading...",
-                              style: const TextStyle(
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w600,
-                                  color: whiteColor)),
+                              style: const TextStyle(fontSize: 8, fontWeight: FontWeight.w600, color: whiteColor)),
                         ],
                       )
                     ],
@@ -122,12 +109,9 @@ class StoryScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width,
                         child: ValueListenableBuilder(
                           valueListenable: buttonClickedTimes,
-                          builder: (BuildContext context, dynamic value,
-                                  Widget? child) =>
-                              StatefulBuilder(
+                          builder: (BuildContext context, dynamic value, Widget? child) => StatefulBuilder(
                             builder: (BuildContext context, setState) {
-                              storyController.currentStoryIndex.value =
-                                  buttonClickedTimes.value;
+                              storyController.currentStoryIndex.value = buttonClickedTimes.value;
                               // buttonClickedTimes.addListener(
                               //   () {
                               //     storyController.currentStoryIndex.value = buttonClickedTimes.value;
@@ -142,29 +126,16 @@ class StoryScreen extends StatelessWidget {
                                 children: [
                                   GestureDetector(
                                       onTap: () {
-                                        storyController.likeStory(
-                                            stories[buttonClickedTimes.value]
-                                                .sId
-                                                .toString());
+                                        storyController.likeStory(stories[buttonClickedTimes.value].sId.toString());
 
                                         setState(() {
-                                          if (stories[buttonClickedTimes.value]
-                                                  .isLike ??
-                                              stories[buttonClickedTimes.value]
-                                                  .likes!
-                                                  .contains(
-                                                      storyController.myId)) {
-                                            stories[buttonClickedTimes.value]
-                                                .isLike = false;
-                                            stories[buttonClickedTimes.value]
-                                                .likes!
-                                                .remove(storyController.myId);
+                                          if (stories[buttonClickedTimes.value].isLike ??
+                                              stories[buttonClickedTimes.value].likes!.contains(globUserId)) {
+                                            stories[buttonClickedTimes.value].isLike = false;
+                                            stories[buttonClickedTimes.value].likes!.remove(globUserId);
                                           } else {
-                                            stories[buttonClickedTimes.value]
-                                                .isLike = true;
-                                            stories[buttonClickedTimes.value]
-                                                .likes!
-                                                .add(storyController.myId!);
+                                            stories[buttonClickedTimes.value].isLike = true;
+                                            stories[buttonClickedTimes.value].likes!.add(globUserId ?? "");
                                           }
                                         });
                                       },
@@ -173,24 +144,17 @@ class StoryScreen extends StatelessWidget {
                                               "assets/png/unlike_icon.png",
                                               width: 22,
                                             ))
-                                          : (stories[buttonClickedTimes.value]
-                                                      .isLike ??
-                                                  stories[buttonClickedTimes
-                                                          .value]
-                                                      .likes!
-                                                      .contains(
-                                                          storyController.myId))
+                                          : (stories[buttonClickedTimes.value].isLike ??
+                                                  stories[buttonClickedTimes.value].likes!.contains(globUserId))
                                               ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Image.asset(
                                                     "assets/png/liked_icon.png",
                                                     width: 22,
                                                   ),
                                                 )
                                               : Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Image.asset(
                                                     "assets/png/unlike_icon.png",
                                                     width: 22,
@@ -199,67 +163,35 @@ class StoryScreen extends StatelessWidget {
                                   stories.isEmpty
                                       ? const Text('Valid')
                                       : Text(
-                                          stories[buttonClickedTimes.value]
-                                              .likes!
-                                              .length
-                                              .toString(),
-                                          style: const TextStyle(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
-                                              color: whiteColor),
+                                          stories[buttonClickedTimes.value].likes!.length.toString(),
+                                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                         ),
                                   InkWell(
                                     onTap: () async {
                                       controller.pause();
                                       showModalBottomSheet(
-                                              backgroundColor: Colors.transparent,
-                                              // enableDrag: true,
-                                              enableDrag: true,
-                                              isScrollControlled: true,
-                                              shape: const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.only(
-                                                          topLeft: Radius
-                                                              .circular(20),
-                                                          topRight: Radius
-                                                              .circular(20))),
-                                              context: context,
-                                              builder: (context) {
-                                                controller.pause();
-                                                return Padding(
-                                                  padding: EdgeInsets.only(
-                                                      bottom:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets
-                                                              .bottom),
-                                                  child:
-                                                      PostCommentsModalBottomSheet(
-                                                    islike: stories[
-                                                            buttonClickedTimes
-                                                                .value]
-                                                        .isLike,
-                                                    likelength: stories[
-                                                            buttonClickedTimes
-                                                                .value]
-                                                        .likeCount,
-                                                    comments: stories[
-                                                            buttonClickedTimes
-                                                                .value]
-                                                        .comments!,
-                                                    postId: stories[
-                                                            buttonClickedTimes
-                                                                .value]
-                                                        .sId!,
-                                                    isStory: true,
-                                                    postuID: stories[
-                                                            buttonClickedTimes
-                                                                .value]
-                                                        .userId,
-                                                  ),
-                                                );
-                                              })
-                                          .then((value) => controller.pause())
-                                          .whenComplete(() {
+                                          backgroundColor: Colors.transparent,
+                                          // enableDrag: true,
+                                          enableDrag: true,
+                                          isScrollControlled: true,
+                                          shape: const RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+                                          context: context,
+                                          builder: (context) {
+                                            controller.pause();
+                                            return Padding(
+                                              padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                                              child: PostCommentsModalBottomSheet(
+                                                islike: stories[buttonClickedTimes.value].isLike,
+                                                likelength: stories[buttonClickedTimes.value].likeCount,
+                                                comments: stories[buttonClickedTimes.value].comments!,
+                                                postId: stories[buttonClickedTimes.value].sId!,
+                                                isStory: true,
+                                                postuID: stories[buttonClickedTimes.value].userId,
+                                              ),
+                                            );
+                                          }).then((value) => controller.pause()).whenComplete(() {
                                         controller.play();
                                       });
 
@@ -271,11 +203,10 @@ class StoryScreen extends StatelessWidget {
                                       //     stories[storyController
                                       //             .currentStoryIndex.value]
                                       //         .sId!,
-                                      //     storyController.myId.value);
+                                      //     globUserId.value);
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          30, 8, 5, 8),
+                                      padding: const EdgeInsets.fromLTRB(30, 8, 5, 8),
                                       child: Image.asset(
                                         "assets/png/comment_icon.png",
                                         width: 22,
@@ -284,21 +215,12 @@ class StoryScreen extends StatelessWidget {
                                   ),
                                   stories.isNotEmpty
                                       ? Text(
-                                          stories[buttonClickedTimes.value]
-                                              .comments!
-                                              .length
-                                              .toString(),
-                                          style: const TextStyle(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white),
+                                          stories[buttonClickedTimes.value].comments!.length.toString(),
+                                          style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white),
                                         )
                                       : const Text(
                                           'VAlid',
-                                          style: TextStyle(
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
-                                              color: whiteColor),
+                                          style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: whiteColor),
                                         ),
                                   const SizedBox(
                                     width: 30,
@@ -309,9 +231,8 @@ class StoryScreen extends StatelessWidget {
                                       showModalBottomSheet(
                                         backgroundColor: Colors.transparent,
                                         shape: const OutlineInputBorder(
-                                            borderRadius: BorderRadius.only(
-                                                topRight: Radius.circular(20),
-                                                topLeft: Radius.circular(20))),
+                                            borderRadius:
+                                                BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20))),
                                         isScrollControlled: true,
                                         context: context,
                                         builder: (context) {
@@ -341,8 +262,7 @@ class StoryScreen extends StatelessWidget {
             )));
   }
 
-  updateName(BuildContext context, List<Comments> comments, String storyId,
-      String myId) {
+  updateName(BuildContext context, List<Comments> comments, String storyId, String myId) {
     TextEditingController textEditingController = TextEditingController();
     return showDialog(
       barrierColor: const Color(0xff252525).withOpacity(.4),
@@ -381,11 +301,8 @@ class StoryScreen extends StatelessWidget {
                       child: Container(
                         decoration: const BoxDecoration(
                             color: Color.fromRGBO(0, 0, 0, 0.2),
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20.0),
-                                topLeft: Radius.circular(20.0))),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
+                            borderRadius: BorderRadius.only(topRight: Radius.circular(20.0), topLeft: Radius.circular(20.0))),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         child: Column(
                           children: [
                             Row(
@@ -404,10 +321,7 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 const Text(
                                   "0",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: whiteColor),
+                                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -426,10 +340,7 @@ class StoryScreen extends StatelessWidget {
                                 ),
                                 Text(
                                   "${comments.length}",
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: whiteColor),
+                                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: whiteColor),
                                 ),
                                 const SizedBox(
                                   width: 20,
@@ -520,8 +431,7 @@ class StoryScreen extends StatelessWidget {
                                             0xff909090,
                                           ),
                                         ),
-                                        contentPadding:
-                                            EdgeInsets.only(left: 20),
+                                        contentPadding: EdgeInsets.only(left: 20),
                                       ),
                                     ),
                                   ),
@@ -530,8 +440,7 @@ class StoryScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     width: 55,
                                     child: const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(
                                           Icons.emoji_emotions_outlined,
@@ -554,20 +463,14 @@ class StoryScreen extends StatelessWidget {
                                   Container(
                                     decoration: const BoxDecoration(
                                         shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),
                                         gradient: LinearGradient(
                                             end: Alignment.bottomRight,
                                             begin: Alignment.topLeft,
-                                            colors: [
-                                              Color.fromRGBO(27, 71, 193, 1),
-                                              Color.fromRGBO(49, 219, 199, 1)
-                                            ])),
+                                            colors: [Color.fromRGBO(27, 71, 193, 1), Color.fromRGBO(49, 219, 199, 1)])),
                                     child: IconButton(
                                         onPressed: () {
-                                          storyController.commentStory(
-                                              textEditingController.text,
-                                              storyId);
+                                          storyController.commentStory(textEditingController.text, storyId);
                                           comments.add(Comments(
                                             text: textEditingController.text,
                                             userId: myId,

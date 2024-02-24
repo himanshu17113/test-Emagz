@@ -1,5 +1,6 @@
 import 'package:emagz_vendor/screens/auth/widgets/dob.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
+import 'package:emagz_vendor/screens/support/support_screen.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 import 'package:emagz_vendor/social_media/screens/settings/security/two_step_verification_screen.dart';
@@ -78,28 +79,29 @@ class _SecurityScreenState extends State<SecurityScreen> {
                   ],
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                height: 38,
-                width: 38,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: purpleColor,
-                ),
-                child: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: 45,
+                  width: 45,
+                  margin: const EdgeInsets.only(right: 10, top: 5, bottom: 5),
+                  padding: const EdgeInsets.only(
+                    left: 15,
+                    right: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: chipColor,
+                  ),
+                  child: const Icon(
                     Icons.arrow_back_ios,
-                    size: 25,
-                    weight: .5,
                     color: Colors.white,
+                    //size: 20,
                   ),
                 ),
-              ),
-              const SizedBox(
-                width: 20,
               ),
             ],
           ),
@@ -169,16 +171,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
               fontSize: 12,
               fontWeight: FontWeight.w600,
             ),
-            const SizedBox(
-              height: 10,
-            ),
             Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.only(
-                  left: 17, right: 25, top: 10, bottom: 14),
+              margin: const EdgeInsets.only(bottom: 10, top: 10),
+              padding: const EdgeInsets.only(left: 17, right: 25, top: 10, bottom: 14),
               width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -192,15 +189,11 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FormHeadingText(
-                            headings: "Two way Verification",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
+                            headings: "Two way Verification", fontSize: 12, fontWeight: FontWeight.w500, color: Colors.black),
                         SizedBox(
                           width: 150,
                           child: FormHeadingText(
-                            headings:
-                                "Secure your account even more with Two-Way-Verification",
+                            headings: "Secure your account even more with Two-Way-Verification",
                             fontSize: 8,
                             color: toggleInactive,
                           ),
@@ -239,18 +232,19 @@ class _SecurityScreenState extends State<SecurityScreen> {
               body: "Learn about our terms and condition",
             ),
             OtherSecurityTile(
-              onTap: () {},
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SupportScreen(),
+                  )),
               heading: "Help & Support",
               body: "Need help connect with our support team",
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.only(
-                  left: 17, right: 25, top: 10, bottom: 14),
+              padding: const EdgeInsets.only(left: 17, right: 25, top: 10, bottom: 14),
               width: double.infinity,
-              decoration: BoxDecoration(
-                  color: const Color(0xffFF3232),
-                  borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(color: const Color(0xffFF3232), borderRadius: BorderRadius.circular(10)),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -264,10 +258,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FormHeadingText(
-                            headings: "Deactive Account",
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: whiteColor),
+                            headings: "Deactive Account", fontSize: 12, fontWeight: FontWeight.w500, color: whiteColor),
                         SizedBox(
                           width: 100,
                           child: FormHeadingText(
@@ -333,8 +324,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   width: 315,
                   child: FormHeadingText(
-                    headings:
-                        "Note:  Once Date of birth update you can change your Date of birth for next 60 days",
+                    headings: "Note:  Once Date of birth update you can change your Date of birth for next 60 days",
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: unselectedLabel,
@@ -371,10 +361,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 4.07),
-                            blurRadius: 20,
-                            color: const Color(0xff000040).withOpacity(.25))
+                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                       ],
                     ),
                     child: const FormHeadingText(
@@ -425,8 +412,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
             buttonPadding: EdgeInsets.zero,
             actionsPadding: EdgeInsets.zero,
             elevation: 0.0,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             content: Container(
               height: 620,
               width: double.infinity,
@@ -608,9 +594,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                                offset: const Offset(0, 4.07),
-                                blurRadius: 20,
-                                color: const Color(0xff000040).withOpacity(.25))
+                                offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                           ],
                         ),
                         child: const FormHeadingText(
@@ -667,8 +651,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
               buttonPadding: EdgeInsets.zero,
               actionsPadding: EdgeInsets.zero,
               elevation: 0.0,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               content: Container(
                 height: 400,
                 width: double.infinity,
@@ -695,8 +678,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     const SizedBox(
                       width: 315,
                       child: FormHeadingText(
-                        headings:
-                            "Note:  Once name update you can change your name for next 60 days",
+                        headings: "Note:  Once name update you can change your name for next 60 days",
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         color: unselectedLabel,
@@ -737,9 +719,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                           borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                                offset: const Offset(0, 4.07),
-                                blurRadius: 20,
-                                color: const Color(0xff000040).withOpacity(.25))
+                                offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                           ],
                         ),
                         child: const FormHeadingText(
@@ -810,8 +790,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   width: 315,
                   child: FormHeadingText(
-                    headings:
-                        "Please verify your updated email id by enter OTP sent to your new email id",
+                    headings: "Please verify your updated email id by enter OTP sent to your new email id",
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: unselectedLabel,
@@ -864,10 +843,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 4.07),
-                            blurRadius: 20,
-                            color: const Color(0xff000040).withOpacity(.25))
+                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                       ],
                     ),
                     child: const FormHeadingText(
@@ -917,8 +893,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         context: context,
         builder: (ctx) {
           return Container(
-            height: MediaQuery.of(context).size.height * .45 +
-                MediaQuery.of(context).viewInsets.bottom,
+            height: MediaQuery.of(context).size.height * .45 + MediaQuery.of(context).viewInsets.bottom,
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(20, 25, 20, 0),
             decoration: BoxDecoration(
@@ -943,8 +918,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   width: 315,
                   child: FormHeadingText(
-                    headings:
-                        "Please enter your new mobile number which you want to update and use",
+                    headings: "Please enter your new mobile number which you want to update and use",
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: unselectedLabel,
@@ -982,10 +956,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 4.07),
-                            blurRadius: 20,
-                            color: const Color(0xff000040).withOpacity(.25))
+                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                       ],
                     ),
                     child: const FormHeadingText(
@@ -1031,8 +1002,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         context: context,
         builder: (ctx) {
           return Container(
-            height: MediaQuery.of(context).size.height * .45 +
-                MediaQuery.of(context).viewInsets.bottom,
+            height: MediaQuery.of(context).size.height * .45 + MediaQuery.of(context).viewInsets.bottom,
             width: double.infinity,
             padding: EdgeInsets.fromLTRB(
               20,
@@ -1059,8 +1029,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                 const SizedBox(
                   width: 315,
                   child: FormHeadingText(
-                    headings:
-                        "Please enter your new email id which you want to update and use",
+                    headings: "Please enter your new email id which you want to update and use",
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
                     color: unselectedLabel,
@@ -1098,10 +1067,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
                       boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 4.07),
-                            blurRadius: 20,
-                            color: const Color(0xff000040).withOpacity(.25))
+                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
                       ],
                     ),
                     child: const FormHeadingText(

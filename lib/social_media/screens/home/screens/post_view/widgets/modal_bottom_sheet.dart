@@ -234,8 +234,13 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                   debugPrint("sending comment");
                                 } else {
                                   if (!commentsController.isCommentingOnReply.value) {
-                                    Comment x = await commentsController.postReply(widget.postId,
-                                        commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    Comment x = await commentsController.postReply(
+                                      widget.postId,
+                                      commentsController.commentId.value,
+                                      commentsController.controller.text,
+                                      widget.postuID!,
+                                      //     commentsController.commentId.value
+                                    );
                                     debugPrint("rp------- ${x.sId}");
                                     if (x.sId == null) {
                                       setState(() {
@@ -244,8 +249,13 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                       });
                                     }
                                   } else {
-                                    Comment x = await commentsController.postReply(widget.postId,
-                                        commentsController.commentId.value, commentsController.controller.text, widget.postuID!);
+                                    Comment x = await commentsController.postReply(
+                                      widget.postId,
+                                      commentsController.commentId.value,
+                                      commentsController.controller.text,
+                                      widget.postuID!,
+                                      //    commentsController.commentId.value
+                                    );
                                     log("rp------- ${x.sId}");
                                     if (x.sId != null) {
                                       debugPrint("rp ${x.sId}");
