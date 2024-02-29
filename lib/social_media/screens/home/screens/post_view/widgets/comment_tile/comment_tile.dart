@@ -43,20 +43,18 @@ class PostCommentTile extends StatelessWidget {
             child: Row(
               children: [
                 (comment.userId?.profilePic == null)
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
                         child: CircleAvatar(
                           radius: 24,
-                          backgroundImage:
-                              CachedNetworkImageProvider(uselessUrl),
+                          backgroundImage: CachedNetworkImageProvider(uselessUrl),
                         ),
                       )
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: CircleAvatar(
                           radius: 20,
-                          backgroundImage: CachedNetworkImageProvider(
-                              comment.userId!.profilePic!),
+                          backgroundImage: CachedNetworkImageProvider(comment.userId!.profilePic!),
                         ),
                       ),
                 Column(
@@ -74,10 +72,7 @@ class PostCommentTile extends StatelessWidget {
                     ),
                     Text(
                       "${comment.text}",
-                      style: const TextStyle(
-                          fontSize: 16.2,
-                          color: Colors.white,
-                          letterSpacing: 0.32),
+                      style: const TextStyle(fontSize: 16.2, color: Colors.white, letterSpacing: 0.32),
                     ),
                     GetBuilder<CommentController>(
                       init: CommentController(),
@@ -167,7 +162,7 @@ class PostCommentTile extends StatelessWidget {
                   commentindex: index,
                   postId: postId,
                   postuID: postuID,
-                  commentuID: comment.sId ,
+                  commentuID: comment.sId,
                 );
               } else {
                 return const SizedBox();

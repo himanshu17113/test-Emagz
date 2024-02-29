@@ -7,7 +7,6 @@ import 'package:emagz_vendor/social_media/screens/chat/controllers/chatControlle
 import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.dart';
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'models/chat_model.dart';

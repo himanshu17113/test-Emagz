@@ -48,7 +48,7 @@ class _LiveScreenState extends State<LiveScreen> {
                     children: [
                       Container(
                         height: 170,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(uselessUrl),
                                 fit: BoxFit.cover)),
@@ -135,7 +135,7 @@ class _LiveScreenState extends State<LiveScreen> {
                               const SizedBox(
                                 width: 15,
                               ),
-                              CircleAvatar(
+                              const CircleAvatar(
                                 radius: 24,
                                 backgroundImage:
                                     NetworkImage(uselessUrl),

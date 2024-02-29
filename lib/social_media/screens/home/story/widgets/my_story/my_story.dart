@@ -9,210 +9,80 @@ import '../../story_screen.dart';
 
 class MyStory extends StatelessWidget {
   final UserId? userID;
-  final List<Stories>? stories;
-  const MyStory({super.key, this.stories, this.userID});
+  final List<Stories> stories;
+  const MyStory({super.key, required this.stories, this.userID});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {
-          if (stories == [] || userID == null) {
-            return;
-          } else {
-            Get.to(() => StoryScreen(userId: userID!, stories: stories!));
-          }
-        },
-        child: SizedBox(
-          height: 55,
-          width: 55,
-          //      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-          // height: 70,
-          // width: 70,
-          // decoration: const BoxDecoration(
-          //   image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.fill),
-          // ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                height: 55,
-                width: 55,
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.centerRight,
-                decoration: const BoxDecoration(
-                  //    shape: BoxShape.circle,
-                  image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.contain),
-                ),
-              ),
-              Positioned(
-                // bottom: 5,
-                left: 8,
-                top: 21,
-                //  right: 5,
-                child: SizedBox(
-                    height: 39,
-                    width: 39,
-                    child: RotationTransition(
-                      turns: const AlwaysStoppedAnimation(222 / 360),
-                      child: Container(
-                        height: 35,
-                        width: 35,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 0, color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10), //<-- SEE HERE
-                            color: Colors.grey,
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: CachedNetworkImageProvider(
-                                  stories!.isNotEmpty
-                                      ? stories![0].mediaUrl ?? "https://picsum.photos/500/500?random=0"
-                                      : "https://picsum.photos/500/500?random=0",
-                                ))
+      onTap: () {
+        if (stories == [] || userID == null) {
+          return;
+        } else {
+          Get.to(() => StoryScreen(userId: userID!, stories: stories));
+        }
+      },
+      child: SizedBox.square(
+        dimension: 70,
+        // margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
 
-                            //    border: Border.all(color: whiteColor, width: 1),
-                            //borderRadius: BorderRadius.circular(100),
-
-                            ),
-                      ),
-                    )),
-              ),
-
-              Positioned(
-                top: 45,
-                left: 10,
-                child: IconButton(
-                  alignment: Alignment.centerLeft,
-                  iconSize: 10,
-                  onPressed: () {
-                    showModalBottomSheet(
-                        elevation: 0.0,
-                        backgroundColor: Colors.transparent,
-                        barrierColor: Colors.black45,
-                        context: context,
-                        builder: (context) {
-                          return  StorySelectionBottomSheet();
-                        });
-                  },
-                  icon: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      //   borderRadius: BorderRadius.circular(33),
-                      border: Border.all(color: Colors.white, width: 2),
-                      color: const Color(0xff3B12AA),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 60,
+              width: 60,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                //  shape: BoxShape.circle,
+                image: DecorationImage(
+                    image: CachedNetworkImageProvider(
+                      stories.isNotEmpty
+                          ? stories[0].mediaUrl ?? "https://picsum.photos/500/500?random=0"
+                          : "https://picsum.photos/500/500?random=0",
                     ),
-                    child: const RotationTransition(
-                      turns: AlwaysStoppedAnimation(48 / 360),
-                      child: Icon(
-                        Icons.add,
-                        color: Colors.white,
-                        size: 15,
-                      ),
-                    ),
+                    fit: BoxFit.fill),
+              ),
+              child: Image.asset(
+                "assets/png/story_frame.png",
+                fit: BoxFit.fill,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 20,
+              child: IconButton(
+                alignment: Alignment.centerLeft,
+                iconSize: 10,
+                onPressed: () {
+                  showModalBottomSheet(
+                      elevation: 0.0,
+                      backgroundColor: Colors.transparent,
+                      barrierColor: Colors.black45,
+                      context: context,
+                      builder: (context) {
+                        return StorySelectionBottomSheet();
+                      });
+                },
+                icon: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    //   borderRadius: BorderRadius.circular(33),
+                    border: Border.all(color: Colors.white, width: 2),
+                    color: const Color(0xff3B12AA),
+                  ),
+                  child: const Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 15,
                   ),
                 ),
-              )
-              // Positioned(
-              //   top: 66,
-              //   left: 20,
-              //   child: Text(
-              //     username == null ? "loading.." : username!.username!,
-              //     style: TextStyle(
-              //         fontSize: 6,
-              //         fontWeight: FontWeight.bold,
-              //         color: blackButtonColor),
-              //   ),
-              // ),
-            ],
-          ),
-        )
-        // Container(
-        //     height: 55,
-        //     width: 55,
-        //     alignment: Alignment.centerRight,
-        //     decoration: const BoxDecoration(
-        //       image: DecorationImage(
-        //           image: AssetImage("assets/png/story_border.png"),
-        //           fit: BoxFit.contain),
-        //     ),
-        //     child: RotationTransition(
-        //       turns: const AlwaysStoppedAnimation(-48 / 360),
-        //       child: Stack(
-        //         children: [
-        //           Container(
-        //             height: 55,
-        //             width: 55,
-        //             alignment: Alignment.centerRight,
-        //             decoration: const BoxDecoration(
-        //               image: DecorationImage(
-        //                   image: AssetImage("assets/png/story_border.png"),
-        //                   fit: BoxFit.contain),
-        //             ),
-        //           ),
-        //           Positioned(
-        //             top: 24,
-        //             left: 7.3,
-        //             child: RotationTransition(
-        //               turns: const AlwaysStoppedAnimation(48 / 360),
-        //               child: Container(
-        //                 height: 40,
-        //                 width: 40,
-        //                 decoration: BoxDecoration(
-        //                   borderRadius: BorderRadius.circular(10),
-        //                   //   border: Border.all( color: ),
-        //                   image: DecorationImage(
-        //                       image: CachedNetworkImageProvider(stories!.isNotEmpty
-        //                           ? stories![0].mediaUrl ??
-        //                               "https://picsum.photos/500/500?random=0"
-        //                           : "https://picsum.photos/500/500?random=0"),
-        //                       fit: BoxFit.cover),
-        //                 ),
-        //                 // child: Image.network(
-        //                 //   url,
-        //                 //   fit: BoxFit.cover,
-        //                 // ),
-        //               ),
-        //             ),
-        //           ),
-        //           Positioned(
-        //             top: 45,
-        //             left: 10,
-        //             child: IconButton(
-        //               alignment: Alignment.centerLeft,
-        //               iconSize: 10,
-        //               onPressed: () {
-        //                 showModalBottomSheet(
-        //                     elevation: 0.0,
-        //                     backgroundColor: Colors.transparent,
-        //                     barrierColor: Colors.transparent,
-        //                     context: context,
-        //                     builder: (context) {
-        //                       return const StorySelectionBottomSheet();
-        //                     });
-        //               },
-        //               icon: Container(
-        //                 decoration: BoxDecoration(
-        //                   shape: BoxShape.circle,
-        //                   //   borderRadius: BorderRadius.circular(33),
-        //                   border: Border.all(color: Colors.white, width: 2),
-        //                   color: const Color(0xff3B12AA),
-        //                 ),
-        //                 child: const RotationTransition(
-        //                   turns: AlwaysStoppedAnimation(48 / 360),
-        //                   child: Icon(
-        //                     Icons.add,
-        //                     color: Colors.white,
-        //                     size: 15,
-        //                   ),
-        //                 ),
-        //               ),
-        //             ),
-        //           )
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-
-        );
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -233,8 +103,8 @@ class RoundedRhombusClipper extends CustomClipper<Path> {
     // Apply rounded corners
     // const borderRadius = Radius.circular(10.0);
     const radius = 30.0;
-    return Path.combine(
-        PathOperation.intersect, path, Path()..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width, size.height), const Radius.circular(radius))));
+    return Path.combine(PathOperation.intersect, path,
+        Path()..addRRect(RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, size.width, size.height), const Radius.circular(radius))));
     // addRect(RRect.fromRectAndRadius(path, radius));
   }
 
@@ -269,7 +139,8 @@ class RPSCustomPainter extends CustomPainter {
     Paint paint0Stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = size.width * 0.04155673;
-    paint0Stroke.shader = ui.Gradient.linear(Offset(size.width * -13.18254, size.height * 1.389908), Offset(size.width * 0.8014365, size.height * 0.7431385), [
+    paint0Stroke.shader = ui.Gradient.linear(
+        Offset(size.width * -13.18254, size.height * 1.389908), Offset(size.width * 0.8014365, size.height * 0.7431385), [
       const Color(0xff57ECD9).withOpacity(1),
       const Color(0xff53EADB).withOpacity(1),
       const Color(0xff2FDDC6).withOpacity(1),
@@ -285,7 +156,8 @@ class RPSCustomPainter extends CustomPainter {
       0.993897
     ]);
     canvas.drawRRect(
-        RRect.fromRectAndCorners(Rect.fromLTWH(size.width * -0.04758846, size.height * 0.5317885, size.width * 0.7655058, size.height * 0.7734019),
+        RRect.fromRectAndCorners(
+            Rect.fromLTWH(size.width * -0.04758846, size.height * 0.5317885, size.width * 0.7655058, size.height * 0.7734019),
             bottomRight: Radius.circular(size.width * 0.1913744),
             bottomLeft: Radius.circular(size.width * 0.1913744),
             topLeft: Radius.circular(size.width * 0.1913744),
@@ -295,7 +167,8 @@ class RPSCustomPainter extends CustomPainter {
     Paint paint0Fill = Paint()..style = PaintingStyle.fill;
     paint0Fill.color = const Color(0xff000000).withOpacity(1.0);
     canvas.drawRRect(
-        RRect.fromRectAndCorners(Rect.fromLTWH(size.width * -0.04758846, size.height * 0.5317885, size.width * 0.7655058, size.height * 0.7734019),
+        RRect.fromRectAndCorners(
+            Rect.fromLTWH(size.width * -0.04758846, size.height * 0.5317885, size.width * 0.7655058, size.height * 0.7734019),
             bottomRight: Radius.circular(size.width * 0.1913744),
             bottomLeft: Radius.circular(size.width * 0.1913744),
             topLeft: Radius.circular(size.width * 0.1913744),
@@ -320,7 +193,8 @@ class ParallelogramClipper extends CustomClipper<Path> {
     path.lineTo(cornerRadius, size.height);
     path.lineTo(0.0, cornerRadius);
 
-    path.addRRect(RRect.fromLTRBR(cornerRadius, cornerRadius, size.width - cornerRadius, size.height - cornerRadius, const Radius.circular(cornerRadius)));
+    path.addRRect(RRect.fromLTRBR(
+        cornerRadius, cornerRadius, size.width - cornerRadius, size.height - cornerRadius, const Radius.circular(cornerRadius)));
 
     return path;
   }

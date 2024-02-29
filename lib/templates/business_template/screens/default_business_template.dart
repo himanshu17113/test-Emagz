@@ -55,9 +55,9 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                 children: [
                   Container(
                     height: 600,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(image: NetworkImage(uselessUrl), fit: BoxFit.cover),
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
                       ),
@@ -241,7 +241,7 @@ class DefaultBusinesstempScreen extends StatelessWidget {
                         }),
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         image: DecorationImage(
                       image: NetworkImage(
                         uselessUrl,

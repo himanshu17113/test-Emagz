@@ -19,11 +19,11 @@ class PTemplateOneScreen extends StatelessWidget {
         children: [
           Container(
             height: 650,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(uselessUrl),
                 fit: BoxFit.cover,
-                colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.saturation),
+                colorFilter: ColorFilter.mode(Colors.grey, BlendMode.saturation),
               ),
             ),
             child: Stack(
@@ -87,7 +87,7 @@ class PTemplateOneScreen extends StatelessWidget {
                   // width: 350,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.yellow),
-                    image: DecorationImage(
+                    image: const DecorationImage(
                       image: CachedNetworkImageProvider(uselessUrl),
                       fit: BoxFit.cover,
                     ),
@@ -163,7 +163,7 @@ class PTemplateOneScreen extends StatelessWidget {
                             // width: 350,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.yellow),
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                 image: CachedNetworkImageProvider(uselessUrl),
                                 fit: BoxFit.cover,
                               ),
@@ -189,7 +189,7 @@ class PTemplateOneScreen extends StatelessWidget {
                         // width: 350,
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.yellow),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
@@ -227,7 +227,7 @@ class PTemplateOneScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
@@ -244,7 +244,7 @@ class PTemplateOneScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
@@ -261,7 +261,7 @@ class PTemplateOneScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.amber),
                           borderRadius: BorderRadius.circular(200),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
                           ),
@@ -282,14 +282,14 @@ class PTemplateOneScreen extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 4,
                         itemBuilder: (context, index) {
-                          return Row(
+                          return const Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               CircleAvatar(
                                 radius: 30,
                                 backgroundImage: CachedNetworkImageProvider(uselessUrl),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 12,
                               )
                             ],

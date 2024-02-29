@@ -48,7 +48,7 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                     children: [
                       Container(
                         height: 170,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             image: DecorationImage(
                                 image: NetworkImage(uselessUrl),
                                 fit: BoxFit.cover)),
@@ -130,9 +130,9 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                                 color: lightSky.withOpacity(.5), width: 1.5),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Row(
+                          child: const Row(
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: 15,
                               ),
                               CircleAvatar(
@@ -140,10 +140,10 @@ class _EndedLiveScreenState extends State<EndedLiveScreen> {
                                 backgroundImage:
                                     NetworkImage(uselessUrl),
                               ),
-                              const SizedBox(
+                              SizedBox(
                                 width: 10,
                               ),
-                              const Column(
+                              Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

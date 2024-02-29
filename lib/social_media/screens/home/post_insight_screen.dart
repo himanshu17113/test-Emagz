@@ -100,7 +100,7 @@ class PostInsightScreen extends StatelessWidget {
               Container(
                 height: 200,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
+                  image: const DecorationImage(
                       image: NetworkImage(uselessUrl),
                       fit: BoxFit.cover),
                   borderRadius: BorderRadius.circular(5),

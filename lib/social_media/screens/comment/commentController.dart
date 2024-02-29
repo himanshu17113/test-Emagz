@@ -203,14 +203,47 @@ class CommentController extends GetxController {
     }
   }
 
+  Future<Comment> replyonreply(
+    String postId,
+    String commentID,
+    String? comment,
+    String postuID,
+  ) async {
+    debugPrint(ApiEndpoint.replyPost(postId, replyCommentId, userId!, commentID));
+    //  // var comment = controller.text;
+    //   if (comment == "") {
+    //     Get.snackbar("Invalid Comment", "Cant post Empty Comment");
+    //     return false;
+    //   }
+    isPosting.value = true;
+    try {
+      Map<String, String> data = {"text": comment ?? controller.text};
+
+      var resposne = await dio.post(ApiEndpoint.replyPost(postId, replyCommentId, userId!, commentID), data: data);
+      debugPrint("nrrjkrj");
+      debugPrint(resposne.data.toString());
+      isPosting.value = false;
+      controller.clear();
+      //  debugPrint(resposne.data.toString());
+      isPosting.value = false;
+      final Comment commentx = Comment.fromJson(resposne.data["comment"]);
+      socketController.sendCommentNotification(postuID, true, null, true);
+      log(commentx.text.toString());
+      return commentx;
+    } catch (e) {
+      log(e.toString());
+      isPosting.value = false;
+      //   update();
+      return Comment();
+    }
+  }
+
   Future<Comment> postReply(
     String postId,
     String commentID,
     String? comment,
     String postuID,
   ) async {
-    debugPrint("👾👾👾👾👾👾👾👾");
-
     debugPrint(ApiEndpoint.replyPost(postId, commentID, userId!, replyCommentId));
     //  // var comment = controller.text;
     //   if (comment == "") {
@@ -220,17 +253,20 @@ class CommentController extends GetxController {
     isPosting.value = true;
     try {
       Map<String, String> data = {"text": comment ?? controller.text};
-      var resposne = await dio.post(ApiEndpoint.replyPost(postId, replyCommentId, userId!, commentID), data: data);
-      log(resposne.toString());
+
+      var resposne = await dio.post(ApiEndpoint.replyPost(postId, commentID, userId!, null), data: data);
+
+      debugPrint(resposne.data.toString());
       isPosting.value = false;
       controller.clear();
       //  debugPrint(resposne.data.toString());
       isPosting.value = false;
       final Comment commentx = Comment.fromJson(resposne.data["comment"]);
       socketController.sendCommentNotification(postuID, true, null, true);
-      debugPrint(commentx.text);
+      log(commentx.text.toString());
       return commentx;
     } catch (e) {
+      log(e.toString());
       isPosting.value = false;
       //   update();
       return Comment();

@@ -49,11 +49,11 @@ class _StoryCommentTileState extends State<StoryCommentTile> {
               width: 10,
             ),
             (profileUrl == null)
-                ? CircleAvatar(
+                ? const CircleAvatar(
                     radius: 24,
                     backgroundImage: NetworkImage(uselessUrl),
                   )
-                : CircleAvatar(
+                : const CircleAvatar(
                     radius: 24,
                     backgroundImage: NetworkImage(uselessUrl),
                   ),

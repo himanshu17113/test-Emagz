@@ -11,7 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:emagz_vendor/social_media/controller/auth/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- import 'package:google_sign_in/google_sign_in.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
 import 'widgets/my_custom_textfiled.dart';
@@ -90,9 +90,11 @@ class _SignInScreenState extends State<SignInScreen> {
               const Text("Remember me"),
               const Spacer(),
               InkWell(
-                onTap: () {
-                  Get.off(() => const ForgetPasswordScreen());
-                },
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgetPasswordScreen(),
+                    )),
                 child: const FormHeadingText(
                   headings: "Forgot Password ?",
                 ),

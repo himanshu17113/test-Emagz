@@ -242,21 +242,21 @@ class _PostCommentsModalBottomSheetState extends State<PostCommentsModalBottomSh
                                       //     commentsController.commentId.value
                                     );
                                     debugPrint("rp------- ${x.sId}");
-                                    if (x.sId == null) {
+                                    if (x.sId != null) {
                                       setState(() {
                                         widget.comments[commentsController.commentindex.value]?.comments?.add(x);
                                         commentsController.controller.clear();
                                       });
                                     }
                                   } else {
-                                    Comment x = await commentsController.postReply(
+                                    Comment x = await commentsController.replyonreply(
                                       widget.postId,
                                       commentsController.commentId.value,
                                       commentsController.controller.text,
                                       widget.postuID!,
                                       //    commentsController.commentId.value
                                     );
-                                    log("rp------- ${x.sId}");
+                                    log("rp ${x.text}");
                                     if (x.sId != null) {
                                       debugPrint("rp ${x.sId}");
                                       setState(() {

@@ -11,7 +11,6 @@ import 'package:emagz_vendor/social_media/screens/chat/message_request_screen.da
 import 'package:emagz_vendor/templates/choose_template/webview.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';

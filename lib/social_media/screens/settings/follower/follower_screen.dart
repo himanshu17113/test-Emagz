@@ -88,7 +88,7 @@ class _FollowerScreenState extends State<FollowerScreen> {
                                 const SizedBox(
                                   width: 15,
                                 ),
-                                CircleAvatar(
+                                const CircleAvatar(
                                   radius: 24,
                                   backgroundImage:
                                       NetworkImage(uselessUrl),

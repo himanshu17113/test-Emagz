@@ -17,7 +17,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
-    var authController =  AuthController() ;
+    var authController = AuthController();
 
     Size size = MediaQuery.of(context).size;
 
@@ -74,8 +74,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           height: 5,
                         ),
                         const FormHeadingText(
-                          headings:
-                              "Please enter your registered mobile number o0r email id to reset your password",
+                          headings: "Please enter your registered mobile number o0r email id to reset your password",
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
                           color: unselectedLabel,
@@ -93,34 +92,34 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           height: 10,
                         ),
                         MyCustomTextfiled(
-                            hint: "Enter your email or mobile number",
-                            controller: authController.forgotPasswordEmailController,
-                          onChange: (text) {
-                              setState(() {
-                              });
-                          },
+                          hint: "Enter your email ",
+                          controller: authController.forgotPasswordEmailController,
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Center(
-                          child:  authController.isUserRegiserting  ? const CircularProgressIndicator():  MyGradientButton(
-                              isEnabled: authController.forgotPasswordEmailController.value.text.isNotEmpty,
-                              onTap: () async{
-                                await authController.sendForgotPasswordRequest();
-                              },
-                            ),
-                           
+                          child: authController.isUserRegiserting
+                              ? const CircularProgressIndicator()
+                              : MyGradientButton(
+                                  isEnabled: authController.forgotPasswordEmailController.value.text.isNotEmpty,
+                                  onTap: () async {
+                                    await authController.sendForgotPasswordRequest();
+                                  },
+                                ),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        const Center(
-                          child: FormHeadingText(
-                            headings: "Back To Sign In",
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: lightBlack,
+                        Center(
+                          child: GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: const FormHeadingText(
+                              headings: "Back To Sign In",
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: lightBlack,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -129,8 +128,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ],
                     ),
                   ),
-
-
                 ],
               ),
             ),

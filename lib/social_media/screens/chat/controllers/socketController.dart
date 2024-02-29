@@ -251,8 +251,8 @@ class SocketController extends GetxController {
       print('getChatList');
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
       var response = await client.get(Uri.parse(ApiEndpoint.getConversation(globUserId ?? userId!)), headers: header);
-      debugPrint("Chat list");
-      debugPrint("🧣🧣🧣🧣🧣 start");
+     
+      debugPrint("🧣🧣🧣🧣🧣 Chat list");
       List<Conversation> conversationsx = [];
       jsonDecode(response.body).forEach((e) {
         final conversation = Conversation.fromJson(e);

@@ -310,7 +310,7 @@ class AuthController {
 
   sendForgotPasswordRequest() async {
     isUserRegiserting = true;
-    var email = forgotPasswordEmailController.text;
+    String email = forgotPasswordEmailController.text;
     if (email == "") {
       CustomSnackbar.show("Please Enter email or Password");
     }

@@ -21,7 +21,7 @@ class PTemplateTwoScreen extends StatelessWidget {
         children: [
           Container(
             height: 800,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(image: CachedNetworkImageProvider(uselessUrl), fit: BoxFit.cover),
             ),
             child: Stack(
@@ -190,7 +190,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.only(),
                         height: 300,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: CachedNetworkImageProvider(uselessUrl),
                             fit: BoxFit.cover,
@@ -215,7 +215,7 @@ class PTemplateTwoScreen extends StatelessWidget {
                   child: Container(
                     margin: const EdgeInsets.only(top: 30),
                     height: 300,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: CachedNetworkImageProvider(uselessUrl),
                         fit: BoxFit.cover,

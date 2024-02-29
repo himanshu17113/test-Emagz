@@ -47,10 +47,7 @@ class ConversationController extends GetxController {
   }
 
   userTemplate() async {
-    var headers = {
-      'Content-Type': 'application/json',
-      "Authorization": globToken ?? token!
-    };
+    var headers = {'Content-Type': 'application/json', "Authorization": globToken ?? token!};
     http.Response response = await http.get(
       Uri.parse("${ApiEndpoint.userTemplate}/$globUserId"),
       headers: headers,
@@ -88,8 +85,7 @@ class ConversationController extends GetxController {
       }
       print('getChatList');
       debugPrint(ApiEndpoint.getConversation(globUserId ?? userId!));
-      var response =
-          await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
+      var response = await dio.get(ApiEndpoint.getConversation(globUserId ?? userId!));
       debugPrint("Chat list");
       debugPrint("🧣🧣🧣🧣🧣 start");
       List<Conversation> conversationsx = [];
@@ -109,11 +105,7 @@ class ConversationController extends GetxController {
 
   Future postChat(String text, String conversationId) async {
     try {
-      var body = {
-        "conversationId": conversationId,
-        "sender": globUserId ?? userId,
-        "text": text
-      };
+      var body = {"conversationId": conversationId, "sender": globUserId ?? userId, "text": text};
 
       await dio.post(ApiEndpoint.postMessage, data: body);
     } catch (e) {
@@ -214,13 +206,8 @@ class ConversationController extends GetxController {
     req?.clear();
     try {
       debugPrint('${ApiEndpoint.requestList}?filter=$filter');
-      var headers = {
-        'Content-Type': 'application/json',
-        "Authorization": token!
-      };
-      http.Response response = await http.get(
-          Uri.parse('${ApiEndpoint.requestList}?filter=$filter'),
-          headers: headers);
+      var headers = {'Content-Type': 'application/json', "Authorization": token!};
+      http.Response response = await http.get(Uri.parse('${ApiEndpoint.requestList}?filter=$filter'), headers: headers);
       var body = jsonDecode(response.body);
       Requests? temp;
       body.forEach((e) {
@@ -242,11 +229,8 @@ class ConversationController extends GetxController {
       update(['searchList']);
     } else {
       isSearch = true;
-      searChatList = chatList
-          .where((element) => element.userData!.username!
-              .toLowerCase()
-              .contains(search.toLowerCase()))
-          .toList();
+      searChatList =
+          chatList.where((element) => element.userData!.username!.toLowerCase().contains(search.toLowerCase())).toList();
       if (searChatList.isEmpty) {
         notfound = true;
       } else {

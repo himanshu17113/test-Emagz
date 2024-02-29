@@ -63,36 +63,33 @@ class CommentReplyTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 0.0),
-                  child: SizedBox(
-                    height: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 40,
-                          width: 2,
-                          color: Colors.white30,
-                        ),
-                        Container(
-                          height: 2,
-                          color: Colors.white30,
-                        ),
-                        (!last)
-                            ? Expanded(
-                                flex: 10,
-                                child: Container(
-                                  margin: const EdgeInsets.only(top: 10),
-                                  width: 2,
-                                  color: Colors.white30,
-                                ),
-                              )
-                            : const Spacer(
-                                flex: 10,
-                              )
-                      ],
-                    ),
+                child: SizedBox(
+                  height: 80,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: 2,
+                        color: Colors.white30,
+                      ),
+                      Container(
+                        height: 2,
+                        color: Colors.white30,
+                      ),
+                      (!last)
+                          ? Expanded(
+                              flex: 10,
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 10),
+                                width: 2,
+                                color: Colors.white30,
+                              ),
+                            )
+                          : const Spacer(
+                              flex: 10,
+                            )
+                    ],
                   ),
                 ),
               ),
@@ -173,7 +170,7 @@ class CommentReplyTile extends StatelessWidget {
                                         GestureDetector(
                                           onTap: () {
                                             if (!comment.likes!.contains(globUserId)) {
-                                              comment.likes!.add(globUserId);
+                                              setState(() => comment.likes!.add(globUserId));
                                               commentController.likeComment(postId, comment.sId!);
                                             }
                                           },
@@ -205,7 +202,7 @@ class CommentReplyTile extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                flex: 2,
+                                flex: 3,
                                 child: Column(
                                   children: [
                                     Row(
@@ -219,10 +216,8 @@ class CommentReplyTile extends StatelessWidget {
                                                 letterSpacing: 0.32,
                                                 fontWeight: FontWeight.w500),
                                           ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
                                           Container(
+                                            margin: const EdgeInsets.only(left: 4, right: 10, top: 5),
                                             padding: const EdgeInsets.all(3),
                                             width: 20,
                                             height: 20,
@@ -235,28 +230,28 @@ class CommentReplyTile extends StatelessWidget {
                                             ),
                                             child: Image.asset("assets/png/liked_icon.png", color: purpleColor),
                                           ),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
                                         ]
                                       ],
                                     ),
-                                    IconButton(
-                                      alignment: Alignment.bottomLeft,
-                                      icon: Icon(
-                                        max == 1 ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
-                                        size: 20,
+                                    SizedBox(
+                                      height: 5,
+                                      child: IconButton(
+                                        alignment: Alignment.bottomLeft,
+                                        icon: Icon(
+                                          max == 1 ? Icons.keyboard_arrow_down : Icons.keyboard_arrow_up,
+                                          size: 20,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            if (max == 100) {
+                                              max = 1;
+                                            } else {
+                                              max = 100;
+                                            }
+                                          });
+                                        },
+                                        color: Colors.white60,
                                       ),
-                                      onPressed: () {
-                                        setState(() {
-                                          if (max == 100) {
-                                            max = 1;
-                                          } else {
-                                            max = 100;
-                                          }
-                                        });
-                                      },
-                                      color: Colors.white60,
                                     ),
                                   ],
                                 ),

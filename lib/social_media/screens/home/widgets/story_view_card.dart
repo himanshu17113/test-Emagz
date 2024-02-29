@@ -5,57 +5,61 @@ import 'package:flutter/material.dart';
 import '../story/model/story_model.dart';
 
 class StoryViewCard extends StatelessWidget {
+  final UserId? username;
+  final String url;
   const StoryViewCard({
     Key? key,
     this.username,
     required this.url,
   }) : super(key: key);
-  final UserId? username;
-  final String url;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-      height: 68,
-      width: 72,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          RotationTransition(
-            turns: const AlwaysStoppedAnimation(183 / 360),
-            child: Container(
-              height: 58,
-              width: 58,
-              alignment: Alignment.centerRight,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage("assets/png/story_border.png"), fit: BoxFit.contain),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 5,
+      ),
+      child: SizedBox.square(
+        dimension: 100,
+        // margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              height: 70,
+              width: 70,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                //  shape: BoxShape.circle,
+                image: DecorationImage(image: CachedNetworkImageProvider(url), fit: BoxFit.fill),
+              ),
+              child: Image.asset(
+                "assets/png/story_frame.png",
+                fit: BoxFit.fill,
               ),
             ),
-          ),
-          Positioned(
-              child: RotationTransition(
-            turns: const AlwaysStoppedAnimation(224 / 360),
-            child: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                  border: Border.all(width: 0, color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey,
-                  image: DecorationImage(fit: BoxFit.fill, image: CachedNetworkImageProvider(url))),
+            Positioned(
+              // bottom: 25,
+              // left: 47.5,
+              bottom: 30,
+              left: 52,
+              child: // SizedBox(
+                  RotationTransition(
+                turns: const AlwaysStoppedAnimation(-48 / 360),
+                child: SizedBox(
+                  //   color: Colors.amber,
+                  width: 100,
+                  height: 20,
+                  child: Text(
+                    username == null ? "  loading.." : username!.username!,
+                    style: const TextStyle(fontSize: 6, fontWeight: FontWeight.bold, color: blackButtonColor),
+                  ),
+                ),
+              ),
             ),
-          )),
-          Positioned(
-            top: 66,
-            left: 20,
-            child: Text(
-              username == null ? "loading.." : username!.username!,
-              style: const TextStyle(fontSize: 6, fontWeight: FontWeight.bold, color: blackButtonColor),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -7,7 +7,6 @@ import 'package:emagz_vendor/social_media/common/bottom_nav/bottom_nav.dart';
 import 'package:emagz_vendor/social_media/controller/auth/hive_db.dart';
 import 'package:emagz_vendor/social_media/models/user_schema.dart';
 
-import 'package:emagz_vendor/social_media/screens/account/business_account_confirmation.dart';
 import 'package:emagz_vendor/templates/choose_template/choose_template.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -115,11 +114,11 @@ class SetupAccount extends GetxController {
   }
 
   Future<String> uploadProfilePic(XFile? image) async {
-    Map<String, String> header = {'Content-type': 'multipart/form-data'};
+    Map<String, String> header = {'Content-type': 'multipart/form-data', "Authorization": globToken!};
     Map<String, String> header2 = {"Authorization": globToken!};
     var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
     request.headers.addAll(header);
-    request.headers.addAll(header2);
+
     if (image?.path != null) {
       request.files.add(await http.MultipartFile.fromPath(
         'profilePic',
@@ -129,8 +128,9 @@ class SetupAccount extends GetxController {
     }
     var response = await request.send();
     debugPrint("code${response.statusCode}");
-    debugPrint("stream${response.stream}");
+
     final res = await http.Response.fromStream(response);
+    debugPrint("stream${res.body}");
     var data = jsonDecode(res.body);
     if (response.statusCode == 200) {
       //var hiveBox = Hive.box("secretes");

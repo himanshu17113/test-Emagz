@@ -13,7 +13,7 @@ class HomePostsController extends GetxController {
   bool ispostloading = false;
   final socketController = Get.put(
     SocketController(),
-    tag: "notify", 
+    tag: "notify",
   );
   String? token;
   String? userId;
@@ -34,15 +34,13 @@ class HomePostsController extends GetxController {
       // }
     }
     scrollController.addListener(() {
-      if (scrollController.position.userScrollDirection ==
-          ScrollDirection.reverse) {
+      if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
         if (isVisible) {
           isVisible = false;
           update(['bottom_Nav', 'appbar']);
         }
       }
-      if (scrollController.position.userScrollDirection ==
-          ScrollDirection.forward) {
+      if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
         if (!isVisible) {
           isVisible = true;
           update(["bottom_Nav", "appbar"]);
@@ -63,13 +61,9 @@ class HomePostsController extends GetxController {
   }
 
   loadMoreData() async {
-    if (scrollController.position.pixels >=
-            scrollController.position.maxScrollExtent &&
-        !ispostloading &&
-        !endOfPost) {
+    if (scrollController.position.pixels >= scrollController.position.maxScrollExtent && !ispostloading && !endOfPost) {
       await getPost();
-    } else if (scrollController.position.pixels ==
-        scrollController.position.minScrollExtent - 50) {}
+    } else if (scrollController.position.pixels == scrollController.position.minScrollExtent - 50) {}
   }
 
   getPost() async {
@@ -83,13 +77,14 @@ class HomePostsController extends GetxController {
       debugPrint(endPoint.toString());
       var resposne = await dio.get(endPoint);
       int len = posts!.length;
-      if (resposne.data['AllPost'] != null &&
-          resposne.data["AllPost"] is List) {
+      if (resposne.data['AllPost'] != null && resposne.data["AllPost"] is List) {
         resposne.data["AllPost"].forEach((e) {
           Post? post;
           try {
             post = Post.fromJson(e);
           } catch (err) {
+            debugPrint(e["_id"]);
+
             debugPrint('get post error in home controller');
             debugPrint(err.toString());
             ispostloading = false;
@@ -140,8 +135,7 @@ class HomePostsController extends GetxController {
     }
   }
 
-  Future<bool> likePost(
-      String postId, int index, bool islike, String uid) async {
+  Future<bool> likePost(String postId, int index, bool islike, String uid) async {
     // if (!islike) {
     //   posts![index].likeCount! - 1;
     //   posts![index].isLike = false;
@@ -151,8 +145,7 @@ class HomePostsController extends GetxController {
     // }
 
     if (islike) {
-      socketController.sendLikeNotification(
-          uid, constuser?.username ?? constuser?.displayName ?? "");
+      socketController.sendLikeNotification(uid, constuser?.username ?? constuser?.displayName ?? "");
     }
     try {
       var data = {
@@ -182,8 +175,7 @@ class HomePostsController extends GetxController {
     }
   }
 
-  Future<Map<String, String>?> postCustomPoll(
-      String postId, String vote) async {
+  Future<Map<String, String>?> postCustomPoll(String postId, String vote) async {
     try {
       debugPrint(ApiEndpoint.doPoll(postId));
       var data = {"vote": vote, "userId": userId};
@@ -219,13 +211,10 @@ class HomePostsController extends GetxController {
       );
 
       Poll poll = Poll.fromMap(response.data);
-      Map<String, String> map = {
-        "isVoted": (poll.isVoted ?? false) ? "True" : "False"
-      };
+      Map<String, String> map = {"isVoted": (poll.isVoted ?? false) ? "True" : "False"};
       poll.postx?.customPollData?.forEach((element) {
         debugPrint(response.data["pollCalculation"][element]);
-        map.addIf(response.data["pollCalculation"][element] != null, element,
-            response.data["pollCalculation"][element]);
+        map.addIf(response.data["pollCalculation"][element] != null, element, response.data["pollCalculation"][element]);
       });
 
       return map;

@@ -14,9 +14,9 @@ class CommentReplyTile extends StatelessWidget {
         color: const Color(0xffDDE0FF),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
+      child: const Row(
         children: [
-          const SizedBox(
+          SizedBox(
             width: 10,
           ),
           CircleAvatar(
@@ -24,10 +24,10 @@ class CommentReplyTile extends StatelessWidget {
             backgroundImage:
             NetworkImage(uselessUrl),
           ),
-          const SizedBox(
+          SizedBox(
             width: 10,
           ),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment:
             MainAxisAlignment.spaceBetween,
@@ -48,12 +48,12 @@ class CommentReplyTile extends StatelessWidget {
               ),
             ],
           ),
-          const Spacer(),
-          const Icon(
+          Spacer(),
+          Icon(
             Icons.keyboard_arrow_down,
             size: 10,
           ),
-          const SizedBox(
+          SizedBox(
             width: 10,
           )
         ],
