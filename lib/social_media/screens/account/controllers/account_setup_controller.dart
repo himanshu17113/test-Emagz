@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:emagz_vendor/common/common_snackbar.dart';
@@ -114,6 +115,7 @@ class SetupAccount extends GetxController {
   }
 
   Future<String> uploadProfilePic(XFile? image) async {
+    debugPrint('${ApiEndpoint.uploadProfilePic}?userId=$globUserId');
     Map<String, String> header = {'Content-type': 'multipart/form-data', "Authorization": globToken!};
     Map<String, String> header2 = {"Authorization": globToken!};
     var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
@@ -121,7 +123,7 @@ class SetupAccount extends GetxController {
 
     if (image?.path != null) {
       request.files.add(await http.MultipartFile.fromPath(
-        'profilePic',
+        'ProfilePic',
         image!.path,
         filename: image.name,
       ));
@@ -130,18 +132,19 @@ class SetupAccount extends GetxController {
     debugPrint("code${response.statusCode}");
 
     final res = await http.Response.fromStream(response);
-    debugPrint("stream${res.body}");
     var data = jsonDecode(res.body);
     if (response.statusCode == 200) {
       //var hiveBox = Hive.box("secretes");
-      constuser = UserSchema.fromJson(data);
+      constuser = UserSchema.fromJson(data['data']);
       //  await hiveBox.put('user', constuser);
-      debugPrint(data.toString());
-      debugPrint(data['data']['profilePic'].toString());
-      HiveDB.upateProfilePic(data['data']['profilePic']);
+      log(data.toString());
+      debugPrint(data['data']['ProfilePic'].toString());
+      if (constuser?.profilePic != null) {
+        HiveDB.upateProfilePic(constuser!.profilePic!);
+      }
       //  await jwtController.setProfileImage(data['data']['profilePic']);
-      profilePic?.value = data['data']['profilePic'];
-      return data['data']['profilePic'];
+      profilePic?.value = data['data']['ProfilePic'];
+      return data['data']['ProfilePic'];
     } else {
       return 'https://media.istockphoto.com/photos/smiling-indian-business-man-working-on-laptop-at-home-office-young-picture-id1307615661?b=1&k=20&m=1307615661&s=170667a&w=0&h=Zp9_27RVS_UdlIm2k8sa8PuutX9K3HTs8xdK0UfKmYk=';
     }
