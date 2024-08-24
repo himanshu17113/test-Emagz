@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart'  ;
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/constant/data.dart' as text;
 import 'package:emagz_vendor/templates/common/appbar/common_appbar.dart';
@@ -20,7 +20,7 @@ class TemplateFourScreen extends StatefulWidget {
 class _TemplateFourScreenState extends State<TemplateFourScreen> {
   int _current = 0;
 
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +178,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                   ),
                 ),
                 Expanded(
-                  child: CarouselSlider.builder(
+                  child:  CarouselSlider.builder(
                     itemCount: products.length,
                     carouselController: _controller,
                     itemBuilder: (context, index, realIndex) {
@@ -255,7 +255,7 @@ class _TemplateFourScreenState extends State<TemplateFourScreen> {
                         ],
                       );
                     },
-                    options: CarouselOptions(
+                    options:  CarouselOptions(
                         viewportFraction: .41,
                         enlargeCenterPage: true,
                         scrollDirection: Axis.horizontal,

@@ -19,7 +19,7 @@ class TemplateEightScreen extends StatefulWidget {
 class _TemplateEightScreenState extends State<TemplateEightScreen> {
   // final controller = PageController(initialPage: 0);
   final controllerTwo = PageController(initialPage: 0, viewportFraction: .85);
-  CarouselController controller = CarouselController();
+  CarouselSliderController controller = CarouselSliderController();
 
   int activePageTwo = 0;
   List<String> images = [

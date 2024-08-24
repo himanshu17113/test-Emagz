@@ -19,7 +19,7 @@ class TemplateSixScreen extends StatefulWidget {
 class _TemplateSixScreenState extends State<TemplateSixScreen> {
   int _current = 0;
 
-  final CarouselController _controller = CarouselController();
+  final   _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,7 @@ class TemplateFiveScreen extends StatefulWidget {
 class _TemplateFiveScreenState extends State<TemplateFiveScreen> {
   int _current = 0;
 
-  final CarouselController _controller = CarouselController();
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

@@ -17,8 +17,8 @@ class TemplateNineScreen extends StatefulWidget {
 
 class _TemplateNineScreenState extends State<TemplateNineScreen> {
   // final controller = PageController(initialPage: 0);
-  CarouselController controller = CarouselController();
-  CarouselController controllerTwo = CarouselController();
+  final controller = CarouselSliderController();
+  final controllerTwo = CarouselSliderController();
 
   @override
   void initState() {

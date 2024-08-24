@@ -58,6 +58,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        themeMode: ThemeMode.light,
         debugShowCheckedModeBanner: false,
         title: 'eMAGZ',
         theme: ThemeData.light().copyWith(

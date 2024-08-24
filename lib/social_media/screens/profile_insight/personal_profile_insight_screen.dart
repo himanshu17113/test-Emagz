@@ -1,7 +1,5 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../common/common_appbar.dart';
 
 class PersonalProfileInsightScreen extends StatefulWidget {
@@ -137,51 +135,52 @@ class _PersonalProfileInsightScreenState
                             fontWeight: FontWeight.w500),
                       ),
                     ),
-                    SizedBox(
-                      height: 190,
-                      child: SfCartesianChart(
-                        margin: const EdgeInsets.only(right: 20, left: 10),
-                        // enableSideBySideSeriesPlacement: false,
-                        borderWidth: 0,
-                        plotAreaBorderWidth: 0,
-                        primaryXAxis: const CategoryAxis(
-                          tickPosition: TickPosition.outside,
-                          // minorTicksPerInterval: 0,
-                          majorTickLines: MajorTickLines(
-                              size: 2, color: Colors.transparent),
-                          axisLine: AxisLine(width: 0),
+                    // SizedBox(
+                    //   height: 190,
+                    //   child: SfCartesianChart(
+                    //     margin: const EdgeInsets.only(right: 20, left: 10),
+                    //     // enableSideBySideSeriesPlacement: false,
+                    //     borderWidth: 0,
+                    //     plotAreaBorderWidth: 0,
+                    //     primaryXAxis: const CategoryAxis(
+                    //       tickPosition: TickPosition.outside,
+                    //       // minorTicksPerInterval: 0,
+                    //       majorTickLines: MajorTickLines(
+                    //           size: 2, color: Colors.transparent),
+                    //       axisLine: AxisLine(width: 0),
 
-                          maximumLabels: 8,
-                          labelStyle: TextStyle(
-                              color: Colors.transparent, fontSize: 0),
-                          majorGridLines: MajorGridLines(width: 0),
-                        ),
-                        primaryYAxis: const NumericAxis(isVisible: false),
-                        tooltipBehavior: TooltipBehavior(enable: true),
-                        series: <CartesianSeries<ChartData, String>>[
-                          ColumnSeries<ChartData, String>(
-                              borderRadius: BorderRadius.circular(0),
-                              dataSource: [
-                                ChartData('jan', 30, Colors.red),
-                                ChartData('Feb', 20, Colors.amber),
-                                ChartData('Mar', 40, Colors.green),
-                                ChartData('Apr', 25, Colors.blueAccent),
-                                ChartData('May', 20, Colors.indigo),
-                                ChartData('Jun', 30, Colors.cyan),
-                                // ChartData('Jul', 35),
-                                // ChartData('Aug', 45),
-                              ],
-                              pointColorMapper: (ChartData data, _) =>
-                                  data.color,
-                              width: 0.92,
-                              trackColor: Colors.black,
-                              xValueMapper: (ChartData data, _) => data.x,
-                              yValueMapper: (ChartData data, _) => data.y,
-                              name: 'Month',
-                              color: Colors.white.withOpacity(.22)),
-                        ],
-                      ),
-                    ),
+                    //       maximumLabels: 8,
+                    //       labelStyle: TextStyle(
+                    //           color: Colors.transparent, fontSize: 0),
+                    //       majorGridLines: MajorGridLines(width: 0),
+                    //     ),
+                    //     primaryYAxis: const NumericAxis(isVisible: false),
+                    //     tooltipBehavior: TooltipBehavior(enable: true),
+                    //     series: <CartesianSeries<ChartData, String>>[
+                    //       ColumnSeries<ChartData, String>(
+                    //           borderRadius: BorderRadius.circular(0),
+                    //           dataSource: [
+                    //             ChartData('jan', 30, Colors.red),
+                    //             ChartData('Feb', 20, Colors.amber),
+                    //             ChartData('Mar', 40, Colors.green),
+                    //             ChartData('Apr', 25, Colors.blueAccent),
+                    //             ChartData('May', 20, Colors.indigo),
+                    //             ChartData('Jun', 30, Colors.cyan),
+                    //             // ChartData('Jul', 35),
+                    //             // ChartData('Aug', 45),
+                    //           ],
+                    //           pointColorMapper: (ChartData data, _) =>
+                    //               data.color,
+                    //           width: 0.92,
+                    //           trackColor: Colors.black,
+                    //           xValueMapper: (ChartData data, _) => data.x,
+                    //           yValueMapper: (ChartData data, _) => data.y,
+                    //           name: 'Month',
+                    //           color: Colors.white.withOpacity(.22)),
+                    //     ],
+                    //   ),
+                    // ),
+                 
                     Container(
                       margin: const EdgeInsets.symmetric(
                           horizontal: 5, vertical: 10),

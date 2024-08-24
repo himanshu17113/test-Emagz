@@ -20,7 +20,7 @@ class TemplateTwoScreen extends StatefulWidget {
 class _TemplateTwoScreenState extends State<TemplateTwoScreen> {
   int _current = 0;
 
-  final CarouselController _controller = CarouselController();
+  final   _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

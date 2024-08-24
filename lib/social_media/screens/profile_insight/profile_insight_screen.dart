@@ -1,8 +1,6 @@
 import 'package:emagz_vendor/constant/colors.dart';
 import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../common/common_appbar.dart';
 
 class ProfileInsightScreen extends StatefulWidget {
@@ -54,20 +52,14 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
               ),
               const Text(
                 "Profile Insights",
-                style: TextStyle(
-                    fontSize: 20,
-                    color: blackButtonColor,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 20, color: blackButtonColor, fontWeight: FontWeight.w600),
               ),
               const SizedBox(
                 height: 5,
               ),
               const Text(
                 "Take a deep look at how your account and content are performing",
-                style: TextStyle(
-                    fontSize: 12,
-                    color: blackButtonColor,
-                    fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 12, color: blackButtonColor, fontWeight: FontWeight.w500),
               ),
               const SizedBox(
                 height: 25,
@@ -81,26 +73,15 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                     width: 80,
                     child: DropdownButtonHideUnderline(
                       child: DropdownButtonFormField(
-                        decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.zero,
-                            enabledBorder: InputBorder.none,
-                            border: InputBorder.none),
+                        decoration: const InputDecoration(contentPadding: EdgeInsets.zero, enabledBorder: InputBorder.none, border: InputBorder.none),
                         focusColor: Colors.white,
                         hint: const Text(
                           "Duration",
-                          style: TextStyle(
-                              fontSize: 12.5,
-                              color: blackButtonColor,
-                              fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 12.5, color: blackButtonColor, fontWeight: FontWeight.w600),
                         ),
                         isExpanded: true,
-                        style: const TextStyle(
-                            fontSize: 12.5,
-                            color: blackButtonColor,
-                            fontWeight: FontWeight.w600),
-                        icon: const Align(
-                            alignment: Alignment.centerRight,
-                            child: Icon(Icons.keyboard_arrow_down)),
+                        style: const TextStyle(fontSize: 12.5, color: blackButtonColor, fontWeight: FontWeight.w600),
+                        icon: const Align(alignment: Alignment.centerRight, child: Icon(Icons.keyboard_arrow_down)),
                         items: daysItem.map((list) {
                           return DropdownMenuItem<String>(
                             value: list,
@@ -131,81 +112,33 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                     height: 250,
                     margin: const EdgeInsets.only(top: 20),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                          begin: Alignment(-0.3, 1),
-                          end: Alignment(0.8, -1.5),
-                          colors: [
-                            Color(0xff0F0AA4),
-                            Color(0xff2992E3),
-                          ]),
+                      gradient: const LinearGradient(begin: Alignment(-0.3, 1), end: Alignment(0.8, -1.5), colors: [
+                        Color(0xff0F0AA4),
+                        Color(0xff2992E3),
+                      ]),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    child: Stack(
-                      children: [
-                        const Positioned(
-                          top: 15,
-                          left: 20,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "₹ 400k",
-                                style: TextStyle(
-                                    color: whiteColor,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                "Total Sales",
-                                style: TextStyle(
-                                    color: whiteColor,
-                                    fontSize: 9,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SfCartesianChart(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          borderWidth: 0,
-                          plotAreaBorderWidth: 0,
-                          primaryYAxis: const NumericAxis(
-                            isVisible: false,
-                            // placeLabelsNearAxisLine: true,
-                          ),
-                          tooltipBehavior: TooltipBehavior(
-                            enable: true,
-                          ),
-                          primaryXAxis: const CategoryAxis(
-                            // placeLabelsNearAxisLine: true,
-                            edgeLabelPlacement: EdgeLabelPlacement.shift,
-                            rangePadding: ChartRangePadding.none,
-                            tickPosition: TickPosition.outside,
-                       //     minorTicksPerInterval: 0,
-                            majorTickLines: MajorTickLines(
-                                size: 5, color: Colors.transparent),
-                            axisLine: AxisLine(width: 0),
-                            maximumLabels: 7,
-                            labelStyle: TextStyle(color: Colors.white),
-                            majorGridLines: MajorGridLines(width: 0),
-                          ),
-                          // palette: [Color(0xff0D7CBB)],
-                          series: <CartesianSeries<dynamic, dynamic>>[
-                            SplineAreaSeries<ChartData, String>(
-                                borderColor: const Color(0xff1DADFF),
-                                borderWidth: 2.5,
-
-                                // color: Colors.red,
-                                gradient: gradientColors,
-                                dataSource: chartData,
-                                splineType: SplineType.natural,
-                                // cardinalSplineTension: .5,
-                                xValueMapper: (ChartData data, _) => data.x,
-                                yValueMapper: (ChartData data, _) => data.y),
+                    child: const Stack(children: [
+                      Positioned(
+                        top: 15,
+                        left: 20,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "₹ 400k",
+                              style: TextStyle(color: whiteColor, fontSize: 17, fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              "Total Sales",
+                              style: TextStyle(color: whiteColor, fontSize: 9, fontWeight: FontWeight.w600),
+                            ),
                           ],
-                        )
-                      ],
-                    ),
+                        ),
+                      ),
+                      //   SfCartesianChart(
+                      //     margin: const EdgeInsets.only(bottom: 10),
+                    ]),
                   ),
                 ],
               ),
@@ -216,10 +149,7 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                   itemCount: gridData.length,
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, mainAxisSpacing: 10, crossAxisCount: 2),
                   itemBuilder: (ctx, index) {
                     return InkWell(
                       onTap: () {
@@ -231,16 +161,8 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                         padding: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            border: selectedIndex == index
-                                ? null
-                                : Border.all(
-                                    color: const Color(0xff9A9A9A), width: 1.5),
-                            image: selectedIndex == index
-                                ? const DecorationImage(
-                                    image: AssetImage(
-                                        "assets/png/profile_grid.png"),
-                                    fit: BoxFit.cover)
-                                : null),
+                            border: selectedIndex == index ? null : Border.all(color: const Color(0xff9A9A9A), width: 1.5),
+                            image: selectedIndex == index ? const DecorationImage(image: AssetImage("assets/png/profile_grid.png"), fit: BoxFit.cover) : null),
                         height: 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -250,17 +172,13 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                               headings: gridData[index]['title'],
                               fontSize: 29,
                               fontWeight: FontWeight.w700,
-                              color: selectedIndex == index
-                                  ? Colors.white
-                                  : toggleInactive,
+                              color: selectedIndex == index ? Colors.white : toggleInactive,
                             ),
                             FormHeadingText(
                               headings: gridData[index]['body'],
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
-                              color: selectedIndex == index
-                                  ? Colors.white
-                                  : toggleInactive,
+                              color: selectedIndex == index ? Colors.white : toggleInactive,
                             )
                           ],
                         ),

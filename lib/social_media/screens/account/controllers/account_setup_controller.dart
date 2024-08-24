@@ -117,7 +117,7 @@ class SetupAccount extends GetxController {
   Future<String> uploadProfilePic(XFile? image) async {
     debugPrint('${ApiEndpoint.uploadProfilePic}?userId=$globUserId');
     Map<String, String> header = {'Content-type': 'multipart/form-data', "Authorization": globToken!};
-    Map<String, String> header2 = {"Authorization": globToken!};
+ 
     var request = http.MultipartRequest('POST', Uri.parse('${ApiEndpoint.uploadProfilePic}?userId=$globUserId'));
     request.headers.addAll(header);
 

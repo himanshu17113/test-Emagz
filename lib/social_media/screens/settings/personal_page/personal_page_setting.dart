@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emagz_vendor/constant/colors.dart';
@@ -82,6 +81,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
               ),
               child: const Icon(
                 Icons.arrow_back_ios,
+                color: Colors.white,
                 size: 24,
               ),
             ),
@@ -167,8 +167,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                             Text(
                               overflow: TextOverflow.ellipsis,
                               constuser?.displayName ?? "loding..",
-                              style:
-                                  TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
+                              style: TextStyle(color: bottomBarIconColor.withOpacity(.8), fontSize: 10, fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -240,9 +239,9 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () async {
-                        Get.to(() => const OwnWebView());
-                      },
+                      onTap: ()=>
+                        Get.to(() => const OwnWebView()),
+                  
                       child: const Card(
                         color: chipColor,
                         child: Padding(
@@ -310,24 +309,17 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
 
             PreferenceTile(
                 title: "Persona Insights  ",
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfileInsightScreen()))),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ProfileInsightScreen()))),
+
+            PreferenceTile(title: "Privacy", onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const PrivacyScreen()))),
 
             PreferenceTile(
-                title: "Privacy",
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const PrivacyScreen()))),
-
-            PreferenceTile(
-                title: "Security",
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SecurityScreen()))),
+                title: "Security", onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SecurityScreen()))),
 
             PreferenceTile(
                 title: "Support",
                 textDesc: 'We are here to Help',
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SupportScreen()))),
+                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const SupportScreen()))),
 
             Container(
               height: 64,
@@ -477,8 +469,8 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
             GestureDetector(
               onTap: () => addAccount(context),
               child: const Center(
-                child: Text("Add another account",
-                    textAlign: TextAlign.center, style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600)),
+                child:
+                    Text("Add another account", textAlign: TextAlign.center, style: TextStyle(color: blackShaded, fontSize: 12, fontWeight: FontWeight.w600)),
               ),
             ),
 
@@ -523,8 +515,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                             trailing: Radio(
                               groupValue: constuser!.sId!,
                               value: list[index].sId!,
-                              onChanged: (value) =>
-                                  state(() => setState(() => HiveDB.switchAcc(list[index], idtoken[list[index].sId!]!))),
+                              onChanged: (value) => state(() => setState(() => HiveDB.switchAcc(list[index], idtoken[list[index].sId!]!))),
                             ),
                           )
                       // RadioListTile(value: value, groupValue: groupValue, onChanged: onChanged)
@@ -622,9 +613,7 @@ class _PersonalPageSettingState extends State<PersonalPageSetting> {
                     decoration: BoxDecoration(
                       color: const Color(0xff3A0DBB),
                       borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))
-                      ],
+                      boxShadow: [BoxShadow(offset: const Offset(0, 4.07), blurRadius: 20, color: const Color(0xff000040).withOpacity(.25))],
                     ),
                     child: const FormHeadingText(
                       headings: "Update",
