@@ -2,7 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class CouponHeading extends StatelessWidget {
-  const CouponHeading({Key? key}) : super(key: key);
+  const CouponHeading({super.key});
 
   @override
   Widget build(BuildContext context) {

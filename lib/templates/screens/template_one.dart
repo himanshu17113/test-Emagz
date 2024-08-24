@@ -8,7 +8,7 @@ import '../common/appbar/common_appbar.dart';
 import '../widgets/common_slider.dart';
 
 class TemplateOne extends StatefulWidget {
-  const TemplateOne({Key? key}) : super(key: key);
+  const TemplateOne({super.key});
 
   @override
   State<TemplateOne> createState() => _TemplateOneState();

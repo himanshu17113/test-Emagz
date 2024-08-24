@@ -10,7 +10,7 @@ import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../../controller/privacy/privacy_controller.dart';
 
 class PostSettingScreen extends StatefulWidget {
-  const PostSettingScreen({Key? key}) : super(key: key);
+  const PostSettingScreen({super.key});
 
   @override
   State<PostSettingScreen> createState() => _PostSettingScreenState();

@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 class BagDropDown extends StatelessWidget {
   final List listData;
     String? value;
-    BagDropDown({Key? key, required this.listData, this.value})
-      : super(key: key);
+    BagDropDown({super.key, required this.listData, this.value});
 
   @override
   Widget build(BuildContext context) {

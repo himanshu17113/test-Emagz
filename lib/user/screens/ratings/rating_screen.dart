@@ -3,7 +3,7 @@ import 'package:emagz_vendor/user/screens/ratings/widgets/ration_card.dart';
 import 'package:flutter/material.dart';
 
 class RatingScreen extends StatelessWidget {
-  const RatingScreen({Key? key}) : super(key: key);
+  const RatingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

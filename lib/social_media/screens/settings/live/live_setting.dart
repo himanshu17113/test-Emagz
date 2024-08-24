@@ -10,7 +10,7 @@ import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../../controller/privacy/privacy_controller.dart';
 
 class LiveSettingScreen extends StatefulWidget {
-  const LiveSettingScreen({Key? key}) : super(key: key);
+  const LiveSettingScreen({super.key});
 
   @override
   State<LiveSettingScreen> createState() => _LiveSettingScreenState();

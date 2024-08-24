@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import '../coupon/coupon_screen.dart';
 
 class ProfileScreenUser extends StatefulWidget {
-  const ProfileScreenUser({Key? key}) : super(key: key);
+  const ProfileScreenUser({super.key});
 
   @override
   State<ProfileScreenUser> createState() => _ProfileScreenUserState();

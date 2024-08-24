@@ -2,7 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class PaymentHeading extends StatelessWidget {
-  const PaymentHeading({Key? key}) : super(key: key);
+  const PaymentHeading({super.key});
 
   @override
   Widget build(BuildContext context) {

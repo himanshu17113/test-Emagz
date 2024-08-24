@@ -5,9 +5,9 @@ import '../../../constant/colors.dart';
 
 class ProductDetailsCard extends StatelessWidget {
   const ProductDetailsCard({
-    Key? key,
+    super.key,
     required this.url3,
-  }) : super(key: key);
+  });
 
   final String url3;
 

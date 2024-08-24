@@ -8,12 +8,12 @@ class ManageAddressTextfiled extends StatelessWidget {
  final int? maxLines;
 
   const ManageAddressTextfiled({
-    Key? key,
+    super.key,
     this.controller,
     this.hint,
     this.maxLines = 1,
     this.inputType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -26,11 +26,11 @@ class EditorScreen extends StatefulWidget {
   final List<Uint8List?> image;
 
   const EditorScreen({
-    Key? key,
+    super.key,
     this.isStory = false,
     this.fileType,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   State<EditorScreen> createState() => _EditorScreenState();
@@ -491,7 +491,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: IconButton(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () => setState(() => rotate[itemindex]++),
@@ -564,7 +564,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () => setState(() => enableRoatation[itemindex] = true),
@@ -586,7 +586,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
@@ -612,7 +612,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
@@ -638,7 +638,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
@@ -664,7 +664,7 @@ class _EditorScreenState extends State<EditorScreen> {
                                         colour: Colors.white24,
                                         child: TextButton.icon(
                                           style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
+                                            padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 15)),
                                             splashFactory: InkSparkle.splashFactory,
                                           ),
                                           onPressed: () {
@@ -776,11 +776,11 @@ class DraggableText extends StatefulWidget {
   TextStyle style;
   Offset position;
   DraggableText({
-    Key? key,
+    super.key,
     required this.text,
     required this.style,
     required this.position,
-  }) : super(key: key);
+  });
 
   @override
   State<DraggableText> createState() => _DraggableTextState();

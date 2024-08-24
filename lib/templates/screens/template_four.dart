@@ -11,7 +11,7 @@ import '../widgets/fav_and_locate_widget.dart';
 import '../widgets/temp_four_product_card.dart';
 
 class TemplateFourScreen extends StatefulWidget {
-  const TemplateFourScreen({Key? key}) : super(key: key);
+  const TemplateFourScreen({super.key});
 
   @override
   State<TemplateFourScreen> createState() => _TemplateFourScreenState();

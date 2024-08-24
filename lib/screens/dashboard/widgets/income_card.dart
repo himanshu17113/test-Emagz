@@ -8,12 +8,11 @@ class IncomeCard extends StatelessWidget {
   final String title;
   final String totalCount;
   const IncomeCard(
-      {Key? key,
+      {super.key,
       required this.gradient,
       required this.title,
       required this.totalCount,
-      required this.imagepath})
-      : super(key: key);
+      required this.imagepath});
 
   @override
   Widget build(BuildContext context) {

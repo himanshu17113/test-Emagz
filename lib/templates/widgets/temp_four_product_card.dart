@@ -6,8 +6,7 @@ import '../../constant/data.dart';
 
 class TemplateFourproductCard extends StatelessWidget {
   final String imgUrl;
-  const TemplateFourproductCard({Key? key, required this.imgUrl})
-      : super(key: key);
+  const TemplateFourproductCard({super.key, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {

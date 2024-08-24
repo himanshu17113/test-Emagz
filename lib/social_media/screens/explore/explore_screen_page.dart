@@ -5,7 +5,7 @@ import '../../common/bottom_nav/bottom_nav.dart';
 import '../../controller/bottom_nav_controller.dart';
 import 'explpre_screen.dart';
 class ExploreScreenPageScreen extends StatefulWidget {
-  const ExploreScreenPageScreen({Key? key}) : super(key: key);
+  const ExploreScreenPageScreen({super.key});
 
   @override
   State<ExploreScreenPageScreen> createState() => _ExploreScreenPageScreenState();

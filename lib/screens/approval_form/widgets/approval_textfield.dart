@@ -9,13 +9,13 @@ final  int? maxLines;
 final  Widget? sufixIcon;
 
   const ApprovalTextField({
-    Key? key,
+    super.key,
     this.hint,
     this.inputType,
     this.maxLines = 1,
     this.controller,
     this.sufixIcon,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

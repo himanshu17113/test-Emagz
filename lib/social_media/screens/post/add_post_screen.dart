@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddPostScren extends StatelessWidget {
-  const AddPostScren({Key? key}) : super(key: key);
+  const AddPostScren({super.key});
   // final navController = Get.put(NavController());
   @override
   Widget build(BuildContext context) {

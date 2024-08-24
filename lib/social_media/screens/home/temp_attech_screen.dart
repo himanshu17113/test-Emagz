@@ -14,7 +14,7 @@ import '../../../templates/screens/template_nine.dart';
 import '../../../templates/screens/template_ten.dart';
 
 class TempAttachScreen extends StatelessWidget {
-  const TempAttachScreen({Key? key}) : super(key: key);
+  const TempAttachScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,8 +91,7 @@ class TempAttachScreen extends StatelessWidget {
 class CustomButton extends StatelessWidget {
   final Function function;
   final String title;
-  const CustomButton({Key? key, required this.function, required this.title})
-      : super(key: key);
+  const CustomButton({super.key, required this.function, required this.title});
 
   @override
   Widget build(BuildContext context) {

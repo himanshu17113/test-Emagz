@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BagScreen extends StatelessWidget {
-  BagScreen({Key? key}) : super(key: key);
+  BagScreen({super.key});
 
   final String quanity = "";
 

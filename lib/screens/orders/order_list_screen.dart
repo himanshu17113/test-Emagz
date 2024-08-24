@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../../model/order_list_model.dart';
 
 class OrderListScreen extends StatefulWidget {
-  const OrderListScreen({Key? key}) : super(key: key);
+  const OrderListScreen({super.key});
 
   @override
   State<OrderListScreen> createState() => _OrderListScreenState();

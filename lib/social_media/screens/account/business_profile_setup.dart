@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BusinessProfileSetupScreen extends StatefulWidget {
-  const BusinessProfileSetupScreen({Key? key}) : super(key: key);
+  const BusinessProfileSetupScreen({super.key});
 
   @override
   State<BusinessProfileSetupScreen> createState() =>

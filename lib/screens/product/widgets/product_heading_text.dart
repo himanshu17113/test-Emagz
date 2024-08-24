@@ -5,8 +5,7 @@ class AddProductheadind extends StatelessWidget {
   final String tittle;
   final bool? isRequired;
   const AddProductheadind(
-      {Key? key, required this.tittle, this.isRequired = true})
-      : super(key: key);
+      {super.key, required this.tittle, this.isRequired = true});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
 class FlipCardScreen extends StatelessWidget {
-  FlipCardScreen({Key? key}) : super(key: key);
+  FlipCardScreen({super.key});
  final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
   @override

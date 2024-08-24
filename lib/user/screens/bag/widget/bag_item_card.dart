@@ -4,7 +4,7 @@ import 'package:emagz_vendor/user/screens/bag/widget/bag_drop_down.dart';
 import 'package:flutter/material.dart';
 
 class BagItemcard extends StatelessWidget {
-  const BagItemcard({Key? key}) : super(key: key);
+  const BagItemcard({super.key});
 
   @override
   Widget build(BuildContext context) {

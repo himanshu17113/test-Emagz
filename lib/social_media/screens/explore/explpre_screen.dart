@@ -13,7 +13,7 @@ import '../../../user/models/product_model.dart';
 import '../../controller/bottom_nav_controller.dart';
 
 class ExploreScreen extends StatefulWidget {
-  const ExploreScreen({Key? key}) : super(key: key);
+  const ExploreScreen({super.key});
 
   @override
   State<ExploreScreen> createState() => _ExploreScreenState();
@@ -142,11 +142,11 @@ class _ExploreScreenState extends State<ExploreScreen> {
 
 class ImageTile extends StatelessWidget {
   const ImageTile({
-    Key? key,
+    super.key,
     required this.index,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   final int index;
   final int width;

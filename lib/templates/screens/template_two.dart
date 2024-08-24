@@ -11,7 +11,7 @@ import '../widgets/fav_and_locate_widget.dart';
 import '../widgets/temp_two_big_slider.dart';
 
 class TemplateTwoScreen extends StatefulWidget {
-  const TemplateTwoScreen({Key? key}) : super(key: key);
+  const TemplateTwoScreen({super.key});
 
   @override
   State<TemplateTwoScreen> createState() => _TemplateTwoScreenState();

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DefaultBusinesstempScreen extends StatelessWidget {
-  const DefaultBusinesstempScreen({Key? key}) : super(key: key);
+  const DefaultBusinesstempScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

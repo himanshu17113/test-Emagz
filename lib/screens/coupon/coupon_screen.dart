@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../../model/order_list_model.dart';
 
 class CouponListScreen extends StatefulWidget {
-  const CouponListScreen({Key? key}) : super(key: key);
+  const CouponListScreen({super.key});
 
   @override
   State<CouponListScreen> createState() => _CouponListScreenState();

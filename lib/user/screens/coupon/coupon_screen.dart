@@ -3,7 +3,7 @@ import 'package:emagz_vendor/user/screens/coupon/widgets/user_coupon.dart';
 import 'package:flutter/material.dart';
 
 class CouponScreen extends StatelessWidget {
-  const CouponScreen({Key? key}) : super(key: key);
+  const CouponScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,14 +9,14 @@ class FormHeadingText extends StatelessWidget {
   final TextAlign textAlign;
   final FontStyle? isItalic;
   const FormHeadingText({
-    Key? key,
+    super.key,
     required this.headings,
     this.fontWeight,
     this.color,
     this.textAlign = TextAlign.start,
     this.fontSize = 15,
     this.isItalic,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -8,11 +8,11 @@ class RDOBInputField extends StatefulWidget {
   final String? time;
 
   const RDOBInputField({
-    Key? key,
+    super.key,
     required this.label,
     this.controller,
     this.time,
-  }) : super(key: key);
+  });
 
   @override
   State<RDOBInputField> createState() => _RDOBInputFieldState();

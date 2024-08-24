@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 
 class CommonAuthScreen extends StatefulWidget {
-  const CommonAuthScreen({Key? key}) : super(key: key);
+  const CommonAuthScreen({super.key});
 
   @override
   State<CommonAuthScreen> createState() => _CommonAuthScreenState();

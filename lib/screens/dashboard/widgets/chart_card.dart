@@ -5,7 +5,7 @@ import '../../../constant/colors.dart';
 import '../../../model/chart_model.dart';
 
 class ChartCard extends StatelessWidget {
-  const ChartCard({Key? key}) : super(key: key);
+  const ChartCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,19 +55,19 @@ class ChartCard extends StatelessWidget {
                 // enableSideBySideSeriesPlacement: false,
                 borderWidth: 0,
                 plotAreaBorderWidth: 0,
-                primaryXAxis: CategoryAxis(
+                primaryXAxis: const CategoryAxis(
                   tickPosition: TickPosition.outside,
                   // minorTicksPerInterval: 0,
                   majorTickLines:
-                      const MajorTickLines(size: 2, color: Colors.transparent),
-                  axisLine: const AxisLine(width: 0),
+                      MajorTickLines(size: 2, color: Colors.transparent),
+                  axisLine: AxisLine(width: 0),
                   maximumLabels: 12,
-                  labelStyle: const TextStyle(color: Colors.white),
-                  majorGridLines: const MajorGridLines(width: 0),
+                  labelStyle: TextStyle(color: Colors.white),
+                  majorGridLines: MajorGridLines(width: 0),
                 ),
-                primaryYAxis: NumericAxis(isVisible: false),
+                primaryYAxis: const NumericAxis(isVisible: false),
                 tooltipBehavior: TooltipBehavior(enable: true),
-                series: <ChartSeries<ChartData, String>>[
+                series: <CartesianSeries<ChartData, String>>[
                   ColumnSeries<ChartData, String>(
                       borderRadius: BorderRadius.circular(10),
                       dataSource: [

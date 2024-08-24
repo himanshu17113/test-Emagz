@@ -7,11 +7,10 @@ class ProfileMenuCard extends StatelessWidget {
   final Widget icon;
   final String title;
   const ProfileMenuCard(
-      {Key? key,
+      {super.key,
       required this.backGroundImage,
       required this.icon,
-      required this.title})
-      : super(key: key);
+      required this.title});
 
   @override
   Widget build(BuildContext context) {

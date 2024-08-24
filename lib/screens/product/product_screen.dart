@@ -12,7 +12,7 @@ import 'widgets/product_desc_headings.dart';
 import 'widgets/product_list_card.dart';
 
 class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+  const ProductScreen({super.key});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();

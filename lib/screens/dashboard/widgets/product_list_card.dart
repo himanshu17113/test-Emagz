@@ -4,8 +4,8 @@ import '../../../constant/colors.dart';
 
 class ProductListTile extends StatelessWidget {
   const ProductListTile({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

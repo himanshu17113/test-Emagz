@@ -7,9 +7,8 @@ class SocialMediaSettingAppBar extends StatelessWidget implements PreferredSizeW
   final Size preferredSize;
   const SocialMediaSettingAppBar({
     required this.title,
-    Key? key,
-  })  : preferredSize = const Size.fromHeight(60.0),
-        super(key: key);
+    super.key,
+  })  : preferredSize = const Size.fromHeight(60.0);
 
   @override
   Widget build(BuildContext context) {

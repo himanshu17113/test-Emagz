@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class MyAddressCard extends StatelessWidget {
  final bool isCurrent;
   const MyAddressCard({
-    Key? key,
+    super.key,
     this.isCurrent = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

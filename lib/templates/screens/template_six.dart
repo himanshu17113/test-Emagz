@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../widgets/fav_and_locate_widget.dart';
 
 class TemplateSixScreen extends StatefulWidget {
-  const TemplateSixScreen({Key? key}) : super(key: key);
+  const TemplateSixScreen({super.key});
 
   @override
   State<TemplateSixScreen> createState() => _TemplateSixScreenState();

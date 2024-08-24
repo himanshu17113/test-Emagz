@@ -6,8 +6,7 @@ class PreferenceTile extends StatelessWidget {
   final String? textDesc;
   final VoidCallback? onTap;
   const PreferenceTile(
-      {Key? key, required this.title, this.onTap, this.textDesc})
-      : super(key: key);
+      {super.key, required this.title, this.onTap, this.textDesc});
 
   @override
   Widget build(BuildContext context) {

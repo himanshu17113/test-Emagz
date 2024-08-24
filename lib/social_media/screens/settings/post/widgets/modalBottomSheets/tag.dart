@@ -324,7 +324,7 @@ class HashTagTextField extends StatefulWidget {
   ///  * [maxLength], which discusses the precise meaning of "number of
   ///    characters" and how it may differ from the intuitive meaning.
   const HashTagTextField({
-    Key? key,
+    super.key,
     this.controller,
     this.decoratedStyle,
     this.onDetectionFinished,
@@ -413,9 +413,7 @@ class HashTagTextField extends StatefulWidget {
                 !identical(keyboardType, TextInputType.text),
             'Use keyboardType TextInputType.multiline when using TextInputAction.newline on a multiline TextField.'),
         keyboardType = keyboardType ??
-            (maxLines == 1 ? TextInputType.text : TextInputType.multiline),
-        
-        super(key: key);
+            (maxLines == 1 ? TextInputType.text : TextInputType.multiline);
 
   final ValueChanged<String>? onDetectionTyped;
 
@@ -721,14 +719,14 @@ class HashTagTextField extends StatefulWidget {
   /// widget.
   ///
   /// If [mouseCursor] is a [MaterialStateProperty<MouseCursor>],
-  /// [MaterialStateProperty.resolve] is used for the following [MaterialState]s:
+  /// [WidgetStateProperty.resolve] is used for the following [WidgetState]s:
   ///
-  ///  * [MaterialState.error].
-  ///  * [MaterialState.hovered].
-  ///  * [MaterialState.focused].
-  ///  * [MaterialState.disabled].
+  ///  * [WidgetState.error].
+  ///  * [WidgetState.hovered].
+  ///  * [WidgetState.focused].
+  ///  * [WidgetState.disabled].
   ///
-  /// If this property is null, [MaterialStateMouseCursor.textable] will be used.
+  /// If this property is null, [WidgetStateMouseCursor.textable] will be used.
   ///
   /// The [mouseCursor] is the only property of [HashTagTextField] that controls the
   /// appearance of the mouse pointer. All other properties related to "cursor"
@@ -1352,13 +1350,13 @@ class _HashTagTextFieldState extends State<HashTagTextField>
       );
     }
     final MouseCursor effectiveMouseCursor =
-        MaterialStateProperty.resolveAs<MouseCursor>(
-      widget.mouseCursor ?? MaterialStateMouseCursor.textable,
-      <MaterialState>{
-        if (!_isEnabled) MaterialState.disabled,
-        if (_isHovering) MaterialState.hovered,
-        if (focusNode.hasFocus) MaterialState.focused,
-        if (_hasError) MaterialState.error,
+        WidgetStateProperty.resolveAs<MouseCursor>(
+      widget.mouseCursor ?? WidgetStateMouseCursor.textable,
+      <WidgetState>{
+        if (!_isEnabled) WidgetState.disabled,
+        if (_isHovering) WidgetState.hovered,
+        if (focusNode.hasFocus) WidgetState.focused,
+        if (_hasError) WidgetState.error,
       },
     );
 

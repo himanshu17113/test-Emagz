@@ -10,7 +10,7 @@ import '../../constant/colors.dart';
 import '../coupon/coupon_screen.dart';
 
 class DrawerMenuScreen extends StatefulWidget {
-  const DrawerMenuScreen({Key? key}) : super(key: key);
+  const DrawerMenuScreen({super.key});
 
   @override
   State<DrawerMenuScreen> createState() => _DrawerMenuScreenState();

@@ -12,13 +12,13 @@ class UserChat extends StatelessWidget {
   final String conversationId;
   final ResentMessage? resentMessage;
   const UserChat({
-    Key? key,
+    super.key,
     //  required this.senderId,
     required this.conversationId,
     this.userData,
     this.isMessage = false,
     this.resentMessage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

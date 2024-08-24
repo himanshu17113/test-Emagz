@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constant/colors.dart';
 
 class PTemplateTwoScreen extends StatelessWidget {
-  const PTemplateTwoScreen({Key? key}) : super(key: key);
+  const PTemplateTwoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

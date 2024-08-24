@@ -9,7 +9,7 @@ import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../../models/user_schema.dart';
 
 class CommentSetting extends StatefulWidget {
-  const CommentSetting({Key? key}) : super(key: key);
+  const CommentSetting({super.key});
 
   @override
   State<CommentSetting> createState() => _CommentSettingState();

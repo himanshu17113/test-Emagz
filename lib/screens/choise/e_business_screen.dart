@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:page_transition/page_transition.dart';
 
 class EbusinessScreen extends StatelessWidget {
-  const EbusinessScreen({Key? key}) : super(key: key);
+  const EbusinessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class UserOnlineCircle extends StatelessWidget {
 final  String? url;
    const UserOnlineCircle({
-    Key? key, this.url,
-  }) : super(key: key);
+    super.key, this.url,
+  });
 
   @override
   Widget build(BuildContext context) {

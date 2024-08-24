@@ -10,9 +10,9 @@ import '../../constant/data.dart';
 class WebViewPersona extends StatefulWidget {
   final String? personaUserId;
   const WebViewPersona({
-    Key? key,
+    super.key,
     this.personaUserId,
-  }) : super(key: key);
+  });
 
   @override
   State<WebViewPersona> createState() => _WebViewPersonaState();
@@ -66,10 +66,10 @@ class _WebViewPersonaState extends State<WebViewPersona> {
 class OwnWebView extends StatelessWidget {
  
   const OwnWebView({
-    Key? key,
+    super.key,
 
     // required this.templateId
-  }) : super(key: key);
+  });
   static final WebViewController controller = WebViewController();
   static final chatController = Get.put(ConversationController());
 
@@ -132,12 +132,11 @@ class WebViewOnlyView extends StatefulWidget {
   String personaUserId;
   String templateId;
   WebViewOnlyView(
-      {Key? key,
+      {super.key,
       required this.token,
       required this.userId,
       required this.personaUserId,
-      required this.templateId})
-      : super(key: key);
+      required this.templateId});
 
   @override
   State<WebViewOnlyView> createState() => _WebViewOnlyViewState();

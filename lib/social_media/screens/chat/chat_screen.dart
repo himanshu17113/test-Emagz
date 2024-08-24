@@ -18,10 +18,10 @@ class ChatScreen extends StatelessWidget {
   final UserData? user;
 
   ChatScreen({
-    Key? key,
+    super.key,
     required this.user,
     required this.conversationId,
-  }) : super(key: key);
+  });
   final socketController = Get.find<SocketController>(tag: "notify");
   final TextEditingController inputTextController = TextEditingController();
 

@@ -20,9 +20,8 @@ class SocialHomeScreenAppBar extends StatefulWidget
   const SocialHomeScreenAppBar({
     this.title = "",
     this.isColor = true,
-    Key? key,
-  })  : preferredSize = const Size.fromHeight(50.0),
-        super(key: key);
+    super.key,
+  })  : preferredSize = const Size.fromHeight(50.0);
 
   @override
   State<SocialHomeScreenAppBar> createState() => _SocialHomeScreenAppBarState();

@@ -8,12 +8,12 @@ final  TextEditingController? controller;
  final int? maxLines;
 
   const AddCouponTextfiled({
-    Key? key,
+    super.key,
     this.controller,
     this.hint,
     this.maxLines = 1,
     this.inputType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

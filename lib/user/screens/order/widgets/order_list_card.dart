@@ -3,7 +3,7 @@ import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class OrderListCard extends StatelessWidget {
-  const OrderListCard({Key? key}) : super(key: key);
+  const OrderListCard({super.key});
 
   @override
   Widget build(BuildContext context) {

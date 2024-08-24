@@ -14,12 +14,11 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../common/common_snackbar.dart';
-
-import 'widgets/dob.dart';
+ import 'widgets/dob.dart';
 import 'widgets/my_custom_textfiled.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -56,7 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> _handleFacebookSignIn() async {
     final LoginResult login = await FacebookAuth.instance.login();
-    final OAuthCredential facebookauthCredential = FacebookAuthProvider.credential(login.accessToken!.token);
+    final OAuthCredential facebookauthCredential = FacebookAuthProvider.credential(login.accessToken!.tokenString);
     final UserCredential userCred = await _firebaseAuth.signInWithCredential(facebookauthCredential);
     if (userCred.user!.photoURL != null && userCred.user!.displayName != null) {
       authController.appleRegister(

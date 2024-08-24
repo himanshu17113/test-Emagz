@@ -8,12 +8,12 @@ class AddProductTextField extends StatelessWidget {
   final int? maxLines;
 
   const AddProductTextField({
-    Key? key,
+    super.key,
     this.hint,
     this.inputType,
     this.maxLines = 1,
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

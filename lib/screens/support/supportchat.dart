@@ -10,10 +10,10 @@ class SupportChat extends StatelessWidget {
   final String conversationId;
   final String userId;
   SupportChat({
-    Key? key,
+    super.key,
     required this.conversationId,
     required this.userId,
-  }) : super(key: key);
+  });
   final socketController = Get.find<SocketController>(tag: "notify");
   final TextEditingController inputTextController = TextEditingController();
 

@@ -15,12 +15,12 @@ class CommentViewScreen extends StatefulWidget {
   VoidCallback update;
   String? myUserId;
   CommentViewScreen({
-    Key? key,
+    super.key,
     required this.post,
     required this.isLiked,
     required this.update,
     this.myUserId,
-  }) : super(key: key);
+  });
 
   @override
   State<CommentViewScreen> createState() => _CommentViewScreenState();
@@ -99,7 +99,7 @@ class _CommentViewScreenState extends State<CommentViewScreen> {
 
 class CommentCard extends StatelessWidget {
   final Comment comment;
-  const CommentCard({Key? key, required this.comment}) : super(key: key);
+  const CommentCard({super.key, required this.comment});
 
   @override
   Widget build(BuildContext context) {

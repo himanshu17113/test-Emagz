@@ -10,7 +10,7 @@ import '../common/appbar/common_appbar.dart';
 import '../widgets/temp_one_sliderCard.dart';
 
 class TemplateSevenScreen extends StatefulWidget {
-  const TemplateSevenScreen({Key? key}) : super(key: key);
+  const TemplateSevenScreen({super.key});
 
   @override
   State<TemplateSevenScreen> createState() => _TemplateSevenScreenState();

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PaymentListScreen extends StatefulWidget {
-  const PaymentListScreen({Key? key}) : super(key: key);
+  const PaymentListScreen({super.key});
 
   @override
   State<PaymentListScreen> createState() => _PaymentListScreenState();

@@ -12,7 +12,7 @@ import '../common/appbar/common_appbar.dart';
 import '../widgets/common_slider.dart';
 
 class TemplateThree extends StatefulWidget {
-  const TemplateThree({Key? key}) : super(key: key);
+  const TemplateThree({super.key});
 
   @override
   State<TemplateThree> createState() => _TemplateThreeState();

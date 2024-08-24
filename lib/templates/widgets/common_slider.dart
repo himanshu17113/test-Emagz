@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../user/models/product_model.dart';
 
 class CommonSlider extends StatefulWidget {
-  const CommonSlider({Key? key}) : super(key: key);
+  const CommonSlider({super.key});
 
   @override
   State<CommonSlider> createState() => _CommonSliderState();

@@ -15,10 +15,10 @@ class ChooseTemplate extends StatefulWidget {
   final bool isReg;
   final bool? isUser;
   const ChooseTemplate({
-    Key? key,
+    super.key,
     this.isUser,
     required this.isReg,
-  }) : super(key: key);
+  });
 
   @override
   State<ChooseTemplate> createState() => _ChooseTemplateState();

@@ -21,7 +21,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
   final bool isblurNeeded;
   final bool? isStory;
   PostCommentsModalBottomSheet({
-    Key? key,
+    super.key,
     this.update,
     required this.postId,
     this.islike,
@@ -31,7 +31,7 @@ class PostCommentsModalBottomSheet extends StatefulWidget {
     this.isblurNeeded = false,
     this.isStory = false,
     this.postuID,
-  }) : super(key: key);
+  });
 
   @override
   State<PostCommentsModalBottomSheet> createState() => _PostCommentsModalBottomSheetState();

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class AddCouponHeadingText extends StatelessWidget {
   final String headings;
-  const AddCouponHeadingText({Key? key, required this.headings}) : super(key: key);
+  const AddCouponHeadingText({super.key, required this.headings});
 
   @override
   Widget build(BuildContext context) {

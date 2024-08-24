@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../../screens/settings/personal_page/personal_page_setting.dart';
 
 class BottomNavBar extends StatelessWidget {
-  BottomNavBar({Key? key}) : super(key: key);
+  BottomNavBar({super.key});
 
   final List<Widget> screen = [
     SocialMediaHomePage(),

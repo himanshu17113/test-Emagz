@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class SliderCard extends StatelessWidget {
   const SliderCard({
-    Key? key,
+    super.key,
     required this.images,
-  }) : super(key: key);
+  });
 
   final String images;
 

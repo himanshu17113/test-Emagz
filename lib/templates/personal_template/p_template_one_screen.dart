@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../constant/colors.dart';
 
 class PTemplateOneScreen extends StatelessWidget {
-  const PTemplateOneScreen({Key? key}) : super(key: key);
+  const PTemplateOneScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

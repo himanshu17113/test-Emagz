@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BusinessAccountConfirmationScreen extends StatelessWidget {
-  const BusinessAccountConfirmationScreen({Key? key}) : super(key: key);
+  const BusinessAccountConfirmationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

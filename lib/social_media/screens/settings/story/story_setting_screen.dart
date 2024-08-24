@@ -8,7 +8,7 @@ import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../../controller/privacy/privacy_controller.dart';
 
 class StorySettingScreen extends StatefulWidget {
-  const StorySettingScreen({Key? key}) : super(key: key);
+  const StorySettingScreen({super.key});
 
   @override
   State<StorySettingScreen> createState() => _StorySettingScreenState();

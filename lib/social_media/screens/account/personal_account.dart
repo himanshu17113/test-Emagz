@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class PersonalAccountScreen extends StatelessWidget {
   final String? suggestedName;
-  PersonalAccountScreen({Key? key, this.suggestedName}) : super(key: key);
+  PersonalAccountScreen({super.key, this.suggestedName});
 
   final authController = AuthController();
 

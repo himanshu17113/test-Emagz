@@ -6,7 +6,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../common/common_appbar.dart';
 
 class ProfileInsightScreen extends StatefulWidget {
-  const ProfileInsightScreen({Key? key}) : super(key: key);
+  const ProfileInsightScreen({super.key});
 
   @override
   State<ProfileInsightScreen> createState() => _ProfileInsightScreenState();
@@ -169,28 +169,28 @@ class _ProfileInsightScreenState extends State<ProfileInsightScreen> {
                           margin: const EdgeInsets.only(bottom: 10),
                           borderWidth: 0,
                           plotAreaBorderWidth: 0,
-                          primaryYAxis: NumericAxis(
+                          primaryYAxis: const NumericAxis(
                             isVisible: false,
                             // placeLabelsNearAxisLine: true,
                           ),
                           tooltipBehavior: TooltipBehavior(
                             enable: true,
                           ),
-                          primaryXAxis: CategoryAxis(
+                          primaryXAxis: const CategoryAxis(
                             // placeLabelsNearAxisLine: true,
                             edgeLabelPlacement: EdgeLabelPlacement.shift,
                             rangePadding: ChartRangePadding.none,
                             tickPosition: TickPosition.outside,
-                            minorTicksPerInterval: 0,
-                            majorTickLines: const MajorTickLines(
+                       //     minorTicksPerInterval: 0,
+                            majorTickLines: MajorTickLines(
                                 size: 5, color: Colors.transparent),
-                            axisLine: const AxisLine(width: 0),
+                            axisLine: AxisLine(width: 0),
                             maximumLabels: 7,
-                            labelStyle: const TextStyle(color: Colors.white),
-                            majorGridLines: const MajorGridLines(width: 0),
+                            labelStyle: TextStyle(color: Colors.white),
+                            majorGridLines: MajorGridLines(width: 0),
                           ),
                           // palette: [Color(0xff0D7CBB)],
-                          series: <ChartSeries>[
+                          series: <CartesianSeries<dynamic, dynamic>>[
                             SplineAreaSeries<ChartData, String>(
                                 borderColor: const Color(0xff1DADFF),
                                 borderWidth: 2.5,

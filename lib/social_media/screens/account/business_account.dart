@@ -2,7 +2,7 @@ import 'package:emagz_vendor/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class BusinessAccount extends StatefulWidget {
-  const BusinessAccount({Key? key}) : super(key: key);
+  const BusinessAccount({super.key});
 
   @override
   State<BusinessAccount> createState() => _BusinessAccountState();

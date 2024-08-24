@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class DetailsText extends StatelessWidget {
   final String title;
   const DetailsText({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

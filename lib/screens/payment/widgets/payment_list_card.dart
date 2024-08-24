@@ -8,8 +8,8 @@ class PaymentListCard extends StatelessWidget {
   final PaymentList paymentList;
   const PaymentListCard({
     required this.paymentList,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

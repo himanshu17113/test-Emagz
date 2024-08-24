@@ -8,8 +8,8 @@ import 'home_pop_up.dart';
 
 class HomePosts extends StatelessWidget {
   const HomePosts({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,8 +7,8 @@ import 'package:emagz_vendor/social_media/screens/chat/widgets/user_list_card.da
 
 class UserChats extends StatelessWidget {
   const UserChats({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   @override
   Widget build(BuildContext context) => GetBuilder<ConversationController>(
         init: ConversationController(),

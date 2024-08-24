@@ -5,7 +5,7 @@ import 'package:emagz_vendor/user/screens/address/widgets/manage_address_textfie
 import 'package:flutter/material.dart';
 
 class ManageAddressScreen extends StatefulWidget {
-  const ManageAddressScreen({Key? key}) : super(key: key);
+  const ManageAddressScreen({super.key});
 
   @override
   State<ManageAddressScreen> createState() => _ManageAddressScreenState();

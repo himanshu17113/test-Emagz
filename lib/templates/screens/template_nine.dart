@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../common/appbar/common_appbar.dart';
 
 class TemplateNineScreen extends StatefulWidget {
-  const TemplateNineScreen({Key? key}) : super(key: key);
+  const TemplateNineScreen({super.key});
 
   @override
   State<TemplateNineScreen> createState() => _TemplateNineScreenState();

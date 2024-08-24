@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class EmptyBagScreen extends StatelessWidget {
-  const EmptyBagScreen({Key? key}) : super(key: key);
+  const EmptyBagScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

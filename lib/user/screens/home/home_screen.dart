@@ -6,7 +6,7 @@ import 'package:emagz_vendor/user/screens/home/widgets/product_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class HomeScren extends StatelessWidget {
-  const HomeScren({Key? key}) : super(key: key);
+  const HomeScren({super.key});
 
   final String imageUrl =
       "https://images.unsplash.com/photo-1647221598398-934ed5cb0e4f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8c2hvcHBpbmclMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60";

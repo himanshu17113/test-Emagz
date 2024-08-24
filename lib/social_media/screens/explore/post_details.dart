@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../../user/models/product_model.dart';
 
 class ExplorePostDetails extends StatelessWidget {
-  const ExplorePostDetails({Key? key}) : super(key: key);
+  const ExplorePostDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

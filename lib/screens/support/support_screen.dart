@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import '../../social_media/common/common_appbar.dart';
 
 class SupportScreen extends StatelessWidget {
-  const SupportScreen({Key? key}) : super(key: key);
+  const SupportScreen({super.key});
   static time(DateTime dateTime) {
     DateTime now = DateTime.now();
     Duration difference = now.difference(dateTime);

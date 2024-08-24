@@ -8,7 +8,7 @@ import 'package:page_transition/page_transition.dart';
 
 
 class EmagzScreen extends StatelessWidget {
-  const EmagzScreen({Key? key}) : super(key: key);
+  const EmagzScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

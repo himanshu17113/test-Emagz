@@ -100,7 +100,7 @@ class _ShareBottomSheetState extends State<ShareBottomSheet> {
 }
 
 class ShareStory extends StatefulWidget {
-  const ShareStory({Key? key}) : super(key: key);
+  const ShareStory({super.key});
 
   @override
   State<ShareStory> createState() => _ShareStoryState();

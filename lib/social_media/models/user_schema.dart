@@ -204,7 +204,7 @@ class UserSchema {
         followers: json["Followers"],
         followings: json["Followings"],
         hirable: json["Hirable"],
-        rating: json["Rating"] == null ? null : json["Rating"].toDouble(),
+        rating: json["Rating"]?.toDouble(),
         reviews: json["Reviews"],
         poll: json["Poll"],
         jobcreated: json["Jobcreated"],

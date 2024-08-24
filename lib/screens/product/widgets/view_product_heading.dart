@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constant/colors.dart';
 
 class ViewProductHeading extends StatelessWidget {
-  const ViewProductHeading({Key? key}) : super(key: key);
+  const ViewProductHeading({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MySaveAddressScreen extends StatefulWidget {
-  const MySaveAddressScreen({Key? key}) : super(key: key);
+  const MySaveAddressScreen({super.key});
 
   @override
   State<MySaveAddressScreen> createState() => _MySaveAddressScreenState();

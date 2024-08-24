@@ -9,8 +9,7 @@ class MyCustomTextfiled extends StatelessWidget {
   final Function? onTap;
   final Function(String text)? onChange;
 
-  const MyCustomTextfiled({Key? key, this.controller, this.hint, this.maxLines = 1, this.onTap, this.inputType, this.onChange})
-      : super(key: key);
+  const MyCustomTextfiled({super.key, this.controller, this.hint, this.maxLines = 1, this.onTap, this.inputType, this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +78,7 @@ class PassTextfiled extends StatelessWidget {
   final Function? onTap;
   final Function(String text)? onChange;
 
-  const PassTextfiled({Key? key, this.controller, this.hint, this.onTap, this.inputType, this.onChange}) : super(key: key);
+  const PassTextfiled({super.key, this.controller, this.hint, this.onTap, this.inputType, this.onChange});
 
   @override
   Widget build(BuildContext context) {

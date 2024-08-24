@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductGridView extends StatelessWidget {
-  const ProductGridView({Key? key}) : super(key: key);
+  const ProductGridView({super.key});
 
   @override
   Widget build(BuildContext context) {

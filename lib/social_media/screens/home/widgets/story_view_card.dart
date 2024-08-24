@@ -8,10 +8,10 @@ class StoryViewCard extends StatelessWidget {
   final UserId? username;
   final String url;
   const StoryViewCard({
-    Key? key,
+    super.key,
     this.username,
     required this.url,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

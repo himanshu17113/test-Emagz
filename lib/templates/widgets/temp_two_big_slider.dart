@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ProductBigSlider extends StatelessWidget {
   final String imgUrl;
-  const ProductBigSlider({Key? key, required this.imgUrl}) : super(key: key);
+  const ProductBigSlider({super.key, required this.imgUrl});
 
   @override
   Widget build(BuildContext context) {

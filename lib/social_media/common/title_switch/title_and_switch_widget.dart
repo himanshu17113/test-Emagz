@@ -9,13 +9,12 @@ class TitleAndSwitchWidget extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool isActive;
   const TitleAndSwitchWidget(
-      {Key? key,
+      {super.key,
       required this.title,
       this.subTitle,
       required this.isActive,
       this.onToggle,
-      this.padding})
-      : super(key: key);
+      this.padding});
 
   @override
   Widget build(BuildContext context) {

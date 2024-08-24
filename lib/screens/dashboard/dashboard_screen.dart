@@ -10,7 +10,7 @@ import 'widgets/order_status_heading.dart';
 import 'widgets/product_list_card.dart';
 
 class DashBordScreen extends StatefulWidget {
-  const DashBordScreen({Key? key}) : super(key: key);
+  const DashBordScreen({super.key});
 
   @override
   State<DashBordScreen> createState() => _DashBordScreenState();

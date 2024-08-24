@@ -16,7 +16,7 @@ import '../post/post_setting_screen.dart';
 import '../story/story_setting_screen.dart';
 
 class PrivacyScreen extends StatefulWidget {
-  const PrivacyScreen({Key? key}) : super(key: key);
+  const PrivacyScreen({super.key});
 
   @override
   State<PrivacyScreen> createState() => _PrivacyScreenState();

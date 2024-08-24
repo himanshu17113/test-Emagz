@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../common/common_top_bar.dart';
 
 class ViewProductScreen extends StatefulWidget {
-  const ViewProductScreen({Key? key}) : super(key: key);
+  const ViewProductScreen({super.key});
 
   @override
   State<ViewProductScreen> createState() => _ViewProductScreenState();
@@ -610,12 +610,12 @@ class ModelTile extends StatelessWidget {
   final Color? color;
 
   const ModelTile({
-    Key? key,
+    super.key,
     required this.modelTextbody,
     required this.title,
     required this.icons,
     this.color = Colors.black,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

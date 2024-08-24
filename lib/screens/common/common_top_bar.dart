@@ -7,8 +7,8 @@ class CommonTopBar extends StatelessWidget {
   final String title;
   const CommonTopBar({
     required this.title,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

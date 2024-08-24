@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
  
 class ApplicationSubmittedScreen extends StatelessWidget {
-  const ApplicationSubmittedScreen({Key? key}) : super(key: key);
+  const ApplicationSubmittedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

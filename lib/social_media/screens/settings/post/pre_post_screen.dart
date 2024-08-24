@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,7 @@ import 'package:emagz_vendor/screens/auth/widgets/form_haeding_text.dart';
 import 'package:emagz_vendor/social_media/controller/post/post_controller.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/FollowingList.dart';
 import 'package:emagz_vendor/social_media/screens/settings/post/widgets/modalBottomSheets/LikesAndViewsOptions.dart';
-import 'package:hashtagable/widgets/hashtag_text_field.dart';
-import '../../../../constant/colors.dart';
+ import '../../../../constant/colors.dart';
 import '../../../common/title_switch/title_and_switch_widget.dart';
 import '../../home/widgets/home_screen_appbar.dart';
 import 'custompoll.dart';
@@ -22,11 +22,11 @@ class PrePostScreen extends StatefulWidget {
   final String? image;
   final List<Uint8List>? images;
   const PrePostScreen({
-    Key? key,
+    super.key,
     required this.postType,
     this.image,
     this.images,
-  }) : super(key: key);
+  });
 
   @override
   State<PrePostScreen> createState() => _PrePostScreenState();

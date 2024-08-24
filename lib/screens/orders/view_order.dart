@@ -6,7 +6,7 @@ import 'package:emagz_vendor/screens/product/widgets/search_container.dart';
 import 'package:flutter/material.dart';
 
 class ViewOrderScreen extends StatefulWidget {
-  const ViewOrderScreen({Key? key}) : super(key: key);
+  const ViewOrderScreen({super.key});
 
   @override
   State<ViewOrderScreen> createState() => _ViewOrderScreenState();

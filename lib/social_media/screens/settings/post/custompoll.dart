@@ -12,7 +12,7 @@ class CustomPollSelectScreen extends StatefulWidget {
   final String? image;
   final List<Uint8List>? images;
   final PostType postType;
-  const CustomPollSelectScreen({Key? key, this.image, required this.postType, this.images}) : super(key: key);
+  const CustomPollSelectScreen({super.key, this.image, required this.postType, this.images});
 
   @override
   State<CustomPollSelectScreen> createState() => _CustomPollSelectScreenState();

@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controller/bottom_nav_controller.dart';
 
 class UserBottomNavBar extends StatelessWidget {
-  const UserBottomNavBar({Key? key}) : super(key: key);
+  const UserBottomNavBar({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<UserNavController>(      autoRemove: false,

@@ -8,8 +8,8 @@ class CouponListCard extends StatelessWidget {
   final OrderList orderList;
   const CouponListCard({
     required this.orderList,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

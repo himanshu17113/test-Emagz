@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class FilterDailog extends StatefulWidget {
-  const FilterDailog({Key? key}) : super(key: key);
+  const FilterDailog({super.key});
 
   @override
   State<FilterDailog> createState() => _FilterDailogState();

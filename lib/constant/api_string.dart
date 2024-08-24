@@ -2,7 +2,7 @@ class ApiEndpoint {
   // static String ip = " 192.168.43.77";
   static String ip = "192.168.43.100";
 
-  static String baseUrl = "https://emagz.live/api";
+  static String baseUrl = "https://www.emagz.live/api";
   // "https://emagztesting.emagz.live/api";
 
   static String socketUrl = "https://emagz.live/socket_connection";

@@ -15,7 +15,7 @@ import '../common/appbar/home.dart';
 import '../models/post_model.dart';
 
 class SocialMediaHomePage extends StatelessWidget {
-  SocialMediaHomePage({Key? key}) : super(key: key);
+  SocialMediaHomePage({super.key});
   final GetXStoryController storyController = Get.put(GetXStoryController(),
       tag: "GetXStoryController", permanent: true);
   final HomePostsController homePostController = Get.put(HomePostsController(),

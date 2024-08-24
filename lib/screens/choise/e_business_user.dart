@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class EbussinessUser extends StatelessWidget {
-  const EbussinessUser({Key? key}) : super(key: key);
+  const EbussinessUser({super.key});
 
   @override
   Widget build(BuildContext context) {

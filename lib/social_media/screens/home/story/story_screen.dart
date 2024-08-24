@@ -46,7 +46,7 @@ class StoryScreen extends StatelessWidget {
                       storyItems: storyItems,
                       controller: controller,
                       repeat: false,
-                      onStoryShow: (s) {
+                      onStoryShow: (s,i) {
                         // if (mounted) {
                         //   setState(() {
                         //     print("setstate called");

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddCouponScreen extends StatefulWidget {
-  const AddCouponScreen({Key? key}) : super(key: key);
+  const AddCouponScreen({super.key});
 
   @override
   State<AddCouponScreen> createState() => _AddCouponScreenState();

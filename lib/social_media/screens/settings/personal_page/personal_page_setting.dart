@@ -25,7 +25,7 @@ import '../../../controller/home/home_controller.dart';
 import '../../profile_insight/profile_insight_screen.dart';
 
 class PersonalPageSetting extends StatefulWidget {
-  const PersonalPageSetting({Key? key}) : super(key: key);
+  const PersonalPageSetting({super.key});
 
   @override
   State<PersonalPageSetting> createState() => _PersonalPageSettingState();

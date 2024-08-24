@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ApplicationVerifiedScreen extends StatelessWidget {
-  const ApplicationVerifiedScreen({Key? key}) : super(key: key);
+  const ApplicationVerifiedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

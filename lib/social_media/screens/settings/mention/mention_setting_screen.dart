@@ -10,7 +10,7 @@ import '../../../common/title_switch/title_and_switch_widget.dart';
  import '../../../controller/privacy/privacy_controller.dart';
  
 class MentionSettingScreen extends StatefulWidget {
-  const MentionSettingScreen({Key? key}) : super(key: key);
+  const MentionSettingScreen({super.key});
 
   @override
   State<MentionSettingScreen> createState() => _MentionSettingScreenState();

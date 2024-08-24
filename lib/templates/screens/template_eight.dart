@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../common/appbar/common_appbar.dart';
 
 class TemplateEightScreen extends StatefulWidget {
-  const TemplateEightScreen({Key? key}) : super(key: key);
+  const TemplateEightScreen({super.key});
 
   @override
   State<TemplateEightScreen> createState() => _TemplateEightScreenState();

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 class UserCouponWidget extends StatelessWidget {
   const UserCouponWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

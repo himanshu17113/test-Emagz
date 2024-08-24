@@ -5,7 +5,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../common/common_appbar.dart';
 
 class PersonalProfileInsightScreen extends StatefulWidget {
-  const PersonalProfileInsightScreen({Key? key}) : super(key: key);
+  const PersonalProfileInsightScreen({super.key});
 
   @override
   State<PersonalProfileInsightScreen> createState() =>
@@ -144,21 +144,21 @@ class _PersonalProfileInsightScreenState
                         // enableSideBySideSeriesPlacement: false,
                         borderWidth: 0,
                         plotAreaBorderWidth: 0,
-                        primaryXAxis: CategoryAxis(
+                        primaryXAxis: const CategoryAxis(
                           tickPosition: TickPosition.outside,
                           // minorTicksPerInterval: 0,
-                          majorTickLines: const MajorTickLines(
+                          majorTickLines: MajorTickLines(
                               size: 2, color: Colors.transparent),
-                          axisLine: const AxisLine(width: 0),
+                          axisLine: AxisLine(width: 0),
 
                           maximumLabels: 8,
-                          labelStyle: const TextStyle(
+                          labelStyle: TextStyle(
                               color: Colors.transparent, fontSize: 0),
-                          majorGridLines: const MajorGridLines(width: 0),
+                          majorGridLines: MajorGridLines(width: 0),
                         ),
-                        primaryYAxis: NumericAxis(isVisible: false),
+                        primaryYAxis: const NumericAxis(isVisible: false),
                         tooltipBehavior: TooltipBehavior(enable: true),
-                        series: <ChartSeries<ChartData, String>>[
+                        series: <CartesianSeries<ChartData, String>>[
                           ColumnSeries<ChartData, String>(
                               borderRadius: BorderRadius.circular(0),
                               dataSource: [

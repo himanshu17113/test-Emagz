@@ -7,7 +7,7 @@ import '../../constant/colors.dart';
 import '../../social_media/common/common_appbar.dart';
 
 class CreateSupport extends StatelessWidget {
-  const CreateSupport({Key? key}) : super(key: key);
+  const CreateSupport({super.key});
 
   @override
   Widget build(BuildContext context) {

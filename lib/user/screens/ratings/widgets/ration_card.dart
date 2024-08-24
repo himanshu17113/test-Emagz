@@ -5,7 +5,7 @@ import 'package:emagz_vendor/user/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class RatingCard extends StatelessWidget {
-  const RatingCard({Key? key}) : super(key: key);
+  const RatingCard({super.key});
 
   @override
   Widget build(BuildContext context) {

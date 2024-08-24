@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class FavouriteAndLocateWidget extends StatelessWidget {
  final bool isWhite;
-  const FavouriteAndLocateWidget({Key? key, this.isWhite = false}) : super(key: key);
+  const FavouriteAndLocateWidget({super.key, this.isWhite = false});
 
   @override
   Widget build(BuildContext context) {

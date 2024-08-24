@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 class PersonalProfileSetup extends StatelessWidget {
   const PersonalProfileSetup({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
   static const TextStyle s = TextStyle(
       color: accountGray, fontSize: 12.2, fontWeight: FontWeight.w500);
   @override

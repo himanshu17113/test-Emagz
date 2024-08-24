@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class ProductDiscHeading extends StatelessWidget {
-  const ProductDiscHeading({Key? key}) : super(key: key);
+  const ProductDiscHeading({super.key});
 
   @override
   Widget build(BuildContext context) {

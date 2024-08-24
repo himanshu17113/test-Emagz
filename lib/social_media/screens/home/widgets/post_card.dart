@@ -18,11 +18,11 @@ class PostCard extends StatelessWidget {
   final bool isBorder;
   final int? index;
   PostCard({
-    Key? key,
+    super.key,
     this.post,
     this.isBorder = true,
     this.index,
-  }) : super(key: key);
+  });
 
   Map<String, String>? map;
 

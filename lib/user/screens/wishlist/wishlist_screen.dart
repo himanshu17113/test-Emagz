@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WishListScreen extends StatelessWidget {
-  const WishListScreen({Key? key}) : super(key: key);
+  const WishListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

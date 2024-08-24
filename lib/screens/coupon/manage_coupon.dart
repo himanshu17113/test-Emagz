@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import '../common/common_top_bar.dart';
 
 class ManageCouponScreen extends StatefulWidget {
-  const ManageCouponScreen({Key? key}) : super(key: key);
+  const ManageCouponScreen({super.key});
 
   @override
   State<ManageCouponScreen> createState() => _ManageCouponScreenState();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constant/colors.dart';
 
 class OrderStatusHeadings extends StatelessWidget {
-  const OrderStatusHeadings({Key? key}) : super(key: key);
+  const OrderStatusHeadings({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,8 +5,8 @@ import '../../../../user/models/product_model.dart';
 
 class SearchResultCard extends StatelessWidget {
   const SearchResultCard({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
